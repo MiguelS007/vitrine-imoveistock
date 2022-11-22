@@ -1,0 +1,28 @@
+.logo{
+    padding: 22px;
+    width: 89px;
+}
+.nav-link{
+    border-bottom: 2px solid transparent;
+}
+.nav-link:hover{
+    border-bottom: 2px solid var(--green);
+    transition: .3s;
+}
+
+.arrow_box:after, .arrow_box:before { 
+    top: 100%; 
+    border: solid transparent; 
+    content: " "; 
+    height: 0; 
+    width: 0;
+    position: absolute;
+} 
+.arrow_box:after { 
+    border-color: transparent;
+    rotate: -90deg;
+    border-left-color: var(--white);
+    border-width: 14px 11px;
+    right: 8%;
+    top: -21%;
+} 

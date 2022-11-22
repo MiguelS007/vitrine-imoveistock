@@ -1,0 +1,75 @@
+<main class="bg-home-header position-relative w-100">
+    <div class="row h-100 m-0-auto max-w-1918">
+        <div class="col-12 title-header h-25 align-items-end text-align-center">
+            <h1 class="fw-700 font-size-55 line-24 text-light ">Seu próximo espaço está aqui</h1>
+            <p class="fw-400 pt-3 font-size-18 line-24 text-light">O maior estoque de imóveis de Curitiba</p>
+        </div>
+        <div class="col-12 mt-5">
+            <form [formGroup]="form" class="row">
+                <div class="col-12 justify-content-center d-flex">
+                    <button type="button"  [class]="collapsed! ? 'bg-light color-black' : 'bg-purple text-light arrow-box-buy'"  (click)="buyOption('buy')"
+                    class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20 "> 
+                        Comprar
+                    </button>
+                    <button type="button"  [class]="collapsed ? 'bg-purple text-light arrow-box-rent' : 'bg-light color-black '" (click)="buyOption('rent')"
+                    class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20"> 
+                        Alugar
+                    </button>
+                </div>
+                <div class="col-12 mt-4 d-flex justify-content-center">
+                    <div class="w-100 painel-browser h-auto border-radius-10 max-w-1161">
+                        <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
+                            <input style="width: 220px;" type="text" placeholder="O que está buscando?" formControlName="typeProperty"
+                            class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
+                            <div  class="dropdown-container input-property">
+                                <select class="form-select input-property mx-3 border border-radius-10 pl-2 pr-5 cursor-pointer h-51 bg-light" aria-label="Default select example">
+                                      <option value="none" selected disabled hidden> 
+                                      Tipo do imóvel
+                                  </option> 
+                                  <option>School</option>
+                                  <option>Basic</option>
+                                  <option>Easy</option>
+                                  <option>Medium</option>
+                                  <option>Hard</option>
+                                </select>
+                            </div>
+                            <input style="width: 220px;" type="text" placeholder="Local" formControlName="typeProperty"
+                            class="btn border input-local pr-5 ml-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
+                            <div class="dropdown-container input-property">
+                                <select class="form-select input-property mx-3 border border-radius-10 pl-2 pr-5 cursor-pointer h-51 bg-light" aria-label="Default select example">
+                                      <option value="none" selected disabled hidden> 
+                                      Tipo do imóvel
+                                  </option> 
+                                  <option>School</option>
+                                  <option>Basic</option>
+                                  <option>Easy</option>
+                                  <option>Medium</option>
+                                  <option>Hard</option>
+                                </select>
+                            </div>
+                            <div class="input-property d-flex justify-content-center align-items-center w-fit">
+                                <button class="btn bg-light fw-400 font-size-14 line-20 color-blue h-51 mx-2 px-3" type="button">+ Opções</button>
+                                <button class="btn bg-light h-51 my-2 border-radius-100 px-3" type="button">
+                                <i class="bi color-blue bi-three-dots-vertical"></i>
+                                </button>
+                            </div>
+                            <button class="btn input-property btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5 mx-2" type="submit">Encontrar</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 mt-5 d-flex justify-content-end">
+                    <div class="d-flex w-fit align-items-center">
+                        <p class="d-grid mr-5 pr-5">
+                            <span class="fw-700 font-size-18 line-24 color-white">Role para baixo</span>
+                            <span style="opacity: 0.5;" class="fw-400 font-size-18 line-24 color-white">para descobrir mais</span>
+                        </p>
+                        <div class="scroll-down"></div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>
