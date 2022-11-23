@@ -1,0 +1,29 @@
+.arrow_box:after{ 
+    border: solid transparent; 
+    content: " "; 
+    height: 0; 
+    width: 0;
+    position: absolute;
+    border-color: transparent;
+    rotate: -90deg;
+    border-left-color: var(--white);
+    border-width: 14px 11px;
+    right: 8%;
+    top: -21%;
+} 
+.arrow-box-options:after{ 
+    border: solid transparent; 
+    content: " "; 
+    height: 0; 
+    width: 0;
+    position: absolute;
+    border-color: transparent;
+    rotate: -90deg;
+    border-left-color: var(--white);
+    border-width: 14px 11px;
+    right: 8%;
+    top: -21%;
+} 
+.dropdown-item:focus, .dropdown-item:active{
+    background: var(--whiteblue) !important;
+}

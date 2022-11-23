@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { forwardRef, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
@@ -35,7 +35,13 @@ import { LoggedComponent } from './logged/logged.component';
     NgxPageScrollCoreModule,
     NgxPageScrollCoreModule,
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => HomeHeaderComponent)
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
