@@ -62,8 +62,8 @@ input:focus {
     --whiteblue: #E8EAFF;
     --whitegreen: #F2FFF5;
     --orangelight: #FFFADA;
-    --white: #FEFFFF;
-    --pink: #FF4789;
+    --white: #f8f9fa;
+    --pink: #FF5A5F;
     --whitelight: #e9ebf686;
     --bluelight: #878DBA;
 }
@@ -212,8 +212,13 @@ input:focus {
     min-height: 80px;
 }
 
-.w-141 {
-    width: 141px;
+.w18h18{
+    width: 18px;
+    height: 18px;
+}
+
+.w-145 {
+    width: 145px;
 }
 
 .w-111 {
@@ -226,6 +231,10 @@ input:focus {
 
 .max-w-1227 {
     max-width: 1227px;
+}
+
+.w-550{
+    width: 550px;
 }
 
 .max-w-32 {
@@ -665,7 +674,8 @@ input:focus {
 }
 
 // MEDIA
-@media (max-width: 1192px) {
+@media (max-width: 1240px) {
+    // HOME-HEADER
     .bg-home-header {
         background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
         background-position: center top;
@@ -700,5 +710,16 @@ input:focus {
 
     .nav-bar {
         justify-content: space-between;
+    }
+    .painel-options-header{
+        top: 85% !important;
+        right: -6% !important;
+        width: 281px;
+        border: 1px solid var(--graylight);
+    }
+    .col-painel-option{
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        padding: 5px 0;
     }
 }
