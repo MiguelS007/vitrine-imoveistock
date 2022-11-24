@@ -2,6 +2,7 @@ import { forwardRef, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { SwiperModule } from 'swiper/angular';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
@@ -30,6 +31,7 @@ import { LoggedComponent } from './logged/logged.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SwiperModule,
     FormsModule,
     ReactiveFormsModule,
     NgxPageScrollCoreModule,
