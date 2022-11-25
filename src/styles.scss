@@ -79,8 +79,8 @@ input:focus {
 
 /* fonts */
 
-.fw-800 {
-    font-weight: 800 !important;
+.fw-900 {
+    font-weight: 900 !important;
 }
 
 .fw-700 {
@@ -216,6 +216,7 @@ input:focus {
 .h-130 {
     height: 130px;
 }
+
 .h-350 {
     height: 350px;
 }
@@ -620,32 +621,40 @@ input:focus {
     width: 340px;
     height: 219px;
 }
+
 // HEADER-GALLERY
-.bg-city-01{
-    background-image: url(./assets/img/gradientgallery.png), url(../../../assets/img/city2.png);
-    background-position: center top;
-    background-repeat: no-repeat no-repeat;
-    background-size: cover;
-}
-.bg-city-02{
-    background-image: url(./assets/img/gradientgallery.png), url(../../../assets/img/city3.png);
-    background-position: center top;
-    background-repeat: no-repeat no-repeat;
-    background-size: cover;
-}
-.bg-city-03{
-    background-image: url(./assets/img/gradientgallery.png), url(../../../assets/img/city1.png);
-    background-position: center top;
-    background-repeat: no-repeat no-repeat;
-    background-size: cover;
-}
-.bg-city-04{
-    background-image: url(./assets/img/gradientgallery.png), url(../../../assets/img/city4.png);
+.bg-city-01 {
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city2.png);
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
 }
 
+.bg-city-02 {
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city3.png);
+    background-position: center top;
+    background-repeat: no-repeat no-repeat;
+    background-size: cover;
+}
+
+.bg-city-03 {
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city1.png);
+    background-position: center top;
+    background-repeat: no-repeat no-repeat;
+    background-size: cover;
+}
+
+.bg-city-04 {
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city4.png);
+    background-position: center top;
+    background-repeat: no-repeat no-repeat;
+    background-size: cover;
+}
+
+//HEADER-CARDS
+.icon-cards {
+    padding: 20% 0;
+}
 
 @media (max-width: 1776px) {
     .arrow-box-buy:after {
@@ -773,7 +782,8 @@ input:focus {
     }
 
     .col-painel-option,
-    .col-gallery{
+    .col-gallery,
+    .col-cards {
         flex: 0 0 100% !important;
         max-width: 100% !important;
         padding: 5px 0;
@@ -787,11 +797,21 @@ input:focus {
         justify-content: center !important;
         margin-top: 2rem;
     }
-    .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
+
+    .swiper-horizontal>.swiper-pagination-bullets,
+    .swiper-pagination-bullets.swiper-pagination-horizontal {
         top: 90%;
         bottom: inherit !important;
         left: 0;
         width: 100%;
+    }
+
+    //HEADER-CARDS
+    .icon-cards {
+        padding: 6% 0;
+    }
+    .col-final-card{
+        display: block !important;
     }
 
 }
