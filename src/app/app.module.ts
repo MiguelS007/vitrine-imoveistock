@@ -13,7 +13,7 @@ import { HomeProductsComponent } from './home/home-products/home-products.compon
 import { HomeGalleryComponent } from './home/home-gallery/home-gallery.component';
 import { HomeCardsComponent } from './home/home-cards/home-cards.component';
 import { HomeHeaderComponent } from './home/home-header/home-header.component';
-import { LoggedComponent } from './logged/logged.component';
+import { LoggedModule } from './logged/logged.module';
 
 
 @NgModule({
@@ -26,15 +26,14 @@ import { LoggedComponent } from './logged/logged.component';
     HomeGalleryComponent,
     HomeCardsComponent,
     HomeHeaderComponent,
-    LoggedComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SwiperModule,
     FormsModule,
+    LoggedModule,
     ReactiveFormsModule,
-    NgxPageScrollCoreModule,
     NgxPageScrollCoreModule,
   ],
   providers: [

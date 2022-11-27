@@ -9,7 +9,9 @@ const routes: Routes = [
   },
   {
     path: 'logged',
-    loadChildren: () => import('./logged/logged.module').then(m => m.LoggedModule)
+    loadChildren: () => 
+      import('./logged/logged.module')
+        .then(m => m.LoggedModule)
   }
 ]
 @NgModule({
