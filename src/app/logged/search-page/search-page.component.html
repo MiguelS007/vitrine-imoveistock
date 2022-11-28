@@ -1,1 +1,466 @@
-<p>search-page works!</p>
+<main class="bg-whitelight position-relative w-100"> 
+    <form [formGroup]="form" class="row mt-10 h-100 m-0-auto mx-5 px-5 max-w-1918">
+        <div class="col-12">
+            <p class="d-flex fw-700 font-size-16 line-18 color-black align-items-center">Página Inicial /
+                <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp; Resultado de busca</span>
+            </p>
+            <p class="fw-700 font-size-32 line-40 color-black">
+                Resultado da sua busca por <b class="">[string busca]</b> 
+            </p>
+        </div>
+        <div class="col-4 mt-5">
+            <div class="w-100 border-radius-10 bg-white p-5">
+                <label for="searchwords" class="label-search-words">
+                    <i class="bi bi-search font-size-24"></i>
+                </label>
+                <input id="searchwords" formControlName="searchwords"
+                style="padding-right: 70px;" type="search" placeholder="Busque por palavras"
+                class="btn border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+                
+                <label for="localproperty" class="label-search-local">
+                    <i class="bi bi-geo-alt font-size-24"></i>
+                </label> 
+                <input id="localproperty" formControlName="localproperty"
+                style="padding-right: 70px;" type="text" placeholder="Local"
+                class="btn border border-radius-10 bg-light fw-400 mt-4 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+
+                <input formControlName="typeproperty"
+                type="text" placeholder="Tipo de imóvel"
+                class="btn border border-radius-10 bg-light fw-400 mt-4 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+
+                <input formControlName="typeprice"
+                type="text" placeholder="Preço"
+                class="btn border border-radius-10 bg-light fw-400 mt-4 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+
+                <input formControlName="typebathroom"
+                type="text" placeholder="Banheiros"
+                class="btn border border-radius-10 bg-light fw-400 mt-4 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+
+                <input formControlName="typerooms"
+                type="text" placeholder="Quartos"
+                class="btn border border-radius-10 bg-light fw-400 mt-4 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+
+                <input formControlName="typevacancies"
+                type="text" placeholder="Vagas"
+                class="btn border border-radius-10 bg-light fw-400 mt-4 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+
+                <input formControlName="typeconstruction"
+                type="text" placeholder="Ano de  construção"
+                class="btn border border-radius-10 bg-light fw-400 mt-4 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+
+                <div class="w-100 d-flex align-items-center">
+                    <input formControlName="typeconstruction"
+                    type="text" placeholder="Metragem Mínima"
+                    class="btn border border-radius-10 bg-light fw-400 mt-4 mr-1 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+                    <input formControlName="typeconstruction"
+                    type="text" placeholder="Metragem Máxima"
+                    class="btn border border-radius-10 bg-light fw-400 mt-4 ml-1 text-left font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+                </div>
+                <button class="bg-purple btn mt-4 text-light fw-700 font-size-18 line-24 border-radius-10 h-74 w-100" type="submit">
+                    Encontrar
+                </button>
+            </div>
+            <div class="w-100 mt-4 border-radius-10 bg-white p-5">
+                <p class="fw-700 pb-4 px-1 font-size-20 line-24 color-blue">Imóveis exclusivos</p>
+                <swiper class="h-350 max-w-1227"
+                [slidesPerView]="1"
+                [pagination]="{ clickable: true }"
+                [scrollbar]="true">
+                    <ng-template swiperSlide> 
+                        <div class="bg-img-property w-100 py-2 px-3 border-radius-10">
+                            <div class="w-100 h-50 p-4 d-flex">
+                                <h4 class="w3-black h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-18 line-24 text-light">Alugar</h4>
+                                <h4 style="background-color:#878DBA;" class="ml-2 h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-18 line-24 text-light">Excluisivo</h4>
+                            </div>
+                            <div class="w-100 d-grid h-50 mx-2 pt-5 px-4 align-items-end">
+                                <p class="fw-700 mt-5  mb-0 font-size-22 h-fit line-32 text-light">RS2,000
+                                <span class="fw-400 font-size-14 line-20 text-light">/ mês</span>
+                                </p>
+                                <span class="fw-700 font-size-14 line-20 text-light">Cobertura com uma vista incrível</span>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template swiperSlide> 
+                        <div class="bg-img-property w-100 py-2 px-3 border-radius-10">
+                            <div class="w-100 h-50 p-4 d-flex">
+                                <h4 class="w3-black h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-18 line-24 text-light">Alugar</h4>
+                                <h4 style="background-color:#878DBA;" class="ml-2 h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-18 line-24 text-light">Excluisivo</h4>
+                            </div>
+                            <div class="w-100 d-grid h-50 mx-2 pt-5 px-4 align-items-end">
+                                <p class="fw-700 mt-5  mb-0 font-size-22 h-fit line-32 text-light">RS2,000
+                                <span class="fw-400 font-size-14 line-20 text-light">/ mês</span>
+                                </p>
+                                <span class="fw-700 font-size-14 line-20 text-light">Cobertura com uma vista incrível</span>
+                            </div>
+                        </div>
+                    </ng-template>
+                </swiper>
+                        
+            </div>
+            <div class="w-100 border-radius-10 mt-4 bg-white p-5">
+                <p class="fw-700 pb-4 font-size-20 line-24 color-black">Tipos de Imóvel</p>
+                <div class="d-flex justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Apartamento
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">6</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp; Imóveis</span>
+                    </p>
+                   
+                </div>
+                <div class="d-flex mt-3 justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Condomínio
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">14</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp; Imóveis</span>
+                    </p>
+                   
+                </div>
+                <div class="d-flex mt-3 justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Casa
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">9</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp; Imóveis</span>
+                    </p>
+                   
+                </div>
+                <div class="d-flex mt-3 justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Sobrado
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">26</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp; Imóveis</span>
+                    </p>
+                   
+                </div>
+                <div class="d-flex mt-3 justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Kitnet
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">80</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp; Imóveis</span>
+                    </p>
+                   
+                </div>
+            </div>
+            <div class="w-100 border-radius-10 mt-4 bg-white p-5">
+                <p class="fw-700 pb-4 font-size-20 line-24 color-black">Tipos de Imóvel</p>
+                <div class="row">
+                    <div class="col-3 p-0">
+                        <img src="../../../assets/img/ap.png" class="border-radius-10 h-111 w-100"/>
+                    </div>
+                    <div class="col-9">
+                        <p class="d-grid mb-0 h-75">
+                            <span class="fw-700 font-size-18 line-24 color-black">Cobertura com uma vista incrível</span>
+                            <span class="fw-700 font-size-18 line-24 color-black">R$222,000</span>
+                        </p>
+                        <p class="d-flex h-25 mb-0 justify-content-between">
+                            <span class="fw-400 font-size-14 line-20 color-black">Quartos: 4</span>
+                            <span class="fw-400 font-size-14 line-20 color-black">Banheiros: 2</span>
+                            <span class="fw-400 font-size-14 line-20 color-black">Metragem: 192m²</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-3 p-0">
+                        <img src="../../../assets/img/tower.png" class="border-radius-10 h-111 w-100"/>
+                    </div>
+                    <div class="col-9">
+                        <p class="d-grid mb-0 h-75">
+                            <span class="fw-700 font-size-18 line-24 color-black">Cobertura com uma vista incrível</span>
+                            <span class="fw-700 font-size-18 line-24 color-black">R$222,000</span>
+                        </p>
+                        <p class="d-flex h-25 mb-0 justify-content-between">
+                            <span class="fw-400 font-size-14 line-20 color-black">Quartos: 4</span>
+                            <span class="fw-400 font-size-14 line-20 color-black">Banheiros: 2</span>
+                            <span class="fw-400 font-size-14 line-20 color-black">Metragem: 192m²</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-3 p-0">
+                        <img src="../../../assets/img/worm.png" class="border-radius-10 h-111 w-100"/>
+                    </div>
+                    <div class="col-9">
+                        <p class="d-grid mb-0 h-75">
+                            <span class="fw-700 font-size-18 line-24 color-black">Cobertura com uma vista incrível</span>
+                            <span class="fw-700 font-size-18 line-24 color-black">R$222,000</span>
+                        </p>
+                        <p class="d-flex h-25 mb-0 justify-content-between">
+                            <span class="fw-400 font-size-14 line-20 color-black">Quartos: 4</span>
+                            <span class="fw-400 font-size-14 line-20 color-black">Banheiros: 2</span>
+                            <span class="fw-400 font-size-14 line-20 color-black">Metragem: 192m²</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 mt-5">
+            <div class="row">
+                <table class="table" style="background: #FFFFFF;box-shadow: 0px -4px 10px rgba(25, 1, 52, 0.16); border-radius: 4px;">
+                    <tbody>
+                        <tr *ngFor="let item of products | paginate: { itemsPerPage: 10, currentPage: paginationProduct }; let i = index">
+                            <th scope="row" class="align-middle">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-globe ml-3" style="font-size: 32px;"></i>
+                                </div>
+                            </th>
+                            <td class="align-middle">
+                                <span class="text-center">{{item.name}}</span>
+                            </td>
+                            <td class="align-middle">
+                                <div class="d-flex flex-column">
+                                    <span class="little-font text-center">ok go</span>
+                                    <span class="text-center">{{item.investors}}</span>
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="d-flex flex-column">
+                                    <span class="little-font text-center">ok go</span>
+                                    <i *ngIf="item.return" class="fas fa-caret-up mx-2 text-center" style="color: #5CC689; font-size: 21px;"></i>
+                                    <i *ngIf="!item.return" class="fas fa-caret-down mx-2 text-center" style="color: #F06E66; font-size: 21px;"></i>
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="d-flex flex-column">
+                                    <span class="little-font text-center text-nowrap">ok ro</span>
+                                    <span class="text-center">{{item.fee}}</span>
+                                </div>
+                            </td>
+                            <a [routerLink]="['/pages/create-bot']">
+                               
+                            </a>
+                            <td class="align-middle">
+                                poof
+                                <!-- <i class="fas fa-chevron-right" (click)="editBots()" style="cursor:pointer;"></i> -->
+                            </td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+                <div *ngIf="products.length > 3" class="d-flex flex-fill justify-content-center">
+                    <pagination-controls (pageChange)="paginationProduct = $event;">
+                    </pagination-controls>
+                </div>
+                <!-- <div class="col-6">
+                    <div class="w-100 py-2 px-3 border-radius-10 bg-white">
+                        <div class="bg-img-result py-2 px-3 border-radius-10">
+                            <div class="w-100 h-50 d-flex">
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">Venda</h4>
+                                <h4 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">Exclusivo</h4>
+                            </div>
+                            <div class="w-100 d-flex h-50 align-items-end justify-content-between">
+                                <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">RS222,000</p>
+                                <div (click)="likeHeart()" class="h-fit like-heart border-radius-10 pt-2 pb-1 px-3">
+                                      <i [class]="iconlikeheart ? 'bi-heart-fill':'bi-heart' " class="bi font-size-16 text-light"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 mx-2 pt-3">
+                              <span class="fw-400 font-size-14 line-20 color-black">Apartamento</span>
+                              <p class="fw-700 my-2 font-size-16 line-20 mb-0 color-black">Cobertura com uma vista incrível</p>
+                              <p class="d-flex align-items-center">
+                                  <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                                  <span class="fw-400 font-size-14 line-20 color-black">Rua Estados unidos 1987, Curitiba - PR</span>
+                              </p>
+                        </div>
+                        <div class="row px-4 my-3 border-bottom-gray pb-3 d-flex">
+                            <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/bed.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">4 Quartos</p>
+                            </div>
+                            <div class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/car.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">2 Vagas</p>
+                            </div>
+                            <div class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/rule.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">199 m2</p>
+                            </div>
+                        </div>
+                        <div class="w-100 d-flex align-items-center py-2 px-1">
+                            <img src="../../../assets/img/guy.png" class="border-radius-100 "/>
+                            <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">Rafael Santos</h3>
+                        </div>
+                    </div>
+                    <div class="w-100 py-2 px-3 border-radius-10 bg-white">
+                        <div class="bg-img-result py-2 px-3 border-radius-10">
+                            <div class="w-100 h-50 d-flex">
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">Venda</h4>
+                                <h4 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">Exclusivo</h4>
+                            </div>
+                            <div class="w-100 d-flex h-50 align-items-end justify-content-between">
+                                <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">RS222,000</p>
+                                <div (click)="likeHeart()" class="h-fit like-heart border-radius-10 pt-2 pb-1 px-3">
+                                      <i [class]="iconlikeheart ? 'bi-heart-fill':'bi-heart' " class="bi font-size-16 text-light"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 mx-2 pt-3">
+                              <span class="fw-400 font-size-14 line-20 color-black">Apartamento</span>
+                              <p class="fw-700 my-2 font-size-16 line-20 mb-0 color-black">Cobertura com uma vista incrível</p>
+                              <p class="d-flex align-items-center">
+                                  <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                                  <span class="fw-400 font-size-14 line-20 color-black">Rua Estados unidos 1987, Curitiba - PR</span>
+                              </p>
+                        </div>
+                        <div class="row px-4 my-3 border-bottom-gray pb-3 d-flex">
+                            <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/bed.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">4 Quartos</p>
+                            </div>
+                            <div class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/car.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">2 Vagas</p>
+                            </div>
+                            <div class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/rule.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">199 m2</p>
+                            </div>
+                        </div>
+                        <div class="w-100 d-flex align-items-center py-2 px-1">
+                            <img src="../../../assets/img/guy.png" class="border-radius-100 "/>
+                            <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">Rafael Santos</h3>
+                        </div>
+                    </div>
+                    <div class="w-100 py-2 px-3 border-radius-10 bg-white">
+                        <div class="bg-img-result py-2 px-3 border-radius-10">
+                            <div class="w-100 h-50 d-flex">
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">Venda</h4>
+                                <h4 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">Exclusivo</h4>
+                            </div>
+                            <div class="w-100 d-flex h-50 align-items-end justify-content-between">
+                                <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">RS222,000</p>
+                                <div (click)="likeHeart()" class="h-fit like-heart border-radius-10 pt-2 pb-1 px-3">
+                                      <i [class]="iconlikeheart ? 'bi-heart-fill':'bi-heart' " class="bi font-size-16 text-light"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 mx-2 pt-3">
+                              <span class="fw-400 font-size-14 line-20 color-black">Apartamento</span>
+                              <p class="fw-700 my-2 font-size-16 line-20 mb-0 color-black">Cobertura com uma vista incrível</p>
+                              <p class="d-flex align-items-center">
+                                  <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                                  <span class="fw-400 font-size-14 line-20 color-black">Rua Estados unidos 1987, Curitiba - PR</span>
+                              </p>
+                        </div>
+                        <div class="row px-4 my-3 border-bottom-gray pb-3 d-flex">
+                            <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/bed.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">4 Quartos</p>
+                            </div>
+                            <div class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/car.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">2 Vagas</p>
+                            </div>
+                            <div class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/rule.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">199 m2</p>
+                            </div>
+                        </div>
+                        <div class="w-100 d-flex align-items-center py-2 px-1">
+                            <img src="../../../assets/img/guy.png" class="border-radius-100 "/>
+                            <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">Rafael Santos</h3>
+                        </div>
+                    </div>
+                    <div class="w-100 py-2 px-3 border-radius-10 bg-white">
+                        <div class="bg-img-result py-2 px-3 border-radius-10">
+                            <div class="w-100 h-50 d-flex">
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">Venda</h4>
+                                <h4 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">Exclusivo</h4>
+                            </div>
+                            <div class="w-100 d-flex h-50 align-items-end justify-content-between">
+                                <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">RS222,000</p>
+                                <div (click)="likeHeart()" class="h-fit like-heart border-radius-10 pt-2 pb-1 px-3">
+                                      <i [class]="iconlikeheart ? 'bi-heart-fill':'bi-heart' " class="bi font-size-16 text-light"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 mx-2 pt-3">
+                              <span class="fw-400 font-size-14 line-20 color-black">Apartamento</span>
+                              <p class="fw-700 my-2 font-size-16 line-20 mb-0 color-black">Cobertura com uma vista incrível</p>
+                              <p class="d-flex align-items-center">
+                                  <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                                  <span class="fw-400 font-size-14 line-20 color-black">Rua Estados unidos 1987, Curitiba - PR</span>
+                              </p>
+                        </div>
+                        <div class="row px-4 my-3 border-bottom-gray pb-3 d-flex">
+                            <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/bed.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">4 Quartos</p>
+                            </div>
+                            <div class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/car.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">2 Vagas</p>
+                            </div>
+                            <div class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/rule.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">199 m2</p>
+                            </div>
+                        </div>
+                        <div class="w-100 d-flex align-items-center py-2 px-1">
+                            <img src="../../../assets/img/guy.png" class="border-radius-100 "/>
+                            <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">Rafael Santos</h3>
+                        </div>
+                    </div>
+                    <div class="w-100 py-2 px-3 border-radius-10 bg-white">
+                        <div class="bg-img-result py-2 px-3 border-radius-10">
+                            <div class="w-100 h-50 d-flex">
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">Venda</h4>
+                                <h4 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">Exclusivo</h4>
+                            </div>
+                            <div class="w-100 d-flex h-50 align-items-end justify-content-between">
+                                <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">RS222,000</p>
+                                <div (click)="likeHeart()" class="h-fit like-heart border-radius-10 pt-2 pb-1 px-3">
+                                      <i [class]="iconlikeheart ? 'bi-heart-fill':'bi-heart' " class="bi font-size-16 text-light"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 mx-2 pt-3">
+                              <span class="fw-400 font-size-14 line-20 color-black">Apartamento</span>
+                              <p class="fw-700 my-2 font-size-16 line-20 mb-0 color-black">Cobertura com uma vista incrível</p>
+                              <p class="d-flex align-items-center">
+                                  <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                                  <span class="fw-400 font-size-14 line-20 color-black">Rua Estados unidos 1987, Curitiba - PR</span>
+                              </p>
+                        </div>
+                        <div class="row px-4 my-3 border-bottom-gray pb-3 d-flex">
+                            <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/bed.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">4 Quartos</p>
+                            </div>
+                            <div class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/car.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">2 Vagas</p>
+                            </div>
+                            <div class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/rule.png" class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">199 m2</p>
+                            </div>
+                        </div>
+                        <div class="w-100 d-flex align-items-center py-2 px-1">
+                            <img src="../../../assets/img/guy.png" class="border-radius-100 "/>
+                            <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">Rafael Santos</h3>
+                        </div>
+                    </div>
+                </div> -->
+                
+               
+                
+            </div>
+        </div>
+    </form>
+</main>
+                

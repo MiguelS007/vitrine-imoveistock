@@ -6,6 +6,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { LoggedComponent } from './logged.component';
 import { SwiperModule } from 'swiper/angular';
 import { AppComponent } from '../app.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AppComponent } from '../app.component';
     LoggedRouteModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     SwiperModule
   ],
   schemas: [],

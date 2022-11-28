@@ -1,19 +1,20 @@
 <nav class="navbar z-10 position-absolute w-100 top-0 justify-content-center navbar-expand-lg navbar-light">
   <div  [class]="collapsed ? 'd-block' : 'd-flex'" class="w-100 mx-4 nav-bar max-w-1918">
-    <div class="navbar-brand d-block">
-        <img src="../../../assets/img/logo.png" class="logo bg-green"> 
-        <img src="../../../assets/img/title-logo.png" class="px-3 title-logo"> 
+    <div class="navbar-brand align-items-center d-flex">
+        <div class="green-block"></div> 
+        <img src="../../../assets/img/logo.png" class="logo bg-greenlight"> 
+        <img src="../../../assets/img/title-logo.png" class="px-3 h-fit title-logo"> 
     </div>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  px-3 fw-400 font-size-14 line-20 color-white" href="#">Home</a>
+          <a class="nav-link  px-3 fw-400 font-size-14 line-20 color-white" [routerLink]="['/home']" [routerLinkActive]="['link-active']">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link  px-3 fw-400 font-size-14 line-20 color-white" href="#">Sobre</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  px-3 fw-400 font-size-14 line-20 color-white" href="#">Imóveis</a>
+          <a class="nav-link  px-3 fw-400 font-size-14 line-20 color-white"  [routerLink]="['logged/search']" [routerLinkActive]="['link-active']">Imóveis</a>
         </li>
         <li class="nav-item">
           <a class="nav-link  px-3 fw-400 font-size-14 line-20 color-white" href="#">indique</a>

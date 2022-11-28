@@ -59,6 +59,15 @@ input:focus {
     bottom: inherit !important;
     left: 0;
     width: 100%;
+    &:nth-child(2){
+        top: 90%;
+        bottom: inherit !important;
+        left: 0;
+        width: 100%;
+    }
+}
+.swiper-pagination-bullet-active{
+    background-color: black !important;
 }
 
 :root {
@@ -100,6 +109,10 @@ input:focus {
 }
 
 /* size-fonts */
+.font-size-9 {
+    font-size: 9px;
+}
+
 .font-size-12 {
     font-size: 12px;
 }
@@ -294,6 +307,10 @@ input:focus {
     margin: 0 auto !important;
 }
 
+.mt-10{
+    padding-top: 10%;
+}
+
 .op-0 {
     opacity: 0 !important;
 }
@@ -397,14 +414,12 @@ input:focus {
 .d-grid {
     display: grid;
 }
+.display-none{
+    display: none;
+}
 
 .flex-wrap {
     flex-wrap: wrap;
-}
-
-
-.bg-green-light {
-    background-color: var(--greenpool);
 }
 
 .bg-whitelight {
@@ -812,6 +827,10 @@ input:focus {
     }
     .col-final-card{
         display: block !important;
+    }
+    // SEARCH-PAGE
+    .green-block{
+        display: none;
     }
 
 }

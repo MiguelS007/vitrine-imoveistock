@@ -1,6 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { PageScrollService } from 'ngx-page-scroll-core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,31 +8,20 @@ import { PageScrollService } from 'ngx-page-scroll-core';
 })
 export class NavBarComponent implements OnInit {
   collapsed = false;
+  urlParams: any;
   constructor(
-    private pageScrollService: PageScrollService,
-    @Inject(DOCUMENT) private document: any,
+    private router: Router
   ) { }
 
+
+
   ngOnInit(): void {
-  }
-
-
-  public scrollToMakeYourRegistration(): void {
-    this.pageScrollService.scroll({
-      document: this.document,
-      scrollTarget: '.scrollToMakeYourRegistration'
-    });
-  }
-
-  public scrollIndicate(): void {
-    this.pageScrollService.scroll({
-      document: this.document,
-      scrollTarget: '.scrollIndicate'
-    });
+    
   }
 
   sideBtn() {
     this.collapsed = !this.collapsed;
   }
+  
 
 }

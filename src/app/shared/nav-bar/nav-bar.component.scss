@@ -9,7 +9,15 @@
     border-bottom: 2px solid var(--green);
     transition: .3s;
 }
-
+.green-block{
+    background: var(--greenlight);
+    height: 93px;
+    width: 89px;
+}
+.link-active{
+    border-bottom: 2px solid var(--green);
+    transition: .3s;
+}
 .arrow_box:after{ 
     border: solid transparent; 
     content: " "; 
