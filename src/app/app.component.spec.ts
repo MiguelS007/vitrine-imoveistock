@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'landing-page-imoveistock'`, () => {
+  it(`should have as title 'vitrine-imoveistock'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('landing-page-imoveistock');
+    expect(app.title).toEqual('vitrine-imoveistock');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('landing-page-imoveistock app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('vitrine-imoveistock app is running!');
   });
 });

@@ -9,16 +9,21 @@
     border-bottom: 2px solid var(--green);
     transition: .3s;
 }
-
-.arrow_box:after, .arrow_box:before { 
-    top: 100%; 
+.green-block{
+    background: var(--greenlight);
+    height: 93px;
+    width: 89px;
+}
+.link-active{
+    border-bottom: 2px solid var(--green);
+    transition: .3s;
+}
+.arrow_box:after{ 
     border: solid transparent; 
     content: " "; 
     height: 0; 
     width: 0;
     position: absolute;
-} 
-.arrow_box:after { 
     border-color: transparent;
     rotate: -90deg;
     border-left-color: var(--white);

@@ -1,55 +1,367 @@
-<main class="bg-home-header position-relative w-100">
+<main class="bg-home-header position-relative w-100"> 
     <div class="row h-100 m-0-auto max-w-1918">
         <div class="col-12 title-header h-25 align-items-end text-align-center">
             <h1 class="fw-700 font-size-55 line-24 text-light ">Seu próximo espaço está aqui</h1>
             <p class="fw-400 pt-3 font-size-18 line-24 text-light">O maior estoque de imóveis de Curitiba</p>
         </div>
         <div class="col-12 mt-5">
-            <form [formGroup]="form" class="row">
+            <form [formGroup]="form" class="row form-header">
                 <div class="col-12 justify-content-center d-flex">
-                    <button type="button"  [class]="collapsed! ? 'bg-light color-black' : 'bg-purple text-light arrow-box-buy'"  (click)="buyOption('buy')"
+                    <button type="button" formControlName="typeStatus" ngDefaultControl value="buy" [class]="collapsed! ? 'bg-light color-black' : 'bg-purple text-light arrow-box-buy'"  (click)="buyOption('buy')"
                     class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20 "> 
-                        Comprar
+                        Comprar 
                     </button>
-                    <button type="button"  [class]="collapsed ? 'bg-purple text-light arrow-box-rent' : 'bg-light color-black '" (click)="buyOption('rent')"
+                    <button type="button"  formControlName="typeStatus" ngDefaultControl value="rent" [class]="collapsed ? 'bg-purple text-light arrow-box-rent' : 'bg-light color-black '" (click)="buyOption('rent')"
                     class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20"> 
                         Alugar
                     </button>
                 </div>
                 <div class="col-12 mt-4 d-flex justify-content-center">
-                    <div class="w-100 painel-browser h-auto border-radius-10 max-w-1161">
+                    <div class="w-100 painel-browser h-auto border-radius-10 max-w-1227">
                         <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
-                            <input style="width: 220px;" type="text" placeholder="O que está buscando?" formControlName="typeProperty"
-                            class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
-                            <div  class="dropdown-container input-property">
-                                <select class="form-select input-property mx-3 border border-radius-10 pl-2 pr-5 cursor-pointer h-51 bg-light" aria-label="Default select example">
-                                      <option value="none" selected disabled hidden> 
-                                      Tipo do imóvel
-                                  </option> 
-                                  <option>School</option>
-                                  <option>Basic</option>
-                                  <option>Easy</option>
-                                  <option>Medium</option>
-                                  <option>Hard</option>
-                                </select>
-                            </div>
-                            <input style="width: 220px;" type="text" placeholder="Local" formControlName="typeProperty"
+                            <input style="width: 220px;" type="text" placeholder="O que está buscando?"  formControlName="search"
+                            class="btn border  text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
+                             <div class="nav-item dropdown">
+                                <input type="text" (click)="typePropertyOptions('typeproperty')" 
+                                 placeholder="Tipo do imóvel" readonly value=""
+                                 class="btn border input-type-property mx-3 text-left input-property border-radius-10 py-2 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue"
+                                />
+                                <ul *ngIf="typepropertydiv" class="z-10 position-absolute bg-light w-100 arrow-box-type-property border-radius-10 mt-5 dropdown-menu-left" >
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyresidential" class="mb-0">
+                                            <input type="radio" id="typePropertyresidential" value="residential" formControlName="typeProperty" 
+                                            name="typeProperty" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Residencial</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 mb-0">
+                                        <label for="typePropertyrural" class="mb-0">
+                                            <input type="radio" id="typePropertyrural" value="rural" formControlName="typeProperty" 
+                                            name="typeProperty" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Rural</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 border-radius-10 px-0 mb-0">
+                                        <label for="typePropertycommercial" class="mb-0">
+                                            <input type="radio" id="typePropertycommercial" value="commercial" formControlName="typeProperty" 
+                                            name="typeProperty" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Comercial</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                </ul>
+                             </div>
+                            <input style="width: 220px;" type="text" placeholder="Local" formControlName="typePropertyLocal"
                             class="btn border input-local pr-5 ml-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
-                            <div class="dropdown-container input-property">
-                                <select class="form-select input-property mx-3 border border-radius-10 pl-2 pr-5 cursor-pointer h-51 bg-light" aria-label="Default select example">
-                                      <option value="none" selected disabled hidden> 
-                                      Tipo do imóvel
-                                  </option> 
-                                  <option>School</option>
-                                  <option>Basic</option>
-                                  <option>Easy</option>
-                                  <option>Medium</option>
-                                  <option>Hard</option>
-                                </select>
+                            
+                            <div class="nav-item dropdown">
+                                <input type="text" (click)="typePropertyOptions('typeoffResidential')" 
+                                placeholder="Tipo" readonly value=""
+                                 class="btn border input-type-property mx-3 text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue"
+                                />
+                                <!-- MOSTRAR CASO OPÇÃO SEJA RESIDENCIAL -->
+                                <ul *ngIf="typeoffResidential" class="z-10 position-absolute bg-light w-100 arrow-box-type-off border-radius-10 py-2 mt-5 dropdown-menu-left" >
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyapartment" class="mb-0">
+                                            <input type="radio" id="typePropertyapartment" value="apartment" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Apartamento</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertystudio" class="mb-0">
+                                            <input type="radio" id="typePropertystudio" value="studio" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Studio</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertykitnet" class="mb-0">
+                                            <input type="radio" id="typePropertykitnet" value="kitnet" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Kitnet</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyhouse" class="mb-0">
+                                            <input type="radio" id="typePropertyhouse" value="house" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Casa</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertycondominium" class="mb-0">
+                                            <input type="radio" id="typePropertycondominium" value="condominium" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Casa de condomínio</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyvillage" class="mb-0">
+                                            <input type="radio" id="typePropertyvillage" value="village" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Casa de vila</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertypenthouse" class="mb-0">
+                                            <input type="radio" id="typePropertypenthouse" value="penthouse" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Cobertura</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyflat" class="mb-0">
+                                            <input type="radio" id="typePropertyflat" value="flat" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Flat</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyloft" class="mb-0">
+                                            <input type="radio" id="typePropertyloft" value="loft" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Loft</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyland" class="mb-0">
+                                            <input type="radio" id="typePropertyland" value="land" formControlName="typeOfResidential" 
+                                            name="typeOfResidential" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Terreno/Lote/Condomínio</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                </ul>
+
+                                <!-- MOSTRAR CASO OPÇÃO SEJA RURAL -->
+                                 <ul *ngIf="typeoffRural" class="z-10 position-absolute bg-light w-100 arrow-box-type-off border-radius-10 py-2 mt-5 dropdown-menu-left" >
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyfarm" class="mb-0">
+                                            <input type="radio" id="typePropertyfarm" value="farm" formControlName="typeOfRural" 
+                                            name="typeOfRural" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Fazenda / Sítio / Chácara</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                </ul>
+                                <!-- MOSTAR CASO OPÇÃO SEJA COMERCIAL -->
+                                <ul *ngIf="typeoffCommercial" class="z-10 position-absolute bg-light w-100 arrow-box-type-off border-radius-10 py-2 mt-5 dropdown-menu-left" >
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyshop" class="mb-0">
+                                            <input type="radio" id="typePropertyshop" value="shop" formControlName="typeOfCommercial" 
+                                            name="typeOfCommercial" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Loja/Salão/Ponto Comercial</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertycommercialset" class="mb-0"> 
+                                            <input type="radio" id="typePropertycommercialset" value="commercialset" formControlName="typeOfCommercial" 
+                                            name="typeOfCommercial" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Conjunto comercial/Sala</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertycommercialhouse" class="mb-0">
+                                            <input type="radio" id="typePropertycommercialhouse" value="commercialhouse" formControlName="typeOfCommercial" 
+                                            name="typeOfCommercial" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Casa comercial</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyhotel" class="mb-0">
+                                            <input type="radio" id="typePropertyhotel" value="hotel" formControlName="typeOfCommercial" 
+                                            name="typeOfCommercial" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Hotel/Motel/Pousada</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertycorporatelots" class="mb-0">
+                                            <input type="radio" id="typePropertycorporatelots" value="corporatelots" formControlName="typeOfCommercial" 
+                                            name="typeOfCommercial" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Andar/Laje corporativa</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertybuilding" class="mb-0">
+                                            <input type="radio" id="typePropertybuilding" value="building" formControlName="typeOfCommercial" 
+                                            name="typeOfCommercial" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Prédio/Torre</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyland" class="mb-0">
+                                            <input type="radio" id="typePropertyland" value="land" formControlName="typeOfCommercial" 
+                                            name="typeOfCommercial" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Terrenos/Lotes comerciais</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertywarehouse" class="mb-0">
+                                            <input type="radio" id="typePropertywarehouse" value="warehouse" formControlName="typeOfCommercial" 
+                                            name="typeOfCommercial" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Galpão/Depósitos/Armazéms</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                        <label for="typePropertyflat" class="mb-0">
+                                            <input type="radio" id="typePropertyflat" value="flat" formControlName="typeOfCommercial" 
+                                            name="typeOfCommercial" class="card-input-element" />
+                                            <div class="py-2 px-4 card-input">
+                                                <span class="fw-400 font-size-14 line-20 color-blue">Garagem</span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                </ul>
+                              
                             </div>
-                            <div class="input-property d-flex justify-content-center align-items-center w-fit">
-                                <button class="btn bg-light fw-400 font-size-14 line-20 color-blue h-51 mx-2 px-3" type="button">+ Opções</button>
-                                <button class="btn bg-light h-51 my-2 border-radius-100 px-3" type="button">
+
+                            <div class="input-property nav-item dropdown d-flex justify-content-center align-items-center">
+                                <button (click)="propertyCharacteristics('propertyCharacteristics')" 
+                                class="btn bg-light fw-400 font-size-14 line-20 color-blue h-51 mx-2 px-3" 
+                                type="button">+ Opções</button>
+                                <div *ngIf="propertyCharacteristicsOptions" 
+                                class="z-10 position-absolute bg-light w-550 border-radius-10 py-2 painel-options-header dropdown-menu-left"  >
+                                    <div class="row mx-0 py-3">
+                                        <div class="col-12 px-4">
+                                            <h5 class="fw-400 font-size-16 line-20 color-green">Caracteristica condominio</h5>
+                                        </div>
+                                        <div class="col-5 col-painel-option px-4 border-bottom-gray">
+                                            <div class="form-check my-1">
+                                                <input (click)="propertyCharacteristics('vacancies')"  formControlName="checkvacancies"
+                                                class="form-check-input w18h18 border-radius-10" type="checkbox" value="vacancies" id="checkvacancies">
+                                                <label class="form-check-label pt-1 px-2 fw-400 font-size-14 line-20 color-black" for="checkvacancies">
+                                                  Vagas
+                                                </label>
+                                            </div>
+                                            <div class="form-check my-1">
+                                                <input (click)="propertyCharacteristics('bathrooms')"  formControlName="checkbathrooms"
+                                                class="form-check-input w18h18 border-radius-10" type="checkbox" value="bathrooms" id="checkbathrooms">
+                                                <label class="form-check-label pt-1 px-2 fw-400 font-size-14 line-20 color-black" for="checkbathrooms">
+                                                  Banheiros
+                                                </label>
+                                            </div>
+                                            <div class="form-check my-1">
+                                                <input (click)="propertyCharacteristics('suites')"  formControlName="checksuites"
+                                                class="form-check-input w18h18 border-radius-10" type="checkbox" value="suites" id="checksuites">
+                                                <label class="form-check-label pt-1 px-2 fw-400 font-size-14 line-20 color-black" for="checksuites">
+                                                  Suites
+                                                </label>
+                                            </div>
+                                            <div class="form-check my-1">
+                                                <input (click)="propertyCharacteristics('rooms')"  formControlName="checkrooms"
+                                                class="form-check-input w18h18 border-radius-10" type="checkbox" value="rooms" id="checkrooms">
+                                                <label class="form-check-label pt-1 px-2 fw-400 font-size-14 line-20 color-black" for="checkrooms">
+                                                  Quartos
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-painel-option px-4 border-bottom-gray">
+                                            <div class="form-check my-1">
+                                                <input (click)="propertyCharacteristics('condominium')"  formControlName="checkcondominium"
+                                                class="form-check-input w18h18 border-radius-10" type="checkbox" value="condominium" id="checkcondominium">
+                                                <label class="form-check-label pt-1 px-2 fw-400 font-size-14 line-20 color-black" for="checkcondominium">
+                                                  Condomínio
+                                                </label>
+                                            </div>
+                                            <div class="form-check my-1">
+                                                <input (click)="propertyCharacteristics('footage')"  formControlName="checkfootage"
+                                                class="form-check-input w18h18 border-radius-10" type="checkbox" value="footage" id="checkfootage">
+                                                <label class="form-check-label pt-1 px-2 fw-400 font-size-14 line-20 color-black" for="checkfootage">
+                                                  Metragem
+                                                </label>
+                                            </div>
+                                             <div class="form-check my-1">
+                                                <input (click)="propertyCharacteristics('construction')"  formControlName="checkconstruction"
+                                                class="form-check-input w18h18 border-radius-10" type="checkbox" value="construction" id="checkconstruction">
+                                                <label class="form-check-label pt-1 px-2 fw-400 font-size-14 line-20 color-black" for="checkconstruction">
+                                                  Ano de contrução
+                                                </label>
+                                            </div>
+                                            <div class="form-check my-1">
+                                                <input (click)="propertyCharacteristics('renovated')"  formControlName="checkrenovated"
+                                                class="form-check-input w18h18 border-radius-10" type="checkbox" value="renovated" id="checkrenovated">
+                                                <label class="form-check-label pt-1 px-2 fw-400 font-size-14 line-20 color-black" for="checkrenovated">
+                                                  Reformado
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 px-4 divviewoptions">
+                                           <div class="w-100 mt-3 flex-wrap d-flex">
+                                             <div *ngIf="viewvacancies" class="d-flex mx-1 align-items-center w-145 my-1 h-51 pr-5 pl-3 border border-radius-10">
+                                                <h5 class="color-black mb-0 fw-400 font-size-14 line-20">Vagas</h5>
+                                             </div>
+                                             <div *ngIf="viewbathrooms" class="d-flex mx-1 align-items-center w-145 my-1 h-51 pr-5 pl-3 border border-radius-10">
+                                                <h5 class="color-black mb-0 fw-400 font-size-14 line-20">Banheiros</h5>
+                                             </div>
+                                             <div *ngIf="viewsuites" class="d-flex mx-1 align-items-center w-145 my-1 h-51 px-3 border border-radius-10">
+                                                <h5 class="color-black mb-0 fw-400 font-size-14 line-20">Suites</h5>
+                                             </div>
+                                             <div *ngIf="viewrooms" class="d-flex mx-1 align-items-center w-145 my-1 h-51 px-3 border border-radius-10">
+                                                <h5 class="color-black mb-0 fw-400 font-size-14 line-20">Quartos</h5>
+                                             </div>
+                                             <div *ngIf="viewcondominium" class="d-flex mx-1 align-items-center w-145 my-1 h-51 px-3 border border-radius-10">
+                                                <h5 class="color-black mb-0 fw-400 font-size-14 line-20">Condomínio</h5>
+                                             </div>
+                                             <div *ngIf="viewfootage" class="d-flex mx-1 align-items-center w-145 my-1 h-51 px-3 border border-radius-10">
+                                                <h5 class="color-black mb-0 fw-400 font-size-14 line-20">Metragem</h5>
+                                             </div>
+                                             <div *ngIf="viewconstruction" class="d-flex mx-1 align-items-center w-145 my-1 h-51 px-3 border border-radius-10">
+                                                <h5 class="color-black mb-0 fw-400 font-size-14 line-20">Ano de contrução</h5>
+                                             </div>
+                                             <div *ngIf="viewrenovated" class="d-flex mx-1 align-items-center w-145 my-1 h-51 px-3 border border-radius-10">
+                                                <h5 class="color-black mb-0 fw-400 font-size-14 line-20">Reformado</h5>
+                                             </div>
+                                           </div>
+                                        </div>
+                                        <div *ngIf="hideviewoptions" class="col-12 text-align-right">
+                                            <h5 (click)="hideView()" class="fw-400 cursor-pointer mb-0 font-size-16 line-20 color-pink">Hide</h5>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <button (click)="propertyCharacteristics('propertyCharacteristics')" class="btn bg-light h-51 my-2 border-radius-100 px-3" type="button">
                                 <i class="bi color-blue bi-three-dots-vertical"></i>
                                 </button>
                             </div>

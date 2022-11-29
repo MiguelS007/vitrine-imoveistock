@@ -1,39 +1,41 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { PageScrollService } from 'ngx-page-scroll-core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, AfterViewInit {
   collapsed = false;
+  urlParams: any;
+  iflogged = false;
   constructor(
-    private pageScrollService: PageScrollService,
-    @Inject(DOCUMENT) private document: any,
+    public router: Router
   ) { }
 
+  ngAfterViewInit(): void {
+  }
+
   ngOnInit(): void {
+
   }
 
-
-  public scrollToMakeYourRegistration(): void {
-    this.pageScrollService.scroll({
-      document: this.document,
-      scrollTarget: '.scrollToMakeYourRegistration'
-    });
+  handlerLoggedBackground(url: string): string {
+    if (url === '/logged/search')
+      return 'bg-light';
+      return 'bg-transpatent';
   }
-
-  public scrollIndicate(): void {
-    this.pageScrollService.scroll({
-      document: this.document,
-      scrollTarget: '.scrollIndicate'
-    });
+  handlerLoggedLinks(url: string): string {
+    if (url === '/logged/search')
+      return 'color-black';
+      return 'text-light';
   }
+  
 
   sideBtn() {
     this.collapsed = !this.collapsed;
   }
+
 
 }
