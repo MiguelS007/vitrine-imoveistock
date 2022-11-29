@@ -23,7 +23,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   handlerLoggedBackground(url: string): string {
     if (url === '/logged/search')
-      return 'bg-light';
+      return 'bg-white';
       return 'bg-transpatent';
   }
   handlerLoggedLinks(url: string): string {

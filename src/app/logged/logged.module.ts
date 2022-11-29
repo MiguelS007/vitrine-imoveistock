@@ -7,11 +7,13 @@ import { LoggedComponent } from './logged.component';
 import { SwiperModule } from 'swiper/angular';
 import { AppComponent } from '../app.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PropertyDetailComponent } from './property-detail/property-detail.component';
 
 @NgModule({
   declarations: [
     LoggedComponent,
     SearchPageComponent,
+    PropertyDetailComponent,
   ],
   imports: [
     CommonModule,
