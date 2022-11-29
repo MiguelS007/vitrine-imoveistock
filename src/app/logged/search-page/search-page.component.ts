@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { DatamokService } from 'src/app/service/datamok.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
-// install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
   selector: 'app-search-page',
@@ -16,6 +15,7 @@ export class SearchPageComponent implements OnInit {
   form: FormGroup;
   iconlikeheart = false;
   products: any = [];
+  propertyproducts: any = [];
   paginationProduct: number = 1;
 
   constructor(
@@ -33,12 +33,16 @@ export class SearchPageComponent implements OnInit {
       typerooms: ['', [Validators.required]],
       typevacancies: ['', [Validators.required]],
       typeconstruction: ['', [Validators.required]],
+      typefootagemax: ['', [Validators.required]],
+      typefootagemin: ['', [Validators.required]],
+      orderby: ['', [Validators.required]],
     });
     
     }
 
   ngOnInit(): void {
     this.products = this.datamokservice.resultSearch;
+    this.propertyproducts = this.datamokservice.exclusiveProperties;
   }
   likeHeart(){
     this.iconlikeheart = !this.iconlikeheart;
