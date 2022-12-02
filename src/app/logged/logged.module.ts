@@ -8,7 +8,10 @@ import { SwiperModule } from 'swiper/angular';
 import { AppComponent } from '../app.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
-
+import {VgCoreModule} from '@videogular/ngx-videogular/core';
+import {VgControlsModule} from '@videogular/ngx-videogular/controls';
+import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
+import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -21,7 +24,11 @@ import { PropertyDetailComponent } from './property-detail/property-detail.compo
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    SwiperModule
+    SwiperModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule
   ],
   schemas: [],
   bootstrap: [AppComponent]

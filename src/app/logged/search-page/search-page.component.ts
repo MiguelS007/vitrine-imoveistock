@@ -11,7 +11,6 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   styleUrls: ['./search-page.component.scss']
 })
 export class SearchPageComponent implements OnInit {
-  currentRoute: string | undefined;
   form: FormGroup;
   iconlikeheart = false;
   products: any = [];

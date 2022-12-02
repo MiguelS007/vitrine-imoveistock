@@ -5,6 +5,27 @@ import { Injectable } from '@angular/core';
 })
 export class DatamokService {
   bot: any;
+  // DETAILS-PROPERTY
+  onlypreview = [
+    {
+      preview: '../../../assets/img/preview3.png',
+    },
+  ];
+  imagespreview = [
+    {
+      previews: '../../../assets/img/preview1.png',
+    },
+    {
+      previews: '../../../assets/img/preview4.png',
+    },
+    {
+      previews: '../../../assets/img/preview2.png',
+    },
+    {
+      previews: '../../../assets/img/preview5.png',
+    },
+  ];
+  // SEARCH-PAGE
   exclusiveProperties = [
     {
       value: '2,000',
