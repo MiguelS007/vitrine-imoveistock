@@ -11,6 +11,8 @@ import { DatamokService } from 'src/app/service/datamok.service';
 export class PropertyDetailComponent implements OnInit {
 
   form: FormGroup;
+  formproperty: FormGroup;
+
   iconlikeheart = false;
   iconshare = false;
   iconprint = false;
@@ -33,6 +35,18 @@ export class PropertyDetailComponent implements OnInit {
     this.form = this.formBuilder.group({
       day: ['', [Validators.required]],
       time: ['', [Validators.required]],
+    });
+    this.formproperty = this.formBuilder.group({
+      searchwords: ['', [Validators.required]],
+      localproperty: ['', [Validators.required]],
+      typeproperty: ['', [Validators.required]],
+      typeprice: ['', [Validators.required]],
+      typebathroom: ['', [Validators.required]],
+      typerooms: ['', [Validators.required]],
+      typevacancies: ['', [Validators.required]],
+      typeconstruction: ['', [Validators.required]],
+      typefootagemax: ['', [Validators.required]],
+      typefootagemin: ['', [Validators.required]],
     });
 
   }
@@ -63,15 +77,19 @@ export class PropertyDetailComponent implements OnInit {
     if (value === 'step1') {
       this.step1scheduling = false;
       this.step2scheduling = true;
-    }else if (value === 'step'){
+    }else if (value === 'step2'){
       this.step2scheduling = false;
       this.step3scheduling = true;
     }else if (value === 'close'){
       this.step1scheduling = false;
       this.step2scheduling = false;
       this.step3scheduling = false;
-    }
-    else if (value === 'open'){
+    }else if (value === 'viewvisits'){
+      this.step1scheduling = false;
+      this.step2scheduling = false;
+      this.step3scheduling = false;
+      this.router.navigate(['logged/visits']);
+    } else if (value === 'open'){
       this.step1scheduling = true;
       this.step2scheduling = false;
       this.step3scheduling = false;

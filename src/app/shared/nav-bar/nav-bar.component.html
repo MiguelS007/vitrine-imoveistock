@@ -1,9 +1,9 @@
 <nav [class]="handlerLoggedBackground(router.url)"  class="navbar z-10 position-absolute w-100 top-0 justify-content-center navbar-expand-lg navbar-light">
-  <div  [class]="collapsed ? 'd-block' : 'd-flex'" class="w-100 mx-4 nav-bar max-w-1918">
+  <div  [class]="collapsed ? 'd-block' : 'd-flex'" class="w-100 mr-4 nav-bar max-w-1918">
     <div class="navbar-brand align-items-center d-flex">
         <div class="green-block"></div> 
         <img src="../../../assets/img/logo.png" class="logo bg-greenlight"> 
-        <img src="../../../assets/img/title-logo.png" class="px-3 h-fit title-logo"> 
+        <img [src]="handlerLoggedLogo(router.url)"  class="px-3 h-fit title-logo"> 
     </div>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">

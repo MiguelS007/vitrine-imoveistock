@@ -328,7 +328,7 @@
                         itemsPerPage: 10, currentPage: paginationProduct }; let
                         i= index" class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3
                         border-radius-10 bg-white">
-                        <div style='background-image: url({{item.bgproduct}});'
+                        <div (click)="goDetailProperty()" style='background-image: url({{item.bgproduct}});'
                             class="bg-img-result py-2 px-3 border-radius-10">
                             <div class="w-100 h-50 d-flex">
                                 <h4 class="bg-purple h-fit px-4 py-2 mb-0
