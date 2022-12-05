@@ -24,19 +24,19 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   handlerLoggedBackground(url: string): string {
     if (url === '/home')
       return 'bg-transpatent';
-      return 'bg-white';
+    return 'bg-white';
   }
   handlerLoggedLinks(url: string): string {
     if (url === '/home')
       return 'text-light';
-      return 'color-black';
+    return 'color-black';
   }
   handlerLoggedLogo(url: string): string {
     if (url === '/home')
       return '../../../assets/img/title-logo.png';
-      return '../../../assets/img/logo-title-black.png';
+    return '../../../assets/img/logo-title-black.png';
   }
-  
+
 
   sideBtn() {
     this.collapsed = !this.collapsed;
