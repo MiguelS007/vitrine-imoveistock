@@ -25,7 +25,8 @@ export class PropertyDetailComponent implements OnInit {
   products: any = [];
   propertyproducts: any = [];
   paginationProduct: number = 1;
-
+  tourvirtual = false;
+  propertyvideo = true;
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -70,29 +71,40 @@ export class PropertyDetailComponent implements OnInit {
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
   }
-  segmentvideo() {
-    this.segment = !this.segment;
+  segmentvideo(value: string) {
+    if (value === 'video') {
+      this.segment = !this.segment;
+      this.propertyvideo = true;
+      this.tourvirtual = false;
+    } else if (value === 'tour') {
+      this.segment = !this.segment;
+      this.propertyvideo = false;
+      this.tourvirtual = true;
+    }
   }
   nextScheduling(value: string) {
     if (value === 'step1') {
       this.step1scheduling = false;
       this.step2scheduling = true;
-    }else if (value === 'step2'){
+    } else if (value === 'step2') {
       this.step2scheduling = false;
       this.step3scheduling = true;
-    }else if (value === 'close'){
+    } else if (value === 'close') {
       this.step1scheduling = false;
       this.step2scheduling = false;
       this.step3scheduling = false;
-    }else if (value === 'viewvisits'){
+    } else if (value === 'viewvisits') {
       this.step1scheduling = false;
       this.step2scheduling = false;
       this.step3scheduling = false;
-      this.router.navigate(['logged/visits']);
-    } else if (value === 'open'){
+      setTimeout(() => {
+        this.router.navigate(['logged/visits']);
+      }, 100);
+    } else if (value === 'open') {
       this.step1scheduling = true;
       this.step2scheduling = false;
       this.step3scheduling = false;
     }
   }
+
 }

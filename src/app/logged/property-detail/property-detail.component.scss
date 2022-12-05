@@ -7,39 +7,8 @@
 
 // MEDIA
 @media (max-width: 1240px) {
-tr{
-    display: grid !important;
-    height: auto !important;
-}
-}
-.modal-body {
-    transition: .4s;
-    animation-name: modal-anime;
-    animation-duration: .4s;
-}
-
-@keyframes modal-anime {
-    0% {
-        opacity: 0;
+    tr {
+        display: grid !important;
+        height: auto !important;
     }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-.selector-item_label {
-    padding: 3px 9px;
-}
-
-.selector-item_radio {
-    appearance: none;
-    display: none;
-}
-
-.selector-item_radio:checked+.selector-item_label {
-    background-color: var(--purple);
-    color: white !important;
-    width: 100%;
-    border: 1px solid var(--purple) !important;
 }
