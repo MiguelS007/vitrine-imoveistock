@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { DatamokService } from 'src/app/service/datamok.service';
 
 @Component({
@@ -12,14 +13,19 @@ export class PropertyDetailComponent implements OnInit {
 
   form: FormGroup;
   formproperty: FormGroup;
+  
+  changeSubscription: Subscription;
 
   iconlikeheart = false;
   iconshare = false;
   iconprint = false;
   segment = false;
+  modallogin = false;
+  modalscheduling = false;
   step1scheduling = true;
   step2scheduling = false;
   step3scheduling = false;
+  modalShedulingVisits = false;
   onlyimg: any = [];
   previewimg: any = [];
   products: any = [];
@@ -48,6 +54,9 @@ export class PropertyDetailComponent implements OnInit {
       typeconstruction: ['', [Validators.required]],
       typefootagemax: ['', [Validators.required]],
       typefootagemin: ['', [Validators.required]],
+    });
+    this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
+      this.modallogin = false;
     });
 
   }
@@ -90,21 +99,24 @@ export class PropertyDetailComponent implements OnInit {
       this.step2scheduling = false;
       this.step3scheduling = true;
     } else if (value === 'close') {
-      this.step1scheduling = false;
+      this.modalscheduling = false;
+      this.step1scheduling = false; 
       this.step2scheduling = false;
       this.step3scheduling = false;
     } else if (value === 'viewvisits') {
+      this.modalscheduling = false;
       this.step1scheduling = false;
       this.step2scheduling = false;
       this.step3scheduling = false;
       setTimeout(() => {
         this.router.navigate(['logged/visits']);
       }, 100);
-    } else if (value === 'open') {
-      this.step1scheduling = true;
-      this.step2scheduling = false;
-      this.step3scheduling = false;
+    } else if (value === 'modal-logged') {
+      this.modallogin = true;
+    }
+    // undefined
+    else if(value === 'modal-scheduling'){
+      this.modalscheduling = true;
     }
   }
-
 }

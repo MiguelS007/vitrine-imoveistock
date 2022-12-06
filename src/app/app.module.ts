@@ -15,7 +15,6 @@ import { HomeCardsComponent } from './home/home-cards/home-cards.component';
 import { HomeHeaderComponent } from './home/home-header/home-header.component';
 import { LoggedModule } from './logged/logged.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,

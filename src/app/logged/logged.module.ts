@@ -13,12 +13,15 @@ import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { VisitsComponent } from './visits/visits.component';
+import { ModalLoginComponent } from './modal-login/modal-login.component';
+import { NgxMaskModule } from 'ngx-mask';
 @NgModule({
   declarations: [
     LoggedComponent,
     SearchPageComponent,
     PropertyDetailComponent,
     VisitsComponent,
+    ModalLoginComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +29,7 @@ import { VisitsComponent } from './visits/visits.component';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    NgxMaskModule.forRoot(),
     SwiperModule,
     VgCoreModule,
     VgControlsModule,
