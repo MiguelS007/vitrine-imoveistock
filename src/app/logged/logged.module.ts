@@ -15,6 +15,7 @@ import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { VisitsComponent } from './visits/visits.component';
 import { ModalLoginComponent } from './modal-login/modal-login.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { ExpressProposalComponent } from './express-proposal/express-proposal.component';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -22,6 +23,7 @@ import { NgxMaskModule } from 'ngx-mask';
     PropertyDetailComponent,
     VisitsComponent,
     ModalLoginComponent,
+    ExpressProposalComponent,
   ],
   imports: [
     CommonModule,

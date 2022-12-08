@@ -677,8 +677,7 @@
                                 </tr>
                                 <tr class="h-40">
                                     <td>
-                                        <span class="fw-400 font-size-18
-                                                    line-24 color-black">Taxa de
+                                        <span class="fw-400 font-size-18 line-24 color-black">Taxa de
                                             serviço <i class="bi
                                                         font-size-14 color-muted
                                                         bi-info-circle"></i></span>
@@ -708,11 +707,13 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button (click)="nextScheduling('modal-logged')" class="bg-purple btn border-radius-10 h-74
+                        <!-- undefined -->
+                        <button (click)="nextScheduling('modal-scheduling')" class="bg-purple btn border-radius-10 h-74
                                     fw-700 font-size-18 line-24 mt-3 text-light
-                                    w-100" type="button" 
-                                   
-                                    >Agendar visita</button>
+                                    w-100" type="button">Agendar visita</button>
+                         <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
+                                    fw-700 font-size-18 line-24 mt-3 color-purple
+                                    w-100" type="button">Fazer Proposta</button>
                         <!-- MODAL-STEPS -->
                         <div *ngIf="modalscheduling" class="modal modal-all fade">
                             <div class="modal-dialog
@@ -723,7 +724,7 @@
                                             <img src="../../../assets/icon/x.png" />
                                         </button>
                                     </div>
-                                    <form *ngIf="modalShedulingVisits" [formGroup]="form">
+                                    <form [formGroup]="form">
                                         <div *ngIf="step1scheduling" class="anima-body">
                                             <p class="fw-700 py-3
                                                         font-size-24 line-32
@@ -1226,10 +1227,9 @@
                                                             text-light
                                                             border-radius-10
                                                             h-74
-                                                            w-100" >Salvar
+                                                            w-100">Salvar
                                                 na Agenda</button>
-                                            <button type="button" 
-                                                (click)="nextScheduling('viewvisits')" class="btn pb-2 mt-3
+                                            <button type="button" (click)="nextScheduling('viewvisits')" class="btn pb-2 mt-3
                                                             border-purple
                                                             bg-white
                                                             fw-700 font-size-18

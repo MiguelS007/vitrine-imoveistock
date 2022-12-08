@@ -14,6 +14,12 @@ import { HomeGalleryComponent } from './home/home-gallery/home-gallery.component
 import { HomeCardsComponent } from './home/home-cards/home-cards.component';
 import { HomeHeaderComponent } from './home/home-header/home-header.component';
 import { LoggedModule } from './logged/logged.module';
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 
 @NgModule({
   declarations: [
@@ -25,14 +31,21 @@ import { LoggedModule } from './logged/logged.module';
     HomeGalleryComponent,
     HomeCardsComponent,
     HomeHeaderComponent,
+    ContactComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     SwiperModule,
     FormsModule,
     LoggedModule,
     ReactiveFormsModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
     NgxPageScrollCoreModule,
   ],
   providers: [

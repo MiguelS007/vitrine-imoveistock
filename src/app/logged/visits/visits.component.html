@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="w-100  block-important h-auto mt-5 d-flex">
-                                    <button type="button" class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
+                                    <button type="button" (click)="goExpress()" class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
                                         Fazer proposta
                                     </button>
                                     <button type="button" class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
@@ -100,7 +100,7 @@
                                     class="bg-img-result py-2 px-3
                                     border-radius-10">
                                     <div class="w-100 h-50 d-flex">
-                                        <h4 class="bg-purple h-fit px-4
+                                        <h4 [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
                                             py-2 mb-0
                                             border-radius-5 fw-400
                                             font-size-14 line-15
@@ -187,7 +187,7 @@
                                             m2</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                             </div>
                             <div class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
                                <p class="fw-700 font-size-18 line-24 color-black">
@@ -200,7 +200,7 @@
                                 <button type="submit" class="btn bg-purple text-light border-radius-10 h-74 w-100 mr-1 fw-700 font-size-18 line-24">
                                     Remarcar
                                 </button>
-                                <button type="submit" type="button" data-toggle="modal"
+                                <button type="submit" type="button" data-toggle="modal"  (click)="cancelVisits('cancel')"
                                 data-target="#cancelvisits" class="btn bg-white border-purple color-purple ml-1 border-radius-10 h-74 w-100 fw-700 font-size-18 line-24"
                                 >Cancalar
                                 </button>
@@ -257,7 +257,7 @@
                                             <button type="submit"
                                                 data-dismiss="modal"
                                                 aria-label="Close"
-                                                (click)="cancelVisits()"
+                                                (click)="cancelVisits('cancelmodal')"
                                                 [disabled]="form.invalid"
                                                 class="btn pb-2
                                                 bg-purple fw-700

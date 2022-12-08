@@ -25,7 +25,6 @@ export class PropertyDetailComponent implements OnInit {
   step1scheduling = true;
   step2scheduling = false;
   step3scheduling = false;
-  modalShedulingVisits = false;
   onlyimg: any = [];
   previewimg: any = [];
   products: any = [];
@@ -91,6 +90,9 @@ export class PropertyDetailComponent implements OnInit {
       this.tourvirtual = true;
     }
   }
+  goExpress(){
+    this.router.navigate(['logged/express']);
+  }
   nextScheduling(value: string) {
     if (value === 'step1') {
       this.step1scheduling = false;
@@ -111,12 +113,13 @@ export class PropertyDetailComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['logged/visits']);
       }, 100);
-    } else if (value === 'modal-logged') {
-      this.modallogin = true;
-    }
+    } 
     // undefined
-    else if(value === 'modal-scheduling'){
-      this.modalscheduling = true;
+    else if (value === 'modal-logged') {
+      this.modallogin = true;
+    }else if(value === 'modal-scheduling'){
+      this.modalscheduling = true; 
+      this.step1scheduling = true;
     }
   }
 }
