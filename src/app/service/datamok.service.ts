@@ -1,10 +1,43 @@
 import { Injectable } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatamokService {
+  // MODA-LOGIN 
+  private subject = new Subject<any>();
   bot: any;
+
+  opModalLogin() {
+    this.subject.next('');
+  }
+
+  getopModalLogin(): Observable<any> {
+    return this.subject.asObservable();
+  }
+  // DETAILS-PROPERTY
+
+  onlypreview = [
+    {
+      preview: '../../../assets/img/preview3.png',
+    },
+  ];
+  imagespreview = [
+    {
+      previews: '../../../assets/img/preview1.png',
+    },
+    {
+      previews: '../../../assets/img/preview4.png',
+    },
+    {
+      previews: '../../../assets/img/preview2.png',
+    },
+    {
+      previews: '../../../assets/img/preview5.png',
+    },
+  ];
+  // SEARCH-PAGE
   exclusiveProperties = [
     {
       value: '2,000',

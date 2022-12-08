@@ -11,7 +11,6 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   styleUrls: ['./search-page.component.scss']
 })
 export class SearchPageComponent implements OnInit {
-  currentRoute: string | undefined;
   form: FormGroup;
   iconlikeheart = false;
   products: any = [];
@@ -23,7 +22,7 @@ export class SearchPageComponent implements OnInit {
     private datamokservice: DatamokService,
     private formBuilder: FormBuilder,
 
-  ) { 
+  ) {
     this.form = this.formBuilder.group({
       searchwords: ['', [Validators.required]],
       localproperty: ['', [Validators.required]],
@@ -37,14 +36,20 @@ export class SearchPageComponent implements OnInit {
       typefootagemin: ['', [Validators.required]],
       orderby: ['', [Validators.required]],
     });
-    
-    }
+
+  }
 
   ngOnInit(): void {
+
     this.products = this.datamokservice.resultSearch;
     this.propertyproducts = this.datamokservice.exclusiveProperties;
   }
-  likeHeart(){
+  likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
   }
+  goDetailProperty() {
+    this.router.navigate(['logged/property-detail']);
+  }
+
+ 
 }

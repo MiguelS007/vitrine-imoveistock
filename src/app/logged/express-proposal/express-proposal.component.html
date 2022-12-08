@@ -1,0 +1,467 @@
+<main class="bg-whitelight position-relative w-100">
+    <form [formGroup]="form" class="row form-search pb-10 pt-10 h-100 m-0-auto mx-5 px-5 w-100
+        max-w-800">
+        <div *ngIf="titleexpress" class="col-12 mx-2">
+            <p class="d-flex fw-700 font-size-24 line-24 color-black ">
+                Escolha sua proposta <i class="bi px-2 font-size-18 text-primary bi-question-circle"></i>
+            </p>
+            <span class="fw-400 font-size-18 line-20 color-black ">
+                Se você concorda com as condições do anúncio, envie essa proposta express. Caso contrário, crie uma
+                proposta customizada.
+            </span>
+        </div>
+        <div class="col-12 my-4">
+           <div *ngIf="cardproduct">
+            <div  *ngFor="let item of products |
+            paginate: {
+            itemsPerPage: 1, currentPage:
+            paginationProduct }; let
+            i= index" class="w-100
+            d-inline-blocks 
+            p-3 
+            border-radius-10 bg-white">
+                <div style='background-image:
+                url({{item.bgproduct}});' class="bg-img-result py-2 px-3
+                border-radius-10">
+                    <div class="w-100 h-50 d-flex">
+                        <h4 class="h-fit px-4 bg-purple
+                        py-2 mb-0
+                        border-radius-5 fw-400
+                        font-size-14 line-15
+                        text-light">Locação</h4>
+                        <h4 class="bg-greenlight h-fit
+                        ml-2 px-3 py-2
+                        mb-0 border-radius-5 fw-400
+                        font-size-14
+                        line-15 color-black">{{item.exclusive}}</h4>
+                    </div>
+                    <div class="w-100 d-flex h-50
+                    align-items-end
+                    justify-content-between">
+                        <p class="fw-700 mb-0
+                        font-size-22 h-fit line-32
+                        text-light">R${{item.price}}</p>
+                        <div (click)="likeHeart()" class="h-fit
+                        bg-transparent-white
+                        cursor-pointer
+                        border-radius-10
+                        pt-2 pb-1 px-3">
+                            <i [class]="iconlikeheart ?
+                            'bi-heart-fill':'bi-heart'
+                            " class="bi
+                            font-size-16
+                            text-light"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 mx-3 text-align-left
+                pt-3">
+                    <span class="fw-400 font-size-14
+                    line-20
+                    color-black">{{item.type}}</span>
+                    <p class="fw-700 my-2 font-size-16
+                    line-20 mb-0
+                    color-black">{{item.nameproperty}}</p>
+                    <p class="d-flex
+                    align-items-center">
+                        <i class="bi font-size-20 mr-2
+                        color-black
+                        bi-geo-alt"></i>
+                        <span class="fw-400 font-size-14
+                        line-20
+                        color-black">{{item.local}}</span>
+                    </p>
+                </div>
+                <div class="row mx-3 my-3 d-flex">
+                    <div class="col justify-content-left
+                    px-0 d-flex
+                    align-items-center
+                    justify-content-left">
+                        <img src="../../../assets/icon/bed.png" class="pr-2" />
+                        <p class="fw-400 mb-0
+                        font-size-14 line-20
+                        color-black">{{item.rooms}}
+                            Quartos</p>
+                    </div>
+                    <div class="col justify-content-left px-0
+                    d-flex
+                    align-items-center
+                    justify-content-left">
+                        <img src="../../../assets/icon/car.png" class="pr-2" />
+                        <p class="fw-400 mb-0
+                        font-size-14 line-20
+                        color-black">{{item.vacancies}}
+                            Vagas</p>
+                    </div>
+                    <div class="col justify-content-left
+                    px-0 d-flex
+                    align-items-center
+                    justify-content-left">
+                        <img src="../../../assets/icon/rule.png" class="pr-2" />
+                        <p class="fw-400 mb-0
+                        font-size-14 line-20
+                        color-black">{{item.metrics}}
+                            m2</p>
+                    </div>
+                </div>
+            </div>
+           </div> 
+           
+
+            <div *ngIf="detailfinalvalue" class="w-100">
+                <div class="w-100 bg-white border-radius-10 mb-3 p-5">
+                    <table class="w-100">
+                        <tbody>
+                            <tr class="h-51 border-bottom-gray mb-2">
+                                <td>
+                                    <span class="fw-700 font-size-18
+                                        line-24 color-black">Valores</span>
+                                </td>
+                            </tr>
+                            <tr class="h-51">
+                                <td>
+                                    <span class="fw-400 font-size-18
+                                        line-24 color-black">Aluguel
+                                        <i class="bi font-size-14
+                                            color-muted
+                                            bi-info-circle"></i></span>
+                                </td>
+                                <td class="d-tavle-cell
+                                    text-align-right">
+                                    <span class="fw-700 font-size-18
+                                        line-24 color-black">R$ 0</span>
+                                </td>
+                            </tr>
+                            <tr class="h-51">
+                                <td>
+                                    <span class="fw-400 font-size-18
+                                        line-24 color-black">Valor total <i class="bi font-size-14
+                                            color-muted
+                                            bi-info-circle"></i></span>
+                                </td>
+                                <td class="d-tavle-cell
+                                    text-align-right">
+                                    <span class="fw-700 font-size-18
+                                        line-24 color-black">R$ 58</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="d-flex pt-4 mb-0 border-top-gray justify-content-end">
+                        <span class="fw-400 font-size-18 line-24 text-primary">Propor novo valor</span>
+                    </p>
+                </div>
+                <div class="w-100 bg-white border-radius-10 mb-3 p-5">
+                    <div class="w-100">
+                        <div class="w-100 border-bottom-gray d-flex align-items-center justify-content-between">
+                            <h5 class="fw-700 font-size-18 line-24 color-black">Retirada</h5>
+                            <i class="bi cursor-pointer font-size-30 color-black bi-three-dots-vertical"></i>
+                        </div>
+                    </div>
+                    <div class="w-100 pt-4 d-flex align-items-center">
+                        <i class="bi bi-person font-size-28"></i>
+                        <div class="d-grid px-3 mb-0">
+                            <p class="fw-400 font-size-16 line-20 color-black mb-1">
+                                Quero pedir que o proprietário retire
+                            </p>
+                            <p class="fw-400 font-size-16 line-20 text-primary mt-1 mb-0">
+                                A cama e o colchão da suíte principal
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 bg-white border-radius-10 p-5">
+                    <p class="fw-700 font-size-18 line-18 color-black">Mudanças do imóvel</p>
+                    <hr class="bg-whitelight"/>
+                    <p class="fw-400 font-size-16 mb-2 line-20 color-black">
+                        Você precisa negociar algum reparo, inclusão ou retirada com o proprietário?
+                    </p>
+                    <p class="border-orange bg-orangelight p-3 mb-2 border-radius-10">
+                        Solicitações prolongam sua negociação. Adicione somente se for imprescindível.
+                    </p>
+                    <button type="button" class="btn mt-3 border-dotted bg-white border-radius-10 h-74 w-100 fw-700 font-size-18 line-24 color-black">
+                        Adicionar solicitação
+                    </button>
+                </div>
+            </div>
+           
+            <div *ngIf="cardinfoone" class="col-12 px-0">
+                <div class="w-100 my-4 p-5 border-radius-10 bg-white">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        Para ser aprovado na avaliação de crédito, você precisa ter bom perfil de crédito, e renda mínima acima de R$ 9715. Até 4 pessoas podem compor renda no contrato.
+                    </p>
+                    <a [routerLink]="['#']" class="d-flex fw-400 font-size-16 line-20 ">
+                        Saiba mais como ser aprovado na avaliação
+                        <img src="../../../assets/icon/share.png" class="px-2" />
+                    </a>
+                </div>
+            </div>
+            <div *ngIf="cardinfotwo" class="col-12 px-0">
+                <div class="w-100 my-4 p-5 border-radius-10 bg-white">
+                    <span class="fw-700 font-size-16 line-20 color-black">Regras do Contrato</span>
+                    <p class="fw-400 font-size-16 pt-3 line-20 color-black">
+                       O contrato é de 30 meses e sem multa de rescisão após 12 meses, com aviso prévio de 30 dias.
+                    </p>
+                    <p class="fw-400 font-size-16 line-20 color-black"> 
+                        O condomínio é pago por você, com exceção do boleto com vencimento no mês de início do contrato, que será pago pelo proprietário. Despesas extraordinárias do condomínio, como fundos de obras e reformas estruturais serão reembolsadas para você pelo QuintoAndar.
+                    </p>
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        Você poderá receber as chaves 6 dias úteis após a assinatura do contrato.
+                    </p>
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        O primeiro aluguel vence 5 dias após o início da sua locação e os aluguéis seguintes no dia 7 de cada mês. A cobrança é sempre referente ao mês corrente (ex.: o aluguel de outubro vence no dia 7 de outubro).
+                    </p>
+                </div>
+            </div>
+            <div *ngIf="btnsend" class="col-12 mt-4 px-0">
+                <button (click)="sendProposalExpress('open')" class="btn bg-purple border-radius-10 h-74 w-100 fw-700 font-size-18 line-24 text-light" type="button">
+                    Enviar proposta express
+                </button>
+                <button (click)="customizedProposal('open')" class="btn bg-white mt-3 border-purple border-radius-10 h-74 w-100 fw-700 font-size-18 line-24 color-purple" type="button">
+                    Criar proposta customizada 
+                </button>
+            </div>
+            <div class="col-12">
+                 <!-- modal-custom -->
+                <div *ngIf="modalsendproposalexpress" class="modal modal-all fade">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content border-none bg-transparent p-3">
+                                <div class="w-100 my-4 p-5 border-radius-10 bg-white">
+                                    <table class="w-100">
+                                        <tbody>
+                                            <tr class="h-40 border-bottom-gray mb-2">
+                                                <td>
+                                                    <span class="fw-700 font-size-18
+                                                        line-24 color-black">Aluguel</span>
+                                                </td>
+                                                <td class="d-tavle-cell
+                                                    text-align-right">
+                                                    <span class="fw-700 font-size-18
+                                                        line-24 color-black">R$
+                                                        4.200,00</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="h-40">
+                                                <td>
+                                                    <span class="fw-400 font-size-18
+                                                        line-24 color-black">Condomínio
+                                                        <i class="bi font-size-14
+                                                            color-muted
+                                                            bi-info-circle"></i></span>
+                                                </td>
+                                                <td class="d-tavle-cell
+                                                    text-align-right">
+                                                    <span class="fw-700 font-size-18
+                                                        line-24 color-black">R$ 0</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="h-40">
+                                                <td>
+                                                    <span class="fw-400 font-size-18
+                                                        line-24 color-black">IPTU <i class="bi font-size-14
+                                                            color-muted
+                                                            bi-info-circle"></i></span>
+                                                </td>
+                                                <td class="d-tavle-cell
+                                                    text-align-right">
+                                                    <span class="fw-700 font-size-18
+                                                        line-24 color-black">R$ 58</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="h-40">
+                                                <td>
+                                                    <span class="fw-400 font-size-18
+                                                        line-24 color-black">Seguro
+                                                        incêndio <i class="bi
+                                                            font-size-14 color-muted
+                                                            bi-info-circle"></i></span>
+                                                </td>
+                                                <td class="d-tavle-cell
+                                                    text-align-right">
+                                                    <span class="fw-700 font-size-18
+                                                        line-24 color-black">R$ 79</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="h-40">
+                                                <td>
+                                                    <span class="fw-400 font-size-18 line-24 color-black">Taxa de
+                                                        serviço <i class="bi
+                                                            font-size-14 color-muted
+                                                            bi-info-circle"></i></span>
+                                                </td>
+                                                <td class="d-tavle-cell
+                                                    text-align-right">
+                                                    <span class="fw-700 font-size-18
+                                                        line-24 color-black">R$ 84</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <h6 class="my-4" style="outline-style: dotted;"></h6>
+                                    <table class="w-100 mt-5">
+                                        <tbody>
+                                            <tr class="h-40">
+                                                <td>
+                                                    <span class="fw-700 font-size-18
+                                                        line-24 color-black">Aluguel</span>
+                                                </td>
+                                                <td class="d-tavle-cell
+                                                    text-align-right">
+                                                    <span class="fw-700 font-size-18
+                                                        line-24 color-black">R$
+                                                        4.241,00</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="w-100 mt-3 d-flex">
+                                        <button type="button" (click)="sendProposalExpress('confirm')" class="btn mr-2 border-radius-10 bg-purple h-74 w-100 fw-500 font-size-18 line-24 text-light">
+                                            Confirmar
+                                        </button>
+                                        <button type="button" (click)="sendProposalExpress('cancelar')" class="btn ml-2 border-purple border-radius-10 bg-white h-74 w-100 fw-500 font-size-18 line-24 color-purple">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- modal-custom -->
+                 <div *ngIf="modalcustomizedproposal" class="modal modal-all fade">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content border-none bg-transparent p-3">
+                            <div class="modal-header mb-2">
+                                <button type="button" (click)="customizedProposal('close')" class="close border-radius-100 bg-whitelight">
+                                    <i class="bi font-size-40 color-black bi-x"></i>
+                                </button>
+                            </div>
+                            <div class="w-100 bg-white border-radius-10 mb-3 p-5">
+                                <table class="w-100">
+                                    <tbody>
+                                        <tr class="h-51 border-bottom-gray mb-2">
+                                            <td>
+                                                <span class="fw-700 font-size-18
+                                                    line-24 color-black">Valores</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="h-51">
+                                            <td>
+                                                <span class="fw-400 font-size-18
+                                                    line-24 color-black">Aluguel
+                                                    <i class="bi font-size-14
+                                                        color-muted
+                                                        bi-info-circle"></i></span>
+                                            </td>
+                                            <td class="d-tavle-cell
+                                                text-align-right">
+                                                <span class="fw-700 font-size-18
+                                                    line-24 color-black">R$ 0</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="h-51">
+                                            <td>
+                                                <span class="fw-400 font-size-18
+                                                    line-24 color-black">Valor total <i class="bi font-size-14
+                                                        color-muted
+                                                        bi-info-circle"></i></span>
+                                            </td>
+                                            <td class="d-tavle-cell
+                                                text-align-right">
+                                                <span class="fw-700 font-size-18
+                                                    line-24 color-black">R$ 58</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="d-flex py-4 border-top-gray justify-content-end">
+                                    <span class="fw-400 font-size-18 line-24 text-primary">Propor novo valor</span>
+                                </p>
+                            </div>
+                            <div *ngIf="modalwarning" class="w-100 bg-white border-radius-10 p-5">
+                                <p class="fw-700 font-size-18 line-18 color-black">Mudanças do imóvel</p>
+                                <hr class="bg-whitelight"/>
+                                <p class="fw-400 font-size-16 mb-2 line-20 color-black">
+                                    Você precisa negociar algum reparo, inclusão ou retirada com o proprietário?
+                                </p>
+                                <p class="border-orange bg-orangelight p-3 mb-2 border-radius-10">
+                                    Solicitações prolongam sua negociação. Adicione somente se for imprescindível.
+                                </p>
+                                <button (click)="propertyChange('open')" type="button" class="btn mt-3 border-dotted bg-white border-radius-10 h-74 w-100 fw-700 font-size-18 line-24 color-black">
+                                    Adicionar solicitação
+                                </button>
+                            </div>
+                            <div *ngIf="modalpropertychange" class="w-100 bg-white border-radius-10 p-5">
+                                <div class="w-100">
+                                    <div class="w-100 d-flex align-items-center justify-content-between">
+                                        <h5 class="fw-700 font-size-18 line-24 color-black">Mudanças do imóvel</h5>
+                                        <i (click)="propertyChange('close')" class="bi cursor-pointer font-size-36 color-black bi-x"></i>
+                                    </div>
+                                    <div class="w-100 mt-4">
+                                        <p class="d-flex cursor-pointer align-items-center mb-2"(click)="removeItem('open')" >
+                                            <img src="../../../assets/icon/less.png" />
+                                            <span class="fw-400 font-size-16 line-20 color-black">Retirar um item</span>
+                                        </p>
+                                        <!-- in analisys -->
+
+                                        <!-- <p class="d-flex align-items-center mb-2">
+                                            <img src="../../../assets/icon/more.png" />
+                                            <span class="fw-400 font-size-16 line-20 color-black">Incluir algo novo</span>
+                                        </p>
+                                        <p class="d-flex align-items-center mb-2">
+                                            <img src="../../../assets/icon/tools.png" />
+                                            <span class="fw-400 font-size-16 line-20 color-black">Fazer manutenção ou reparo</span>
+                                        </p>
+                                        <p class="d-flex align-items-center mb-2">
+                                            <img src="../../../assets/icon/list.png" />
+                                            <span class="fw-400 font-size-16 line-20 color-black">Modificar ou substituir algo</span>
+                                        </p> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="modalremoveitem" class="w-100 bg-white border-radius-10 p-5">
+                                <div class="w-100">
+                                    <div class="w-100 d-flex align-items-center justify-content-between">
+                                        <h5 class="fw-700 font-size-18 line-24 color-black">Retirada</h5>
+                                        <i (click)="removeItem('close')" class="bi cursor-pointer font-size-36 color-black bi-x"></i>
+                                    </div>
+                                    <div class="w-100">
+                                        <p class="border-orange bg-orangelight p-3 d-flex mb-2 border-radius-10">
+                                            <i class="bi text-warning px-3 font-size-20 bi-lightbulb"></i>
+                                            Save Solicitações prolongam sua negociação. Adicione somente se for imprescindível.
+                                        </p>
+                                        <p class="fw-700 font-size-16 mt-4 line-20 color-black">
+                                            Quero pedir que o proprietário retire
+                                        </p>
+                                        <input type="text" #qtdcomments (keyup)="0" formControlName="faqremove"
+                                            class="w-100 py-2 border-none border-bottom-gray bg-white color-blue fw-400 font-size-14 line-18" 
+                                            maxlength="200" placeholder="descreva o que deseja retirar"/>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <p class="fw-400 m-0 font-size-12 line-15 color-black">
+                                                ex: a cama e o colchão da suiíte principal
+                                            </p>
+                                          <p class="fw-400 m-0 font-size-12 line-15 color-blue">
+                                            {{qtdcomments.value.length}}/200
+                                          </p>
+                                        </div>
+                                        <div class="row d-flex justify-content-end ">
+                                            <div class="col-7 d-flex col-express block-important">
+                                                <button (click)="removeItem('close')" class="bg-white m-1 border-black w-100 cursor-pointer border-radius-10 h-51 fw-700 font-size-18 line-24 color-black" type="submit">
+                                                Cancelar
+                                            </button>
+                                            <button (click)="removeItem('submit')" [disabled]="form.invalid" class="bg-purple m-1 w-100 border-radius-10 cursor-pointer h-51 fw-700 font-size-18 line-24 border-none text-light" type="submit">
+                                                Salvar
+                                            </button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</main>
