@@ -1,0 +1,24 @@
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent !important;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 676px !important;
+        margin: 1.75rem auto;
+    }
+}
+.modal-content{
+    overflow-y: scroll !important;
+    height: 568px !important;
+}

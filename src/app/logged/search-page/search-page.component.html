@@ -1,0 +1,409 @@
+<main class="bg-whitelight position-relative w-100">
+    <form [formGroup]="form" class="row form-search pt-10 h-100 m-0-auto mx-5 px-5
+        max-w-1918">
+        <div class="col-12">
+            <p class="d-flex fw-700 font-size-16 line-19 color-black
+                align-items-center">Página Inicial /
+                <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;
+                    Resultado de busca
+                </span>
+            </p>
+            <p class="fw-700 font-size-32 line-40 color-black">
+                Resultado da sua busca por <b>[string busca]</b>
+            </p>
+        </div>
+        <div class="col-4 col-body-products mt-5">
+            <div class="w-100 border-radius-10 bg-white p-5">
+                <label for="searchwords" class="label-search-words">
+                    <i class="bi bi-search font-size-24"></i>
+                </label>
+                <input id="searchwords" formControlName="searchwords"
+                    style="padding-right: 70px;" type="search"
+                    placeholder="Busque por palavras"
+                    class="btn border border-radius-10 bg-light fw-400 text-left
+                    font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+
+                <label for="localproperty" class="label-search-local">
+                    <i class="bi bi-geo-alt font-size-24"></i>
+                </label>
+                <input id="localproperty" formControlName="localproperty"
+                    style="padding-right: 70px;" type="text" placeholder="Local"
+                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                    text-left font-size-16 line-20 pl-4 color-black w-100
+                    h-74"/>
+ 
+                <input formControlName="typeproperty"
+                    type="text" placeholder="Tipo de imóvel"
+                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                    text-left font-size-16 line-20 pl-4 color-black w-100
+                    h-74"/>
+
+                <input formControlName="typeprice"
+                    type="text" placeholder="Preço"
+                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                    text-left font-size-16 line-20 pl-4 color-black w-100
+                    h-74"/>
+
+                <input formControlName="typebathroom"
+                    type="text" placeholder="Banheiros"
+                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                    text-left font-size-16 line-20 pl-4 color-black w-100
+                    h-74"/>
+
+                <input formControlName="typerooms"
+                    type="text" placeholder="Quartos"
+                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                    text-left font-size-16 line-20 pl-4 color-black w-100
+                    h-74"/>
+
+                <input formControlName="typevacancies"
+                    type="text" placeholder="Vagas"
+                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                    text-left font-size-16 line-20 pl-4 color-black w-100
+                    h-74"/>
+
+                <input formControlName="typeconstruction"
+                    type="text" placeholder="Ano de construção"
+                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                    text-left font-size-16 line-20 pl-4 color-black w-100
+                    h-74"/>
+
+                <div class="w-100 d-flex align-items-center">
+                    <input formControlName="typefootagemin"
+                        type="text" placeholder="Metragem Mínima"
+                        class="btn border border-radius-10 bg-light fw-400 mt-4
+                        mr-1 text-left font-size-16 line-20 pl-4 color-black
+                        w-100 h-74"/>
+                    <input formControlName="typefootagemax"
+                        type="text" placeholder="Metragem Máxima"
+                        class="btn border border-radius-10 bg-light fw-400 mt-4
+                        ml-1 text-left font-size-16 line-20 pl-4 color-black
+                        w-100 h-74"/>
+                </div>
+                <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
+                    line-24 border-radius-10 h-74 w-100" type="submit">
+                    Encontrar
+                </button>
+            </div>
+            <div class="w-100 mt-4 border-radius-10 bg-white p-5">
+                <p class="fw-700 pb-4 px-1 font-size-20 line-24 color-blue">Imóveis
+                    exclusivos</p>
+                <swiper class="h-350 max-w-1227"
+                    [slidesPerView]="1"
+                    [pagination]="{ clickable: true }"
+                    [scrollbar]="true">
+                    <ng-template *ngFor="let item of propertyproducts"
+                        swiperSlide>
+                        <div style="background-image:
+                            url(../../../assets/img/gradient.png),
+                            url({{item.bgproduct}});"
+                            class="bg-img-property w-100 py-2 px-3
+                            border-radius-10">
+                            <div class="w-100 details-card-swiper h-50 p-4 d-flex">
+                                <h4 class="w3-black h-fit px-4 py-2 mb-0
+                                    border-radius-5 fw-400 font-size-18 line-24
+                                    text-light">{{item.rent}}</h4>
+                                <h4 style="background-color:#878DBA;"
+                                    class="ml-2 h-fit px-4 py-2 mb-0
+                                    border-radius-5 fw-400 font-size-18 line-24
+                                    text-light">{{item.exclusive}}</h4>
+                            </div>
+                            <div class="w-100 details-card-swiper d-grid h-50 mx-2 pt-5 px-4
+                                align-items-end">
+                                <p class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                                    line-32 text-light">R${{item.value}}
+                                    <span class="fw-400 font-size-14 line-20
+                                        text-light">/ mês</span>
+                                </p>
+                                <span class="fw-700 font-size-14 line-20
+                                    text-light">{{item.nameproperty}}</span>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                </swiper>
+
+            </div>
+            <div class="w-100 border-radius-10 mt-4 bg-white p-5">
+                <p class="fw-700 pb-4 font-size-20 line-24 color-black">Tipos de
+                    Imóvel</p>
+                <div class="d-flex justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Apartamento
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">6</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
+                            Imóveis</span>
+                    </p>
+
+                </div>
+                <div class="d-flex mt-3 justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Condomínio
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">14</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
+                            Imóveis</span>
+                    </p>
+
+                </div>
+                <div class="d-flex mt-3 justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Casa
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">9</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
+                            Imóveis</span>
+                    </p>
+
+                </div>
+                <div class="d-flex mt-3 justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Sobrado
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">26</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
+                            Imóveis</span>
+                    </p>
+
+                </div>
+                <div class="d-flex mt-3 justify-content-between">
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-9 bi-caret-right-fill"></i>
+                        Kitnet
+                    </p>
+                    <p class="fw-400 d-flex font-size-16 line-20 color-black">
+                        <span class="fw-400 font-size-16 line-20 color-black">80</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
+                            Imóveis</span>
+                    </p>
+
+                </div>
+            </div>
+            <div class="w-100 border-radius-10 mt-4 bg-white p-5">
+                <p class="fw-700 pb-4 font-size-20 line-24 color-black">Tipos de
+                    Imóvel
+                </p>
+                <div class="row">
+                    <div class="col-3 col-img-types-property p-0">
+                        <img src="../../../assets/img/ap.png"
+                            class="border-radius-10 h-111 w-100"/>
+                    </div>
+                    <div class="col-9 col-img-types-property">
+                        <p class="d-grid title-property-product mb-0 h-75">
+                            <span class="fw-700 font-size-18 line-24
+                                color-black">Cobertura com uma vista incrível</span>
+                            <span class="fw-700 font-size-18 line-24
+                                color-black">R$222,000</span>
+                        </p>
+                        <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">Quartos:4</span>
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">Banheiros:2</span>
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">Metragem:192m²</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-3 col-img-types-property p-0">
+                        <img src="../../../assets/img/ap.png"
+                            class="border-radius-10 h-111 w-100"/>
+                    </div>
+                    <div class="col-9 col-img-types-property">
+                        <p class="d-grid title-property-product mb-0 h-75">
+                            <span class="fw-700 font-size-18 line-24
+                                color-black">Cobertura com uma vista incrível</span>
+                            <span class="fw-700 font-size-18 line-24
+                                color-black">R$222,000</span>
+                        </p>
+                        <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">Quartos:4</span>
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">Banheiros:2</span>
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">Metragem:192m²</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-3 col-img-types-property p-0">
+                        <img src="../../../assets/img/ap.png"
+                            class="border-radius-10 h-111 w-100"/>
+                    </div>
+                    <div class="col-9 col-img-types-property">
+                        <p class="d-grid title-property-product mb-0 h-75">
+                            <span class="fw-700 font-size-18 line-24
+                                color-black">Cobertura com uma vista incrível</span>
+                            <span class="fw-700 font-size-18 line-24
+                                color-black">R$222,000</span>
+                        </p>
+                        <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">Quartos:4</span>
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">Banheiros:2</span>
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">Metragem:192m²</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 col-body-products px-0 mt-5">
+            <div class="col-12">
+                <div class="w-100 d-flex align-items-center results-bar
+                    justify-content-between py-4 px-5 border-radius-10
+                    bg-white">
+                    <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
+                        <span>9</span>
+                        <span class="px-1">Resultados</span>
+                    </p>
+                    <div class="d-flex align-items-center">
+                        <p class="fw-700 mb-0 font-size-14 line-20 color-black">Ordenar
+                            por:</p>
+                        <div class="select-box">
+                            <div class="select-box__current" tabindex="1">
+                                <div class="select-box__value">
+                                    <input class="select-box__input"
+                                        type="radio" id="relevant"
+                                        value="relevant"
+                                        formControlName="orderby" name="orderby"
+                                        checked="checked"/>
+                                    <p class="select-box__input-text">Relevante</p>
+                                </div>
+                                <div class="select-box__value">
+                                    <input class="select-box__input"
+                                        type="radio" id="highestprice"
+                                        value="highestprice"
+                                        formControlName="orderby"
+                                        name="orderby"/>
+                                    <p class="select-box__input-text">Maior
+                                        preço</p>
+                                </div>
+                                <div class="select-box__value">
+                                    <input class="select-box__input"
+                                        type="radio" id="lowestprice"
+                                        value="lowestprice"
+                                        formControlName="orderby"
+                                        name="orderby"/>
+                                    <p class="select-box__input-text">Menor
+                                        preço</p>
+                                </div>
+                            </div>
+                            <ul class="select-box__list">
+                                <li>
+                                    <label class="select-box__option mb-0"
+                                        for="relevant"
+                                        aria-hidden="aria-hidden">Relevante</label>
+                                </li>
+                                <li>
+                                    <label class="select-box__option mb-0"
+                                        for="highestprice"
+                                        aria-hidden="aria-hidden">Maior preço</label>
+                                </li>
+                                <li>
+                                    <label class="select-box__option mb-0"
+                                        for="lowestprice"
+                                        aria-hidden="aria-hidden">Menor preço</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-cards-products px-0 col-sm-12">
+                    <div *ngFor="let item of products | paginate: {
+                        itemsPerPage: 10, currentPage: paginationProduct }; let
+                        i= index" class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3
+                        border-radius-10 bg-white">
+                        <div (click)="goDetailProperty()" style='background-image: url({{item.bgproduct}});'
+                            class="bg-img-result py-2 px-3 border-radius-10">
+                            <div class="w-100 h-50 d-flex">
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                                    border-radius-5 fw-400 font-size-14 line-15
+                                    text-light">{{item.sold}}</h4>
+                                <h4 class="bg-greenlight h-fit ml-2 px-3 py-2
+                                    mb-0 border-radius-5 fw-400 font-size-14
+                                    line-15 color-black">{{item.exclusive}}</h4>
+                            </div>
+                            <div class="w-100 d-flex h-50 align-items-end
+                                justify-content-between">
+                                <p class="fw-700 mb-0 font-size-22 h-fit line-32
+                                    text-light">R${{item.price}}</p>
+                                <div (click)="likeHeart()" class="h-fit
+                                    bg-transparent-white cursor-pointer border-radius-10
+                                    pt-2 pb-1 px-3">
+                                    <i [class]="iconlikeheart ?
+                                        'bi-heart-fill':'bi-heart' " class="bi
+                                        font-size-16 text-light"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 mx-2 text-align-left pt-3">
+                            <span class="fw-400 font-size-14 line-20
+                                color-black">{{item.type}}</span>
+                            <p class="fw-700 my-2 font-size-16 line-20 mb-0
+                                color-black">{{item.nameproperty}}</p>
+                            <p class="d-flex align-items-center">
+                                <i class="bi font-size-20 mr-2 color-black
+                                    bi-geo-alt"></i>
+                                <span class="fw-400 font-size-14 line-20
+                                    color-black">{{item.local}}</span>
+                            </p>
+                        </div>
+                        <div class="row px-4 my-3 border-bottom-gray pb-3
+                            d-flex">
+                            <div class="col justify-content-left px-0 d-flex
+                                align-items-center justify-content-left">
+                                <img src="../../../assets/icon/bed.png"
+                                    class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20
+                                    color-black">{{item.rooms}} Quartos</p>
+                            </div>
+                            <div class="col justify-content-center px-0 d-flex
+                                align-items-center justify-content-left">
+                                <img src="../../../assets/icon/car.png"
+                                    class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20
+                                    color-black">{{item.vacancies}} Vagas</p>
+                            </div>
+                            <div class="col justify-content-end px-0 d-flex
+                                align-items-center justify-content-left">
+                                <img src="../../../assets/icon/rule.png"
+                                    class="pr-2"/>
+                                <p class="fw-400 mb-0 font-size-14 line-20
+                                    color-black">{{item.metrics}} m2</p>
+                            </div>
+                        </div>
+                        <div class="w-100 d-flex align-items-center py-2 px-1">
+                            <img [src]="item.picface" class="border-radius-100
+                                "/>
+                            <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20
+                                color-black">{{item.nameface}}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 my-5 py-5 justify-content-center">
+                    <div *ngIf="products.length> 3" class="d-flex flex-fill
+                        justify-content-center">
+                        <pagination-controls (pageChange)="paginationProduct=
+                            $event;">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
