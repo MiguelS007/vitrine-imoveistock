@@ -1,1 +1,60 @@
-<p>footer works!</p>
+<footer class="w-100 h-500 bg-purple d-flex justify-content-center">
+    <div class="max-w-1227 mt-5 pt-4 w-100 row h-auto">
+        <div class="col-4 d-flex  justify-content-end h-auto col-footer">
+            <div class="w-auto">
+
+            <p class="fw-700 mb-3 font-size-18 line-24 text-light">
+                Somos a Imoveistock
+            </p>
+            <p class="d-grid mb-0">
+                <span class="fw-400 font-size-14 line-32 text-light">
+                    Um novo jeito de buscar e encontrar imóveis. <br/>
+                    Estamos aqui para abrir portas para você.
+                </span>
+            </p>
+            </div>
+        </div>
+        <div class="col-4 d-flex justify-content-center h-auto col-footer">
+            <div class="w-auto">
+                 <p class="fw-700 mb-3  font-size-18 line-24 text-light">
+                Fale com a gente
+            </p>
+            <p class="d-grid  mb-0">
+                <span class="fw-400 font-size-14 line-32 text-light">
+                    contato@imoveistock.com<br/>
+                    Alameda Pres. Taunay, 829 <br/>
+                    Batel, Curitiba - PR <br/>
+                    80420-180
+                    <br/><br/>
+                    (41) 98721-2409
+                </span>
+            </p>
+            </div>
+           
+        </div>
+        <div class="col-4 text-align-left  h-auto col-footer">
+            <p class="fw-700 mb-3 font-size-18 line-24 text-light">
+                Siga nossas redes
+            </p>
+            <p class="d-flex w-50 justify-content-between mb-0">
+                <img src="../../../assets/icon/facebook-light.png"/>
+                <img src="../../../assets/icon/instagram-light.png"/>
+                <img src="../../../assets/icon/linkedin-light.png"/>
+                <img src="../../../assets/icon/youtube-light.png"/>
+            </p>
+        </div> 
+        <div class="col-12 block-important d-flex">
+            <div class="w-50 d-flex">
+                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['/home']" [routerLinkActive]="['text-light']">Home</a>
+                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['/search']" [routerLinkActive]="['text-light']">Imóveis</a>
+                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['']" [routerLinkActive]="['text-light']">Indique</a>
+                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['/contact']" [routerLinkActive]="['text-light']">Contato</a>
+            </div>
+            <div class="w-50 justify-content-end d-flex">
+                <p class="mb-0 year fw-400 font-size-14 line-20 color-muted">
+                    {{year}} - Imoveistock Tecnologia e Negócios LTDA.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
