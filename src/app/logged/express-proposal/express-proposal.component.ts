@@ -19,6 +19,7 @@ export class ExpressProposalComponent implements OnInit {
   cardinfotwo = true;
   cardinfoone = true;
   detailfinalvalue = false;
+  modalvalue = false;
   cardproduct = true;
   titleexpress = true;
   modalpropertychange = false;
@@ -93,6 +94,13 @@ export class ExpressProposalComponent implements OnInit {
         this.detailfinalvalue = true;
       }, 100);
       this.modalcustomizedproposal = false;
+    }
+  }
+  proposeValue(value: string) {
+    if (value === 'open') {
+      this.modalvalue = true;
+    } else if (value === 'close') {
+      this.modalvalue = false;
     }
   }
 

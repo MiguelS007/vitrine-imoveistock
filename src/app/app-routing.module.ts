@@ -6,8 +6,6 @@ import { PropertyDetailComponent } from './pages/property-detail/property-detail
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgModule } from '@angular/core';
 
-
-
 export const routes: Routes = [
 
   { path: '', 
