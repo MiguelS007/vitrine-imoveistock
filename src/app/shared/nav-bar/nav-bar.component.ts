@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { DatamokService } from 'src/app/service/datamok.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,9 +12,18 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   collapsed = false;
   urlParams: any;
   iflogged = false;
+  modallogin = false;
+  changeSubscription: Subscription;
+
   constructor(
-    public router: Router
-  ) { }
+    public router: Router,
+    private datamokservice: DatamokService,
+
+  ) { 
+    this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
+      this.modallogin = false;
+    });
+  }
 
   ngAfterViewInit(): void {
   }
@@ -37,7 +48,9 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     return '../../../assets/img/logo-title-black.png';
   }
 
-
+  goLogin() {
+    this.modallogin = true;
+  }
   sideBtn() {
     this.collapsed = !this.collapsed;
   }

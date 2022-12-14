@@ -48,7 +48,7 @@ export class SearchPageComponent implements OnInit {
     this.iconlikeheart = !this.iconlikeheart;
   }
   goDetailProperty() {
-    this.router.navigate(['logged/property-detail']);
+    this.router.navigate(['property-detail']);
   }
 
  

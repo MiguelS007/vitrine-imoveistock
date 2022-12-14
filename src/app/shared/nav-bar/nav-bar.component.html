@@ -17,7 +17,7 @@
         </li>
         <li class="nav-item">
           <a [class]="handlerLoggedLinks(router.url)" 
-          class="nav-link  px-3 fw-400 font-size-14 line-20"  [routerLink]="['logged/search']" [routerLinkActive]="['link-active']">Imóveis</a>
+          class="nav-link  px-3 fw-400 font-size-14 line-20"  [routerLink]="['/search']" [routerLinkActive]="['link-active']">Imóveis</a>
         </li>
         <li class="nav-item">
           <a [class]="handlerLoggedLinks(router.url)" 
@@ -28,14 +28,16 @@
           class="nav-link  px-3 fw-400 font-size-14 line-20"  [routerLink]="['/contact']" [routerLinkActive]="['link-active']">Contato</a>
         </li>
         <li class="nav-item dropdown">
-          <a [class]="handlerLoggedLinks(router.url)" 
+          <a (click)="goLogin()" class="nav-link  px-3 fw-400 font-size-14 line-20">Login</a>
+          <app-modal-login *ngIf="modallogin"></app-modal-login>
+          <!-- <a [class]="handlerLoggedLinks(router.url)" 
           class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="bi font-size-20 bi-person"></i> Paulo <img src="../../../assets/icon/arrow-down.png" />
 					</a>
           <div class="dropdown-menu arrow_box px-4 border-radius-10 dropdown-menu-right" aria-labelledby="navbarDropdown">
             <h2 class="dropdown-item px-0  py-2 fw-400 font-size-14 line-20 color-black" >Minha conta</h2>
             <h2 class="dropdown-item px-0  py-2 fw-400 font-size-14 line-20 color-black" >Sair da conta</h2>
-          </div>
+          </div> -->
         </li>
       </ul>
     </div>
