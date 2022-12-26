@@ -1,5 +1,5 @@
 <nav [class]="handlerLoggedBackground(router.url)"  class="navbar z-10 position-absolute w-100 top-0 justify-content-center navbar-expand-lg navbar-light">
-  <div  [class]="collapsed ? 'd-block' : 'd-flex'" class="w-100 mr-4 nav-bar max-w-1918">
+  <div  [class]="collapsed ? 'd-block mr-0' : 'd-flex mr-4'" class="w-100 nav-bar max-w-1918">
     <div class="navbar-brand align-items-center d-flex">
         <div class="green-block"></div> 
         <img src="../../../assets/img/logo.png" class="logo bg-greenlight"> 
@@ -28,7 +28,7 @@
           class="nav-link  px-3 fw-400 font-size-14 line-20"  [routerLink]="['/contact']" [routerLinkActive]="['link-active']">Contato</a>
         </li>
         <li class="nav-item dropdown">
-          <a (click)="goLogin()" class="nav-link  px-3 fw-400 font-size-14 line-20">Login</a>
+          <a (click)="goLogin()"  [class]="handlerLoggedLinks(router.url)" [routerLinkActive]="['link-active']" class="nav-link  px-3 fw-400 font-size-14 line-20">Login</a>
           <app-modal-login *ngIf="modallogin"></app-modal-login>
           <!-- <a [class]="handlerLoggedLinks(router.url)" 
           class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
