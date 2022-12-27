@@ -50,6 +50,7 @@ export class PropertyDetailComponent implements OnInit {
       typebathroom: ['', [Validators.required]],
       typerooms: ['', [Validators.required]],
       typevacancies: ['', [Validators.required]],
+      component: ['', [Validators.required]],
       typeconstruction: ['', [Validators.required]],
       typefootagemax: ['', [Validators.required]],
       typefootagemin: ['', [Validators.required]],

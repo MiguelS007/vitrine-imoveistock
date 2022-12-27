@@ -19,7 +19,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     public router: Router,
     private datamokservice: DatamokService,
 
-  ) { 
+  ) {
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
       this.modallogin = false;
     });

@@ -29,7 +29,7 @@
         </li>
         <li class="nav-item dropdown">
           <a (click)="goLogin()"  [class]="handlerLoggedLinks(router.url)" [routerLinkActive]="['link-active']" class="nav-link  px-3 fw-400 font-size-14 line-20">Login</a>
-          <app-modal-login *ngIf="modallogin"></app-modal-login>
+          
           <!-- <a [class]="handlerLoggedLinks(router.url)" 
           class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="bi font-size-20 bi-person"></i> Paulo <img src="../../../assets/icon/arrow-down.png" />
@@ -47,3 +47,4 @@
     
   </div>    
 </nav>
+<app-modal-login *ngIf="modallogin"></app-modal-login>

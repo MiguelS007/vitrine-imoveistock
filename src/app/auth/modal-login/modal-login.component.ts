@@ -12,8 +12,6 @@ import { DatamokService } from 'src/app/service/datamok.service';
 export class ModalLoginComponent implements OnInit {
 
   form: FormGroup;
-  formcode: FormGroup;
-  formsignup: FormGroup;
   // request: any = AuthenticateRequestDto;
   modallogin = true;
   modalsign = true;
@@ -29,16 +27,13 @@ export class ModalLoginComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
     this.form = this.formBuilder.group({
-      phone: ['', [Validators.required]],
-    });
-    this.formcode = this.formBuilder.group({
-      code: ['', [Validators.required]],
-    });
-    this.formsignup = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
+      ddd: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       cpf: ['', [Validators.required]],
+      code: ['', [Validators.required]],
+      check: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {
@@ -72,7 +67,9 @@ export class ModalLoginComponent implements OnInit {
       this.modalsignin1 = false;
       this.modalsignup1 = true;
     }
-
+  }
+  onSubmit() {
+    console.warn(this.form.value);
   }
   onDigitInput(event: any) {
     let element;
