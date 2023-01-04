@@ -48,9 +48,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     return '../../../assets/img/logo-title-black.png';
   }
 
-  goLogin() {
-    this.modallogin = true;
-  }
+
   sideBtn() {
     this.collapsed = !this.collapsed;
   }

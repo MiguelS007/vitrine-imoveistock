@@ -1,68 +1,61 @@
 import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserAuthenticatedDto } from '../dtos/user-authenticated.dto';
+import CryptoUtil from '../utils/crypto.util';
+import LocalStorageUtil, { LocalStorageKeys } from '../utils/localStorage.util';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class BaseService {
-
-  protected api: string = `${environment.api.path}`;
-
-  response: UserAuthenticatedDto;
-
-  protected anonymousHeader() {
+export abstract class BaseService {
+    protected anonymousHeader() {
       return {
-          headers: new HttpHeaders({
-              'Content-Type': 'application/json'
-          })
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
       };
-  }
-
-  protected authorizedHeader() {
-
-      const userJson = JSON.parse(localStorage.getItem('user'));
-      let accessToken = userJson.accessToken
-      let phone = userJson.phone
-      
-      this.response = {
-          accesstoken: accessToken,
-          phone: phone
-      };
-      
+    }
+    protected authorizedHeader() {
+      const user = LocalStorageUtil.get(LocalStorageKeys.user);
       return {
-          headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${this.response?.accesstoken}`
-          })
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user?.token}`
+        })
       };
-  }
-
-  protected extractData(response: any) {
+    }
+    protected extractData(response: any) {
       return response.data || {};
-  }
-
-  protected serviceError(response: Response | any) {
+    }
+    protected resp(response: any) {
+      return response || {};
+    }
+    protected serviceError(response: Response | any) {
       let customError: string[] = [];
-      let customResponse = { error: { erros: [] } }
-
+      let customResponse = new Error();
       if (response instanceof HttpErrorResponse) {
-
-          if (response.statusText === 'Unknown Error') {
-              customError.push('Unknown Error');
-              response.error.errors = customError;
-          }
+        if (response.statusText === 'Unknown Error') {
+          customError.push('Unknown Error');
+          response.error.errors = customError;
+        }
       }
-
       if (response.status === 500) {
-          customError.push('Error processing request');
-
-          customResponse.error.erros = customError;
-          return throwError(customResponse);
+        customError.push('Error processing request');
+        customResponse.error.errors = customError;
+        return throwError(customResponse);
       }
-
       return throwError(response);
+    }
+    protected extractCryptoData(response: any) {
+      const decryptedData = CryptoUtil.decrypt(environment.payloadKey, response.data.payload);
+      return JSON.parse(decryptedData);
+    }
+    protected encrypt(request: any) {
+      const encryptedData = CryptoUtil.encrypt(environment.payloadKey, JSON.stringify(request));
+      return { payload: encryptedData };
+    }
   }
-}
+  class Error {
+    error: ErrorResponse = new ErrorResponse();
+  }
+  class ErrorResponse {
+    errors: string[] = [];
+  }
+  

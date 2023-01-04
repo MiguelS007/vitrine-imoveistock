@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { ToastrService } from 'ngx-toastr';
 import { UserRegisterRequestDto } from 'src/app/dtos/user-register-request.dto';
+import { ProfileService } from 'src/app/service/profile.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -14,52 +15,59 @@ export class ModalSignupComponent implements OnInit {
 
   form: FormGroup;
 
-  request!: UserRegisterRequestDto;
+  request: UserRegisterRequestDto;
+
   response: any;
 
   constructor(
     private formBuilder: FormBuilder,
+    private profileService: ProfileService,
     private userService: UserService,
     // private toastrService: ToastrService,
     private router: Router
   ) {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.required]],
       phone: ['', [Validators.required]],
+      email: ['', [Validators.required,  Validators.email]],
+      name: ['', [Validators.required]],
       cpf: ['', [Validators.required]],
       termsAndPolicy: [false, [Validators.required]]
     })
   }
 
   ngOnInit(): void {
+    
   }
 
 
-  onSubmit() {
-    var cpf = `${this.form.controls['cpf'].value[0]}${this.form.controls['cpf'].value[1]}${this.form.controls['cpf'].value[2]}.${this.form.controls['cpf'].value[3]}${this.form.controls['cpf'].value[4]}${this.form.controls['cpf'].value[5]}.${this.form.controls['cpf'].value[6]}${this.form.controls['cpf'].value[7]}${this.form.controls['cpf'].value[8]}-${this.form.controls['cpf'].value[9]}${this.form.controls['cpf'].value[10]}`
+  async confirm() {
+    // var cpf = `${this.form.controls['cpf'].value[0]}${this.form.controls['cpf'].value[1]}${this.form.controls['cpf'].value[2]}.${this.form.controls['cpf'].value[3]}${this.form.controls['cpf'].value[4]}${this.form.controls['cpf'].value[5]}.${this.form.controls['cpf'].value[6]}${this.form.controls['cpf'].value[7]}${this.form.controls['cpf'].value[8]}-${this.form.controls['cpf'].value[9]}${this.form.controls['cpf'].value[10]}`
 
     this.request = {
-      cpf: cpf,
-      email: this.form.controls['email'].value,
-      name: this.form.controls['name'].value,
       phone: `+55${this.form.controls['phone'].value}`,
+      email: this.form.controls['email'].value,
+      cpf: this.form.controls['cpf'].value,
+      name: this.form.controls['name'].value,
+      profileId: this.response
     }
 
     this.userService.register(this.request).subscribe(
-      success => {
+      async success => {
         this.registerSuccess()
       },
-      error => {
+      async error => {
         // this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });
-        console.log(error)
+        console.log(error ,'deu ruin')
+    this.router.navigate(['auth/signin'])
+
       }
     )
   }
 
   registerSuccess() {
     // this.toastrService.success('Usuario cadastrado com sucesso', '', { progressBar: true })
-    // this.router.navigate(['home'])
+    this.router.navigate(['home'])
+    console.log('pqp deu bom')
   }
 
 

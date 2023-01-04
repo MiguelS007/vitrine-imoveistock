@@ -20,10 +20,11 @@ import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
-import { ModalLoginComponent } from './auth/modal-login/modal-login.component';
 import { PropertyDetailComponent } from './pages/property-detail/property-detail.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
+// import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -37,12 +38,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HomeHeaderComponent,
     ContactComponent,
     AboutComponent,
-    ModalLoginComponent,
     SearchPageComponent,
     PropertyDetailComponent,
   ],
 
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -56,6 +57,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     VgOverlayPlayModule,
     VgBufferingModule,
     NgxPageScrollCoreModule,
+    // ToastrModule.forRoot(),
   ],
   providers: [
     {

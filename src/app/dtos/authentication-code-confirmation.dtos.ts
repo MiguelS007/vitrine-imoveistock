@@ -1,4 +1,4 @@
 export abstract class AuthenticateCodeConfirmationRequestDto {
-    phone!: string;
-    code!: number;
+    phone: string;
+    code: number;
 }

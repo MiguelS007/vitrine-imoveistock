@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="anima-body">
+<form [formGroup]="form" class="anima-body">
     <p class="fw-700 pt-3
     font-size-24 line-32
     color-black w-100
@@ -35,7 +35,7 @@
                 Privacidade</a> da Imoveistock
         </label>
     </div>
-    <button type="sumbit"
+    <button type="sumbit" (click)="confirm()"
     [disabled]="this.form.controls['termsAndPolicy'].value !== true "
     class="btn pb-2 mt-3
     bg-purple fw-700

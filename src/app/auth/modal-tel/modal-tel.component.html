@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="anima-body">
+<form [formGroup]="form" class="anima-body">
     <p class="text-center w-10">
         <img class="text-center" src="../../../assets/img/logo.png" />
     </p>
@@ -22,7 +22,7 @@
             class="btn w-100 h-74 bg-whitelight text-left ml-3 border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
             placeholder="Celular" />
     </div>
-    <button type="sumbit" [disabled]="form.invalid" class="btn pb-2 mt-5
+    <button type="sumbit" (click)="confirm()" [disabled]="form.invalid" class="btn pb-2 mt-5
 bg-purple fw-700
 font-size-18 line-24
 text-light

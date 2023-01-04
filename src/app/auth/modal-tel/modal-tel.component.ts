@@ -14,7 +14,7 @@ import { DatamokService } from 'src/app/service/datamok.service';
 export class ModalTelComponent implements OnInit {
 
   form: FormGroup;
-  request: AuthenticateRequestDto | undefined;
+  request: AuthenticateRequestDto;
   
   constructor(
     private router: Router,
@@ -24,13 +24,8 @@ export class ModalTelComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.required]],
       ddd: ['', [Validators.required]],
       phone: ['', [Validators.required]],
-      cpf: ['', [Validators.required]],
-      code: ['', [Validators.required]],
-      check: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {
@@ -41,7 +36,7 @@ export class ModalTelComponent implements OnInit {
 
 
     this.request = {
-      phone: `55${this.form.controls['phone'].value}`.replace(/\D/g, '')
+      phone: `55${this.form.controls['ddd'].value}${this.form.controls['phone'].value}`.replace(/\D/g, '')
     }
 
 
@@ -51,11 +46,12 @@ export class ModalTelComponent implements OnInit {
       },
       error => {
         // this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });
-        console.error(error)
+        console.error(error,  this.form.controls['phone'].value)
       }
     )
   }
   registerSuccess() {
+    localStorage.setItem('phone', this.request.phone);
     // this.toastrService.success('Usuario cadastrado com sucesso', '', { progressBar: true })
     this.router.navigate(['home'])
   }
