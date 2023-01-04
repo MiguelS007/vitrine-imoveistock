@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="anima-body">
+    <p class="fw-700 pt-3
+    font-size-24 line-32
+    color-black w-100
+    text-center">
+      Digite o código de acesso
+   </p>
+   <p class="fw-400
+    font-size-14 line-18
+    color-black w-100
+    text-center">
+      Insira o código de 6 digitos que enviamos para o número:
+      <span class="fw-700 pt-3
+       font-size-14 line-18
+       color-black"></span> 41 9 1234-1234
+   </p>
+   <div class="w-100 d-inline-block justify-content-center d-flex">
+      <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code"
+         class="btn w56h56 bg-whitelight border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+      <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code"
+         class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+      <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code"
+         class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+      <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code"
+         class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+      <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code"
+         class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+      <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code"
+         class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+   </div>
+   <p class="fw-500 py-4
+    font-size-16 line-20
+    text-primary w-100
+    text-center">
+      Não recebi o código
+   </p>
+   <button type="sumbit" (click)="login('close')" class="btn pb-2 mt-3
+ bg-purple fw-700
+ font-size-18 line-24
+ text-light
+ border-radius-10
+ h-74
+ w-100">Continuar
+   </button>
+</form>
