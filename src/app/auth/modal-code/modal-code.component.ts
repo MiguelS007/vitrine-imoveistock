@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+// import { ToastrService } from 'ngx-toastr';
+import { AuthetincatedUserDto } from 'src/app/dtos/authenticated-user.dto';
+import { AuthenticateCodeConfirmationRequestDto } from 'src/app/dtos/authentication-code-confirmation.dtos';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-modal-code',
@@ -11,64 +16,67 @@ import { DatamokService } from 'src/app/service/datamok.service';
 export class ModalCodeComponent implements OnInit {
 
   form: FormGroup;
-  // request: any = AuthenticateRequestDto;
-  modallogin = true;
-  modalsign = true;
-  modalsignin1 = true;
-  modalsignin2 = false;
-  modalsignin3 = false;
-  modalsignup1 = false;
+  phone: string = '';
+  notsendcodemsg = false;
+  request: any = AuthenticateCodeConfirmationRequestDto;
+
   constructor(
     private router: Router,
-    private datamokservice: DatamokService,
     // private toastrService: ToastrService,
-    // private authenticationService: AuthenticationService,
+    private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
+    private userService: UserService
   ) {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      ddd: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
-      cpf: ['', [Validators.required]],
-      code: ['', [Validators.required]],
-      check: ['', [Validators.required]],
+      code1: ['', [Validators.required]],
+      code2: ['', [Validators.required]],
+      code3: ['', [Validators.required]],
+      code4: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {
-  }
-
-  async login(value: string) {
-    if (value === 'signin') {
-      this.modalsignin1 = false;
-      this.modalsignin2 = true;
-    } else if (value === 'sendtel') {
-      this.modalsignin2 = false;
-      this.modalsignin3 = true;
-      // this.request = Object.assign({}, this.form.value);
-
-      // this.authenticationService.authenticate(this.request).subscribe(
-      //   success => {
-      //     this.authenticationService.setAuthenticatedUser(
-      //       new AuthetincatedUserDto(success.phone, success.accessToken),
-      //     );
-      //     this.router.navigate(['/home'])
-      //   },
-      //   error => {
-      //     this.toastrService.error('Celular invalido', '', { progressBar: true })
-      //   }
-      // )
-    } else if (value === 'close') {
-      setTimeout(() => {
-        this.datamokservice.opModalLogin();
-      }, 100);
-    } else if (value === 'signup') {
-      this.modalsignin1 = false;
-      this.modalsignup1 = true;
+    this.phone = localStorage.getItem('phone');
+    console.log(this.phone);
+    if (this.phone === null) {
+      this.router.navigate(['auth/sign-in']);
     }
   }
-  onSubmit() {
-    console.warn(this.form.value);
+  notSendCode(value: string){
+    if(value === 'open'){
+      this.notsendcodemsg = true;
+    }else if(value === 'close'){
+      this.notsendcodemsg = false;
+    }
+  }
+  async confirm() {
+
+    this.request = {
+      code: `${this.form.controls['code1'].value}${this.form.controls['code2'].value}${this.form.controls['code3'].value}${this.form.controls['code4'].value}`,
+      phone: this.phone
+    }
+    this.authenticationService.authenticateCodeConfirmation(this.request).subscribe(
+      async success => {
+        localStorage.removeItem('phone');
+        this.authenticationService.setAuthenticatedUser(
+          new AuthetincatedUserDto(success.userId, success.phone, success.token, success.profileId, success.apiFunctionsId),
+          );
+          
+          this.userService.getUser().subscribe(
+            success => {
+              let user = JSON.stringify(success);
+              localStorage.setItem('userDto', user);
+              this.router.navigate(['home']);
+          },
+          error => {
+            console.error(error)
+          }
+        )
+      },
+      async error => {
+        // this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });
+        console.error(error, this.request)
+      }
+    )
   }
   onDigitInput(event: any) {
     let element;

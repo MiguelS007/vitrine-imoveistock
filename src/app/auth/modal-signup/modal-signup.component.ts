@@ -28,7 +28,7 @@ export class ModalSignupComponent implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       phone: ['', [Validators.required]],
-      email: ['', [Validators.required,  Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required]],
       cpf: ['', [Validators.required]],
       termsAndPolicy: [false, [Validators.required]]
@@ -36,29 +36,40 @@ export class ModalSignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.profileService.list().subscribe(
+      success => {
+        for (let i = 0; i < success.length; i++) {
+          if (success[i].name === 'porteiros') {
+            this.response = success[i]._id
+          }
+        }
+      },
+      error => { console.log(error) }
+    );
+    console.log(this.response);
   }
 
 
   async confirm() {
-    // var cpf = `${this.form.controls['cpf'].value[0]}${this.form.controls['cpf'].value[1]}${this.form.controls['cpf'].value[2]}.${this.form.controls['cpf'].value[3]}${this.form.controls['cpf'].value[4]}${this.form.controls['cpf'].value[5]}.${this.form.controls['cpf'].value[6]}${this.form.controls['cpf'].value[7]}${this.form.controls['cpf'].value[8]}-${this.form.controls['cpf'].value[9]}${this.form.controls['cpf'].value[10]}`
+    var cpf = `${this.form.controls['cpf'].value[0]}${this.form.controls['cpf'].value[1]}${this.form.controls['cpf'].value[2]}.${this.form.controls['cpf'].value[3]}${this.form.controls['cpf'].value[4]}${this.form.controls['cpf'].value[5]}.${this.form.controls['cpf'].value[6]}${this.form.controls['cpf'].value[7]}${this.form.controls['cpf'].value[8]}-${this.form.controls['cpf'].value[9]}${this.form.controls['cpf'].value[10]}`
 
     this.request = {
       phone: `+55${this.form.controls['phone'].value}`,
       email: this.form.controls['email'].value,
-      cpf: this.form.controls['cpf'].value,
+      cpf: cpf,
       name: this.form.controls['name'].value,
-      profileId: this.response
+      profileId: 'fc68f468-9b93-4486-a92c-8d096f698987'
     }
 
     this.userService.register(this.request).subscribe(
       async success => {
         this.registerSuccess()
+
       },
       async error => {
         // this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });
-        console.log(error ,'deu ruin')
-    this.router.navigate(['auth/signin'])
+        console.log(error, 'deu ruin')
+        this.router.navigate(['auth/sign-in'])
 
       }
     )
@@ -67,7 +78,7 @@ export class ModalSignupComponent implements OnInit {
   registerSuccess() {
     // this.toastrService.success('Usuario cadastrado com sucesso', '', { progressBar: true })
     this.router.navigate(['home'])
-    console.log('pqp deu bom')
+    console.log( this.response,'pqp deu bom')
   }
 
 

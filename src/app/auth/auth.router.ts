@@ -16,7 +16,7 @@ const routes: Routes = [
                 component: ModalLoginComponent,
             },
             {
-                path: 'signin',
+                path: 'sign-in',
                 component: ModalTelComponent,
             },
             {
@@ -24,7 +24,7 @@ const routes: Routes = [
                 component: ModalCodeComponent,
             },
             {
-                path: 'signup',
+                path: 'sign-up',
                 component: ModalSignupComponent,
             },
         ]

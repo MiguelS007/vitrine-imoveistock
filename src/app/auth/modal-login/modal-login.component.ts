@@ -42,13 +42,13 @@ export class ModalLoginComponent implements OnInit {
 
   async login(value: string) {
     if (value === 'signin') {
-      this.router.navigate(['auth/signin']);
+      this.router.navigate(['auth/sign-in']);
     } else if (value === 'close') {
       setTimeout(() => {
         this.datamokservice.opModalLogin();
       }, 100);
     } else if (value === 'signup') {
-      this.router.navigate(['auth/signup']);
+      this.router.navigate(['auth/sign-up']);
     }
   }
   onSubmit() {

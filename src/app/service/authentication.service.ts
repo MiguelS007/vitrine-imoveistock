@@ -17,7 +17,7 @@ import { AuthenticateCodeConfirmationRequestDto } from '../dtos/authentication-c
 })
 export class AuthenticationService extends BaseService {
 
-  url: string = `${environment.apis.imoveistock}authentication`;
+  url: string = `${environment.apis.imoveistock}/authentication`;
 
   token = {
     userId: '',

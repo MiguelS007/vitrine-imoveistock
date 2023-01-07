@@ -9,7 +9,7 @@ import { BaseService } from './base.service';
 })
 export class ProfileService extends BaseService {
 
-  url: string = `${environment.apis.imoveistock}profile`
+  url: string = `${environment.apis.imoveistock}/profile`
 
   constructor(
       private httpClient: HttpClient

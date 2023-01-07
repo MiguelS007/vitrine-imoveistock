@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
 
 @Component({
@@ -14,6 +15,11 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   iflogged = false;
   modallogin = false;
   changeSubscription: Subscription;
+  loggedname = false;
+  loggedopt = false;
+  loginopt = true;
+  user: UserGetResponseDto;
+
 
   constructor(
     public router: Router,
@@ -26,6 +32,15 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.user = JSON.parse(localStorage.getItem('userDto'));
+    console.log(this.user.name , 'el gato');
+    if(this.user.name != null){
+      this.loggedname = true;
+      this.loggedopt = true;
+      this.loginopt = false;
+    }else{
+     this.loginopt = true;
+    }
   }
 
   ngOnInit(): void {
@@ -48,9 +63,17 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     return '../../../assets/img/logo-title-black.png';
   }
 
+  logOut() {
+    localStorage.removeItem('userDto');
+    this.router.navigate(['auth/login']);
+  }
+
 
   sideBtn() {
     this.collapsed = !this.collapsed;
+    this.loggedname = false;
+      this.loggedopt = false;
+      this.loginopt = true;
   }
 
 
