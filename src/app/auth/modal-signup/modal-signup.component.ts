@@ -46,7 +46,7 @@ export class ModalSignupComponent implements OnInit {
       },
       error => { console.log(error) }
     );
-    console.log(this.response);
+    console.log(this.response, "number");
   }
 
 
@@ -64,12 +64,12 @@ export class ModalSignupComponent implements OnInit {
     this.userService.register(this.request).subscribe(
       async success => {
         this.registerSuccess()
-
+        this.router.navigate(['home'])
       },
       async error => {
         // this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });
         console.log(error, 'deu ruin')
-        this.router.navigate(['auth/sign-in'])
+        // this.router.navigate(['auth/sign-in'])
 
       }
     )
