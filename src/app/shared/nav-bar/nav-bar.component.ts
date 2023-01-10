@@ -32,19 +32,19 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.user = JSON.parse(localStorage.getItem('userDto'));
-    console.log(this.user.name , 'el gato');
-    if(this.user.name != null){
-      this.loggedname = true;
-      this.loggedopt = true;
-      this.loginopt = false;
-    }else{
-     this.loginopt = true;
-    }
+    // console.log(this.user.name , 'the user');
+
   }
 
   ngOnInit(): void {
-
+    this.user = JSON.parse(localStorage.getItem('userDto'));
+    if (this.user.name != null) {
+      this.loggedname = true;
+      this.loggedopt = true;
+      this.loginopt = false;
+    } else {
+      this.loginopt = true;
+    }
   }
 
   handlerLoggedBackground(url: string): string {
@@ -72,8 +72,8 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   sideBtn() {
     this.collapsed = !this.collapsed;
     this.loggedname = false;
-      this.loggedopt = false;
-      this.loginopt = true;
+    this.loggedopt = false;
+    this.loginopt = true;
   }
 
 

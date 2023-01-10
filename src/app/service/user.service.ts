@@ -20,9 +20,6 @@ export class UserService extends BaseService {
     ) {
         super();
     }
-
-
-
     register(dto: UserRegisterRequestDto): Observable<UserRegisterResponseDto> {
         return this.httpClient
             .post(`${this.url}`, dto, this.authorizedHeader())

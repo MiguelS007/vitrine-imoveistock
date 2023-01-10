@@ -5,11 +5,12 @@ import { AboutComponent } from './pages/about/about.component';
 import { PropertyDetailComponent } from './pages/property-detail/property-detail.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgModule } from '@angular/core';
+import { ModalLoginComponent } from './auth/modal-login/modal-login.component';
 
 export const routes: Routes = [
 
   { path: '', 
-    component: HomeComponent 
+    component: ModalLoginComponent 
   },
   { 
     path: 'home',
