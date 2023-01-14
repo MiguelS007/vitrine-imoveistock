@@ -33,7 +33,7 @@ export const routes: Routes = [
     component: PropertyDetailComponent,
   },
   {
-    path: 'auth',
+    path: '',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {

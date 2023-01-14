@@ -39,14 +39,14 @@ export class ModalSignupComponent implements OnInit {
     this.profileService.list().subscribe(
       success => {
         for (let i = 0; i < success.length; i++) {
-          if (success[i].name === 'porteiros') {
+          if (success[i].name === 'proprietario') {
             this.response = success[i]._id
           }
         }
+        console.log(this.response = success[0]._id,' / id of profile');
       },
       error => { console.log(error) }
     );
-    console.log(this.response, "number");
   }
 
 
@@ -58,12 +58,12 @@ export class ModalSignupComponent implements OnInit {
       email: this.form.controls['email'].value,
       cpf: cpf,
       name: this.form.controls['name'].value,
-      profileId: 'fc68f468-9b93-4486-a92c-8d096f698987'
+      profileId:  this.response
     }
 
     this.userService.register(this.request).subscribe(
       async success => {
-        this.registerSuccess()
+        // this.registerSuccess()
         this.router.navigate(['home'])
       },
       async error => {
@@ -75,11 +75,11 @@ export class ModalSignupComponent implements OnInit {
     )
   }
 
-  registerSuccess() {
-    // this.toastrService.success('Usuario cadastrado com sucesso', '', { progressBar: true })
-    this.router.navigate(['home'])
-    console.log( this.response,'pqp deu bom')
-  }
+  // registerSuccess() {
+  //   this.toastrService.success('Usuario cadastrado com sucesso', '', { progressBar: true })
+  //   this.router.navigate(['home'])
+  //   console.log( this.response,'pqp deu bom')
+  // }
 
 
 }
