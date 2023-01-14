@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  api: {
-    path: 'http://localhost:2000',
+  payloadKey: '57b0e476-142c-4762-8547-140b65cb1e9c',
+  apis: {
+    imoveistock: 'http://localhost:5000',
   },
 };
 

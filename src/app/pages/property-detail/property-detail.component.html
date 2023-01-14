@@ -1,58 +1,57 @@
 <main class="bg-whitelight position-relative h-100 w-100">
-    <div class="row form-search pt-10 h-100 m-0-auto px-3
+  <div class="row form-search pt-10 h-100 m-0-auto px-3
       max-w-1918">
-      <div class="col-12 px-0 h-100">
-        <div class="row h-100 mx-0">
-          <div class="col-6 px-0 col-preview-img">
-            <div *ngFor="let item of onlyimg" style="background-image: url({{item.preview}})"
-              class="bg-property-view w-100 h-600"></div>
-          </div>
-          <div class="col-6 px-0 col-preview-img">
-            <div *ngFor="let item of previewimg" style="background-image: url({{item.previews}})"
-              class="bg-property-view d-inline-block w-50 h-300"></div>
-          </div>
-          <div class="col-12 col-btns-preview-img px-5 d-flex py-5
+    <div class="col-12 px-0 h-100">
+      <div class="row h-100 mx-0">
+        <div class="col-6 px-0 col-preview-img">
+          <div *ngFor="let item of onlyimg" style="background-image: url({{item.preview}})"
+            class="bg-property-view w-100 h-600"></div>
+        </div>
+        <div class="col-6 px-0 col-preview-img">
+          <div *ngFor="let item of previewimg" style="background-image: url({{item.previews}})"
+            class="bg-property-view d-inline-block w-50 h-300"></div>
+        </div>
+        <div class="col-12 col-btns-preview-img px-5 d-flex py-5
             align-items-center justify-content-between
             position-relative">
-            <button type="button" data-toggle="modal" data-target="#previewimage" class="fw-700 btn-view-img
+          <button type="button" data-toggle="modal" data-target="#previewimage" class="fw-700 btn-view-img
               font-size-18 line-19 text-light h-74 w-auto px-5 btn
               border-radius-10 bg-purple">
             <i class="bi font-size-18 text-light bi-camera-fill"></i>
             Ver fotos
-            </button>
-            <div class="options-img d-flex align-items-center">
-              <div (click)="btninteractionimg('like')" class="h-fit mx-1 bg-transparent-white
+          </button>
+          <div class="options-img d-flex align-items-center">
+            <div (click)="btninteractionimg('like')" class="h-fit mx-1 bg-transparent-white
                 cursor-pointer border-radius-10 pt-2 pb-1 px-3">
-                <i [class]="iconlikeheart
+              <i [class]="iconlikeheart
                   ?'bi-heart-fill':'bi-heart' " class="bifont-size-16 text-light"></i>
-              </div>
-              <div (click)="btninteractionimg('share')" class="h-fit mx-1 bg-transparent-white
+            </div>
+            <div (click)="btninteractionimg('share')" class="h-fit mx-1 bg-transparent-white
                 cursor-pointer border-radius-10 pt-2 pb-1 px-3">
-                <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bifont-size-16 text-light"></i>
-              </div>
-              <div (click)="btninteractionimg('print')" class="h-fit mx-1 bg-transparent-white
+              <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bifont-size-16 text-light"></i>
+            </div>
+            <div (click)="btninteractionimg('print')" class="h-fit mx-1 bg-transparent-white
                 cursor-pointer border-radius-10 pt-2 pb-1 px-3">
-                <i [class]="iconprint
+              <i [class]="iconprint
                   ?'bi-printer-fill':'bi-printer' " class="bifont-size-16 text-light"></i>
-              </div>
             </div>
           </div>
-          <div class="col-12">
-            <!-- Modal -->
-            <div class="modal fade" id="previewimage" tabindex="-1" role="dialog"
-              aria-labelledby="previewimageTitle" aria-hidden="true">
-              <div class="modal-dialog modal-lg-preview
+        </div>
+        <div class="col-12">
+          <!-- Modal -->
+          <div class="modal fade" id="previewimage" tabindex="-1" role="dialog" aria-labelledby="previewimageTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg-preview
                 modal-dialog-centered" role="document">
-                <div class="modal-content pb-4
+              <div class="modal-content pb-4
                   modal-content-preview">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span class="text-light font-size-55" aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="anima-body">
-                    <swiper class="h-auto max-w-1227" [slidesPerView]="1" [navigation]="true"
-                    [scrollbar]="true">
+                  </button>
+                </div>
+                <div class="anima-body">
+                  <swiper class="h-auto max-w-1227" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
                     <ng-template *ngFor="let item of propertyproducts" swiperSlide>
                       <div class="bg-img-preview d-flex
                         justify-content-center w-100
@@ -61,727 +60,733 @@
                         <img src="{{item.bgproduct}}" class="w-100" />
                       </div>
                     </ng-template>
-                    </swiper>
-                  </div>
+                  </swiper>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-12">
-        <div class="row row-body-details-property">
-          <div class="col-8 col-body-details-property">
-            <div class="w-100 mb-5 mt-4 border-radius-10 bg-white">
-              <div class="w-100 align-items-center pt-5 px-5">
-                <h1 class="fw-400 font-size-18 d-inline-block
+    </div>
+    <div class="col-12">
+      <div class="row row-body-details-property">
+        <div class="col-8 col-body-details-property">
+          <div class="w-100 mb-5 mt-4 border-radius-10 bg-white">
+            <div class="w-100 align-items-center pt-5 px-5">
+              <h1 class="fw-400 font-size-18 d-inline-block
                   line-19 color-black bg-graylight
                   border-radius-10 bg-purple-light mr-3 py-4
                   px-4">Apartamento</h1>
-                <h1 class="fw-400 font-size-18 d-inline-block
+              <h1 class="fw-400 font-size-18 d-inline-block
                   line-19 color-black bg-graylight
                   border-radius-10 bg-purple-light py-4 mr-3
                   px-4">Quarto:&nbsp;4</h1>
-                <h1 class="fw-400 font-size-18 d-inline-block
+              <h1 class="fw-400 font-size-18 d-inline-block
                   line-19 color-black bg-graylight
                   border-radius-10 bg-purple-light py-4 mr-3
                   px-4">Banheiros:&nbsp;2</h1>
-                <h1 class="fw-400 font-size-18 d-inline-block
+              <h1 class="fw-400 font-size-18 d-inline-block
                   line-19 color-black bg-graylight
                   border-radius-10 bg-purple-light py-4 px-4 mr-3
                   ">Metragem:&nbsp;180</h1>
-              </div>
-              <div class="w-100 my-4 px-5 pt-3 pb-4
-                border-bottom-gray">
-                <span class="fw-700 font-size-18 line-24
-                  color-black">o que está te acontecendo</span>
-                <br />
-                <br />
-                <p class="fw-400 font-size-18 line-24
-                  color-black" style="white-space:pre-line">
-                  Evans Tower very high demand corner
-                  junior one bedroom plus a large balcony
-                  boasting full open NYC views. You need
-                  to see the views to believe them. Mint
-                  condition with new hardwood floors. Lots
-                  of closets plus washer and dryer.
-                </p>
-                <p class="fw-400 font-size-18 line-24 py-3
-                  color-black" style="white-space:pre-line">
-                  Fully furnished. Elegantly appointed
-                  condominium unit situated on premier
-                  location. PS6. The wide entry hall leads
-                  to a large living room with dining area.
-                  This expansive 2 bedroom and 2 renovated
-                  marble bathroom apartment has great
-                  windows. Despite the interior views, the
-                  apartments Southern and Eastern
-                  exposures allow for lovely natural light
-                  to fill every room. The master suite is
-                  surrounded by handcrafted milkwork and
-                  features incredible walk-in closet and
-                  storage space.
-                  The second bedroom is a corner room with
-                  double windows.
-                </p>
-                <p class="fw-400 font-size-18 line-24 py-3
-                  color-black" style="white-space:pre-line">
-                  The kitchen has fabulous space, new
-                  appliances, and a laundry area. Other
-                  features include rich herringbone
-                  floors, crown moldings and coffered
-                  ceilings throughout the apartment. 1049
-                  5th Avenue is a classic pre-war building
-                  located across from Central Park, the
-                  reservoir and The Metropolitan Museum.
-                  Elegant lobby and 24 hours doorman. This
-                  is a pet-friendly building.
-                </p>
-              </div>
-              <div class="w-100 py-4 border-bottom-gray px-5">
-                <p class="w-100 color-black fw-700
-                  font-size-18 line-24 pb-3">Detalhes do
-                  Imóvel
-                </p>
-                <table class="w-100">
-                  <tbody>
-                    <tr class="h-51">
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Identificador:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;HZ227</span>
-                      </td>
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Ano da
-                        contrução:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;2019</span>
-                      </td>
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Tipo do
-                        imóvel:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;Apartamento</span>
-                      </td>
-                    </tr>
-                    <tr class="h-51">
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Preço:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;604,000</span>
-                      </td>
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Quartos:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;3</span>
-                      </td>
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Disponibilidade:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;Venda</span>
-                      </td>
-                    </tr>
-                    <tr class="h-51">
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Valor do
-                        Condomínio:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;800,00</span>
-                      </td>
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Banheiro:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;2</span>
-                      </td>
-                    </tr>
-                    <tr class="h-51">
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Metragem:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;250m²</span>
-                      </td>
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Vagas:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;2</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="w-50 py-4 border-bottom-gray px-5">
-                <p class="w-100 color-black fw-700
-                  font-size-18 line-24 pb-3">Informações
-                  Adicionais
-                </p>
-                <table class="w-100">
-                  <tbody>
-                    <tr class="h-51">
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Face do
-                        imóvel:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;Sul</span>
-                      </td>
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Item:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;4</span>
-                      </td>
-                    </tr>
-                    <tr class="h-51">
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Construtora:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;Thá</span>
-                      </td>
-                    </tr>
-                    <tr class="h-51">
-                      <td>
-                        <span class="fw-400
-                          font-size-16 line-20
-                          color-black">Item:</span>
-                        <span class="fw-700
-                          font-size-16 line-20
-                          color-black">&nbsp;&nbsp;4</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
-            <div class="w-100 border-radius-10 p-5 bg-white">
-              <p class="w-100 color-black fw-700 font-size-18
-                line-24 pb-3">Detalhes do Imóvel</p>
+            <div class="w-100 my-4 px-5 pt-3 pb-4
+                border-bottom-gray">
+              <span class="fw-700 font-size-18 line-24
+                  color-black">o que está te acontecendo</span>
+              <br />
+              <br />
+              <p class="fw-400 font-size-18 line-24
+                  color-black" style="white-space:pre-line">
+                Evans Tower very high demand corner
+                junior one bedroom plus a large balcony
+                boasting full open NYC views. You need
+                to see the views to believe them. Mint
+                condition with new hardwood floors. Lots
+                of closets plus washer and dryer.
+              </p>
+              <p class="fw-400 font-size-18 line-24 py-3
+                  color-black" style="white-space:pre-line">
+                Fully furnished. Elegantly appointed
+                condominium unit situated on premier
+                location. PS6. The wide entry hall leads
+                to a large living room with dining area.
+                This expansive 2 bedroom and 2 renovated
+                marble bathroom apartment has great
+                windows. Despite the interior views, the
+                apartments Southern and Eastern
+                exposures allow for lovely natural light
+                to fill every room. The master suite is
+                surrounded by handcrafted milkwork and
+                features incredible walk-in closet and
+                storage space.
+                The second bedroom is a corner room with
+                double windows.
+              </p>
+              <p class="fw-400 font-size-18 line-24 py-3
+                  color-black" style="white-space:pre-line">
+                The kitchen has fabulous space, new
+                appliances, and a laundry area. Other
+                features include rich herringbone
+                floors, crown moldings and coffered
+                ceilings throughout the apartment. 1049
+                5th Avenue is a classic pre-war building
+                located across from Central Park, the
+                reservoir and The Metropolitan Museum.
+                Elegant lobby and 24 hours doorman. This
+                is a pet-friendly building.
+              </p>
+            </div>
+            <div class="w-100 py-4 border-bottom-gray px-5">
+              <p class="w-100 color-black fw-700
+                  font-size-18 line-24 pb-3">Detalhes do
+                Imóvel
+              </p>
               <table class="w-100">
                 <tbody>
                   <tr class="h-51">
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Ar
-                      Condicionado</span>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Identificador:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;HZ227</span>
                     </td>
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Sauna</span>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Ano da
+                        contrução:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;2019</span>
                     </td>
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Tv
-                      a cabo</span>
-                    </td>
-                  </tr>
-                  <tr class="h-51">
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Churrasqueira</span>
-                    </td>
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Área
-                      Comum</span>
-                    </td>
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Mobiliada</span>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Tipo do
+                        imóvel:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;Apartamento</span>
                     </td>
                   </tr>
                   <tr class="h-51">
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Academia</span>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Preço:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;604,000</span>
                     </td>
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Piscina</span>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Quartos:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;3</span>
                     </td>
-                  </tr>
-                  <tr class="h-51">
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Lavanderia</span>
-                    </td>
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Elevador</span>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Disponibilidade:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;Venda</span>
                     </td>
                   </tr>
                   <tr class="h-51">
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Banheiro
-                      Externo</span>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Valor do
+                        Condomínio:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;800,00</span>
                     </td>
-                    <td class="align-items-center">
-                      <i class="bi color-pink
-                        font-size-20 bi-check2"></i>
-                      <span class="fw-400 mb-0
-                        font-size-16 line-20
-                        color-black">&nbsp;&nbsp;Wi-fi</span>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Banheiro:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;2</span>
+                    </td>
+                  </tr>
+                  <tr class="h-51">
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Metragem:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;250m²</span>
+                    </td>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Vagas:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;2</span>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="w-100 border-radius-10 mt-5 p-5
+            <div class="w-50 py-4 border-bottom-gray px-5">
+              <p class="w-100 color-black fw-700
+                  font-size-18 line-24 pb-3">Informações
+                Adicionais
+              </p>
+              <table class="w-100">
+                <tbody>
+                  <tr class="h-51">
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Face do
+                        imóvel:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;Sul</span>
+                    </td>
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Item:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;4</span>
+                    </td>
+                  </tr>
+                  <tr class="h-51">
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Construtora:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;Thá</span>
+                    </td>
+                  </tr>
+                  <tr class="h-51">
+                    <td>
+                      <span class="fw-400
+                          font-size-16 line-20
+                          color-black">Item:</span>
+                      <span class="fw-700
+                          font-size-16 line-20
+                          color-black">&nbsp;&nbsp;4</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="w-100 border-radius-10 p-5 bg-white">
+            <p class="w-100 color-black fw-700 font-size-18
+                line-24 pb-3">Detalhes do Imóvel</p>
+            <table class="w-100">
+              <tbody>
+                <tr class="h-51">
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Ar
+                      Condicionado</span>
+                  </td>
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Sauna</span>
+                  </td>
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Tv
+                      a cabo</span>
+                  </td>
+                </tr>
+                <tr class="h-51">
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Churrasqueira</span>
+                  </td>
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Área
+                      Comum</span>
+                  </td>
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Mobiliada</span>
+                  </td>
+                </tr>
+                <tr class="h-51">
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Academia</span>
+                  </td>
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Piscina</span>
+                  </td>
+                </tr>
+                <tr class="h-51">
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Lavanderia</span>
+                  </td>
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Elevador</span>
+                  </td>
+                </tr>
+                <tr class="h-51">
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Banheiro
+                      Externo</span>
+                  </td>
+                  <td class="align-items-center">
+                    <i class="bi color-pink
+                        font-size-20 bi-check2"></i>
+                    <span class="fw-400 mb-0
+                        font-size-16 line-20
+                        color-black">&nbsp;&nbsp;Wi-fi</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="w-100 border-radius-10 mt-5 p-5
               bg-white">
-              <p class="w-100 color-black d-flex
+            <p class="w-100 color-black d-flex
                 block-important align-items-center
                 justify-content-between fw-700 font-size-18
                 line-24 pb-3">Localização
-                <span class="fw-400 font-size-14 line-20
+              <span class="fw-400 font-size-14 line-20
                   text-primary">Endereço do local,
                 Curitiba - Paraná, CEP 808080-80</span>
-              </p>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7205.665528434405!2d-49.26210139554594!3d-25.443854055282333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1669903101993!5m2!1spt-BR!2sbr"
-                class="w-100 h-600" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <div class="w-100 border-radius-10 mt-5 p-5
+            </p>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7205.665528434405!2d-49.26210139554594!3d-25.443854055282333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1669903101993!5m2!1spt-BR!2sbr"
+              class="w-100 h-600" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="w-100 border-radius-10 mt-5 p-5
               bg-white">
-              <p class="w-100 color-black d-flex
+            <p class="w-100 color-black d-flex
                 align-items-center justify-content-between
                 fw-700 font-size-18 line-24 pb-3">Planta
-                baixa
-              </p>
-              <div class="w-100 my-4 d-flex block-important
+              baixa
+            </p>
+            <div class="w-100 my-4 d-flex block-important
                 border border-radius-10
                 justify-content-between p-4">
-                <div class="w-auto d-inline-block">
-                  <h3 class="fw-400 px-4 my-2 font-size-18
+              <div class="w-auto d-inline-block">
+                <h3 class="fw-400 px-4 my-2 font-size-18
                     line-24 color-black ">Primeiro piso</h3>
-                </div>
-                <div class="w-auto d-inline-block">
-                  <h3 class="fw-400 px-4 my-2 font-size-18
-                    line-24 color-black d-inline-block">Tamanho:
-                    267 m²
-                  </h3>
-                  <h3 class="fw-400 px-4 my-2 font-size-18
-                    line-24 color-black d-inline-block">Quartos:
-                    87 m²
-                  </h3>
-                  <h3 class="fw-400 px-4 my-2 font-size-18
-                    line-24 color-black d-inline-block">Banheiros:
-                    34 m²
-                  </h3>
-                  <h3 class="fw-400 px-4 my-2 font-size-18
-                    line-24 color-black d-inline-block">Preço:
-                    R$ 222,000
-                  </h3>
-                </div>
               </div>
-              <img src="../../../assets/img/plant.png" class="w-100 p-4" />
-              <p class="fw-400 font-size-14 line-20
-                color-black w-100 text-center py-5">
-                Plan description. Lorem ipsum dolor sit
-                amet, consectetuer adipiscing elit, sed diam
-                nonummy nibh
-                euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad minim
-                veniam, quis
-                nostrud exerci tation ullamcorper suscipit
-                lobortis nisl ut aliquip ex ea commodo
-                consequat.
-              </p>
+              <div class="w-auto d-inline-block">
+                <h3 class="fw-400 px-4 my-2 font-size-18
+                    line-24 color-black d-inline-block">Tamanho:
+                  267 m²
+                </h3>
+                <h3 class="fw-400 px-4 my-2 font-size-18
+                    line-24 color-black d-inline-block">Quartos:
+                  87 m²
+                </h3>
+                <h3 class="fw-400 px-4 my-2 font-size-18
+                    line-24 color-black d-inline-block">Banheiros:
+                  34 m²
+                </h3>
+                <h3 class="fw-400 px-4 my-2 font-size-18
+                    line-24 color-black d-inline-block">Preço:
+                  R$ 222,000
+                </h3>
+              </div>
             </div>
-            <div class="w-100 border-radius-10 mt-5 bg-white">
-              <div class="w-100 px-5 space-segment pt-5 mb-4
+            <img src="../../../assets/img/plant.png" class="w-100 p-4" />
+            <p class="fw-400 font-size-14 line-20
+                color-black w-100 text-center py-5">
+              Plan description. Lorem ipsum dolor sit
+              amet, consectetuer adipiscing elit, sed diam
+              nonummy nibh
+              euismod tincidunt ut laoreet dolore magna
+              aliquam erat volutpat. Ut wisi enim ad minim
+              veniam, quis
+              nostrud exerci tation ullamcorper suscipit
+              lobortis nisl ut aliquip ex ea commodo
+              consequat.
+            </p>
+          </div>
+          <div class="w-100 border-radius-10 mt-5 bg-white">
+            <div class="w-100 px-5 space-segment pt-5 mb-4
                 d-flex align-items-center
                 border-bottom-gray">
-                <button [class]="segment ? 'color-muted':'border-bottom-green color-black' " (click)="segmentvideo('video')" class="btn bg-transparent py-2 px-5 btn-segment fw-700 font-size-18 line-24" type="button">Vídeo do Imóvel</button>
-                <button [class]="segment ? 'border-bottom-green color-black':'color-muted' " (click)="segmentvideo('tour')" class="btn bg-transparent py-2 px-5
+              <button [class]="segment ? 'color-muted':'border-bottom-green color-black' "
+                (click)="segmentvideo('video')"
+                class="btn bg-transparent py-2 px-5 btn-segment fw-700 font-size-18 line-24" type="button">Vídeo do
+                Imóvel</button>
+              <button [class]="segment ? 'border-bottom-green color-black':'color-muted' "
+                (click)="segmentvideo('tour')" class="btn bg-transparent py-2 px-5
                 btn-segment fw-700 font-size-18 line-24" type="button">Tour virtual
                 exclusivo</button>
-              </div>
-              <div *ngIf="propertyvideo" class="w-100 position-relative pt-4 pb-5">
-                <vg-player class="w-90 m-0-auto h-100 ">
-                  <vg-overlay-play></vg-overlay-play>
-                  <vg-buffering></vg-buffering>
-                  <vg-scrub-bar>
-                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-                  </vg-scrub-bar>
-                  <vg-controls>
-                    <vg-play-pause></vg-play-pause>
-                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-                    <vg-scrub-bar style="pointer-events:
+            </div>
+            <div *ngIf="propertyvideo" class="w-100 position-relative pt-4 pb-5">
+              <vg-player class="w-90 m-0-auto h-100 ">
+                <vg-overlay-play></vg-overlay-play>
+                <vg-buffering></vg-buffering>
+                <vg-scrub-bar>
+                  <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                  <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                </vg-scrub-bar>
+                <vg-controls>
+                  <vg-play-pause></vg-play-pause>
+                  <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                  <vg-scrub-bar style="pointer-events:
                       none;"></vg-scrub-bar>
-                    <vg-mute></vg-mute>
-                    <vg-volume></vg-volume>
-                    <vg-fullscreen></vg-fullscreen>
-                  </vg-controls>
-                  <video [vgMedia]="$any(media)" poster="../../../assets/img/preview1.png" #media
-                  id="singleVideo" preload="auto" crossorigin>
+                  <vg-mute></vg-mute>
+                  <vg-volume></vg-volume>
+                  <vg-fullscreen></vg-fullscreen>
+                </vg-controls>
+                <video [vgMedia]="$any(media)" poster="../../../assets/img/preview1.png" #media id="singleVideo"
+                  preload="auto" crossorigin>
                   <source src="../../../assets/vid/lambo.mp4" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
-                  </video>
-                </vg-player>
-              </div>
-              <div *ngIf="tourvirtual" class="w-100
-                position-relative pt-4 pb-5">
-                <p>Conteúdo de tur</p>
-              </div>
+                </video>
+              </vg-player>
             </div>
-            <div class="row my-5">
-              <div class="col-12 col-cards-products px-0
+            <div *ngIf="tourvirtual" class="w-100
+                position-relative pt-4 pb-5">
+              <p>Conteúdo de tur</p>
+            </div>
+          </div>
+          <div class="row my-5">
+            <div class="col-12 col-cards-products px-0
                 col-sm-12">
-                <div *ngFor="let item of products | paginate: { itemsPerPage: 4, currentPage:paginationProduct }; let i= index" class="w-46
+              <div
+                *ngFor="let item of products | paginate: { itemsPerPage: 4, currentPage:paginationProduct }; let i= index"
+                class="w-46
                   card-product-result d-inline-block mt-5
                   ml-5 p-3
                   border-radius-10 bg-white">
-                  <div style='background-image:
+                <div style='background-image:
                     url({{item.bgproduct}});' class="bg-img-result py-2 px-3
                     border-radius-10">
-                    <div class="w-100 h-50 d-flex">
-                      <h4 class="bg-purple h-fit px-4
+                  <div class="w-100 h-50 d-flex">
+                    <h4 class="bg-purple h-fit px-4
                         py-2 mb-0
                         border-radius-5 fw-400
                         font-size-14 line-15
                         text-light">{{item.sold}}</h4>
-                      <h4 class="bg-greenlight h-fit
+                    <h4 class="bg-greenlight h-fit
                         ml-2 px-3 py-2
                         mb-0 border-radius-5 fw-400
                         font-size-14
                         line-15 color-black">{{item.exclusive}}</h4>
-                    </div>
-                    <div class="w-100 d-flex h-50
+                  </div>
+                  <div class="w-100 d-flex h-50
                       align-items-end
                       justify-content-between">
-                      <p class="fw-700 mb-0
+                    <p class="fw-700 mb-0
                         font-size-22 h-fit line-32
                         text-light">R${{item.price}}</p>
-                      <div (click)="likeHeart()" class="h-fit
+                    <div (click)="likeHeart()" class="h-fit
                         bg-transparent-white
                         cursor-pointer
                         border-radius-10
                         pt-2 pb-1 px-3">
-                        <i [class]="iconlikeheart ?
+                      <i [class]="iconlikeheart ?
                           'bi-heart-fill':'bi-heart'
                           " class="bi
                           font-size-16
                           text-light"></i>
-                      </div>
                     </div>
                   </div>
-                  <div class="w-100 mx-2 text-align-left
+                </div>
+                <div class="w-100 mx-2 text-align-left
                     pt-3">
-                    <span class="fw-400 font-size-14
+                  <span class="fw-400 font-size-14
                       line-20
                       color-black">{{item.type}}</span>
-                    <p class="fw-700 my-2 font-size-16
+                  <p class="fw-700 my-2 font-size-16
                       line-20 mb-0
                       color-black">{{item.nameproperty}}</p>
-                    <p class="d-flex
+                  <p class="d-flex
                       align-items-center">
-                      <i class="bi font-size-20 mr-2
+                    <i class="bi font-size-20 mr-2
                         color-black
                         bi-geo-alt"></i>
-                      <span class="fw-400 font-size-14
+                    <span class="fw-400 font-size-14
                         line-20
                         color-black">{{item.local}}</span>
-                    </p>
-                  </div>
-                  <div class="row px-4 my-3
+                  </p>
+                </div>
+                <div class="row px-4 my-3
                     border-bottom-gray pb-3
                     d-flex">
-                    <div class="col justify-content-left
+                  <div class="col justify-content-left
                       px-0 d-flex
                       align-items-center
                       justify-content-left">
-                      <img src="../../../assets/icon/bed.png" class="pr-2" />
-                      <p class="fw-400 mb-0
+                    <img src="../../../assets/icon/bed.png" class="pr-2" />
+                    <p class="fw-400 mb-0
                         font-size-14 line-20
                         color-black">{{item.rooms}}
-                        Quartos
-                      </p>
-                    </div>
-                    <div class="col
+                      Quartos
+                    </p>
+                  </div>
+                  <div class="col
                       justify-content-center px-0
                       d-flex
                       align-items-center
                       justify-content-left">
-                      <img src="../../../assets/icon/car.png" class="pr-2" />
-                      <p class="fw-400 mb-0
+                    <img src="../../../assets/icon/car.png" class="pr-2" />
+                    <p class="fw-400 mb-0
                         font-size-14 line-20
                         color-black">{{item.vacancies}}
-                        Vagas
-                      </p>
-                    </div>
-                    <div class="col justify-content-end
+                      Vagas
+                    </p>
+                  </div>
+                  <div class="col justify-content-end
                       px-0 d-flex
                       align-items-center
                       justify-content-left">
-                      <img src="../../../assets/icon/rule.png" class="pr-2" />
-                      <p class="fw-400 mb-0
+                    <img src="../../../assets/icon/rule.png" class="pr-2" />
+                    <p class="fw-400 mb-0
                         font-size-14 line-20
                         color-black">{{item.metrics}}
-                        m2
-                      </p>
-                    </div>
+                      m2
+                    </p>
                   </div>
-                  <div class="w-100 d-flex
+                </div>
+                <div class="w-100 d-flex
                     align-items-center py-2 px-1">
-                    <img [src]="item.picface" class="border-radius-100
+                  <img [src]="item.picface" class="border-radius-100
                       " />
-                    <h3 class="fw-400 mb-0 pl-2
+                  <h3 class="fw-400 mb-0 pl-2
                       font-size-14 line-20
                       color-black">{{item.nameface}}</h3>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-4 col-body-details-property">
-            <div class="w-100 mb-5 p-5 border-radius-10
+        </div>
+        <div class="col-4 col-body-details-property">
+          <div class="w-100 mb-5 p-5 border-radius-10
               bg-white">
-              <p class="d-grid w-100">
-                <span class="fw-700 font-size-18 line-24
+            <p class="d-grid w-100">
+              <span class="fw-700 font-size-18 line-24
                   color-black">Alta procura</span>
-                <span class="fw-400 font-size-14 line-19
+              <span class="fw-400 font-size-14 line-19
                   color-black">226 pessoas viram esse
                 imóvel recentemente</span>
-              </p>
-              <hr class="hr" />
-              <table class="w-100">
-                <tbody>
-                  <tr class="h-40">
-                    <td>
-                      <span class="fw-700 font-size-18
+            </p>
+            <hr class="hr" />
+            <table class="w-100">
+              <tbody>
+                <tr class="h-40">
+                  <td>
+                    <span class="fw-700 font-size-18
                         line-24 color-black">Aluguel</span>
-                    </td>
-                    <td class="d-tavle-cell
+                  </td>
+                  <td class="d-tavle-cell
                       text-align-right">
-                      <span class="fw-700 font-size-18
+                    <span class="fw-700 font-size-18
                         line-24 color-black">R$
                       4.200,00</span>
-                    </td>
-                  </tr>
-                  <tr class="h-40">
-                    <td>
-                      <span class="fw-400 font-size-18
+                  </td>
+                </tr>
+                <tr class="h-40">
+                  <td>
+                    <span class="fw-400 font-size-18
                         line-24 color-black">Condomínio
                       <i class="bi font-size-14
                         color-muted
                         bi-info-circle"></i></span>
-                    </td>
-                    <td class="d-tavle-cell
+                  </td>
+                  <td class="d-tavle-cell
                       text-align-right">
-                      <span class="fw-700 font-size-18
+                    <span class="fw-700 font-size-18
                         line-24 color-black">R$ 0</span>
-                    </td>
-                  </tr>
-                  <tr class="h-40">
-                    <td>
-                      <span class="fw-400 font-size-18
+                  </td>
+                </tr>
+                <tr class="h-40">
+                  <td>
+                    <span class="fw-400 font-size-18
                         line-24 color-black">IPTU <i class="bi font-size-14
                         color-muted
                         bi-info-circle"></i></span>
-                    </td>
-                    <td class="d-tavle-cell
+                  </td>
+                  <td class="d-tavle-cell
                       text-align-right">
-                      <span class="fw-700 font-size-18
+                    <span class="fw-700 font-size-18
                         line-24 color-black">R$ 58</span>
-                    </td>
-                  </tr>
-                  <tr class="h-40">
-                    <td>
-                      <span class="fw-400 font-size-18
+                  </td>
+                </tr>
+                <tr class="h-40">
+                  <td>
+                    <span class="fw-400 font-size-18
                         line-24 color-black">Seguro
                       incêndio <i class="bi
                         font-size-14 color-muted
                         bi-info-circle"></i></span>
-                    </td>
-                    <td class="d-tavle-cell
+                  </td>
+                  <td class="d-tavle-cell
                       text-align-right">
-                      <span class="fw-700 font-size-18
+                    <span class="fw-700 font-size-18
                         line-24 color-black">R$ 79</span>
-                    </td>
-                  </tr>
-                  <tr class="h-40">
-                    <td>
-                      <span class="fw-400 font-size-18 line-24 color-black">Taxa de
+                  </td>
+                </tr>
+                <tr class="h-40">
+                  <td>
+                    <span class="fw-400 font-size-18 line-24 color-black">Taxa de
                       serviço <i class="bi
                         font-size-14 color-muted
                         bi-info-circle"></i></span>
-                    </td>
-                    <td class="d-tavle-cell
+                  </td>
+                  <td class="d-tavle-cell
                       text-align-right">
-                      <span class="fw-700 font-size-18
+                    <span class="fw-700 font-size-18
                         line-24 color-black">R$ 84</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h6 class="my-4" style="outline-style: dotted;"></h6>
-              <table class="w-100 mt-5">
-                <tbody>
-                  <tr class="h-40">
-                    <td>
-                      <span class="fw-700 font-size-18
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <h6 class="my-4" style="outline-style: dotted;"></h6>
+            <table class="w-100 mt-5">
+              <tbody>
+                <tr class="h-40">
+                  <td>
+                    <span class="fw-700 font-size-18
                         line-24 color-black">Aluguel</span>
-                    </td>
-                    <td class="d-tavle-cell
+                  </td>
+                  <td class="d-tavle-cell
                       text-align-right">
-                      <span class="fw-700 font-size-18
+                    <span class="fw-700 font-size-18
                         line-24 color-black">R$
                       4.241,00</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- undefined -->
-              <button (click)="nextScheduling('modal-scheduling')" class="bg-purple btn border-radius-10 h-74
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- undefined -->
+            <button (click)="nextScheduling('modal-scheduling')" class="bg-purple btn border-radius-10 h-74
                 fw-700 font-size-18 line-24 mt-3 text-light
                 w-100" type="button">Agendar visita</button>
-              <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
+            <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
                 fw-700 font-size-18 line-24 mt-3 color-purple
                 w-100" type="button">Fazer Proposta</button>
-              <!-- MODAL-STEPS -->
-              <div *ngIf="modalscheduling" class="modal modal-all fade">
-                <div class="modal-dialog
+            <!-- MODAL-STEPS -->
+            <div *ngIf="modalscheduling" class="modal modal-all fade">
+              <div class="modal-dialog
                   modal-dialog-centered" role="document">
-                  <div class="modal-content p-3">
-                    <div class="modal-header">
-                      <button type="button" (click)="nextScheduling('close')" class="close">
+                <div class="modal-content p-3">
+                  <div class="modal-header">
+                    <button type="button" (click)="nextScheduling('close')" class="close">
                       <img src="../../../assets/icon/x.png" />
-                      </button>
-                    </div>
-                    <form [formGroup]="form">
-                      <div *ngIf="step1scheduling" class="anima-body">
-                        <p class="fw-700 py-3
+                    </button>
+                  </div>
+                  <form [formGroup]="form">
+                    <div *ngIf="step1scheduling" class="anima-body">
+                      <p class="fw-700 py-3
                           font-size-24 line-32
                           color-black w-100
                           text-center">Agendar
-                          visita
-                        </p>
-                        <div class="row
+                        visita
+                      </p>
+                      <div class="row
                           border-radius-10
                           border p-3 d-flex">
-                          <div class="col-3 p-0">
-                            <img src="../../../assets/img/ap.png" class="w-100
+                        <div class="col-3 p-0">
+                          <img src="../../../assets/img/ap.png" class="w-100
                               border-radius-10
                               " />
-                          </div>
-                          <div class="col-9">
-                            <h5 class="fw-700
+                        </div>
+                        <div class="col-9">
+                          <h5 class="fw-700
                               font-size-18
                               line-24
                               color-black">Cobertura
-                              com uma vista
-                              incrível
-                            </h5>
-                            <p class="w-100 mb-0
+                            com uma vista
+                            incrível
+                          </h5>
+                          <p class="w-100 mb-0
                               d-flex">
-                              <span class="fw-400
+                            <span class="fw-400
                                 font-size-14
                                 line-19
                                 color-black">Quartos:&nbsp;4</span>
-                              <span class="fw-400
+                            <span class="fw-400
                                 font-size-14
                                 line-19
                                 color-black">Banheiros:&nbsp;2</span>
-                              <span class="fw-400
+                            <span class="fw-400
                                 font-size-14
                                 line-19
                                 color-black">Metragem:&nbsp;192m²</span>
-                            </p>
-                          </div>
+                          </p>
                         </div>
-                        <div class="col-12 px-0">
-                          <p class="fw-500 mx-1
+                      </div>
+                      <div class="col-12 px-0">
+                        <p class="fw-500 mx-1
                             font-size-18 line-24
                             pt-5 color-black">Escolha
-                            um dia:
-                          </p>
-                          <div class="selector
+                          um dia:
+                        </p>
+                        <div class="selector
                             mt-2
                             d-flex">
-                            <div class="selecotr-item
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <input type="radio" id="building-option" formControlName="day"
-                                value="terça" name="day" class="selector-item_radio
+                            <input type="radio" id="building-option" formControlName="day" value="terça" name="day"
+                              class="selector-item_radio
                                 border-radius-05
                                 w-100 h-100
                                 text-center
                                 position-relative">
-                              <label for="building-option" class="selector-item_label
+                            <label for="building-option" class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
@@ -789,16 +794,16 @@
                                 color-black
                                 border-black">Ter.
                               29</label>
-                            </div>
-                            <div class="selecotr-item
+                          </div>
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <input type="radio" id="ground-option" formControlName="day"
-                                name="day" value="Quarta" class="selector-item_radio">
-                              <label for="ground-option" class="selector-item_label
+                            <input type="radio" id="ground-option" formControlName="day" name="day" value="Quarta"
+                              class="selector-item_radio">
+                            <label for="ground-option" class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
@@ -806,16 +811,16 @@
                                 color-black
                                 border-black">Qua.
                               30</label>
-                            </div>
-                            <div class="selecotr-item
+                          </div>
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <input type="radio" id="house-option" formControlName="day"
-                                name="day" value="Quinta" class="selector-item_radio">
-                              <label for="house-option" class="selector-item_label
+                            <input type="radio" id="house-option" formControlName="day" name="day" value="Quinta"
+                              class="selector-item_radio">
+                            <label for="house-option" class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
@@ -823,16 +828,16 @@
                                 color-black
                                 border-black">Qui.
                               31</label>
-                            </div>
-                            <div class="selecotr-item
+                          </div>
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <input type="radio" id="sex-option" formControlName="day"
-                                name="day" value="Sexta" class="selector-item_radio">
-                              <label for="sex-option" class="selector-item_label
+                            <input type="radio" id="sex-option" formControlName="day" name="day" value="Sexta"
+                              class="selector-item_radio">
+                            <label for="sex-option" class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
@@ -840,14 +845,14 @@
                                 color-black
                                 border-black">Sex.
                               01</label>
-                            </div>
-                            <div class="selecotr-item
+                          </div>
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <label class="selector-item_label
+                            <label class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
@@ -855,103 +860,102 @@
                                 color-muted
                                 border">Sab.
                               02</label>
-                            </div>
                           </div>
-                          <p class="fw-500 mx-1
+                        </div>
+                        <p class="fw-500 mx-1
                             font-size-18 line-24
                             pt-4 color-black">Escolha
-                            um horário:
-                          </p>
-                          <div class="selector
+                          um horário:
+                        </p>
+                        <div class="selector
                             mt-2
                             d-flex">
-                            <div class="selecotr-item
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <input type="radio" id="0800-option" formControlName="time"
-                                name="time" value="0800" class="selector-item_radio
+                            <input type="radio" id="0800-option" formControlName="time" name="time" value="0800" class="selector-item_radio
                                 border-radius-05
                                 w-100 h-100
                                 text-center
                                 position-relative">
-                              <label for="0800-option" class="selector-item_label
+                            <label for="0800-option" class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
                                 line-19
                                 color-black
                                 border-black">08:00</label>
-                            </div>
-                            <div class="selecotr-item
+                          </div>
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <input type="radio" id="0915-option" formControlName="time"
-                                name="time" value="0915" class="selector-item_radio">
-                              <label for="0915-option" class="selector-item_label
+                            <input type="radio" id="0915-option" formControlName="time" name="time" value="0915"
+                              class="selector-item_radio">
+                            <label for="0915-option" class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
                                 line-19
                                 color-black
                                 border-black">09:15</label>
-                            </div>
-                            <div class="selecotr-item
+                          </div>
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <input type="radio" id="1015-option" formControlName="time"
-                                name="time" value="1015" class="selector-item_radio">
-                              <label for="1015-option" class="selector-item_label
+                            <input type="radio" id="1015-option" formControlName="time" name="time" value="1015"
+                              class="selector-item_radio">
+                            <label for="1015-option" class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
                                 line-19
                                 color-black
                                 border-black">10:15</label>
-                            </div>
-                            <div class="selecotr-item
+                          </div>
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <input type="radio" id="1130-option" formControlName="time"
-                                name="time" value="1130" class="selector-item_radio">
-                              <label for="1130-option" class="selector-item_label
+                            <input type="radio" id="1130-option" formControlName="time" name="time" value="1130"
+                              class="selector-item_radio">
+                            <label for="1130-option" class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
                                 line-19
                                 color-black
                                 border-black">11:30</label>
-                            </div>
-                            <div class="selecotr-item
+                          </div>
+                          <div class="selecotr-item
                               mx-1 d-flex
                               h-100
                               position-relative
                               ion-justify-content-center
                               ion-align-items-center">
-                              <label class="selector-item_label
+                            <label class="selector-item_label
                                 border-radius-100
                                 fw-400
                                 font-size-14
                                 line-19
                                 color-muted
                                 border">12:45</label>
-                            </div>
                           </div>
-                          <div class="w-100 py-4
+                        </div>
+                        <div class="w-100 py-4
                             d-grid
                             text-align-left">
-                            <button type="button" class="btn
+                          <button type="button" class="btn
                               bg-transparent
                               w-fit
                               fw-500
@@ -959,7 +963,7 @@
                               line-20
                               text-primary">Tentar
                             encaixe</button>
-                            <button type="button" class="btn
+                          <button type="button" class="btn
                               bg-transparent
                               w-fit
                               fw-500
@@ -968,36 +972,36 @@
                               text-primary">Enviar
                             proposta sem
                             visitar</button>
-                          </div>
-                          <button type="button" (click)="nextScheduling('step1')" class="btn pb-2
+                        </div>
+                        <button type="button" (click)="nextScheduling('step1')" class="btn pb-2
                             bg-purple fw-700
                             font-size-18 line-24
                             text-light
                             border-radius-10
                             h-74
                             w-100">Continuar</button>
-                        </div>
                       </div>
-                      <div *ngIf="step2scheduling" class="anima-body">
-                        <p class="fw-700 py-3
+                    </div>
+                    <div *ngIf="step2scheduling" class="anima-body">
+                      <p class="fw-700 py-3
                           font-size-24 line-32
                           color-black w-100
                           text-center">
-                          Revise e confirme o seu
-                          <br /> agendamento
-                        </p>
-                        <div class="w-100">
-                          <p class="fw-500
+                        Revise e confirme o seu
+                        <br /> agendamento
+                      </p>
+                      <div class="w-100">
+                        <p class="fw-500
                             font-size-18
                             line-24
                             color-black">Resumo:</p>
-                          <p>
-                            <i class="bi
+                        <p>
+                          <i class="bi
                               font-size-18
                               color-black
                               mr-1
                               bi-geo-alt"></i>
-                            <span class="fw-400
+                          <span class="fw-400
                               font-size-16
                               line-20
                               color-black">Rua
@@ -1006,106 +1010,106 @@
                             1987,
                             Curitiba -
                             PR</span>
-                          </p>
-                          <div class="row px-3
+                        </p>
+                        <div class="row px-3
                             my-3 pb-3
                             d-flex">
-                            <div class="col
+                          <div class="col
                               justify-content-left
                               px-0 d-flex
                               align-items-center
                               justify-content-left">
-                              <img src="../../../assets/icon/bed.png" class="pr-2" />
-                              <p class="fw-400
+                            <img src="../../../assets/icon/bed.png" class="pr-2" />
+                            <p class="fw-400
                                 mb-0
                                 font-size-14
                                 line-20
                                 color-black">4
-                                Quartos
-                              </p>
-                            </div>
-                            <div class="col
+                              Quartos
+                            </p>
+                          </div>
+                          <div class="col
                               justify-content-center
                               px-0 d-flex
                               align-items-center
                               justify-content-left">
-                              <img src="../../../assets/icon/car.png" class="pr-2" />
-                              <p class="fw-400
+                            <img src="../../../assets/icon/car.png" class="pr-2" />
+                            <p class="fw-400
                                 mb-0
                                 font-size-14
                                 line-20
                                 color-black">2
-                                Vagas
-                              </p>
-                            </div>
-                            <div class="col
+                              Vagas
+                            </p>
+                          </div>
+                          <div class="col
                               justify-content-end
                               px-0 d-flex
                               align-items-center
                               justify-content-left">
-                              <img src="../../../assets/icon/rule.png" class="pr-2" />
-                              <p class="fw-400
+                            <img src="../../../assets/icon/rule.png" class="pr-2" />
+                            <p class="fw-400
                                 mb-0
                                 font-size-14
                                 line-20
                                 color-black">199
-                                m2
-                              </p>
-                            </div>
+                              m2
+                            </p>
                           </div>
-                          <p class="w-100
+                        </div>
+                        <p class="w-100
                             fw-700
                             pt-2 pb-4
                             font-size-22
                             line-32
                             color-black">
-                            R$222,000
-                          </p>
-                          <p class="w-100
+                          R$222,000
+                        </p>
+                        <p class="w-100
                             fw-400
                             font-size-16
                             line-20
                             color-black">
-                            <i class="bi
+                          <i class="bi
                               font-size-20
                               mr-2
                               bi-calendar"></i>
-                            Terça-feira, 29
-                            de
-                            Junho às 08:00
-                          </p>
-                        </div>
-                        <div class="w-100 my-4
+                          Terça-feira, 29
+                          de
+                          Junho às 08:00
+                        </p>
+                      </div>
+                      <div class="w-100 my-4
                           align-items-center
                           d-flex border
                           border-radius-10
                           p-3">
-                          <i class="bi
+                        <i class="bi
                             font-size-24
                             color-black
                             bi-info-circle"></i>
-                          <p class="fw-400
+                        <p class="fw-400
                             ml-3
                             mb-0
                             font-size-16
                             line-20
                             color-black">
-                            Ao agendar essa
-                            visita, sua
-                            presença
-                            é
-                            automaticamente
-                            confirmada e um
-                            dos
-                            nossos
-                            corretores
-                            parceiros é
-                            selecionado para
-                            te
-                            acompanhar.
-                          </p>
-                        </div>
-                        <button type="submit" (click)="nextScheduling('step2')" class="btn pb-2
+                          Ao agendar essa
+                          visita, sua
+                          presença
+                          é
+                          automaticamente
+                          confirmada e um
+                          dos
+                          nossos
+                          corretores
+                          parceiros é
+                          selecionado para
+                          te
+                          acompanhar.
+                        </p>
+                      </div>
+                      <button type="submit" (click)="nextScheduling('step2')" class="btn pb-2
                           bg-purple fw-700
                           font-size-18 line-24
                           text-light
@@ -1113,109 +1117,109 @@
                           h-74
                           w-100">Agendar
                         visita</button>
-                      </div>
-                      <div *ngIf="step3scheduling" class="anima-body">
-                        <p class="fw-700 py-3
+                    </div>
+                    <div *ngIf="step3scheduling" class="anima-body">
+                      <p class="fw-700 py-3
                           font-size-24 line-32
                           color-black w-100
                           text-center">
-                          Você agendou sua
-                          visita!
-                        </p>
-                        <div class="w-100">
-                          <p class="fw-700
+                        Você agendou sua
+                        visita!
+                      </p>
+                      <div class="w-100">
+                        <p class="fw-700
                             font-size-18
                             line-24
                             color-black">
-                            <i class="bi
+                          <i class="bi
                               font-size-18
                               color-black
                               bi-clock"></i>
-                            Você vai ver
-                            quem te
-                            acompanhará
-                          </p>
-                          <p class="fw-400
+                          Você vai ver
+                          quem te
+                          acompanhará
+                        </p>
+                        <p class="fw-400
                             font-size-18
                             line-24
                             color-black">
-                            Terça-feira à
-                            noite,
-                            pela sua agenda
-                            de
-                            visitas
-                          </p>
-                          <a [routerLink]="['#']" class="fw-500
+                          Terça-feira à
+                          noite,
+                          pela sua agenda
+                          de
+                          visitas
+                        </p>
+                        <a [routerLink]="['#']" class="fw-500
                             font-size-16
                             line-20">Ver
                           agenda
                           de visitas</a>
-                          <div class="row px-3
+                        <div class="row px-3
                             my-3 pt-3 pb-3
                             d-flex">
-                            <div class="col
+                          <div class="col
                               justify-content-left
                               px-0 d-flex
                               align-items-center
                               justify-content-left">
-                              <img src="../../../assets/icon/bed.png" class="pr-2" />
-                              <p class="fw-400
+                            <img src="../../../assets/icon/bed.png" class="pr-2" />
+                            <p class="fw-400
                                 mb-0
                                 font-size-14
                                 line-20
                                 color-black">4
-                                Quartos
-                              </p>
-                            </div>
-                            <div class="col
+                              Quartos
+                            </p>
+                          </div>
+                          <div class="col
                               justify-content-center
                               px-0 d-flex
                               align-items-center
                               justify-content-left">
-                              <img src="../../../assets/icon/car.png" class="pr-2" />
-                              <p class="fw-400
+                            <img src="../../../assets/icon/car.png" class="pr-2" />
+                            <p class="fw-400
                                 mb-0
                                 font-size-14
                                 line-20
                                 color-black">2
-                                Vagas
-                              </p>
-                            </div>
-                            <div class="col
+                              Vagas
+                            </p>
+                          </div>
+                          <div class="col
                               justify-content-end
                               px-0 d-flex
                               align-items-center
                               justify-content-left">
-                              <img src="../../../assets/icon/rule.png" class="pr-2" />
-                              <p class="fw-400
+                            <img src="../../../assets/icon/rule.png" class="pr-2" />
+                            <p class="fw-400
                                 mb-0
                                 font-size-14
                                 line-20
                                 color-black">199
-                                m2
-                              </p>
-                            </div>
+                              m2
+                            </p>
                           </div>
-                          <p class="w-100
+                        </div>
+                        <p class="w-100
                             fw-400
                             font-size-16
                             line-20
                             color-black">
-                            <i class="bi
+                          <i class="bi
                               font-size-20
                               mr-2
                               bi-calendar"></i>
-                            Terça-feira, 29
-                            de
-                            Junho às 08:00
-                          </p>
-                          <p>
-                            <i class="bi
+                          Terça-feira, 29
+                          de
+                          Junho às 08:00
+                        </p>
+                        <p>
+                          <i class="bi
                               font-size-18
                               color-black
                               mr-1
                               bi-geo-alt"></i>
-                            <span class="fw-400
+                          <span class="fw-400
                               font-size-16
                               line-20
                               color-black">Rua
@@ -1224,9 +1228,9 @@
                             1987,
                             Curitiba -
                             PR</span>
-                          </p>
-                        </div>
-                        <button type="submit" (click)="nextScheduling('close')" class="btn pb-2 mt-3
+                        </p>
+                      </div>
+                      <button type="submit" (click)="nextScheduling('close')" class="btn pb-2 mt-3
                           bg-purple fw-700
                           font-size-18 line-24
                           text-light
@@ -1234,7 +1238,7 @@
                           h-74
                           w-100">Salvar
                         na Agenda</button>
-                        <button type="button" (click)="nextScheduling('viewvisits')" class="btn pb-2 mt-3
+                      <button type="button" (click)="nextScheduling('viewvisits')" class="btn pb-2 mt-3
                           border-purple
                           bg-white
                           fw-700 font-size-18
@@ -1242,98 +1246,94 @@
                           border-radius-10
                           h-74
                           w-100">Ver visitas</button>
-                      </div>
-                    </form>
-                  </div>
+                    </div>
+                  </form>
                 </div>
               </div>
-              <app-modal-login *ngIf="modallogin"></app-modal-login>
             </div>
-            <form [formGroup]="formproperty" class="w-100
+          </div>
+          <form [formGroup]="formproperty" class="w-100
               mb-5 border-radius-10 bg-white">
-              <div class="w-100 border-radius-10 bg-white
+            <div class="w-100 border-radius-10 bg-white
                 p-5">
-                <label for="searchwords" class="label-search-words-details-property">
+              <label for="searchwords" class="label-search-words-details-property">
                 <i class="bi bi-search
                   font-size-24"></i>
-                </label>
-                <input id="searchwords" formControlName="searchwords" style="padding-right: 70px;"
-                  type="search" placeholder="Busque por palavras" class="btn border border-radius-10
+              </label>
+              <input id="searchwords" formControlName="searchwords" style="padding-right: 70px;" type="search"
+                placeholder="Busque por palavras" class="btn border border-radius-10
                   bg-light fw-400 text-left
                   font-size-16 line-20 pl-4
                   color-black w-100 h-74" />
-                <label for="localproperty" class="label-search-local-detail-property">
+              <label for="localproperty" class="label-search-local-detail-property">
                 <i class="bi bi-geo-alt
                   font-size-24"></i>
-                </label>
-                <input id="localproperty" formControlName="localproperty" style="padding-right: 70px;"
-                  type="text" placeholder="Local" class="btn border border-radius-10
+              </label>
+              <input id="localproperty" formControlName="localproperty" style="padding-right: 70px;" type="text"
+                placeholder="Local" class="btn border border-radius-10
                   bg-light fw-400 mt-4
                   text-left font-size-16 line-20 pl-4
                   color-black w-100
                   h-74" />
-                <input formControlName="typeproperty" type="text" placeholder="Tipo de
-                  imóvel" class="btn border border-radius-10
+              <input formControlName="typeproperty" type="text" placeholder="Tipo de imóvel" class="btn border border-radius-10
                   bg-light fw-400 mt-4
                   text-left font-size-16 line-20 pl-4
                   color-black w-100
                   h-74" />
-                <input formControlName="typeprice" type="text" placeholder="Preço" class="btn border border-radius-10
+              <input formControlName="typeprice" type="text" placeholder="Preço" class="btn border border-radius-10
                   bg-light fw-400 mt-4
                   text-left font-size-16 line-20 pl-4
                   color-black w-100
                   h-74" />
-                <input formControlName="typebathroom" type="text" placeholder="Banheiros" class="btn border border-radius-10
+              <input formControlName="typebathroom" type="text" placeholder="Banheiros" class="btn border border-radius-10
                   bg-light fw-400 mt-4
                   text-left font-size-16 line-20 pl-4
                   color-black w-100
                   h-74" />
-                <input formControlName="typerooms" type="text" placeholder="Quartos" class="btn border border-radius-10
+              <input formControlName="typerooms" type="text" placeholder="Quartos" class="btn border border-radius-10
                   bg-light fw-400 mt-4
                   text-left font-size-16 line-20 pl-4
                   color-black w-100
                   h-74" />
-                <input formControlName="typevacancies" type="text" placeholder="Vagas" class="btn border border-radius-10
+              <input formControlName="typevacancies" type="text" placeholder="Vagas" class="btn border border-radius-10
                   bg-light fw-400 mt-4
                   text-left font-size-16 line-20 pl-4
                   color-black w-100
                   h-74" />
-                <input formControlName="typeconstruction" type="text" placeholder="Ano de
-                  construção" class="btn border border-radius-10
+              <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10
                   bg-light fw-400 mt-4
                   text-left font-size-16 line-20 pl-4
                   color-black w-100
                   h-74" />
-                <div class="w-100 d-flex
+              <div class="w-100 d-flex
                   align-items-center">
-                  <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border
+                <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border
                     border-radius-10 bg-light fw-400
                     mt-4
                     mr-1 text-left font-size-16
                     line-20 pl-4 color-black
                     w-100 h-74" />
-                  <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border
+                <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border
                     border-radius-10 bg-light fw-400
                     mt-4
                     ml-1 text-left font-size-16
                     line-20 pl-4 color-black
                     w-100 h-74" />
-                </div>
-                <button class="bg-purple btn mt-4
+              </div>
+              <button class="bg-purple btn mt-4
                   text-light fw-700 font-size-18
                   line-24 border-radius-10 h-74 w-100" type="submit">
                 Encontrar
-                </button>
-              </div>
-            </form>
-            <div class="w-100 mt-4 border-radius-10 bg-white
+              </button>
+            </div>
+          </form>
+          <div class="w-100 mt-4 border-radius-10 bg-white
               p-5">
-              <p class="fw-700 pb-4 px-1 font-size-20
+            <p class="fw-700 pb-4 px-1 font-size-20
                 line-24 color-blue">Imóveis
-                exclusivos
-              </p>
-              <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }"
-              [scrollbar]="true">
+              exclusivos
+            </p>
+            <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }" [scrollbar]="true">
               <ng-template *ngFor="let item of propertyproducts" swiperSlide>
                 <div style="background-image:
                   url(../../../assets/img/gradient.png),
@@ -1344,11 +1344,11 @@
                     details-card-swiper h-50 p-4
                     d-flex">
                     <h4 class="w3-black h-fit
-                      px-4 py-2 mb-0
+                      px-4 py-2 mb-0 mx-1
                       border-radius-5 fw-400
                       font-size-18 line-24
                       text-light">{{item.rent}}</h4>
-                    <h4 style="background-color:#878DBA;" class="ml-2 h-fit px-4
+                    <h4 style="background-color:#878DBA;" class="mx-1 h-fit px-4
                       py-2 mb-0
                       border-radius-5 fw-400
                       font-size-18 line-24
@@ -1371,210 +1371,210 @@
                   </div>
                 </div>
               </ng-template>
-              </swiper>
-            </div>
-            <div class="w-100 border-radius-10 mt-4 bg-white
+            </swiper>
+          </div>
+          <div class="w-100 border-radius-10 mt-4 bg-white
               p-5">
-              <p class="fw-700 pb-4 font-size-20 line-24
+            <p class="fw-700 pb-4 font-size-20 line-24
                 color-black">Tipos de
-                Imóvel
-              </p>
-              <div class="d-flex justify-content-between">
-                <p class="fw-400 font-size-16 line-20
+              Imóvel
+            </p>
+            <div class="d-flex justify-content-between">
+              <p class="fw-400 font-size-16 line-20
                   color-black">
-                  <i class="bi font-size-9
+                <i class="bi font-size-9
                     bi-caret-right-fill"></i>
-                  Apartamento
-                </p>
-                <p class="fw-400 d-flex font-size-16
+                Apartamento
+              </p>
+              <p class="fw-400 d-flex font-size-16
                   line-20 color-black">
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">6</span>
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">&nbsp;
                   Imóveis</span>
-                </p>
-              </div>
-              <div class="d-flex mt-3
+              </p>
+            </div>
+            <div class="d-flex mt-3
                 justify-content-between">
-                <p class="fw-400 font-size-16 line-20
+              <p class="fw-400 font-size-16 line-20
                   color-black">
-                  <i class="bi font-size-9
+                <i class="bi font-size-9
                     bi-caret-right-fill"></i>
-                  Condomínio
-                </p>
-                <p class="fw-400 d-flex font-size-16
+                Condomínio
+              </p>
+              <p class="fw-400 d-flex font-size-16
                   line-20 color-black">
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">14</span>
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">&nbsp;
                   Imóveis</span>
-                </p>
-              </div>
-              <div class="d-flex mt-3
+              </p>
+            </div>
+            <div class="d-flex mt-3
                 justify-content-between">
-                <p class="fw-400 font-size-16 line-20
+              <p class="fw-400 font-size-16 line-20
                   color-black">
-                  <i class="bi font-size-9
+                <i class="bi font-size-9
                     bi-caret-right-fill"></i>
-                  Casa
-                </p>
-                <p class="fw-400 d-flex font-size-16
+                Casa
+              </p>
+              <p class="fw-400 d-flex font-size-16
                   line-20 color-black">
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">9</span>
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">&nbsp;
                   Imóveis</span>
-                </p>
-              </div>
-              <div class="d-flex mt-3
+              </p>
+            </div>
+            <div class="d-flex mt-3
                 justify-content-between">
-                <p class="fw-400 font-size-16 line-20
+              <p class="fw-400 font-size-16 line-20
                   color-black">
-                  <i class="bi font-size-9
+                <i class="bi font-size-9
                     bi-caret-right-fill"></i>
-                  Sobrado
-                </p>
-                <p class="fw-400 d-flex font-size-16
+                Sobrado
+              </p>
+              <p class="fw-400 d-flex font-size-16
                   line-20 color-black">
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">26</span>
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">&nbsp;
                   Imóveis</span>
-                </p>
-              </div>
-              <div class="d-flex mt-3
+              </p>
+            </div>
+            <div class="d-flex mt-3
                 justify-content-between">
-                <p class="fw-400 font-size-16 line-20
+              <p class="fw-400 font-size-16 line-20
                   color-black">
-                  <i class="bi font-size-9
+                <i class="bi font-size-9
                     bi-caret-right-fill"></i>
-                  Kitnet
-                </p>
-                <p class="fw-400 d-flex font-size-16
+                Kitnet
+              </p>
+              <p class="fw-400 d-flex font-size-16
                   line-20 color-black">
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">80</span>
-                  <span class="fw-400 font-size-16
+                <span class="fw-400 font-size-16
                     line-20 color-black">&nbsp;
                   Imóveis</span>
+              </p>
+            </div>
+          </div>
+          <div class="w-100 border-radius-10 mt-4 bg-white
+              p-5">
+            <p class="fw-700 pb-4 font-size-20 line-24
+                color-black">Tipos de
+              Imóvel
+            </p>
+            <div class="row">
+              <div class="col-3 col-img-types-property
+                  p-0">
+                <img src="../../../assets/img/ap.png" class="border-radius-10 h-111
+                    w-100" />
+              </div>
+              <div class="col-9
+                  col-img-types-property">
+                <p class="d-grid
+                    title-property-product mb-0
+                    h-75">
+                  <span class="fw-700 font-size-18
+                      line-24
+                      color-black">Cobertura com
+                    uma vista incrível</span>
+                  <span class="fw-700 font-size-18
+                      line-24
+                      color-black">R$222,000</span>
+                </p>
+                <p class="d-flex h-25
+                    info-property-product mb-0
+                    justify-content-between">
+                  <span class="fw-400 font-size-14
+                      line-20
+                      color-black">Quartos:4</span>
+                  <span class="fw-400 font-size-14
+                      line-20
+                      color-black">Banheiros:2</span>
+                  <span class="fw-400 font-size-14
+                      line-20
+                      color-black">Metragem:192m²</span>
                 </p>
               </div>
             </div>
-            <div class="w-100 border-radius-10 mt-4 bg-white
-              p-5">
-              <p class="fw-700 pb-4 font-size-20 line-24
-                color-black">Tipos de
-                Imóvel
-              </p>
-              <div class="row">
-                <div class="col-3 col-img-types-property
+            <div class="row mt-5">
+              <div class="col-3 col-img-types-property
                   p-0">
-                  <img src="../../../assets/img/ap.png" class="border-radius-10 h-111
+                <img src="../../../assets/img/ap.png" class="border-radius-10 h-111
                     w-100" />
-                </div>
-                <div class="col-9
-                  col-img-types-property">
-                  <p class="d-grid
-                    title-property-product mb-0
-                    h-75">
-                    <span class="fw-700 font-size-18
-                      line-24
-                      color-black">Cobertura com
-                    uma vista incrível</span>
-                    <span class="fw-700 font-size-18
-                      line-24
-                      color-black">R$222,000</span>
-                  </p>
-                  <p class="d-flex h-25
-                    info-property-product mb-0
-                    justify-content-between">
-                    <span class="fw-400 font-size-14
-                      line-20
-                      color-black">Quartos:4</span>
-                    <span class="fw-400 font-size-14
-                      line-20
-                      color-black">Banheiros:2</span>
-                    <span class="fw-400 font-size-14
-                      line-20
-                      color-black">Metragem:192m²</span>
-                  </p>
-                </div>
               </div>
-              <div class="row mt-5">
-                <div class="col-3 col-img-types-property
-                  p-0">
-                  <img src="../../../assets/img/ap.png" class="border-radius-10 h-111
-                    w-100" />
-                </div>
-                <div class="col-9
+              <div class="col-9
                   col-img-types-property">
-                  <p class="d-grid
+                <p class="d-grid
                     title-property-product mb-0
                     h-75">
-                    <span class="fw-700 font-size-18
+                  <span class="fw-700 font-size-18
                       line-24
                       color-black">Cobertura com
                     uma vista incrível</span>
-                    <span class="fw-700 font-size-18
+                  <span class="fw-700 font-size-18
                       line-24
                       color-black">R$222,000</span>
-                  </p>
-                  <p class="d-flex h-25
+                </p>
+                <p class="d-flex h-25
                     info-property-product mb-0
                     justify-content-between">
-                    <span class="fw-400 font-size-14
+                  <span class="fw-400 font-size-14
                       line-20
                       color-black">Quartos:4</span>
-                    <span class="fw-400 font-size-14
+                  <span class="fw-400 font-size-14
                       line-20
                       color-black">Banheiros:2</span>
-                    <span class="fw-400 font-size-14
+                  <span class="fw-400 font-size-14
                       line-20
                       color-black">Metragem:192m²</span>
-                  </p>
-                </div>
+                </p>
               </div>
-              <div class="row mt-5">
-                <div class="col-3 col-img-types-property
+            </div>
+            <div class="row mt-5">
+              <div class="col-3 col-img-types-property
                   p-0">
-                  <img src="../../../assets/img/ap.png" class="border-radius-10 h-111
+                <img src="../../../assets/img/ap.png" class="border-radius-10 h-111
                     w-100" />
-                </div>
-                <div class="col-9
+              </div>
+              <div class="col-9
                   col-img-types-property">
-                  <p class="d-grid
+                <p class="d-grid
                     title-property-product mb-0
                     h-75">
-                    <span class="fw-700 font-size-18
+                  <span class="fw-700 font-size-18
                       line-24
                       color-black">Cobertura com
                     uma vista incrível</span>
-                    <span class="fw-700 font-size-18
+                  <span class="fw-700 font-size-18
                       line-24
                       color-black">R$222,000</span>
-                  </p>
-                  <p class="d-flex h-25
+                </p>
+                <p class="d-flex h-25
                     info-property-product mb-0
                     justify-content-between">
-                    <span class="fw-400 font-size-14
+                  <span class="fw-400 font-size-14
                       line-20
                       color-black">Quartos:4</span>
-                    <span class="fw-400 font-size-14
+                  <span class="fw-400 font-size-14
                       line-20
                       color-black">Banheiros:2</span>
-                    <span class="fw-400 font-size-14
+                  <span class="fw-400 font-size-14
                       line-20
                       color-black">Metragem:192m²</span>
-                  </p>
-                </div>
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
+  </div>
+</main>

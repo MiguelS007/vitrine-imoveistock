@@ -1,0 +1,52 @@
+<form [formGroup]="form" class="auth-form px-3 pb-5 anima-body">
+
+    <div class="py-3 max-w-800">
+
+        <p class="fw-700 pt-3
+    font-size-24 line-32
+    color-black w-100
+    text-center">
+            Para continuar, precisamos de alguns dados seus
+        </p>
+        <div class="w-100">
+            <input type="text" formControlName="name"
+                class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
+                placeholder="Nome Completo" />
+            <input type="email" formControlName="email"
+                class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
+                placeholder="Email" />
+            <input type="tel" mask="(00) 00000-0000" formControlName="phone"
+                class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
+                placeholder="Celular" />
+            <input type="tel" mask="000.000.000-00" formControlName="cpf"
+                class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
+                placeholder="CPF" />
+        </div>
+        <p class="fw-400 pt-3 pb-2
+    font-size-14 line-18
+    color-black w-100
+    text-left">
+            Para visitar imóveis, você precisa apresentar um documento original com foto.
+        </p>
+        <div class="form-check d-flex align-items-center pb-2">
+            <input class="form-check-input w18h18" type="checkbox" formControlName="termsAndPolicy" value=""
+                id="checksignup">
+            <label class="form-check-label ml-2 fw-400 font-size-14 line-18 color-black" for="checksignup">
+                Estou de acordo com os
+                <a [routerLink]="['#']" class="fw-700 font-size-14 line-18 text-primary">Termos de Uso</a> e ciente
+                da
+                <a [routerLink]="['#']" class="fw-700 font-size-14 line-18 text-primary">Política de
+                    Privacidade</a> da Imoveistock
+            </label>
+        </div>
+        <button type="sumbit" (click)="confirm()" [disabled]="this.form.controls['termsAndPolicy'].value !== true "
+            class="btn pb-2 mt-3
+    bg-purple fw-700
+    font-size-18 line-24
+    text-light
+    border-radius-10
+    h-74
+    w-100">Continuar
+        </button>
+    </div>
+</form>

@@ -1,0 +1,51 @@
+<form [formGroup]="form" class="auth-form px-3 pb-5 anima-body">
+   <div class="py-3 max-w-800">
+
+      <p class="fw-700 pt-3
+    font-size-24 line-32
+    color-black w-100
+    text-center">
+         Digite o código de acesso
+      </p>
+      <p class="fw-400
+    font-size-14 line-18
+    color-black w-100
+    text-center">
+         Insira o código de 6 digitos que enviamos para o número: <br />
+         <span class="fw-700 pt-3
+       font-size-14 line-18
+       color-black">+{{phone}}</span>
+
+      </p>
+      <div class="w-100 d-inline-block justify-content-center d-flex">
+         <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code1" placeholder="*"
+            class="btn w56h56 bg-whitelight border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+         <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code2" placeholder="*"
+            class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+         <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code3" placeholder="*"
+            class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+         <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code4" placeholder="*"
+            class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
+      </div>
+      <p (click)="notSendCode('open')" class="fw-500 py-4
+    font-size-16 line-20
+    text-primary w-100
+    text-center">
+         Não recebi o código
+      </p>
+      <p *ngIf="notsendcodemsg" (click)="notSendCode('close')" class="fw-600 py-4
+      font-size-20 line-20 px-5
+      text-primary w-100 text-light bg-greenlight border-green border-radius-10
+      text-center">
+         Se você não recebeu a mensagem, verifique <br /> se ela não caiu no spam do seu celular
+      </p>
+      <button type="sumbit" [disabled]="form.invalid" (click)="confirm()" class="btn pb-2 mt-3
+ bg-purple fw-700
+ font-size-18 line-24
+ text-light
+ border-radius-10
+ h-74
+ w-100">Continuar
+      </button>
+   </div>
+</form>

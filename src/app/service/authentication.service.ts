@@ -1,26 +1,34 @@
-import { Injectable } from '@angular/core';
-import { Observable, map, catchError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { AuthenticateRequestDto } from '../dtos/authenticate-request.dto';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import { BaseService } from './base.service';
 import { AuthenticateResponseDto } from '../dtos/authenticate-response.dto';
 import { AuthetincatedUserDto } from '../dtos/authenticated-user.dto';
-import { LocalStorageKeys } from '../utils/localStorage.util';
+import LocalStorageUtil, { LocalStorageKeys } from "../utils/localStorage.util";
 import jwtDecode from 'jwt-decode';
+import { AuthenticateCodeConfirmationRequestDto } from '../dtos/authentication-code-confirmation.dtos';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService extends BaseService {
 
-  url: string = `${this.api}/authentication`;
-  jwtPayload: JwtPayload;
+  url: string = `${environment.apis.imoveistock}/authentication`;
 
   token = {
+    userId: '',
     phone: '',
-    accessToken: ''
+    token: '',
+    profileId: '',
+    apiFunctionsId: [],
   }
+
+  jwtPayload: JwtPayload;
+
 
   constructor(
     private httpClient: HttpClient
@@ -37,25 +45,35 @@ export class AuthenticationService extends BaseService {
         catchError(this.serviceError)
       );
   }
+  authenticateCodeConfirmation(dto: AuthenticateCodeConfirmationRequestDto): Observable<AuthetincatedUserDto> {
+    return this.httpClient
+      .post(`${this.url}/authenticate-code-confirmation`, dto, this.anonymousHeader())
+      .pipe(
+        map(this.extractData),
+        catchError(this.serviceError)
+      );
+  }
+
 
 
   getPayLoadFromLocalStorage(): JwtPayload {
     const token = this.getAuthenticatedUser();
-    return jwtDecode(token.accessToken);
+    return jwtDecode(token.token);
   }
 
   setAuthenticatedUser(dto: AuthetincatedUserDto) {
-    localStorage.set(LocalStorageKeys.user, dto);
+    LocalStorageUtil.set(LocalStorageKeys.user, dto);
     this.getPayLoadFromJWT();
   }
 
   getAuthenticatedUser(): AuthetincatedUserDto {
-    return localStorage.get(LocalStorageKeys.user);
+    return LocalStorageUtil.get(LocalStorageKeys.user);
   }
 
   getPayLoadFromJWT() {
     this.token = this.getAuthenticatedUser();
-    return this.jwtPayload = jwtDecode(this.token.accessToken);
+    return this.jwtPayload = jwtDecode(this.token.token);
   }
+
 
 }

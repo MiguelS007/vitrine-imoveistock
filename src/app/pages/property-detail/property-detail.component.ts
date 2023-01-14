@@ -13,7 +13,7 @@ export class PropertyDetailComponent implements OnInit {
 
   form: FormGroup;
   formproperty: FormGroup;
-  
+
   changeSubscription: Subscription;
 
   iconlikeheart = false;
@@ -50,6 +50,7 @@ export class PropertyDetailComponent implements OnInit {
       typebathroom: ['', [Validators.required]],
       typerooms: ['', [Validators.required]],
       typevacancies: ['', [Validators.required]],
+      component: ['', [Validators.required]],
       typeconstruction: ['', [Validators.required]],
       typefootagemax: ['', [Validators.required]],
       typefootagemin: ['', [Validators.required]],
@@ -90,7 +91,7 @@ export class PropertyDetailComponent implements OnInit {
       this.tourvirtual = true;
     }
   }
-  goExpress(){
+  goExpress() {
     this.router.navigate(['logged/express']);
   }
   nextScheduling(value: string) {
@@ -102,7 +103,7 @@ export class PropertyDetailComponent implements OnInit {
       this.step3scheduling = true;
     } else if (value === 'close') {
       this.modalscheduling = false;
-      this.step1scheduling = false; 
+      this.step1scheduling = false;
       this.step2scheduling = false;
       this.step3scheduling = false;
     } else if (value === 'viewvisits') {
@@ -113,12 +114,12 @@ export class PropertyDetailComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['logged/visits']);
       }, 100);
-    } 
+    }
     // undefined
     else if (value === 'modal-logged') {
       this.modallogin = true;
-    }else if(value === 'modal-scheduling'){
-      this.modalscheduling = true; 
+    } else if (value === 'modal-scheduling') {
+      this.modalscheduling = true;
       this.step1scheduling = true;
     }
   }

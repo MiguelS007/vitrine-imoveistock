@@ -1,33 +1,26 @@
-<div class="modal modal-all fade">
-    <div style="transform: translate(0,0%) !important;" class="modal-dialog
-       modal-dialog-centered" role="document">
-       <div class="modal-content p-3">
-          <div class="modal-header">
-             <button type="button" (click)="login('close')" class="close"> 
-             <img src="../../../assets/icon/x.png" />
-             </button> 
-          </div>
-          <div *ngIf="modalsign" class="px-3" >
-             <div *ngIf="modalsignin1" class="anima-body">
-                <p class="text-center w-10">
-                   <img class="text-center" src="../../../assets/img/logo.png" />
-                </p>
-                <p class="fw-700 pt-3
+<div class="auth-form px-3 d-flex justify-content-center pb-5">
+
+   <div *ngIf="modalsign" class="py-3 ">
+
+      <div *ngIf="modalsignin1" class="anima-body">
+         <p class="text-center w-10">
+            <img class="text-center" src="../../../assets/img/logo.png" />
+         </p>
+         <p class="fw-700 pt-3
                    font-size-24 line-32
                    color-black w-100
                    text-center">
-                   Acesse ou crie sua conta
-                </p>
-                <button type="button" (click)="login('signin')" class="btn pb-2 mt-3
+            Acesse ou crie sua conta
+         </p>
+         <button type="button" (click)="login('signin')" class="btn pb-2 mt-3
                    bg-purple fw-700
                    font-size-18 line-24
                    text-light
                    border-radius-10
                    h-74
                    w-100">Acessar conta
-                </button>
-                <button type="button"
-                   (click)="login('signup')" class="btn pb-2 mt-3
+         </button>
+         <button type="button" (click)="login('signup')" class="btn pb-2 mt-3
                    border-purple
                    bg-white
                    fw-700 font-size-18
@@ -35,125 +28,7 @@
                    border-radius-10
                    h-74
                    w-100">Criar conta</button>
-in             </div>
-             <!-- FORM-TEL -->
-             <form [formGroup]="form" *ngIf="modalsignin2" class="anima-body">
-             <p class="text-center w-10">
-                <img class="text-center" src="../../../assets/img/logo.png" />
-             </p>
-             <p class="fw-700 pt-3
-                font-size-24 line-32
-                color-black w-100
-                text-center">
-                Acesse sua conta
-             </p>
-             <p class="fw-400
-                font-size-14 line-18
-                color-black w-100
-                text-center">
-                Digite seu celular para entrar. Seus dados estão seguros e você não precisa de senha
-             </p>
-             <div class="w-100 d-flex">
-                <input type="tel" maxlength="2" formControlName="phone" class="btn w-20 bg-whitelight border-radius-10 border p-3 fw-400 font-size-16 line-20 color-black" placeholder="DDD" />
-                <input type="tel" mask="99999-9999" formControlName="phone" class="btn w-100 h-74 bg-whitelight text-left ml-3 border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black" placeholder="Celular" />
-             </div>
-             <button type="sumbit" [disabled]="form.invalid" (click)="login('sendtel')" 
-             class="btn pb-2 mt-5
-             bg-purple fw-700
-             font-size-18 line-24
-             text-light
-             border-radius-10
-             h-74
-             w-100">Acessar conta
-             </button>
-             </form>
-             <form [formGroup]="formcode"  *ngIf="modalsignin3" class="anima-body">
-             <p class="fw-700 pt-3
-                font-size-24 line-32
-                color-black w-100
-                text-center">
-                Digite o código de acesso
-             </p>
-             <p class="fw-400
-                font-size-14 line-18
-                color-black w-100
-                text-center">
-                Insira o código de 6 digitos que enviamos para o número: 
-                <span class="fw-700 pt-3
-                   font-size-14 line-18
-                   color-black"></span> 41 9 1234-1234
-             </p>
-             <div class="w-100 justify-content-center d-flex">
-                <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code" class="btn w56h56 bg-whitelight border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
-                <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code" class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
-                <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code" class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
-                <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code" class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
-                <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code" class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
-                <input type="tel" (keyup)="onDigitInput($event)" maxlength="1" formControlName="code" class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
-             </div>
-             <p class="fw-500 py-4
-                font-size-16 line-20
-                text-primary w-100
-                text-center">
-                Não recebi o código
-             </p>
-             <button type="sumbit" [disabled]="formcode.invalid" (click)="login('close')" 
-             class="btn pb-2 mt-3
-             bg-purple fw-700
-             font-size-18 line-24
-             text-light
-             border-radius-10
-             h-74
-             w-100">Continuar
-             </button>
-in             </form>
-             <!-- undefined -->
-             <form [formGroup]="formsignup" *ngIf="modalsignup1" class="anima-body">
-             <p class="fw-700 pt-3
-                font-size-24 line-32
-                color-black w-100
-                text-center">
-                Para continuar, precisamos de alguns dados seus
-             </p>
-             <div class="w-100">
-                <input type="text" formControlName="name" 
-                   class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
-                   placeholder="Nome Completo" />
-                <input type="email" formControlName="email" 
-                   class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
-                   placeholder="Email" />
-                <input type="tel" mask="(00) 00000-0000" formControlName="phone"
-                   class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
-                   placeholder="Celular" />
-                <input type="tel"  mask="000.000.000-00"  formControlName="cpf" 
-                   class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
-                   placeholder="CPF" />
-             </div>
-             <p class="fw-400 pt-3 pb-2
-                font-size-14 line-18
-                color-black w-100
-                text-left">
-                Para visitar imóveis, você precisa apresentar um documento original com foto.
-             </p>
-             <div class="form-check d-flex align-items-center pb-2">
-                <input class="form-check-input w18h18" type="checkbox" formControlName="check" value="check" id="checksignup">
-                <label class="form-check-label ml-2 fw-400 font-size-14 line-18 color-black" for="checksignup">
-                Estou de acordo com os 
-                <a [routerLink]="['#']" class="fw-700 font-size-14 line-18 text-primary">Termos de Uso</a> e ciente da 
-                <a [routerLink]="['#']" class="fw-700 font-size-14 line-18 text-primary">Política de Privacidade</a> da Imoveistock
-                </label>
-             </div>
-             <button type="sumbit" [disabled]="formsignup.invalid" (click)="login('close')" 
-             class="btn pb-2 mt-3
-             bg-purple fw-700
-             font-size-18 line-24
-             text-light
-             border-radius-10
-             h-74
-             w-100">Continuar
-             </button>
-in             </form>
-          </div>
-       </div>
-    </div>
- </div>
+
+      </div>
+   </div>
+</div>

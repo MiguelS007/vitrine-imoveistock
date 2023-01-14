@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GetImoveisHomeRequestDto } from 'src/app/dtos/get-imoveis-home-request.dto';
+import { SearchService } from 'src/app/service/search.service';
 
 @Component({
   selector: 'app-home-header',
@@ -10,6 +12,8 @@ import { Router } from '@angular/router';
 export class HomeHeaderComponent implements OnInit {
 
   form: FormGroup;
+
+  request: GetImoveisHomeRequestDto[] = [];
 
   collapsed = false;
   typepropertydiv = false;
@@ -29,9 +33,12 @@ export class HomeHeaderComponent implements OnInit {
   hideviewoptions = false;
   showviewoptions = false;
 
+  resultType: any;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
+    private searchService: SearchService
   ) {
     this.form = this.formBuilder.group({
       search: ['', [Validators.required]],
@@ -54,7 +61,57 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
+  retornaEstado(value) {
+    if (value.charAt(0) == "f")
+      return value;
+  }
+  searchKeyUp(value) {
+    this.searchService.getSaearchImoveis().subscribe(
+      success => {
+        this.request = success;
+        let search = value.target.value;
+
+        // console.log(this.request[1].propertyType.indexOf(search) !== -1);
+        // var theString = "I have been looking for Sam.";
+        // var theWord = "looking";
+        // var theCharacter = "I";
+        // var theSubstring = "for Sam";
+
+
+        // // Output — The word "looking" exists in given string.
+        // if (theString.indexOf(theWord) !== -1) {
+        //   console.log('The word "' + theWord + '" exists in given string.');
+        // }
+
+        // // Output — The character "I" exists in given string.
+        // if (theString.indexOf(theCharacter) !== -1) {
+        //   console.log('The character "' + theCharacter + '" exists in given string.');
+        // }
+
+        // // Output — The substring "for Sam" exists in given string.
+        // if (theString.indexOf(theSubstring) !== -1) {
+        //   console.log('The substring "' + theSubstring + '" exists in given string.');
+        // }
+
+        let searchvalue;
+        console.log(this.request[1].propertyCharacteristics)
+        for (let i = 0; i < this.request.length; i++) { 
+          console.log(this.request[i].propertyCharacteristics)
+          // searchvalue = this.request[i].propertyType
+
+          //   if (this.request[i].propertyType) {
+          //     searchvalue.push({ loft: this.request[i].propertyType });
+          //     console.log();
+          //   }
+        }
+        // this.resultType = searchvalue.length;
+      },
+      error => { console.log(error, 'o erro') }
+    );
+  }
+
   buyOption(value: string) {
     if (value === 'buy') {
       this.collapsed = false;
@@ -126,3 +183,4 @@ export class HomeHeaderComponent implements OnInit {
     this.hideviewoptions = false;
   }
 }
+

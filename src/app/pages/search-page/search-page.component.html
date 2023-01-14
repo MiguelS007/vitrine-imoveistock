@@ -100,11 +100,11 @@
                             class="bg-img-property w-100 py-2 px-3
                             border-radius-10">
                             <div class="w-100 details-card-swiper h-50 p-4 d-flex">
-                                <h4 class="w3-black h-fit px-4 py-2 mb-0
+                                <h4 class="w3-black h-fit px-4 py-2 mb-0 mx-1
                                     border-radius-5 fw-400 font-size-18 line-24
                                     text-light">{{item.rent}}</h4>
                                 <h4 style="background-color:#878DBA;"
-                                    class="ml-2 h-fit px-4 py-2 mb-0
+                                    class="mx-1 h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-18 line-24
                                     text-light">{{item.exclusive}}</h4>
                             </div>
@@ -133,7 +133,7 @@
                         Apartamento
                     </p>
                     <p class="fw-400 d-flex font-size-16 line-20 color-black">
-                        <span class="fw-400 font-size-16 line-20 color-black">6</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">{{countApartment}}</span>
                         <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
                             Imóveis</span>
                     </p>
@@ -145,7 +145,7 @@
                         Condomínio
                     </p>
                     <p class="fw-400 d-flex font-size-16 line-20 color-black">
-                        <span class="fw-400 font-size-16 line-20 color-black">14</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">{{countCondominium}}</span>
                         <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
                             Imóveis</span>
                     </p>
@@ -157,7 +157,7 @@
                         Casa
                     </p>
                     <p class="fw-400 d-flex font-size-16 line-20 color-black">
-                        <span class="fw-400 font-size-16 line-20 color-black">9</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">{{countHouse}}</span>
                         <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
                             Imóveis</span>
                     </p>
@@ -166,10 +166,10 @@
                 <div class="d-flex mt-3 justify-content-between">
                     <p class="fw-400 font-size-16 line-20 color-black">
                         <i class="bi font-size-9 bi-caret-right-fill"></i>
-                        Sobrado
+                        Loft
                     </p>
                     <p class="fw-400 d-flex font-size-16 line-20 color-black">
-                        <span class="fw-400 font-size-16 line-20 color-black">26</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">{{countLoft}}</span>
                         <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
                             Imóveis</span>
                     </p>
@@ -181,7 +181,7 @@
                         Kitnet
                     </p>
                     <p class="fw-400 d-flex font-size-16 line-20 color-black">
-                        <span class="fw-400 font-size-16 line-20 color-black">80</span>
+                        <span class="fw-400 font-size-16 line-20 color-black">{{countKitnet}}</span>
                         <span class="fw-400 font-size-16 line-20 color-black">&nbsp;
                             Imóveis</span>
                     </p>
@@ -189,10 +189,9 @@
                 </div>
             </div>
             <div class="w-100 border-radius-10 mt-4 bg-white p-5">
-                <p class="fw-700 pb-4 font-size-20 line-24 color-black">Tipos de
-                    Imóvel
+                <p class="fw-700 pb-4 font-size-20 line-24 color-black">Tipos de Imóvel
                 </p>
-                <div class="row">
+                <div *ngFor="let item of response | slice:0:3" class="row mt-5 pt-5">
                     <div class="col-3 col-img-types-property p-0">
                         <img src="../../../assets/img/ap.png"
                             class="border-radius-10 h-111 w-100"/>
@@ -200,61 +199,17 @@
                     <div class="col-9 col-img-types-property">
                         <p class="d-grid title-property-product mb-0 h-75">
                             <span class="fw-700 font-size-18 line-24
-                                color-black">Cobertura com uma vista incrível</span>
+                                color-black">{{item.description}}</span>
                             <span class="fw-700 font-size-18 line-24
-                                color-black">R$222,000</span>
+                                color-black">R${{item.saleValue}}</span>
                         </p>
                         <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
                             <span class="fw-400 font-size-14 line-20
-                                color-black">Quartos:4</span>
+                                color-black">Quartos: {{item.rooms}}</span>
                             <span class="fw-400 font-size-14 line-20
-                                color-black">Banheiros:2</span>
+                                color-black">Banheiros: {{item.bathrooms}}</span>
                             <span class="fw-400 font-size-14 line-20
-                                color-black">Metragem:192m²</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-3 col-img-types-property p-0">
-                        <img src="../../../assets/img/ap.png"
-                            class="border-radius-10 h-111 w-100"/>
-                    </div>
-                    <div class="col-9 col-img-types-property">
-                        <p class="d-grid title-property-product mb-0 h-75">
-                            <span class="fw-700 font-size-18 line-24
-                                color-black">Cobertura com uma vista incrível</span>
-                            <span class="fw-700 font-size-18 line-24
-                                color-black">R$222,000</span>
-                        </p>
-                        <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
-                            <span class="fw-400 font-size-14 line-20
-                                color-black">Quartos:4</span>
-                            <span class="fw-400 font-size-14 line-20
-                                color-black">Banheiros:2</span>
-                            <span class="fw-400 font-size-14 line-20
-                                color-black">Metragem:192m²</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-3 col-img-types-property p-0">
-                        <img src="../../../assets/img/ap.png"
-                            class="border-radius-10 h-111 w-100"/>
-                    </div>
-                    <div class="col-9 col-img-types-property">
-                        <p class="d-grid title-property-product mb-0 h-75">
-                            <span class="fw-700 font-size-18 line-24
-                                color-black">Cobertura com uma vista incrível</span>
-                            <span class="fw-700 font-size-18 line-24
-                                color-black">R$222,000</span>
-                        </p>
-                        <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
-                            <span class="fw-400 font-size-14 line-20
-                                color-black">Quartos:4</span>
-                            <span class="fw-400 font-size-14 line-20
-                                color-black">Banheiros:2</span>
-                            <span class="fw-400 font-size-14 line-20
-                                color-black">Metragem:192m²</span>
+                                color-black">Metragem: {{item.usefulArea}} m²</span>
                         </p>
                     </div>
                 </div>
@@ -322,26 +277,26 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mx-0">
                 <div class="col-12 col-cards-products px-0 col-sm-12">
-                    <div *ngFor="let item of products | paginate: {
+                    <div *ngFor="let item of response | paginate: {
                         itemsPerPage: 10, currentPage: paginationProduct }; let
                         i= index" class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3
                         border-radius-10 bg-white">
-                        <div (click)="goDetailProperty()" style='background-image: url({{item.bgproduct}});'
-                            class="bg-img-result py-2 px-3 border-radius-10">
+                        <div (click)="goDetailProperty()" class="bg-img-result py-2 px-3 border-radius-10">
+                             <!-- style='background-image: url({{item.bgproduct}});' -->
                             <div class="w-100 h-50 d-flex">
                                 <h4 class="bg-purple h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-14 line-15
-                                    text-light">{{item.sold}}</h4>
+                                    text-light">Venda</h4>
                                 <h4 class="bg-greenlight h-fit ml-2 px-3 py-2
                                     mb-0 border-radius-5 fw-400 font-size-14
-                                    line-15 color-black">{{item.exclusive}}</h4>
+                                    line-15 color-black">Excluisvo</h4>
                             </div>
                             <div class="w-100 d-flex h-50 align-items-end
                                 justify-content-between">
                                 <p class="fw-700 mb-0 font-size-22 h-fit line-32
-                                    text-light">R${{item.price}}</p>
+                                    text-light">R${{item.saleValue}}</p>
                                 <div (click)="likeHeart()" class="h-fit
                                     bg-transparent-white cursor-pointer border-radius-10
                                     pt-2 pb-1 px-3">
@@ -353,14 +308,15 @@
                         </div>
                         <div class="w-100 mx-2 text-align-left pt-3">
                             <span class="fw-400 font-size-14 line-20
-                                color-black">{{item.type}}</span>
+                                color-black">{{item.propertyCharacteristics}}</span>
                             <p class="fw-700 my-2 font-size-16 line-20 mb-0
-                                color-black">{{item.nameproperty}}</p>
+                                color-black text-truncate"
+                                style="max-width: 90%;">{{item.description}}</p>
                             <p class="d-flex align-items-center">
                                 <i class="bi font-size-20 mr-2 color-black
                                     bi-geo-alt"></i>
                                 <span class="fw-400 font-size-14 line-20
-                                    color-black">{{item.local}}</span>
+                                    color-black">{{item.complementAddress}}, {{item.city}}</span>
                             </p>
                         </div>
                         <div class="row px-4 my-3 border-bottom-gray pb-3
@@ -377,21 +333,21 @@
                                 <img src="../../../assets/icon/car.png"
                                     class="pr-2"/>
                                 <p class="fw-400 mb-0 font-size-14 line-20
-                                    color-black">{{item.vacancies}} Vagas</p>
+                                    color-black">{{item.vacancyNumber}} Vagas</p>
                             </div>
                             <div class="col justify-content-end px-0 d-flex
                                 align-items-center justify-content-left">
                                 <img src="../../../assets/icon/rule.png"
                                     class="pr-2"/>
                                 <p class="fw-400 mb-0 font-size-14 line-20
-                                    color-black">{{item.metrics}} m2</p>
+                                    color-black">{{item.usefulArea}} m2</p>
                             </div>
                         </div>
                         <div class="w-100 d-flex align-items-center py-2 px-1">
-                            <img [src]="item.picface" class="border-radius-100
+                            <img [src]="urlsimg" class="border-radius-100
                                 "/>
                             <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20
-                                color-black">{{item.nameface}}</h3>
+                                color-black">{{item.ownerName}}</h3>
                         </div>
                     </div>
                 </div>

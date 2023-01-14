@@ -1,7 +1,28 @@
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.234) !important;
+}
+
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 676px !important;
         margin: 1.75rem auto;
+    }
+
+}
+
+@media (max-width: 576px) {
+    input {
+        padding-right: 1.5rem !important;
     }
 }
 

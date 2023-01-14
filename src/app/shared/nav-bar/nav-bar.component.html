@@ -1,8 +1,8 @@
 <nav [class]="handlerLoggedBackground(router.url)"  class="navbar z-10 position-absolute w-100 top-0 justify-content-center navbar-expand-lg navbar-light">
-  <div  [class]="collapsed ? 'd-block' : 'd-flex'" class="w-100 mr-4 nav-bar max-w-1918">
-    <div class="navbar-brand align-items-center d-flex">
+  <div  [class]="collapsed ? 'd-block mr-0' : 'd-flex mr-4'" class="w-100 nav-bar max-w-1918">
+    <div   class="navbar-brand align-items-center d-flex">
         <div class="green-block"></div> 
-        <img src="../../../assets/img/logo.png" class="logo bg-greenlight"> 
+        <img [routerLink]="['/home']" src="../../../assets/img/logo.png" class="logo bg-greenlight"> 
         <img [src]="handlerLoggedLogo(router.url)"  class="px-3 h-fit title-logo"> 
     </div>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -15,29 +15,36 @@
           <a [class]="handlerLoggedLinks(router.url)" 
           class="nav-link  px-3 fw-400 font-size-14 line-20" [routerLink]="['/about']" [routerLinkActive]="['link-active']">Sobre</a>
         </li>
-        <li class="nav-item">
-          <a [class]="handlerLoggedLinks(router.url)" 
-          class="nav-link  px-3 fw-400 font-size-14 line-20"  [routerLink]="['/search']" [routerLinkActive]="['link-active']">Imóveis</a>
+        <li class="nav-item dropdown">
+          <a *ngIf="indicatLogon" href="dashboard-indicação" [class]="handlerLoggedLinks(router.url)"  class="nav-link  px-3 fw-400 font-size-14 line-20">Indicar imóveis</a>
+          <a *ngIf="indicatLogoff" [routerLink]="['auth/login']"  [class]="handlerLoggedLinks(router.url)"  class="nav-link  px-3 fw-400 font-size-14 line-20">Indicar imóveis</a>
         </li>
-        <li class="nav-item">
-          <a [class]="handlerLoggedLinks(router.url)" 
-          class="nav-link  px-3 fw-400 font-size-14 line-20" href="#">indique</a>
+        <li class="dropdown cursor-pointer nav-item">
+          <a [class]="handlerLoggedLinks(router.url)" class="nav-link px-3 fw-400 font-size-14 line-20 dropdown-toggle" role="button" id="dropproperty" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Para Proprietários 
+					</a>
+          <div class="dropdown-menu box-shadow border-none border-radius-10" aria-labelledby="dropdownMenuLink">
+            <a href="https://imoveistock-proprietario.vercel.app/" class="dropdown-item py-2 fw-400 font-size-14 line-20 color-black">Anunciar Imóvel</a>
+            <a class="dropdown-item" href="dashboard-indicação">Área do Proprietário</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a *ngIf="brokerLogon" href="dashboard-corretores" [class]="handlerLoggedLinks(router.url)"  class="nav-link  px-3 fw-400 font-size-14 line-20">Para Corretores.</a>
+          <a *ngIf="brokerLogoff" [routerLink]="['auth/login']"  [class]="handlerLoggedLinks(router.url)"  class="nav-link  px-3 fw-400 font-size-14 line-20">Para Corretores</a>
         </li>
         <li class="nav-item">
           <a [class]="handlerLoggedLinks(router.url)" 
           class="nav-link  px-3 fw-400 font-size-14 line-20"  [routerLink]="['/contact']" [routerLinkActive]="['link-active']">Contato</a>
         </li>
         <li class="nav-item dropdown">
-          <a (click)="goLogin()" class="nav-link  px-3 fw-400 font-size-14 line-20">Login</a>
-          <app-modal-login *ngIf="modallogin"></app-modal-login>
-          <!-- <a [class]="handlerLoggedLinks(router.url)" 
-          class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="bi font-size-20 bi-person"></i> Paulo <img src="../../../assets/icon/arrow-down.png" />
+          <a *ngIf="loginopt" [routerLink]="['auth/login']" [class]="handlerLoggedLinks(router.url)" [routerLinkActive]="['link-active']" class="nav-link  px-3 fw-400 font-size-14 line-20">Login</a>
+          <a *ngIf="loggedname" [class]="handlerLoggedLinks(router.url)" class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle" id="droplogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="bi font-size-20 bi-person"></i> {{user?.name  | slice:0:6}}... <img src="../../../assets/icon/arrow-down.png" />
 					</a>
-          <div class="dropdown-menu arrow_box px-4 border-radius-10 dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <h2 class="dropdown-item px-0  py-2 fw-400 font-size-14 line-20 color-black" >Minha conta</h2>
-            <h2 class="dropdown-item px-0  py-2 fw-400 font-size-14 line-20 color-black" >Sair da conta</h2>
-          </div> -->
+          <div *ngIf="loggedopt"  class="dropdown-menu arrow_box px-4 border-radius-10 dropdown-menu-right" aria-labelledby="droplogin">
+            <a href="" class="dropdown-item px-0  py-2 fw-400 font-size-14 line-20 color-black">Meus Imóveis</a>
+            <h2 (click)="logOut()" class="dropdown-item px-0  py-2 fw-400 font-size-14 line-20 color-black" >Sair da conta</h2>
+          </div>
         </li>
       </ul>
     </div>

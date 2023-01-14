@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
 
 @Component({
@@ -11,25 +12,59 @@ import { DatamokService } from 'src/app/service/datamok.service';
 export class NavBarComponent implements OnInit, AfterViewInit {
   collapsed = false;
   urlParams: any;
+  
   iflogged = false;
   modallogin = false;
   changeSubscription: Subscription;
+  
+  loggedname = false;
+  loggedopt = false;
+  loginopt = true;
+  
+  indicatLogon = false;
+  indicatLogoff = true;
+  
+  brokerLogon = false;
+  brokerLogoff = true;
+
+  user: UserGetResponseDto;
+
+
+
 
   constructor(
     public router: Router,
     private datamokservice: DatamokService,
 
-  ) { 
+  ) {
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
       this.modallogin = false;
     });
   }
 
   ngAfterViewInit(): void {
+    // console.log(this.user.name , 'the user');
+
   }
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('userDto'));
+    if (this.user.name != null) {
+      this.loggedname = true;
+      this.loggedopt = true;
+      this.loginopt = false;
 
+      this.indicatLogon = true;
+      this.indicatLogoff = false;
+
+      this.brokerLogon = true;
+      this.brokerLogoff = false;
+
+    } else {
+      this.indicatLogoff = true;
+      this.brokerLogoff = true;
+      this.loginopt = true;
+    }
   }
 
   handlerLoggedBackground(url: string): string {
@@ -48,11 +83,18 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     return '../../../assets/img/logo-title-black.png';
   }
 
-  goLogin() {
-    this.modallogin = true;
+  logOut() {
+    localStorage.removeItem('userDto');
+    this.router.navigate(['auth/login']);
   }
+
+
   sideBtn() {
     this.collapsed = !this.collapsed;
+    this.loggedname = false;
+    this.loggedopt = false;
+    this.loginopt = true;
+
   }
 
 

@@ -1,0 +1,36 @@
+<form [formGroup]="form" class="auth-form px-3 pb-5 anima-body">
+    <div class="py-3 max-w-800">
+
+        <p class="text-center w-10 max-w-800">
+            <img class="text-center" src="../../../assets/img/logo.png" />
+        </p>
+        <p class="fw-700 pt-3
+  font-size-24 line-32
+  color-black w-100
+  text-center">
+            Acesse sua conta
+        </p>
+        <p class="fw-400
+  font-size-14 line-18
+  color-black w-100
+  text-center">
+            Digite seu celular para entrar. Seus dados estão seguros e você não precisa de senha
+        </p>
+        <div class="w-100 d-flex">
+            <input type="tel" maxlength="2" formControlName="ddd" id="ddd" (keyup)="nextCode('ddd', $event)"
+                class="btn w-20 bg-whitelight border-radius-10 border p-3 fw-400 font-size-16 line-20 color-black"
+                placeholder="DDD" />
+            <input type="tel" mask="99999-9999" formControlName="phone" id="tel" (keyup)="nextCode('tel', $event)"
+                class="btn w-100 h-74 bg-whitelight text-left ml-3 border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
+                placeholder="Celular" />
+        </div>
+        <button type="sumbit" (click)="confirm()"  class="btn pb-2 mt-5
+bg-purple fw-700
+font-size-18 line-24
+text-light
+border-radius-10
+h-74
+w-100">Acessar conta
+        </button>
+    </div>
+</form>

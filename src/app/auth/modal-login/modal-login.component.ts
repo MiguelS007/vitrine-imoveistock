@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticateRequestDto } from 'src/app/dtos/authenticate-request.dto';
 // import { ToastrService } from 'ngx-toastr';
 import { DatamokService } from 'src/app/service/datamok.service';
 
@@ -12,9 +13,7 @@ import { DatamokService } from 'src/app/service/datamok.service';
 export class ModalLoginComponent implements OnInit {
 
   form: FormGroup;
-  formcode: FormGroup;
-  formsignup: FormGroup;
-  // request: any = AuthenticateRequestDto;
+  request: any = AuthenticateRequestDto;
   modallogin = true;
   modalsign = true;
   modalsignin1 = true;
@@ -29,16 +28,13 @@ export class ModalLoginComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
     this.form = this.formBuilder.group({
-      phone: ['', [Validators.required]],
-    });
-    this.formcode = this.formBuilder.group({
-      code: ['', [Validators.required]],
-    });
-    this.formsignup = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
+      ddd: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       cpf: ['', [Validators.required]],
+      code: ['', [Validators.required]],
+      check: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {
@@ -46,33 +42,17 @@ export class ModalLoginComponent implements OnInit {
 
   async login(value: string) {
     if (value === 'signin') {
-      this.modalsignin1 = false;
-      this.modalsignin2 = true;
-    } else if (value === 'sendtel') {
-      this.modalsignin2 = false;
-      this.modalsignin3 = true;
-      // this.request = Object.assign({}, this.form.value);
-
-      // this.authenticationService.authenticate(this.request).subscribe(
-      //   success => {
-      //     this.authenticationService.setAuthenticatedUser(
-      //       new AuthetincatedUserDto(success.phone, success.accessToken),
-      //     );
-      //     this.router.navigate(['/home'])
-      //   },
-      //   error => {
-      //     this.toastrService.error('Celular invalido', '', { progressBar: true })
-      //   }
-      // )
+      this.router.navigate(['auth/sign-in']);
     } else if (value === 'close') {
       setTimeout(() => {
         this.datamokservice.opModalLogin();
       }, 100);
     } else if (value === 'signup') {
-      this.modalsignin1 = false;
-      this.modalsignup1 = true;
+      this.router.navigate(['auth/sign-up']);
     }
-
+  }
+  onSubmit() {
+    console.warn(this.form.value);
   }
   onDigitInput(event: any) {
     let element;
