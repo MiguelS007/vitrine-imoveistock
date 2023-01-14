@@ -19,7 +19,10 @@
                 <div class="col-12 mt-4 d-flex justify-content-center">
                     <div class="w-100 painel-browser h-auto border-radius-10 max-w-1227">
                         <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
-                            <input style="width: 220px;" type="text" placeholder="O que está buscando?"  formControlName="search"
+                            <input style="width: 220px;" type="text" placeholder="Local" formControlName="typePropertyLocal"
+                            class="btn border input-local input-type-property pr-5 mr-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
+                            
+                            <input style="width: 220px;" type="text" (keyup)="searchKeyUp($event)" placeholder="O que está buscando?"  formControlName="search"
                             class="btn border  text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
                              <div class="nav-item dropdown">
                                 <input type="text" (click)="typePropertyOptions('typeproperty')" 
@@ -56,9 +59,7 @@
                                     </li>
                                 </ul>
                              </div>
-                            <input style="width: 220px;" type="text" placeholder="Local" formControlName="typePropertyLocal"
-                            class="btn border input-local pr-5 ml-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
-                            
+                           
                             <div class="nav-item dropdown">
                                 <input type="text" (click)="typePropertyOptions('typeoffResidential')" 
                                 placeholder="Tipo" readonly value=""
