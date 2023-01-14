@@ -6,6 +6,7 @@ export class UserGetResponseDto {
     photo?: Photo;
 }
 class Photo {
+    _id?: string;
     key?: string;
     location?: string;
 }

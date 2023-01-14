@@ -1,5 +1,4 @@
 export class HomeGetResponsetDto {
-    _id: string;
     complementAddress?: string;
     propertyCharacteristics?: string;
     rooms?: number;
@@ -9,4 +8,7 @@ export class HomeGetResponsetDto {
     city?: string;
     usefulArea?: string;
     ownerName?: string;
+    bathrooms?: string;
+    propertyType?: string;
+
 }
