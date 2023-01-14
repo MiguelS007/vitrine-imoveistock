@@ -12,13 +12,24 @@ import { DatamokService } from 'src/app/service/datamok.service';
 export class NavBarComponent implements OnInit, AfterViewInit {
   collapsed = false;
   urlParams: any;
+  
   iflogged = false;
   modallogin = false;
   changeSubscription: Subscription;
+  
   loggedname = false;
   loggedopt = false;
   loginopt = true;
+  
+  indicatLogon = false;
+  indicatLogoff = true;
+  
+  brokerLogon = false;
+  brokerLogoff = true;
+
   user: UserGetResponseDto;
+
+
 
 
   constructor(
@@ -42,7 +53,16 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.loggedname = true;
       this.loggedopt = true;
       this.loginopt = false;
+
+      this.indicatLogon = true;
+      this.indicatLogoff = false;
+
+      this.brokerLogon = true;
+      this.brokerLogoff = false;
+
     } else {
+      this.indicatLogoff = true;
+      this.brokerLogoff = true;
       this.loginopt = true;
     }
   }
@@ -74,6 +94,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     this.loggedname = false;
     this.loggedopt = false;
     this.loginopt = true;
+
   }
 
 

@@ -18,16 +18,7 @@ export class HomeProductsComponent implements OnInit {
 
   response: HomeGetResponsetDto[] = [];
   user: UserGetResponseDto;
-
-  // : any;
-  city: any = [];
-
   urlsimg: any = [];
-
-  requestimg: any;
-
-  random: number;
-
 
   constructor(
     private router: Router,
@@ -40,18 +31,7 @@ export class HomeProductsComponent implements OnInit {
       success => {
         this.response = success;
       },
-      error => { console.log(error, 'deu ruin') }
-    );
-    this.userService.getUser().subscribe(
-      success => {
-        this.user = success;
-        if (this.user?.photo?.location) {
-          this.urlsimg.push(this.user.photo.location);
-        }
-      },
-      error => {
-        console.error(error, ' o erro');
-      }
+      error => { console.log(error, 'data not collected') }
     );
   }
 
