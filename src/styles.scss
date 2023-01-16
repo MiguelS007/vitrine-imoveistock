@@ -668,7 +668,7 @@ input:focus {
 }
 
 .border-none {
-    border: 0px;
+    border: 0px !important;
 }
 
 // NAV-BAR
@@ -721,6 +721,10 @@ input:focus {
 .painel-browser {
     border: 10px solid transparent;
     background: #ffffff3f;
+}
+
+.box-shadow {
+    box-shadow: 2px 3px 14px 5px #00000050;
 }
 
 
