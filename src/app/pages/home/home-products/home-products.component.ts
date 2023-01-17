@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HomeGetResponsetDto } from 'src/app/dtos/home-get-response.dto';
+import { AnnouncementGetResponsetDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
@@ -16,7 +16,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 export class HomeProductsComponent implements OnInit {
   iconlikeheart = false;
 
-  response: HomeGetResponsetDto[] = [];
+  response: AnnouncementGetResponsetDto[] = [];
   user: UserGetResponseDto;
   urlsimg: any = [];
 
@@ -30,6 +30,7 @@ export class HomeProductsComponent implements OnInit {
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
+        console.log(this.response);
       },
       error => { console.log(error, 'data not collected') }
     );

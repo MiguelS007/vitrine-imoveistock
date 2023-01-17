@@ -80,6 +80,7 @@ export class PropertyDetailComponent implements OnInit {
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
   }
+
   segmentvideo(value: string) {
     if (value === 'video') {
       this.segment = !this.segment;

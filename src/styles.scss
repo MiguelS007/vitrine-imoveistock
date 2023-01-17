@@ -425,7 +425,9 @@ input:focus {
 .pt-10 {
     padding-top: 10rem;
 }
-
+.pt-6{
+    padding-top: 6rem;
+}
 .pb-10 {
     padding-bottom: 10rem;
 }
@@ -1061,6 +1063,11 @@ input:focus {
 }
 
 // PROPERTY-DETAILS
+.schedule-visit-modal{
+    bottom: 5%;
+    right: 5%;
+    padding: 1.5rem 2rem;
+}
 .col-btns-preview-img {
     top: -170px;
     background: linear-gradient(0deg, black, transparent);
@@ -1263,6 +1270,9 @@ vg-overlay-play .vg-overlay-play {
         background-size: cover contain;
         height: 64rem;
         max-height: 1969px;
+    }
+    .filter-search{
+        margin-top: 0px !important;
     }
 
     .form-header {
@@ -1522,7 +1532,7 @@ vg-overlay-play .vg-overlay-play {
     }
 
     .form-search {
-        padding-top: 180px !important;
+        padding-top: 53px !important;
     }
 
 

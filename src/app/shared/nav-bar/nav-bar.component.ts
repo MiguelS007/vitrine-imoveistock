@@ -12,18 +12,17 @@ import { DatamokService } from 'src/app/service/datamok.service';
 export class NavBarComponent implements OnInit, AfterViewInit {
   collapsed = false;
   urlParams: any;
-  
   iflogged = false;
   modallogin = false;
   changeSubscription: Subscription;
-  
+
   loggedname = false;
   loggedopt = false;
   loginopt = true;
-  
+
   indicatLogon = false;
   indicatLogoff = true;
-  
+
   brokerLogon = false;
   brokerLogoff = true;
 
@@ -88,7 +87,11 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     this.router.navigate(['auth/login']);
   }
 
-
+  goDeashboard() {
+    console.log(
+      localStorage.getItem('user')
+    );
+  }
   sideBtn() {
     this.collapsed = !this.collapsed;
     this.loggedname = false;

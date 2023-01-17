@@ -1,4 +1,4 @@
-export class HomeGetResponsetDto {
+export class AnnouncementGetResponsetDto {
     complementAddress?: string;
     propertyCharacteristics?: string;
     rooms?: number;
@@ -10,5 +10,4 @@ export class HomeGetResponsetDto {
     ownerName?: string;
     bathrooms?: string;
     propertyType?: string;
-
 }

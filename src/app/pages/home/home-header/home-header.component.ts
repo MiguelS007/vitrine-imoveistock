@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { GetImoveisHomeRequestDto } from 'src/app/dtos/get-imoveis-home-request.dto';
+import { AnnouncementGetResponsetDto } from 'src/app/dtos/announcement-get-response.dto';
 import { SearchService } from 'src/app/service/search.service';
 
 @Component({
@@ -13,17 +13,20 @@ export class HomeHeaderComponent implements OnInit {
   @Input() fieldvalue = '';
   form: FormGroup;
 
-  request: GetImoveisHomeRequestDto[] = [];
+  response: AnnouncementGetResponsetDto[] = [];
 
+  resultsearchfor: any = [];
   collapsed = false;
   typepropertydiv = false;
   typeoffResidential = false;
   typeoffRural = false;
   typeoffCommercial = false;
+  searchresult: any;
   propertyCharacteristicsOptions = false;
   filtersearch = false;
-  searchfilter = '';
-
+  liresultsearch: any = [];
+  searchfilterTypeProperty: string;
+  searchfilterType: string;
   viewvacancies = false;
   viewbathrooms = false;
   viewsuites = false;
@@ -65,60 +68,53 @@ export class HomeHeaderComponent implements OnInit {
   ngOnInit() {
 
   }
-  retornaEstado(value) {
-    if (value.charAt(0) == "f")
-      return value;
+  // make full search
+  confirm() {
+
   }
-
+  // search filter
   resultSearch(event: any) {
-    console.log(event.target.value);
-    if (event.target.value === '') {
-      this.filtersearch = false;
-    } else {
-      this.filtersearch = true;
-    }
-    // this.searchService.getSaearchImoveis().subscribe(
-    //   success => {
-    //     this.request = success;
-    //     let search = data.target.value;
-
-    //     // console.log(this.request[1].propertyType.indexOf(search) !== -1);
-    //     // var theString = "I have been looking for Sam.";
-    //     // var theWord = "looking";
-    //     // var theCharacter = "I";
-    //     // var theSubstring = "for Sam";
 
 
-    //     // // Output — The word "looking" exists in given string.
-    //     // if (theString.indexOf(theWord) !== -1) {
-    //     //   console.log('The word "' + theWord + '" exists in given string.');
-    //     // }
+    this.searchService.searchLocalHome().subscribe(
+      success => {
+        this.response = success;
+        console.log(event.target.value);
+        // let searchLeatter = event.target.value;
+        // if (event.target.value === '') {
+        //   this.filtersearch = false;
+        // } else {
+        //   this.filtersearch = true;
+        // }
+        // for (let i = 0; i < this.response.length; i++) {
+        //   this.searchresult = this.response[i].city;
 
-    //     // // Output — The character "I" exists in given string.
-    //     // if (theString.indexOf(theCharacter) !== -1) {
-    //     //   console.log('The character "' + theCharacter + '" exists in given string.');
-    //     // }
+        //   console.log(this.searchresult.charAt(), 'casa')
+        // }
 
-    //     // // Output — The substring "for Sam" exists in given string.
-    //     // if (theString.indexOf(theSubstring) !== -1) {
-    //     //   console.log('The substring "' + theSubstring + '" exists in given string.');
-    //     // }
 
-    //     let searchvalue;
-    //     console.log(this.request[1].propertyCharacteristics)
-    //     for (let i = 0; i < this.request.length; i++) { 
-    //       console.log(this.request[i].propertyCharacteristics)
-    //       // searchvalue = this.request[i].propertyType
+        // var input, filter, ul, a, i, txtValue;
+        // input = document.getElementById("searchresult");
+        // filter = input.value.toUpperCase();
+        // ul = document.getElementById("bodyresponseresultfilter");
+        // const liFilter = ul.document.getElementsByTagName(
+        //   'li'
+        // ) as HTMLCollectionOf<HTMLLIElement>;
+        // console.log(liFilter, 'kgiugigu')
 
-    //       //   if (this.request[i].propertyType) {
-    //       //     searchvalue.push({ loft: this.request[i].propertyType });
-    //       //     console.log();
-    //       //   }
-    //     }
-    //     // this.resultType = searchvalue.length;
-    //   },
-    //   error => { console.log(error, 'o erro') }
-    // );
+        // for (i = 0; i < liFilter.length; i++) {
+        //   a = liFilter[i].getElementsByTagName('a')[0];
+        //   txtValue = a.textContent || a.innerText;
+        //   if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        //     liFilter[i].style.display = "";
+        //   } else {
+        //     liFilter[i].style.display = "none";
+        //   }
+        // }
+        console.log()
+      },
+      error => { console.log(error, 'o erro') }
+    );
   }
 
   buyOption(value: string) {
@@ -128,25 +124,51 @@ export class HomeHeaderComponent implements OnInit {
       this.collapsed = true;
     }
   }
+
+  typePropertyStep1(value: string) {
+    if (value === 'residential') {
+      this.searchfilterTypeProperty = 'residential';
+    } else if (value === 'rural') {
+      this.searchfilterTypeProperty = 'rural';
+    } else if (value === 'comercial') {
+      this.searchfilterTypeProperty = 'comercial';
+    }
+    this.typepropertydiv = !this.typepropertydiv;
+  }
+
+
+
+  typeProperty(value: string) {
+    this.searchfilterType = value
+    this.typeoffResidential = false;
+    this.typeoffRural = false;
+    this.typeoffCommercial = false;
+
+  }
+
+
   typePropertyOptions(value: string) {
     if (value === 'typeproperty') {
       this.typepropertydiv = !this.typepropertydiv;
-    } else if (value === 'typeoffResidential') {
+      this.typeoffResidential = false;
+      this.typeoffRural = false;
+      this.typeoffCommercial = false;
+
+    } else if (value === 'residential') {
       this.typeoffResidential = !this.typeoffResidential;
-    } else if (value === 'typeoffRural') {
+    } else if (value === 'rural') {
       this.typeoffRural = !this.typeoffRural;
-    } else if (value === 'typeoffCommercial') {
+    } else if (value === 'comercial') {
       this.typeoffCommercial = !this.typeoffCommercial;
     }
   }
 
 
-  addItem(value: string) {
 
-    if (value === 'residential') {
-
-    }
-  }
+  // addItem(value: string) {
+  //   if (value === 'residential') {
+  //   }
+  // }
 
 
 
@@ -191,5 +213,7 @@ export class HomeHeaderComponent implements OnInit {
     divviewoptions.style.display = 'none'
     this.hideviewoptions = false;
   }
+
+
 }
 
