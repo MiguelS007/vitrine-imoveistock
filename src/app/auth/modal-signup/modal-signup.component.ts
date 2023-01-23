@@ -64,7 +64,7 @@ export class ModalSignupComponent implements OnInit {
     this.userService.register(this.request).subscribe(
       async success => {
         // this.registerSuccess()
-        this.router.navigate(['home'])
+        this.router.navigate(['/'])
       },
       async error => {
         // this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });

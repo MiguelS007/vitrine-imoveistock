@@ -67,12 +67,15 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchService.searchLocalHome().subscribe(
-      success => {
-        this.response = success;
-      },
-      error => { console.log(error, 'o erro') }
-    );
+    let user = JSON.parse(localStorage.getItem('userDto'))
+    if(user !== null) {
+      this.searchService.searchLocalHome().subscribe(
+        success => {
+          this.response = success;
+        },
+        error => { console.log(error, 'o erro') }
+      );
+    }
   }
   // make full search
   confirm() {
