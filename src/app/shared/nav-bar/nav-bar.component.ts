@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { ModalLoginComponent } from '../../auth/modal-login/modal-login.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -29,11 +31,14 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   user: UserGetResponseDto;
 
 
+  home: boolean = true;
+  about: boolean = false;
 
 
   constructor(
     public router: Router,
     private datamokservice: DatamokService,
+    private modalService: NgbModal
 
   ) {
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
@@ -48,6 +53,14 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userDto'));
+
+    if(window.location.pathname === '/') {
+      this.home = true;
+      this.about = false
+    } else if (window.location.pathname === '/about') {
+      this.home = false;
+      this.about = true
+    }
 
     if (this.user !== null) {
       this.loggedname = true;
@@ -67,20 +80,16 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  handlerLoggedBackground(url: string): string {
-    if (url === '/')
-      return 'bg-transpatent';
-    return 'bg-white';
-  }
-  handlerLoggedLinks(url: string): string {
-    if (url === '/')
-      return 'text-light';
-    return 'color-black';
-  }
-  handlerLoggedLogo(url: string): string {
-    if (url === '/')
-      return '../../../assets/img/title-logo.png';
-    return '../../../assets/img/logo-title-black.png';
+  changePage(value) {
+    if(value === 'home') {
+      this.home = true;
+      this.about = false;
+      this.router.navigate(['/']);
+    } else if (value === 'about') {
+      this.home = false;
+      this.about = true;
+      this.router.navigate(['/about']);
+    }
   }
 
   logOut() {
@@ -99,6 +108,10 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     this.loggedopt = false;
     this.loginopt = true;
 
+  }
+
+  openLogin() {
+    this.modalService.open(ModalLoginComponent, {centered: true})
   }
 
 

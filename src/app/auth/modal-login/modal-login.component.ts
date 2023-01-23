@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticateRequestDto } from 'src/app/dtos/authenticate-request.dto';
 // import { ToastrService } from 'ngx-toastr';
 import { DatamokService } from 'src/app/service/datamok.service';
@@ -26,6 +27,7 @@ export class ModalLoginComponent implements OnInit {
     // private toastrService: ToastrService,
     // private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
+    private modalService: NgbModal
   ) {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -66,6 +68,10 @@ export class ModalLoginComponent implements OnInit {
       return;
     else
       element.focus();
+  }
+
+  exit() {
+    this.modalService.dismissAll()
   }
 
 }

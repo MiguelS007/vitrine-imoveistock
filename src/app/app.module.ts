@@ -26,6 +26,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     HttpClientModule,
     BrowserModule,
+    NgbModule,
     AppRoutingModule,
     FormsModule,
     SwiperModule,
