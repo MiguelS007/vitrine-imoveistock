@@ -19,17 +19,17 @@ export class SearchService extends BaseService {
   }
   getSearch(): Observable<any> {
     return this.httpClient
-      .get(`${this.url}/profile`, this.anonymousHeader())
+      .get(`${this.url}profile`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
   getPropertyHome(): Observable<AnnouncementGetResponsetDto[]> {
     return this.httpClient
-      .get(`${this.url}/announcement`, this.authorizedHeader())
+      .get(`${this.url}announcement`, this.authorizedHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
   searchLocalHome(): Observable<AnnouncementGetResponsetDto[]> {
     return this.httpClient
-      .get(`${this.url}/announcement`, this.authorizedHeader())
+      .get(`${this.url}announcement`, this.authorizedHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
 

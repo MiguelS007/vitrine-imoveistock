@@ -48,6 +48,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userDto'));
+    console.log(this.user.name , 'the user');
     if (this.user.name != null) {
       this.loggedname = true;
       this.loggedopt = true;

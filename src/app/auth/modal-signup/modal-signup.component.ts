@@ -31,7 +31,7 @@ export class ModalSignupComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required]],
       cpf: ['', [Validators.required]],
-      termsAndPolicy: [false, [Validators.required]]
+      termsAndPolicy: [false, [Validators.requiredTrue]]
     })
   }
 
@@ -54,17 +54,19 @@ export class ModalSignupComponent implements OnInit {
     var cpf = `${this.form.controls['cpf'].value[0]}${this.form.controls['cpf'].value[1]}${this.form.controls['cpf'].value[2]}.${this.form.controls['cpf'].value[3]}${this.form.controls['cpf'].value[4]}${this.form.controls['cpf'].value[5]}.${this.form.controls['cpf'].value[6]}${this.form.controls['cpf'].value[7]}${this.form.controls['cpf'].value[8]}-${this.form.controls['cpf'].value[9]}${this.form.controls['cpf'].value[10]}`
 
     this.request = {
-      phone: `+55${this.form.controls['phone'].value}`,
+      phone:  `55${this.form.controls['phone'].value}`.replace(/\D/g, ''),
       email: this.form.controls['email'].value,
       cpf: cpf,
       name: this.form.controls['name'].value,
       profileId:  this.response
     }
+    console.log(this.request.phone);
+
 
     this.userService.register(this.request).subscribe(
       async success => {
-        // this.registerSuccess()
-        this.router.navigate(['home'])
+        this.registerSuccess()
+        this.router.navigate(['/insert-code'])
       },
       async error => {
         // this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });
@@ -75,11 +77,11 @@ export class ModalSignupComponent implements OnInit {
     )
   }
 
-  // registerSuccess() {
-  //   this.toastrService.success('Usuario cadastrado com sucesso', '', { progressBar: true })
-  //   this.router.navigate(['home'])
-  //   console.log( this.response,'pqp deu bom')
-  // }
+  registerSuccess() {
+    // this.toastrService.success('Usuario cadastrado com sucesso', '', { progressBar: true })
+    this.router.navigate(['home'])
+    console.log( this.response,'pqp deu bom')
+  }
 
 
 }

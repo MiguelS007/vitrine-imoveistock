@@ -10,14 +10,13 @@ import { AuthenticateResponseDto } from '../dtos/authenticate-response.dto';
 import { AuthetincatedUserDto } from '../dtos/authenticated-user.dto';
 import LocalStorageUtil, { LocalStorageKeys } from "../utils/localStorage.util";
 import jwtDecode from 'jwt-decode';
-import { AuthenticateCodeConfirmationRequestDto } from '../dtos/authentication-code-confirmation.dtos';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService extends BaseService {
 
-  url: string = `${environment.apis.imoveistock}/authentication`;
+  url: string = `${environment.apis.imoveistock}authentication`;
 
   token = {
     userId: '',
@@ -45,17 +44,6 @@ export class AuthenticationService extends BaseService {
         catchError(this.serviceError)
       );
   }
-  authenticateCodeConfirmation(dto: AuthenticateCodeConfirmationRequestDto): Observable<AuthetincatedUserDto> {
-    return this.httpClient
-      .post(`${this.url}/authenticate-code-confirmation`, dto, this.anonymousHeader())
-      .pipe(
-        map(this.extractData),
-        catchError(this.serviceError)
-      );
-  }
-
-
-
   getPayLoadFromLocalStorage(): JwtPayload {
     const token = this.getAuthenticatedUser();
     return jwtDecode(token.token);
