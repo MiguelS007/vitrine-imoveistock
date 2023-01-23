@@ -10,10 +10,6 @@ import { ModalLoginComponent } from './auth/modal-login/modal-login.component';
 export const routes: Routes = [
 
   { path: '', 
-    component: ModalLoginComponent 
-  },
-  { 
-    path: 'home',
     component: HomeComponent 
   },
   {

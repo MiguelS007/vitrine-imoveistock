@@ -20,6 +20,8 @@ export class HomeProductsComponent implements OnInit {
   user: UserGetResponseDto;
   urlsimg: any = [];
 
+  logged: boolean;
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -27,13 +29,19 @@ export class HomeProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.searchService.getPropertyHome().subscribe(
-      success => {
-        this.response = success;
-        console.log(this.response);
-      },
-      error => { console.log(error, 'data not collected') }
-    );
+    let user = JSON.parse(localStorage.getItem('userDto'))
+    if (user !== null) {
+      this.logged = true;
+      this.searchService.getPropertyHome().subscribe(
+        success => {
+          this.response = success;
+          console.log(this.response);
+        },
+        error => { console.log(error, 'data not collected') }
+      );
+    } else {
+      this.logged = false;
+    }
   }
 
 
