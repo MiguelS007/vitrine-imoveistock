@@ -25,6 +25,7 @@
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.10.2",
     "crypto-js": "^4.1.1",
+    "force": "^0.0.3",
     "jwt-decode": "^3.1.2",
     "jwt-payload": "^1.0.7",
     "ngx-mask": "^14.2.4",
@@ -32,6 +33,7 @@
     "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~7.5.0",
+    "spinners-angular": "^0.0.5",
     "swiper": "^8.4.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

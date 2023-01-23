@@ -6,6 +6,7 @@
 @import 'swiper/scss/pagination';
 
 
+
 @import '../node_modules/@videogular/ngx-videogular/fonts/videogular.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;900&display=swap');
@@ -57,6 +58,50 @@ input:focus {
 }
 
 // GLOBAL
+// spinner
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #01FF5F;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #01FF5F transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 .swiper-horizontal>.swiper-pagination-bullets,
 .swiper-pagination-bullets.swiper-pagination-horizontal {
     top: 80%;
@@ -426,6 +471,10 @@ input:focus {
     padding-top: 10rem;
 }
 
+.pt-6 {
+    padding-top: 6rem;
+}
+
 .pb-10 {
     padding-bottom: 10rem;
 }
@@ -668,7 +717,7 @@ input:focus {
 }
 
 .border-none {
-    border: 0px;
+    border: 0px !important;
 }
 
 // NAV-BAR
@@ -721,6 +770,10 @@ input:focus {
 .painel-browser {
     border: 10px solid transparent;
     background: #ffffff3f;
+}
+
+.box-shadow {
+    box-shadow: 2px 3px 14px 5px #00000050;
 }
 
 
@@ -1057,6 +1110,12 @@ input:focus {
 }
 
 // PROPERTY-DETAILS
+.schedule-visit-modal {
+    bottom: 5%;
+    right: 5%;
+    padding: 1.5rem 2rem;
+}
+
 .col-btns-preview-img {
     top: -170px;
     background: linear-gradient(0deg, black, transparent);
@@ -1259,6 +1318,10 @@ vg-overlay-play .vg-overlay-play {
         background-size: cover contain;
         height: 64rem;
         max-height: 1969px;
+    }
+
+    .filter-search {
+        margin-top: 0px !important;
     }
 
     .form-header {
@@ -1518,7 +1581,7 @@ vg-overlay-play .vg-overlay-play {
     }
 
     .form-search {
-        padding-top: 180px !important;
+        padding-top: 53px !important;
     }
 
 

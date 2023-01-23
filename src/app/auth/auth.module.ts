@@ -12,7 +12,7 @@ import { ModalTelComponent } from "./modal-tel/modal-tel.component";
 import { AuthenticationService } from "../service/authentication.service";
 import { ProfileService } from "../service/profile.service";
 import { UserService } from "../service/user.service";
-// import { ToastrModule } from "ngx-toastr";
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
     declarations: [
@@ -23,13 +23,13 @@ import { UserService } from "../service/user.service";
         ModalLoginComponent
     ],
     imports: [
-        HttpClientModule,
         CommonModule,
+        HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
         NgxMaskModule.forRoot(),
         AuthRouterModule,
-        // ToastrModule.forRoot()
+        ToastrModule.forRoot(),
     ],
     providers: [
         AuthenticationService,

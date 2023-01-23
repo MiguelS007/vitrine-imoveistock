@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HomeGetResponsetDto } from 'src/app/dtos/home-get-response.dto';
+import { AnnouncementGetResponsetDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { SearchService } from 'src/app/service/search.service';
@@ -27,7 +27,7 @@ export class SearchPageComponent implements OnInit {
   countLoft: number;
   countKitnet: number;
 
-  response: HomeGetResponsetDto[] = [];
+  response: AnnouncementGetResponsetDto[] = [];
   user: UserGetResponseDto;
   urlsimg: any = [];
 

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { GetImoveisHomeRequestDto } from 'src/app/dtos/get-imoveis-home-request.dto';
+import { AnnouncementGetResponsetDto } from 'src/app/dtos/announcement-get-response.dto';
 import { SearchService } from 'src/app/service/search.service';
 
 @Component({
@@ -10,18 +10,24 @@ import { SearchService } from 'src/app/service/search.service';
   styleUrls: ['./home-header.component.scss']
 })
 export class HomeHeaderComponent implements OnInit {
-
+  @Input() fieldvalue = '';
   form: FormGroup;
 
-  request: GetImoveisHomeRequestDto[] = [];
+  response: AnnouncementGetResponsetDto[] = [];
+  filterResponse: AnnouncementGetResponsetDto[] = [];
 
+  resultsearchfor: any = [];
   collapsed = false;
   typepropertydiv = false;
   typeoffResidential = false;
   typeoffRural = false;
   typeoffCommercial = false;
+  searchresult: any;
   propertyCharacteristicsOptions = false;
-
+  filtersearch = false;
+  liresultsearch: any = [];
+  searchfilterTypeProperty: string;
+  searchfilterType: string;
   viewvacancies = false;
   viewbathrooms = false;
   viewsuites = false;
@@ -61,56 +67,25 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-
-  }
-  retornaEstado(value) {
-    if (value.charAt(0) == "f")
-      return value;
-  }
-  searchKeyUp(value) {
-    this.searchService.getSaearchImoveis().subscribe(
+    this.searchService.searchLocalHome().subscribe(
       success => {
-        this.request = success;
-        let search = value.target.value;
-
-        // console.log(this.request[1].propertyType.indexOf(search) !== -1);
-        // var theString = "I have been looking for Sam.";
-        // var theWord = "looking";
-        // var theCharacter = "I";
-        // var theSubstring = "for Sam";
-
-
-        // // Output — The word "looking" exists in given string.
-        // if (theString.indexOf(theWord) !== -1) {
-        //   console.log('The word "' + theWord + '" exists in given string.');
-        // }
-
-        // // Output — The character "I" exists in given string.
-        // if (theString.indexOf(theCharacter) !== -1) {
-        //   console.log('The character "' + theCharacter + '" exists in given string.');
-        // }
-
-        // // Output — The substring "for Sam" exists in given string.
-        // if (theString.indexOf(theSubstring) !== -1) {
-        //   console.log('The substring "' + theSubstring + '" exists in given string.');
-        // }
-
-        let searchvalue;
-        console.log(this.request[1].propertyCharacteristics)
-        for (let i = 0; i < this.request.length; i++) { 
-          console.log(this.request[i].propertyCharacteristics)
-          // searchvalue = this.request[i].propertyType
-
-          //   if (this.request[i].propertyType) {
-          //     searchvalue.push({ loft: this.request[i].propertyType });
-          //     console.log();
-          //   }
-        }
-        // this.resultType = searchvalue.length;
+        this.response = success;
       },
       error => { console.log(error, 'o erro') }
     );
   }
+  // make full search
+  confirm() {
+
+  }
+  // search filter
+  resultSearch(tableName: string) {
+    if(tableName.length > 0) this.filtersearch = true
+    else this.filtersearch = false
+    this.filterResponse = this.response.filter(el => el.city.toLowerCase().includes(tableName.toLowerCase()))
+    console.log(this.filterResponse);
+  }
+
 
   buyOption(value: string) {
     if (value === 'buy') {
@@ -119,25 +94,51 @@ export class HomeHeaderComponent implements OnInit {
       this.collapsed = true;
     }
   }
+
+  typePropertyStep1(value: string) {
+    if (value === 'residential') {
+      this.searchfilterTypeProperty = 'residential';
+    } else if (value === 'rural') {
+      this.searchfilterTypeProperty = 'rural';
+    } else if (value === 'comercial') {
+      this.searchfilterTypeProperty = 'comercial';
+    }
+    this.typepropertydiv = !this.typepropertydiv;
+  }
+
+
+
+  typeProperty(value: string) {
+    this.searchfilterType = value
+    this.typeoffResidential = false;
+    this.typeoffRural = false;
+    this.typeoffCommercial = false;
+
+  }
+
+
   typePropertyOptions(value: string) {
     if (value === 'typeproperty') {
       this.typepropertydiv = !this.typepropertydiv;
-    } else if (value === 'typeoffResidential') {
+      this.typeoffResidential = false;
+      this.typeoffRural = false;
+      this.typeoffCommercial = false;
+
+    } else if (value === 'residential') {
       this.typeoffResidential = !this.typeoffResidential;
-    } else if (value === 'typeoffRural') {
+    } else if (value === 'rural') {
       this.typeoffRural = !this.typeoffRural;
-    } else if (value === 'typeoffCommercial') {
+    } else if (value === 'comercial') {
       this.typeoffCommercial = !this.typeoffCommercial;
     }
   }
 
 
-  addItem(value: string) {
 
-    if (value === 'residential') {
-
-    }
-  }
+  // addItem(value: string) {
+  //   if (value === 'residential') {
+  //   }
+  // }
 
 
 
@@ -182,5 +183,7 @@ export class HomeHeaderComponent implements OnInit {
     divviewoptions.style.display = 'none'
     this.hideviewoptions = false;
   }
+
+
 }
 
