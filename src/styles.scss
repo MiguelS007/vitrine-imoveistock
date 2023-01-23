@@ -758,8 +758,9 @@ input:focus {
     background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
     background-position: center top;
     background-repeat: no-repeat no-repeat;
-    background-size: cover contain;
+    background-size: cover;
     height: 64rem;
+    width: 100% !important;
     max-height: 1969px;
 }
 
@@ -1299,13 +1300,13 @@ vg-overlay-play .vg-overlay-play {
 
 
 
+.logo-navbar-desktop {
+    height: 100px !important;
+}
 
-
-
-
-
-
-
+.logo-navbar-mobile {
+    display: none !important;
+}
 
 // MEDIA
 @media (max-width: 1240px) {
@@ -1316,7 +1317,8 @@ vg-overlay-play .vg-overlay-play {
         background-position: center top;
         background-repeat: no-repeat no-repeat;
         background-size: cover contain;
-        height: 64rem;
+        height: 100vh !important;
+        width: 100% !important;
         max-height: 1969px;
     }
 
@@ -1611,5 +1613,15 @@ vg-overlay-play .vg-overlay-play {
 
     .col-cards-products {
         text-align: center;
+    }
+}
+
+@media (max-width: 540px) {
+    .logo-navbar-desktop {
+       display: none !important; 
+    }
+    .logo-navbar-mobile {
+        display: flex !important;
+        height: 100px !important;
     }
 }

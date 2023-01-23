@@ -48,7 +48,8 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userDto'));
-    if (this.user.name != null) {
+
+    if (this.user !== null) {
       this.loggedname = true;
       this.loggedopt = true;
       this.loginopt = false;
@@ -67,17 +68,17 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   handlerLoggedBackground(url: string): string {
-    if (url === '/home')
+    if (url === '/')
       return 'bg-transpatent';
     return 'bg-white';
   }
   handlerLoggedLinks(url: string): string {
-    if (url === '/home')
+    if (url === '/')
       return 'text-light';
     return 'color-black';
   }
   handlerLoggedLogo(url: string): string {
-    if (url === '/home')
+    if (url === '/')
       return '../../../assets/img/title-logo.png';
     return '../../../assets/img/logo-title-black.png';
   }

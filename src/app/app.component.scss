@@ -1,0 +1,13 @@
+app-nav-bar {
+    position: fixed !important;
+    top: 0px !important;
+    left: 0px !important;
+    right: 0px !important;
+    z-index: 99999 !important;
+}
+
+@media (max-width: 992px) {
+    app-nav-bar {
+        backdrop-filter: blur(5px) !important;
+    }
+}
