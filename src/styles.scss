@@ -32,6 +32,12 @@
     background: #01FF5F !important;
 }
 
+.changeColorNavbar {
+    app-nav-bar {
+        background-color: rgba(0, 0, 0, 0.377) !important;
+    }
+}
+
 a {
     text-decoration: none !important;
 }
