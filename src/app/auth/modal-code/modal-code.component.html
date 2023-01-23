@@ -39,13 +39,20 @@
       text-center">
          Se você não recebeu a mensagem, verifique <br /> se ela não caiu no spam do seu celular
       </p>
-      <button type="sumbit" [disabled]="form.invalid" (click)="confirm()" class="btn pb-2 mt-3
+      <button type="sumbit" *ngIf="continued" [disabled]="form.invalid" (click)="confirm()" class="btn pb-2 mt-3
  bg-purple fw-700
  font-size-18 line-24
  text-light
  border-radius-10
  h-74
- w-100">Continuar
+ w-100"> Confirmar
+        
       </button>
+      <div *ngIf="spinnerload" class="lds-ring">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+      </div>
    </div>
 </form>

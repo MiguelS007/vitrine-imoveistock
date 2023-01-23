@@ -25,7 +25,7 @@ import { PropertyDetailComponent } from './pages/property-detail/property-detail
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
-// import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import { HttpClientModule } from '@angular/common/http';
     NgxMaskModule.forRoot(),
     VgBufferingModule,
     NgxPageScrollCoreModule,
-    // ToastrModule.forRoot(),
+    ToastrModule.forRoot(),
   ],
   providers: [
     {

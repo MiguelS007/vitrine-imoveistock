@@ -14,6 +14,7 @@ export class HomeHeaderComponent implements OnInit {
   form: FormGroup;
 
   response: AnnouncementGetResponsetDto[] = [];
+  filterResponse: AnnouncementGetResponsetDto[] = [];
 
   resultsearchfor: any = [];
   collapsed = false;
@@ -66,56 +67,25 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.searchService.searchLocalHome().subscribe(
+      success => {
+        this.response = success;
+      },
+      error => { console.log(error, 'o erro') }
+    );
   }
   // make full search
   confirm() {
 
   }
   // search filter
-  resultSearch(event: any) {
-
-
-    this.searchService.searchLocalHome().subscribe(
-      success => {
-        this.response = success;
-        console.log(event.target.value);
-        // let searchLeatter = event.target.value;
-        // if (event.target.value === '') {
-        //   this.filtersearch = false;
-        // } else {
-        //   this.filtersearch = true;
-        // }
-        // for (let i = 0; i < this.response.length; i++) {
-        //   this.searchresult = this.response[i].city;
-
-        //   console.log(this.searchresult.charAt(), 'casa')
-        // }
-
-
-        // var input, filter, ul, a, i, txtValue;
-        // input = document.getElementById("searchresult");
-        // filter = input.value.toUpperCase();
-        // ul = document.getElementById("bodyresponseresultfilter");
-        // const liFilter = ul.document.getElementsByTagName(
-        //   'li'
-        // ) as HTMLCollectionOf<HTMLLIElement>;
-        // console.log(liFilter, 'kgiugigu')
-
-        // for (i = 0; i < liFilter.length; i++) {
-        //   a = liFilter[i].getElementsByTagName('a')[0];
-        //   txtValue = a.textContent || a.innerText;
-        //   if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        //     liFilter[i].style.display = "";
-        //   } else {
-        //     liFilter[i].style.display = "none";
-        //   }
-        // }
-        console.log()
-      },
-      error => { console.log(error, 'o erro') }
-    );
+  resultSearch(tableName: string) {
+    if(tableName.length > 0) this.filtersearch = true
+    else this.filtersearch = false
+    this.filterResponse = this.response.filter(el => el.city.toLowerCase().includes(tableName.toLowerCase()))
+    console.log(this.filterResponse);
   }
+
 
   buyOption(value: string) {
     if (value === 'buy') {
