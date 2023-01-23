@@ -50,7 +50,7 @@ export class ModalCodeComponent implements OnInit {
       this.notsendcodemsg = false;
     }
   }
-  // async confirm() {
+  async confirm() {
   //   this.spinnerload = true;
   //   this.continued = false;
   //   this.request = {
@@ -83,8 +83,8 @@ export class ModalCodeComponent implements OnInit {
   //       this.form.setValue(this.form.controls['code1'].value = ''});
   //     }
   //   )
-  // }
-  // onDigitInput(event: any) {
+  }
+  onDigitInput(event: any) {
   //   let element;
   //   if (event.code !== 'Backspace')
   //     element = event.srcElement.nextElementSibling;
@@ -96,6 +96,6 @@ export class ModalCodeComponent implements OnInit {
   //     return;
   //   else
   //     element.focus();
-  // }
+  }
 
 }
