@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
 import { Component,  Inject, OnInit, Renderer2 } from '@angular/core';
-import { PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +17,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private pageScrollService: PageScrollService,
     @Inject(DOCUMENT) private document: any,) {}
 
   ngOnInit(): void {
