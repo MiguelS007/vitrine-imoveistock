@@ -19,6 +19,15 @@
     font-family: 'Nunito', sans-serif !important;
 }
 
+
+.modal-backdrop {
+    display: none;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.5);
+}
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -765,9 +774,8 @@ input:focus {
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
-    height: 64rem;
+    height: fit-content;
     width: 100% !important;
-    max-height: 1969px;
 }
 
 .title-header {
@@ -1182,7 +1190,7 @@ vg-overlay-play .vg-overlay-play {
 .modal-content {
     border-radius: 1rem !important;
     max-height: 550px;
-    overflow-y: scroll;
+    overflow-y: none !important;
 }
 
 .label-search-local-detail-property {
@@ -1276,7 +1284,18 @@ vg-overlay-play .vg-overlay-play {
     background-image: url(./assets/img/gradient.png), url(./assets/img/office.png);
     background-position: center center;
     background-repeat: no-repeat no-repeat;
-    background-size: cover cover;
+    background-size: cover !important;
+    width: 100% !important;
+}
+
+.bg-header-about-custom {
+    position: absolute !important;
+    background-image: url(./assets/img/gradient.png), url(./assets/img/office.png);
+    background-position: center center;
+    background-repeat: no-repeat no-repeat;
+    background-size: cover !important;
+    width: 100% !important;
+    min-height: 45vh !important;
 }
 
 //  FOOTER
@@ -1314,6 +1333,16 @@ vg-overlay-play .vg-overlay-play {
     display: none !important;
 }
 
+.item-navbar-disabled {
+    color: white !important;
+    cursor: pointer !important;
+}
+
+.item-navbar-selected {
+    color: white !important;
+    border-bottom: 2px solid #01FF5F !important;
+}
+
 // MEDIA
 @media (max-width: 1240px) {
 
@@ -1323,7 +1352,7 @@ vg-overlay-play .vg-overlay-play {
         background-position: center top;
         background-repeat: no-repeat no-repeat;
         background-size: cover contain;
-        height: 100vh !important;
+        height: fit-content !important;
         width: 100% !important;
         max-height: 1969px;
     }
@@ -1624,8 +1653,9 @@ vg-overlay-play .vg-overlay-play {
 
 @media (max-width: 540px) {
     .logo-navbar-desktop {
-       display: none !important; 
+        display: none !important;
     }
+
     .logo-navbar-mobile {
         display: flex !important;
         height: 100px !important;

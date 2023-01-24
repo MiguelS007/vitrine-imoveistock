@@ -5,6 +5,12 @@ import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/fo
 import { SwiperModule } from 'swiper/angular';
 import { NgxMaskModule } from "ngx-mask";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
@@ -23,10 +29,7 @@ import { VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { PropertyDetailComponent } from './pages/property-detail/property-detail.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { HttpClientModule } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
-import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +52,7 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     RouterModule,
     BrowserAnimationsModule,
+    NgbModule,
     AppRoutingModule,
     FormsModule,
     SwiperModule,
@@ -60,6 +64,7 @@ import { RouterModule } from '@angular/router';
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
+    NgxPageScrollModule,
     NgxMaskModule.forRoot(),
     VgBufferingModule,
     ToastrModule.forRoot(),
