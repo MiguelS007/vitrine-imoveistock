@@ -70,29 +70,27 @@
 <nav class="navbar navbar-expand-lg navbar-light container navbar-custom">
   <img src="../../../assets/logo/logo-vitrine.svg" class="logo-navbar-desktop">
   <img src="../../../assets/logo/logo-mobile.svg" class="logo-navbar-mobile">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav flex-fill justify-content-end">
       <li class="nav-item">
-        <a [class]="handlerLoggedLinks(router.url)" class="nav-link  px-3 fw-400 font-size-14 line-20"
-          [routerLink]="['/']" [routerLinkActive]="['link-active']">Home</a>
+        <a (click)="changePage('home')" [class]="home ? 'item-navbar-selected' : 'item-navbar-disabled'"
+          class="nav-link px-3 fw-400 font-size-14 line-20" [routerLink]="['/']">Home</a>
       </li>
       <li class="nav-item">
-        <a [class]="handlerLoggedLinks(router.url)" class="nav-link  px-3 fw-400 font-size-14 line-20"
-          [routerLink]="['/about']" [routerLinkActive]="['link-active']">Sobre</a>
+        <a (click)="changePage('about')" [class]="about ? 'item-navbar-selected' : 'item-navbar-disabled'"
+          class="nav-link  px-3 fw-400 font-size-14 line-20">Sobre</a>
       </li>
       <li class="nav-item dropdown">
-        <a *ngIf="indicatLogon" href="dashboard-indicação" [class]="handlerLoggedLinks(router.url)"
-          class="nav-link  px-3 fw-400 font-size-14 line-20">Indicar imóveis</a>
-        <a *ngIf="indicatLogoff" [routerLink]="['auth/login']" [class]="handlerLoggedLinks(router.url)"
-          class="nav-link  px-3 fw-400 font-size-14 line-20">Indicar imóveis</a>
+        <a (click)="changePage('indicateProperties')" class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Indicar imóveis</a>
       </li>
       <li class="dropdown cursor-pointer nav-item">
-        <a [class]="handlerLoggedLinks(router.url)" class="nav-link px-3 fw-400 font-size-14 line-20 dropdown-toggle"
-          role="button" id="dropproperty" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link px-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled" role="button"
+          id="dropproperty" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Para Proprietários
         </a>
         <div class="dropdown-menu box-shadow border-none border-radius-10" aria-labelledby="dropdownMenuLink">
@@ -102,21 +100,22 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a *ngIf="brokerLogon" href="dashboard-corretores" [class]="handlerLoggedLinks(router.url)"
-          class="nav-link  px-3 fw-400 font-size-14 line-20">Para Corretores.</a>
-        <a *ngIf="brokerLogoff" [routerLink]="['auth/login']" [class]="handlerLoggedLinks(router.url)"
-          class="nav-link  px-3 fw-400 font-size-14 line-20">Para Corretores</a>
+        <a *ngIf="brokerLogon" href="dashboard-corretores"
+          class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores.</a>
+        <a *ngIf="brokerLogoff" [routerLink]="['auth/login']"
+          class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores</a>
       </li>
       <li class="nav-item">
-        <a [class]="handlerLoggedLinks(router.url)" class="nav-link  px-3 fw-400 font-size-14 line-20"
-          [routerLink]="['/contact']" [routerLinkActive]="['link-active']">Contato</a>
+        <a class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled" [routerLink]="['/contact']"
+          [routerLinkActive]="['link-active']">Contato</a>
       </li>
       <li class="nav-item dropdown">
-        <a *ngIf="loginopt" [routerLink]="['auth/login']" [class]="handlerLoggedLinks(router.url)"
-          [routerLinkActive]="['link-active']" class="nav-link  px-3 fw-400 font-size-14 line-20">Login</a>
-        <a *ngIf="loggedname" [class]="handlerLoggedLinks(router.url)"
-          class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle" id="droplogin" role="button"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a *ngIf="loginopt" (click)="openLogin()" [routerLinkActive]="['link-active']"
+          class="nav-link px-3 fw-400 font-size-14 line-20 item-navbar-disabled">
+          Login
+        </a>
+        <a *ngIf="loggedname" class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle" id="droplogin"
+          role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="bi font-size-20 bi-person"></i> {{user?.name | slice:0:6}}... <img
             src="../../../assets/icon/arrow-down.png" />
         </a>
