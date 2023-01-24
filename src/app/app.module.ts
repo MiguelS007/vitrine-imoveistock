@@ -8,7 +8,6 @@ import { NgxMaskModule } from "ngx-mask";
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { HomeComponent } from './pages/home/home.component';
 import { HomeProductsComponent } from './pages/home/home-products/home-products.component';
 import { HomeGalleryComponent } from './pages/home/home-gallery/home-gallery.component';
@@ -27,6 +26,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 
 @NgModule({
   declarations: [
@@ -60,8 +61,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     VgOverlayPlayModule,
     NgxMaskModule.forRoot(),
     VgBufferingModule,
-    NgxPageScrollCoreModule,
+    NgxPageScrollModule,
     ToastrModule.forRoot(),
+    NgxPageScrollCoreModule
   ],
   providers: [
     {
