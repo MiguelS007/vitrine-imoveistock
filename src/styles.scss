@@ -1274,7 +1274,7 @@ vg-overlay-play .vg-overlay-play {
 // CONTACT
 .bg-header-contact {
     background-image: url(./assets/img/black-woman.png);
-    background-position: center ;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 50vh !important;
@@ -1535,6 +1535,11 @@ vg-overlay-play .vg-overlay-play {
     // NAV-BAR
     #navbarSupportedContent {
         backdrop-filter: blur(55px);
+    }
+
+    // PROPERTY-DETAILS
+    .spc-btns-property {
+        display: block !important;
     }
 
 }
