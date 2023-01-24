@@ -77,8 +77,6 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
       this.userName = this.user.name.split(' ')[0];
 
-      console.log(this.userName)
-
     } else {
       this.indicatLogoff = true;
       this.brokerLogoff = true;
@@ -101,7 +99,6 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       } else {
         this.openLogin()
       }
-      console.log(this.user)
     } else if (value === 'forBrokers') {
       if(this.user !== null) {
         console.log('esta logado')

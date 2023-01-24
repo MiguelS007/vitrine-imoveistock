@@ -72,10 +72,6 @@ export class HomeHeaderComponent implements OnInit {
       this.searchService.getPropertyHome().subscribe(
         success => {
           this.response = success;
-          console.log(this.response);
-          for (let i = 0; i < this.response.length; i++) {
-          console.log(this.response[i].cidade);
-          }
         },
         error => { console.log(error, 'data not collected') }
       );
@@ -90,7 +86,6 @@ export class HomeHeaderComponent implements OnInit {
     if(tableName.length > 0) this.filtersearch = true
     else this.filtersearch = false
     this.filterResponse = this.response.filter(el => el.cidade.toLowerCase().includes(tableName.toLowerCase()))
-    console.log(this.filterResponse);
   }
 
 
