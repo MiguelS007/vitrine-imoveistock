@@ -26,8 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { NgxPageScrollModule } from 'ngx-page-scroll';
-// import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { ModalLoginComponent } from './auth/modal-login/modal-login.component';
 import { ModalTelComponent } from './auth/modal-tel/modal-tel.component';
 import { ModalCodeComponent } from './auth/modal-code/modal-code.component';
@@ -71,9 +71,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     VgOverlayPlayModule, 
     NgxMaskModule.forRoot(),
     VgBufferingModule,
-    // NgxPageScrollModule,
+    NgxPageScrollModule,
     ToastrModule.forRoot(),
-    // NgxPageScrollCoreModule
+    NgxPageScrollCoreModule
   ],
   providers: [
     {

@@ -21,7 +21,7 @@
               <i class="bi font-size-18 text-light bi-camera-fill"></i>
               <p class="px-2 font-size-18 line-19 text-light mb-0">Ver fotos</p>
             </button>
-            <button type="button" data-toggle="modal"  class="fw-700 btn-view-img
+            <button type="button"  pageScroll href="#previewvideo" class="fw-700 btn-view-img
             h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 
             border-radius-10 bg-purple">
               <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
@@ -482,7 +482,7 @@
                     d-flex align-items-center
                     border-bottom-gray">
               <button [class]="segment ? 'color-muted':'border-bottom-green color-black' "
-                (click)="segmentvideo('video')"
+                (click)="segmentvideo('video')"id="previewvideo"
                 class="btn bg-transparent py-2 px-5 btn-segment fw-700 font-size-18 line-24" type="button">Vídeo do
                 Imóvel</button>
               <button [class]="segment ? 'border-bottom-green color-black':'color-muted' "
