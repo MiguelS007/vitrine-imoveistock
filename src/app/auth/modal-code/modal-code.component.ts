@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr'; 
+import { ToastrService } from 'ngx-toastr';
 import { AuthetincatedUserDto } from 'src/app/dtos/authenticated-user.dto';
 import { AuthenticateCodeConfirmationRequestDto } from 'src/app/dtos/authentication-code-confirmation.dtos';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -43,59 +43,52 @@ export class ModalCodeComponent implements OnInit {
       this.router.navigate(['auth/sign-in']);
     }
   }
-  notSendCode(value: string){
-    if(value === 'open'){
+  notSendCode(value: string) {
+    if (value === 'open') {
       this.notsendcodemsg = true;
-    }else if(value === 'close'){
+    } else if (value === 'close') {
       this.notsendcodemsg = false;
     }
   }
   async confirm() {
-  //   this.spinnerload = true;
-  //   this.continued = false;
-  //   this.request = {
-  //     code: `${this.form.controls['code1'].value}${this.form.controls['code2'].value}${this.form.controls['code3'].value}${this.form.controls['code4'].value}`,
-  //     phone: this.phone
-  //   }
-  //   this.authenticationService.authenticateCodeConfirmation(this.request).subscribe(
-  //     async success => {
-  //       localStorage.removeItem('phone');
-  //       this.authenticationService.setAuthenticatedUser(
-  //         new AuthetincatedUserDto(success.userId, success.phone, success.token, success.profileId, success.apiFunctionsId),
-  //         );
-          
-  //         this.userService.getUser().subscribe(
-  //           success => {
-  //             let user = JSON.stringify(success);
-  //             localStorage.setItem('userDto', user);
-  //             this.router.navigate(['home']);
-  //         },
-  //         error => {
-  //           console.error(error)
-  //         }
-  //       )
-  //     },
-  //     async error => {
-  //       this.toastrService.error('Erro ao cadastrar ', 'Toastr fun!', { progressBar: true });
-  //       console.error(error, this.request)
-  //       this.spinnerload = false;
-  //       this.continued = true;
-  //       this.form.setValue(this.form.controls['code1'].value = ''});
-  //     }
-  //   )
+    //   this.spinnerload = true;
+    //   this.continued = false;
+    //   this.request = {
+    //     code: `${this.form.controls['code1'].value}${this.form.controls['code2'].value}${this.form.controls['code3'].value}${this.form.controls['code4'].value}`,
+    //     phone: this.phone
+    //   }
+    //   this.authenticationService.authenticateCodeConfirmation(this.request).subscribe(
+    //     async success => {
+    //       localStorage.removeItem('phone');
+    //       this.authenticationService.setAuthenticatedUser(
+    //         new AuthetincatedUserDto(success.userId, success.phone, success.token, success.profileId, success.apiFunctionsId),
+    //         );
+
+    //         this.userService.getUser().subscribe(
+    //           success => {
+    //             let user = JSON.stringify(success);
+    //             localStorage.setItem('userDto', user);
+    //             this.router.navigate(['home']);
+    //         },
+    //         error => {
+    //           console.error(error)
+    //         }
+    //       )
+    //     },
+    //     async error => {
+    //       this.toastrService.error('Erro ao cadastrar ', 'Toastr fun!', { progressBar: true });
+    //       console.error(error, this.request)
+    //       this.spinnerload = false;
+    //       this.continued = true;
+    //       this.form.setValue(this.form.controls['code1'].value = ''});
+    //     }
+    //   )
   }
-  onDigitInput(event: any) {
-  //   let element;
-  //   if (event.code !== 'Backspace')
-  //     element = event.srcElement.nextElementSibling;
-
-  //   if (event.code === 'Backspace')
-  //     element = event.srcElement.previousElementSibling;
-
-  //   if (element == null)
-  //     return;
-  //   else
-  //     element.focus();
+  onDigitInput(event: any, item) {
+    let digito = event.target.value
+    if(item === 'code1') {
+      console.log(digito)
+    }
   }
 
 }

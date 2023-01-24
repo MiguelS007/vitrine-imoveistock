@@ -28,6 +28,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { ModalLoginComponent } from './auth/modal-login/modal-login.component';
+import { ModalTelComponent } from './auth/modal-tel/modal-tel.component';
+import { ModalCodeComponent } from './auth/modal-code/modal-code.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -43,11 +47,15 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
     AboutComponent,
     SearchPageComponent,
     PropertyDetailComponent,
+    ModalLoginComponent,
+    ModalTelComponent,
+    ModalCodeComponent
   ],
 
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     NgbModule,
     AppRoutingModule,
     FormsModule,
