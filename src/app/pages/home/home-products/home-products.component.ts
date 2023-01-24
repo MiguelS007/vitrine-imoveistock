@@ -21,7 +21,7 @@ export class HomeProductsComponent implements OnInit {
   urlsimg: any = [];
 
   logged: boolean;
-
+naruto:string;
   constructor(
     private router: Router,
     private userService: UserService,
@@ -35,13 +35,7 @@ export class HomeProductsComponent implements OnInit {
       this.searchService.getPropertyHome().subscribe(
         success => {
           this.response = success;
-          for (let i = 0; i < this.response.length; i++) {
-            let exluxividade = this.response[i].exclusivity
-            console.log(exluxividade == '0')
-            // if(exluxividade == '1') console.log('opmvonifsdigsr')
-            // else console.log('efjndof rtguierhiowebaejisrniuaejyaeor niue eirug ')
-          }
-       
+        
         },
         error => { console.log(error, 'data not collected') }
       );
