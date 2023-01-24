@@ -4,8 +4,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
 import { NgxMaskModule } from "ngx-mask";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -28,8 +26,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { NgxPageScrollModule } from 'ngx-page-scroll';
-// import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { ModalLoginComponent } from './auth/modal-login/modal-login.component';
+import { ModalTelComponent } from './auth/modal-tel/modal-tel.component';
+import { ModalCodeComponent } from './auth/modal-code/modal-code.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -45,12 +47,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AboutComponent,
     SearchPageComponent,
     PropertyDetailComponent,
+    ModalLoginComponent,
+    ModalTelComponent,
+    ModalCodeComponent
   ],
 
   imports: [
     HttpClientModule,
     BrowserModule,
-    RouterModule,
     BrowserAnimationsModule,
     NgbModule,
     AppRoutingModule,
@@ -66,9 +70,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     VgOverlayPlayModule,
     NgxMaskModule.forRoot(),
     VgBufferingModule,
-    // NgxPageScrollModule,
+    NgxPageScrollModule,
     ToastrModule.forRoot(),
-    // NgxPageScrollCoreModule
+    NgxPageScrollCoreModule
   ],
   providers: [
     {

@@ -1,4 +1,4 @@
-<section *ngIf="logged" class="bg-home-products position-relative w-100 h-auto">
+<section class="bg-home-products position-relative w-100 h-auto">
     <div class="row bg-whitelight h-auto m-0-auto max-w-1918" style="padding-bottom: 8rem;">
         <div class="col-12 pt-3 pb-5">
             <div class="w-100 my-5 text-align-center">
@@ -13,12 +13,11 @@
             [slidesPerView]="3"
             [pagination]="{ clickable: true }"
                 [scrollbar]="true">
-                <ng-template *ngFor="let item of response | slice :0:10" swiperSlide>
-                    <div class="row px-4"> 
-                        <div class="col-md-4 col-swiper">
+                <ng-template swiperSlide>
+                    <div class="row justify-content-center px-4"> 
+                        <div *ngFor="let item of response | slice: 0:3" class="col-md-4 col-swiper">
                             <div class="w-fit h-100 product-announcement p-2 border-radius-10 bg-white">
                                 <div class="bg-img-product py-2 px-3 border-radius-10">
-                                <!-- style='background-image: url({{item.bgproduct}});' -->
                                     <div class="w-100 h-50 d-flex">
                                         <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
                                             Venda</h4>
@@ -40,10 +39,10 @@
                                         style="max-width: 90%;">{{item.description}}</p>
                                     <p class="d-flex align-items-center">
                                         <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
-                                        <span class="fw-400 font-size-14 line-20 color-black">{{item.complementAddress}}, {{item.city}}</span>
+                                        <span class="fw-400 font-size-14 line-20 color-black">{{item.complementAddress}}, {{item.cidade}}</span>
                                     </p>
                                 </div>
-                                <div class="row mx-1 border-bottom-gray pb-3 d-flex">
+                                <div class="row mx-1 pb-3 d-flex">
                                     <div
                                         class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                                         <img src="../../../assets/icon/bed.png" class="pr-2" />
@@ -60,9 +59,9 @@
                                         <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{item.usefulArea | slice:0:4}} m2</p>
                                     </div>
                                 </div>
-                                <div *ngFor="let url of urlsimg" class="w-100 d-flex align-items-center py-2 px-1">
-                                    <img [src]="urlsimg" class="border-radius-100 " style="width: 42px;" />
-                                    <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">{{item.ownerName}}</h3>
+                                <div class="w-100 d-flex align-items-center py-2 px-1">
+                                    <img [src]="item.advertiser?.photo?.location" class="border-radius-100 " style="width: 42px;" />
+                                    <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">{{item.advertiser?.name}}</h3>
                                 </div>
                             </div>
                         </div>
