@@ -35,13 +35,22 @@ export class HomeProductsComponent implements OnInit {
       this.searchService.getPropertyHome().subscribe(
         success => {
           this.response = success;
-          console.log(this.response);
+          for (let i = 0; i < this.response.length; i++) {
+            let exluxividade = this.response[i].exclusivity
+            console.log(exluxividade == '0')
+            // if(exluxividade == '1') console.log('opmvonifsdigsr')
+            // else console.log('efjndof rtguierhiowebaejisrniuaejyaeor niue eirug ')
+          }
+       
         },
         error => { console.log(error, 'data not collected') }
       );
     } else {
       this.logged = false;
     }
+    // if(exclusivity === 1){
+
+    // }
   }
 
 

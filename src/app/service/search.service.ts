@@ -24,12 +24,12 @@ export class SearchService extends BaseService {
   }
   getPropertyHome(): Observable<AnnouncementGetResponsetDto[]> {
     return this.httpClient
-      .get(`${this.url}/announcement`, this.authorizedHeader())
+      .get(`${this.url}announcement`, this.authorizedHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
   searchLocalHome(): Observable<AnnouncementGetResponsetDto[]> {
     return this.httpClient
-      .get(`${this.url}/announcement`, this.authorizedHeader())
+      .get(`${this.url}announcement`, this.authorizedHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
 

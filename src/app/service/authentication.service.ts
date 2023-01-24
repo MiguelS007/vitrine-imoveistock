@@ -20,60 +20,56 @@ export class AuthenticationService extends BaseService {
   url: string = `${environment.apis.imoveistock}authentication`;
 
   token = {
-    userId: '',
-    phone: '',
-    token: '',
-    profileId: '',
-    apiFunctionsId: [],
+      userId: '',
+      phone: '',
+      token: '',
+      profileId: '',
+      apiFunctionsId: [],
   }
 
   jwtPayload: JwtPayload;
 
-
   constructor(
-    private httpClient: HttpClient
+      private httpClient: HttpClient
   ) {
-    super()
+      super();
   }
-
 
   authenticate(dto: AuthenticateRequestDto): Observable<AuthenticateResponseDto> {
-    return this.httpClient
-      .post(`${this.url}/authenticate`, dto, this.anonymousHeader())
-      .pipe(
-        map(this.extractData),
-        catchError(this.serviceError)
-      );
+      return this.httpClient
+          .post(`${this.url}/authenticate`, dto, this.anonymousHeader())
+          .pipe(
+              map(this.extractData),
+              catchError(this.serviceError)
+          );
   }
+
   authenticateCodeConfirmation(dto: AuthenticateCodeConfirmationRequestDto): Observable<AuthetincatedUserDto> {
-    return this.httpClient
-      .post(`${this.url}/authenticate-code-confirmation`, dto, this.anonymousHeader())
-      .pipe(
-        map(this.extractData),
-        catchError(this.serviceError)
-      );
+      return this.httpClient
+          .post(`${this.url}/authenticate-code-confirmation`, dto, this.anonymousHeader())
+          .pipe(
+              map(this.extractData),
+              catchError(this.serviceError)
+          );
   }
-
-
 
   getPayLoadFromLocalStorage(): JwtPayload {
-    const token = this.getAuthenticatedUser();
-    return jwtDecode(token.token);
+      const token = this.getAuthenticatedUser();
+      return jwtDecode(token.token);
   }
 
   setAuthenticatedUser(dto: AuthetincatedUserDto) {
-    LocalStorageUtil.set(LocalStorageKeys.user, dto);
-    this.getPayLoadFromJWT();
+      LocalStorageUtil.set(LocalStorageKeys.user, dto);
+      this.getPayLoadFromJWT();
   }
 
   getAuthenticatedUser(): AuthetincatedUserDto {
-    return LocalStorageUtil.get(LocalStorageKeys.user);
+      return LocalStorageUtil.get(LocalStorageKeys.user);
   }
 
   getPayLoadFromJWT() {
-    this.token = this.getAuthenticatedUser();
-    return this.jwtPayload = jwtDecode(this.token.token);
+      this.token = this.getAuthenticatedUser();
+      return this.jwtPayload = jwtDecode(this.token.token);
   }
-
 
 }

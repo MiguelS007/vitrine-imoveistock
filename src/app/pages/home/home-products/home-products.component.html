@@ -10,12 +10,12 @@
                 </h4>
             </div>
             <swiper class="mySwip h-100 max-w-1227" 
-            [slidesPerView]="1" 
+            [slidesPerView]="3"
             [pagination]="{ clickable: true }"
                 [scrollbar]="true">
-                <ng-template swiperSlide>
+                <ng-template *ngFor="let item of response | slice :0:10" swiperSlide>
                     <div class="row px-4"> 
-                        <div *ngFor="let item of response" class="col-md-4 col-swiper">
+                        <div class="col-md-4 col-swiper">
                             <div class="w-fit h-100 product-announcement p-2 border-radius-10 bg-white">
                                 <div class="bg-img-product py-2 px-3 border-radius-10">
                                 <!-- style='background-image: url({{item.bgproduct}});' -->
@@ -26,7 +26,7 @@
                                             Exclusivo</h4>
                                     </div>
                                     <div class="w-100 d-flex h-50 align-items-end justify-content-between">
-                                        <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">RS{{item.saleValue}}</p>
+                                        <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">R$ {{item.saleValue}}</p>
                                         <div (click)="likeHeart()"
                                             class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
                                             <i [class]="iconlikeheart ? 'bi-heart-fill':'bi-heart' "
@@ -57,7 +57,7 @@
                                     <div
                                         class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
                                         <img src="../../../assets/icon/rule.png" class="pr-2" />
-                                        <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{item.usefulArea}} m2</p>
+                                        <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{item.usefulArea | slice:0:4}} m2</p>
                                     </div>
                                 </div>
                                 <div *ngFor="let url of urlsimg" class="w-100 d-flex align-items-center py-2 px-1">

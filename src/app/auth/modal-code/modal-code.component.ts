@@ -24,6 +24,13 @@ export class ModalCodeComponent implements OnInit {
   request: any = AuthenticateCodeConfirmationRequestDto;
   numberTel;
 
+  codigo1;
+  codigo2;
+  codigo3;
+  codigo4;
+
+  codigo;
+
   constructor(
     private router: Router,
     private toastrService: ToastrService,
@@ -41,12 +48,29 @@ export class ModalCodeComponent implements OnInit {
   ngOnInit(): void {
     let phone = localStorage.getItem('phone');
     this.numberTel = phone;
+    console.log(this.numberTel)
     if (this.numberTel === null) {
       this.router.navigate(['auth/insert-tel'])
     }
   }
-  gotoNextField(nextInput) {
-    nextInput.setFocus();
+  nextCode(item, value) {
+    if (item === 'code1') {
+      this.codigo1 = value.target.value;
+      var nextInput = document.getElementById('code2');
+      nextInput.focus();
+    } else if (item === 'code2') {
+      this.codigo2 = value.target.value;
+      var nextInput = document.getElementById('code3');
+      nextInput.focus();
+    } else if (item === 'code3') {
+      this.codigo3 = value.target.value;
+      var nextInput = document.getElementById('code4');
+      nextInput.focus();
+    } else if (item === 'code4') {
+      this.codigo4 = value.target.value;
+      var nextInput = document.getElementById('btn-send-code');
+      nextInput.focus();
+    }
   }
 
 
@@ -60,14 +84,9 @@ export class ModalCodeComponent implements OnInit {
   async confirm() {
     this.spinnerload = true;
     this.continued = false;
-    let code1 = this.form.controls['coden1'].value;
-    let code2 = this.form.controls['coden2'].value;
-    let code3 = this.form.controls['coden3'].value;
-    let code4 = this.form.controls['coden4'].value;
-
-    console.log(code1, code2, code3, code4);
+    this.codigo = `${this.codigo1}${this.codigo2}${this.codigo3}${this.codigo4}`;
     this.request = {
-      code: parseInt(`${code1}${code2}${code3}${code4}`),
+      code: parseInt(`${this.codigo}`),
       phone: this.numberTel
     }
     console.log(this.request.code);
@@ -95,7 +114,7 @@ export class ModalCodeComponent implements OnInit {
     let user = JSON.stringify(success);
     localStorage.setItem('userDto', user);
     setTimeout(() => {
-      this.router.navigate(['home']);
+      this.router.navigate(['/']);
     }, 100);
   }
 

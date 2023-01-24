@@ -14,17 +14,17 @@
          Insira o código de 6 digitos que enviamos para o número: <br />
          <span class="fw-700 pt-3
        font-size-14 line-18
-       color-black">{{phone}}</span>
+       color-black">{{numberTel}}</span>
 
       </p>
       <div class="w-100 d-inline-block justify-content-center d-flex">
-         <input type="tel" #Field1 maxlength="1" (keyup)="gotoNextField(Field2)" formControlName="coden1" placeholder="*"
+         <input type="tel" id="code1" maxlength="1" (keyup)="nextCode('code1', $event)" formControlName="coden1" placeholder="*"
             class="btn w56h56 bg-whitelight border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
-         <input type="tel" #Field2 maxlength="1" (keyup)="gotoNextField(Field3)" formControlName="coden2" placeholder="*"
+         <input type="tel" id="code2" maxlength="1" (keyup)="nextCode('code2', $event)" formControlName="coden2" placeholder="*"
             class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
-         <input type="tel" #Field3 maxlength="1" (keyup)="gotoNextField(Field4)" formControlName="coden3" placeholder="*"
+         <input type="tel" id="code3" maxlength="1" (keyup)="nextCode('code3', $event)" formControlName="coden3" placeholder="*"
             class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
-         <input type="tel" #Field4 maxlength="1" formControlName="coden4" placeholder="*"
+         <input type="tel" id="code4" maxlength="1" (keyup)="nextCode('code4', $event)" formControlName="coden4" placeholder="*"
             class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" />
       </div>
       <p (click)="notSendCode('open')" class="fw-500 py-4
@@ -39,7 +39,7 @@
       text-center">
          Se você não recebeu a mensagem, verifique <br /> se ela não caiu no spam do seu celular
       </p>
-      <button type="sumbit" *ngIf="continued" [disabled]="form.invalid" (click)="confirm()" class="btn pb-2 mt-3
+      <button type="sumbit" *ngIf="continued" [disabled]="form.invalid" (click)="confirm()"  id="btn-send-code" class="btn pb-2 mt-3
  bg-purple fw-700
  font-size-18 line-24
  text-light
