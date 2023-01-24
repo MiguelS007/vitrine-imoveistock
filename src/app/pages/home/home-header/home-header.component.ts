@@ -26,6 +26,7 @@ export class HomeHeaderComponent implements OnInit {
   propertyCharacteristicsOptions = false;
   filtersearch = false;
   liresultsearch: any = [];
+  selectedcities: string;
   searchfilterTypeProperty: string;
   searchfilterType: string;
   viewvacancies = false;
@@ -93,7 +94,15 @@ export class HomeHeaderComponent implements OnInit {
     console.log(this.filterResponse);
   }
 
+  selectCites(selected: string){
+    console.log(selected);
+    let selectedcities =  this.form.controls['typePropertyLocal']
+    this.form.setValue({
+      selectedcities: selected
+    });
 
+
+  }
 
   buyOption(value: string) {
     if (value === 'buy') {

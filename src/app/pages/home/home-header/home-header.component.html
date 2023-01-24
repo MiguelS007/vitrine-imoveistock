@@ -21,13 +21,12 @@
                         <div class="w-100 painel-browser h-auto border-radius-10 max-w-1227">
                             <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
                                 <div  class="w-100">
-                                    <input #searchresult (keyup)="resultSearch(searchresult.value)" style="width: 220px;" type="text" placeholder="Local" formControlName="typePropertyLocal" maxlength="30" 
+                                    <input #searchresult (keyup)="resultSearch(searchresult.value)" [value]="selectedcities" style="width: 220px;" type="text" placeholder="Local" formControlName="typePropertyLocal" maxlength="30" 
                                     class="btn border input-local input-type-property pr-5 mr-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
                                     <div *ngIf="filtersearch" class="w-100 z-10 border-radius-10 bg-light position-absolute" style="max-width: 220px; top: 120px;">
                                         <ul id="bodyresponseresultfilter" class="list-group bg-light border-radius-10 box-shadow p-1 list-group-flush">
-                                            <li *ngFor="let item of filterResponse" class="list-group-item cursor-pointer border-none  text-truncate" style="max-width: 190px;">
-                                                <input type="text" #selectCity (click)="selectCity(selectCity.value)" [value]="item.city" 
-                                                <>{{item.city}}</a>
+                                            <li *ngFor="let item of filterResponse" class="list-group-item cursor-pointer border-none bg-light text-truncate" style="max-width: 190px;">
+                                                <input type="text" class="outline-none bg-light border-none cursor-pointer" readonly #selectCity (click)="selectCites(selectCity.value)" [value]="item.city" />
                                             </li>
                                         </ul>
                                     </div>
