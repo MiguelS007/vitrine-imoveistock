@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr'; 
 import { AuthetincatedUserDto } from 'src/app/dtos/authenticated-user.dto';
 import { AuthenticateCodeConfirmationRequestDto } from 'src/app/dtos/authentication-code-confirmation.dtos';
+import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { UserService } from 'src/app/service/user.service';
@@ -21,6 +22,14 @@ export class ModalCodeComponent implements OnInit {
   continued = true;
   notsendcodemsg = false;
   request: any = AuthenticateCodeConfirmationRequestDto;
+  numberTel;
+
+  codigo1;
+  codigo2;
+  codigo3;
+  codigo4;
+
+  codigo;
 
   constructor(
     private router: Router,
@@ -30,19 +39,41 @@ export class ModalCodeComponent implements OnInit {
     private userService: UserService
   ) {
     this.form = this.formBuilder.group({
-      code1: ['', [Validators.required]],
-      code2: ['', [Validators.required]],
-      code3: ['', [Validators.required]],
-      code4: ['', [Validators.required]],
+      coden1: ['', [Validators.required]],
+      coden2: ['', [Validators.required]],
+      coden3: ['', [Validators.required]],
+      coden4: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {
-    this.phone = localStorage.getItem('phone');
-    console.log(this.phone);
-    if (this.phone === null) {
-      this.router.navigate(['auth/sign-in']);
+    let phone = localStorage.getItem('phone');
+    this.numberTel = phone;
+    console.log(this.numberTel)
+    if (this.numberTel === null) {
+      this.router.navigate(['auth/insert-tel'])
     }
   }
+  nextCode(item, value) {
+    if (item === 'code1') {
+      this.codigo1 = value.target.value;
+      var nextInput = document.getElementById('code2');
+      nextInput.focus();
+    } else if (item === 'code2') {
+      this.codigo2 = value.target.value;
+      var nextInput = document.getElementById('code3');
+      nextInput.focus();
+    } else if (item === 'code3') {
+      this.codigo3 = value.target.value;
+      var nextInput = document.getElementById('code4');
+      nextInput.focus();
+    } else if (item === 'code4') {
+      this.codigo4 = value.target.value;
+      var nextInput = document.getElementById('btn-send-code');
+      nextInput.focus();
+    }
+  }
+
+
   notSendCode(value: string){
     if(value === 'open'){
       this.notsendcodemsg = true;
@@ -51,51 +82,48 @@ export class ModalCodeComponent implements OnInit {
     }
   }
   async confirm() {
-  //   this.spinnerload = true;
-  //   this.continued = false;
-  //   this.request = {
-  //     code: `${this.form.controls['code1'].value}${this.form.controls['code2'].value}${this.form.controls['code3'].value}${this.form.controls['code4'].value}`,
-  //     phone: this.phone
-  //   }
-  //   this.authenticationService.authenticateCodeConfirmation(this.request).subscribe(
-  //     async success => {
-  //       localStorage.removeItem('phone');
-  //       this.authenticationService.setAuthenticatedUser(
-  //         new AuthetincatedUserDto(success.userId, success.phone, success.token, success.profileId, success.apiFunctionsId),
-  //         );
-          
-  //         this.userService.getUser().subscribe(
-  //           success => {
-  //             let user = JSON.stringify(success);
-  //             localStorage.setItem('userDto', user);
-  //             this.router.navigate(['home']);
-  //         },
-  //         error => {
-  //           console.error(error)
-  //         }
-  //       )
-  //     },
-  //     async error => {
-  //       this.toastrService.error('Erro ao cadastrar ', 'Toastr fun!', { progressBar: true });
-  //       console.error(error, this.request)
-  //       this.spinnerload = false;
-  //       this.continued = true;
-  //       this.form.setValue(this.form.controls['code1'].value = ''});
-  //     }
-  //   )
+    this.spinnerload = true;
+    this.continued = false;
+    this.codigo = `${this.codigo1}${this.codigo2}${this.codigo3}${this.codigo4}`;
+    this.request = {
+      code: parseInt(`${this.codigo}`),
+      phone: this.numberTel
+    }
+    console.log(this.request.code);
+
+    this.authenticationService.authenticateCodeConfirmation(this.request).subscribe(
+      success => this.runAutheticateCodeConfirmation(success),
+      async error => await this.runError(error),
+    );
   }
-  onDigitInput(event: any) {
-  //   let element;
-  //   if (event.code !== 'Backspace')
-  //     element = event.srcElement.nextElementSibling;
+  runAutheticateCodeConfirmation(success: AuthetincatedUserDto): void {
 
-  //   if (event.code === 'Backspace')
-  //     element = event.srcElement.previousElementSibling;
+    localStorage.removeItem('phone');
 
-  //   if (element == null)
-  //     return;
-  //   else
-  //     element.focus();
+    this.authenticationService.setAuthenticatedUser(
+      new AuthetincatedUserDto(success.userId, success.phone, success.token, success.profileId, success.apiFunctionsId),
+    );
+
+    this.userService.getUser().subscribe(
+      success => this.runGetUserSuccess(success),
+      async error => this.runError(error),
+    );
+
+  }
+  runGetUserSuccess(success: UserGetResponseDto): void {
+    let user = JSON.stringify(success);
+    localStorage.setItem('userDto', user);
+    setTimeout(() => {
+      this.router.navigate(['/']);
+    }, 100);
   }
 
+  async runError(error: any) {
+    this.toastrService.error('Código Inválido! ', '', { progressBar: true });
+    
+    this.spinnerload = false;
+    this.form.setValue({ coden1: '', coden2: '', coden3: '', coden4: '' });
+
+
+  }
 }
