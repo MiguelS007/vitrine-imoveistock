@@ -32,7 +32,7 @@ export class ModalTelComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async confirm() {
+  confirm() {
 
     this.request = {
       phone: `55${this.form.controls['ddd'].value}${this.form.controls['phone'].value}`.replace(/\D/g, '')
@@ -47,22 +47,23 @@ export class ModalTelComponent implements OnInit {
   }
 
   runError(error) {
-      this.toastrService.error('Erro ao enviar SMS', '', {progressBar: true})
+    this.toastrService.error('Erro ao enviar SMS', '', { progressBar: true })
+    console.error(error)
   }
 
   registerSuccess(success) {
     localStorage.setItem('phone', success.phone);
     this.modalService.dismissAll();
-    this.modalService.open(ModalCodeComponent, {centered: true})
+    this.modalService.open(ModalCodeComponent, { centered: true })
   }
 
   nextCode(item, value) {
     if (item === 'ddd') {
       this.code1 = value.target.value;
       var nextInput = document.getElementById('tel');
-      for(var i = 0; i < this.code1.length; i++) {
-           if(this.code1.length >= 2)
-            nextInput.focus();
+      for (var i = 0; i < this.code1.length; i++) {
+        if (this.code1.length >= 2)
+          nextInput.focus();
       }
     }
   }

@@ -41,10 +41,10 @@ export class ModalCodeComponent implements OnInit {
     private modalService: NgbModal
   ) {
     this.form = this.formBuilder.group({
-      coden1: ['', [Validators.required]],
-      coden2: ['', [Validators.required]],
-      coden3: ['', [Validators.required]],
-      coden4: ['', [Validators.required]],
+      code1: ['', [Validators.required]],
+      code2: ['', [Validators.required]],
+      code3: ['', [Validators.required]],
+      code4: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {
@@ -52,6 +52,8 @@ export class ModalCodeComponent implements OnInit {
     if (this.phone === null) {
       this.modalService.dismissAll()
     }
+
+    this.numberTel = this.phone
   }
   notSendCode(value: string) {
     if (value === 'open') {
