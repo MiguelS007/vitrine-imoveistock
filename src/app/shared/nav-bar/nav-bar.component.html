@@ -116,8 +116,8 @@
         </a>
         <a *ngIf="loggedname" class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle" id="droplogin"
           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="bi font-size-20 bi-person"></i> {{user?.name | slice:0:6}}... <img
-            src="../../../assets/icon/arrow-down.png" />
+          <i class="bi font-size-20 bi-person"></i> {{user?.name}}... <img
+            src="../../../assets/icon/arrow-down.png" /> 
         </a>
         <div *ngIf="loggedopt" class="dropdown-menu arrow_box px-4 border-radius-10 dropdown-menu-right"
           aria-labelledby="droplogin">
