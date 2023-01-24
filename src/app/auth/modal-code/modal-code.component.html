@@ -19,13 +19,17 @@
       </p>
       <div class="w-100 d-inline-block justify-content-center d-flex">
          <input type="tel" (keyup)="onDigitInput($event, 'code1')" maxlength="1" formControlName="code1" placeholder="*"
-            class="btn w56h56 bg-whitelight border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" id="code1" />
+            class="btn w56h56 bg-whitelight border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black"
+            id="code1" />
          <input type="tel" (keyup)="onDigitInput($event, 'code2')" maxlength="1" formControlName="code2" placeholder="*"
-            class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" id="code2" />
+            class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black"
+            id="code2" />
          <input type="tel" (keyup)="onDigitInput($event, 'code3')" maxlength="1" formControlName="code3" placeholder="*"
-            class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" id="code3"/>
+            class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black"
+            id="code3" />
          <input type="tel" (keyup)="onDigitInput($event, 'code4')" maxlength="1" formControlName="code4" placeholder="*"
-            class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black" id="code4"/>
+            class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black"
+            id="code4" />
       </div>
       <p (click)="notSendCode('open')" class="fw-500 py-4
     font-size-16 line-20
@@ -39,20 +43,22 @@
       text-center">
          Se você não recebeu a mensagem, verifique <br /> se ela não caiu no spam do seu celular
       </p>
-      <button type="sumbit" *ngIf="continued" [disabled]="form.invalid" (click)="confirm()" class="btn pb-2 mt-3
+      <button type="sumbit" *ngIf="continued" [disabled]="form.invalid" (click)="confirm()" id="btn-send-code" class="btn pb-2 mt-3
  bg-purple fw-700
  font-size-18 line-24
  text-light
  border-radius-10
  h-74
  w-100"> Confirmar
-        
+
       </button>
-      <div *ngIf="spinnerload" class="lds-ring">
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
+      <div class="d-flex justify-content-center">
+         <div *ngIf="spinnerload" class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+         </div>
       </div>
    </div>
 </form>

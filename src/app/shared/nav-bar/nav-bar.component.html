@@ -112,9 +112,9 @@
           class="nav-link px-3 fw-400 font-size-14 line-20 item-navbar-disabled">
           Login
         </a>
-        <a *ngIf="loggedname" class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle" id="droplogin"
+        <a *ngIf="loggedname" class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled text-capitalize" id="droplogin"
           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="bi font-size-20 bi-person"></i> {{user?.name | slice:0:6}}... <img
+          <i class="bi font-size-20 bi-person"></i> {{userName}}<img
             src="../../../assets/icon/arrow-down.png" />
         </a>
         <div *ngIf="loggedopt" class="dropdown-menu arrow_box px-4 border-radius-10 dropdown-menu-right"
