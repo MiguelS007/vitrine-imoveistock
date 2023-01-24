@@ -55,7 +55,7 @@ export class ModalSignupComponent implements OnInit {
 
 
 
-  async confirm() {
+  confirm() {
     this.isSubmitted = true;
 
     var cpf = `${this.form.controls['cpf'].value[0]}${this.form.controls['cpf'].value[1]}${this.form.controls['cpf'].value[2]}.${this.form.controls['cpf'].value[3]}${this.form.controls['cpf'].value[4]}${this.form.controls['cpf'].value[5]}.${this.form.controls['cpf'].value[6]}${this.form.controls['cpf'].value[7]}${this.form.controls['cpf'].value[8]}-${this.form.controls['cpf'].value[9]}${this.form.controls['cpf'].value[10]}`
@@ -70,10 +70,10 @@ export class ModalSignupComponent implements OnInit {
     
     if (this.form.controls['termsAndPolicy'].value === true) {
       this.userService.register(this.request).subscribe(
-        async success => {
+        success => {
           this.nextFunction()
         },
-        async error => {
+        error => {
           this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });
           // console.log(error, 'deu ruin')
         }
@@ -97,7 +97,4 @@ export class ModalSignupComponent implements OnInit {
       }
     );
   }
-
-
-
 }
