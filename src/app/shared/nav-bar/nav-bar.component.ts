@@ -96,6 +96,12 @@ export class NavBarComponent implements OnInit, AfterViewInit {
         this.openLogin()
       }
       console.log(this.user)
+    } else if (value === 'forBrokers') {
+      if(this.user !== null) {
+        console.log('esta logado')
+      } else {
+        this.openLogin()
+      }
     }
   }
 

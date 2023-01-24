@@ -100,9 +100,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a *ngIf="brokerLogon" href="dashboard-corretores"
-          class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores.</a>
-        <a *ngIf="brokerLogoff" [routerLink]="['auth/login']"
+        <a (click)="changePage('forBrokers')" 
           class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores</a>
       </li>
       <li class="nav-item">

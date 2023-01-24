@@ -1273,11 +1273,23 @@ vg-overlay-play .vg-overlay-play {
 
 // CONTACT
 .bg-header-contact {
-    background-image: url(./assets/img/gradient.png), url(./assets/img/black-woman.png);
-    background-position: center center;
-    background-repeat: no-repeat no-repeat;
-    background-size: cover cover;
+    background-image: url(./assets/img/black-woman.png);
+    background-position: center ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50vh !important;
+    width: 100vw !important;
+    z-index: -5 !important;
 }
+
+// .bg-header-contact {
+//     background-image: url(./assets/img/gradient.png), url(./assets/img/black-woman.png);
+//     background-position: center center;
+//     background-repeat: no-repeat no-repeat;
+//     background-size: cover cover;
+//     height: 50vh !important;
+//     width: 100vw !important;
+// }
 
 // ABOUT
 .bg-header-about {
