@@ -89,6 +89,13 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.home = false;
       this.about = true;
       this.router.navigate(['/about']);
+    } else if (value === 'indicateProperties') {
+      if(this.user !== null) {
+        console.log('esta logado')
+      } else {
+        this.openLogin()
+      }
+      console.log(this.user)
     }
   }
 

@@ -1288,6 +1288,16 @@ vg-overlay-play .vg-overlay-play {
     width: 100% !important;
 }
 
+.bg-header-about-custom {
+    position: absolute !important;
+    background-image: url(./assets/img/gradient.png), url(./assets/img/office.png);
+    background-position: center center;
+    background-repeat: no-repeat no-repeat;
+    background-size: cover !important;
+    width: 100% !important;
+    min-height: 45vh !important;
+}
+
 //  FOOTER
 .footer-log {
     height: 20% !important;
@@ -1325,6 +1335,7 @@ vg-overlay-play .vg-overlay-play {
 
 .item-navbar-disabled {
     color: white !important;
+    cursor: pointer !important;
 }
 
 .item-navbar-selected {
