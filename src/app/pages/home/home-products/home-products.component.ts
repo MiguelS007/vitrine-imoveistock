@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnnouncementGetResponsetDto } from 'src/app/dtos/announcement-get-response.dto';
+import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
@@ -16,7 +16,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 export class HomeProductsComponent implements OnInit {
   iconlikeheart = false;
 
-  response: AnnouncementGetResponsetDto[] = [];
+  response: AnnouncementGetResponseDto[] = [];
   user: UserGetResponseDto;
   urlsimg: any = [];
 
@@ -29,22 +29,14 @@ naruto:string;
   ) { }
 
   ngOnInit(): void {
-    let user = JSON.parse(localStorage.getItem('userDto'))
-    if (user !== null) {
-      this.logged = true;
-      this.searchService.getPropertyHome().subscribe(
-        success => {
-          this.response = success;
-        
-        },
-        error => { console.log(error, 'data not collected') }
-      );
-    } else {
-      this.logged = false;
-    }
-    // if(exclusivity === 1){
+    this.searchService.getPropertyHome().subscribe(
+      success => {
+        this.response = success;
+        console.log(this.response);
+      },
+      error => { console.log(error, 'data not collected') }
+    );
 
-    // }
   }
 
 

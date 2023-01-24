@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-// import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticateRequestDto } from 'src/app/dtos/authenticate-request.dto';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import { DatamokService } from 'src/app/service/datamok.service';
+import { ModalCodeComponent } from '../modal-code/modal-code.component';
 
 @Component({
   selector: 'app-modal-tel',
@@ -19,10 +19,9 @@ export class ModalTelComponent implements OnInit {
   request: AuthenticateRequestDto;
 
   constructor(
-    private router: Router,
-    private datamokservice: DatamokService,
-    // private toastrService: ToastrService,
+    private modalService: NgbModal,
     private authenticationService: AuthenticationService,
+    private toastrService: ToastrService,
     private formBuilder: FormBuilder,
   ) {
     this.form = this.formBuilder.group({
@@ -41,18 +40,20 @@ export class ModalTelComponent implements OnInit {
 
     this.authenticationService.authenticate(this.request).subscribe(
       success => {
-        this.registerSuccess()
+        this.registerSuccess(success)
       },
-      error => {
-        // this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });
-        console.error(error, 'number with errors')
-      }
+      error => this.runError(error)
     )
   }
-  registerSuccess() {
-    localStorage.setItem('phone', this.request.phone);
-    // this.toastrService.success('Usuario cadastrado com sucesso', '', { progressBar: true })
-    this.router.navigate(['auth/insert-code'])
+
+  runError(error) {
+      this.toastrService.error('Erro ao enviar SMS', '', {progressBar: true})
+  }
+
+  registerSuccess(success) {
+    localStorage.setItem('phone', success.phone);
+    this.modalService.dismissAll();
+    this.modalService.open(ModalCodeComponent, {centered: true})
   }
 
   nextCode(item, value) {
@@ -63,8 +64,6 @@ export class ModalTelComponent implements OnInit {
            if(this.code1.length >= 2)
             nextInput.focus();
       }
-      // test
-      console.log(this.code1.length);
     }
   }
 

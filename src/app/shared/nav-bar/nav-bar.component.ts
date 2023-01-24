@@ -35,6 +35,8 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   about: boolean = false;
 
 
+  userName: string;
+
   constructor(
     public router: Router,
     private datamokservice: DatamokService,
@@ -56,7 +58,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
     if(window.location.pathname === '/') {
       this.home = true;
-      this.about = false
+      this.about = false;
     } else if (window.location.pathname === '/about') {
       this.home = false;
       this.about = true
@@ -72,6 +74,10 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
       this.brokerLogon = true;
       this.brokerLogoff = false;
+
+      this.userName = this.user.name.split(' ')[0];
+
+      console.log(this.userName)
 
     } else {
       this.indicatLogoff = true;

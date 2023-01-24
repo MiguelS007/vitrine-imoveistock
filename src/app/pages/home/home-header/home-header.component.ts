@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AnnouncementGetResponsetDto } from 'src/app/dtos/announcement-get-response.dto';
+import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { SearchService } from 'src/app/service/search.service';
 
 @Component({
@@ -13,8 +13,8 @@ export class HomeHeaderComponent implements OnInit {
   @Input() fieldvalue = '';
   form: FormGroup;
 
-  response: AnnouncementGetResponsetDto[] = [];
-  filterResponse: AnnouncementGetResponsetDto[] = [];
+  response: AnnouncementGetResponseDto[] = [];
+  filterResponse: AnnouncementGetResponseDto[] = [];
 
   resultsearchfor: any = [];
   collapsed = false;
@@ -75,7 +75,7 @@ export class HomeHeaderComponent implements OnInit {
           this.response = success;
           console.log(this.response);
           for (let i = 0; i < this.response.length; i++) {
-          console.log(this.response[i].city);
+          console.log(this.response[i].cidade);
           }
         },
         error => { console.log(error, 'data not collected') }
@@ -90,7 +90,7 @@ export class HomeHeaderComponent implements OnInit {
   resultSearch(tableName: string) {
     if(tableName.length > 0) this.filtersearch = true
     else this.filtersearch = false
-    this.filterResponse = this.response.filter(el => el.city?.toLowerCase().includes(tableName.toLowerCase()));
+    this.filterResponse = this.response.filter(el => el.cidade.toLowerCase().includes(tableName.toLowerCase()))
     console.log(this.filterResponse);
   }
 

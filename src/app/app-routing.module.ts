@@ -29,10 +29,6 @@ export const routes: Routes = [
     component: PropertyDetailComponent,
   },
   {
-    path: '',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-  },
-  {
     path: 'logged',
     loadChildren: () =>
       import('./logged/logged.module')
