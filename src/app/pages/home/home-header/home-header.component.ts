@@ -68,12 +68,16 @@ export class HomeHeaderComponent implements OnInit {
 
   ngOnInit() {
     let user = JSON.parse(localStorage.getItem('userDto'))
-    if(user !== null) {
-      this.searchService.searchLocalHome().subscribe(
+    if (user !== null) {
+      this.searchService.getPropertyHome().subscribe(
         success => {
           this.response = success;
+          console.log(this.response);
+          for (let i = 0; i < this.response.length; i++) {
+          console.log(this.response[i].cidade);
+          }
         },
-        error => { console.log(error, 'o erro') }
+        error => { console.log(error, 'data not collected') }
       );
     }
   }
@@ -88,6 +92,7 @@ export class HomeHeaderComponent implements OnInit {
     this.filterResponse = this.response.filter(el => el.cidade.toLowerCase().includes(tableName.toLowerCase()))
     console.log(this.filterResponse);
   }
+
 
 
   buyOption(value: string) {

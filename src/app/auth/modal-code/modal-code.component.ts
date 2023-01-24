@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AuthetincatedUserDto } from 'src/app/dtos/authenticated-user.dto';
 import { AuthenticateCodeConfirmationRequestDto } from 'src/app/dtos/authentication-code-confirmation.dtos';
+import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { UserService } from 'src/app/service/user.service';
@@ -22,6 +23,9 @@ export class ModalCodeComponent implements OnInit {
   continued = true;
   notsendcodemsg = false;
   request: any = AuthenticateCodeConfirmationRequestDto;
+  numberTel;
+
+  codigo;
 
   codigo1: string;
   codigo2: string;
@@ -37,10 +41,10 @@ export class ModalCodeComponent implements OnInit {
     private modalService: NgbModal
   ) {
     this.form = this.formBuilder.group({
-      code1: ['', [Validators.required]],
-      code2: ['', [Validators.required]],
-      code3: ['', [Validators.required]],
-      code4: ['', [Validators.required]],
+      coden1: ['', [Validators.required]],
+      coden2: ['', [Validators.required]],
+      coden3: ['', [Validators.required]],
+      coden4: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {
@@ -111,4 +115,12 @@ export class ModalCodeComponent implements OnInit {
     }
   }
 
+  async runError(error: any) {
+    this.toastrService.error('Código Inválido! ', '', { progressBar: true });
+    
+    this.spinnerload = false;
+    this.form.setValue({ coden1: '', coden2: '', coden3: '', coden4: '' });
+
+
+  }
 }

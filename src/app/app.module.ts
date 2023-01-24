@@ -4,7 +4,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
 import { NgxMaskModule } from "ngx-mask";
-
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -25,6 +24,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
@@ -62,6 +62,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SwiperModule,
     FormsModule,
     LoggedModule,
+    ToastrModule,
     ReactiveFormsModule,
     NgxPaginationModule,
     VgCoreModule,

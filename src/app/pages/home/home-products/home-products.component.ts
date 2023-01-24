@@ -21,7 +21,7 @@ export class HomeProductsComponent implements OnInit {
   urlsimg: any = [];
 
   logged: boolean;
-
+naruto:string;
   constructor(
     private router: Router,
     private userService: UserService,
