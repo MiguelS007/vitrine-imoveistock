@@ -28,8 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxPageScrollModule } from 'ngx-page-scroll';
-import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+// import { NgxPageScrollModule } from 'ngx-page-scroll';
+// import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 
 @NgModule({
   declarations: [
@@ -66,9 +66,9 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
     VgOverlayPlayModule,
     NgxMaskModule.forRoot(),
     VgBufferingModule,
-    NgxPageScrollModule,
+    // NgxPageScrollModule,
     ToastrModule.forRoot(),
-    NgxPageScrollCoreModule
+    // NgxPageScrollCoreModule
   ],
   providers: [
     {
