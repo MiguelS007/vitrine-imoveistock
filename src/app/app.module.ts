@@ -32,6 +32,7 @@ import { ModalLoginComponent } from './auth/modal-login/modal-login.component';
 import { ModalTelComponent } from './auth/modal-tel/modal-tel.component';
 import { ModalCodeComponent } from './auth/modal-code/modal-code.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalSignupComponent } from './auth/modal-signup/modal-signup.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PropertyDetailComponent,
     ModalLoginComponent,
     ModalTelComponent,
-    ModalCodeComponent
+    ModalCodeComponent,
+    ModalSignupComponent
   ],
 
   imports: [
