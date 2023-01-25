@@ -142,8 +142,15 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   logOut() {
-    localStorage.removeItem('userDto');
-    this.router.navigate(['auth/login']);
+    localStorage.clear();
+
+    setTimeout(() => {
+      this.loginopt = true;
+      this.loggedname = false;
+      this.router.navigate(['/']);
+      
+    }, 100);
+
   }
 
   goDeashboard() {
