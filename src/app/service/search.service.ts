@@ -27,10 +27,6 @@ export class SearchService extends BaseService {
       .get(`${this.url}announcement/list`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
-  searchLocalHome(): Observable<AnnouncementGetResponseDto[]> {
-    return this.httpClient
-      .get(`${this.url}announcement`, this.authorizedHeader())
-      .pipe(map(this.extractData), catchError(this.serviceError));
-  }
+
 
 }

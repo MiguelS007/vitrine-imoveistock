@@ -72,10 +72,12 @@ export class PropertyDetailComponent implements OnInit {
     this.previewimg = this.datamokservice.imagespreview;
     this.propertyproducts = this.datamokservice.exclusiveProperties;
     this.products = this.datamokservice.resultSearch;
+    this.user = JSON.parse(localStorage.getItem('userDto'));
+
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
-        console.log(this.response, 'responsta');
+        console.log(this.response[0], 'responsta', this.user._id);
       },
       error => { console.log(error, 'data not collected') }
     );
