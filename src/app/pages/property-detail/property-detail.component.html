@@ -1,40 +1,49 @@
-<main class="bg-whitelight position-relative h-100 w-100">
+<main class="bg-graylight position-relative h-100 w-100">
   <div class="row form-search h-100 m-0-auto">
     <div class="col-12 px-0 h-100">
       <div class="row h-100 mx-0">
         <div class="col-6 px-0 col-preview-img">
-          <div *ngFor="let item of onlyimg" style="background-image: url({{item.preview}})" class="bg-property-view w-100 h-600"></div>
+          <div *ngFor="let item of onlyimg" style="background-image: url({{item.preview}})"
+            class="bg-property-view w-100 h-600"></div>
         </div>
         <div class="col-6 px-0 col-preview-img">
-          <div *ngFor="let item of previewimg" style="background-image: url({{item.previews}})" class="bg-property-view d-inline-block w-50 h-300"></div>
+          <div *ngFor="let item of previewimg" style="background-image: url({{item.previews}})"
+            class="bg-property-view d-inline-block w-50 h-300"></div>
         </div>
         <div class="col-12 col-btns-preview-img px-5 d-flex py-5-items-center position-relative">
           <div class="w-auto d-flex spc-btns-property align-items-center">
-            <button type="button" data-toggle="modal" data-target="#previewimage" class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+            <button type="button" data-toggle="modal" data-target="#previewimage"
+              class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <i class="bi font-size-18 text-light bi-camera-fill"></i>
               <p class="px-2 font-size-18 line-19 text-light mb-0">Ver fotos</p>
             </button>
-            <button type="button"  pageScroll href="#previewvideo" class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+            <button type="button" pageScroll href="#previewvideo" 
+              class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
               <p class="px-2 font-size-18 line-19 text-light mb-0">Ver vídeo</p>
             </button>
-            <button type="button"  pageScroll href="#previewplant" class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+            <button type="button" pageScroll href="#previewplant"  (click)="openarrow(3)"
+              class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/datas-block.png" class="" alt="not icon" />
               <p class="px-2 font-size-18 line-19 text-light mb-0">Ver planta</p>
             </button>
-            <button type="button"  pageScroll href="#previewvideo"  (click)="segmentvideo('tour')" class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+            <button type="button" pageScroll href="#previewvideo" (click)="segmentvideo('tour')" 
+              class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/street-view.png" class="" alt="not icon" />
               <p class="px-2 font-size-18 line-19 text-light mb-0">Visita 360°</p>
             </button>
           </div>
           <div class="options-img d-flex align-items-center">
-            <div (click)="btninteractionimg('like')" class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
+            <div (click)="btninteractionimg('like')"
+              class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
               <i [class]="iconlikeheart ?'bi-heart-fill':'bi-heart' " class="bifont-size-16 text-light"></i>
             </div>
-            <div (click)="btninteractionimg('share')" class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
+            <div (click)="btninteractionimg('share')"
+              class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
               <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bifont-size-16 text-light"></i>
             </div>
-            <div (click)="btninteractionimg('print')" class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
+            <div (click)="btninteractionimg('print')"
+              class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
               <i [class]="iconprint?'bi-printer-fill':'bi-printer' " class="bifont-size-16 text-light"></i>
             </div>
           </div>
@@ -70,9 +79,10 @@
         </div>
       </div>
     </div>
-    <div class="col-12  d-flex justify-content-center">
-      <div class="row max-w-1918 col-md-10 row-body-details-property">
-        <div *ngFor="let item of response" class="col-8 col-body-details-property">
+    <div class="col-12 bg-graylight d-flex justify-content-center">
+      <div *ngFor="let item of response" class="row max-w-1918 col-md-10 row-body-details-property">
+
+        <div class="col-8 col-body-details-property">
           <div class="w-100 mb-5 border-radius-10 bg-white">
             <div class="w-100 align-items-center pt-5 px-5">
               <h1 class="fw-400 font-size-18 d-inline-block
@@ -82,15 +92,15 @@
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 mr-3
-                       px-4">Quarto:&nbsp;{{item.rooms}}</h1>
+                       px-4">Quarto:&nbsp;{{item.rooms || '-'}}</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 mr-3
-                       px-4">Banheiros:&nbsp;{{item.bathrooms}}</h1>
+                       px-4">Banheiros:&nbsp;{{item.bathrooms || '-'}}</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 px-4 mr-3
-                       ">Metragem:&nbsp;{{item.usefulArea}}m²</h1>
+                       ">Metragem:&nbsp;{{item.usefulArea || '-'}}m²</h1>
             </div>
             <div class="w-100 my-4 px-5 pt-3 pb-4
                     border-bottom-gray">
@@ -140,10 +150,7 @@
               </p>
             </div>
             <div class="w-100 py-4 border-bottom-gray px-5">
-              <p class="w-100 color-black fw-700
-                       font-size-18 line-24 pb-3">Detalhes do
-                Imóvel
-              </p>
+              <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Detalhes doImóvel</p>
               <table class="w-100">
                 <tbody>
                   <tr class="h-51">
@@ -162,7 +169,7 @@
                         contrução:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.yearOfConstruction}}</span>
+                                   color-black">&nbsp;&nbsp;{{item.yearOfConstruction || '-'}}</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -171,7 +178,7 @@
                         imóvel:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.propertyType}}</span>
+                                   color-black">&nbsp;&nbsp;{{item.propertyType || '-'}}</span>
                     </td>
                   </tr>
                   <tr class="h-51">
@@ -181,7 +188,7 @@
                                    color-black">Preço:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;R$ {{item.saleValue}}</span>
+                                   color-black">&nbsp;&nbsp;{{item.saleValue | currency: 'R$ ' || '-'}}</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -195,9 +202,10 @@
                       <span class="fw-400
                                    font-size-16 line-20
                                    color-black">Disponibilidade:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.typeOfAd}}</span>
+                      <span *ngIf="item.typeOfAd === 'sale'"
+                        class="fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Venda</span>
+                      <span *ngIf="item.typeOfAd === 'rent'"
+                        class="fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Aluguel</span>
                     </td>
                   </tr>
                   <tr class="h-51">
@@ -208,7 +216,7 @@
                         Condomínio:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.condominiumValue}}</span>
+                                   color-black">&nbsp;&nbsp;{{item.condominiumValue | currency: 'R$ ' || '-'}}</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -216,7 +224,7 @@
                                    color-black">Banheiro:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.rooms}}</span>
+                                   color-black">&nbsp;&nbsp;{{item.rooms || '-'}}</span>
                     </td>
                   </tr>
                   <tr class="h-51">
@@ -226,7 +234,7 @@
                                    color-black">Metragem:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.usefulArea}}m²</span>
+                                   color-black">&nbsp;&nbsp;{{item.usefulArea || '-'}}m²</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -234,7 +242,7 @@
                                    color-black">Vagas:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.vacancyNumber}}</span>
+                                   color-black">&nbsp;&nbsp;{{item.vacancyNumber || '-'}}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -291,9 +299,14 @@
             </div>
           </div>
           <div class="w-100 border-radius-10 p-5 bg-white">
-            <p class="w-100 color-black fw-700 font-size-18
-                    line-24 pb-3">Detalhes do Imóvel</p>
-            <table class="w-100">
+            <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
+              <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
+              <img *ngIf="!arrow1" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
+                class="animate__animated animate__rotateIn" (click)="openarrow(1)">
+              <img *ngIf="arrow1"  src="../../../assets/icon/arrow-top-blue.png" class="animate__animated animate__rotateIn"
+                width="18" style="cursor: pointer;" (click)="openarrow(1)">
+            </div>
+            <table *ngIf="arrow1" class="w-100 animate__animated animate__fadeInUp">
               <tbody>
                 <tr class="h-51">
                   <td class="align-items-center">
@@ -396,29 +409,29 @@
               </tbody>
             </table>
           </div>
-          <div class="w-100 border-radius-10 mt-5 p-5
-                 bg-white">
-            <p class="w-100 color-black d-flex
-                    block-important align-items-center
-                    justify-content-between fw-700 font-size-18
-                    line-24 pb-3">Localização
-              <span class="fw-400 font-size-14 line-20
-                       text-primary">Endereço do local,
-                Curitiba - Paraná, CEP 808080-80</span>
-            </p>
-            <iframe
+          <div class="w-100 border-radius-10 mt-5 p-5 bg-white">
+            <div class="w-100 justify-content-between d-flex align-items-center">
+              <p class="w-100 color-black d-flex block-important align-items-center justify-content-between fw-700 font-size-18 line-24 pb-3">Localização
+                <span class="fw-400 font-size-14 line-20 text-primary">Endereço do local, {{item.city || '-'}}, CEP {{item.cepAddress || '-'}}</span>
+              </p>
+              <img *ngIf="!arrow2" src="../../../assets/icon/arrow-down-blue.png" width="20" class="cursor-pointer animate__animated animate__rotateIn" (click)="openarrow(2)">
+              <img *ngIf="arrow2"  src="../../../assets/icon/arrow-top-blue.png" class="cursor-pointer animate__animated animate__rotateIn" width="18"  (click)="openarrow(2)">
+            </div>
+            <iframe *ngIf="arrow2"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7205.665528434405!2d-49.26210139554594!3d-25.443854055282333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1669903101993!5m2!1spt-BR!2sbr"
-              class="w-100 h-600" style="border:0;" allowfullscreen="" loading="lazy"
+              class="w-100 h-600 animate__animated animate__fadeInUp" style="border:0;" allowfullscreen="" loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-          <div id="previewplant" class="w-100 border-radius-10 mt-5 p-5
-                 bg-white">
-            <p class="w-100 color-black d-flex
-                    align-items-center justify-content-between
-                    fw-700 font-size-18 line-24 pb-3">Planta
-              baixa
-            </p>
-            <div class="w-100 my-4 d-flex block-important
+          <div id="previewplant" class="w-100 border-radius-10 mt-5 p-5 bg-white">
+            <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
+              <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Planta baixa</p>
+              <img *ngIf="!arrow3" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
+                class="animate__animated animate__rotateIn" (click)="openarrow(3)">
+              <img *ngIf="arrow3"  src="../../../assets/icon/arrow-top-blue.png" class="animate__animated animate__rotateIn"
+                width="18" style="cursor: pointer;" (click)="openarrow(3)">
+            </div>
+            <div *ngIf="arrow3" class="w-100 animate__animated animate__fadeInUp">
+              <div  class="w-100 my-4 d-flex block-important
                     border border-radius-10
                     justify-content-between p-4">
               <div class="w-auto d-inline-block">
@@ -439,8 +452,7 @@
                   34 m²
                 </h3>
                 <h3 class="fw-400 px-4 my-2 font-size-18
-                          line-24 color-black d-inline-block">Preço:
-                  R$ 222,000
+                          line-24 color-black d-inline-block">Preço: {{item.saleValue | currency: 'R$ ' || '-'}}
                 </h3>
               </div>
             </div>
@@ -457,13 +469,15 @@
               lobortis nisl ut aliquip ex ea commodo
               consequat.
             </p>
+            </div>
+            
           </div>
           <div class="w-100 border-radius-10 mt-5 bg-white">
             <div class="w-100 px-5 space-segment pt-5 mb-4
                     d-flex align-items-center
                     border-bottom-gray">
               <button [class]="segment ? 'color-muted':'border-bottom-green color-black' "
-                (click)="segmentvideo('video')"id="previewvideo"
+                (click)="segmentvideo('video')" id="previewvideo"
                 class="btn bg-transparent py-2 px-5 btn-segment fw-700 font-size-18 line-24" type="button">Vídeo do
                 Imóvel</button>
               <button [class]="segment ? 'border-bottom-green color-black':'color-muted' "
@@ -497,8 +511,8 @@
             </div>
             <div *ngIf="tourvirtual" class="w-100 d-flex justify-content-center position-relative pt-4 pb-5">
               <div class="w-100 align-items-center text-align-center">
-              <img src="../../../assets/img/360video.png" class="w-50" alt="not video"/>
-              <p class="fw-500 py-3 font-size-18 line-15 text-dark">Este anúncio ainda não possui Visita em 360°</p>
+                <img src="../../../assets/img/360video.png" class="w-50" alt="not video" />
+                <p class="fw-500 py-3 font-size-18 line-15 text-dark">Este anúncio ainda não possui Visita em 360°</p>
               </div>
             </div>
           </div>
@@ -634,8 +648,7 @@
                   <td class="d-tavle-cell
                              text-align-right">
                     <span class="fw-700 font-size-18
-                                line-24 color-black">R$
-                      4.200,00</span>
+                                line-24 color-black">{{item.saleValue | currency: 'R$ ' || '-'}}</span>
                   </td>
                 </tr>
                 <tr class="h-40">
@@ -649,7 +662,7 @@
                   <td class="d-tavle-cell
                              text-align-right">
                     <span class="fw-700 font-size-18
-                                line-24 color-black">R$ 0</span>
+                                line-24 color-black">{{item.condominiumValue | currency: 'R$ ' || '-'}}</span>
                   </td>
                 </tr>
                 <tr class="h-40">
@@ -662,7 +675,7 @@
                   <td class="d-tavle-cell
                              text-align-right">
                     <span class="fw-700 font-size-18
-                                line-24 color-black">R$ 58</span>
+                                line-24 color-black">{{item.valueOfIptu | currency: 'R$ ' || '-'}}</span>
                   </td>
                 </tr>
                 <tr class="h-40">
@@ -704,9 +717,9 @@
                   </td>
                   <td class="d-tavle-cell
                              text-align-right">
-                    <span class="fw-700 font-size-18
-                                line-24 color-black">R$
-                      4.241,00</span>
+                    <span class="fw-700 font-size-18 line-24 color-black">
+                      {{finalValue | currency: 'R$ ' || '-'}}
+                    </span>
                   </td>
                 </tr>
               </tbody>
