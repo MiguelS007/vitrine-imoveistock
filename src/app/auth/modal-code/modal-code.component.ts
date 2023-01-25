@@ -63,37 +63,38 @@ export class ModalCodeComponent implements OnInit {
     }
   }
   async confirm() {
-      this.spinnerload = true;
-      this.continued = false;
-      this.request = {
-        code: `${this.form.controls['code1'].value}${this.form.controls['code2'].value}${this.form.controls['code3'].value}${this.form.controls['code4'].value}`,
-        phone: this.phone
-      }
-      this.authenticationService.authenticateCodeConfirmation(this.request).subscribe(
-        async success => {
-          localStorage.removeItem('phone');
-          this.authenticationService.setAuthenticatedUser(
-            new AuthetincatedUserDto(success.userId, success.phone, success.token, success.profileId, success.apiFunctionsId),
-            );
+    this.spinnerload = true;
+    this.continued = false;
+    this.request = {
+      code: `${this.form.controls['code1'].value}${this.form.controls['code2'].value}${this.form.controls['code3'].value}${this.form.controls['code4'].value}`,
+      phone: this.phone
+    }
+    this.authenticationService.authenticateCodeConfirmation(this.request).subscribe(
+      async success => {
+        localStorage.removeItem('phone');
 
-            this.userService.getUser().subscribe(
-              success => {
-                let user = JSON.stringify(success);
-                localStorage.setItem('userDto', user);
-                this.router.navigate(['/']);
-                this.modalService.dismissAll()
-            },
-            error => {
-              console.error(error)
-            }
-          )
-        },
-        async error => {
-          this.toastrService.error('Erro ao confirmar codigo', '', { progressBar: true });
-          this.spinnerload = false;
-          this.continued = true;
-        }
-      )
+        this.authenticationService.setAuthenticatedUser(
+          new AuthetincatedUserDto(success.userId, success.phone, success.token, success.profileId, success.apiFunctionsId),
+        );
+        this.authenticationService.logged.next(true)
+        this.userService.getUser().subscribe(
+          success => {
+            let user = JSON.stringify(success);
+            localStorage.setItem('userDto', user);
+            this.router.navigate(['/']);
+            this.modalService.dismissAll()
+          },
+          error => {
+            console.error(error)
+          }
+        )
+      },
+      async error => {
+        this.toastrService.error('Erro ao confirmar codigo', '', { progressBar: true });
+        this.spinnerload = false;
+        this.continued = true;
+      }
+    )
   }
 
   onDigitInput(event: any, item) {
@@ -119,7 +120,7 @@ export class ModalCodeComponent implements OnInit {
 
   async runError(error: any) {
     this.toastrService.error('Código Inválido! ', '', { progressBar: true });
-    
+
     this.spinnerload = false;
     this.form.setValue({ coden1: '', coden2: '', coden3: '', coden4: '' });
 

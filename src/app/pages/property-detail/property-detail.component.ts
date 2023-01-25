@@ -75,7 +75,6 @@ export class PropertyDetailComponent implements OnInit {
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
-        console.log(this.response, 'responsta');
       },
       error => { console.log(error, 'data not collected') }
     );

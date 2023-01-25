@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-light container navbar-custom">
   <img [routerLink]="['/']" src="../../../assets/logo/logo-vitrine.svg" class="logo-navbar-desktop">
   <img [routerLink]="['/']" src="../../../assets/logo/logo-mobile.svg" class="logo-navbar-mobile">
@@ -18,7 +17,8 @@
           class="nav-link  px-3 fw-400 font-size-14 line-20">Sobre</a>
       </li>
       <li class="nav-item dropdown">
-        <a (click)="changePage('indicateProperties')" class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Indicar imóveis</a>
+        <a (click)="changePage('indicateProperties')"
+          class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Indicar imóveis</a>
       </li>
       <li class="dropdown cursor-pointer nav-item">
         <a class="nav-link px-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled" role="button"
@@ -32,7 +32,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a (click)="changePage('forBrokers')" 
+        <a (click)="changePage('forBrokers')"
           class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores</a>
       </li>
       <li class="nav-item">
@@ -44,9 +44,10 @@
           class="nav-link px-3 fw-400 font-size-14 line-20 item-navbar-disabled">
           Login
         </a>
-        <a *ngIf="loggedname" class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled text-capitalize" id="droplogin"
-          role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="bi font-size-20 bi-person"></i> {{userName | slice:0:10}}...
+        <a *ngIf="loggedname"
+          class="nav-link  px-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled text-capitalize"
+          id="droplogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="bi font-size-20 bi-person"></i> {{userName}}
           <img src="../../../assets/icon/arrow-down.png" />
         </a>
         <div *ngIf="loggedopt" class="dropdown-menu arrow_box px-4 border-radius-10 dropdown-menu-right"
