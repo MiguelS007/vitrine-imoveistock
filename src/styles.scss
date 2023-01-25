@@ -1130,9 +1130,14 @@ input:focus {
     right: 5%;
     padding: 1.5rem 2rem;
 }
+// .row-body-details-property{
+//     display: flex;
+//     justify-content: center;
+// }
 
 .col-btns-preview-img {
     top: -170px;
+    justify-content: space-evenly;
     background: linear-gradient(0deg, black, transparent);
 }
 

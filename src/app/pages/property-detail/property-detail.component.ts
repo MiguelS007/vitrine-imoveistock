@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
+import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { SearchService } from 'src/app/service/search.service';
 
 @Component({
   selector: 'app-property-detail',
@@ -15,6 +18,9 @@ export class PropertyDetailComponent implements OnInit {
   formproperty: FormGroup;
 
   changeSubscription: Subscription;
+
+  response: AnnouncementGetResponseDto[] = [];
+  user: UserGetResponseDto;
 
   iconlikeheart = false;
   iconshare = false;
@@ -36,6 +42,7 @@ export class PropertyDetailComponent implements OnInit {
     private router: Router,
     private datamokservice: DatamokService,
     private formBuilder: FormBuilder,
+    private searchService: SearchService,
 
   ) {
     this.form = this.formBuilder.group({
@@ -58,15 +65,22 @@ export class PropertyDetailComponent implements OnInit {
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
       this.modallogin = false;
     });
-
   }
+
   ngOnInit(): void {
     this.onlyimg = this.datamokservice.onlypreview;
     this.previewimg = this.datamokservice.imagespreview;
     this.propertyproducts = this.datamokservice.exclusiveProperties;
     this.products = this.datamokservice.resultSearch;
-
+    this.searchService.getPropertyHome().subscribe(
+      success => {
+        this.response = success;
+        console.log(this.response, 'responsta');
+      },
+      error => { console.log(error, 'data not collected') }
+    );
   }
+
   btninteractionimg(value: string) {
     if (value === 'like') {
       this.iconlikeheart = !this.iconlikeheart;
@@ -77,6 +91,7 @@ export class PropertyDetailComponent implements OnInit {
       window.print();
     }
   }
+  
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
   }
@@ -92,9 +107,11 @@ export class PropertyDetailComponent implements OnInit {
       this.tourvirtual = true;
     }
   }
+
   goExpress() {
     this.router.navigate(['logged/express']);
   }
+
   nextScheduling(value: string) {
     if (value === 'step1') {
       this.step1scheduling = false;
