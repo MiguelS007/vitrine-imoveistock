@@ -154,9 +154,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   goDeashboard() {
-    console.log(
-      localStorage.getItem('user')
-    );
+    this.router.navigate(['logged/visits'])
   }
   sideBtn() {
     this.collapsed = !this.collapsed;
