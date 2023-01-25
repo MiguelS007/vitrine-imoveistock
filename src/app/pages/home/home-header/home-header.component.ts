@@ -69,18 +69,16 @@ export class HomeHeaderComponent implements OnInit {
 
   ngOnInit() {
     let user = JSON.parse(localStorage.getItem('userDto'))
-    if (user !== null) {
-      this.searchService.getPropertyHome().subscribe(
-        success => {
-          this.response = success;
-          console.log(this.response);
-          for (let i = 0; i < this.response.length; i++) {
+    this.searchService.getPropertyHome().subscribe(
+      success => {
+        this.response = success;
+        console.log(this.response);
+        for (let i = 0; i < this.response.length; i++) {
           console.log(this.response[i].cidade);
-          }
-        },
-        error => { console.log(error, 'data not collected') }
-      );
-    }
+        }
+      },
+      error => { console.log(error, 'data not collected') }
+    );
   }
   // make full search
   confirm() {
@@ -88,15 +86,13 @@ export class HomeHeaderComponent implements OnInit {
   }
   // search filter
   resultSearch(tableName: string) {
-    if(tableName.length > 0) this.filtersearch = true
+    if (tableName.length > 0) this.filtersearch = true
     else this.filtersearch = false
     this.filterResponse = this.response.filter(el => el.cidade.toLowerCase().includes(tableName.toLowerCase()))
-    console.log(this.filterResponse);
   }
 
-  selectCites(selected: string){
-    console.log(selected);
-    let selectedcities =  this.form.controls['typePropertyLocal']
+  selectCites(selected: string) {
+    let selectedcities = this.form.controls['typePropertyLocal']
     this.form.setValue({
       selectedcities: selected
     });

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthenticateRequestDto } from '../dtos/authenticate-request.dto';
@@ -28,6 +28,8 @@ export class AuthenticationService extends BaseService {
   }
 
   jwtPayload: JwtPayload;
+
+  logged = new Subject();
 
   constructor(
       private httpClient: HttpClient
