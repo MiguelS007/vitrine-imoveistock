@@ -86,11 +86,11 @@
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 mr-3
-                       px-4">Banheiros:&nbsp;2</h1>
+                       px-4">Banheiros:&nbsp;{{item.bathrooms}}</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 px-4 mr-3
-                       ">Metragem:&nbsp;180</h1>
+                       ">Metragem:&nbsp;{{item.usefulArea}}</h1>
             </div>
             <div class="w-100 my-4 px-5 pt-3 pb-4
                     border-bottom-gray">
@@ -162,7 +162,7 @@
                         contrução:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;2019</span>
+                                   color-black">&nbsp;&nbsp;{{item.yearOfConstruction}}</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -171,7 +171,7 @@
                         imóvel:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;Apartamento</span>
+                                   color-black">&nbsp;&nbsp;{{item.propertyType}}</span>
                     </td>
                   </tr>
                   <tr class="h-51">
@@ -181,7 +181,7 @@
                                    color-black">Preço:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;604,000</span>
+                                   color-black">&nbsp;&nbsp;R$ {{item.saleValue}}</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -197,7 +197,7 @@
                                    color-black">Disponibilidade:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;Venda</span>
+                                   color-black">&nbsp;&nbsp;{{item.typeOfAd | currency:'BRL'}}</span>
                     </td>
                   </tr>
                   <tr class="h-51">
