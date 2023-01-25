@@ -51,7 +51,7 @@ export class ModalSignupComponent implements OnInit {
     )
   }
 
-  
+
 
 
 
@@ -67,15 +67,14 @@ export class ModalSignupComponent implements OnInit {
       name: this.form.controls['name'].value,
       profileId: this.response
     }
-    
+
     if (this.form.controls['termsAndPolicy'].value === true) {
       this.userService.register(this.request).subscribe(
         success => {
-          this.nextFunction()
+          this.toastrService.error('Cadastrado com sucesso!', '', { progressBar: true });
         },
         error => {
-          this.toastrService.error('Erro ao cadastrar ', '', { progressBar: true });
-          // console.log(error, 'deu ruin')
+          this.toastrService.error('Erro ao cadastrar', '', { progressBar: true });
         }
       )
     }
@@ -84,17 +83,17 @@ export class ModalSignupComponent implements OnInit {
     }
   }
 
-  nextFunction() {
-    this.authenticationService.authenticate(this.request).subscribe(
-      async success => {
-        this.toastrService.success('Sms enviado com sucesso!', '', { progressBar: true });
-        localStorage.setItem('phone', this.request.phone);
-        this.router.navigate(['auth/insert-code']);
-      },
-      async error => {
-        this.toastrService.success('Não foi possível enviar SMS!', '', { progressBar: true });
-        console.log(error);
-      }
-    );
-  }
+  // nextFunction() {
+  //   this.authenticationService.authenticate(this.request).subscribe(
+  //     async success => {
+  //       this.toastrService.success('Sms enviado com sucesso!', '', { progressBar: true });
+  //       localStorage.setItem('phone', this.request.phone);
+  //       this.router.navigate(['auth/insert-code']);
+  //     },
+  //     async error => {
+  //       this.toastrService.success('Não foi possível enviar SMS!', '', { progressBar: true });
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 }

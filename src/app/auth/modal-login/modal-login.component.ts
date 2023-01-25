@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticateRequestDto } from 'src/app/dtos/authenticate-request.dto';
 // import { ToastrService } from 'ngx-toastr';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { ModalSignupComponent } from '../modal-signup/modal-signup.component';
 import { ModalTelComponent } from '../modal-tel/modal-tel.component';
 
 @Component({
@@ -30,10 +31,12 @@ export class ModalLoginComponent implements OnInit {
   }
 
   login() {
+    this.exit()
     this.modalService.open(ModalTelComponent, {centered: true})
   }
 
   createAccount() {
-    
+    this.exit()
+    this.modalService.open(ModalSignupComponent, {centered: true})
   }
 }
