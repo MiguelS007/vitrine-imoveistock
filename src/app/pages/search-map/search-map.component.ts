@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup , Validators} from '@angular/forms';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { SearchService } from 'src/app/service/search.service';
@@ -27,20 +27,19 @@ export class SearchMapComponent implements OnInit {
   constructor(
     private searchService: SearchService,
     private formBuilder: FormBuilder,
-
-
   ) { 
     this.form = this.formBuilder.group({
-    });
+      orderby: ['', [Validators.required]],
 
+    });
   }
 
   ngOnInit(): void {
 
-    this.searchService.getPropertyHome().subscribe(
+    this.searchService.getPropertyList().subscribe(
       success => {
         this.response = success;
-        console.log( this.response ,'numero');
+        // console.log( this.response[3].advertiser?.photo?.location ,'numero');
       },
       error => { console.log(error, 'data not collected') }
     );

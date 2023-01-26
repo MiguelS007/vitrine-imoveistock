@@ -10,8 +10,8 @@
                 Resultado da sua busca por <b>[string busca]</b>
             </p>
         </div>
-        <div class="row w-100">
-            <div class="col-7">
+        <div class="row col-md-10 w-100">
+            <div class="col-8">
                 <div class="w-100 d-flex justify-content-between">
                     <div
                         class="w-fit px-5 cursor-pointer d-flex justify-content-center w3-black mr-2 py-4 border-radius-10">
@@ -67,7 +67,7 @@
                 <div class="row mx-0">
                     <div class="col-12 col-cards-products px-0 col-sm-12">
                         <div *ngFor="let item of response | paginate: {itemsPerPage: 10, currentPage: paginationProduct }; let i= index" class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3 border-radius-10 bg-white">
-                            <div (click)="goDetailProperty()" class="bg-img-result py-2 px-3 border-radius-10">
+                            <div (click)="goDetailProperty()" class="bg-img-product py-2 px-3 border-radius-10">
                                  <!-- style='background-image: url({{item.bgproduct}});' -->
                                 <div class="w-100 h-50 d-flex">
                                     <h4 class="bg-purple h-fit px-4 py-2 mb-0
@@ -127,6 +127,11 @@
                                         color-black">{{item.usefulArea}} m2</p>
                                 </div>
                             </div>
+                            <div class="w-100 d-flex align-items-center py-2 px-1">
+                                <img  [src]="item.advertiser?.photo?.location" class="border-radius-100 "
+                                    style="width: 42px;" />
+                                <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">{{item.advertiser?.name || '-'}}</h3>
+                            </div>
                           
                         </div>
                     </div>
@@ -139,6 +144,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-4">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230483.17971440213!2d-49.42988400298687!3d-25.495050065287735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1674742868033!5m2!1spt-BR!2sbr" 
+                class="w-100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </form>

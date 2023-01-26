@@ -27,6 +27,11 @@ export class SearchService extends BaseService {
       .get(`${this.url}announcement/list`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
+  getPropertyList(): Observable<AnnouncementGetResponseDto[]> {
+    return this.httpClient
+      .get(`${this.url}announcement`, this.anonymousHeader())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+  }
   listByAdvertizer(): Observable<AnnouncementGetResponseDto[]> {
     return this.httpClient
         .get(`${this.url}announcement/list-by-advertizer`, this.authorizedHeader())
