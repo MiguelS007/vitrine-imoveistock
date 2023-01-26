@@ -72,10 +72,6 @@ export class HomeHeaderComponent implements OnInit {
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
-        console.log(this.response);
-        for (let i = 0; i < this.response.length; i++) {
-          console.log(this.response[i].cityAddress);
-        }
       },
       error => { console.log(error, 'data not collected') }
     );
@@ -96,7 +92,6 @@ export class HomeHeaderComponent implements OnInit {
     const filtered = removeRepets.filter((item, index) => removeRepets.indexOf(item) === index);
     this.filterResponse = filtered;
     this.filtersearch = true
-    console.log(this.filterResponse)
   }
 
   selectCites(selected) {

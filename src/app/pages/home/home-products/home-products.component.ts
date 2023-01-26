@@ -44,7 +44,6 @@ naruto:string;
   }
 
   announcementSelected(value) {
-    console.log(value)
     this.router.navigate([`property-detail/${value}`])
   }
 }
