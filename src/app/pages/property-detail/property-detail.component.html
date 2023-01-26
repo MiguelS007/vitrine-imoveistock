@@ -470,7 +470,6 @@
               consequat.
             </p>
             </div>
-            
           </div>
           <div class="w-100 border-radius-10 mt-5 bg-white">
             <div class="w-100 px-5 space-segment pt-5 mb-4
@@ -517,8 +516,7 @@
             </div>
           </div>
           <div class="row my-5">
-            <div class="col-12 col-cards-products px-0
-                    col-sm-12">
+            <div class="col-12 col-cards-products px-0 col-sm-12">
               <div
                 *ngFor="let item of products | paginate: { itemsPerPage: 4, currentPage:paginationProduct }; let i= index"
                 class="w-46
@@ -743,232 +741,114 @@
                   </div>
                   <form [formGroup]="form">
                     <div *ngIf="step1scheduling" class="anima-body">
-                      <p class="fw-700 py-3
-                                   font-size-24 line-32
-                                   color-black w-100
-                                   text-center">Agendar
-                        visita
-                      </p>
-                      <div class="row
-                                   border-radius-10
-                                   border p-3 d-flex">
+                      <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">Agendar visita</p>
+                      <div class="row border-radius-10 border p-3 d-flex">
                         <div class="col-3 p-0">
-                          <img src="../../../assets/img/ap.png" class="w-100
-                                         border-radius-10
-                                         " />
+                          <img src="../../../assets/img/ap.png" class="w-100 border-radius-10" />
                         </div>
                         <div class="col-9">
-                          <h5 class="fw-700
-                                         font-size-18
-                                         line-24
-                                         color-black">Cobertura
-                            com uma vista
-                            incrível
-                          </h5>
-                          <p class="w-100 mb-0
-                                         d-flex">
-                            <span class="fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black">Quartos:&nbsp;4</span>
-                            <span class="fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black">Banheiros:&nbsp;2</span>
-                            <span class="fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black">Metragem:&nbsp;192m²</span>
+                          <h5 class="fw-700 font-size-18 line-24 color-black d-inline-block text-truncate" style="max-width: 150px;">{{response.description || '-'}}</h5>
+                          <p class="w-100 mb-0 d-grid">
+                            <span class="fw-400 font-size-14 line-19 color-black">Quartos:&nbsp;{{response.rooms || '-'}}</span>
+                            <span class="fw-400 font-size-14 line-19 color-black">Banheiros:&nbsp;{{response.bathrooms || '-'}}</span>
+                            <span class="fw-400 font-size-14 line-19 color-black">Metragem:&nbsp;{{response.usefulArea || '-'}}m²</span>
                           </p>
                         </div>
                       </div>
                       <div class="col-12 px-0">
-                        <p class="fw-500 mx-1
-                                      font-size-18 line-24
-                                      pt-5 color-black">Escolha
-                          um dia:
-                        </p>
-                        <div class="selector
-                                      mt-2
-                                      d-flex">
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <input type="radio" id="building-option" formControlName="day" value="terça" name="day"
-                              class="selector-item_radio
-                                            border-radius-05
-                                            w-100 h-100
-                                            text-center
-                                            position-relative">
-                            <label for="building-option" class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black
-                                            border-black">Ter.
-                              29</label>
+                        <p class="fw-500 mx-1 font-size-18 line-24 pt-5 color-black">Escolha um dia:</p>
+                        <div class="selector mt-2 d-flex">
+                          <div *ngFor="let item of arrayDeDatas" class="selecotr-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" [id]="item" formControlName="day" [value]="item" name="day" (change)="selectDate(item)"
+                              class="selector-item_radio  border-radius-05 w-100 h-100 text-center position-relative">
+                            <label [for]="item" class="selector-item_label border-radius-100 fw-400 font-size-14 line-19 color-black border-black">
+                              {{item | date: 'EEE'}} {{item | date: 'dd'}}/{{item | date: 'MM'}}
+                            </label>
                           </div>
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <input type="radio" id="ground-option" formControlName="day" name="day" value="Quarta"
-                              class="selector-item_radio">
-                            <label for="ground-option" class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black
-                                            border-black">Qua.
-                              30</label>
+                          
+                        </div>
+                        <p class="fw-500 mx-1 font-size-18 line-24 pt-4 color-black">Escolha um horário:</p>
+                        <div class="selector mt-2 d-flex">
+                         <div class="my-3 flex-wrap justify-content-center d-flex">
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="08:30" formControlName="hour" value="08:30" name="hour"  class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative" (change)="selectHour('08:30')">
+                            <label for="08:40"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">08:30</label>
                           </div>
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <input type="radio" id="house-option" formControlName="day" name="day" value="Quinta"
-                              class="selector-item_radio">
-                            <label for="house-option" class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black
-                                            border-black">Qui.
-                              31</label>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                              <input type="radio" id="09:00" formControlName="hour" value="09:00" name="hour"  class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative" (change)="selectHour('09:00')">
+                              <label for="09:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">09:00</label>
                           </div>
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <input type="radio" id="sex-option" formControlName="day" name="day" value="Sexta"
-                              class="selector-item_radio">
-                            <label for="sex-option" class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black
-                                            border-black">Sex.
-                              01</label>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                              <input type="radio" id="09:30" formControlName="hour" value="09:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('09:30')">
+                              <label for="09:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">09:30</label>
                           </div>
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <label class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-muted
-                                            border">Sab.
-                              02</label>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                              <input type="radio" id="10:00" formControlName="hour" value="10:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('10:00')">
+                              <label for="10:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">10:00</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="10:30" formControlName="hour" value="10:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('10:30')">
+                            <label for="10:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">10:30</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="11:00" formControlName="hour" value="11:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('11:00')">
+                            <label for="11:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">11:00</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                              <input type="radio" id="11:30" formControlName="hour" value="11:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('11:30')">
+                              <label for="11:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">11:30</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="12:00" formControlName="hour" value="12:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('12:00')">
+                            <label for="12:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">12:00</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="12:30" formControlName="hour" value="12:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('12:30')">
+                            <label for="12:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">12:30</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="13:00" formControlName="hour" value="13:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('13:00')">
+                            <label for="13:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">13:00</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="13:30" formControlName="hour" value="13:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('13:30')">
+                            <label for="13:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">13:30</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="14:00" formControlName="hour" value="14:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('14:00')">
+                            <label for="14:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">14:00</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="14:30" formControlName="hour" value="14:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('14:30')">
+                            <label for="14:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">14:30</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="15:00" formControlName="hour" value="15:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('15:00')">
+                            <label for="15:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">15:00</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="15:30" formControlName="hour" value="15:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('15:30')">
+                            <label for="15:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">15:30</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="16:00" formControlName="hour" value="16:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('16:00')">
+                            <label for="16:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">16:00</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="16:30" formControlName="hour" value="16:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('16:30')">
+                            <label for="16:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">16:30</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="17:00" formControlName="hour" value="17:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('17:00')">
+                            <label for="17:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">17:00</label>
+                          </div>
+                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" id="17:30" formControlName="hour" value="17:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('17:30')">
+                            <label for="17:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">17:30</label>
                           </div>
                         </div>
-                        <p class="fw-500 mx-1
-                                      font-size-18 line-24
-                                      pt-4 color-black">Escolha
-                          um horário:
-                        </p>
-                        <div class="selector
-                                      mt-2
-                                      d-flex">
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <input type="radio" id="0800-option" formControlName="time" name="time" value="0800" class="selector-item_radio
-                                            border-radius-05
-                                            w-100 h-100
-                                            text-center
-                                            position-relative">
-                            <label for="0800-option" class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black
-                                            border-black">08:00</label>
-                          </div>
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <input type="radio" id="0915-option" formControlName="time" name="time" value="0915"
-                              class="selector-item_radio">
-                            <label for="0915-option" class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black
-                                            border-black">09:15</label>
-                          </div>
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <input type="radio" id="1015-option" formControlName="time" name="time" value="1015"
-                              class="selector-item_radio">
-                            <label for="1015-option" class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black
-                                            border-black">10:15</label>
-                          </div>
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <input type="radio" id="1130-option" formControlName="time" name="time" value="1130"
-                              class="selector-item_radio">
-                            <label for="1130-option" class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-black
-                                            border-black">11:30</label>
-                          </div>
-                          <div class="selecotr-item
-                                         mx-1 d-flex
-                                         h-100
-                                         position-relative
-                                         ion-justify-content-center
-                                         ion-align-items-center">
-                            <label class="selector-item_label
-                                            border-radius-100
-                                            fw-400
-                                            font-size-14
-                                            line-19
-                                            color-muted
-                                            border">12:45</label>
-                          </div>
                         </div>
+                        
                         <div class="w-100 py-4
                                       d-grid
                                       text-align-left">
@@ -1008,78 +888,36 @@
                         <br /> agendamento
                       </p>
                       <div class="w-100">
-                        <p class="fw-500
-                                      font-size-18
-                                      line-24
-                                      color-black">Resumo:</p>
+                        <p class="fw-500 font-size-18 line-24 color-black">Resumo:</p>
                         <p>
-                          <i class="bi
-                                         font-size-18
-                                         color-black
-                                         mr-1
-                                         bi-geo-alt"></i>
-                          <span class="fw-400
-                                         font-size-16
-                                         line-20
-                                         color-black">Rua
-                            Estados
-                            Unidos
-                            1987,
-                            Curitiba -
-                            PR</span>
+                          <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
+                          <span class="fw-400 font-size-16 line-20 color-black">
+                            {{response.complementAddress || '-'}} 
+                            {{response.yearOfConstruction || '-'}},
+                            {{response.city || '-'}} - {{response.uf || '-'}}
+                          </span>
                         </p>
-                        <div class="row px-3
-                                      my-3 pb-3
-                                      d-flex">
-                          <div class="col
-                                         justify-content-left
-                                         px-0 d-flex
-                                         align-items-center
-                                         justify-content-left">
+                        <div class="row px-3 my-3 pb-3 d-flex">
+                          <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2" />
-                            <p class="fw-400
-                                            mb-0
-                                            font-size-14
-                                            line-20
-                                            color-black">4
-                              Quartos
+                            <p class="fw-400 mb-0 font-size-14 line-20 color-black">
+                              {{response.rooms || '-'}} Quartos
                             </p>
                           </div>
-                          <div class="col
-                                         justify-content-center
-                                         px-0 d-flex
-                                         align-items-center
-                                         justify-content-left">
+                          <div class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/car.png" class="pr-2" />
-                            <p class="fw-400
-                                            mb-0
-                                            font-size-14
-                                            line-20
-                                            color-black">2
-                              Vagas
+                            <p class="fw-400 mb-0 font-size-14 line-20 color-black">
+                              {{response.vacancyNumber || '-'}} Vagas
                             </p>
                           </div>
-                          <div class="col
-                                         justify-content-end
-                                         px-0 d-flex
-                                         align-items-center
-                                         justify-content-left">
+                          <div class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/rule.png" class="pr-2" />
-                            <p class="fw-400
-                                            mb-0
-                                            font-size-14
-                                            line-20
-                                            color-black">199
-                              m2
+                            <p class="fw-400 mb-0 font-size-14 line-20 color-black">
+                              {{response.usefulArea || '-'}} m2
                             </p>
                           </div>
                         </div>
-                        <p class="w-100
-                                      fw-700
-                                      pt-2 pb-4
-                                      font-size-22
-                                      line-32
-                                      color-black">
+                        <p class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
                           R$222,000
                         </p>
                         <p class="w-100

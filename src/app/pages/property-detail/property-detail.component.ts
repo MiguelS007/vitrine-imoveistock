@@ -27,6 +27,10 @@ export class PropertyDetailComponent implements OnInit {
   arrow2: boolean = false;
   arrow3: boolean = false;
 
+  arrayDeDatas: any = [];
+
+  dataSelecionada: any;
+  horasSelecionada: string;
 
   iconlikeheart = false;
   iconshare = false;
@@ -69,10 +73,20 @@ export class PropertyDetailComponent implements OnInit {
       typeconstruction: ['', [Validators.required]],
       typefootagemax: ['', [Validators.required]],
       typefootagemin: ['', [Validators.required]],
+      hour: ['', [Validators.required]],
+      day: ['', [Validators.required]],
     });
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
       this.modallogin = false;
     });
+  }
+
+  ngAfterViewInit(): void {
+    for (let i = 1; i < 6; i++) {
+      let hoje = new Date();
+      hoje.setDate(hoje.getDate() + i);
+      this.arrayDeDatas.push(hoje)
+    }
   }
 
   ngOnInit(): void {
@@ -83,16 +97,7 @@ export class PropertyDetailComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
     this.response = this.route.snapshot.data['resolve'];
-
     console.log(this.response)
-
-    // this.searchService.listByAdvertizer().subscribe(
-    //   success => {
-    //     this.response = success;
-    //     this.finalValue = (parseInt(this.response[0].valueOfIptu) + parseInt(this.response[0].saleValue) + parseInt(this.response[0].condominiumValue))
-    //   },
-    //   error => { console.log(error, 'data not collected') }
-    // );
   }
 
   btninteractionimg(value: string) {
@@ -120,6 +125,15 @@ export class PropertyDetailComponent implements OnInit {
       this.propertyvideo = false;
       this.tourvirtual = true;
     }
+  }
+
+
+  selectDate(value) {
+    this.dataSelecionada = value
+  }
+
+  selectHour(value) {
+    this.horasSelecionada = value
   }
 
   goExpress() {
