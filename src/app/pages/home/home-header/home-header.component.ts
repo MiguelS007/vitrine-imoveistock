@@ -72,10 +72,6 @@ export class HomeHeaderComponent implements OnInit {
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
-        console.log(this.response);
-        for (let i = 0; i < this.response.length; i++) {
-          console.log(this.response[i].cidade);
-        }
       },
       error => { console.log(error, 'data not collected') }
     );
@@ -88,16 +84,21 @@ export class HomeHeaderComponent implements OnInit {
   resultSearch(tableName: string) {
     if (tableName.length > 0) this.filtersearch = true
     else this.filtersearch = false
-    this.filterResponse = this.response.filter(el => el.cidade.toLowerCase().includes(tableName.toLowerCase()))
+    this.filterResponse;
+    let removeRepets: any = [];
+    for (let i = 0; i < this.response.length; i++) {
+      removeRepets.push(this.response[i].cityAddress);
+    }
+    const filtered = removeRepets.filter((item, index) => removeRepets.indexOf(item) === index);
+    this.filterResponse = filtered;
+    this.filtersearch = true
   }
 
-  selectCites(selected: string) {
-    let selectedcities = this.form.controls['typePropertyLocal']
-    this.form.setValue({
-      selectedcities: selected
+  selectCites(selected) {
+    this.form.patchValue({
+      typePropertyLocal: selected
     });
-
-
+    this.filtersearch = false;
   }
 
   buyOption(value: string) {

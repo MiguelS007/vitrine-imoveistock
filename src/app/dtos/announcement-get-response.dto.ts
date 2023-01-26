@@ -12,15 +12,13 @@ export abstract class AnnouncementGetResponseDto {
 
     propertyType: string;
 
-    bairro?: string;
+    cityAddress: string;
 
-    city?: string;
+    ufAddress: string;
 
-    cidade?: string;
+    publicPlaceAddress: string;
 
-    logradouro?: string;
-
-    uf?: string;
+    districtAddress: string;
 
     propertyCharacteristics: string;
 

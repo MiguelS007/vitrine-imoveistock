@@ -412,7 +412,7 @@
           <div class="w-100 border-radius-10 mt-5 p-5 bg-white">
             <div class="w-100 justify-content-between d-flex align-items-center">
               <p class="w-100 color-black d-flex block-important align-items-center justify-content-between fw-700 font-size-18 line-24 pb-3">Localização
-                <span class="fw-400 font-size-14 line-20 text-primary">Endereço do local, {{response.city || '-'}}, CEP {{response.cepAddress || '-'}}</span>
+                <span class="fw-400 font-size-14 line-20 text-primary">Endereço do local, {{response.cityAddress || '-'}}, CEP {{response.cepAddress || '-'}}</span>
               </p>
               <img *ngIf="!arrow2" src="../../../assets/icon/arrow-down-blue.png" width="20" class="cursor-pointer animate__animated animate__rotateIn" (click)="openarrow(2)">
               <img *ngIf="arrow2"  src="../../../assets/icon/arrow-top-blue.png" class="cursor-pointer animate__animated animate__rotateIn" width="18"  (click)="openarrow(2)">

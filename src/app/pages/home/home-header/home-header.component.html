@@ -26,7 +26,7 @@
                                     <div *ngIf="filtersearch" class="w-100 z-10 border-radius-10 bg-light position-absolute" style="max-width: 220px; top: 120px;">
                                         <ul id="bodyresponseresultfilter" class="list-group bg-light border-radius-10 box-shadow p-1 list-group-flush">
                                             <li *ngFor="let item of filterResponse" class="list-group-item cursor-pointer border-none  text-truncate" style="max-width: 190px;">
-                                                <a>{{item.cidade}}</a>
+                                                <a (click)="selectCites(item)" class="w-100 h-100">{{item}}</a>
                                             </li>
                                         </ul>
                                     </div>

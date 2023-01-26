@@ -1,5 +1,7 @@
-import { forwardRef, NgModule } from '@angular/core';
+import { forwardRef, NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
 import { AppRoutingModule } from "./app-routing.module";
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
@@ -35,6 +37,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalSignupComponent } from './auth/modal-signup/modal-signup.component';
 import { SearchMapComponent } from './pages/search-map/search-map.component';
 import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.resolver';
+
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -86,7 +91,8 @@ import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.res
       multi: true,
       useExisting: forwardRef(() => HomeHeaderComponent)
     },
-    AnnouncementGetByIdResolve
+    AnnouncementGetByIdResolve,
+    { provide: LOCALE_ID, useValue: 'pt' },
   ],
   bootstrap: [AppComponent],
 })
