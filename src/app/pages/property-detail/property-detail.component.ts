@@ -84,6 +84,8 @@ export class PropertyDetailComponent implements OnInit {
 
     this.response = this.route.snapshot.data['resolve'];
 
+    console.log(this.response)
+
     // this.searchService.listByAdvertizer().subscribe(
     //   success => {
     //     this.response = success;
