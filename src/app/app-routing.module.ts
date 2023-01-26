@@ -6,6 +6,7 @@ import { PropertyDetailComponent } from './pages/property-detail/property-detail
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgModule } from '@angular/core';
 import { ModalLoginComponent } from './auth/modal-login/modal-login.component';
+import { SearchMapComponent } from './pages/search-map/search-map.component';
 
 export const routes: Routes = [
 
@@ -23,6 +24,10 @@ export const routes: Routes = [
   {
     path: 'search',
     component: SearchPageComponent,
+  },
+  {
+    path: 'search-map',
+    component: SearchMapComponent,
   },
   {
     path: 'property-detail',

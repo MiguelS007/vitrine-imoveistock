@@ -33,6 +33,7 @@ import { ModalTelComponent } from './auth/modal-tel/modal-tel.component';
 import { ModalCodeComponent } from './auth/modal-code/modal-code.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalSignupComponent } from './auth/modal-signup/modal-signup.component';
+import { SearchMapComponent } from './pages/search-map/search-map.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ModalSignupComponent } from './auth/modal-signup/modal-signup.component
     ModalLoginComponent,
     ModalTelComponent,
     ModalCodeComponent,
-    ModalSignupComponent
+    ModalSignupComponent,
+    SearchMapComponent
   ],
 
   imports: [

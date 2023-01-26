@@ -22,6 +22,12 @@ export class PropertyDetailComponent implements OnInit {
   response: AnnouncementGetResponseDto[] = [];
   user: UserGetResponseDto;
 
+  detailprofile = false;
+  arrow1: boolean = false;
+  arrow2: boolean = false;
+  arrow3: boolean = false;
+
+
   iconlikeheart = false;
   iconshare = false;
   iconprint = false;
@@ -38,6 +44,7 @@ export class PropertyDetailComponent implements OnInit {
   paginationProduct: number = 1;
   tourvirtual = false;
   propertyvideo = true;
+  finalValue: number;
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -72,9 +79,12 @@ export class PropertyDetailComponent implements OnInit {
     this.previewimg = this.datamokservice.imagespreview;
     this.propertyproducts = this.datamokservice.exclusiveProperties;
     this.products = this.datamokservice.resultSearch;
-    this.searchService.getPropertyHome().subscribe(
+    this.user = JSON.parse(localStorage.getItem('userDto'));
+
+    this.searchService.listByAdvertizer().subscribe(
       success => {
         this.response = success;
+        this.finalValue = (parseInt(this.response[0].valueOfIptu) + parseInt(this.response[0].saleValue) + parseInt(this.response[0].condominiumValue))
       },
       error => { console.log(error, 'data not collected') }
     );
@@ -90,7 +100,7 @@ export class PropertyDetailComponent implements OnInit {
       window.print();
     }
   }
-  
+
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
   }
@@ -109,6 +119,27 @@ export class PropertyDetailComponent implements OnInit {
 
   goExpress() {
     this.router.navigate(['logged/express']);
+  }
+  hideDetailProperty() {
+    this.detailprofile = !this.detailprofile;
+  }
+  openarrow(value: number) {
+    if (value === 1 && this.arrow1 === false) {
+      this.arrow1 = true;
+    } else {
+      this.arrow1 = false;
+    }
+    if (value === 2 && this.arrow2 === false) {
+      this.arrow2 = true;
+    } else {
+      this.arrow2 = false;
+    }
+
+    if (value === 3 && this.arrow3=== false) {
+      this.arrow3 = true;
+    } else {
+      this.arrow3 = false;
+    }
   }
 
   nextScheduling(value: string) {

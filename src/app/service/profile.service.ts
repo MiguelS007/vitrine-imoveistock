@@ -22,4 +22,5 @@ export class ProfileService extends BaseService {
           .get(`${this.url}`, this.anonymousHeader())
           .pipe(map(this.extractData), catchError(this.serviceError));
   }
+  
 }
