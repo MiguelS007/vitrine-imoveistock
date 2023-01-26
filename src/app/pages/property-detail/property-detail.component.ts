@@ -81,9 +81,10 @@ export class PropertyDetailComponent implements OnInit {
     this.products = this.datamokservice.resultSearch;
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
-    this.searchService.listByAdvertizer().subscribe(
+    this.searchService.getPropertyList().subscribe(
       success => {
         this.response = success;
+        console.log(this.response);
         this.finalValue = (parseInt(this.response[0].valueOfIptu) + parseInt(this.response[0].saleValue) + parseInt(this.response[0].condominiumValue))
       },
       error => { console.log(error, 'data not collected') }

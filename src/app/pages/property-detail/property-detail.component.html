@@ -80,7 +80,7 @@
       </div>
     </div>
     <div class="col-12 bg-graylight d-flex justify-content-center">
-      <div *ngFor="let item of response" class="row max-w-1918 col-md-10 row-body-details-property">
+      <div *ngFor="let item of response | slice: 0:1"  class="row max-w-1918 col-md-10 row-body-details-property">
 
         <div class="col-8 col-body-details-property">
           <div class="w-100 mb-5 border-radius-10 bg-white">

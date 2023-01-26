@@ -39,7 +39,7 @@ export class SearchService extends BaseService {
   }
   listByAdvertizer(): Observable<AnnouncementGetResponseDto[]> {
     return this.httpClient
-      .get(`${this.url}announcement/list-by-advertizer`, this.authorizedHeader())
+      .get(`${this.url}announcement/list-by-advertizer`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
 
