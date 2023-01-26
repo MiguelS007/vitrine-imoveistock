@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { ModalLoginComponent } from '../../auth/modal-login/modal-login.component';
 
@@ -40,7 +41,8 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   constructor(
     public router: Router,
     private datamokservice: DatamokService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private authenticationService: AuthenticationService
 
   ) {
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
@@ -54,9 +56,36 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('userDto'));
 
-    if(window.location.pathname === '/') {
+    if (JSON.parse(localStorage.getItem('userDto')) === null) {
+      this.verificationLogged(false);
+    } else if (JSON.parse(localStorage.getItem('userDto')) !== null) {
+      this.verificationLogged(true)
+    }
+
+    this.authenticationService.logged.subscribe({
+      next: value => {
+        if (value === true) {
+          setTimeout(() => {
+            this.user = JSON.parse(localStorage.getItem('userDto'));
+            this.userName = this.user.name.split(' ')[0];
+            this.loggedname = true;
+            this.loggedopt = true;
+            this.loginopt = false;
+
+            this.indicatLogon = true;
+            this.indicatLogoff = false;
+
+            this.brokerLogon = true;
+            this.brokerLogoff = false;
+          }, 1000);
+        } else {
+          this.user = null
+        }
+      }
+    })
+
+    if (window.location.pathname === '/') {
       this.home = true;
       this.about = false;
     } else if (window.location.pathname === '/about') {
@@ -64,6 +93,10 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.about = true
     }
 
+  }
+
+  verificationLogged(value) {
+    this.user = JSON.parse(localStorage.getItem('userDto'));
     if (this.user !== null) {
       this.loggedname = true;
       this.loggedopt = true;
@@ -77,8 +110,6 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
       this.userName = this.user.name.split(' ')[0];
 
-      console.log(this.userName)
-
     } else {
       this.indicatLogoff = true;
       this.brokerLogoff = true;
@@ -87,7 +118,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   changePage(value) {
-    if(value === 'home') {
+    if (value === 'home') {
       this.home = true;
       this.about = false;
       this.router.navigate(['/']);
@@ -96,14 +127,13 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.about = true;
       this.router.navigate(['/about']);
     } else if (value === 'indicateProperties') {
-      if(this.user !== null) {
+      if (this.user !== null) {
         console.log('esta logado')
       } else {
         this.openLogin()
       }
-      console.log(this.user)
     } else if (value === 'forBrokers') {
-      if(this.user !== null) {
+      if (this.user !== null) {
         console.log('esta logado')
       } else {
         this.openLogin()
@@ -130,7 +160,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   openLogin() {
-    this.modalService.open(ModalLoginComponent, {centered: true})
+    this.modalService.open(ModalLoginComponent, { centered: true })
   }
 
 

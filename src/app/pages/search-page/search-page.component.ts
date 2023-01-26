@@ -91,7 +91,6 @@ export class SearchPageComponent implements OnInit {
         this.countLoft = loft.length;
         this.countKitnet = kitnet.length;
 
-        console.log('numero');
       },
       error => { console.log(error, 'data not collected') }
     );
