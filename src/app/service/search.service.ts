@@ -29,14 +29,19 @@ export class SearchService extends BaseService {
   }
   getPropertyList(): Observable<AnnouncementGetResponseDto[]> {
     return this.httpClient
-      .get(`${this.url}announcement`, this.anonymousHeader())
+      .get(`${this.url}announcement/`, this.anonymousHeader())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+  }
+  getPropertyDetails(_id: string): Observable<AnnouncementGetResponseDto> {
+    return this.httpClient
+      .get(`${this.url}announcement/details/${_id}`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
   listByAdvertizer(): Observable<AnnouncementGetResponseDto[]> {
     return this.httpClient
-        .get(`${this.url}announcement/list-by-advertizer`, this.authorizedHeader())
-        .pipe(map(this.extractData), catchError(this.serviceError));
-}
+      .get(`${this.url}announcement/list-by-advertizer`, this.authorizedHeader())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+  }
 
 
 }

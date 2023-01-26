@@ -65,15 +65,15 @@
                     </div>
                 </div>
                 <div class="row mx-0">
-                    <div class="col-12 col-cards-products px-0 col-sm-12">
-                        <div *ngFor="let item of response | paginate: {itemsPerPage: 10, currentPage: paginationProduct }; let i= index" class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3 border-radius-10 bg-white">
+                    <div class="col-12 d-inline-block col-cards-products px-0 col-sm-12">
+                        <div *ngFor="let item of response | paginate: {itemsPerPage: 10, currentPage: paginationProduct }; let i= index" class="mr-3 card-product-result-search d-inline-block mt-5 ml-5 p-3 border-radius-10 bg-white">
                             <div (click)="goDetailProperty()" class="bg-img-product py-2 px-3 border-radius-10">
                                  <!-- style='background-image: url({{item.bgproduct}});' -->
                                 <div class="w-100 h-50 d-flex">
-                                    <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                                    <h4  *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
                                         border-radius-5 fw-400 font-size-14 line-15
                                         text-light">Venda</h4>
-                                    <h4 class="bg-greenlight h-fit ml-2 px-3 py-2
+                                    <h4 *ngIf="item.typeOfAd === 'rent'"  class="bg-greenlight h-fit ml-2 px-3 py-2
                                         mb-0 border-radius-5 fw-400 font-size-14
                                         line-15 color-black">Excluisvo</h4>
                                 </div>
@@ -127,12 +127,6 @@
                                         color-black">{{item.usefulArea}} m2</p>
                                 </div>
                             </div>
-                            <div class="w-100 d-flex align-items-center py-2 px-1">
-                                <img  [src]="item.advertiser?.photo?.location" class="border-radius-100 "
-                                    style="width: 42px;" />
-                                <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">{{item.advertiser?.name || '-'}}</h3>
-                            </div>
-                          
                         </div>
                     </div>
                     <div class="col-12 my-5 py-5 justify-content-center">

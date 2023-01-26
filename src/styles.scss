@@ -827,6 +827,12 @@ input:focus {
     background-position: 92% 50%;
 }
 
+// SEARCH-MAP
+.card-product-result-search{
+    width: 370px !important;
+    margin-left: 0 !important;
+}
+
 // SCROLL DOWN ANIMATION
 .scroll-down-txt span {
     line-height: 25px;
@@ -1136,7 +1142,7 @@ input:focus {
 // }
 
 .col-btns-preview-img {
-    top: -170px;
+    top: -179px;
     justify-content: space-evenly;
     background: linear-gradient(0deg, black, transparent);
 }
@@ -1666,10 +1672,7 @@ vg-overlay-play .vg-overlay-play {
         width: 90% !important;
         margin-left: 0 !important;
     }
-    .card-product-result-search{
-        width: 380px !important;
-        margin-left: 0 !important;
-    }
+
 
     .col-cards-products {
         text-align: center;

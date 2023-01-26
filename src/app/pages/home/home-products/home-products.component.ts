@@ -38,6 +38,10 @@ naruto:string;
 
   }
 
+  selectedAnnouncement(){
+    
+  }
+
 
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
