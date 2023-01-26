@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
@@ -19,7 +19,7 @@ export class PropertyDetailComponent implements OnInit {
 
   changeSubscription: Subscription;
 
-  response: AnnouncementGetResponseDto[] = [];
+  response: AnnouncementGetResponseDto;
   user: UserGetResponseDto;
 
   detailprofile = false;
@@ -50,6 +50,7 @@ export class PropertyDetailComponent implements OnInit {
     private datamokservice: DatamokService,
     private formBuilder: FormBuilder,
     private searchService: SearchService,
+    private route: ActivatedRoute
 
   ) {
     this.form = this.formBuilder.group({
@@ -81,13 +82,15 @@ export class PropertyDetailComponent implements OnInit {
     this.products = this.datamokservice.resultSearch;
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
-    this.searchService.listByAdvertizer().subscribe(
-      success => {
-        this.response = success;
-        this.finalValue = (parseInt(this.response[0].valueOfIptu) + parseInt(this.response[0].saleValue) + parseInt(this.response[0].condominiumValue))
-      },
-      error => { console.log(error, 'data not collected') }
-    );
+    this.response = this.route.snapshot.data['resolve'];
+
+    // this.searchService.listByAdvertizer().subscribe(
+    //   success => {
+    //     this.response = success;
+    //     this.finalValue = (parseInt(this.response[0].valueOfIptu) + parseInt(this.response[0].saleValue) + parseInt(this.response[0].condominiumValue))
+    //   },
+    //   error => { console.log(error, 'data not collected') }
+    // );
   }
 
   btninteractionimg(value: string) {

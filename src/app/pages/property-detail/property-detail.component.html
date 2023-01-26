@@ -68,7 +68,7 @@
                                 justify-content-center w-100
                                 h-100 py-2 px-3
                                 border-radius-10 px-5">
-                        <img src="{{item.bgproduct}}" class="w-100" />
+                        <img src="{{response.bgproduct}}" class="w-100" />
                       </div>
                     </ng-template>
                   </swiper>
@@ -80,7 +80,7 @@
       </div>
     </div>
     <div class="col-12 bg-graylight d-flex justify-content-center">
-      <div *ngFor="let item of response" class="row max-w-1918 col-md-10 row-body-details-property">
+      <div class="row max-w-1918 col-md-10 row-body-details-property">
 
         <div class="col-8 col-body-details-property">
           <div class="w-100 mb-5 border-radius-10 bg-white">
@@ -92,11 +92,11 @@
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 mr-3
-                       px-4">Quarto:&nbsp;{{item.rooms || '-'}}</h1>
+                       px-4">Quarto:&nbsp;{{response.rooms || '-'}}</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 mr-3
-                       px-4">Banheiros:&nbsp;{{item.bathrooms || '-'}}</h1>
+                       px-4">Banheiros:&nbsp;{{response.bathrooms || '-'}}</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 px-4 mr-3

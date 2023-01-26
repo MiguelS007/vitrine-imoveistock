@@ -34,6 +34,7 @@ import { ModalCodeComponent } from './auth/modal-code/modal-code.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalSignupComponent } from './auth/modal-signup/modal-signup.component';
 import { SearchMapComponent } from './pages/search-map/search-map.component';
+import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.resolver';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { SearchMapComponent } from './pages/search-map/search-map.component';
     ModalTelComponent,
     ModalCodeComponent,
     ModalSignupComponent,
-    SearchMapComponent
+    SearchMapComponent,
   ],
 
   imports: [
@@ -84,7 +85,8 @@ import { SearchMapComponent } from './pages/search-map/search-map.component';
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => HomeHeaderComponent)
-    }
+    },
+    AnnouncementGetByIdResolve
   ],
   bootstrap: [AppComponent],
 })
