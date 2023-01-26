@@ -80,7 +80,7 @@
       </div>
     </div>
     <div class="col-12 bg-graylight d-flex justify-content-center">
-      <div *ngFor="let item of response" class="row max-w-1918 col-md-10 row-body-details-property">
+      <div class="row max-w-1918 col-md-10 row-body-details-property">
 
         <div class="col-8 col-body-details-property">
           <div class="w-100 mb-5 border-radius-10 bg-white">
@@ -92,15 +92,15 @@
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 mr-3
-                       px-4">Quarto:&nbsp;{{item.rooms || '-'}}</h1>
+                       px-4">Quarto:&nbsp;{{response.rooms || '-'}}</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 mr-3
-                       px-4">Banheiros:&nbsp;{{item.bathrooms || '-'}}</h1>
+                       px-4">Banheiros:&nbsp;{{response.bathrooms || '-'}}</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 px-4 mr-3
-                       ">Metragem:&nbsp;{{item.usefulArea || '-'}}m²</h1>
+                       ">Metragem:&nbsp;{{response.usefulArea || '-'}}m²</h1>
             </div>
             <div class="w-100 my-4 px-5 pt-3 pb-4
                     border-bottom-gray">
@@ -169,7 +169,7 @@
                         contrução:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.yearOfConstruction || '-'}}</span>
+                                   color-black">&nbsp;&nbsp;{{response.yearOfConstruction || '-'}}</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -178,7 +178,7 @@
                         imóvel:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.propertyType || '-'}}</span>
+                                   color-black">&nbsp;&nbsp;{{response.propertyType || '-'}}</span>
                     </td>
                   </tr>
                   <tr class="h-51">
@@ -188,7 +188,7 @@
                                    color-black">Preço:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.saleValue | currency: 'R$ ' || '-'}}</span>
+                                   color-black">&nbsp;&nbsp;{{response.saleValue | currency: 'R$ ' || '-'}}</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -202,9 +202,9 @@
                       <span class="fw-400
                                    font-size-16 line-20
                                    color-black">Disponibilidade:</span>
-                      <span *ngIf="item.typeOfAd === 'sale'"
+                      <span *ngIf="response.typeOfAd === 'sale'"
                         class="fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Venda</span>
-                      <span *ngIf="item.typeOfAd === 'rent'"
+                      <span *ngIf="response.typeOfAd === 'rent'"
                         class="fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Aluguel</span>
                     </td>
                   </tr>
@@ -216,7 +216,7 @@
                         Condomínio:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.condominiumValue | currency: 'R$ ' || '-'}}</span>
+                                   color-black">&nbsp;&nbsp;{{response.condominiumValue | currency: 'R$ ' || '-'}}</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -224,7 +224,7 @@
                                    color-black">Banheiro:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.rooms || '-'}}</span>
+                                   color-black">&nbsp;&nbsp;{{response.rooms || '-'}}</span>
                     </td>
                   </tr>
                   <tr class="h-51">
@@ -234,7 +234,7 @@
                                    color-black">Metragem:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.usefulArea || '-'}}m²</span>
+                                   color-black">&nbsp;&nbsp;{{response.usefulArea || '-'}}m²</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -242,7 +242,7 @@
                                    color-black">Vagas:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{item.vacancyNumber || '-'}}</span>
+                                   color-black">&nbsp;&nbsp;{{response.vacancyNumber || '-'}}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -412,7 +412,7 @@
           <div class="w-100 border-radius-10 mt-5 p-5 bg-white">
             <div class="w-100 justify-content-between d-flex align-items-center">
               <p class="w-100 color-black d-flex block-important align-items-center justify-content-between fw-700 font-size-18 line-24 pb-3">Localização
-                <span class="fw-400 font-size-14 line-20 text-primary">Endereço do local, {{item.city || '-'}}, CEP {{item.cepAddress || '-'}}</span>
+                <span class="fw-400 font-size-14 line-20 text-primary">Endereço do local, {{response.city || '-'}}, CEP {{response.cepAddress || '-'}}</span>
               </p>
               <img *ngIf="!arrow2" src="../../../assets/icon/arrow-down-blue.png" width="20" class="cursor-pointer animate__animated animate__rotateIn" (click)="openarrow(2)">
               <img *ngIf="arrow2"  src="../../../assets/icon/arrow-top-blue.png" class="cursor-pointer animate__animated animate__rotateIn" width="18"  (click)="openarrow(2)">
@@ -452,7 +452,7 @@
                   34 m²
                 </h3>
                 <h3 class="fw-400 px-4 my-2 font-size-18
-                          line-24 color-black d-inline-block">Preço: {{item.saleValue | currency: 'R$ ' || '-'}}
+                          line-24 color-black d-inline-block">Preço: {{response.saleValue | currency: 'R$ ' || '-'}}
                 </h3>
               </div>
             </div>
@@ -648,7 +648,7 @@
                   <td class="d-tavle-cell
                              text-align-right">
                     <span class="fw-700 font-size-18
-                                line-24 color-black">{{item.saleValue | currency: 'R$ ' || '-'}}</span>
+                                line-24 color-black">{{response.saleValue | currency: 'R$ ' || '-'}}</span>
                   </td>
                 </tr>
                 <tr class="h-40">
@@ -662,7 +662,7 @@
                   <td class="d-tavle-cell
                              text-align-right">
                     <span class="fw-700 font-size-18
-                                line-24 color-black">{{item.condominiumValue | currency: 'R$ ' || '-'}}</span>
+                                line-24 color-black">{{response.condominiumValue | currency: 'R$ ' || '-'}}</span>
                   </td>
                 </tr>
                 <tr class="h-40">
@@ -675,7 +675,7 @@
                   <td class="d-tavle-cell
                              text-align-right">
                     <span class="fw-700 font-size-18
-                                line-24 color-black">{{item.valueOfIptu | currency: 'R$ ' || '-'}}</span>
+                                line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' || '-'}}</span>
                   </td>
                 </tr>
                 <tr class="h-40">

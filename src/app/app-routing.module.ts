@@ -7,6 +7,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgModule } from '@angular/core';
 import { ModalLoginComponent } from './auth/modal-login/modal-login.component';
 import { SearchMapComponent } from './pages/search-map/search-map.component';
+import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.resolver';
 
 export const routes: Routes = [
 
@@ -30,8 +31,8 @@ export const routes: Routes = [
     component: SearchMapComponent,
   },
   {
-    path: 'property-detail',
-    component: PropertyDetailComponent,
+    path: 'property-detail/:_id',
+    component: PropertyDetailComponent, resolve: { resolve: AnnouncementGetByIdResolve }
   },
   {
     path: 'logged',

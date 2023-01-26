@@ -43,4 +43,8 @@ naruto:string;
     this.iconlikeheart = !this.iconlikeheart;
   }
 
+  announcementSelected(value) {
+    console.log(value)
+    this.router.navigate([`property-detail/${value}`])
+  }
 }
