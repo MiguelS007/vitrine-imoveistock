@@ -36,8 +36,7 @@
           class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled" [routerLink]="['/contact']"
-          [routerLinkActive]="['link-active']">Contato</a>
+        <a class="nav-link  px-3 fw-400 font-size-14 line-20" [class]="contact ? 'item-navbar-selected' : 'item-navbar-disabled'" (click)="changePage('contact')">Contato</a>
       </li>
       <li class="nav-item dropdown">
         <a *ngIf="loginopt" (click)="openLogin()" [routerLinkActive]="['link-active']"
