@@ -34,7 +34,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   home: boolean = true;
   about: boolean = false;
-
+  contact: boolean = false;
 
   userName: string;
 
@@ -88,9 +88,19 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     if (window.location.pathname === '/') {
       this.home = true;
       this.about = false;
+      this.contact = false;
     } else if (window.location.pathname === '/about') {
       this.home = false;
-      this.about = true
+      this.about = true;
+      this.contact = false;
+    } else if (window.location.pathname === '/contact') {
+      this.home = false;
+      this.about = false;
+      this.contact = true;
+    } else {
+      this.home = false;
+      this.about = false;
+      this.contact = false;
     }
 
   }
@@ -121,10 +131,12 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     if (value === 'home') {
       this.home = true;
       this.about = false;
+      this.contact = false;
       this.router.navigate(['/']);
     } else if (value === 'about') {
       this.home = false;
       this.about = true;
+      this.contact = false;
       this.router.navigate(['/about']);
     } else if (value === 'indicateProperties') {
       if (this.user !== null) {
@@ -132,12 +144,24 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       } else {
         this.openLogin()
       }
+      this.home = false;
+      this.about = false;
+      this.contact = false;
     } else if (value === 'forBrokers') {
       if (this.user !== null) {
         console.log('esta logado')
       } else {
         this.openLogin()
       }
+      this.home = false;
+      this.about = false;
+      this.contact = false;
+    } else if (value === 'contact') {
+      
+      this.home = false;
+      this.about = false;
+      this.contact = true;
+      this.router.navigate(['/contact']);
     }
   }
 
@@ -148,13 +172,15 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.loginopt = true;
       this.loggedname = false;
       this.router.navigate(['/']);
-      
+
     }, 100);
 
   }
 
   goDeashboard() {
-    this.router.navigate(['logged/visits'])
+    this.router.navigate(['logged/visits']);
+    this.home = false;
+    this.about = false;
   }
   sideBtn() {
     this.collapsed = !this.collapsed;
