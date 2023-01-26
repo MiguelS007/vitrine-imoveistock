@@ -1,4 +1,4 @@
-<main class="bg-whitelight position-relative w-100">
+<main class="bg-graylight position-relative w-100">
     <form [formGroup]="form" class="row form-search pt-10 h-100 m-0-auto mx-5 px-5
         max-w-1918">
         <div class="col-12">
@@ -216,17 +216,18 @@
             </div>
         </div>
         <div class="col-8 col-body-products px-0 mt-5">
-            <div class="col-12">
-                <div class="w-100 d-flex align-items-center results-bar
-                    justify-content-between py-4 px-5 border-radius-10
-                    bg-white">
+            <div class="col-12 d-flex align-items-center">
+                <a [routerLink]="['/search-map']" class="d-flex cursor-pointer w-25 mr-2 border-radius-10 bg-purple align-items-center justify-content-center py-4">
+                    <img src="../../../assets/icon/map.png" class="mr-2" />
+                    <span class="fw-700 font-size-18 line-24 text-light">Ver mapa</span>
+                </a>
+                <div class="w-100 d-flex align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
                     <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
                         <span>9</span>
                         <span class="px-1">Resultados</span>
                     </p>
                     <div class="d-flex align-items-center">
-                        <p class="fw-700 mb-0 font-size-14 line-20 color-black">Ordenar
-                            por:</p>
+                        <p class="fw-700 mb-0 font-size-14 line-20 color-black">Ordenar por:</p>
                         <div class="select-box">
                             <div class="select-box__current" tabindex="1">
                                 <div class="select-box__value">
