@@ -675,7 +675,7 @@ input:focus {
 }
 
 .bg-graylight {
-    background-color: var(--graylight);
+    background-color: var(--light);
 }
 
 
@@ -1664,6 +1664,10 @@ vg-overlay-play .vg-overlay-play {
     // SEARCH-PAGE
     .card-product-result {
         width: 90% !important;
+        margin-left: 0 !important;
+    }
+    .card-product-result-search{
+        width: 380px !important;
         margin-left: 0 !important;
     }
 

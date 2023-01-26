@@ -14,6 +14,8 @@ export abstract class AnnouncementGetResponseDto {
 
     bairro?: string;
 
+    city?: string;
+
     cidade?: string;
 
     logradouro?: string;

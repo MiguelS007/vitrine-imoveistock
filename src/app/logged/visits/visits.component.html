@@ -16,7 +16,7 @@
                     <p class="fw-400 font-size-18 line-24 color-black">
                         Após visitar um imóvel seu histórico de visitas aparecerá aqui
                     </p>
-                    <button style="max-width: 345px;" class="btn mt-3 d-inline-block border-radius-10 bg-purple text-light h-74 w-100 fw-700 font-size-18 line-24" type="button">Procurar imóveis</button>
+                    <button style="max-width: 345px;" [routerLink]="['/search']" class="btn mt-3 d-inline-block border-radius-10 bg-purple text-light h-74 w-100 fw-700 font-size-18 line-24" type="button">Procurar imóveis</button>
                   </div>
                 </div>
                 <div *ngIf="tourvirtual" class="w-100 d-flex justify-content-center anima-body position-relative pt-4 pb-5">
