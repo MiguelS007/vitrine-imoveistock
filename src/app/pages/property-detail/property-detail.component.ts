@@ -97,14 +97,6 @@ export class PropertyDetailComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
     this.response = this.route.snapshot.data['resolve'];
-
-    // this.searchService.listByAdvertizer().subscribe(
-    //   success => {
-    //     this.response = success;
-    //     this.finalValue = (parseInt(this.response[0].valueOfIptu) + parseInt(this.response[0].saleValue) + parseInt(this.response[0].condominiumValue))
-    //   },
-    //   error => { console.log(error, 'data not collected') }
-    // );
   }
 
   btninteractionimg(value: string) {
