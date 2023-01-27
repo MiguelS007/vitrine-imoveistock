@@ -10,7 +10,7 @@
           <div *ngFor="let item of previewimg" style="background-image: url({{item.previews}})"
             class="bg-property-view d-inline-block w-50 h-300"></div>
         </div>
-        <div class="col-12 col-btns-preview-img px-5 d-flex py-5-items-center position-relative">
+        <div class="col-12 col-btns-preview-img px-5 d-flex py-5 align-items-center position-relative">
           <div class="w-auto d-flex spc-btns-property align-items-center">
             <button type="button" data-toggle="modal" data-target="#previewimage"
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
@@ -752,7 +752,7 @@
                             <span class="fw-400 font-size-14 line-19 color-black">Quartos:&nbsp;{{response.rooms || '-'}}</span>
                             <span class="fw-400 font-size-14 line-19 color-black">Banheiros:&nbsp;{{response.bathrooms || '-'}}</span>
                             <span class="fw-400 font-size-14 line-19 color-black">Metragem:&nbsp;{{response.usefulArea || '-'}}m²</span>
-                          </p>
+                          </p> 
                         </div>
                       </div>
                       <div class="col-12 px-0">
@@ -809,20 +809,16 @@
                             <input type="radio" id="15:00" formControlName="time" value="15h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('15h')">
                             <label for="15:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">15:00</label>
                           </div>
-                        
                           <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
                             <input type="radio" id="16:00" formControlName="time" value="16h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('16h')">
                             <label for="16:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">16:00</label>
                           </div>
-                        
                           <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
                             <input type="radio" id="17:00" formControlName="time" value="17h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('17h')">
                             <label for="17:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">17:00</label>
                           </div>
-                        
                         </div>
                         </div>
-                        
                         <div class="w-100 py-4 d-grid text-align-left">
                           <button type="button" class="btn bg-transparent w-fit fw-500 font-size-16 line-20 text-primary">Tentar encaixe</button>
                           <button type="button" class="btn bg-transparent w-fit fw-500 font-size-16 line-20 text-primary">Enviar proposta sem visitar</button>
