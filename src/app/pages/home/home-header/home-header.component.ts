@@ -79,10 +79,26 @@ export class HomeHeaderComponent implements OnInit {
       error => { console.log(error, 'data not collected') }
     );
   }
+
   // make full search
   confirm() {
-    console.log(this.form.value)
+    let filter: any = {
+      where: this.form.controls['typePropertyLocal'].value,
+      whatAreYouLookingFor: this.whatAreYouLookingForTitle,
+      propertyType: this.searchfilterTypeProperty,
+      goal: this.searchfilterType,
+      checkvacancies: this.form.controls['checkvacancies'].value,
+      checkbathrooms: this.form.controls['checkbathrooms'].value,
+      checksuites: this.form.controls['checksuites'].value,
+      checkrooms: this.form.controls['checkrooms'].value,
+      checkcondominium: this.form.controls['checkcondominium'].value,
+      checkfootage: this.form.controls['checkfootage'].value,
+      checkconstruction: this.form.controls['checkconstruction'].value,
+      checkrenovated: this.form.controls['checkrenovated'].value,
+    };
+    console.log(filter)
   }
+
   // search filter
   resultSearch(tableName: string) {
     if (tableName.length > 0) this.filtersearch = true
