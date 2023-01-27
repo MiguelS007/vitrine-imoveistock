@@ -65,13 +65,14 @@ export class ModalSignupComponent implements OnInit {
       email: this.form.controls['email'].value,
       cpf: cpf,
       name: this.form.controls['name'].value,
-      profileId: this.response
+      profilesIds: this.response
     }
 
     if (this.form.controls['termsAndPolicy'].value === true) {
       this.userService.register(this.request).subscribe(
         success => {
-          this.toastrService.error('Cadastrado com sucesso!', '', { progressBar: true });
+          this.toastrService.success('Cadastrado com sucesso!', '', { progressBar: true });
+          this.router.navigate(['/']);
         },
         error => {
           this.toastrService.error('Erro ao cadastrar', '', { progressBar: true });
