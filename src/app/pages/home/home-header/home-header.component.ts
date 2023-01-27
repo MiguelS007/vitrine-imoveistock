@@ -76,11 +76,14 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    let user = JSON.parse(localStorage.getItem('userDto'))
+    let user = JSON.parse(localStorage.getItem('userDto'));
+
+    localStorage.removeItem('resultSearch');
+    localStorage.removeItem('filtro')
+
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
-        console.log(success)
       },
       error => { console.log(error, 'data not collected') }
     );
@@ -159,7 +162,6 @@ export class HomeHeaderComponent implements OnInit {
       for (let i = 0; i < announcementPropertyCharacteristicsGroup.length; i++) {
         if (announcementPropertyCharacteristicsGroup[i].goal === filter.propertyType) {
           announcementpropertyTypeGroup.push(announcementPropertyCharacteristicsGroup[i]);
-          console.log(announcementpropertyTypeGroup)
         }
       }
     } else {
@@ -182,6 +184,8 @@ export class HomeHeaderComponent implements OnInit {
     this.resultType = announcementGoalGroup;
 
 
+  
+    localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
     this.router.navigate(['/search']);
 

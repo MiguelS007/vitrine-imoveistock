@@ -33,6 +33,8 @@ export class SearchPageComponent implements OnInit {
 
   filterResult: AnnouncementGetResponseDto[] = [];
 
+  filtroSelected: any;
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -63,7 +65,21 @@ export class SearchPageComponent implements OnInit {
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
-    console.log(this.filterResult)
+
+    let filtro = localStorage.getItem('filtro');
+    this.filtroSelected = JSON.parse(filtro);
+
+    console.log(this.filtroSelected)
+
+    if (this.filterResult === null || this.filterResult.length === 0) {
+      this.searchService.getPropertyHome().subscribe(
+        success => {
+          this.filterResult = success;
+          console.log(this.filterResult)
+        }
+      )
+    }
+
 
     this.searchService.getPropertyHome().subscribe(
       success => {
@@ -89,7 +105,7 @@ export class SearchPageComponent implements OnInit {
 
           if (this.response[i].propertyCharacteristics === 'kitnet')
             kitnet.push({ kitnet: this.response[i].propertyCharacteristics });
-            
+
         }
         this.countApartment = apartament.length;
         this.countCondominium = condominium.length;
@@ -100,17 +116,17 @@ export class SearchPageComponent implements OnInit {
       },
       error => { console.log(error, 'data not collected') }
     );
-    this.userService.getUser().subscribe(
-      success => {
-        this.user = success;
-        if (this.user?.photo?.location) {
-          this.urlsimg.push(this.user.photo.location);
-        }
-      },
-      error => {
-        console.error(error, 'photo not collected');
-      }
-    );
+    // this.userService.getUser().subscribe(
+    //   success => {
+    //     this.user = success;
+    //     if (this.user?.photo?.location) {
+    //       this.urlsimg.push(this.user.photo.location);
+    //     }
+    //   },
+    //   error => {
+    //     console.error(error, 'photo not collected');
+    //   }
+    // );
   }
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
