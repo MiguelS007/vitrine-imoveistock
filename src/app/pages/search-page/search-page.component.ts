@@ -31,6 +31,8 @@ export class SearchPageComponent implements OnInit {
   user: UserGetResponseDto;
   urlsimg: any = [];
 
+  filterResult: AnnouncementGetResponseDto[] = [];
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -58,6 +60,10 @@ export class SearchPageComponent implements OnInit {
   ngOnInit(): void {
     this.products = this.datamokservice.resultSearch;
     this.propertyproducts = this.datamokservice.exclusiveProperties;
+
+    let resultadoVerify = localStorage.getItem('resultSearch');
+    this.filterResult = JSON.parse(resultadoVerify);
+    console.log(this.filterResult)
 
     this.searchService.getPropertyHome().subscribe(
       success => {

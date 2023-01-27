@@ -45,6 +45,8 @@ export class HomeHeaderComponent implements OnInit {
 
   whatAreYouLookingForTitle: string = 'O que está buscando?';
 
+  typeAd: string = 'sale';
+
 
   constructor(
     private router: Router,
@@ -78,6 +80,7 @@ export class HomeHeaderComponent implements OnInit {
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
+        console.log(success)
       },
       error => { console.log(error, 'data not collected') }
     );
@@ -99,6 +102,7 @@ export class HomeHeaderComponent implements OnInit {
     }
 
     let filter: any = {
+      typeAd: this.typeAd,
       where: this.form.controls['typePropertyLocal'].value,
       whatAreYouLookingFor: oqEstaBuscando,
       propertyType: this.searchfilterTypeProperty,
@@ -113,16 +117,28 @@ export class HomeHeaderComponent implements OnInit {
       checkrenovated: this.form.controls['checkrenovated'].value,
     };
 
-    let announcementCityGroup: AnnouncementGetResponseDto[] = [];
+    let announcementTypeAdGroup: AnnouncementGetResponseDto[] = [];
 
-    if (filter.where !== '') {
+    if (filter.typeAd !== '') {
       for (let i = 0; i < this.response.length; i++) {
-        if (this.response[i].cityAddress === filter.where) {
-          announcementCityGroup.push(this.response[i]);
+        if (this.response[i].typeOfAd === filter.typeAd) {
+          announcementTypeAdGroup.push(this.response[i]);
         }
       }
     } else {
-      announcementCityGroup = this.response;
+      announcementTypeAdGroup = this.response;
+    }
+
+    let announcementCityGroup: AnnouncementGetResponseDto[] = [];
+
+    if (filter.where !== '') {
+      for (let i = 0; i < announcementTypeAdGroup.length; i++) {
+        if (announcementTypeAdGroup[i].cityAddress === filter.where) {
+          announcementCityGroup.push(announcementTypeAdGroup[i]);
+        }
+      }
+    } else {
+      announcementCityGroup = announcementCityGroup;
     }
 
     let announcementPropertyCharacteristicsGroup: AnnouncementGetResponseDto[] = [];
@@ -165,11 +181,10 @@ export class HomeHeaderComponent implements OnInit {
 
     this.resultType = announcementGoalGroup;
 
-    if (this.resultType.length === 0) {
-      this.toastrService.error('Não existe resultados com esses indices de busca', '', { progressBar: true });
-    } else {
-      localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
-    }
+
+    localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
+    this.router.navigate(['/search']);
+
 
 
   }
@@ -196,7 +211,8 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   buyOption(value: string) {
-    if (value === 'buy') {
+    this.typeAd = value;
+    if (value === 'sale') {
       this.collapsed = false;
     } else if (value === 'rent') {
       this.collapsed = true;
