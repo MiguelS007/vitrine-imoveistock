@@ -22,7 +22,7 @@ export class UserService extends BaseService {
     }
     register(dto: UserRegisterRequestDto): Observable<UserRegisterResponseDto> {
         return this.httpClient
-            .post(`${this.url}`, dto, this.authorizedHeader())
+            .post(`${this.url}`, dto, this.anonymousHeader())
             .pipe(
                 map(this.extractData),
                 catchError(this.serviceError)
