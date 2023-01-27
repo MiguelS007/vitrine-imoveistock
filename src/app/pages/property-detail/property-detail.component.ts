@@ -3,8 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
+import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { ProfileService } from 'src/app/service/profile.service';
+import { ScheduleService } from 'src/app/service/schedule.service';
 import { SearchService } from 'src/app/service/search.service';
 
 @Component({
@@ -21,6 +24,8 @@ export class PropertyDetailComponent implements OnInit {
 
   response: AnnouncementGetResponseDto;
   user: UserGetResponseDto;
+
+  request: ScheduleRegisterRequestDto;
 
   detailprofile = false;
   arrow1: boolean = false;
@@ -53,7 +58,7 @@ export class PropertyDetailComponent implements OnInit {
     private router: Router,
     private datamokservice: DatamokService,
     private formBuilder: FormBuilder,
-    private searchService: SearchService,
+    private scheduleService: ScheduleService,
     private route: ActivatedRoute
 
   ) {
@@ -73,8 +78,6 @@ export class PropertyDetailComponent implements OnInit {
       typeconstruction: ['', [Validators.required]],
       typefootagemax: ['', [Validators.required]],
       typefootagemin: ['', [Validators.required]],
-      hour: ['', [Validators.required]],
-      day: ['', [Validators.required]],
     });
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
       this.modallogin = false;
@@ -97,7 +100,18 @@ export class PropertyDetailComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
     this.response = this.route.snapshot.data['resolve'];
+    console.log(this.response._id);
   }
+
+
+
+
+
+
+
+
+
+
 
   btninteractionimg(value: string) {
     if (value === 'like') {
@@ -131,7 +145,8 @@ export class PropertyDetailComponent implements OnInit {
     this.dataSelecionada = value
   }
 
-  selectHour(value) {
+  selectTime(value) {
+    console.log(value)
     this.horasSelecionada = value
   }
 
@@ -153,7 +168,7 @@ export class PropertyDetailComponent implements OnInit {
       this.arrow2 = false;
     }
 
-    if (value === 3 && this.arrow3=== false) {
+    if (value === 3 && this.arrow3 === false) {
       this.arrow3 = true;
     } else {
       this.arrow3 = false;
@@ -162,11 +177,13 @@ export class PropertyDetailComponent implements OnInit {
 
   nextScheduling(value: string) {
     if (value === 'step1') {
-      this.step1scheduling = false;
-      this.step2scheduling = true;
-    } else if (value === 'step2') {
-      this.step2scheduling = false;
-      this.step3scheduling = true;
+     
+      if(this.user === null){
+        this.datamokservice.opModalLogin();
+      }else{
+        this.step1scheduling = false;
+        this.step2scheduling = true;
+      }
     } else if (value === 'close') {
       this.modalscheduling = false;
       this.step1scheduling = false;
@@ -189,4 +206,40 @@ export class PropertyDetailComponent implements OnInit {
       this.step1scheduling = true;
     }
   }
+
+
+
+
+
+
+
+
+  confirmSchedule(value: string) {
+    if (value === 'step2') {
+      this.step2scheduling = false;
+      this.step3scheduling = true;
+    }
+    let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long" });
+    this.request = {
+      status: 'scheduled',
+      day: this.form.controls['day'].value,
+      time: this.horasSelecionada,
+      days: dayweek,
+      cancelUser: 'scheduled',
+    };
+    console.log(this.request);
+
+
+    // this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(
+    //   success => {
+    //     console.log(success)
+    //   },
+    //   error => {
+    //     console.error(error)
+    //   }
+    // )
+
+
+  }
+
 }

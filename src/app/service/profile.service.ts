@@ -8,6 +8,7 @@ import { BaseService } from './base.service';
   providedIn: 'root'
 })
 export class ProfileService extends BaseService {
+  
 
   url: string = `${environment.apis.imoveistock}profile`
 

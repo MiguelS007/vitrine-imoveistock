@@ -757,160 +757,110 @@
                       </div>
                       <div class="col-12 px-0">
                         <p class="fw-500 mx-1 font-size-18 line-24 pt-5 color-black">Escolha um dia:</p>
-                        <div class="selector mt-2 d-flex">
-                          <div *ngFor="let item of arrayDeDatas" class="selecotr-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" [id]="item" formControlName="day" [value]="item" name="day" (change)="selectDate(item)"
+                        <div class="selector flex-wrap mt-2 d-flex">
+                          <div *ngFor="let item of arrayDeDatas" class="selecotr-item cursor-pointer mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" [id]="item" required formControlName="day" [value]="item" name="day" (change)="selectDate(item)"
                               class="selector-item_radio  border-radius-05 w-100 h-100 text-center position-relative">
+                           
                             <label [for]="item" class="selector-item_label border-radius-100 fw-400 font-size-14 line-19 color-black border-black">
                               {{item | date: 'EEE'}} {{item | date: 'dd'}}/{{item | date: 'MM'}}
                             </label>
                           </div>
-                          
                         </div>
                         <p class="fw-500 mx-1 font-size-18 line-24 pt-4 color-black">Escolha um horário:</p>
                         <div class="selector mt-2 d-flex">
                          <div class="my-3 flex-wrap justify-content-center d-flex">
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="08:30" formControlName="hour" value="08:30" name="hour"  class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative" (change)="selectHour('08:30')">
-                            <label for="08:40"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">08:30</label>
+                        
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                            <input type="radio" id="08:00" formControlName="time" value="08h" name="time"  class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative" (change)="selectTime('08h')">
+                            <label for="08:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">08:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                              <input type="radio" id="09:00" formControlName="hour" value="09:00" name="hour"  class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative" (change)="selectHour('09:00')">
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="09:00" formControlName="time" value="09h" name="time"  class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative" (change)="selectTime('09h')">
                               <label for="09:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">09:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                              <input type="radio" id="09:30" formControlName="hour" value="09:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('09:30')">
-                              <label for="09:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">09:30</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                              <input type="radio" id="10:00" formControlName="hour" value="10:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('10:00')">
+                        
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="10:00" formControlName="time" value="10h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('10h')">
                               <label for="10:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">10:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="10:30" formControlName="hour" value="10:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('10:30')">
-                            <label for="10:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">10:30</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="11:00" formControlName="hour" value="11:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('11:00')">
+                        
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                            <input type="radio" id="11:00" formControlName="time" value="11h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('11h')">
                             <label for="11:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">11:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                              <input type="radio" id="11:30" formControlName="hour" value="11:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('11:30')">
-                              <label for="11:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">11:30</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="12:00" formControlName="hour" value="12:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('12:00')">
+                        
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                            <input type="radio" id="12:00" formControlName="time" value="12h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('12h')">
                             <label for="12:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">12:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="12:30" formControlName="hour" value="12:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('12:30')">
-                            <label for="12:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">12:30</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="13:00" formControlName="hour" value="13:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('13:00')">
+                         
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                            <input type="radio" id="13:00" formControlName="time" value="13h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('13h')">
                             <label for="13:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">13:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="13:30" formControlName="hour" value="13:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('13:30')">
-                            <label for="13:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">13:30</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="14:00" formControlName="hour" value="14:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('14:00')">
+                         
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                            <input type="radio" id="14:00" formControlName="time" value="14h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('14h')">
                             <label for="14:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">14:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="14:30" formControlName="hour" value="14:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('14:30')">
-                            <label for="14:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">14:30</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="15:00" formControlName="hour" value="15:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('15:00')">
+                         
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                            <input type="radio" id="15:00" formControlName="time" value="15h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('15h')">
                             <label for="15:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">15:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="15:30" formControlName="hour" value="15:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('15:30')">
-                            <label for="15:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">15:30</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="16:00" formControlName="hour" value="16:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('16:00')">
+                        
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                            <input type="radio" id="16:00" formControlName="time" value="16h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('16h')">
                             <label for="16:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">16:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="16:30" formControlName="hour" value="16:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('16:30')">
-                            <label for="16:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">16:30</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="17:00" formControlName="hour" value="17:00" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('17:00')">
+                        
+                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                            <input type="radio" id="17:00" formControlName="time" value="17h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('17h')">
                             <label for="17:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">17:00</label>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" id="17:30" formControlName="hour" value="17:30" name="hour" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectHour('17:30')">
-                            <label for="17:30"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">17:30</label>
-                          </div>
+                        
                         </div>
                         </div>
                         
-                        <div class="w-100 py-4
-                                      d-grid
-                                      text-align-left">
-                          <button type="button" class="btn
-                                         bg-transparent
-                                         w-fit
-                                         fw-500
-                                         font-size-16
-                                         line-20
-                                         text-primary">Tentar
-                            encaixe</button>
-                          <button type="button" class="btn
-                                         bg-transparent
-                                         w-fit
-                                         fw-500
-                                         font-size-16
-                                         line-20
-                                         text-primary">Enviar
-                            proposta sem
-                            visitar</button>
+                        <div class="w-100 py-4 d-grid text-align-left">
+                          <button type="button" class="btn bg-transparent w-fit fw-500 font-size-16 line-20 text-primary">Tentar encaixe</button>
+                          <button type="button" class="btn bg-transparent w-fit fw-500 font-size-16 line-20 text-primary">Enviar proposta sem visitar</button>
                         </div>
-                        <button type="button" (click)="nextScheduling('step1')" class="btn pb-2
-                                      bg-purple fw-700
-                                      font-size-18 line-24
-                                      text-light
-                                      border-radius-10
-                                      h-74
-                                      w-100">Continuar</button>
+                        <button type="button" [disabled]="this.form.controls['time'].value == ''" (click)="nextScheduling('step1')" class="btn pb-2 bg-purple fw-700 font-size-18 line-24 text-light  border-radius-10 h-74 w-100">Continuar</button>
                       </div>
                     </div>
                     <div *ngIf="step2scheduling" class="anima-body">
-                      <p class="fw-700 py-3
-                                   font-size-24 line-32
-                                   color-black w-100
-                                   text-center">
+                      <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
                         Revise e confirme o seu
                         <br /> agendamento
                       </p>
                       <div class="w-100">
-                        <p class="fw-500 font-size-18 line-24 color-black">Resumo:</p>
+                        <p class="fw-500 font-size-18 line-24 color-black">Resumo:
+                          {{response.description || '(sem descrição) '}} 
+                        </p>
                         <p>
                           <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
                           <span class="fw-400 font-size-16 line-20 color-black">
-                            {{response.complementAddress || '-'}} 
+                            {{response.complementAddress || '(sem endereço)'}} 
                             {{response.yearOfConstruction || '-'}},
-                            {{response.cityAddress || '-'}} - {{response.ufAddress || '-'}}
+                            {{response.cityAddress || '(local não informado!)'}} - {{response.ufAddress || '-'}}
                           </span>
                         </p>
-                        <div class="row px-3 my-3 pb-3 d-flex">
-                          <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                        <div class="row block-important px-3  d-flex">
+                          <div class="col pt-2 pb-3 left-important justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2" />
                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
                               {{response.rooms || '-'}} Quartos
                             </p>
                           </div>
-                          <div class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
+                          <div class="col pt-2 pb-3 left-important justify-content-center px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/car.png" class="pr-2" />
                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                              {{response.vacancyNumber || '-'}} Vagas
+                              {{response.parkingSpaces || '-'}} Vagas
                             </p>
                           </div>
-                          <div class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
+                          <div class="col pt-2 pb-3 left-important justify-content-end px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/rule.png" class="pr-2" />
                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
                               {{response.usefulArea || '-'}} m2
@@ -918,189 +868,68 @@
                           </div>
                         </div>
                         <p class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-                          R$222,000
+                          {{response.saleValue | currency: 'R$ ' || '-' }}
                         </p>
-                        <p class="w-100
-                                      fw-400
-                                      font-size-16
-                                      line-20
-                                      color-black">
-                          <i class="bi
-                                         font-size-20
-                                         mr-2
-                                         bi-calendar"></i>
-                          Terça-feira, 29
-                          de
-                          Junho às 08:00
+                        <p *ngIf="dataSelecionada" class="w-100 fw-400 font-size-16  line-20 color-black">
+                          <i class="bi font-size-20  mr-2 bi-calendar"></i>
+                          {{dataSelecionada | date: 'EEEE'}}, {{dataSelecionada | date: 'dd'}} de {{dataSelecionada |date: 'MMMM'}} <span *ngIf="horasSelecionada"> às {{horasSelecionada}}</span>
                         </p>
                       </div>
-                      <div class="w-100 my-4
-                                   align-items-center
-                                   d-flex border
-                                   border-radius-10
-                                   p-3">
-                        <i class="bi
-                                      font-size-24
-                                      color-black
-                                      bi-info-circle"></i>
-                        <p class="fw-400
-                                      ml-3
-                                      mb-0
-                                      font-size-16
-                                      line-20
-                                      color-black">
-                          Ao agendar essa
-                          visita, sua
-                          presença
-                          é
-                          automaticamente
-                          confirmada e um
-                          dos
-                          nossos
-                          corretores
-                          parceiros é
-                          selecionado para
-                          te
-                          acompanhar.
+                      <div class="w-100 my-4 align-items-center d-flex border border-radius-10 p-3">
+                        <i class="bi font-size-24 color-black bi-info-circle"></i>
+                        <p class="fw-400 ml-3 mb-0 font-size-16 line-20 color-black">
+                          Ao agendar essa visita, sua presença é automaticamente confirmada e um dos nossos corretores parceiros é selecionado para te acompanhar.
                         </p>
                       </div>
-                      <button type="submit" (click)="nextScheduling('step2')" class="btn pb-2
-                                   bg-purple fw-700
-                                   font-size-18 line-24
-                                   text-light
-                                   border-radius-10
-                                   h-74
-                                   w-100">Agendar
-                        visita</button>
+                      <button type="submit" (click)="confirmSchedule('step2')" class="btn pb-2 bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100">Agendar visita</button>
                     </div>
+                    
                     <div *ngIf="step3scheduling" class="anima-body">
-                      <p class="fw-700 py-3
-                                   font-size-24 line-32
-                                   color-black w-100
-                                   text-center">
-                        Você agendou sua
-                        visita!
+                      <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
+                        Você agendou sua visita!
                       </p>
                       <div class="w-100">
-                        <p class="fw-700
-                                      font-size-18
-                                      line-24
-                                      color-black">
-                          <i class="bi
-                                         font-size-18
-                                         color-black
-                                         bi-clock"></i>
-                          Você vai ver
-                          quem te
-                          acompanhará
+                        <p class="fw-700 font-size-18  line-24 color-black">
+                          <i class="bi font-size-18  color-black  bi-clock"></i>
+                          Você vai ver quem te acompanhará
                         </p>
-                        <p class="fw-400
-                                      font-size-18
-                                      line-24
-                                      color-black">
-                          Terça-feira à
-                          noite,
-                          pela sua agenda
-                          de
-                          visitas
+                        <p class="fw-400 font-size-18  line-24 color-black">
+                          {{dataSelecionada | date: 'EEEE'}},  pela sua agenda de visitas
                         </p>
-                        <a [routerLink]="['#']" class="fw-500
-                                      font-size-16
-                                      line-20">Ver
-                          agenda
-                          de visitas</a>
-                        <div class="row px-3
-                                      my-3 pt-3 pb-3
-                                      d-flex">
-                          <div class="col
-                                         justify-content-left
-                                         px-0 d-flex
-                                         align-items-center
-                                         justify-content-left">
+                        <a (click)="nextScheduling('viewvisits')"  class="fw-500 font-size-16 text-primary line-20">Ver agenda de visitas</a>
+                        <div class="row px-3 my-3 pt-3 pb-3 d-flex">
+                          <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2" />
-                            <p class="fw-400
-                                            mb-0
-                                            font-size-14
-                                            line-20
-                                            color-black">4
-                              Quartos
+                            <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.rooms || '-'}} quartos
                             </p>
                           </div>
-                          <div class="col
-                                         justify-content-center
-                                         px-0 d-flex
-                                         align-items-center
-                                         justify-content-left">
+                          <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/car.png" class="pr-2" />
-                            <p class="fw-400
-                                            mb-0
-                                            font-size-14
-                                            line-20
-                                            color-black">2
-                              Vagas
+                            <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.parkingSpaces || '-'}} vagas
                             </p>
                           </div>
-                          <div class="col
-                                         justify-content-end
-                                         px-0 d-flex
-                                         align-items-center
-                                         justify-content-left">
+                          <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/rule.png" class="pr-2" />
-                            <p class="fw-400
-                                            mb-0
-                                            font-size-14
-                                            line-20
-                                            color-black">199
-                              m2
+                            <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.rooms || '-'}} m2
                             </p>
                           </div>
+                         
                         </div>
-                        <p class="w-100
-                                      fw-400
-                                      font-size-16
-                                      line-20
-                                      color-black">
-                          <i class="bi
-                                         font-size-20
-                                         mr-2
-                                         bi-calendar"></i>
-                          Terça-feira, 29
-                          de
-                          Junho às 08:00
+                        <p *ngIf="dataSelecionada" class="w-100 fw-400 font-size-16  line-20 color-black">
+                          <i class="bi font-size-20  mr-2 bi-calendar"></i>
+                          {{dataSelecionada | date: 'EEEE'}}, {{dataSelecionada | date: 'dd'}} de {{dataSelecionada |date: 'MMMM'}} <span *ngIf="horasSelecionada"> às {{horasSelecionada}}</span>
                         </p>
                         <p>
-                          <i class="bi
-                                         font-size-18
-                                         color-black
-                                         mr-1
-                                         bi-geo-alt"></i>
-                          <span class="fw-400
-                                         font-size-16
-                                         line-20
-                                         color-black">Rua
-                            Estados
-                            Unidos
-                            1987,
-                            Curitiba -
-                            PR</span>
+                          <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
+                          <span class="fw-400 font-size-16 line-20 color-black">
+                            {{response.complementAddress || '(sem endereço)'}} 
+                            {{response.yearOfConstruction || '-'}},
+                            {{response.cityAddress || '(local não informado!)'}} - {{response.ufAddress || '-'}}
+                          </span>
                         </p>
                       </div>
-                      <button type="submit" (click)="nextScheduling('close')" class="btn pb-2 mt-3
-                                   bg-purple fw-700
-                                   font-size-18 line-24
-                                   text-light
-                                   border-radius-10
-                                   h-74
-                                   w-100">Salvar
-                        na Agenda</button>
-                      <button type="button" (click)="nextScheduling('viewvisits')" class="btn pb-2 mt-3
-                                   border-purple
-                                   bg-white
-                                   fw-700 font-size-18
-                                   line-24 color-purple
-                                   border-radius-10
-                                   h-74
-                                   w-100">Ver visitas</button>
+                      <button type="submit" (click)="nextScheduling('close')" class="btn pb-2 mt-3 bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100">Salvar na Agenda</button>
+                      <button type="button" (click)="nextScheduling('viewvisits')" class="btn pb-2 mt-3 border-purple bg-white fw-700 font-size-18 line-24 color-purple border-radius-10  h-74 w-100">Ver visitas</button>
                     </div>
                   </form>
                 </div>
