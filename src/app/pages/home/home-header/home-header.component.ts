@@ -42,6 +42,8 @@ export class HomeHeaderComponent implements OnInit {
 
   resultType: any;
 
+  whatAreYouLookingForTitle: string = 'O que está buscando?'
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -51,6 +53,7 @@ export class HomeHeaderComponent implements OnInit {
       search: ['', [Validators.required]],
       typeStatus: ['', [Validators.required]],
       typeProperty: ['', [Validators.required]],
+      typepropertyTeste: [''],
       typePropertyLocal: ['', [Validators.required]],
       typePropertyOptions: ['', [Validators.required]],
       typeOfResidential: ['', [Validators.required]],
@@ -78,7 +81,7 @@ export class HomeHeaderComponent implements OnInit {
   }
   // make full search
   confirm() {
-
+    console.log(this.form.value)
   }
   // search filter
   resultSearch(tableName: string) {
@@ -110,6 +113,10 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   typePropertyStep1(value: string) {
+    let typepropertyTesteRename = value
+    this.form.patchValue({
+      typepropertyTeste: typepropertyTesteRename
+    })
     if (value === 'residential') {
       this.searchfilterTypeProperty = 'residential';
     } else if (value === 'rural') {
@@ -145,6 +152,11 @@ export class HomeHeaderComponent implements OnInit {
     } else if (value === 'comercial') {
       this.typeoffCommercial = !this.typeoffCommercial;
     }
+  }
+
+  whatAreYouLookingFor(value) {
+    this.whatAreYouLookingForTitle = value
+
   }
 
 
