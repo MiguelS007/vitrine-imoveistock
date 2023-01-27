@@ -8,8 +8,16 @@
                     Resultado de busca
                 </span>
             </p>
-            <p class="fw-700 font-size-32 line-40 color-black">
-                Resultado da sua busca por <b>[string busca]</b>
+            <p class="fw-700 font-size-32 line-40 color-black" *ngIf="filtroResultDisplay.typeAd">
+                Resultado da sua busca por <b>
+                    <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}}</span>
+                    <span
+                        *ngIf="filtroResultDisplay.whatAreYouLookingFor"> {{filtroResultDisplay.whatAreYouLookingFor}},</span>
+
+                    <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
+                    <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
+                    <span *ngIf="filtroResultDisplay.where"> em {{filtroResultDisplay.where}}</span>
+                </b>
             </p>
         </div>
         <div class="col-4 col-body-products mt-5">
@@ -17,68 +25,49 @@
                 <label for="searchwords" class="label-search-words">
                     <i class="bi bi-search font-size-24"></i>
                 </label>
-                <input id="searchwords" formControlName="searchwords"
-                    style="padding-right: 70px;" type="search"
-                    placeholder="Busque por palavras"
-                    class="btn border border-radius-10 bg-light fw-400 text-left
-                    font-size-16 line-20 pl-4 color-black w-100 h-74"/>
+                <input id="searchwords" formControlName="searchwords" style="padding-right: 70px;" type="search"
+                    placeholder="Busque por palavras" class="btn border border-radius-10 bg-light fw-400 text-left
+                    font-size-16 line-20 pl-4 color-black w-100 h-74" />
 
                 <label for="localproperty" class="label-search-local">
                     <i class="bi bi-geo-alt font-size-24"></i>
                 </label>
-                <input id="localproperty" formControlName="localproperty"
-                    style="padding-right: 70px;" type="text" placeholder="Local"
-                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                <input id="localproperty" formControlName="localproperty" style="padding-right: 70px;" type="text"
+                    placeholder="Local" class="btn border border-radius-10 bg-light fw-400 mt-4
                     text-left font-size-16 line-20 pl-4 color-black w-100
-                    h-74"/>
- 
-                <input formControlName="typeproperty"
-                    type="text" placeholder="Tipo de imóvel"
-                    class="btn border border-radius-10 bg-light fw-400 mt-4
-                    text-left font-size-16 line-20 pl-4 color-black w-100
-                    h-74"/>
+                    h-74" />
 
-                <input formControlName="typeprice"
-                    type="text" placeholder="Preço"
-                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                <input formControlName="typeproperty" type="text" placeholder="Tipo de imóvel" class="btn border border-radius-10 bg-light fw-400 mt-4
                     text-left font-size-16 line-20 pl-4 color-black w-100
-                    h-74"/>
+                    h-74" />
 
-                <input formControlName="typebathroom"
-                    type="text" placeholder="Banheiros"
-                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                <input formControlName="typeprice" type="text" placeholder="Preço" class="btn border border-radius-10 bg-light fw-400 mt-4
                     text-left font-size-16 line-20 pl-4 color-black w-100
-                    h-74"/>
+                    h-74" />
 
-                <input formControlName="typerooms"
-                    type="text" placeholder="Quartos"
-                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                <input formControlName="typebathroom" type="text" placeholder="Banheiros" class="btn border border-radius-10 bg-light fw-400 mt-4
                     text-left font-size-16 line-20 pl-4 color-black w-100
-                    h-74"/>
+                    h-74" />
 
-                <input formControlName="typevacancies"
-                    type="text" placeholder="Vagas"
-                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                <input formControlName="typerooms" type="text" placeholder="Quartos" class="btn border border-radius-10 bg-light fw-400 mt-4
                     text-left font-size-16 line-20 pl-4 color-black w-100
-                    h-74"/>
+                    h-74" />
 
-                <input formControlName="typeconstruction"
-                    type="text" placeholder="Ano de construção"
-                    class="btn border border-radius-10 bg-light fw-400 mt-4
+                <input formControlName="typevacancies" type="text" placeholder="Vagas" class="btn border border-radius-10 bg-light fw-400 mt-4
                     text-left font-size-16 line-20 pl-4 color-black w-100
-                    h-74"/>
+                    h-74" />
+
+                <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
+                    text-left font-size-16 line-20 pl-4 color-black w-100
+                    h-74" />
 
                 <div class="w-100 d-flex align-items-center">
-                    <input formControlName="typefootagemin"
-                        type="text" placeholder="Metragem Mínima"
-                        class="btn border border-radius-10 bg-light fw-400 mt-4
+                    <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
                         mr-1 text-left font-size-16 line-20 pl-4 color-black
-                        w-100 h-74"/>
-                    <input formControlName="typefootagemax"
-                        type="text" placeholder="Metragem Máxima"
-                        class="btn border border-radius-10 bg-light fw-400 mt-4
+                        w-100 h-74" />
+                    <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
                         ml-1 text-left font-size-16 line-20 pl-4 color-black
-                        w-100 h-74"/>
+                        w-100 h-74" />
                 </div>
                 <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
                     line-24 border-radius-10 h-74 w-100" type="submit">
@@ -88,23 +77,18 @@
             <div class="w-100 mt-4 border-radius-10 bg-white p-5">
                 <p class="fw-700 pb-4 px-1 font-size-20 line-24 color-blue">Imóveis
                     exclusivos</p>
-                <swiper class="h-350 max-w-1227"
-                    [slidesPerView]="1"
-                    [pagination]="{ clickable: true }"
+                <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }"
                     [scrollbar]="true">
-                    <ng-template *ngFor="let item of propertyproducts"
-                        swiperSlide>
+                    <ng-template *ngFor="let item of propertyproducts" swiperSlide>
                         <div style="background-image:
                             url(../../../assets/img/gradient.png),
-                            url({{item.bgproduct}});"
-                            class="bg-img-property w-100 py-2 px-3
+                            url({{item.bgproduct}});" class="bg-img-property w-100 py-2 px-3
                             border-radius-10">
                             <div class="w-100 details-card-swiper h-50 p-4 d-flex">
                                 <h4 class="w3-black h-fit px-4 py-2 mb-0 mx-1
                                     border-radius-5 fw-400 font-size-18 line-24
                                     text-light">{{item.rent}}</h4>
-                                <h4 style="background-color:#878DBA;"
-                                    class="mx-1 h-fit px-4 py-2 mb-0
+                                <h4 style="background-color:#878DBA;" class="mx-1 h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-18 line-24
                                     text-light">{{item.exclusive}}</h4>
                             </div>
@@ -193,8 +177,7 @@
                 </p>
                 <div *ngFor="let item of response | slice:0:3" class="row mt-5 pt-5">
                     <div class="col-3 col-img-types-property p-0">
-                        <img src="../../../assets/img/ap.png"
-                            class="border-radius-10 h-111 w-100"/>
+                        <img src="../../../assets/img/ap.png" class="border-radius-10 h-111 w-100" />
                     </div>
                     <div class="col-9 col-img-types-property">
                         <p class="d-grid title-property-product mb-0 h-75">
@@ -217,11 +200,13 @@
         </div>
         <div class="col-8 col-body-products px-0 mt-5">
             <div class="col-12 d-flex align-items-center">
-                <a [routerLink]="['/search-map']" class="d-flex cursor-pointer w-25 mr-2 border-radius-10 bg-purple align-items-center justify-content-center py-4">
+                <a [routerLink]="['/search-map']"
+                    class="d-flex cursor-pointer w-25 mr-2 border-radius-10 bg-purple align-items-center justify-content-center py-4">
                     <img src="../../../assets/icon/map.png" class="mr-2" />
                     <span class="fw-700 font-size-18 line-24 text-light">Ver mapa</span>
                 </a>
-                <div class="w-100 d-flex align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
+                <div
+                    class="w-100 d-flex align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
                     <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
                         <span>9</span>
                         <span class="px-1">Resultados</span>
@@ -231,46 +216,34 @@
                         <div class="select-box">
                             <div class="select-box__current" tabindex="1">
                                 <div class="select-box__value">
-                                    <input class="select-box__input"
-                                        type="radio" id="relevant"
-                                        value="relevant"
-                                        formControlName="orderby" name="orderby"
-                                        checked="checked"/>
+                                    <input class="select-box__input" type="radio" id="relevant" value="relevant"
+                                        formControlName="orderby" name="orderby" checked="checked" />
                                     <p class="select-box__input-text">Relevante</p>
                                 </div>
                                 <div class="select-box__value">
-                                    <input class="select-box__input"
-                                        type="radio" id="highestprice"
-                                        value="highestprice"
-                                        formControlName="orderby"
-                                        name="orderby"/>
+                                    <input class="select-box__input" type="radio" id="highestprice" value="highestprice"
+                                        formControlName="orderby" name="orderby" />
                                     <p class="select-box__input-text">Maior
                                         preço</p>
                                 </div>
                                 <div class="select-box__value">
-                                    <input class="select-box__input"
-                                        type="radio" id="lowestprice"
-                                        value="lowestprice"
-                                        formControlName="orderby"
-                                        name="orderby"/>
+                                    <input class="select-box__input" type="radio" id="lowestprice" value="lowestprice"
+                                        formControlName="orderby" name="orderby" />
                                     <p class="select-box__input-text">Menor
                                         preço</p>
                                 </div>
                             </div>
                             <ul class="select-box__list">
                                 <li>
-                                    <label class="select-box__option mb-0"
-                                        for="relevant"
+                                    <label class="select-box__option mb-0" for="relevant"
                                         aria-hidden="aria-hidden">Relevante</label>
                                 </li>
                                 <li>
-                                    <label class="select-box__option mb-0"
-                                        for="highestprice"
+                                    <label class="select-box__option mb-0" for="highestprice"
                                         aria-hidden="aria-hidden">Maior preço</label>
                                 </li>
                                 <li>
-                                    <label class="select-box__option mb-0"
-                                        for="lowestprice"
+                                    <label class="select-box__option mb-0" for="lowestprice"
                                         aria-hidden="aria-hidden">Menor preço</label>
                                 </li>
                             </ul>
@@ -285,7 +258,7 @@
                         i= index" class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3
                         border-radius-10 bg-white">
                         <div (click)="goDetailProperty()" class="bg-img-result py-2 px-3 border-radius-10">
-                             <!-- style='background-image: url({{item.bgproduct}});' -->
+                            <!-- style='background-image: url({{item.bgproduct}});' -->
                             <div class="w-100 h-50 d-flex">
                                 <h4 class="bg-purple h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-14 line-15
@@ -311,8 +284,7 @@
                             <span class="fw-400 font-size-14 line-20
                                 color-black">{{item.propertyCharacteristics}}</span>
                             <p class="fw-700 my-2 font-size-16 line-20 mb-0
-                                color-black text-truncate"
-                                style="max-width: 90%;">{{item.description}}</p>
+                                color-black text-truncate" style="max-width: 90%;">{{item.description}}</p>
                             <p class="d-flex align-items-center">
                                 <i class="bi font-size-20 mr-2 color-black
                                     bi-geo-alt"></i>
@@ -324,29 +296,26 @@
                             d-flex">
                             <div class="col justify-content-left px-0 d-flex
                                 align-items-center justify-content-left">
-                                <img src="../../../assets/icon/bed.png"
-                                    class="pr-2"/>
+                                <img src="../../../assets/icon/bed.png" class="pr-2" />
                                 <p class="fw-400 mb-0 font-size-14 line-20
                                     color-black">{{item.rooms}} Quartos</p>
                             </div>
                             <div class="col justify-content-center px-0 d-flex
                                 align-items-center justify-content-left">
-                                <img src="../../../assets/icon/car.png"
-                                    class="pr-2"/>
+                                <img src="../../../assets/icon/car.png" class="pr-2" />
                                 <p class="fw-400 mb-0 font-size-14 line-20
                                     color-black">{{item.vacancyNumber}} Vagas</p>
                             </div>
                             <div class="col justify-content-end px-0 d-flex
                                 align-items-center justify-content-left">
-                                <img src="../../../assets/icon/rule.png"
-                                    class="pr-2"/>
+                                <img src="../../../assets/icon/rule.png" class="pr-2" />
                                 <p class="fw-400 mb-0 font-size-14 line-20
                                     color-black">{{item.usefulArea}} m2</p>
                             </div>
                         </div>
                         <div class="w-100 d-flex align-items-center py-2 px-1">
                             <img [src]="urlsimg" class="border-radius-100
-                                "/>
+                                " />
                             <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20
                                 color-black">{{item.ownerName}}</h3>
                         </div>

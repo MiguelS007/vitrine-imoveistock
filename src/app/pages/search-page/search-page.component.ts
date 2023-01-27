@@ -35,6 +35,22 @@ export class SearchPageComponent implements OnInit {
 
   filtroSelected: any;
 
+  filtroResultDisplay: {
+    typeAd: string,
+    where: string,
+    whatAreYouLookingFor: string,
+    propertyType: string,
+    goal: string,
+    checkvacancies: string,
+    checkbathrooms: string,
+    checksuites: string,
+    checkrooms: string,
+    checkcondominium: string,
+    checkfootage: string,
+    checkconstruction: string,
+    checkrenovated: string,
+  }
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -69,9 +85,37 @@ export class SearchPageComponent implements OnInit {
     let filtro = localStorage.getItem('filtro');
     this.filtroSelected = JSON.parse(filtro);
 
-    console.log(this.filtroSelected)
+    let typeAdTranslate: string = ''
 
-    if (this.filterResult === null || this.filterResult.length === 0) {
+    if(this.filtroSelected?.typeAd === 'rent') {
+      typeAdTranslate = 'Venda'
+    } else if (this.filtroSelected?.typeAd === 'sale') {
+      typeAdTranslate = 'Alugar'
+    }
+
+    this.filtroResultDisplay = {
+      typeAd: typeAdTranslate,
+      where: this.filtroSelected?.where,
+      whatAreYouLookingFor: this.filtroSelected?.whatAreYouLookingFor,
+      propertyType: this.filtroSelected?.propertyType,
+      goal: this.filtroSelected?.goal,
+      checkvacancies: '',
+      checkbathrooms: '',
+      checksuites: '',
+      checkrooms: '',
+      checkcondominium: '',
+      checkfootage: '',
+      checkconstruction: '',
+      checkrenovated: '',
+    }
+
+    console.log(this.filtroResultDisplay)
+
+    console.log(this.filtroSelected)
+    console.log(this.filterResult)
+
+
+    if (this.filterResult === null) {
       this.searchService.getPropertyHome().subscribe(
         success => {
           this.filterResult = success;
