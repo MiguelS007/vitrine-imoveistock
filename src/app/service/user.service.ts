@@ -13,7 +13,7 @@ import { BaseService } from './base.service';
 })
 export class UserService extends BaseService {
 
-    url: string = `${environment.apis.imoveistock}user`;
+    url: string = `${environment.apis.imoveistock}`;
 
     constructor(
         private httpClient: HttpClient,
@@ -22,7 +22,7 @@ export class UserService extends BaseService {
     }
     register(dto: UserRegisterRequestDto): Observable<UserRegisterResponseDto> {
         return this.httpClient
-            .post(`${this.url}`, dto, this.authorizedHeader())
+            .post(`${this.url}user-client`, dto, this.anonymousHeader())
             .pipe(
                 map(this.extractData),
                 catchError(this.serviceError)
@@ -30,7 +30,7 @@ export class UserService extends BaseService {
     }
     getUser(): Observable<UserGetResponseDto> {
         return this.httpClient
-            .get(`${this.url}/authenticated`, this.authorizedHeader())
+            .get(`${this.url}user-client/authenticated`, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 }

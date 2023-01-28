@@ -19,7 +19,7 @@ export class SearchService extends BaseService {
   }
   getSearch(): Observable<any> {
     return this.httpClient
-      .get(`${this.url}profile`, this.anonymousHeader())
+      .get(`${this.url}profile-client`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
   getPropertyHome(): Observable<AnnouncementGetResponseDto[]> {

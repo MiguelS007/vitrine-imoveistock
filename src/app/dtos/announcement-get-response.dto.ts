@@ -117,6 +117,8 @@ export abstract class AnnouncementGetResponseDto {
     bestDayPhotos?: Date;
 
     whatIsTheBestTimePhotographer?: string;
+
+    advertiser_id?: string
 }
 
 class WhatWasRenovated {

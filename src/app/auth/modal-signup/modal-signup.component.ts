@@ -18,7 +18,7 @@ export class ModalSignupComponent implements OnInit {
 
   request: UserRegisterRequestDto;
 
-  response: any;
+  response: string[];
   isSubmitted: boolean = false;
 
   constructor(
@@ -61,7 +61,7 @@ export class ModalSignupComponent implements OnInit {
     var cpf = `${this.form.controls['cpf'].value[0]}${this.form.controls['cpf'].value[1]}${this.form.controls['cpf'].value[2]}.${this.form.controls['cpf'].value[3]}${this.form.controls['cpf'].value[4]}${this.form.controls['cpf'].value[5]}.${this.form.controls['cpf'].value[6]}${this.form.controls['cpf'].value[7]}${this.form.controls['cpf'].value[8]}-${this.form.controls['cpf'].value[9]}${this.form.controls['cpf'].value[10]}`
 
     this.request = {
-      phone: `+55${this.form.controls['phone'].value}`,
+      phone: `+55${this.form.controls['phone'].value.replace(/\D/g, '')}`,
       email: this.form.controls['email'].value,
       cpf: cpf,
       name: this.form.controls['name'].value,
@@ -74,6 +74,7 @@ export class ModalSignupComponent implements OnInit {
       this.userService.register(this.request).subscribe(
         success => {
           this.toastrService.success('Cadastrado com sucesso!', '', { progressBar: true });
+          window.location.reload();
         },
         error => {
           console.log(error)
@@ -85,6 +86,8 @@ export class ModalSignupComponent implements OnInit {
       this.toastrService.error('Necessario estar de acordo com os termos e condições de uso!', '', { progressBar: true });
     }
   }
+
+  
 
   // nextFunction() {
   //   this.authenticationService.authenticate(this.request).subscribe(
