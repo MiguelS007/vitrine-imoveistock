@@ -46,7 +46,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   ) {
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
-      this.modallogin = false;
+      this.modalService.open(ModalLoginComponent, { centered: true })
     });
   }
 

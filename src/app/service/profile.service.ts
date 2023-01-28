@@ -8,8 +8,9 @@ import { BaseService } from './base.service';
   providedIn: 'root'
 })
 export class ProfileService extends BaseService {
+  
 
-  url: string = `${environment.apis.imoveistock}profile`
+  url: string = `${environment.apis.imoveistock}`
 
   constructor(
       private httpClient: HttpClient
@@ -19,7 +20,7 @@ export class ProfileService extends BaseService {
 
   list(): Observable<any> {
       return this.httpClient
-          .get(`${this.url}`, this.anonymousHeader())
+          .get(`${this.url}profile-client`, this.anonymousHeader())
           .pipe(map(this.extractData), catchError(this.serviceError));
   }
   

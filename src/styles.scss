@@ -1130,13 +1130,14 @@ input:focus {
     right: 5%;
     padding: 1.5rem 2rem;
 }
+
 // .row-body-details-property{
 //     display: flex;
 //     justify-content: center;
 // }
 
 .col-btns-preview-img {
-    top: -170px;
+    top: -177px;
     justify-content: space-evenly;
     background: linear-gradient(0deg, black, transparent);
 }
@@ -1507,6 +1508,10 @@ vg-overlay-play .vg-overlay-play {
         display: block !important;
     }
 
+    .left-important {
+        justify-content: start !important;
+    }
+
     // VISITS-PAGE
     .col-visits {
         flex: 0 0 100% !important;
@@ -1666,13 +1671,25 @@ vg-overlay-play .vg-overlay-play {
         width: 90% !important;
         margin-left: 0 !important;
     }
-    .card-product-result-search{
+
+    .card-product-result-search {
         width: 380px !important;
         margin-left: 0 !important;
     }
 
     .col-cards-products {
         text-align: center;
+    }
+}
+
+@media(max-height: 800px) {
+
+    // PROPERTY DETAILS
+    .modal-content {
+        border-radius: 1rem !important;
+        overflow-y: none !important;
+        max-height: 610px !important;
+        overflow-y: scroll !important;
     }
 }
 

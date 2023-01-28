@@ -17,7 +17,7 @@ import { AuthenticateCodeConfirmationRequestDto } from '../dtos/authentication-c
 })
 export class AuthenticationService extends BaseService {
 
-  url: string = `${environment.apis.imoveistock}authentication`;
+  url: string = `${environment.apis.imoveistock}authentication/`;
 
   token = {
       userId: '',
@@ -39,7 +39,7 @@ export class AuthenticationService extends BaseService {
 
   authenticate(dto: AuthenticateRequestDto): Observable<AuthenticateResponseDto> {
       return this.httpClient
-          .post(`${this.url}/authenticate`, dto, this.anonymousHeader())
+          .post(`${this.url}authenticate`, dto, this.anonymousHeader())
           .pipe(
               map(this.extractData),
               catchError(this.serviceError)
@@ -48,7 +48,7 @@ export class AuthenticationService extends BaseService {
 
   authenticateCodeConfirmation(dto: AuthenticateCodeConfirmationRequestDto): Observable<AuthetincatedUserDto> {
       return this.httpClient
-          .post(`${this.url}/authenticate-code-confirmation`, dto, this.anonymousHeader())
+          .post(`${this.url}authenticate-code-confirmation`, dto, this.anonymousHeader())
           .pipe(
               map(this.extractData),
               catchError(this.serviceError)
