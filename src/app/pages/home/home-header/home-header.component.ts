@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { SearchService } from 'src/app/service/search.service';
 
@@ -40,14 +41,18 @@ export class HomeHeaderComponent implements OnInit {
   hideviewoptions = false;
   showviewoptions = false;
 
-  resultType: any;
+  resultType: any = [];
 
-  whatAreYouLookingForTitle: string = 'O que está buscando?'
+  whatAreYouLookingForTitle: string = 'O que está buscando?';
+
+  typeAd: string = 'sale';
+
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private toastrService: ToastrService
   ) {
     this.form = this.formBuilder.group({
       search: ['', [Validators.required]],
@@ -71,7 +76,11 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    let user = JSON.parse(localStorage.getItem('userDto'))
+    let user = JSON.parse(localStorage.getItem('userDto'));
+
+    localStorage.removeItem('resultSearch');
+    localStorage.removeItem('filtro')
+
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
@@ -79,10 +88,111 @@ export class HomeHeaderComponent implements OnInit {
       error => { console.log(error, 'data not collected') }
     );
   }
+
   // make full search
   confirm() {
-    console.log(this.form.value)
+
+    let oqEstaBuscando: string = '';
+
+    if (this.whatAreYouLookingForTitle !== 'O que está buscando?') {
+      if (this.whatAreYouLookingForTitle === 'Terreno') {
+        oqEstaBuscando = 'terreno'
+      } else if (this.whatAreYouLookingForTitle === 'Edifício') {
+        oqEstaBuscando = 'edificio'
+      } else if (this.whatAreYouLookingForTitle === 'Casa') {
+        oqEstaBuscando = 'casa'
+      }
+    }
+
+    let filter: any = {
+      typeAd: this.typeAd,
+      where: this.form.controls['typePropertyLocal'].value,
+      whatAreYouLookingFor: oqEstaBuscando,
+      propertyType: this.searchfilterTypeProperty,
+      goal: this.searchfilterType,
+      checkvacancies: this.form.controls['checkvacancies'].value,
+      checkbathrooms: this.form.controls['checkbathrooms'].value,
+      checksuites: this.form.controls['checksuites'].value,
+      checkrooms: this.form.controls['checkrooms'].value,
+      checkcondominium: this.form.controls['checkcondominium'].value,
+      checkfootage: this.form.controls['checkfootage'].value,
+      checkconstruction: this.form.controls['checkconstruction'].value,
+      checkrenovated: this.form.controls['checkrenovated'].value,
+    };
+
+    let announcementTypeAdGroup: AnnouncementGetResponseDto[] = [];
+
+    if (filter.typeAd !== '') {
+      for (let i = 0; i < this.response.length; i++) {
+        if (this.response[i].typeOfAd === filter.typeAd) {
+          announcementTypeAdGroup.push(this.response[i]);
+        }
+      }
+    } else {
+      announcementTypeAdGroup = this.response;
+    }
+
+    let announcementCityGroup: AnnouncementGetResponseDto[] = [];
+
+    if (filter.where !== '') {
+      for (let i = 0; i < announcementTypeAdGroup.length; i++) {
+        if (announcementTypeAdGroup[i].cityAddress === filter.where) {
+          announcementCityGroup.push(announcementTypeAdGroup[i]);
+        }
+      }
+    } else {
+      announcementCityGroup = announcementCityGroup;
+    }
+
+    let announcementPropertyCharacteristicsGroup: AnnouncementGetResponseDto[] = [];
+
+    if (filter.whatAreYouLookingFor !== '') {
+      for (let i = 0; i < announcementCityGroup.length; i++) {
+        if (announcementCityGroup[i].propertyCharacteristics === filter.whatAreYouLookingFor) {
+          announcementPropertyCharacteristicsGroup.push(announcementCityGroup[i]);
+        }
+      }
+    } else {
+      announcementPropertyCharacteristicsGroup = announcementCityGroup;
+    }
+
+    let announcementpropertyTypeGroup: AnnouncementGetResponseDto[] = [];
+
+    if (filter.propertyType !== undefined) {
+      for (let i = 0; i < announcementPropertyCharacteristicsGroup.length; i++) {
+        if (announcementPropertyCharacteristicsGroup[i].goal === filter.propertyType) {
+          announcementpropertyTypeGroup.push(announcementPropertyCharacteristicsGroup[i]);
+        }
+      }
+    } else {
+      announcementpropertyTypeGroup = announcementPropertyCharacteristicsGroup
+    }
+
+    let announcementGoalGroup: AnnouncementGetResponseDto[] = [];
+
+    if (filter.goal !== undefined) {
+      for (let i = 0; i < announcementpropertyTypeGroup.length; i++) {
+        if (announcementpropertyTypeGroup[i].propertyType
+          === filter.goal) {
+          announcementGoalGroup.push(announcementpropertyTypeGroup[i]);
+        }
+      }
+    } else {
+      announcementGoalGroup = announcementpropertyTypeGroup
+    }
+
+    this.resultType = announcementGoalGroup;
+
+
+  
+    localStorage.setItem('filtro', JSON.stringify(filter))
+    localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
+    this.router.navigate(['/search']);
+
+
+
   }
+
   // search filter
   resultSearch(tableName: string) {
     if (tableName.length > 0) this.filtersearch = true
@@ -105,7 +215,8 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   buyOption(value: string) {
-    if (value === 'buy') {
+    this.typeAd = value;
+    if (value === 'sale') {
       this.collapsed = false;
     } else if (value === 'rent') {
       this.collapsed = true;
@@ -117,8 +228,8 @@ export class HomeHeaderComponent implements OnInit {
     this.form.patchValue({
       typepropertyTeste: typepropertyTesteRename
     })
-    if (value === 'residential') {
-      this.searchfilterTypeProperty = 'residential';
+    if (value === 'residencial') {
+      this.searchfilterTypeProperty = 'residencial';
     } else if (value === 'rural') {
       this.searchfilterTypeProperty = 'rural';
     } else if (value === 'comercial') {
@@ -145,7 +256,7 @@ export class HomeHeaderComponent implements OnInit {
       this.typeoffRural = false;
       this.typeoffCommercial = false;
 
-    } else if (value === 'residential') {
+    } else if (value === 'residencial') {
       this.typeoffResidential = !this.typeoffResidential;
     } else if (value === 'rural') {
       this.typeoffRural = !this.typeoffRural;

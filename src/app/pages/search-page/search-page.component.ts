@@ -31,6 +31,26 @@ export class SearchPageComponent implements OnInit {
   user: UserGetResponseDto;
   urlsimg: any = [];
 
+  filterResult: AnnouncementGetResponseDto[] = [];
+
+  filtroSelected: any;
+
+  filtroResultDisplay: {
+    typeAd: string,
+    where: string,
+    whatAreYouLookingFor: string,
+    propertyType: string,
+    goal: string,
+    checkvacancies: string,
+    checkbathrooms: string,
+    checksuites: string,
+    checkrooms: string,
+    checkcondominium: string,
+    checkfootage: string,
+    checkconstruction: string,
+    checkrenovated: string,
+  }
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -59,6 +79,52 @@ export class SearchPageComponent implements OnInit {
     this.products = this.datamokservice.resultSearch;
     this.propertyproducts = this.datamokservice.exclusiveProperties;
 
+    let resultadoVerify = localStorage.getItem('resultSearch');
+    this.filterResult = JSON.parse(resultadoVerify);
+
+    let filtro = localStorage.getItem('filtro');
+    this.filtroSelected = JSON.parse(filtro);
+
+    let typeAdTranslate: string = ''
+
+    if(this.filtroSelected?.typeAd === 'rent') {
+      typeAdTranslate = 'Venda'
+    } else if (this.filtroSelected?.typeAd === 'sale') {
+      typeAdTranslate = 'Alugar'
+    }
+
+    this.filtroResultDisplay = {
+      typeAd: typeAdTranslate,
+      where: this.filtroSelected?.where,
+      whatAreYouLookingFor: this.filtroSelected?.whatAreYouLookingFor,
+      propertyType: this.filtroSelected?.propertyType,
+      goal: this.filtroSelected?.goal,
+      checkvacancies: '',
+      checkbathrooms: '',
+      checksuites: '',
+      checkrooms: '',
+      checkcondominium: '',
+      checkfootage: '',
+      checkconstruction: '',
+      checkrenovated: '',
+    }
+
+    console.log(this.filtroResultDisplay)
+
+    console.log(this.filtroSelected)
+    console.log(this.filterResult)
+
+
+    if (this.filterResult === null) {
+      this.searchService.getPropertyHome().subscribe(
+        success => {
+          this.filterResult = success;
+          console.log(this.filterResult)
+        }
+      )
+    }
+
+
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
@@ -83,7 +149,7 @@ export class SearchPageComponent implements OnInit {
 
           if (this.response[i].propertyCharacteristics === 'kitnet')
             kitnet.push({ kitnet: this.response[i].propertyCharacteristics });
-            
+
         }
         this.countApartment = apartament.length;
         this.countCondominium = condominium.length;
@@ -94,17 +160,17 @@ export class SearchPageComponent implements OnInit {
       },
       error => { console.log(error, 'data not collected') }
     );
-    this.userService.getUser().subscribe(
-      success => {
-        this.user = success;
-        if (this.user?.photo?.location) {
-          this.urlsimg.push(this.user.photo.location);
-        }
-      },
-      error => {
-        console.error(error, 'photo not collected');
-      }
-    );
+    // this.userService.getUser().subscribe(
+    //   success => {
+    //     this.user = success;
+    //     if (this.user?.photo?.location) {
+    //       this.urlsimg.push(this.user.photo.location);
+    //     }
+    //   },
+    //   error => {
+    //     console.error(error, 'photo not collected');
+    //   }
+    // );
   }
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;

@@ -10,7 +10,7 @@
                     <div class="col-12 justify-content-center d-flex">
                         <button type="button" formControlName="typeStatus" ngDefaultControl value="sale"
                             [class]="collapsed! ? 'bg-light color-black' : 'bg-purple text-light arrow-box-buy'"
-                            (click)="buyOption('buy')"
+                            (click)="buyOption('sale')"
                             class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20 ">
                             Comprar
                         </button>
@@ -66,7 +66,7 @@
                                         <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                             <label for="typePropertyresidential" class="mb-0">
                                                 <input type="radio" id="typePropertyresidential"
-                                                    (click)="typePropertyStep1('residential')"
+                                                    (click)="typePropertyStep1('residencial')"
                                                     formControlName="typeProperty" name="typeProperty"
                                                     class="card-input-element" />
                                                 <div class="py-2 px-4 card-input">
@@ -152,7 +152,7 @@
                                         <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                             <label for="typePropertycondominium" class="mb-0">
                                                 <input type="radio" id="typePropertycondominium"
-                                                    (click)="typeProperty('casa condominio')"
+                                                    (click)="typeProperty('casadecondominio')"
                                                     formControlName="typeOfResidential" name="typeOfResidential"
                                                     class="card-input-element" />
                                                 <div class="py-2 px-4 card-input">
@@ -164,7 +164,7 @@
                                         <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                             <label for="typePropertyvillage" class="mb-0">
                                                 <input type="radio" id="typePropertyvillage"
-                                                    (click)="typeProperty('vila')" formControlName="typeOfResidential"
+                                                    (click)="typeProperty('casadevila')" formControlName="typeOfResidential"
                                                     name="typeOfResidential" class="card-input-element" />
                                                 <div class="py-2 px-4 card-input">
                                                     <span class="fw-400 font-size-14 line-20 color-blue">Casa de
@@ -222,7 +222,7 @@
                                         <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                             <label for="typePropertyfarm" class="mb-0">
                                                 <input type="radio" id="typePropertyfarm"
-                                                    (click)="typeProperty('chacara')" formControlName="typeOfRural"
+                                                    (click)="typeProperty('fazenda')" formControlName="typeOfRural"
                                                     name="typeOfRural" class="card-input-element" />
                                                 <div class="py-2 px-4 card-input">
                                                     <span class="fw-400 font-size-14 line-20 color-blue">Fazenda / Sítio
@@ -249,7 +249,7 @@
                                         <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                             <label for="typePropertycommercialset" class="mb-0">
                                                 <input type="radio" id="typePropertycommercialset"
-                                                    (click)="typeProperty('conjunto comercial')"
+                                                    (click)="typeProperty('conjuntocomercial')"
                                                     formControlName="typeOfCommercial" name="typeOfCommercial"
                                                     class="card-input-element" />
                                                 <div class="py-2 px-4 card-input">
@@ -261,7 +261,7 @@
                                         <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                             <label for="typePropertycommercialhouse" class="mb-0">
                                                 <input type="radio" id="typePropertycommercialhouse"
-                                                    (click)="typeProperty('casa comercial')"
+                                                    (click)="typeProperty('casacomercial')"
                                                     formControlName="typeOfCommercial" name="typeOfCommercial"
                                                     class="card-input-element" />
                                                 <div class="py-2 px-4 card-input">
@@ -284,7 +284,7 @@
                                         <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                             <label for="typePropertycorporatelots" class="mb-0">
                                                 <input type="radio" id="typePropertycorporatelots"
-                                                    (click)="typeProperty('laje')" formControlName="typeOfCommercial"
+                                                    (click)="typeProperty('lajecorporativa')" formControlName="typeOfCommercial"
                                                     name="typeOfCommercial" class="card-input-element" />
                                                 <div class="py-2 px-4 card-input">
                                                     <span class="fw-400 font-size-14 line-20 color-blue">Andar/Laje
@@ -295,7 +295,7 @@
                                         <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                             <label for="typePropertybuilding" class="mb-0">
                                                 <input type="radio" id="typePropertybuilding"
-                                                    (click)="typeProperty('predio')" formControlName="typeOfCommercial"
+                                                    (click)="typeProperty('prediointeiro')" formControlName="typeOfCommercial"
                                                     name="typeOfCommercial" class="card-input-element" />
                                                 <div class="py-2 px-4 card-input">
                                                     <span

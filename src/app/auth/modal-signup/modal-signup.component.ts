@@ -68,6 +68,8 @@ export class ModalSignupComponent implements OnInit {
       profilesIds: this.response
     }
 
+    console.log(this.request)
+
     if (this.form.controls['termsAndPolicy'].value === true) {
       this.userService.register(this.request).subscribe(
         success => {
@@ -75,6 +77,7 @@ export class ModalSignupComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error => {
+          console.log(error)
           this.toastrService.error('Erro ao cadastrar', '', { progressBar: true });
         }
       )
