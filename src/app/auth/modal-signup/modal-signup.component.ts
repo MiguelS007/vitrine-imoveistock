@@ -74,7 +74,7 @@ export class ModalSignupComponent implements OnInit {
       this.userService.register(this.request).subscribe(
         success => {
           this.toastrService.success('Cadastrado com sucesso!', '', { progressBar: true });
-          this.router.navigate(['/']);
+          window.location.reload();
         },
         error => {
           console.log(error)
@@ -86,6 +86,8 @@ export class ModalSignupComponent implements OnInit {
       this.toastrService.error('Necessario estar de acordo com os termos e condições de uso!', '', { progressBar: true });
     }
   }
+
+  
 
   // nextFunction() {
   //   this.authenticationService.authenticate(this.request).subscribe(

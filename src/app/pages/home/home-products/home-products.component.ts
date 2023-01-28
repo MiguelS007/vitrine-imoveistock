@@ -32,6 +32,7 @@ export class HomeProductsComponent implements OnInit {
     this.searchService.getPropertyHome().subscribe(
       success => {
         this.response = success;
+        console.log(this.response);
       },
       error => { console.log(error, 'data not collected') }
     );
