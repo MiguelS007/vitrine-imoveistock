@@ -9,10 +9,7 @@ export const environment = {
     // imoveistock: 'https://market-inkluziva.mustblockchain.com/imoveistock/',
     imoveistock: 'http://localhost:5000/',
   },
-  google: {
-    apiKey: 'AIzaSyBzwijvQ13DZALYBwC-uKdWWELaf0r9Xzs',
-    // imoveistock: 'http://localhost:3000/',
-  }
+
 };
 
 

@@ -177,9 +177,9 @@ export class PropertyDetailComponent implements OnInit {
 
   nextScheduling(value: string) {
     if (value === 'step1') {
-      if(this.user === null){
+      if (this.user === null) {
         this.datamokservice.opModalLogin();
-      }else{
+      } else {
         this.step1scheduling = false;
         this.step2scheduling = true;
       }
