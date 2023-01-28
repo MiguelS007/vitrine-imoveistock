@@ -1272,7 +1272,7 @@ vg-overlay-play .vg-overlay-play {
     bottom: 0;
     left: 0;
     z-index: 1050;
-    overflow: hidden;
+    overflow: none !important;
     outline: 0;
 }
 
@@ -1688,8 +1688,7 @@ vg-overlay-play .vg-overlay-play {
     .modal-content {
         border-radius: 1rem !important;
         overflow-y: none !important;
-        max-height: 610px !important;
-        overflow-y: scroll !important;
+        overflow-y: none !important;
     }
 }
 
