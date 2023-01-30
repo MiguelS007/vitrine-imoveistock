@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { DatamokService } from 'src/app/service/datamok.service';
 
 @Component({
   selector: 'app-home-cards',
@@ -6,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-cards.component.scss']
 })
 export class HomeCardsComponent implements OnInit {
+  changeSubscription: Subscription;
 
-  constructor() { }
+  modallogin = false;
+
+  constructor(
+    private datamokservice: DatamokService,
+  ) { 
+    this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
+      this.modallogin = false;
+    });
+  }
 
   ngOnInit(): void {
+  }
+
+  openLogin(){
+    this.datamokservice.opModalLogin();
   }
 
 }
