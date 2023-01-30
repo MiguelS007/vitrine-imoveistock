@@ -120,11 +120,11 @@
                 </swiper>
 
             </div>
-            
-            <div class="w-100 border-radius-10 mt-4 bg-white p-4">
+
+            <div *ngIf="recentlySeenList.length > 0" class="w-100 border-radius-10 mt-4 bg-white p-4">
                 <p class="fw-700 pb-4 font-size-20 line-24 color-black">Visualizados recentemente
                 </p>
-                <div *ngFor="let item of response | slice:0:3" class="row mt-5 pt-5">
+                <div *ngFor="let item of recentlySeenList | slice:0:3" class="row mb-4">
                     <div class="col-3 col-img-types-property p-0">
                         <img src="../../../assets/img/ap.png" class="border-radius-10 h-111 w-100" />
                     </div>
@@ -132,8 +132,10 @@
                         <p class="d-grid title-property-product mb-0 h-75">
                             <span class="fw-700 font-size-18 line-24
                                 color-black">{{item.description}}</span>
-                            <span class="fw-700 font-size-18 line-24
-                                color-black">R${{item.saleValue}}</span>
+                            <span *ngIf="item.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24
+                                color-black">{{item.saleValue  | currency: 'R$'}}</span>
+                            <span *ngIf="item.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24
+                                color-black">{{item.leaseValue  | currency: 'R$'}}</span>
                         </p>
                         <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
                             <span class="fw-400 font-size-14 line-20
@@ -149,8 +151,7 @@
         </div>
         <div class="col-8 col-body-products px-0 mt-5">
             <div class="col-12 space-see-maps-area-search">
-                <a [routerLink]="['/search-map']"
-                    class="btn-ver-no-mapa">
+                <a [routerLink]="['/search-map']" class="btn-ver-no-mapa">
                     <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
                     <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
                 </a>
@@ -163,19 +164,21 @@
                     <div class="d-flex align-items-center">
                         <p class="fw-700 mb-0 font-size-14 line-20 color-black">Ordenar por:</p>
                         <div class="dropdown">
-                            <button class="btn dropdown-orderby-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              {{orderBy}}
+                            <button class="btn dropdown-orderby-custom dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                {{orderBy}}
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" (click)="changeOderBy('Relevante')">Relevante</a>
-                              <a class="dropdown-item" (click)="changeOderBy('Maior
+                                <a class="dropdown-item" (click)="changeOderBy('Relevante')">Relevante</a>
+                                <a class="dropdown-item" (click)="changeOderBy('Maior
                               preço')">Maior
-                                preço</a>
-                              <a class="dropdown-item" (click)="changeOderBy('Menor
+                                    preço</a>
+                                <a class="dropdown-item" (click)="changeOderBy('Menor
                               preço')">Menor
-                                preço</a>
+                                    preço</a>
                             </div>
-                          </div>
+                        </div>
                         <!-- <div class="select-box">
                             <div class="select-box__current" tabindex="1">
                                 <div class="select-box__value">

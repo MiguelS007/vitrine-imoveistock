@@ -53,6 +53,11 @@ export class SearchPageComponent implements OnInit {
 
   orderBy: string = 'Selecione'
 
+  recentlySeenIdsList: any = [];
+
+
+  recentlySeenList: AnnouncementGetResponseDto[] = [];
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -83,6 +88,18 @@ export class SearchPageComponent implements OnInit {
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
 
+    let recentlySeenList = localStorage.getItem('recentlySeen');
+    this.recentlySeenIdsList = JSON.parse(recentlySeenList);
+
+    if(this.recentlySeenIdsList.length !== null) {
+      for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
+        this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
+          success => this.recentlySeenList.push(success),
+          error => console.log(error)
+        )
+      }
+    } 
+
     let filtro = localStorage.getItem('filtro');
     this.filtroSelected = JSON.parse(filtro);
 
@@ -110,13 +127,7 @@ export class SearchPageComponent implements OnInit {
       checkrenovated: '',
     }
 
-    console.log(this.filtroResultDisplay)
-
-    console.log(this.filtroSelected)
-    console.log(this.filterResult)
-
-
-    if (this.filterResult === null) {
+    if (this.filterResult === null || this.filterResult.length === 0) {
       this.searchService.getPropertyListAll().subscribe(
         success => {
           this.filterResult = success;
