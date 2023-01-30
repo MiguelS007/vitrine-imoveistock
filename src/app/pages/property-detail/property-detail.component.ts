@@ -100,7 +100,7 @@ export class PropertyDetailComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
     this.response = this.route.snapshot.data['resolve'];
-    console.log(this.response._id);
+    console.log(this.user?._id, this.response._id);
   }
 
 
@@ -220,7 +220,7 @@ export class PropertyDetailComponent implements OnInit {
       this.step2scheduling = false;
       this.step3scheduling = true;
     }
-    let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long" });
+    let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long"});
     this.request = {
       status: 'scheduled',
       day: this.form.controls['day'].value,
@@ -229,18 +229,13 @@ export class PropertyDetailComponent implements OnInit {
       cancelUser: 'scheduled',
     };
     console.log(this.request);
-
-
-    // this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(
-    //   success => {
-    //     console.log(success)
-    //   },
-    //   error => {
-    //     console.error(error)
-    //   }
-    // )
-
-
+    this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(
+      success => {
+        console.log(success)
+      },
+      error => {
+        console.error(error)
+      }
+    )
   }
-
 }

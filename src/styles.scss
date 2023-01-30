@@ -136,6 +136,10 @@ input:focus {
     background-color: black !important;
 }
 
+.max-w-400{
+    max-width: 471px;
+}
+
 .navbar {
     padding: 0 !important;
 }
@@ -1122,6 +1126,12 @@ input:focus {
     to {
         transform: scaleY(0);
     }
+}
+
+// VISITS-PAGE
+.hover-green:hover{
+    border: 1px solid var(--greenlight);
+    box-shadow: 1px 1px 19px var(--greenlight);
 }
 
 // PROPERTY-DETAILS
