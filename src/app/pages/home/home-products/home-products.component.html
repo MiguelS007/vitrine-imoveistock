@@ -11,7 +11,7 @@
             </div>
 
             <div class="row justify-content-center px-4">
-                <div *ngFor="let item of response | slice: 0:3" (click)="announcementSelected(item._id)" class="col-md-4" style="cursor: pointer;">
+                <div *ngFor="let item of response | slice: 0:3" (click)="announcementSelected(item._id)" class="col-md-4 mt-mobile" style="cursor: pointer;">
                     <div class="h-100 product-announcement p-2 border-radius-10 bg-white">
                         <div class="bg-img-product py-2 px-3 border-radius-10">
                             <div class="w-100 h-50 d-flex">
@@ -42,19 +42,18 @@
                                     {{item.cityAddress}}</span>
                             </p>
                         </div>
-                        <div class="row mx-1 pb-3 d-flex">
-                            <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                        <div class="row mx-1 pb-3 block-important d-flex">
+                            <div class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
                                 <img src="../../../assets/icon/bed.png" class="pr-2" />
                                 <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{item.rooms}} Quartos</p>
                             </div>
-                            <div class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
+                            <div class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
                                 <img src="../../../assets/icon/car.png" class="pr-2" />
                                 <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{item.vacancyNumber}} Vagas</p>
                             </div>
-                            <div class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
+                            <div class="col mt-2 justify-content-end left-important  px-0 d-flex align-items-center justify-content-left">
                                 <img src="../../../assets/icon/rule.png" class="pr-2" />
-                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{item.usefulArea | slice:0:4}}
-                                    m2</p>
+                                <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{item.usefulArea | slice:0:4}}m2</p>
                             </div>
                         </div>
                         <!-- <div class="w-100 d-flex align-items-center py-2 px-1">

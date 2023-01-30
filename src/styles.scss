@@ -136,7 +136,7 @@ input:focus {
     background-color: black !important;
 }
 
-.max-w-400{
+.max-w-400 {
     max-width: 471px;
 }
 
@@ -744,6 +744,10 @@ input:focus {
     display: none !important;
 }
 
+.navbar-toggler {
+    margin-right: 1rem !important;
+}
+
 @media (max-width: 480px) {
     .logo {
         padding: 9px !important;
@@ -755,7 +759,7 @@ input:focus {
     }
 
     .title-header {
-        padding-top: 41% !important;
+        padding-top: 69% !important;
     }
 
     .title-header h1 {
@@ -1129,7 +1133,7 @@ input:focus {
 }
 
 // VISITS-PAGE
-.hover-green:hover{
+.hover-green:hover {
     border: 1px solid var(--greenlight);
     box-shadow: 1px 1px 19px var(--greenlight);
 }
@@ -1554,6 +1558,7 @@ vg-overlay-play .vg-overlay-play {
     // NAV-BAR
     #navbarSupportedContent {
         backdrop-filter: blur(55px);
+        background: #00000063;
     }
 
     // PROPERTY-DETAILS
@@ -1586,6 +1591,23 @@ vg-overlay-play .vg-overlay-play {
 
     .product-announcement {
         max-width: 310px !important;
+  
+    }
+    .mt-mobile{
+        margin-top: 1rem;
+        justify-content: center;
+        display: flex;
+    }
+
+    // HOME-HEADER
+    .bg-home-header {
+        background-image: url(./assets/img/gradient.png), url(./assets/img/family-mobile.png);
+        background-position: center top;
+        background-size: contain;
+        width: 100% !important;
+    }
+    .black-mobile{
+        color: black !important;
     }
 
     // SEARCH-PAGE
