@@ -250,7 +250,7 @@
                             <span class="fw-400 font-size-14 line-20
                                 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
                             <p class="fw-700 my-2 font-size-16 line-20 mb-0
-                                color-black text-truncate" style="max-width: 90%;">{{item.description}}</p>
+                                color-black text-truncate" style="max-width: 90%;">{{item.description || '-' }}</p>
                             <p class="d-flex align-items-center">
                                 <i class="bi font-size-20 mr-2 color-black
                                     bi-geo-alt"></i>
@@ -265,7 +265,7 @@
                                 align-items-center justify-content-left">
                                 <img src="../../../assets/icon/bed.png" class="pr-2" />
                                 <p class="fw-400 mb-0 font-size-14 line-20
-                                    color-black">{{item.rooms}} Quartos</p>
+                                    color-black">{{item.bedrooms}} Quartos</p>
                             </div>
                             <div class="col justify-content-center px-0 d-flex
                                 align-items-center justify-content-left">
