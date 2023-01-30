@@ -19,10 +19,17 @@ export class ScheduleService extends BaseService {
     ) {
         super();
     }
-   
+
     registerSchedule(_id: string, dto: ScheduleRegisterRequestDto): Observable<ScheduleRegisterResponseDto> {
-      return this.httpClient
-        .post(`${this.url}visit/register/${_id}`, dto, this.authorizedHeader())
-        .pipe(map(this.extractData), catchError(this.serviceError));
+        return this.httpClient
+            .post(`${this.url}visit/register/${_id}`, dto, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
     }
+
+    getListVisists(): Observable<ScheduleRegisterResponseDto[]> {
+        return this.httpClient
+            .get(`${this.url}visit/list`, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
 }
