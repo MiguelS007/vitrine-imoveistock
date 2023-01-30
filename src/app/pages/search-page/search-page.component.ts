@@ -18,7 +18,7 @@ export class SearchPageComponent implements OnInit {
   form: FormGroup;
   iconlikeheart = false;
   products: any = [];
-  propertyproducts: any = [];
+  propertyproducts: AnnouncementGetResponseDto[] = [];
   paginationProduct: number = 1;
 
   countApartment: number;
@@ -51,6 +51,8 @@ export class SearchPageComponent implements OnInit {
     checkrenovated: string,
   }
 
+  orderBy: string = 'Selecione'
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -77,7 +79,6 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.datamokservice.resultSearch;
-    this.propertyproducts = this.datamokservice.exclusiveProperties;
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
@@ -116,67 +117,31 @@ export class SearchPageComponent implements OnInit {
 
 
     if (this.filterResult === null) {
-      this.searchService.getPropertyHome().subscribe(
+      this.searchService.getPropertyListAll().subscribe(
         success => {
           this.filterResult = success;
-          console.log(this.filterResult)
         }
       )
     }
 
 
-    this.searchService.getPropertyHome().subscribe(
+    this.searchService.getPropertyHomeExclusivity().subscribe(
       success => {
+        this.propertyproducts = success
         this.response = success;
-        let apartament = [];
-        let condominium = [];
-        let house = [];
-        let loft = [];
-        let kitnet = [];
-
-        for (let i = 0; i < this.response.length; i++) {
-          if (this.response[i].propertyCharacteristics === 'edificio')
-            apartament.push({ apartament: this.response[i].propertyCharacteristics });
-
-          if (this.response[i].propertyCharacteristics === 'casadecondominio')
-            condominium.push({ condominium: this.response[i].propertyCharacteristics });
-
-          if (this.response[i].propertyCharacteristics === 'casa')
-            house.push({ house: this.response[i].propertyCharacteristics });
-
-          if (this.response[i].propertyCharacteristics === 'loft')
-            loft.push({ loft: this.response[i].propertyCharacteristics });
-
-          if (this.response[i].propertyCharacteristics === 'kitnet')
-            kitnet.push({ kitnet: this.response[i].propertyCharacteristics });
-
-        }
-        this.countApartment = apartament.length;
-        this.countCondominium = condominium.length;
-        this.countHouse = house.length;
-        this.countLoft = loft.length;
-        this.countKitnet = kitnet.length;
-
       },
       error => { console.log(error, 'data not collected') }
     );
-    // this.userService.getUser().subscribe(
-    //   success => {
-    //     this.user = success;
-    //     if (this.user?.photo?.location) {
-    //       this.urlsimg.push(this.user.photo.location);
-    //     }
-    //   },
-    //   error => {
-    //     console.error(error, 'photo not collected');
-    //   }
-    // );
   }
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
   }
   goDetailProperty() {
     this.router.navigate(['property-detail']);
+  }
+
+  changeOderBy(value) {
+    this.orderBy = value
   }
 
 

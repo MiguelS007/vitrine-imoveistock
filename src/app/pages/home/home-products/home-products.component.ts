@@ -29,7 +29,7 @@ export class HomeProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.searchService.getPropertyHome().subscribe(
+    this.searchService.getPropertyHomeExclusivity().subscribe(
       success => {
         this.response = success;
         console.log(this.response);

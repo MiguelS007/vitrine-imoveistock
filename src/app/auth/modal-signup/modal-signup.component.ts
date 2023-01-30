@@ -6,6 +6,7 @@ import { UserRegisterRequestDto } from 'src/app/dtos/user-register-request.dto';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { ProfileService } from 'src/app/service/profile.service';
 import { UserService } from 'src/app/service/user.service';
+import { ProfileClientEnum } from '../../../app/dtos/enum/profile-client.enum';
 
 @Component({
   selector: 'app-modal-signup',
@@ -39,16 +40,7 @@ export class ModalSignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.list().subscribe(
-      success => {
-        for (let i = 0; i < success.length; i++) {
-          if (success[i].name === 'indicacao') {
-            this.response = [success[i]._id]
-          }
-        }
-      },
-      error => { console.error(error) }
-    )
+
   }
 
 
@@ -65,7 +57,7 @@ export class ModalSignupComponent implements OnInit {
       email: this.form.controls['email'].value,
       cpf: cpf,
       name: this.form.controls['name'].value,
-      profilesIds: this.response
+      profilesIds: [ProfileClientEnum.indicacao, ProfileClientEnum.proprietario]
     }
 
     console.log(this.request)
@@ -87,7 +79,7 @@ export class ModalSignupComponent implements OnInit {
     }
   }
 
-  
+
 
   // nextFunction() {
   //   this.authenticationService.authenticate(this.request).subscribe(
