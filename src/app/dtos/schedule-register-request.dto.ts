@@ -3,6 +3,5 @@ export abstract class ScheduleRegisterRequestDto {
     day: Date;
     time: string;
     days: string;
-    cancelUser: string; 
-    // userId: string;
+    cancelUser: string;
 }

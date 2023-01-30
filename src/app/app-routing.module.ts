@@ -31,7 +31,7 @@ export const routes: Routes = [
     component: SearchMapComponent,
   },
   {
-    path: 'property-detail/:_id',
+    path: 'announcement/detail/:_id',
     component: PropertyDetailComponent, resolve: { resolve: AnnouncementGetByIdResolve }
   },
   {

@@ -45,6 +45,6 @@ export class HomeProductsComponent implements OnInit {
   }
 
   announcementSelected(value) {
-    this.router.navigate([`property-detail/${value}`])
+    this.router.navigate([`announcement/detail/${value}`])
   }
 }

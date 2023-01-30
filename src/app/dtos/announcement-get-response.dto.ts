@@ -118,7 +118,7 @@ export abstract class AnnouncementGetResponseDto {
 
     whatIsTheBestTimePhotographer?: string;
 
-    advertiser_id?: string
+    advertiserId: string;
 }
 
 class WhatWasRenovated {
