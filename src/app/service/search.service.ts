@@ -19,27 +19,34 @@ export class SearchService extends BaseService {
   }
   getSearch(): Observable<any> {
     return this.httpClient
-      .get(`${this.url}profile-client`, this.anonymousHeader())
+      .get(`${this.url}app/profile-client`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
-  getPropertyHome(): Observable<AnnouncementGetResponseDto[]> {
+  getPropertyHomeExclusivity(): Observable<AnnouncementGetResponseDto[]> {
     return this.httpClient
-      .get(`${this.url}announcement/list`, this.anonymousHeader())
+      .get(`${this.url}app/announcement/list`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
+
+  getPropertyListAll(): Observable<AnnouncementGetResponseDto[]> {
+    return this.httpClient
+      .get(`${this.url}app/announcement/list-all-showcase`, this.anonymousHeader())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+  }
+
   getPropertyList(): Observable<AnnouncementGetResponseDto[]> {
     return this.httpClient
-      .get(`${this.url}announcement`, this.anonymousHeader())
+      .get(`${this.url}app/announcement`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
   getPropertyDetails(_id: string): Observable<AnnouncementGetResponseDto> {
     return this.httpClient
-      .get(`${this.url}announcement/detail/${_id}`, this.anonymousHeader())
+      .get(`${this.url}app/announcement/detail/${_id}`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
   listByAdvertizer(): Observable<AnnouncementGetResponseDto[]> {
     return this.httpClient
-        .get(`${this.url}announcement/list-by-advertizer`, this.authorizedHeader())
+        .get(`${this.url}app/announcement/list-by-advertizer`, this.authorizedHeader())
         .pipe(map(this.extractData), catchError(this.serviceError));
 }
 
