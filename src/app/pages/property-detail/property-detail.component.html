@@ -92,7 +92,7 @@
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 mr-3
-                       px-4">Quarto:&nbsp;{{response.rooms || '-'}}</h1>
+                       px-4">Quarto:&nbsp;{{response.bedrooms || '-'}}</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
                        line-19 color-black bg-graylight
                        border-radius-10 bg-purple-light py-4 mr-3
@@ -196,7 +196,7 @@
                                    color-black">Quartos:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.rooms || '-'}}</span>
+                                   color-black">&nbsp;&nbsp;{{response.bedrooms || '-'}}</span>
                     </td>
                     <td>
                       <span class="fw-400
@@ -224,7 +224,7 @@
                                    color-black">Banheiro:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.rooms || '-'}}</span>
+                                   color-black">&nbsp;&nbsp;{{response.bedrooms || '-'}}</span>
                     </td>
                   </tr>
                   <tr class="h-51">
@@ -585,7 +585,7 @@
                     <img src="../../../assets/icon/bed.png" class="pr-2" />
                     <p class="fw-400 mb-0
                                 font-size-14 line-20
-                                color-black">{{item.rooms}}
+                                color-black">{{item.bedrooms}}
                       Quartos
                     </p>
                   </div>
@@ -749,7 +749,7 @@
                         <div class="col-9">
                           <h5 class="fw-700 font-size-18 line-24 color-black d-inline-block text-truncate" style="max-width: 150px;">{{response.description || '-'}}</h5>
                           <p class="w-100 mb-0 d-grid">
-                            <span class="fw-400 font-size-14 line-19 color-black">Quartos:&nbsp;{{response.rooms || '-'}}</span>
+                            <span class="fw-400 font-size-14 line-19 color-black">Quartos:&nbsp;{{response.bedrooms || '-'}}</span>
                             <span class="fw-400 font-size-14 line-19 color-black">Banheiros:&nbsp;{{response.bathrooms || '-'}}</span>
                             <span class="fw-400 font-size-14 line-19 color-black">Metragem:&nbsp;{{response.usefulArea || '-'}}m²</span>
                           </p> 
@@ -847,7 +847,7 @@
                           <div class="col pt-2 pb-3 left-important justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2" />
                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                              {{response.rooms || '-'}} Quartos
+                              {{response.bedrooms || '-'}} Quartos
                             </p>
                           </div>
                           <div class="col pt-2 pb-3 left-important justify-content-center px-0 d-flex align-items-center justify-content-left">
@@ -896,7 +896,7 @@
                         <div class="row px-3 my-3 pt-3 pb-3 d-flex">
                           <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2" />
-                            <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.rooms || '-'}} quartos
+                            <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.bedrooms || '-'}} quartos
                             </p>
                           </div>
                           <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">

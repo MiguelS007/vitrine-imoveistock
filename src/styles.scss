@@ -1485,6 +1485,9 @@ vg-overlay-play .vg-overlay-play {
     .little-text-mobile {
         font-size: 10px !important;
     }
+    .mobile-w{
+        width: 26px !important;
+    }
 
     .swiper-horizontal>.swiper-pagination-bullets,
     .swiper-pagination-bullets.swiper-pagination-horizontal {
@@ -1691,6 +1694,9 @@ vg-overlay-play .vg-overlay-play {
         background-position: center top;
         background-size: contain;
         width: 100% !important;
+    }
+    .d-none-mobile{
+        display: none !important;
     }
 
     .black-mobile {
