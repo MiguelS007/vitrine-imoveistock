@@ -13,7 +13,7 @@
                 
                 <div class="row justify-content-center px-4">
                     <!-- VERSION DESK -->
-                    <swiper class="col-12 swiper-desk h-500 max-w-1477" [spaceBetween]="50" [slidesPerView]="3"
+                    <swiper class="col-12 swiper-desk h-500 max-w-1477" [spaceBetween]="2" [slidesPerView]="3"
                         [pagination]="{ clickable: true }" [scrollbar]="true">
                         <ng-template *ngFor="let item of response | slice: 0:15" swiperSlide>
                             <div class="col-md-12 mt-mobile" style="cursor: pointer;">
@@ -57,7 +57,7 @@
                                             <div
                                                 class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
                                                 <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
-                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
                                                     {{item.bedrooms}}
                                                     Quartos
                                                 </p>
@@ -72,7 +72,7 @@
                                             <div
                                                 class="col mt-2 justify-content-end left-important  px-0 d-flex align-items-center justify-content-left">
                                                 <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
-                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
                                                     {{item.usefulArea |
                                                     currency: ' '}} m2</p>
                                             </div>
@@ -143,7 +143,7 @@
                                             <div
                                                 class="col mt-2 justify-content-end left-important  px-0 d-flex align-items-center justify-content-left">
                                                 <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
-                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-truncate" style="max-width: 15px;">
                                                     {{item.usefulArea |
                                                     currency: ' '}} m2</p>
                                             </div>

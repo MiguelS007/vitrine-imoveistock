@@ -16,6 +16,7 @@ import { SearchService } from 'src/app/service/search.service';
 export class VisitsComponent implements OnInit {
   form: FormGroup;
   response: any[] = [];
+  responseSchedules:ScheduleRegisterResponseDto;
   user: UserGetResponseDto;
 
 
@@ -59,6 +60,7 @@ export class VisitsComponent implements OnInit {
     this.ngxSpinnerService.show();
 
     this.response = []
+
 
     this.announcementService.listLikes().subscribe(
       success => {
