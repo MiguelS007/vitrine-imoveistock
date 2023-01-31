@@ -52,14 +52,20 @@ export class VisitsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.list();
+  }
 
-    this.ngxSpinnerService.show()
+  list() {
+    this.ngxSpinnerService.show();
+
+    this.response = []
 
     this.announcementService.listLikes().subscribe(
       success => {
         console.log('list', success);
         for (let i = 0; i < success.length; i++) {
-          this.response.push(success[i].announcement)
+          this.response.push(success[i].announcement);
+          Object.assign(this.response[i], { liked: true });
         }
         this.ngxSpinnerService.hide()
       },
@@ -82,8 +88,27 @@ export class VisitsComponent implements OnInit {
     }
   }
   
-  likeHeart() {
-    this.iconlikeheart = !this.iconlikeheart;
+  likeHeart(value) {
+
+    let request = {
+      announcementId: value
+    }
+
+    for (let i = 0; i < this.response.length; i++) {
+      if (this.response[i]._id === value) {
+        this.announcementService.registerUnlike(request).subscribe(
+          success => {
+            setTimeout(() => {
+              this.list()
+            }, 1000);
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      }
+    }
+
   }
 
   cancelVisits(value: string) {
