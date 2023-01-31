@@ -22,6 +22,11 @@ export class HomeProductsComponent implements OnInit {
 
   logged: boolean;
   naruto: string;
+
+  filterDuplicate: any = [];
+
+  recentlySeenList: any = [];
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -45,6 +50,34 @@ export class HomeProductsComponent implements OnInit {
   }
 
   announcementSelected(value) {
+    let teste: any = localStorage.getItem('recentlySeen');
+    this.recentlySeenList = JSON.parse(teste);
+
+
+    let verify = {_id: value};
+
+    let list: any = this.recentlySeenList;
+
+    if(list === null) {
+      list = [];
+    }
+    
+    if(this.recentlySeenList !== null ) {
+      for (let i = 0; i < list.length; i++) {
+        if(list[i]._id === value) {
+          return
+        }
+      }
+    }
+
+    list.push(verify);
+
+    this.recentlySeenList = list;
+
+
+    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
     this.router.navigate([`announcement/detail/${value}`])
+
   }
+
 }

@@ -189,8 +189,6 @@ export class HomeHeaderComponent implements OnInit {
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
     this.router.navigate(['/search']);
 
-
-
   }
 
   // search filter
@@ -201,7 +199,8 @@ export class HomeHeaderComponent implements OnInit {
     let removeRepets: any = [];
     for (let i = 0; i < this.response.length; i++) {
       removeRepets.push(this.response[i].cityAddress);
-    }
+    };
+    console.log(this.filterResponse)
     const filtered = removeRepets.filter((item, index) => removeRepets.indexOf(item) === index);
     this.filterResponse = filtered;
     this.filtersearch = true

@@ -7,6 +7,7 @@ import { DatamokService } from 'src/app/service/datamok.service';
 import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { NgxSpinnerService } from "ngx-spinner";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
@@ -53,12 +54,18 @@ export class SearchPageComponent implements OnInit {
 
   orderBy: string = 'Selecione'
 
+  recentlySeenIdsList: any = [];
+
+
+  recentlySeenList: AnnouncementGetResponseDto[] = [];
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
     private userService: UserService,
     private searchService: SearchService,
     private formBuilder: FormBuilder,
+    private ngxSpinnerService: NgxSpinnerService
 
   ) {
     this.form = this.formBuilder.group({
@@ -78,17 +85,31 @@ export class SearchPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.ngxSpinnerService.show();
     this.products = this.datamokservice.resultSearch;
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
+
+    let recentlySeenList = localStorage.getItem('recentlySeen');
+    this.recentlySeenIdsList = JSON.parse(recentlySeenList);
+
+    if (this.recentlySeenIdsList !== null) {
+      for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
+        this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
+          success => this.recentlySeenList.push(success),
+          error => console.log(error)
+        )
+      }
+    }
 
     let filtro = localStorage.getItem('filtro');
     this.filtroSelected = JSON.parse(filtro);
 
     let typeAdTranslate: string = ''
 
-    if(this.filtroSelected?.typeAd === 'rent') {
+    if (this.filtroSelected?.typeAd === 'rent') {
       typeAdTranslate = 'Venda'
     } else if (this.filtroSelected?.typeAd === 'sale') {
       typeAdTranslate = 'Alugar'
@@ -110,16 +131,11 @@ export class SearchPageComponent implements OnInit {
       checkrenovated: '',
     }
 
-    console.log(this.filtroResultDisplay)
-
-    console.log(this.filtroSelected)
-    console.log(this.filterResult)
-
-
-    if (this.filterResult === null) {
+    if (this.filterResult === null || this.filterResult.length === 0) {
       this.searchService.getPropertyListAll().subscribe(
         success => {
           this.filterResult = success;
+          this.ngxSpinnerService.hide();
         }
       )
     }
@@ -129,15 +145,44 @@ export class SearchPageComponent implements OnInit {
       success => {
         this.propertyproducts = success
         this.response = success;
+        this.ngxSpinnerService.hide();
       },
       error => { console.log(error, 'data not collected') }
     );
   }
+
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
   }
-  goDetailProperty() {
-    this.router.navigate(['property-detail']);
+
+  announcementSelected(value) {
+    let teste: any = localStorage.getItem('recentlySeen');
+    this.recentlySeenList = JSON.parse(teste);
+
+
+    let verify = { _id: value };
+
+    let list: any = this.recentlySeenList;
+
+    if (list === null) {
+      list = [];
+    }
+
+    if (this.recentlySeenList !== null) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i]._id === value) {
+          return
+        }
+      }
+    }
+
+    list.push(verify);
+
+    this.recentlySeenList = list;
+
+
+    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList))
+    this.router.navigate([`announcement/detail/${value}`])
   }
 
   changeOderBy(value) {
