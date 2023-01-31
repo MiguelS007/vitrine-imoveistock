@@ -8,6 +8,8 @@ export abstract class AnnouncementGetResponseDto {
 
     goal: string;
 
+    liked?: boolean;
+
     status: string;
 
     propertyType: string;

@@ -9,6 +9,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { VisitsComponent } from './visits/visits.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ExpressProposalComponent } from './express-proposal/express-proposal.component';
+import { AnnouncementService } from '../service/announcement.service';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -26,6 +27,9 @@ import { ExpressProposalComponent } from './express-proposal/express-proposal.co
    
   ],
   schemas: [],
+  providers: [
+    AnnouncementService
+  ],
   bootstrap: [AppComponent]
 
 })
