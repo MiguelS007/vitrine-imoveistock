@@ -46,23 +46,19 @@ export class HomeProductsComponent implements OnInit {
 
   list() {
     this.searchService.getPropertyHomeExclusivity().subscribe(
-      success => {
-        this.response = success;
-        if(localStorage.getItem('user') !== null) { 
+      response => {
+        this.response = response;
+        if (localStorage.getItem('user') !== null) {
           this.announcementService.listLikes().subscribe(
             success => {
               for (let i = 0; i < success.length; i++) {
                 for (let x = 0; x < this.response.length; x++) {
                   if (success[i].announcement._id === this.response[x]._id) {
-                    console.log('somos iguais', success[i].announcement);
                     Object.assign(this.response[x], { liked: true });
-                  } else {
-                    Object.assign(this.response[x], { liked: false })
                   }
                 }
                 this.listLikes.push(success[i].announcement)
               }
-              console.log(this.response)
             }
           )
         }
@@ -78,7 +74,7 @@ export class HomeProductsComponent implements OnInit {
       announcementId: value
     }
 
-    if(localStorage.getItem('user') === null) {
+    if (localStorage.getItem('user') === null) {
       this.modalService.open(ModalLoginComponent, { centered: true });
       return
     }
