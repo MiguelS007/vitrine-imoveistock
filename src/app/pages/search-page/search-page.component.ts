@@ -95,7 +95,7 @@ export class SearchPageComponent implements OnInit {
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
 
-    if (this.recentlySeenIdsList.length !== null) {
+    if (this.recentlySeenIdsList !== null) {
       for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
         this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
           success => this.recentlySeenList.push(success),
@@ -154,8 +154,35 @@ export class SearchPageComponent implements OnInit {
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
   }
-  goDetailProperty() {
-    this.router.navigate(['property-detail']);
+
+  announcementSelected(value) {
+    let teste: any = localStorage.getItem('recentlySeen');
+    this.recentlySeenList = JSON.parse(teste);
+
+
+    let verify = { _id: value };
+
+    let list: any = this.recentlySeenList;
+
+    if (list === null) {
+      list = [];
+    }
+
+    if (this.recentlySeenList !== null) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i]._id === value) {
+          return
+        }
+      }
+    }
+
+    list.push(verify);
+
+    this.recentlySeenList = list;
+
+
+    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList))
+    this.router.navigate([`announcement/detail/${value}`])
   }
 
   changeOderBy(value) {
