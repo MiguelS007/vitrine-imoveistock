@@ -91,15 +91,15 @@
                             url(../../../assets/img/img-announcement-default.jpg);" class="bg-img-property w-100 py-2 px-3
                             border-radius-10" (click)="announcementSelected(item._id)">
                             <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
-                                <h4 class="w3-black h-fit px-4 py-2 mb-0
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-18 line-24
                                     text-light" *ngIf="item.typeOfAd === 'rent'">Alugar</h4>
-                                <h4 class="w3-black h-fit px-4 py-2 mb-0
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-18 line-24
                                     text-light" *ngIf="item.typeOfAd === 'sale'">Vender</h4>
-                                <h4 *ngIf="item.exclusivity === true" style="background-color:#878DBA;" class="ml-2 h-fit px-4 py-2 mb-0
+                                <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-18 line-24
-                                    text-light">Exclusivo</h4>
+                                    text-dark">Exclusivo</h4>
                             </div>
                             <div class="w-100 details-card-swiper d-grid h-50 pt-5
                                 align-items-end">
@@ -124,7 +124,8 @@
             <div *ngIf="recentlySeenList.length > 0" class="w-100 border-radius-10 my-4 bg-white p-4">
                 <p class="fw-700 pb-4 font-size-20 line-24 color-black">Visualizados recentemente
                 </p>
-                <div *ngFor="let item of recentlySeenList | slice:0:3" class="row mb-4" (click)="announcementSelected(item._id)">
+                <div *ngFor="let item of recentlySeenList | slice:0:3" class="row mb-4"
+                    (click)="announcementSelected(item._id)">
                     <div class="col-3 col-img-types-property p-0">
                         <img src="../../../assets/img/ap.png" class="border-radius-10 h-111 w-100" />
                     </div>
@@ -133,13 +134,13 @@
                             <span class="fw-700 font-size-18 line-24
                                 color-black">{{item.description}}</span>
                             <span *ngIf="item.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24
-                                color-black">{{item.saleValue  | currency: 'R$'}}</span>
+                                color-black">{{item.saleValue | currency: 'R$'}}</span>
                             <span *ngIf="item.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24
-                                color-black">{{item.leaseValue  | currency: 'R$'}}</span>
+                                color-black">{{item.leaseValue | currency: 'R$'}}</span>
                         </p>
                         <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
                             <span class="fw-400 font-size-14 line-20
-                                color-black">Quartos: {{item.rooms}}</span>
+                                color-black">Quartos: {{item.bedrooms}}</span>
                             <span class="fw-400 font-size-14 line-20
                                 color-black">Banheiros: {{item.bathrooms}}</span>
                             <span class="fw-400 font-size-14 line-20
@@ -171,8 +172,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" (click)="changeOderBy('Relevante')">Relevante</a>
-                                <a class="dropdown-item" (click)="changeOderBy('Maior
-                              preço')">Maior
+                                <a class="dropdown-item" (click)="changeOderBy('Maiorpreço')">Maior
                                     preço</a>
                                 <a class="dropdown-item" (click)="changeOderBy('Menor
                               preço')">Menor
@@ -222,9 +222,8 @@
                 <div class="col-lg-6 col-cards-products" *ngFor="let item of filterResult | paginate: {
                     itemsPerPage: 10, currentPage: paginationProduct }; let
                     i= index">
-                    <div class="w-100 card-product-result d-inline-block mt-5 ml-5 p-3
-                        border-radius-10 bg-white">
-                        <div (click)="announcementSelected(item._id)" class="border-radius-10 position-relative">
+                    <div class="w-100 card-product-result d-inline-block mt-5 ml-5 p-3 border-radius-10 bg-white">
+                        <div class="border-radius-10 position-relative">
                             <img src="../../../assets/img/img-announcement-default.jpg"
                                 class="img-search-announcement-main">
                             <div class="space-sale-or-rent-search-announcement">
@@ -249,38 +248,40 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-100 mx-2 text-align-left pt-3">
-                            <span class="fw-400 font-size-14 line-20
-                                color-black text-capitalize">{{item.propertyCharacteristics}}</span>
-                            <p class="fw-700 my-2 font-size-16 line-20 mb-0
-                                color-black text-truncate" style="max-width: 90%;">{{item.description || '-' }}</p>
-                            <p class="d-flex align-items-center">
-                                <i class="bi font-size-20 mr-2 color-black
-                                    bi-geo-alt"></i>
+                        <div (click)="announcementSelected(item._id)" class="col-12 px-0">
+                            <div class="w-100 mx-2 text-align-left pt-3">
                                 <span class="fw-400 font-size-14 line-20
+                                color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                                <p class="fw-700 my-2 font-size-16 line-20 mb-0
+                                color-black text-truncate" style="max-width: 90%;">{{item.description || '-' }}</p>
+                                <p class="d-flex align-items-center">
+                                    <i class="bi font-size-20 mr-2 color-black
+                                    bi-geo-alt"></i>
+                                    <span class="fw-400 font-size-14 line-20
                                     color-black">{{item.publicPlaceAddress}},
-                                    {{item.cityAddress}} - {{item.ufAddress}}</span>
-                            </p>
-                        </div>
-                        <div class="row px-4 my-3 pb-3
+                                        {{item.cityAddress}} - {{item.ufAddress}}</span>
+                                </p>
+                            </div>
+                            <div class="row px-4 my-3 pb-3
                             d-flex">
-                            <div class="col justify-content-left px-0 d-flex
+                                <div class="col justify-content-left px-0 d-flex
                                 align-items-center justify-content-left">
-                                <img src="../../../assets/icon/bed.png" class="pr-2" />
-                                <p class="fw-400 mb-0 font-size-14 line-20
+                                    <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
+                                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
                                     color-black">{{item.bedrooms}} Quartos</p>
-                            </div>
-                            <div class="col justify-content-center px-0 d-flex
+                                </div>
+                                <div class="col justify-content-center px-0 d-flex
                                 align-items-center justify-content-left">
-                                <img src="../../../assets/icon/car.png" class="pr-2" />
-                                <p class="fw-400 mb-0 font-size-14 line-20
+                                    <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
+                                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
                                     color-black">{{item.vacancyNumber}} Vagas</p>
-                            </div>
-                            <div class="col justify-content-end px-0 d-flex
+                                </div>
+                                <div class="col justify-content-end px-0 d-flex
                                 align-items-center justify-content-left">
-                                <img src="../../../assets/icon/rule.png" class="pr-2" />
-                                <p class="fw-400 mb-0 font-size-14 line-20
+                                    <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
+                                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
                                     color-black text-truncate">{{item.usefulArea | currency: ' '}} m²</p>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
@@ -58,6 +59,7 @@ export class PropertyDetailComponent implements OnInit {
     private router: Router,
     private datamokservice: DatamokService,
     private formBuilder: FormBuilder,
+    private toastrService: ToastrService,
     private scheduleService: ScheduleService,
     private route: ActivatedRoute
 
@@ -167,7 +169,6 @@ export class PropertyDetailComponent implements OnInit {
     } else {
       this.arrow2 = false;
     }
-
     if (value === 3 && this.arrow3 === false) {
       this.arrow3 = true;
     } else {
@@ -220,7 +221,7 @@ export class PropertyDetailComponent implements OnInit {
       this.step2scheduling = false;
       this.step3scheduling = true;
     }
-    let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long"});
+    let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long" });
     this.request = {
       status: 'scheduled',
       day: this.form.controls['day'].value,
@@ -232,9 +233,15 @@ export class PropertyDetailComponent implements OnInit {
     this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(
       success => {
         console.log(success)
+        this.toastrService.success('Agendado com sucesso!', '', { progressBar: true });
       },
       error => {
         console.error(error)
+        this.toastrService.error('Ops, erro ao agendar!', '', { progressBar: true });
+        this.step2scheduling = false;
+        this.step3scheduling = false;
+        this.step1scheduling = false;
+        this.modalscheduling = false;
       }
     )
   }

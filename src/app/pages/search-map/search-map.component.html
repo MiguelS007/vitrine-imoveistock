@@ -6,24 +6,22 @@
                     Resultado de busca
                 </span>
             </p>
-            <!-- <p class="fw-700 font-size-32 line-40 color-black">
-                Resultado da sua busca por <b>[string busca]</b>
-            </p> -->
         </div>
-        <div class="row mx-0 col-md-12 block-important w-100">
-            <div class="col-8 col-full">
-                <div class="w-100 d-flex block-mobile justify-content-between">
-                    <div [routerLink]="['/search']"
-                        class="w-auto px-4 cursor-pointer mt-3 d-flex justify-content-center bg-purple mr-2 align-items-center py-4 border-radius-10">
-                        <i class="bi bi-list font-size-24 text-light pr-2"></i>
-                        <span class="fw-700 font-size-18 line-24 text-light">Ver&nbsp;Lista</span>
-                    </div>
-                    <div
-                        class="w-auto px-4 cursor-pointer  mt-3 d-flex justify-content-center w3-black mr-2 py-4 align-items-center border-radius-10">
+        <div class="row mx-0 px-0 col-md-12 block-important w-100">
+            <div class="col-12 col-full">
+                <div class="w-100 d-flex justify-content-between">
+                   
+                    <div style="width: 135px;"
+                        class="px-4 cursor-pointer btn-map-mobile  mt-3 d-flex justify-content-center w3-black  py-4 align-items-center border-radius-10">
                         <img src="../../../assets/icon/filter.png" class="pr-2" alt="not filter" />
                         <span class="fw-700 font-size-18 line-24 text-light">Filtrar</span>
                     </div>
-                    <div
+                    <div [routerLink]="['/search']"
+                        class="w-auto px-4 cursor-pointer btn-map-mobile mt-3 d-flex justify-content-center bg-purple  align-items-center py-4 border-radius-10">
+                        <i class="bi bi-list font-size-24 text-light pr-2"></i>
+                        <span class="fw-700 font-size-18 line-24 text-light">Ver&nbsp;Lista</span>
+                    </div>
+                    <!-- <div
                         class="w-75 w-full  mt-3 d-flex align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
                         <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
                             <span>9</span>
@@ -67,10 +65,10 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mx-0">
-                    <div class="col-12 col-cards-products px-0 col-sm-12">
+                    <div class="col-12  col-cards-products px-0 col-sm-12">
                         <div *ngFor="let item of response | paginate: {itemsPerPage: 10, currentPage: paginationProduct }; let i= index"
                             class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3 border-radius-10 bg-white">
                             <div (click)="goDetailProperty()" class="bg-img-product py-2 px-3 border-radius-10">
@@ -138,20 +136,20 @@
 
                         </div>
                     </div>
-                    <div class="col-12 my-5 py-5 justify-content-center">
+                    <!-- <div class="col-12 my-5 py-5 justify-content-center">
                         <div *ngIf="response.length> 3" class="d-flex flex-fill
                             justify-content-center">
                             <pagination-controls (pageChange)="paginationProduct=
                                 $event;">
                             </pagination-controls>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div class="col-4 col-full">
+            <div class="col-12 px-0 mt-2 col-full">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230483.17971440213!2d-49.42988400298687!3d-25.495050065287735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1674742868033!5m2!1spt-BR!2sbr"
-                    class="w-100 h-400" style="border:0;" allowfullscreen="" loading="lazy"
+                    class="w-100 min-h-700 h-100" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>

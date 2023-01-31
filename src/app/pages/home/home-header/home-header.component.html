@@ -1,11 +1,11 @@
 <main class="bg-home-header position-relative w-100">
     <div class="container">
         <div class="row h-100 m-0-auto max-w-1918">
-            <div class="col-12 title-header h-25 align-items-end text-align-center">
-                <h1 class="fw-700 font-size-55 black-mobile line-50 text-light ">Seu próximo espaço está aqui</h1>
-                <p class="fw-400 pt-3 black-mobile font-size-18 line-24 text-light">O maior estoque de imóveis de Curitiba</p>
+            <div class="col-12 title-header h-25 px-0 align-items-end text-align-center">
+                <h1 class="fw-700 font-size-55 text-mobile line-50 text-light ">Seu próximo espaço está aqui</h1>
+                <p class="fw-400 font-size-18 line-24 text-light">O maior estoque de imóveis de Curitiba</p>
             </div>
-            <div class="col-12 px-0 mt-5">
+            <div class="col-12 px-0"> 
                 <form [formGroup]="form" class="row form-header">
                     <div class="col-12 justify-content-center d-flex">
                         <button type="button" formControlName="typeStatus" ngDefaultControl value="sale"
@@ -24,26 +24,6 @@
                     <div class="col-12 px-0 mt-4 d-flex justify-content-center">
                         <div class="w-100 painel-browser h-auto border-radius-10 max-w-1227">
                             <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
-                                <div class="w-100">
-                                    <input #searchresult (keyup)="resultSearch(searchresult.value)"
-                                        [value]="selectedcities" style="width: 220px;" type="text" placeholder="Local"
-                                        formControlName="typePropertyLocal" maxlength="30"
-                                        class="btn border input-local input-type-property pr-5 mr-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
-                                    <div *ngIf="filtersearch"
-                                        class="w-100 z-10 border-radius-10 bg-light position-absolute"
-                                        style="max-width: 220px; top: 120px;">
-                                        <ul id="bodyresponseresultfilter"
-                                            class="list-group bg-light border-radius-10 box-shadow p-1 list-group-flush">
-                                            <li *ngFor="let item of filterResponse"
-                                                class="list-group-item cursor-pointer border-none  text-truncate"
-                                                style="max-width: 190px;">
-                                                <a (click)="selectCites(item)" class="w-100 h-100">{{item}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- <input style="width: 220px;" type="text" placeholder="O que está buscando?"  formControlName="search"
-                                class="btn border  text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" (click)="whatAreYouLookingFor()" /> -->
                                 <div class="dropdown">
                                     <button style="min-width: 162.23px !important;" class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue dropdown-toggle" type="button"
                                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -99,7 +79,24 @@
                                         </li>
                                     </ul>
                                 </div>
-
+                                <div class="w-100">
+                                    <input #searchresult (keyup)="resultSearch(searchresult.value)"
+                                        [value]="selectedcities" style="width: 220px;" type="text" placeholder="Local"
+                                        formControlName="typePropertyLocal" maxlength="30"
+                                        class="btn border input-local input-type-property pr-5 mr-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
+                                    <div *ngIf="filtersearch"
+                                        class="w-100 z-10 border-radius-10 bg-light position-absolute"
+                                        style="max-width: 220px; top: 120px;">
+                                        <ul id="bodyresponseresultfilter"
+                                            class="list-group bg-light border-radius-10 box-shadow p-1 list-group-flush">
+                                            <li *ngFor="let item of filterResponse"
+                                                class="list-group-item cursor-pointer border-none  text-truncate"
+                                                style="max-width: 190px;">
+                                                <a (click)="selectCites(item)" class="w-100 h-100">{{item}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div class="nav-item dropdown">
                                     <input type="text" (click)="typePropertyOptions(searchfilterTypeProperty)"
                                         placeholder="Finalidade" readonly value="{{searchfilterType}}"
@@ -339,7 +336,6 @@
                                     </ul>
 
                                 </div>
-
                                 <div
                                     class="input-property nav-item dropdown d-flex justify-content-center align-items-center">
                                     <button (click)="propertyCharacteristics('propertyCharacteristics')"
@@ -508,7 +504,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 mt-5 d-flex justify-content-end">
+                    <div class="col-12 d-none-mobile mt-5 d-flex justify-content-end">
                         <div class="d-flex w-fit align-items-center">
                             <p class="d-grid mr-5 pr-5">
                                 <span class="fw-700 font-size-18 black-mobile line-24 color-white">Role para baixo</span>
