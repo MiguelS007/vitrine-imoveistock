@@ -369,6 +369,7 @@ input:focus {
 .h-600 {
     height: 600px;
 }
+
 .h-fit {
     height: fit-content !important;
 }
@@ -442,6 +443,10 @@ input:focus {
 
 .max-w-1227 {
     max-width: 1227px;
+}
+
+.max-w-1477 {
+    max-width: 1477px;
 }
 
 .max-w-1000 {
@@ -748,36 +753,6 @@ input:focus {
     margin-right: 1rem !important;
 }
 
-@media (max-width: 480px) {
-    .logo {
-        padding: 9px !important;
-        width: 50px !important;
-    }
-
-    .title-logo {
-        width: 60%;
-    }
-
-    .title-header {
-        padding-top: 69% !important;
-    }
-
-    .title-header h1 {
-        line-height: 35px !important;
-        font-size: 28px;
-    }
-    // HEADER
-    .top-black-mobile{
-        color: black !important;
-    }
-
-    // DETAIL-PROPERTY
-    .label-search-words-details-property,
-    .label-search-local-detail-property {
-        display: none !important;
-    }
-
-}
 
 
 // HOME-HEADER
@@ -788,6 +763,14 @@ input:focus {
     background-size: cover;
     height: fit-content;
     width: 100% !important;
+}
+
+.swiper-mobile {
+    display: none;
+}
+
+.swiper-desk {
+    display: block;
 }
 
 .title-header {
@@ -1418,7 +1401,7 @@ vg-overlay-play .vg-overlay-play {
     background-color: white !important;
     width: 150px !important;
     text-align: start !important;
-} 
+}
 
 // MEDIA
 @media (max-width: 1240px) {
@@ -1433,6 +1416,7 @@ vg-overlay-play .vg-overlay-play {
         width: 100% !important;
         max-height: 1969px;
     }
+    
 
     .filter-search {
         margin-top: 0px !important;
@@ -1493,6 +1477,9 @@ vg-overlay-play .vg-overlay-play {
         justify-content: center !important;
         margin-top: 2rem;
     }
+    .little-text-mobile {
+        font-size: 10px !important;
+    }
 
     .swiper-horizontal>.swiper-pagination-bullets,
     .swiper-pagination-bullets.swiper-pagination-horizontal {
@@ -1512,11 +1499,12 @@ vg-overlay-play .vg-overlay-play {
         display: none;
     }
 
-    .col-full{
+    .col-full {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
-    .h-400{
+
+    .h-400 {
         height: 400px;
     }
 
@@ -1620,6 +1608,28 @@ vg-overlay-play .vg-overlay-play {
         display: block !important;
     }
 
+    // HEADER
+    .swiper-mobile {
+        display: block;
+    }
+
+    .swiper-desk {
+        display: none;
+    }
+
+    .product-announcement {
+        max-width: 390px !important;
+    }
+
+    .mt-mobile {
+        margin-top: 1rem;
+        justify-content: center;
+        display: flex;
+    }
+
+
+
+
 }
 
 @media (max-width: 768px) {
@@ -1637,11 +1647,13 @@ vg-overlay-play .vg-overlay-play {
         width: fit-content !important;
         margin-right: 0 !important;
     }
+
     // SEARCH-PAGE
-    .block-mobile{
+    .block-mobile {
         display: block !important;
     }
-    .w-full{
+
+    .w-full {
         width: 100% !important;
     }
 }
@@ -1667,15 +1679,6 @@ vg-overlay-play .vg-overlay-play {
         height: 219px;
     }
 
-    .product-announcement {
-        max-width: 310px !important;
-  
-    }
-    .mt-mobile{
-        margin-top: 1rem;
-        justify-content: center;
-        display: flex;
-    }
 
     // HOME-HEADER
     .bg-home-header {
@@ -1684,7 +1687,8 @@ vg-overlay-play .vg-overlay-play {
         background-size: contain;
         width: 100% !important;
     }
-    .black-mobile{
+
+    .black-mobile {
         color: black !important;
     }
 
@@ -1771,10 +1775,12 @@ vg-overlay-play .vg-overlay-play {
     .col-w-100 {
         width: 100% !important;
     }
+
     // ABOUT
-    .text-mobile{
-        font-size: 19px !important;
+    .text-mobile {
+        font-size: 24px !important;
     }
+ 
 
 }
 
@@ -1815,4 +1821,40 @@ vg-overlay-play .vg-overlay-play {
         display: flex !important;
         height: 100px !important;
     }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        padding: 9px !important;
+        width: 50px !important;
+    }
+
+    .title-logo {
+        width: 60%;
+    }
+
+    .title-header {
+        padding-top: 69% !important;
+    }
+
+    .title-header h1 {
+        line-height: 35px !important;
+        font-size: 28px;
+    }
+
+    // HEADER
+    .top-black-mobile {
+        color: black !important;
+    }
+
+    .d-none-mobile{
+        display: none;
+    }
+
+    // DETAIL-PROPERTY
+    .label-search-words-details-property,
+    .label-search-local-detail-property {
+        display: none !important;
+    }
+
 }
