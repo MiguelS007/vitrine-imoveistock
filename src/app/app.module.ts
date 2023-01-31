@@ -37,7 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalSignupComponent } from './auth/modal-signup/modal-signup.component';
 import { SearchMapComponent } from './pages/search-map/search-map.component';
 import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.resolver';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 registerLocaleData(ptBr);
 
@@ -83,7 +83,8 @@ registerLocaleData(ptBr);
     VgBufferingModule,
     NgxPageScrollModule,
     ToastrModule.forRoot(),
-    NgxPageScrollCoreModule
+    NgxPageScrollCoreModule,
+    NgxSpinnerModule
   ],
   providers: [
     {
