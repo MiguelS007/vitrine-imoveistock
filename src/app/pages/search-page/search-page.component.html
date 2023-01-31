@@ -91,15 +91,15 @@
                             url(../../../assets/img/img-announcement-default.jpg);" class="bg-img-property w-100 py-2 px-3
                             border-radius-10" (click)="announcementSelected(item._id)">
                             <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
-                                <h4 class="w3-black h-fit px-4 py-2 mb-0
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-18 line-24
                                     text-light" *ngIf="item.typeOfAd === 'rent'">Alugar</h4>
-                                <h4 class="w3-black h-fit px-4 py-2 mb-0
+                                <h4 class="bg-purple h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-18 line-24
                                     text-light" *ngIf="item.typeOfAd === 'sale'">Vender</h4>
-                                <h4 *ngIf="item.exclusivity === true" style="background-color:#878DBA;" class="ml-2 h-fit px-4 py-2 mb-0
+                                <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-18 line-24
-                                    text-light">Exclusivo</h4>
+                                    text-dark">Exclusivo</h4>
                             </div>
                             <div class="w-100 details-card-swiper d-grid h-50 pt-5
                                 align-items-end">
@@ -222,7 +222,7 @@
                 <div class="col-lg-6 col-cards-products px-0" *ngFor="let item of filterResult | paginate: {
                     itemsPerPage: 10, currentPage: paginationProduct }; let
                     i= index">
-                    <div class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3
+                    <div class="w-90 card-product-result d-inline-block mt-5 ml-5 p-3
                         border-radius-10 bg-white">
                         <div (click)="announcementSelected(item._id)" class="border-radius-10 position-relative">
                             <img src="../../../assets/img/img-announcement-default.jpg"

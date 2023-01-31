@@ -437,6 +437,10 @@ input:focus {
     width: 111px;
 }
 
+.min-h-700 {
+    min-height: 700px;
+}
+
 .max-w-1918 {
     max-width: 1918px;
 }
@@ -1416,7 +1420,7 @@ vg-overlay-play .vg-overlay-play {
         width: 100% !important;
         max-height: 1969px;
     }
-    
+
 
     .filter-search {
         margin-top: 0px !important;
@@ -1477,6 +1481,7 @@ vg-overlay-play .vg-overlay-play {
         justify-content: center !important;
         margin-top: 2rem;
     }
+
     .little-text-mobile {
         font-size: 10px !important;
     }
@@ -1683,7 +1688,7 @@ vg-overlay-play .vg-overlay-play {
     // HOME-HEADER
     .bg-home-header {
         background-image: url(./assets/img/family-mobile.png);
-        background-position: top;
+        background-position: center top;
         background-size: contain;
         width: 100% !important;
     }
@@ -1698,6 +1703,12 @@ vg-overlay-play .vg-overlay-play {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
+
+    .btn-map-mobile {
+        padding: 1rem !important;
+        height: 51px !important;
+    }
+
 
     .col-img-types-property {
         flex: 0 0 100% !important;
@@ -1730,7 +1741,6 @@ vg-overlay-play .vg-overlay-play {
 
     .details-card-swiper {
         padding: 1rem 0 !important;
-        display: block !important;
     }
 
     // DETAIL-PROPERTY
@@ -1780,7 +1790,7 @@ vg-overlay-play .vg-overlay-play {
     .text-mobile {
         font-size: 24px !important;
     }
- 
+
 
 }
 
@@ -1847,7 +1857,7 @@ vg-overlay-play .vg-overlay-play {
         color: black !important;
     }
 
-    .d-none-mobile{
+    .d-none-mobile {
         display: none;
     }
 
