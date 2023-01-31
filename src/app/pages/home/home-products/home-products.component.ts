@@ -40,6 +40,17 @@ export class HomeProductsComponent implements OnInit {
       success => {
         this.response = success;
         console.log(this.response);
+        this.announcementService.listLikes().subscribe(
+          success => {
+            for (let i = 0; i < success.length; i++) {
+             for (let x = 0; x < this.response.length; x++) {
+              if(success[i].announcement._id === this.response[x]._id) {
+                console.log('somos iguais', success[i].announcement)
+              }
+             } 
+            }
+          }
+        )
       },
       error => { console.log(error, 'data not collected') }
     );
