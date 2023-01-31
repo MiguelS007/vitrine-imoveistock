@@ -25,6 +25,12 @@ export class AnnouncementService extends BaseService {
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
+    registerUnlike(dto: AnnouncementLikeRequestDto): Observable<any> {
+        return this.httpClient
+            .post(`${this.url}/unlike`, dto, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
     listLikes(): Observable<any> {
         return this.httpClient
             .get(`${this.url}/like/list-by-user`, this.authorizedHeader())
