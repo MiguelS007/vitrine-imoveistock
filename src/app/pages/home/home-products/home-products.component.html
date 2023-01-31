@@ -1,5 +1,6 @@
-<section class="bg-home-products position-relative w-100 h-auto">
-    <div class="row bg-whitelight h-auto m-0-auto max-w-1918" style="padding-bottom: 8rem;">
+<section class="bg-whitelight position-relative w-100 h-auto">
+    <div class="container">
+            <div class="row h-auto m-0-auto max-w-1918">
         <div class="col-12 pt-3 pb-5">
             <div class="w-100 my-5 text-align-center">
                 <p class="fw-700 mb-0 text-mobile font-size-32 line-43">
@@ -17,7 +18,7 @@
                 [slidesPerView]="3" [pagination]="{ clickable: true }"
                 [scrollbar]="true">
                     <ng-template *ngFor="let item of response | slice: 0:15" swiperSlide>
-                        <div (click)="announcementSelected(item._id)" class="w-100 mt-mobile" style="cursor: pointer;">
+                        <div  (click)="announcementSelected(item._id)" class="w-100 mt-mobile" style="cursor: pointer;">
                             <div class="h-100 product-announcement p-2 border-radius-10 bg-white">
                                 <div class="bg-img-product py-2 px-3 border-radius-10">
                                     <div class="w-100 h-50 d-flex">
@@ -126,4 +127,6 @@
             </div>
         </div>
     </div>
+    </div>
+
 </section>

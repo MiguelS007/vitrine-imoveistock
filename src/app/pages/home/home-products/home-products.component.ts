@@ -50,6 +50,8 @@ export class HomeProductsComponent implements OnInit {
   }
 
   announcementSelected(value) {
+    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
+    this.router.navigate([`announcement/detail/${value}`])
     let teste: any = localStorage.getItem('recentlySeen');
     this.recentlySeenList = JSON.parse(teste);
 
@@ -75,8 +77,7 @@ export class HomeProductsComponent implements OnInit {
     this.recentlySeenList = list;
 
 
-    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
-    this.router.navigate([`announcement/detail/${value}`])
+
 
   }
 
