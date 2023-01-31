@@ -20,7 +20,7 @@
         <a (click)="changePage('indicateProperties')"
           class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Indicar imóveis</a>
       </li>
-      <li class="dropdown cursor-pointer nav-item">
+      <!-- <li class="dropdown cursor-pointer nav-item">
         <a class="nav-link px-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled" role="button"
           id="dropproperty" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Para Proprietários
@@ -30,13 +30,19 @@
             class="dropdown-item py-2 fw-400 font-size-14 line-20 color-black">Anunciar Imóvel</a>
           <a class="dropdown-item" href="dashboard-indicação">Área do Proprietário</a>
         </div>
+      </li> -->
+      <li class="nav-item dropdown">
+        <a (click)="changePage('ownerRegistration')"
+          class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Proprietários</a>
       </li>
       <li class="nav-item dropdown">
         <a (click)="changePage('forBrokers')"
           class="nav-link  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link  px-3 fw-400 font-size-14 line-20" [class]="contact ? 'item-navbar-selected' : 'item-navbar-disabled'" (click)="changePage('contact')">Contato</a>
+        <a class="nav-link  px-3 fw-400 font-size-14 line-20"
+          [class]="contact ? 'item-navbar-selected' : 'item-navbar-disabled'"
+          (click)="changePage('contact')">Contato</a>
       </li>
       <li class="nav-item dropdown">
         <a *ngIf="loginopt" (click)="openLogin()" [routerLinkActive]="['link-active']"
