@@ -50,8 +50,8 @@ export class VisitsComponent implements OnInit {
     //   success => {
     //     this.response = success;
     //     console.log(this.response);
-    //     this.listofvisits = true;
-    //     this.noregisteredvisit = false;
+        // this.listofvisits = true;
+        // this.noregisteredvisit = false;
     //   },
     //   error => {
     //     this.listofvisits = false;
@@ -62,6 +62,8 @@ export class VisitsComponent implements OnInit {
     this.scheduleService.getListVisists().subscribe(
       success => {
         this.response = success
+        this.listofvisits = true;
+        this.noregisteredvisit = false;
         for (let i = 0; i < this.response.length; i++) {
           this.response[i];
           this.week = this.response[i].day;
@@ -73,6 +75,8 @@ export class VisitsComponent implements OnInit {
       },
       error => {
         console.log(error);
+        this.listofvisits = false;
+        this.noregisteredvisit = true;
       }
     )
   }

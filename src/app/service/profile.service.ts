@@ -20,7 +20,7 @@ export class ProfileService extends BaseService {
 
   list(): Observable<any> {
       return this.httpClient
-          .get(`${this.url}profile-client`, this.anonymousHeader())
+          .get(`${this.url}app/profile-client`, this.anonymousHeader())
           .pipe(map(this.extractData), catchError(this.serviceError));
   }
   
