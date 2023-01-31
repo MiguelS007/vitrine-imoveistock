@@ -75,7 +75,8 @@ export class HomeProductsComponent implements OnInit {
     this.recentlySeenList = list;
 
 
-    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList))
+    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
+    this.router.navigate([`announcement/detail/${value}`])
 
   }
 
