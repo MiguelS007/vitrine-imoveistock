@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ScheduleRegisterResponseDto } from 'src/app/dtos/schedule-register-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
+import { AnnouncementService } from 'src/app/service/announcement.service';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { SearchService } from 'src/app/service/search.service';
 
@@ -13,7 +15,7 @@ import { SearchService } from 'src/app/service/search.service';
 })
 export class VisitsComponent implements OnInit {
   form: FormGroup;
-  response: ScheduleRegisterResponseDto[];
+  response: any[] = [];
   user: UserGetResponseDto;
 
 
@@ -25,20 +27,24 @@ export class VisitsComponent implements OnInit {
   iconlikeheart = false;
   noregisteredvisit = false;
   listofvisits = true;
-  historiclist: any[]=[];
+  historiclist: any[] = [];
   namemounth: string;
   week: string;
   nameweek: string;
 
   products: any;
   paginationProduct: number = 1;
- 
+
+  recentlySeenList: any = [];
+
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private searchService: SearchService,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private announcementService: AnnouncementService,
+    private ngxSpinnerService: NgxSpinnerService
   ) {
     this.form = this.formBuilder.group({
       cancelvisit: ['', [Validators.required]],
@@ -46,36 +52,24 @@ export class VisitsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.searchService.getPropertyHome().subscribe(
-    //   success => {
-    //     this.response = success;
-    //     console.log(this.response);
-    //     this.listofvisits = true;
-    //     this.noregisteredvisit = false;
-    //   },
-    //   error => {
-    //     this.listofvisits = false;
-    //     this.noregisteredvisit = true;
-    //     console.log(error, 'data not collected')
-    //   }
-    // );
-    this.scheduleService.getListVisists().subscribe(
+
+    this.ngxSpinnerService.show()
+
+    this.announcementService.listLikes().subscribe(
       success => {
-        this.response = success
-        for (let i = 0; i < this.response.length; i++) {
-          this.response[i];
-          this.week = this.response[i].day;
-          this.namemounth = new Date(this.week).toLocaleString('pt-br', { month: 'long' })
-          this.nameweek = new Date(this.week).toLocaleString('pt-br', { weekday: 'long' })
-          console.log(this.response[i], '1okokoko1')
-          this.week = this.response[i].day;
+        console.log('list', success);
+        for (let i = 0; i < success.length; i++) {
+          this.response.push(success[i].announcement)
         }
+        this.ngxSpinnerService.hide()
       },
       error => {
         console.log(error);
+        this.ngxSpinnerService.hide()
       }
     )
   }
+
   segmentvideo(value: string) {
     if (value === 'video') {
       this.segment = !this.segment;
@@ -87,6 +81,7 @@ export class VisitsComponent implements OnInit {
       this.tourvirtual = true;
     }
   }
+  
   likeHeart() {
     this.iconlikeheart = !this.iconlikeheart;
   }
@@ -98,10 +93,39 @@ export class VisitsComponent implements OnInit {
       this.location = true;
     }
   }
-  announcementSelected(value) {
-    this.router.navigate([`announcement/detail/${value}`])
-  }
+
   goExpress() {
     this.router.navigate(['logged/express']);
+  }
+
+  announcementSelected(value) {
+    let teste: any = localStorage.getItem('recentlySeen');
+    this.recentlySeenList = JSON.parse(teste);
+
+
+    let verify = { _id: value };
+
+    let list: any = this.recentlySeenList;
+
+    if (list === null) {
+      list = [];
+    }
+
+    if (this.recentlySeenList !== null) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i]._id === value) {
+          return
+        }
+      }
+    }
+
+    list.push(verify);
+
+    this.recentlySeenList = list;
+
+
+    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
+    this.router.navigate([`announcement/detail/${value}`])
+
   }
 }

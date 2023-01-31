@@ -38,6 +38,7 @@ import { ModalSignupComponent } from './auth/modal-signup/modal-signup.component
 import { SearchMapComponent } from './pages/search-map/search-map.component';
 import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.resolver';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { AnnouncementService } from './service/announcement.service';
 
 registerLocaleData(ptBr);
 
@@ -94,6 +95,7 @@ registerLocaleData(ptBr);
     },
     AnnouncementGetByIdResolve,
     { provide: LOCALE_ID, useValue: 'pt' },
+    AnnouncementService
   ],
   bootstrap: [AppComponent],
 })

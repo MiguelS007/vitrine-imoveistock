@@ -27,22 +27,24 @@
                             type="button">Procurar imóveis</button>
                     </div>
                     <div *ngIf="listofvisits" class="row d-flex  justify-content-center w-100">
-                        <div class="col-md-4 max-w-400 p-0">
-                            <div *ngFor="let item of response" (click)="announcementSelected(item._id)"
+                        <div *ngFor="let item of response" class="col-md-4 max-w-400 p-3">
+                            <div (click)="announcementSelected(item._id)"
                                 class="w-100 mb-4 border-radius-10 box-shadow hover-green" style="cursor: pointer;">
                                 <div class="h-100 product-announcement p-2 border-radius-10 bg-white">
                                     <div class="bg-img-product py-2 px-3 border-radius-10">
                                         <div class="w-100 h-50 d-flex">
-                                            <h4 *ngIf="item.announcement?.typeOfAd === 'sale'"
+                                            <h4 *ngIf="item.typeOfAd === 'sale'"
                                                 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
                                                 Venda</h4>
-                                            <h4 *ngIf="item.announcement?.typeOfAd === 'rent'"
+                                            <h4 *ngIf="item.typeOfAd === 'rent'"
                                                 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
-                                                Exclusivo</h4>
+                                                Alugar</h4>
                                         </div>
                                         <div class="w-100 d-flex h-50 align-items-end justify-content-between">
-                                            <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">R$
-                                                {{item.announcement?.saleValue}}</p>
+                                            <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">
+                                                {{item.saleValue | currency: 'R$'}}</p>
+                                            <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">
+                                                {{item.leaseValue | currency: 'R$'}}</p>
                                             <div (click)="likeHeart()"
                                                 class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
                                                 <i [class]="iconlikeheart ? 'bi-heart-fill':'bi-heart' "
@@ -52,14 +54,14 @@
                                     </div>
                                     <div class="w-100 mx-1 pt-3">
                                         <span
-                                            class="fw-400 font-size-14 line-20 color-black">{{item.announcement?.propertyCharacteristics}}</span>
+                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
                                         <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
-                                            style="max-width: 90%;">{{item.announcement?.description}}</p>
+                                            style="max-width: 90%;">{{item.description}}</p>
                                         <p class="d-flex align-items-center">
                                             <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
                                             <span
-                                                class="fw-400 font-size-14 line-20 color-black">{{item.announcement?.complementAddress}},
-                                                {{item.announcement?.cityAddress}}</span>
+                                                class="fw-400 font-size-14 line-20 color-black">{{item.publicPlaceAddress}},
+                                                {{item.cityAddress}} - {{item.ufAddress}}</span>
                                         </p>
                                     </div>
                                     <div class="row mx-1 pb-3 d-flex">
@@ -67,27 +69,20 @@
                                             class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/bed.png" class="pr-2" />
                                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                                                {{item.announcement?.rooms}} Quartos</p>
+                                                {{item.bedrooms}} Quartos</p>
                                         </div>
                                         <div
                                             class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/car.png" class="pr-2" />
                                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                                                {{item.announcement?.vacancyNumber}} Vagas</p>
+                                                {{item.vacancyNumber}} Vagas</p>
                                         </div>
                                         <div
                                             class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/rule.png" class="pr-2" />
                                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                                                {{item.announcement?.usefulArea | slice:0:4}}
-                                                m2</p>
+                                                {{item.usefulArea | currency: ' '}} m2</p>
                                         </div>
-                                    </div>
-                                    <div class="w-100 d-flex align-items-center py-2 px-1">
-                                        <img [src]="item.announcement?.advertiser?.photo?.location"
-                                            class="border-radius-100 " style="width: 42px;" />
-                                        <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">
-                                            {{item.announcement?.advertiser?.name}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -96,43 +91,55 @@
                 </div>
                 <div *ngIf="tourvirtual"
                     class="w-100 d-flex justify-content-center anima-body position-relative pt-4 pb-5">
-                    <div *ngFor="let item of response"
-                        class="row w-100 d-flex max-w-1227">
+                    <div *ngFor="let item of response" class="row w-100 d-flex max-w-1227">
                         <h1></h1>
                         <div class="col-5 mt-4 col-visits">
                             <div class="w-100 h-auto bg-white box-shadow border-radius-10 p-4">
                                 <div [class]="confirmcancel ? 'd-none':'d-flex'" class="w-100">
-                                    <span class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{item.time || '-'}}</span>
-                                    <span class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{nameweek|| '-'}}</span>
+                                    <span
+                                        class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{item.time
+                                        || '-'}}</span>
+                                    <span
+                                        class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{nameweek||
+                                        '-'}}</span>
                                 </div>
-                                <div  [class]="confirmcancel ? 'd-flex':'d-none'" class="w-100" class="w-100">
-                                    <span class="fw-400 font-size-14 line-19 color-pink py-1 px-3 mb-0 border-pink border-radius-100 mr-2">Visita cancelada</span>
+                                <div [class]="confirmcancel ? 'd-flex':'d-none'" class="w-100" class="w-100">
+                                    <span
+                                        class="fw-400 font-size-14 line-19 color-pink py-1 px-3 mb-0 border-pink border-radius-100 mr-2">Visita
+                                        cancelada</span>
                                 </div>
                                 <div class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex">
                                     <div class="col-3 col-visits p-0">
-                                        <img src="../../../assets/img/ap.png" class="w-100 border-radius-10 "/>
+                                        <img src="../../../assets/img/ap.png" class="w-100 border-radius-10 " />
                                     </div>
                                     <div class="col-9 px-2 col-visits">
-                                        <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate" style="max-width: 150px;">{{item.announcement?.description}}</h5>
+                                        <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
+                                            style="max-width: 150px;">{{item.announcement?.description}}</h5>
                                         <div class="w-100 d-inline-block mb-0">
-                                            <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">Quartos:&nbsp;{{item.announcement?.rooms || '-'}}</h2>
-                                            <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">Banheiros:&nbsp;{{item.announcement?.bathrooms || '-'}}</h2>
-                                            <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">Metragem:&nbsp;{{item.announcement?.usefulArea || '-'}}m²</h2>
+                                            <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
+                                                Quartos:&nbsp;{{item.announcement?.rooms || '-'}}</h2>
+                                            <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
+                                                Banheiros:&nbsp;{{item.announcement?.bathrooms || '-'}}</h2>
+                                            <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
+                                                Metragem:&nbsp;{{item.announcement?.usefulArea || '-'}}m²</h2>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="w-100  block-important h-auto mt-5 d-flex">
-                                    <button type="button" (click)="goExpress()" class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
+                                    <button type="button" (click)="goExpress()"
+                                        class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
                                         Fazer proposta
                                     </button>
-                                    <button type="button" class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
-                                        Cancelar 
+                                    <button type="button"
+                                        class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
+                                        Cancelar
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <div class="col-7 mt-4 col-visits">
-                            <div [class]="confirmcancel ? 'd-grid':'d-none'" class="w-100 mb-4 bg-white border-pink border-radius-10 p-4 h-auto">
+                            <div [class]="confirmcancel ? 'd-grid':'d-none'"
+                                class="w-100 mb-4 bg-white border-pink border-radius-10 p-4 h-auto">
                                 <p class="fw-700 font-size-18 line-24 color-pink mb-0 py-3">
                                     Visita Cancelada
                                 </p>
@@ -142,11 +149,13 @@
                             </div>
                             <div class="w-100 bg-white border-radius-10 p-4 h-auto">
                                 <p class="w-100 fw-400 font-size-16 line-20 color-black">
-                                    <i class="bi font-size-20 mr-2 bi-calendar"></i> {{nameweek || '-'}}, {{item.day | slice:8:10}} de {{namemounth}} às {{item.time || '-'}}
+                                    <i class="bi font-size-20 mr-2 bi-calendar"></i> {{nameweek || '-'}}, {{item.day |
+                                    slice:8:10}} de {{namemounth}} às {{item.time || '-'}}
                                 </p>
                                 <p class="fw-400 py-2 font-size-16 line-20 color-black">
                                     <i class="bi font-size-20 color-black mr-2 bi-geo-alt"></i>
-                                    {{item.announcement?.districtAddress || '-'}} {{item.announcement?.rooms || '-'}}, {{item.announcement?.cityAddress || '-'}} - {{item.announcement?.ufAddress || '-'}}
+                                    {{item.announcement?.districtAddress || '-'}} {{item.announcement?.rooms || '-'}},
+                                    {{item.announcement?.cityAddress || '-'}} - {{item.announcement?.ufAddress || '-'}}
                                 </p>
                                 <p class="fw-400 font-size-16 line-20 color-black">
                                     <i class="bi font-size-20 color-black mr-2 bi-person-vcard"></i>
@@ -158,7 +167,9 @@
                                 <div class="w-100 d-flex">
                                     <i class="bi color-black mr-2 font-size-20 bi-person"></i>
                                     <p class="d-grid">
-                                        <span class="fw-500 font-size-14 line-18 color-black">{{item.announcement?.ownerName || '-'}}</span>
+                                        <span
+                                            class="fw-500 font-size-14 line-18 color-black">{{item.announcement?.ownerName
+                                            || '-'}}</span>
                                         <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
                                         <span class="fw-400 font-size-14 line-18 color-black">11 9 1234-1234</span>
                                     </p>
@@ -173,181 +184,185 @@
                                 d-inline-blocks 
                                 p-3 
                                 border-radius-10 bg-white">
-                                <div style='background-image:
-                                    url({{item.bgproduct}});'
-                                    class="bg-img-result py-2 px-3
+                                    <div style='background-image:
+                                    url({{item.bgproduct}});' class="bg-img-result py-2 px-3
                                     border-radius-10">
-                                    <div class="w-100 h-50 d-flex">
-                                        <h4 [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
+                                        <div class="w-100 h-50 d-flex">
+                                            <h4 [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
                                             py-2 mb-0
                                             border-radius-5 fw-400
                                             font-size-14 line-15
                                             text-light">Locação</h4>
-                                        <h4 class="bg-greenlight h-fit
+                                            <h4 class="bg-greenlight h-fit
                                             ml-2 px-3 py-2
                                             mb-0 border-radius-5 fw-400
                                             font-size-14
                                             line-15 color-black">{{item.exclusive}}</h4>
-                                    </div>
-                                    <div class="w-100 d-flex h-50
+                                        </div>
+                                        <div class="w-100 d-flex h-50
                                         align-items-end
                                         justify-content-between">
-                                        <p class="fw-700 mb-0
+                                            <p class="fw-700 mb-0
                                             font-size-22 h-fit line-32
                                             text-light">R${{item.price}}</p>
-                                        <div (click)="likeHeart()"
-                                            class="h-fit
+                                            <div (click)="likeHeart()" class="h-fit
                                             bg-transparent-white
                                             cursor-pointer
                                             border-radius-10
                                             pt-2 pb-1 px-3">
-                                            <i [class]="iconlikeheart ?
+                                                <i [class]="iconlikeheart ?
                                                 'bi-heart-fill':'bi-heart'
                                                 " class="bi
                                                 font-size-16
                                                 text-light"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="w-100 mx-3 text-align-left
+                                    <div class="w-100 mx-3 text-align-left
                                     pt-3">
-                                    <span class="fw-400 font-size-14
+                                        <span class="fw-400 font-size-14
                                         line-20
                                         color-black">{{item.type}}</span>
-                                    <p class="fw-700 my-2 font-size-16
+                                        <p class="fw-700 my-2 font-size-16
                                         line-20 mb-0
                                         color-black">{{item.nameproperty}}</p>
-                                    <p class="d-flex
+                                        <p class="d-flex
                                         align-items-center">
-                                        <i class="bi font-size-20 mr-2
+                                            <i class="bi font-size-20 mr-2
                                             color-black
                                             bi-geo-alt"></i>
-                                        <span class="fw-400 font-size-14
+                                            <span class="fw-400 font-size-14
                                             line-20
                                             color-black">{{item.local}}</span>
-                                    </p>
-                                </div> 
-                                <div class="row mx-3 my-3 d-flex">
-                                    <div class="col justify-content-left
+                                        </p>
+                                    </div>
+                                    <div class="row mx-3 my-3 d-flex">
+                                        <div class="col justify-content-left
                                         px-0 d-flex
                                         align-items-center
                                         justify-content-left">
-                                        <img
-                                            src="../../../assets/icon/bed.png"
-                                            class="pr-2"/>
-                                        <p class="fw-400 mb-0
+                                            <img src="../../../assets/icon/bed.png" class="pr-2" />
+                                            <p class="fw-400 mb-0
                                             font-size-14 line-20
                                             color-black">{{item.rooms}}
-                                            Quartos</p>
-                                    </div>
-                                    <div class="col justify-content-left px-0
+                                                Quartos</p>
+                                        </div>
+                                        <div class="col justify-content-left px-0
                                         d-flex
                                         align-items-center
                                         justify-content-left">
-                                        <img
-                                            src="../../../assets/icon/car.png"
-                                            class="pr-2"/>
-                                        <p class="fw-400 mb-0
+                                            <img src="../../../assets/icon/car.png" class="pr-2" />
+                                            <p class="fw-400 mb-0
                                             font-size-14 line-20
                                             color-black">{{item.vacancies}}
-                                            Vagas</p>
-                                    </div>
-                                    <div class="col justify-content-left
+                                                Vagas</p>
+                                        </div>
+                                        <div class="col justify-content-left
                                         px-0 d-flex
                                         align-items-center
                                         justify-content-left">
-                                        <img
-                                            src="../../../assets/icon/rule.png"
-                                            class="pr-2"/>
-                                        <p class="fw-400 mb-0
+                                            <img src="../../../assets/icon/rule.png" class="pr-2" />
+                                            <p class="fw-400 mb-0
                                             font-size-14 line-20
                                             color-black">{{item.metrics}}
-                                            m2</p>
+                                                m2</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div> 
                             </div>
                             <div class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
-                               <p class="fw-700 font-size-18 line-24 color-black">
-                                Editar visita
-                               </p>
-                               <p class="fw-400 font-size-14 line-18 color-black">
-                                Não vai dar pra ir? Remarque ou cancele a visita, Assim, o corretor fica livre para atender outro cliente
-                               </p>
-                               <div class="w-100 mt-3 d-flex">
-                                <button type="submit" class="btn bg-purple text-light border-radius-10 h-74 w-100 mr-1 fw-700 font-size-18 line-24">
-                                    Remarcar
-                                </button>
-                                <button type="submit" type="button" data-toggle="modal"  (click)="cancelVisits('cancel')"
-                                data-target="#cancelvisits" class="btn bg-white border-purple color-purple ml-1 border-radius-10 h-74 w-100 fw-700 font-size-18 line-24"
-                                >Cancalar
-                                </button>
-                            <div class="modal fade" id="cancelvisits"
-                                tabindex="1" role="dialog"
-                                aria-labelledby="cancelvisits"
-                                aria-hidden="true">
-                                <div class="modal-dialog
+                                <p class="fw-700 font-size-18 line-24 color-black">
+                                    Editar visita
+                                </p>
+                                <p class="fw-400 font-size-14 line-18 color-black">
+                                    Não vai dar pra ir? Remarque ou cancele a visita, Assim, o corretor fica livre para
+                                    atender outro cliente
+                                </p>
+                                <div class="w-100 mt-3 d-flex">
+                                    <button type="submit"
+                                        class="btn bg-purple text-light border-radius-10 h-74 w-100 mr-1 fw-700 font-size-18 line-24">
+                                        Remarcar
+                                    </button>
+                                    <button type="submit" type="button" data-toggle="modal"
+                                        (click)="cancelVisits('cancel')" data-target="#cancelvisits"
+                                        class="btn bg-white border-purple color-purple ml-1 border-radius-10 h-74 w-100 fw-700 font-size-18 line-24">Cancalar
+                                    </button>
+                                    <div class="modal fade" id="cancelvisits" tabindex="1" role="dialog"
+                                        aria-labelledby="cancelvisits" aria-hidden="true">
+                                        <div class="modal-dialog
                                     modal-dialog-centered" role="document">
-                                    <form [formGroup]="form"
-                                        class="modal-content px-4 py-3">
-                                        <div class="modal-header">
-                                            <button type="button"
-                                                class="close"
-                                                data-dismiss="modal"
-                                                aria-label="Close">
-                                                <img
-                                                    src="../../../assets/icon/x.png"/>
-                                            </button>
-                                        </div>
-                                        <div class="anima-body">
-                                            <p class="fw-700 w-100 text-center font-size-24 line-32 color-black">
-                                                Cancelar visita
-                                            </p>
-                                            <p class="fw-400 py-4 w-100 text-center font-size-14 line-18 color-black">
-                                                Para confirmar, conte pra gente o motivo
-                                            </p>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input w18h18" value="reason1" formControlName="cancelvisit" type="radio" name="cancelvisit" id="cancelreason1">
-                                                <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black" for="cancelreason1">
-                                                    Não tenho mais interesse neste imóvel, mas continuo procurando outras opções
-                                                </label>
-                                              </div>
-                                              <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input w18h18" value="reason2" formControlName="cancelvisit" type="radio" name="cancelvisit"  id="cancelreason2">
-                                                <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black" for="cancelreason2">
-                                                    Tive um imprevisto, mas ainda tenho interesse neste imóvel
-                                                </label>
-                                              </div>
-                                              <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input w18h18" value="reason3" formControlName="cancelvisit" type="radio" name="cancelvisit"  id="cancelreason3">
-                                                <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black" for="cancelreason3">
-                                                    Não quero mais alugar
-                                                </label>
-                                              </div>
-                                              <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input w18h18" value="reason4" formControlName="cancelvisit" type="radio" name="cancelvisit"  id="cancelreason3">
-                                                <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black" for="cancelreason3">
-                                                    Outro motivo
-                                                </label>
-                                              </div>
+                                            <form [formGroup]="form" class="modal-content px-4 py-3">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <img src="../../../assets/icon/x.png" />
+                                                    </button>
+                                                </div>
+                                                <div class="anima-body">
+                                                    <p
+                                                        class="fw-700 w-100 text-center font-size-24 line-32 color-black">
+                                                        Cancelar visita
+                                                    </p>
+                                                    <p
+                                                        class="fw-400 py-4 w-100 text-center font-size-14 line-18 color-black">
+                                                        Para confirmar, conte pra gente o motivo
+                                                    </p>
+                                                    <div class="form-check d-flex align-items-center">
+                                                        <input class="form-check-input w18h18" value="reason1"
+                                                            formControlName="cancelvisit" type="radio"
+                                                            name="cancelvisit" id="cancelreason1">
+                                                        <label
+                                                            class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
+                                                            for="cancelreason1">
+                                                            Não tenho mais interesse neste imóvel, mas continuo
+                                                            procurando outras opções
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check d-flex align-items-center">
+                                                        <input class="form-check-input w18h18" value="reason2"
+                                                            formControlName="cancelvisit" type="radio"
+                                                            name="cancelvisit" id="cancelreason2">
+                                                        <label
+                                                            class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
+                                                            for="cancelreason2">
+                                                            Tive um imprevisto, mas ainda tenho interesse neste imóvel
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check d-flex align-items-center">
+                                                        <input class="form-check-input w18h18" value="reason3"
+                                                            formControlName="cancelvisit" type="radio"
+                                                            name="cancelvisit" id="cancelreason3">
+                                                        <label
+                                                            class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
+                                                            for="cancelreason3">
+                                                            Não quero mais alugar
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check d-flex align-items-center">
+                                                        <input class="form-check-input w18h18" value="reason4"
+                                                            formControlName="cancelvisit" type="radio"
+                                                            name="cancelvisit" id="cancelreason3">
+                                                        <label
+                                                            class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
+                                                            for="cancelreason3">
+                                                            Outro motivo
+                                                        </label>
+                                                    </div>
 
-                                            <button type="submit"
-                                                data-dismiss="modal"
-                                                aria-label="Close"
-                                                (click)="cancelVisits('cancelmodal')"
-                                                [disabled]="form.invalid"
-                                                class="btn pb-2
+                                                    <button type="submit" data-dismiss="modal" aria-label="Close"
+                                                        (click)="cancelVisits('cancelmodal')" [disabled]="form.invalid"
+                                                        class="btn pb-2
                                                 bg-purple fw-700
                                                 font-size-18 line-24
                                                 text-light mt-3
                                                 border-radius-10 h-74
                                                 w-100">Confirmar
-                                            </button>
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
-                            </div>
                             </div>
                         </div>
                     </div>

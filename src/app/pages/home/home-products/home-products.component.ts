@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
+import { AnnouncementService } from 'src/app/service/announcement.service';
 import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -31,6 +32,7 @@ export class HomeProductsComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private searchService: SearchService,
+    private announcementService: AnnouncementService
   ) { }
 
   ngOnInit(): void {
@@ -41,12 +43,23 @@ export class HomeProductsComponent implements OnInit {
       },
       error => { console.log(error, 'data not collected') }
     );
-
   }
 
 
-  likeHeart() {
+  likeHeart(value) {
     this.iconlikeheart = !this.iconlikeheart;
+
+    let request = {
+      announcementId: value
+    }
+    this.announcementService.registerLike(request).subscribe(
+      success => {
+        console.log(success)
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 
   announcementSelected(value) {
@@ -54,17 +67,17 @@ export class HomeProductsComponent implements OnInit {
     this.recentlySeenList = JSON.parse(teste);
 
 
-    let verify = {_id: value};
+    let verify = { _id: value };
 
     let list: any = this.recentlySeenList;
 
-    if(list === null) {
+    if (list === null) {
       list = [];
     }
-    
-    if(this.recentlySeenList !== null ) {
+
+    if (this.recentlySeenList !== null) {
       for (let i = 0; i < list.length; i++) {
-        if(list[i]._id === value) {
+        if (list[i]._id === value) {
           return
         }
       }
