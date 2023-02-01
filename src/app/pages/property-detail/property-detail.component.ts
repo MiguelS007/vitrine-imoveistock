@@ -223,11 +223,9 @@ export class PropertyDetailComponent implements OnInit {
     }
     let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long" });
     this.request = {
-      status: 'scheduled',
       day: this.form.controls['day'].value,
       time: this.horasSelecionada,
       days: dayweek,
-      cancelUser: 'scheduled',
     };
     console.log(this.request);
     this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(

@@ -16,6 +16,7 @@ import { SearchService } from 'src/app/service/search.service';
 export class VisitsComponent implements OnInit {
   form: FormGroup;
   response: any[] = [];
+  responseSchedules:ScheduleRegisterResponseDto[];
   user: UserGetResponseDto;
 
 
@@ -53,12 +54,26 @@ export class VisitsComponent implements OnInit {
 
   ngOnInit(): void {
     this.list();
+    this.schedulesList();
+  }
+
+  schedulesList(){
+    this.scheduleService.getListVisists().subscribe(
+      success => {
+        this.responseSchedules = success
+        console.log('listsss', this.responseSchedules);
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   list() {
     this.ngxSpinnerService.show();
 
     this.response = []
+
 
     this.announcementService.listLikes().subscribe(
       success => {
