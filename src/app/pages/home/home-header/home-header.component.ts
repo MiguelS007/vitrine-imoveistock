@@ -141,7 +141,7 @@ export class HomeHeaderComponent implements OnInit {
         }
       }
     } else {
-      announcementCityGroup = announcementCityGroup;
+      announcementCityGroup = announcementTypeAdGroup;
     }
 
     let announcementPropertyCharacteristicsGroup: AnnouncementGetResponseDto[] = [];
@@ -152,6 +152,7 @@ export class HomeHeaderComponent implements OnInit {
           announcementPropertyCharacteristicsGroup.push(announcementCityGroup[i]);
         }
       }
+
     } else {
       announcementPropertyCharacteristicsGroup = announcementCityGroup;
     }
