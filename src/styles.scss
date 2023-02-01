@@ -891,6 +891,10 @@ input:focus {
     max-height: 1969px;
 }
 
+.heart-like {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
 .bg-img-product {
     background-image: url(./assets/img/ap.png);
@@ -1541,6 +1545,10 @@ vg-overlay-play .vg-overlay-play {
     .btn-view-img {
         width: 100% !important;
     }
+    .info-cards-property{
+        padding: 1rem 2rem 0.1rem 2rem !important;
+    }
+
 
     .options-img {
         padding-top: 1rem !important;
@@ -1650,6 +1658,9 @@ vg-overlay-play .vg-overlay-play {
 
     .d-block-tablet {
         display: block !important;
+    }
+    .d-flex-tablet {
+        display: flex !important;
     }
 
     .bg-property-view {

@@ -121,16 +121,16 @@ export class HomeProductsComponent implements OnInit {
     localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
     let teste: any = localStorage.getItem('recentlySeen');
     this.recentlySeenList = JSON.parse(teste);
-    
-    
+
+
     let verify = { _id: value };
-    
+
     let list: any = this.recentlySeenList;
-    
+
     if (list === null) {
       list = [];
     }
-    
+
     if (this.recentlySeenList !== null) {
       for (let i = 0; i < list.length; i++) {
         if (list[i]._id === value) {
@@ -138,15 +138,15 @@ export class HomeProductsComponent implements OnInit {
         }
       }
     }
-    
+
     list.push(verify);
-    
+
     this.recentlySeenList = list;
-    
+
     this.router.navigate([`announcement/detail/${value}`]);
-    
-    
-    
+
+
+
   }
-  
+
 }
