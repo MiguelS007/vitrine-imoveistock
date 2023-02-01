@@ -22,7 +22,7 @@ export class ScheduleService extends BaseService {
 
     registerSchedule(_id: string, dto: ScheduleRegisterRequestDto): Observable<ScheduleRegisterResponseDto> {
         return this.httpClient
-            .post(`${this.url}app/visit/register/${_id}`, dto, this.authorizedHeader())
+            .post(`${this.url}app/announcement-visit/register/${_id}`, dto, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 

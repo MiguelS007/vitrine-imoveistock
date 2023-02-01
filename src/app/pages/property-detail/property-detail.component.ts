@@ -175,39 +175,39 @@ export class PropertyDetailComponent implements OnInit {
 
   scheduling(item) {
     if(localStorage.getItem('user') !== null) {
-      localStorage.setItem('announcementOfScheduling', item)
-      this.modalService.open(SchedulingStep1Component, { centered: true })
+      localStorage.setItem('announcementOfScheduling', JSON.stringify(item))
+      this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
     } else {
       this.modalService.open(ModalLoginComponent, { centered: true })
     }
   }
 
 
-  confirmSchedule(value: string) {
-    if (value === 'step2') {
-      this.step2scheduling = false;
-      this.step3scheduling = true;
-    }
-    let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long" });
-    this.request = {
-      day: this.form.controls['day'].value,
-      time: this.horasSelecionada,
-      days: dayweek,
-    };
-    console.log(this.request);
-    this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(
-      success => {
-        console.log(success)
-        this.toastrService.success('Agendado com sucesso!', '', { progressBar: true });
-      },
-      error => {
-        console.error(error)
-        this.toastrService.error('Ops, erro ao agendar!', '', { progressBar: true });
-        this.step2scheduling = false;
-        this.step3scheduling = false;
-        this.step1scheduling = false;
-        this.modalscheduling = false;
-      }
-    )
-  }
+  // confirmSchedule(value: string) {
+  //   if (value === 'step2') {
+  //     this.step2scheduling = false;
+  //     this.step3scheduling = true;
+  //   }
+  //   let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long" });
+  //   this.request = {
+  //     day: this.form.controls['day'].value,
+  //     time: this.horasSelecionada,
+  //     days: dayweek,
+  //   };
+  //   console.log(this.request);
+  //   this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(
+  //     success => {
+  //       console.log(success)
+  //       this.toastrService.success('Agendado com sucesso!', '', { progressBar: true });
+  //     },
+  //     error => {
+  //       console.error(error)
+  //       this.toastrService.error('Ops, erro ao agendar!', '', { progressBar: true });
+  //       this.step2scheduling = false;
+  //       this.step3scheduling = false;
+  //       this.step1scheduling = false;
+  //       this.modalscheduling = false;
+  //     }
+  //   )
+  // }
 }

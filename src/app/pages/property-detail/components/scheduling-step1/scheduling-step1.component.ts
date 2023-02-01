@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
+import { SchedulingStep2Component } from '../scheduling-step2/scheduling-step2.component';
 
 @Component({
   selector: 'app-scheduling-step1',
@@ -20,9 +22,15 @@ export class SchedulingStep1Component implements OnInit {
 
   arrayDeDatas: any = [];
 
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true
+  };
+
   constructor(
     private formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastrService: ToastrService
   ) {
     this.form = this.formBuilder.group({
       day: ['', [Validators.required]],
@@ -31,8 +39,14 @@ export class SchedulingStep1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    let response = localStorage.getItem('announcementOfScheduling')
-    this.response = JSON.parse(response)
+    let response = localStorage.getItem('announcementOfScheduling');
+    this.response = JSON.parse(response);
+
+    for (let i = 1; i < 6; i++) {
+      let hoje = new Date();
+      hoje.setDate(hoje.getDate() + i);
+      this.arrayDeDatas.push(hoje)
+    }
   }
 
   selectTime(value) {
@@ -45,7 +59,20 @@ export class SchedulingStep1Component implements OnInit {
   }
 
   confirm() {
-
+    let dateFormat: Date = this.form.controls['day'].value;
+    dateFormat.setHours(parseInt(this.form.controls['time'].value));
+    dateFormat.setMinutes(0);
+    const result = this.isValidDate(dateFormat)
+    if (result === true) {
+      localStorage.setItem('dateScheduling', JSON.stringify(dateFormat));
+      this.modalService.dismissAll()
+      this.modalService.open(SchedulingStep2Component, { centered: true, backdrop: 'static', keyboard: false});
+    } else {
+      this.toastrService.error('Selecione uma data valida', '', { progressBar: true })
+    }
+  }
+  isValidDate(d) {
+    return d instanceof Date && !isNaN(d.getTime());
   }
 
   exit() {
