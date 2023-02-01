@@ -2,20 +2,31 @@
   <div class="row form-search h-100 m-0-auto">
     <div class="col-12 px-0 h-100">
       <div class="row h-100 mx-0">
-        <div class="col-6 px-0 col-preview-img">
+        <!-- VERSION DESK -->
+        <div class="col-6 d-none-tablet px-0 col-preview-img">
           <div *ngFor="let item of onlyimg" style="background-image: url({{item.preview}})"
             class="bg-property-view w-100 h-600"></div>
         </div>
-        <div class="col-6 px-0 col-preview-img">
+        <div class="col-6 d-none-tablet px-0 col-preview-img">
           <div *ngFor="let item of previewimg" style="background-image: url({{item.previews}})"
             class="bg-property-view d-inline-block w-50 h-300"></div>
         </div>
+        <!-- VERSION MOBILE -->
+        <swiper class="d-block-tablet col-12 slide" style="display: none;"
+        [navigation]="true"
+        [slidesPerView]="1" [pagination]="{ clickable: true }"
+        [scrollbar]="true">
+        <ng-template *ngFor="let item of previewimg" class="w-100" swiperSlide>
+          <div style="background-image: url({{item.previews}})"
+          class="bg-property-view w-100 h-600"></div>
+        </ng-template>
+      </swiper>
         <div class="col-12 col-btns-preview-img px-5 d-flex py-5 align-items-center position-relative">
           <div class="w-auto d-flex spc-btns-property align-items-center">
             <button type="button" data-toggle="modal" data-target="#previewimage"
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <i class="bi font-size-18 text-light bi-camera-fill"></i>
-              <p class="px-2 font-size-18 line-19 text-light mb-0">Ver fotos</p>
+              <p class="px-2 font-size-18 text-mobile line-19 text-light mb-0">Ver fotos</p>
             </button>
             <button type="button" pageScroll href="#previewvideo" 
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
@@ -90,17 +101,17 @@
                        border-radius-10 bg-purple-light mr-3 py-4
                        px-4">Apartamento</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
-                       line-19 color-black bg-graylight
+                       line-19 color-black bg-graylight  text-nowrap
                        border-radius-10 bg-purple-light py-4 mr-3
                        px-4">Quarto:&nbsp;{{response.bedrooms || '-'}}</h1>
-              <h1 class="fw-400 font-size-18 d-inline-block
-                       line-19 color-black bg-graylight
+              <h1 class="fw-400 font-size-18 
+                       line-19 color-black bg-graylight d-inline-block text-nowrap
                        border-radius-10 bg-purple-light py-4 mr-3
                        px-4">Banheiros:&nbsp;{{response.bathrooms || '-'}}</h1>
               <h1 class="fw-400 font-size-18 d-inline-block
-                       line-19 color-black bg-graylight
+                       line-19 color-black bg-graylight text-nowrap
                        border-radius-10 bg-purple-light py-4 px-4 mr-3
-                       ">Metragem:&nbsp;{{response.usefulArea || '-'}}m²</h1>
+                       ">Metragem:&nbsp;{{response.usefulArea | currency: ' '}}m²</h1>
             </div>
             <div class="w-100 my-4 px-5 pt-3 pb-4
                     border-bottom-gray">
@@ -234,13 +245,13 @@
                                    color-black">Metragem:</span>
                       <span class="fw-700
                                    font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.usefulArea || '-'}}m²</span>
+                                   color-black">&nbsp;&nbsp;{{response.usefulArea |currency: ' '}}m²</span>
                     </td>
                     <td>
                       <span class="fw-400
                                    font-size-16 line-20
                                    color-black">Vagas:</span>
-                      <span class="fw-700
+                      <span class="fw-700 
                                    font-size-16 line-20
                                    color-black">&nbsp;&nbsp;{{response.vacancyNumber || '-'}}</span>
                     </td>
@@ -583,7 +594,7 @@
                              align-items-center
                              justify-content-left">
                     <img src="../../../assets/icon/bed.png" class="pr-2" />
-                    <p class="fw-400 mb-0
+                    <p class="fw-400 mb-0  little-text-mobile
                                 font-size-14 line-20
                                 color-black">{{item.bedrooms}}
                       Quartos
@@ -595,7 +606,7 @@
                              align-items-center
                              justify-content-left">
                     <img src="../../../assets/icon/car.png" class="pr-2" />
-                    <p class="fw-400 mb-0
+                    <p class="fw-400 mb-0  little-text-mobile
                                 font-size-14 line-20
                                 color-black">{{item.vacancies}}
                       Vagas
@@ -606,7 +617,7 @@
                              align-items-center
                              justify-content-left">
                     <img src="../../../assets/icon/rule.png" class="pr-2" />
-                    <p class="fw-400 mb-0
+                    <p class="fw-400 mb-0  little-text-mobile
                                 font-size-14 line-20
                                 color-black">{{item.metrics}}
                       m2
@@ -1241,7 +1252,7 @@
                           info-property-product mb-0
                           justify-content-between">
                   <span class="fw-400 font-size-14
-                             line-20
+                             line-20 
                              color-black">Quartos:4</span>
                   <span class="fw-400 font-size-14
                              line-20

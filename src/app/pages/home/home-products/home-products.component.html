@@ -1,6 +1,6 @@
 <section class="bg-whitelight position-relative w-100 h-auto">
     <div class="container">
-        <div class="row h-auto m-0-auto max-w-1918" style="padding-bottom: 8rem;">
+        <div class="row h-auto m-0-auto max-w-1918">
             <div class="col-12 pt-3 pb-5">
                 <div class="w-100 my-5 text-align-center">
                     <p class="fw-700 text-mobile mb-0 font-size-32 line-43">
@@ -13,7 +13,7 @@
                 
                 <div class="row justify-content-center px-4">
                     <!-- VERSION DESK -->
-                    <swiper class="col-12 swiper-desk h-500 max-w-1477" [spaceBetween]="50" [slidesPerView]="3"
+                    <swiper class="col-12 swiper-desk h-500 max-w-1477" [spaceBetween]="2" [slidesPerView]="3"
                         [pagination]="{ clickable: true }" [scrollbar]="true">
                         <ng-template *ngFor="let item of response | slice: 0:15" swiperSlide>
                             <div class="col-md-12 mt-mobile" style="cursor: pointer;">
@@ -57,7 +57,7 @@
                                             <div
                                                 class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
                                                 <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
-                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
                                                     {{item.bedrooms}}
                                                     Quartos
                                                 </p>
@@ -72,7 +72,7 @@
                                             <div
                                                 class="col mt-2 justify-content-end left-important  px-0 d-flex align-items-center justify-content-left">
                                                 <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
-                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
                                                     {{item.usefulArea |
                                                     currency: ' '}} m2</p>
                                             </div>
@@ -87,7 +87,7 @@
                     <swiper class="col-12 swiper-mobile h-500 max-w-1477" [spaceBetween]="50" [slidesPerView]="1"
                         [pagination]="{ clickable: true }" [scrollbar]="true">
                         <ng-template *ngFor="let item of response | slice: 0:10" swiperSlide>
-                            <div class="col-md-12 mt-mobile" style="cursor: pointer;">
+                            <div class="col-md-12 mt-mobile px-0" style="cursor: pointer;">
                                 <div class="h-100 product-announcement p-2 border-radius-10 bg-white">
                                     <div class="bg-img-product py-2 px-3 border-radius-10">
                                         <div class="w-100 h-50 d-flex">
@@ -143,7 +143,7 @@
                                             <div
                                                 class="col mt-2 justify-content-end left-important  px-0 d-flex align-items-center justify-content-left">
                                                 <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
-                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
                                                     {{item.usefulArea |
                                                     currency: ' '}} m2</p>
                                             </div>
