@@ -51,6 +51,19 @@
         background-color: rgba(0, 0, 0, 0.377) !important;
     }
 }
+.swiper-button-prev, .swiper-button-next {
+    position: absolute;
+    top: 50%;
+    width: calc(var(--swiper-navigation-size) / 44 * 27);
+    height: var(--swiper-navigation-size);
+    margin-top: calc(0px - var(--swiper-navigation-size) / 2);
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--greenlight) !important;
+}
 
 a {
     text-decoration: none !important;
@@ -536,6 +549,10 @@ input:focus {
     overflow-x: scroll !important;
 }
 
+.overflow-y-scroll {
+    overflow-y: scroll !important;
+}
+
 .border-radius-5 {
     border-radius: 5px;
 }
@@ -887,6 +904,10 @@ input:focus {
     max-height: 1969px;
 }
 
+.heart-like {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
 .bg-img-product {
     background-image: url(./assets/img/ap.png);
@@ -1538,9 +1559,28 @@ vg-overlay-play .vg-overlay-play {
         width: 100% !important;
     }
 
+    .info-cards-property {
+        padding: 1rem 2rem 0.1rem 2rem !important;
+    }
+
+    .d-none-desk {
+        display: none !important;
+        ;
+    }
+
+    .d-block-desk {
+        display: block !important;
+        ;
+    }
+
+
+
     .options-img {
         padding-top: 1rem !important;
-        justify-content: center !important;
+    top: 32px !important;
+    right: 17px !important;
+    position: absolute !important;
+    justify-content: center !important;
     }
 
     .col-preview-img,
@@ -1619,12 +1659,28 @@ vg-overlay-play .vg-overlay-play {
 
     // PROPERTY-DETAILS
     .spc-btns-property {
+        top: 71px !important;
+        position: relative !important;
     }
-    .btn-view-img{
+
+    .btn-view-img {
         margin: 0;
         height: 0 !important;
-        width: auto !important; 
+        width: auto !important;
         padding: 20px 12px !important;
+    }
+
+    .btn-view-img img {
+        width: 16px !important;
+    }
+
+    .small-text {
+        font-size: 10px !important;
+        font-weight: 400 !important;
+    }
+
+    .info-announcement {
+        padding: 5px 11px !important;
     }
 
     .d-none-tablet {
@@ -1634,15 +1690,22 @@ vg-overlay-play .vg-overlay-play {
     .d-block-tablet {
         display: block !important;
     }
+
+    .d-flex-tablet {
+        display: flex !important;
+    }
+
     .bg-property-view {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         height: 400px !important;
     }
+
     .col-btns-preview-img {
+        position: absolute !important;
         display: block !important;
-        top: -159px;
+        top: 211px;
         background: none;
         z-index: 1;
     }

@@ -105,7 +105,7 @@
                                                 *ngIf="item.typeOfAd === 'rent'">{{item.leaseValue | currency: 'R$'}}
                                             </p>
                                             <div (click)="likeHeart(item._id)"
-                                                class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
+                                                class="h-fit bg-transparent-white heart-like border-radius-10 pt-2 pb-1">
                                                 <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' "
                                                     class="bi bi-heart-fill font-size-16 text-light"></i>
                                             </div>
@@ -117,7 +117,7 @@
                                                 class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
                                             <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
                                                 style="max-width: 90%;">{{item.description}}</p>
-                                            <p class="d-flex align-items-center">
+                                            <p class="d-flex align-items-center  text-left">
                                                 <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
                                                 <span
                                                     class="fw-400 font-size-14 line-20 color-black">{{item.publicPlaceAddress}},
