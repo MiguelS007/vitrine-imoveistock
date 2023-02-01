@@ -20,12 +20,12 @@
             </p>
         </div>
         <div class="col-4 col-body-products mt-5">
-            <div class="w-100 border-radius-10 bg-white p-5">
+            <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
                 <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center">
                     <input type="search"
                         class="form-control border-0 border-radius-10 bg-light pl-4 fw-400 font-size-16 line-20"
-                        formControlName="localproperty" placeholder="Local"
-                        placeholder="Local" aria-describedby="button-addon2">
+                        formControlName="localproperty" placeholder="Local" placeholder="Local"
+                        aria-describedby="button-addon2">
                     <div class="input-group-append mx-2">
                         <i class="bi bi-search font-size-24"></i>
                     </div>
@@ -33,8 +33,8 @@
                 <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center mt-4">
                     <input type="search"
                         class="form-control border-0 border-radius-10 bg-light pl-4 fw-400 font-size-16 line-20"
-                        formControlName="localproperty" placeholder="Local"
-                        placeholder="Local" aria-describedby="button-addon2">
+                        formControlName="localproperty" placeholder="Local" placeholder="Local"
+                        aria-describedby="button-addon2">
                     <div class="input-group-append mx-2">
                         <i class="bi bi-geo-alt font-size-24"></i>
                     </div>
@@ -139,16 +139,36 @@
             </div>
         </div>
         <div class="col-8 col-body-products px-0 mt-5">
+            <div class="col-12 d-block-desk d-none mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
+                <p class="d-flex fw-700 font-size-16 line-19 color-black
+                 align-items-center">Página Inicial /
+                    <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;
+                        Resultado de busca
+                    </span>
+                </p>
+                <p class="fw-700 font-size-32 line-40 color-black">
+                    Resultado da sua busca por <b>
+                        <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}}</span>
+                        <span *ngIf="filtroResultDisplay.whatAreYouLookingFor">
+                            {{filtroResultDisplay.whatAreYouLookingFor}},</span>
+                        <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
+                        <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
+                        <span *ngIf="filtroResultDisplay.where"> em {{filtroResultDisplay.where}}</span>
+                    </b>
+                </p>
+            </div>
             <div class="col-12 space-see-maps-area-search">
-                <a [routerLink]="['/search-map']" class="btn-ver-no-mapa">
+                <a [routerLink]="['/search-map']" class="btn-ver-no-mapa py-4">
                     <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
                     <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
                 </a>
-                <div class="btn-ver-no-filter px-2 d-block-tablet" [class]="filterbtn ? 'd-none':'d-block'"(click)="filterSearch()">
+                <div class="btn-ver-no-filter py-4 px-2 d-block-tablet" [class]="filterbtn ? 'd-none':'d-block'"
+                    data-toggle="modal" data-target="#filtersearch">
                     <img src="../../../assets/icon/filter.png" height="23" class="mx-3" />
                     <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Filtrar</span>
                 </div>
-                <div class="w-100 d-flex d-none-desk align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
+                <div
+                    class="w-100 d-flex d-none-desk align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
                     <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
                         <span>{{filterResult?.length}}</span>
                         <span class="px-1">Resultados</span>
@@ -172,10 +192,10 @@
                 </div>
             </div>
             <div class="row mx-0">
-                <div class="col-lg-6 col-cards-products" *ngFor="let item of filterResult | paginate: {
+                <div class="col-lg-6 px-0 col-cards-products" *ngFor="let item of filterResult | paginate: {
                 itemsPerPage: 10, currentPage: paginationProduct }; let
                 i= index">
-                    <div class="w-100 card-product-result d-inline-block mt-5 ml-5 p-3 border-radius-10 bg-white">
+                    <div class="w-100 card-product-result d-inline-block mt-5 p-3 border-radius-10 bg-white">
                         <div class="border-radius-10 position-relative">
                             <img src="../../../assets/img/img-announcement-default.jpg"
                                 class="img-search-announcement-main">
@@ -246,6 +266,72 @@
                       $event;">
                         </pagination-controls>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="filtersearch" tabindex="-1" role="dialog" aria-labelledby="filtersearchTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg-preview
+                modal-dialog-centered" role="document">
+                <div class="modal-content pb-4
+                   modal-content-preview">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form [formGroup]="form" class="anima-body">
+                        <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
+                            <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center">
+                                <input type="search"
+                                    class="form-control border-0 border-radius-10 bg-light pl-4 fw-400 font-size-16 line-20"
+                                    formControlName="localproperty" placeholder="Local" placeholder="Local"
+                                    aria-describedby="button-addon2">
+                                <div class="input-group-append mx-2">
+                                    <i class="bi bi-search font-size-24"></i>
+                                </div>
+                            </div>
+                            <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center mt-4">
+                                <input type="search"
+                                    class="form-control border-0 border-radius-10 bg-light pl-4 fw-400 font-size-16 line-20"
+                                    formControlName="localproperty" placeholder="Local" placeholder="Local"
+                                    aria-describedby="button-addon2">
+                                <div class="input-group-append mx-2">
+                                    <i class="bi bi-geo-alt font-size-24"></i>
+                                </div>
+                            </div>
+                            <input formControlName="typeproperty" type="text" placeholder="Tipo de imóvel" class="btn border border-radius-10 bg-light fw-400 mt-4
+                            text-left font-size-16 line-20 pl-4 color-black w-100
+                            h-74" />
+                            <input formControlName="typeprice" type="text" placeholder="Preço" class="btn border border-radius-10 bg-light fw-400 mt-4
+                            text-left font-size-16 line-20 pl-4 color-black w-100
+                            h-74" />
+                            <input formControlName="typebathroom" type="text" placeholder="Banheiros" class="btn border border-radius-10 bg-light fw-400 mt-4
+                            text-left font-size-16 line-20 pl-4 color-black w-100
+                            h-74" />
+                            <input formControlName="typerooms" type="text" placeholder="Quartos" class="btn border border-radius-10 bg-light fw-400 mt-4
+                            text-left font-size-16 line-20 pl-4 color-black w-100
+                            h-74" />
+                            <input formControlName="typevacancies" type="text" placeholder="Vagas" class="btn border border-radius-10 bg-light fw-400 mt-4
+                            text-left font-size-16 line-20 pl-4 color-black w-100
+                            h-74" />
+                            <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
+                            text-left font-size-16 line-20 pl-4 color-black w-100
+                            h-74" />
+                            <div class="w-100 d-flex align-items-center">
+                                <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
+                               mr-1 text-left font-size-16 line-20 pl-4 color-black
+                               w-100 h-74" />
+                                <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
+                               ml-1 text-left font-size-16 line-20 pl-4 color-black
+                               w-100 h-74" />
+                            </div>
+                            <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
+                            line-24 border-radius-10 h-74 w-100" type="submit">
+                                Encontrar
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
