@@ -1,7 +1,7 @@
-<main class="bg-graylight position-relative w-100">
+<main class="bg-graylight position-relative w-100 p-5">
     <form [formGroup]="form" class="row form-search pt-10 h-100 m-0-auto mx-5 px-5
        max-w-1918">
-        <div class="col-12 mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
+        <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
             <p class="d-flex fw-700 font-size-16 line-19 color-black
              align-items-center">Página Inicial /
                 <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;
@@ -144,8 +144,11 @@
                     <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
                     <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
                 </a>
-                <div
-                    class="w-100 d-flex align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
+                <div class="btn-ver-no-filter px-2 d-block-tablet" [class]="filterbtn ? 'd-none':'d-block'"(click)="filterSearch()">
+                    <img src="../../../assets/icon/filter.png" height="23" class="mx-3" />
+                    <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Filtrar</span>
+                </div>
+                <div class="w-100 d-flex d-none-desk align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
                     <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
                         <span>{{filterResult?.length}}</span>
                         <span class="px-1">Resultados</span>

@@ -1424,6 +1424,15 @@ vg-overlay-play .vg-overlay-play {
     border-radius: 9px !important;
     display: flex !important;
     align-items: center !important;
+    height: 71px;
+    margin-right: 16px !important;
+}
+.btn-ver-no-filter {
+    background: #000000 !important;
+    height: 71px;
+    border-radius: 9px !important;
+    display: flex !important;
+    align-items: center !important;
     margin-right: 16px !important;
 }
 
@@ -1532,6 +1541,13 @@ vg-overlay-play .vg-overlay-play {
     // SEARCH-PAGE
     .green-block {
         display: none;
+    }
+    .form-search{
+        flex-direction: column-reverse !important;
+    }
+
+    .space-see-maps-area-search{
+        justify-content: space-between !important;
     }
 
     .col-full {

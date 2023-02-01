@@ -26,6 +26,7 @@ export class SearchPageComponent implements OnInit {
   paginationProduct: number = 1;
 
   countApartment: number;
+  filterbtn = true;
   countCondominium: number;
   countHouse: number;
   countLoft: number;
@@ -233,6 +234,10 @@ export class SearchPageComponent implements OnInit {
       }
     }
 
+  }
+
+  filterSearch(){
+    this.filterbtn = !this.filterbtn
   }
 
   announcementSelected(value) {
