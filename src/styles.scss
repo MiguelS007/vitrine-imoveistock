@@ -51,7 +51,9 @@
         background-color: rgba(0, 0, 0, 0.377) !important;
     }
 }
-.swiper-button-prev, .swiper-button-next {
+
+.swiper-button-prev,
+.swiper-button-next {
     position: absolute;
     top: 50%;
     width: calc(var(--swiper-navigation-size) / 44 * 27);
@@ -976,6 +978,11 @@ input:focus {
     padding: 20% 0;
 }
 
+.scheduling-visit-selected {
+    border: 1px solid var(--greenlight);
+    box-shadow: 1px 1px 19px var(--greenlight);
+}
+
 @media (max-width: 1776px) {
     .arrow-box-buy:after {
         left: 45.8%;
@@ -1577,10 +1584,10 @@ vg-overlay-play .vg-overlay-play {
 
     .options-img {
         padding-top: 1rem !important;
-    top: 32px !important;
-    right: 17px !important;
-    position: absolute !important;
-    justify-content: center !important;
+        top: 32px !important;
+        right: 17px !important;
+        position: absolute !important;
+        justify-content: center !important;
     }
 
     .col-preview-img,

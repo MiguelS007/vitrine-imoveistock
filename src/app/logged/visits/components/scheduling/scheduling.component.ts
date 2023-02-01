@@ -33,6 +33,8 @@ export class SchedulingComponent implements OnInit {
 
   recentlySeenList: any = [];
 
+  announcementChecked: string;
+
 
   constructor(
     private scheduleService: ScheduleService,
@@ -55,6 +57,11 @@ export class SchedulingComponent implements OnInit {
         this.response = success
         if (success.length > 0) {
           this.selectedScheduling = success[0];
+          setTimeout(() => {
+            let teste = document.getElementById(success[0]._id);
+            teste.classList.add('scheduling-visit-selected');
+            localStorage.setItem('announcementChecked', success[0]._id)
+          }, 200);
         }
         this.verifyLike()
 
@@ -121,7 +128,18 @@ export class SchedulingComponent implements OnInit {
 
   selectVisit(item) {
     this.selectedScheduling = item;
-    this.verifyLike()
+    this.verifyLike();
+    let checkOld
+    setTimeout(() => {
+      checkOld = localStorage.getItem('announcementChecked');
+    }, 100);
+    let teste = document.getElementById(item._id);
+    teste.classList.add('scheduling-visit-selected');
+    setTimeout(() => {
+      localStorage.setItem('announcementChecked', item._id)
+      let removeOld = document.getElementById(checkOld);
+      removeOld.classList.remove('scheduling-visit-selected')
+    }, 110);
   }
 
   announcementSelected(value) {
