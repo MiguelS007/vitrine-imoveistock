@@ -22,26 +22,26 @@
         </ng-template>
       </swiper>
         <div class="col-12 col-btns-preview-img px-5 d-flex py-5 align-items-center position-relative">
-          <div class="w-auto d-flex spc-btns-property align-items-center">
+          <div class="w-auto d-flex overflow-y-scroll spc-btns-property align-items-center">
             <button type="button" data-toggle="modal" data-target="#previewimage"
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <i class="bi font-size-18 text-light bi-camera-fill"></i>
-              <p class="px-2 font-size-18 text-mobile line-19 text-light mb-0">Ver fotos</p>
+              <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
+              <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
             </button>
             <button type="button" pageScroll href="#previewvideo" 
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 text-light mb-0">Ver vídeo</p>
+              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
             </button>
             <button type="button" pageScroll href="#previewplant"  (click)="openarrow(3)"
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/datas-block.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 text-light mb-0">Ver planta</p>
+              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver planta</p>
             </button>
             <button type="button" pageScroll href="#previewvideo" (click)="segmentvideo('tour')" 
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/street-view.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 text-light mb-0">Visita 360°</p>
+              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
             </button>
           </div>
           <div class="options-img d-flex align-items-center">
@@ -90,25 +90,24 @@
         </div>
       </div>
     </div>
-    <div class="col-12 bg-graylight d-flex justify-content-center">
-      <div class="row max-w-1918 col-md-10 row-body-details-property">
-
+    <div class="col-12 bg-graylight mt-mobile px-0 d-flex justify-content-center">
+      <div class="row max-w-1918 col-md-10 px-0 row-body-details-property">
         <div class="col-8 col-body-details-property">
           <div class="w-100 mb-5 border-radius-10 bg-white">
             <div class="w-100 align-items-center pt-5 px-5">
               <h1 class="fw-400 font-size-18 d-inline-block
-                       line-19 color-black bg-graylight
+                       line-19 color-black bg-graylight small-text info-announcement
                        border-radius-10 bg-purple-light mr-3 py-4
                        px-4">Apartamento</h1>
-              <h1 class="fw-400 font-size-18 d-inline-block
-                       line-19 color-black bg-graylight  text-nowrap
+              <h1 class="fw-400 font-size-18 d-inline-block  small-text info-announcement
+                       line-19 color-black bg-graylight text-nowrap
                        border-radius-10 bg-purple-light py-4 mr-3
                        px-4">Quarto:&nbsp;{{response.bedrooms || '-'}}</h1>
-              <h1 class="fw-400 font-size-18 
+              <h1 class="fw-400 font-size-18 small-text info-announcement
                        line-19 color-black bg-graylight d-inline-block text-nowrap
                        border-radius-10 bg-purple-light py-4 mr-3
                        px-4">Banheiros:&nbsp;{{response.bathrooms || '-'}}</h1>
-              <h1 class="fw-400 font-size-18 d-inline-block
+              <h1 class="fw-400 font-size-18 d-inline-block small-text info-announcement
                        line-19 color-black bg-graylight text-nowrap
                        border-radius-10 bg-purple-light py-4 px-4 mr-3
                        ">Metragem:&nbsp;{{response.usefulArea | currency: ' '}}m²</h1>
