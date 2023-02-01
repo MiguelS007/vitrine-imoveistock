@@ -24,6 +24,8 @@ export class SchedulingComponent implements OnInit {
 
   form: FormGroup;
 
+  selectedScheduling: ScheduleRegisterResponseDto;
+
   constructor(
     private scheduleService: ScheduleService,
     private router: Router,
@@ -36,14 +38,18 @@ export class SchedulingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.schedulesList()
+    this.schedulesList();
   }
 
   schedulesList() {
     this.scheduleService.getListVisists().subscribe(
       success => {
-        this.responseSchedules = success
-        console.log('listsss', this.responseSchedules);
+        this.response = success
+        console.log('lista de agendamentos', this.response);
+        if(success.length > 0) {
+          this.selectedScheduling = success[0];
+          console.log(this.selectedScheduling);
+        }
       },
       error => {
         console.log(error);
