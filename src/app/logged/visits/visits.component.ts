@@ -77,7 +77,19 @@ export class VisitsComponent implements OnInit {
 
     this.announcementService.listLikes().subscribe(
       success => {
-        console.log('list', success);
+        for (let i = 0; i < success[i]; i++) {
+          console.log('lissst', success[i].length     );     
+        }
+        console.log('list', success[0])
+
+        if(success.length < 0){
+          this.listofvisits = true; 
+          this.noregisteredvisit = false; 
+          console.log('list', success)
+        }else{ 
+          this.listofvisits = false;
+          this.noregisteredvisit = true;
+        }
         for (let i = 0; i < success.length; i++) {
           this.response.push(success[i].announcement);
           Object.assign(this.response[i], { liked: true });
@@ -87,6 +99,7 @@ export class VisitsComponent implements OnInit {
       error => {
         console.log(error);
         this.ngxSpinnerService.hide()
+       
       }
     )
   }
