@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
@@ -10,6 +13,7 @@ import { DatamokService } from 'src/app/service/datamok.service';
 import { ProfileService } from 'src/app/service/profile.service';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { SearchService } from 'src/app/service/search.service';
+import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
 
 @Component({
   selector: 'app-property-detail',
@@ -61,13 +65,11 @@ export class PropertyDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private scheduleService: ScheduleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ngxSpinnerService: NgxSpinnerService,
+    private modalService: NgbModal
 
   ) {
-    this.form = this.formBuilder.group({
-      day: ['', [Validators.required]],
-      time: ['', [Validators.required]],
-    });
     this.formproperty = this.formBuilder.group({
       searchwords: ['', [Validators.required]],
       localproperty: ['', [Validators.required]],
@@ -95,6 +97,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ngxSpinnerService.show()
     this.onlyimg = this.datamokservice.onlypreview;
     this.previewimg = this.datamokservice.imagespreview;
     this.propertyproducts = this.datamokservice.exclusiveProperties;
@@ -102,16 +105,10 @@ export class PropertyDetailComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
     this.response = this.route.snapshot.data['resolve'];
+    this.ngxSpinnerService.hide()
+
     console.log(this.user?._id, this.response._id);
   }
-
-
-
-
-
-
-
-
 
 
 
@@ -176,44 +173,14 @@ export class PropertyDetailComponent implements OnInit {
     }
   }
 
-  nextScheduling(value: string) {
-    if (value === 'step1') {
-      if (this.user === null) {
-        this.datamokservice.opModalLogin();
-      } else {
-        this.step1scheduling = false;
-        this.step2scheduling = true;
-      }
-      this.step1scheduling = false;
-      this.step2scheduling = true;
-    } else if (value === 'close') {
-      this.modalscheduling = false;
-      this.step1scheduling = false;
-      this.step2scheduling = false;
-      this.step3scheduling = false;
-    } else if (value === 'viewvisits') {
-      this.modalscheduling = false;
-      this.step1scheduling = false;
-      this.step2scheduling = false;
-      this.step3scheduling = false;
-      setTimeout(() => {
-        this.router.navigate(['logged/visits']);
-      }, 100);
-    }
-    // undefined
-    else if (value === 'modal-logged') {
-      this.modallogin = true;
-    } else if (value === 'modal-scheduling') {
-      this.modalscheduling = true;
-      this.step1scheduling = true;
+  scheduling(item) {
+    if(localStorage.getItem('user') !== null) {
+      localStorage.setItem('announcementOfScheduling', item)
+      this.modalService.open(SchedulingStep1Component, { centered: true })
+    } else {
+      this.modalService.open(ModalLoginComponent, { centered: true })
     }
   }
-
-
-
-
-
-
 
 
   confirmSchedule(value: string) {
