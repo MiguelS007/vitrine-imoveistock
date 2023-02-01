@@ -11,14 +11,13 @@ export class VisitsComponent implements OnInit {
   segment = false;
 
   constructor(
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   changePage(value: string) {
     if (value === 'favorites') {
       this.segment = !this.segment;
-    } else if (value === 'tour') {
       this.spaceFavorites = true;
       this.spaceScheduling = false;
     } else if (value === 'scheduling') {

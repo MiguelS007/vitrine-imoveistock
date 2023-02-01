@@ -1,294 +1,305 @@
 <div class="w-100 d-flex justify-content-center anima-body position-relative pt-4 pb-5">
     <div class="row w-100 d-flex max-w-1227">
-        <div *ngIf="response.length > 0">
-            <div class="col-5 mt-4 col-visits">
-                <div *ngFor="let item of response | slice:0:2"
-                    class="w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4">
-                    <div [class]="confirmcancel ? 'd-none':'d-flex'" class="w-100">
-                        <span
-                            class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{item.time
-                            || '-'}}</span>
-                        <span
-                            class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{nameweek||
-                            '-'}}</span>
+        <div *ngIf="response.length > 0" class="col-md-5 mt-4 col-visits">
+            <div *ngFor="let item of response" class="w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4"
+                (click)="selectVisit(item)">
+                <div [class]="confirmcancel ? 'd-none':'d-flex'" class="w-100">
+                    <span
+                        class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{item.visitDate
+                        | date: 'HH:mm'
+                        || '-'}}</span>
+                    <span
+                        class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{item.visitDate
+                        | date: 'EEE'||
+                        '-'}}{{item.visitDate | date: 'dd'||
+                        '-'}}</span>
+                </div>
+                <div [class]="confirmcancel ? 'd-flex':'d-none'" class="w-100" class="w-100">
+                    <span
+                        class="fw-400 font-size-14 line-19 color-pink py-1 px-3 mb-0 border-pink border-radius-100 mr-2">Visita
+                        cancelada</span>
+                </div>
+                <div class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex">
+                    <div class="col-3 col-visits p-0">
+                        <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 " />
                     </div>
-                    <div [class]="confirmcancel ? 'd-flex':'d-none'" class="w-100" class="w-100">
-                        <span
-                            class="fw-400 font-size-14 line-19 color-pink py-1 px-3 mb-0 border-pink border-radius-100 mr-2">Visita
-                            cancelada</span>
-                    </div>
-                    <div class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex">
-                        <div class="col-3 col-visits p-0">
-                            <img src="../../../assets/img/ap.png" class="w-100 border-radius-10 " />
+                    <div class="col-9 px-2 col-visits">
+                        <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
+                            style="max-width: 150px;">{{item.announcement?.description}}</h5>
+                        <div class="w-100 d-inline-block mb-0">
+                            <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
+                                Quartos:&nbsp;{{item.announcement?.bedrooms || '-'}}</h2>
+                            <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
+                                Banheiros:&nbsp;{{item.announcement?.bathrooms || '-'}}</h2>
+                            <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
+                                Metragem:&nbsp;{{item.announcement?.usefulArea | currency: ' ' || '-'}}m²</h2>
                         </div>
-                        <div class="col-9 px-2 col-visits">
-                            <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
-                                style="max-width: 150px;">{{item.announcement?.description}}</h5>
-                            <div class="w-100 d-inline-block mb-0">
-                                <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
-                                    Quartos:&nbsp;{{item.announcement?.bedrooms || '-'}}</h2>
-                                <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
-                                    Banheiros:&nbsp;{{item.announcement?.bathrooms || '-'}}</h2>
-                                <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
-                                    Metragem:&nbsp;{{item.announcement?.usefulArea || '-'}}m²</h2>
-                            </div>
-                        </div>
                     </div>
-                    <div class="w-100  block-important h-auto mt-5 d-flex">
-                        <button type="button" (click)="goExpress()"
-                            class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
-                            Fazer proposta
-                        </button>
-                        <button type="button"
-                            class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
-                            Cancelar
-                        </button>
-                    </div>
+                </div>
+                <div class="w-100  block-important h-auto mt-5 d-flex">
+                    <button type="button" (click)="goExpress()"
+                        class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
+                        Fazer proposta
+                    </button>
+                    <button type="button"
+                        class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
+                        Cancelar
+                    </button>
                 </div>
             </div>
-            <div class="col-7 mt-4 col-visits">
-                <div [class]="confirmcancel ? 'd-grid':'d-none'"
-                    class="w-100 mb-4 bg-white border-pink border-radius-10 p-4 h-auto">
-                    <p class="fw-700 font-size-18 line-24 color-pink mb-0 py-3">
-                        Visita Cancelada
+        </div>
+        <div class="col-md-7 mt-4 col-visits">
+            <div [class]="confirmcancel ? 'd-grid':'d-none'"
+                class="w-100 mb-4 bg-white border-pink border-radius-10 p-4 h-auto">
+                <p class="fw-700 font-size-18 line-24 color-pink mb-0 py-3">
+                    Visita Cancelada
+                </p>
+                <span class="fw-400 font-size-14 line-18 color-black">
+                    Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
+                </span>
+            </div>
+            <div class="w-100 bg-white border-radius-10 p-4 h-auto">
+                <p class="w-100 fw-400 font-size-16 line-20 color-black">
+                    <i class="bi font-size-20 mr-2 bi-calendar"></i>{{selectedScheduling?.visitDate | date: 'EEEE'||
+                    '-'}}, {{selectedScheduling.visitDate | date: 'dd' }} de {{selectedScheduling.visitDate | date:
+                    'LLLL' }} às {{selectedScheduling.visitDate | date: 'HH:mm' || '-'}}
+                </p>
+                <p class="fw-400 py-2 font-size-16 line-20 color-black">
+                    <i class="bi font-size-20 color-black mr-2 bi-geo-alt"></i>
+                    {{selectedScheduling.announcement?.districtAddress || '-'}}
+                    {{selectedScheduling.announcement?.rooms
+                    ||
+                    '-'}},
+                    {{selectedScheduling.announcement?.cityAddress || '-'}} -
+                    {{selectedScheduling.announcement?.ufAddress ||
+                    '-'}}
+                </p>
+                <p class="fw-400 font-size-16 line-20 color-black">
+                    <i class="bi font-size-20 color-black mr-2 bi-person-vcard"></i>
+                    Leve seu documento de identificação original com foto
+                </p>
+                <p class="fw-700 font-size-16 mt-4 line-20 color-black">
+                    A visita é acompanhada por esse corretor:
+                </p>
+                <div class="w-100 d-flex">
+                    <i class="bi color-black mr-2 font-size-20 bi-person"></i>
+                    <p class="d-grid">
+                        <span
+                            class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.announcement?.ownerName
+                            || '-'}}</span>
+                        <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
+                        <span class="fw-400 font-size-14 line-18 color-black">11 9 1234-1234</span>
                     </p>
-                    <span class="fw-400 font-size-14 line-18 color-black">
+                    <!-- <span class="fw-400 font-size-14 line-18 color-black">
                         Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
-                    </span>
+                    </span> -->
                 </div>
-                <div class="w-100 bg-white border-radius-10 p-4 h-auto">
-                    <p class="w-100 fw-400 font-size-16 line-20 color-black">
-                        <i class="bi font-size-20 mr-2 bi-calendar"></i> {{nameweek || '-'}}, {{selectedScheduling.day
-                        |
-                        slice:8:10}} de {{namemounth}} às {{selectedScheduling.time || '-'}}
-                    </p>
-                    <p class="fw-400 py-2 font-size-16 line-20 color-black">
-                        <i class="bi font-size-20 color-black mr-2 bi-geo-alt"></i>
-                        {{selectedScheduling.announcement?.districtAddress || '-'}}
-                        {{selectedScheduling.announcement?.rooms
-                        ||
-                        '-'}},
-                        {{selectedScheduling.announcement?.cityAddress || '-'}} -
-                        {{selectedScheduling.announcement?.ufAddress ||
-                        '-'}}
-                    </p>
-                    <p class="fw-400 font-size-16 line-20 color-black">
-                        <i class="bi font-size-20 color-black mr-2 bi-person-vcard"></i>
-                        Leve seu documento de identificação original com foto
-                    </p>
-                    <p class="fw-700 font-size-16 mt-4 line-20 color-black">
-                        A visita é acompanhada por esse corretor:
-                    </p>
-                    <div class="w-100 d-flex">
-                        <i class="bi color-black mr-2 font-size-20 bi-person"></i>
-                        <p class="d-grid">
-                            <span
-                                class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.announcement?.ownerName
-                                || '-'}}</span>
-                            <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
-                            <span class="fw-400 font-size-14 line-18 color-black">11 9 1234-1234</span>
-                        </p>
-                        <span class="fw-400 font-size-14 line-18 color-black">
-                            Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
-                        </span>
-                    </div>
-                </div>
-                <div class="w-100 bg-white mt-4 border-radius-10 h-auto">
-                    <div *ngFor="let item of products |
-                                    paginate: {
-                                    itemsPerPage: 1, currentPage:
-                                    paginationProduct }; let
-                                    i= index" class="w-100
+            </div>
+            <div class="w-100 bg-white mt-4 border-radius-10 h-auto">
+                <div class="w-100
                                     d-inline-blocks 
                                     p-3 
                                     border-radius-10 bg-white">
-                        <div style='background-image:
-                                        url({{item.bgproduct}});' class="bg-img-result py-2 px-3
+                    <div style='background-image:
+                                        url(../../../../../assets/img/img-announcement-default.jpg);' class="bg-img-result py-2 px-3
                                         border-radius-10">
-                            <div class="w-100 h-50 d-flex">
-                                <h4 [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
+                        <div class="w-100 h-50 d-flex">
+                            <h4 *ngIf="selectedScheduling.announcement?.typeOfAd === 'rent'"
+                                [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
                                                 py-2 mb-0
                                                 border-radius-5 fw-400
                                                 font-size-14 line-15
                                                 text-light">Locação</h4>
-                                <h4 class="bg-greenlight h-fit
+                            <h4 *ngIf="selectedScheduling.announcement?.typeOfAd === 'sale'"
+                                [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
+                                                py-2 mb-0
+                                                border-radius-5 fw-400
+                                                font-size-14 line-15
+                                                text-light">Venda</h4>
+                            <h4 *ngIf="selectedScheduling.announcement?.exclusivity === true" class="bg-greenlight h-fit
                                                 ml-2 px-3 py-2
                                                 mb-0 border-radius-5 fw-400
                                                 font-size-14
-                                                line-15 color-black">{{item.exclusive}}</h4>
-                            </div>
-                            <div class="w-100 d-flex h-50
+                                                line-15 color-black">Exclusivo</h4>
+                        </div>
+                        <div class="w-100 d-flex h-50
                                             align-items-end
                                             justify-content-between">
-                                <p class="fw-700 mb-0
+                            <p *ngIf="selectedScheduling.announcement?.typeOfAd === 'sale'" class="fw-700 mb-0
                                                 font-size-22 h-fit line-32
-                                                text-light">R${{item.price}}</p>
-                                <div (click)="likeHeart(item._id)" class="h-fit
+                                                text-light">{{selectedScheduling.announcement?.saleValue | currency:
+                                'R$'}}</p>
+                            <p *ngIf="selectedScheduling.announcement?.typeOfAd === 'rent'" class="fw-700 mb-0
+                                                font-size-22 h-fit line-32
+                                                text-light">{{selectedScheduling.announcement?.leaseValue | currency:
+                                'R$'}}</p>
+                            <div (click)="likeHeart(selectedScheduling.announcement?._id)" class="h-fit
                                                 bg-transparent-white
                                                 cursor-pointer
                                                 border-radius-10
                                                 pt-2 pb-1 px-3">
-                                    <i [class]="item.liked ?
+                                <i [class]="selectedScheduling.announcement?.liked ?
                                                     'bi-heart-fill':'bi-heart'
                                                     " class="bi
                                                     font-size-16
                                                     text-light"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-100 mx-3 text-align-left
-                                        pt-3">
-                            <span class="fw-400 font-size-14
-                                            line-20
-                                            color-black">{{item.type}}</span>
-                            <p class="fw-700 my-2 font-size-16
-                                            line-20 mb-0
-                                            color-black">{{item.nameproperty}}</p>
-                            <p class="d-flex
-                                            align-items-center">
-                                <i class="bi font-size-20 mr-2
-                                                color-black
-                                                bi-geo-alt"></i>
-                                <span class="fw-400 font-size-14
-                                                line-20
-                                                color-black">{{item.local}}</span>
-                            </p>
-                        </div>
-                        <div class="row mx-3 my-3 d-flex">
-                            <div class="col justify-content-left
-                                            px-0 d-flex
-                                            align-items-center
-                                            justify-content-left">
-                                <img src="../../../assets/icon/bed.png" class="pr-2" />
-                                <p class="fw-400 mb-0
-                                                font-size-14 line-20
-                                                color-black">{{item.bedrooms}}
-                                    Quartos</p>
-                            </div>
-                            <div class="col justify-content-left px-0
-                                            d-flex
-                                            align-items-center
-                                            justify-content-left">
-                                <img src="../../../assets/icon/car.png" class="pr-2" />
-                                <p class="fw-400 mb-0
-                                                font-size-14 line-20
-                                                color-black">{{item.vacancies}}
-                                    Vagas</p>
-                            </div>
-                            <div class="col justify-content-left
-                                            px-0 d-flex
-                                            align-items-center
-                                            justify-content-left">
-                                <img src="../../../assets/icon/rule.png" class="pr-2" />
-                                <p class="fw-400 mb-0
-                                                font-size-14 line-20
-                                                color-black">{{item.metrics}}
-                                    m2</p>
                             </div>
                         </div>
                     </div>
+                    <div class="w-100 mx-3 text-align-left
+                                        pt-3" (click)="announcementSelected(selectedScheduling.announcement?._id)" style="cursor: pointer;">
+                        <span
+                            class="fw-400 font-size-14
+                                            line-20
+                                            color-black">{{selectedScheduling.announcement?.propertyCharacteristics}}</span>
+                        <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate" style="max-width: 90%;">
+                            {{selectedScheduling.announcement?.description}}</p>
+                        <p class="d-flex
+                                            align-items-center">
+                            <i class="bi font-size-20 mr-2
+                                                color-black
+                                                bi-geo-alt"></i>
+                            <span
+                                class="fw-400 font-size-14 line-20 color-black">{{selectedScheduling.announcement?.publicPlaceAddress}},
+                                {{selectedScheduling.announcement?.cityAddress}} -
+                                {{selectedScheduling.announcement?.ufAddress}}</span>
+                        </p>
+                    </div>
+                    <div class="row mx-3 my-3 d-flex">
+                        <div class="col justify-content-left
+                                            px-0 d-flex
+                                            align-items-center
+                                            justify-content-left">
+                            <img src="../../../assets/icon/bed.png" class="pr-2" />
+                            <p class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">{{selectedScheduling.announcement?.bedrooms}}
+                                Quartos</p>
+                        </div>
+                        <div class="col justify-content-left px-0
+                                            d-flex
+                                            align-items-center
+                                            justify-content-left">
+                            <img src="../../../assets/icon/car.png" class="pr-2" />
+                            <p class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">{{selectedScheduling.announcement?.vacancyNumber}}
+                                Vagas</p>
+                        </div>
+                        <div class="col justify-content-left
+                                            px-0 d-flex
+                                            align-items-center
+                                            justify-content-left">
+                            <img src="../../../assets/icon/rule.png" class="pr-2" />
+                            <p class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">{{selectedScheduling.announcement?.usefulArea |
+                                currency: ' '}} m2
+                                m2</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
-                    <p class="fw-700 font-size-18 line-24 color-black">
-                        Editar visita
-                    </p>
-                    <p class="fw-400 font-size-14 line-18 color-black">
-                        Não vai dar pra ir? Remarque ou cancele a visita, Assim, o corretor fica livre
-                        para
-                        atender outro cliente
-                    </p>
-                    <div class="w-100 mt-3 d-flex">
-                        <button type="submit"
-                            class="btn bg-purple text-light border-radius-10 h-74 w-100 mr-1 fw-700 font-size-18 line-24">
-                            Remarcar
-                        </button>
-                        <button type="submit" type="button" data-toggle="modal" (click)="cancelVisits('cancel')"
-                            data-target="#cancelvisits"
-                            class="btn bg-white border-purple color-purple ml-1 border-radius-10 h-74 w-100 fw-700 font-size-18 line-24">Cancalar
-                        </button>
-                        <div class="modal fade" id="cancelvisits" tabindex="1" role="dialog"
-                            aria-labelledby="cancelvisits" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <form [formGroup]="form" class="modal-content px-4 py-3">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <img src="../../../assets/icon/x.png" />
-                                        </button>
+            </div>
+            <div class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
+                <p class="fw-700 font-size-18 line-24 color-black">
+                    Editar visita
+                </p>
+                <p class="fw-400 font-size-14 line-18 color-black">
+                    Não vai dar pra ir? Remarque ou cancele a visita, Assim, o corretor fica livre
+                    para
+                    atender outro cliente
+                </p>
+                <div class="w-100 mt-3 d-flex">
+                    <button type="submit"
+                        class="btn bg-purple text-light border-radius-10 h-74 w-100 mr-1 fw-700 font-size-18 line-24">
+                        Remarcar
+                    </button>
+                    <button type="submit" type="button" data-toggle="modal" (click)="cancelVisits('cancel')"
+                        data-target="#cancelvisits"
+                        class="btn bg-white border-purple color-purple ml-1 border-radius-10 h-74 w-100 fw-700 font-size-18 line-24">Cancalar
+                    </button>
+                    <div class="modal fade" id="cancelvisits" tabindex="1" role="dialog" aria-labelledby="cancelvisits"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <form [formGroup]="form" class="modal-content px-4 py-3">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <img src="../../../assets/icon/x.png" />
+                                    </button>
+                                </div>
+                                <div class="anima-body">
+                                    <p class="fw-700 w-100 text-center font-size-24 line-32 color-black">
+                                        Cancelar visita
+                                    </p>
+                                    <p class="fw-400 py-4 w-100 text-center font-size-14 line-18 color-black">
+                                        Para confirmar, conte pra gente o motivo
+                                    </p>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input w18h18" value="reason1"
+                                            formControlName="cancelvisit" type="radio" name="cancelvisit"
+                                            id="cancelreason1">
+                                        <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
+                                            for="cancelreason1">
+                                            Não tenho mais interesse neste imóvel, mas continuo
+                                            procurando outras opções
+                                        </label>
                                     </div>
-                                    <div class="anima-body">
-                                        <p class="fw-700 w-100 text-center font-size-24 line-32 color-black">
-                                            Cancelar visita
-                                        </p>
-                                        <p class="fw-400 py-4 w-100 text-center font-size-14 line-18 color-black">
-                                            Para confirmar, conte pra gente o motivo
-                                        </p>
-                                        <div class="form-check d-flex align-items-center">
-                                            <input class="form-check-input w18h18" value="reason1"
-                                                formControlName="cancelvisit" type="radio" name="cancelvisit"
-                                                id="cancelreason1">
-                                            <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
-                                                for="cancelreason1">
-                                                Não tenho mais interesse neste imóvel, mas continuo
-                                                procurando outras opções
-                                            </label>
-                                        </div>
-                                        <div class="form-check d-flex align-items-center">
-                                            <input class="form-check-input w18h18" value="reason2"
-                                                formControlName="cancelvisit" type="radio" name="cancelvisit"
-                                                id="cancelreason2">
-                                            <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
-                                                for="cancelreason2">
-                                                Tive um imprevisto, mas ainda tenho interesse neste
-                                                imóvel
-                                            </label>
-                                        </div>
-                                        <div class="form-check d-flex align-items-center">
-                                            <input class="form-check-input w18h18" value="reason3"
-                                                formControlName="cancelvisit" type="radio" name="cancelvisit"
-                                                id="cancelreason3">
-                                            <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
-                                                for="cancelreason3">
-                                                Não quero mais alugar
-                                            </label>
-                                        </div>
-                                        <div class="form-check d-flex align-items-center">
-                                            <input class="form-check-input w18h18" value="reason4"
-                                                formControlName="cancelvisit" type="radio" name="cancelvisit"
-                                                id="cancelreason3">
-                                            <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
-                                                for="cancelreason3">
-                                                Outro motivo
-                                            </label>
-                                        </div>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input w18h18" value="reason2"
+                                            formControlName="cancelvisit" type="radio" name="cancelvisit"
+                                            id="cancelreason2">
+                                        <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
+                                            for="cancelreason2">
+                                            Tive um imprevisto, mas ainda tenho interesse neste
+                                            imóvel
+                                        </label>
+                                    </div>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input w18h18" value="reason3"
+                                            formControlName="cancelvisit" type="radio" name="cancelvisit"
+                                            id="cancelreason3">
+                                        <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
+                                            for="cancelreason3">
+                                            Não quero mais alugar
+                                        </label>
+                                    </div>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input w18h18" value="reason4"
+                                            formControlName="cancelvisit" type="radio" name="cancelvisit"
+                                            id="cancelreason3">
+                                        <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
+                                            for="cancelreason3">
+                                            Outro motivo
+                                        </label>
+                                    </div>
 
-                                        <button type="submit" data-dismiss="modal" aria-label="Close"
-                                            (click)="cancelVisits('cancelmodal')" [disabled]="form.invalid" class="btn pb-2
+                                    <button type="submit" data-dismiss="modal" aria-label="Close"
+                                        (click)="cancelVisits('cancelmodal')" [disabled]="form.invalid" class="btn pb-2
                                                     bg-purple fw-700
                                                     font-size-18 line-24
                                                     text-light mt-3
                                                     border-radius-10 h-74
                                                     w-100">Confirmar
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div *ngIf="response.length === 0" class="d-flex w-100 justify-content-center">
-            <div  class="w-100 text-center pt-10 pb-10 h-100 mx-2 max-w-1918 ">
-                <p class="fw-700 mb-3 font-size-24 line-32 color-black">
-                    Você não tem histórico de agendamento
-                </p>
-                <p class="fw-400 font-size-18 line-24 color-black">
-                    Após agendar uma visita seu histórico de agendamento aparecerá aqui
-                </p>
-                <button style="max-width: 345px;" [routerLink]="['/search']"
-                    class="btn mt-3 d-inline-block border-radius-10 bg-purple text-light h-74 w-100 fw-700 font-size-18 line-24"
-                    type="button">Procurar imóveis</button>
-            </div>
+    </div>
+    <div *ngIf="response.length === 0" class="d-flex w-100 justify-content-center">
+        <div class="w-100 text-center pt-10 pb-10 h-100 mx-2 max-w-1918 ">
+            <p class="fw-700 mb-3 font-size-24 line-32 color-black">
+                Você não tem histórico de agendamento
+            </p>
+            <p class="fw-400 font-size-18 line-24 color-black">
+                Após agendar uma visita seu histórico de agendamento aparecerá aqui
+            </p>
+            <button style="max-width: 345px;" [routerLink]="['/search']"
+                class="btn mt-3 d-inline-block border-radius-10 bg-purple text-light h-74 w-100 fw-700 font-size-18 line-24"
+                type="button">Procurar imóveis</button>
         </div>
     </div>
 </div>

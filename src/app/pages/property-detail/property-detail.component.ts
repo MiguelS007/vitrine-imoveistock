@@ -265,31 +265,5 @@ export class PropertyDetailComponent implements OnInit {
     this.recentlySeenList = JSON.parse(teste);
   }
 
-  // confirmSchedule(value: string) {
-  //   if (value === 'step2') {
-  //     this.step2scheduling = false;
-  //     this.step3scheduling = true;
-  //   }
-  //   let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long" });
-  //   this.request = {
-  //     day: this.form.controls['day'].value,
-  //     time: this.horasSelecionada,
-  //     days: dayweek,
-  //   };
-  //   console.log(this.request);
-  //   this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(
-  //     success => {
-  //       console.log(success)
-  //       this.toastrService.success('Agendado com sucesso!', '', { progressBar: true });
-  //     },
-  //     error => {
-  //       console.error(error)
-  //       this.toastrService.error('Ops, erro ao agendar!', '', { progressBar: true });
-  //       this.step2scheduling = false;
-  //       this.step3scheduling = false;
-  //       this.step1scheduling = false;
-  //       this.modalscheduling = false;
-  //     }
-  //   )
-  // }
+  
 }
