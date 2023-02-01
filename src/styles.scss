@@ -19,6 +19,11 @@
     font-family: 'Nunito', sans-serif !important;
 }
 
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1212px !important;
+    }
+}
 
 .modal-backdrop {
     display: none;
@@ -1485,7 +1490,8 @@ vg-overlay-play .vg-overlay-play {
     .little-text-mobile {
         font-size: 10px !important;
     }
-    .mobile-w{
+
+    .mobile-w {
         width: 26px !important;
     }
 
@@ -1613,7 +1619,32 @@ vg-overlay-play .vg-overlay-play {
 
     // PROPERTY-DETAILS
     .spc-btns-property {
+    }
+    .btn-view-img{
+        margin: 0;
+        height: 0 !important;
+        width: auto !important; 
+        padding: 20px 12px !important;
+    }
+
+    .d-none-tablet {
+        display: none !important;
+    }
+
+    .d-block-tablet {
         display: block !important;
+    }
+    .bg-property-view {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 400px !important;
+    }
+    .col-btns-preview-img {
+        display: block !important;
+        top: -159px;
+        background: none;
+        z-index: 1;
     }
 
     // HEADER
@@ -1695,7 +1726,8 @@ vg-overlay-play .vg-overlay-play {
         background-size: contain;
         width: 100% !important;
     }
-    .d-none-mobile{
+
+    .d-none-mobile {
         display: none !important;
     }
 
@@ -1773,9 +1805,6 @@ vg-overlay-play .vg-overlay-play {
         padding: 1rem !important;
     }
 
-    .form-search {
-        padding-top: 53px !important;
-    }
 
 
     .col-footer {

@@ -2,20 +2,31 @@
   <div class="row form-search h-100 m-0-auto">
     <div class="col-12 px-0 h-100">
       <div class="row h-100 mx-0">
-        <div class="col-6 px-0 col-preview-img">
+        <!-- VERSION DESK -->
+        <div class="col-6 d-none-tablet px-0 col-preview-img">
           <div *ngFor="let item of onlyimg" style="background-image: url({{item.preview}})"
             class="bg-property-view w-100 h-600"></div>
         </div>
-        <div class="col-6 px-0 col-preview-img">
+        <div class="col-6 d-none-tablet px-0 col-preview-img">
           <div *ngFor="let item of previewimg" style="background-image: url({{item.previews}})"
             class="bg-property-view d-inline-block w-50 h-300"></div>
         </div>
+        <!-- VERSION MOBILE -->
+        <swiper class="d-block-tablet col-12 slide" style="display: none;"
+        [navigation]="true"
+        [slidesPerView]="1" [pagination]="{ clickable: true }"
+        [scrollbar]="true">
+        <ng-template *ngFor="let item of previewimg" class="w-100" swiperSlide>
+          <div style="background-image: url({{item.previews}})"
+          class="bg-property-view w-100 h-600"></div>
+        </ng-template>
+      </swiper>
         <div class="col-12 col-btns-preview-img px-5 d-flex py-5 align-items-center position-relative">
           <div class="w-auto d-flex spc-btns-property align-items-center">
             <button type="button" data-toggle="modal" data-target="#previewimage"
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <i class="bi font-size-18 text-light bi-camera-fill"></i>
-              <p class="px-2 font-size-18 line-19 text-light mb-0">Ver fotos</p>
+              <p class="px-2 font-size-18 text-mobile line-19 text-light mb-0">Ver fotos</p>
             </button>
             <button type="button" pageScroll href="#previewvideo" 
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
