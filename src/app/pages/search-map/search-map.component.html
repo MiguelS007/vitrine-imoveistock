@@ -1,16 +1,28 @@
 <main class="bg-graylight position-relative w-100">
     <form [formGroup]="form" class="row form-search pt-10 h-100 m-0-auto mx-5 px-5 max-w-1918">
         <div class="col-12 mt-5 pt-5">
-            <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">Página Inicial /
-                <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;
-                    Resultado de busca
-                </span>
-            </p>
+            <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
+                <p class="d-flex fw-700 font-size-16 line-19 color-black
+                 align-items-center">Página Inicial /
+                    <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;
+                        Resultado de busca
+                    </span>
+                </p>
+                <p class="fw-700 font-size-32 line-40 color-black">
+                    Resultado da sua busca por <b>
+                        <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}}</span>
+                        <span *ngIf="filtroResultDisplay.whatAreYouLookingFor">
+                            {{filtroResultDisplay.whatAreYouLookingFor}},</span>
+                        <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
+                        <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
+                        <span *ngIf="filtroResultDisplay.where"> em {{filtroResultDisplay.where}}</span>
+                    </b>
+                </p>
+            </div>
         </div>
         <div class="row mx-0 px-0 col-md-12 block-important w-100">
             <div class="col-12 col-full">
                 <div class="w-100 d-flex justify-content-between">
-                   
                     <div style="width: 135px;"
                         class="px-4 cursor-pointer btn-map-mobile  mt-3 d-flex justify-content-center w3-black  py-4 align-items-center border-radius-10">
                         <img src="../../../assets/icon/filter.png" class="pr-2" alt="not filter" />
@@ -21,7 +33,7 @@
                         <i class="bi bi-list font-size-24 text-light pr-2"></i>
                         <span class="fw-700 font-size-18 line-24 text-light">Ver&nbsp;Lista</span>
                     </div>
-                    <!-- <div
+                    <div
                         class="w-75 w-full  mt-3 d-flex align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
                         <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
                             <span>9</span>
@@ -65,75 +77,40 @@
                                 </ul>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="row mx-0">
                     <div class="col-12  col-cards-products px-0 col-sm-12">
-                        <div *ngFor="let item of response | paginate: {itemsPerPage: 10, currentPage: paginationProduct }; let i= index"
-                            class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3 border-radius-10 bg-white">
-                            <div (click)="goDetailProperty()" class="bg-img-product py-2 px-3 border-radius-10">
-                                <!-- style='background-image: url({{item.bgproduct}});' -->
-                                <div class="w-100 h-50 d-flex">
+                        <div class="w-46 card-product-result d-inline-block mt-5 ml-5 p-3 border-radius-10 bg-white" *ngFor="let item of propertyproducts | paginate: {itemsPerPage: 10, currentPage: paginationProduct }; let i= index">
+                            <div style="background-image:
+                       url(../../../assets/img/gradient.png),
+                       url(../../../assets/img/img-announcement-default.jpg);" class="bg-img-property w-100 py-2 px-3
+                       border-radius-10" (click)="announcementSelected(item._id)">
+                                <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
                                     <h4 class="bg-purple h-fit px-4 py-2 mb-0
-                                        border-radius-5 fw-400 font-size-14 line-15
-                                        text-light">Venda</h4>
-                                    <h4 class="bg-greenlight h-fit ml-2 px-3 py-2
-                                        mb-0 border-radius-5 fw-400 font-size-14
-                                        line-15 color-black">Excluisvo</h4>
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-light" *ngIf="item.typeOfAd === 'rent'">Alugar</h4>
+                                    <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-light" *ngIf="item.typeOfAd === 'sale'">Vender</h4>
+                                    <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-dark">Exclusivo</h4>
                                 </div>
-                                <div class="w-100 d-flex h-50 align-items-end
-                                    justify-content-between">
-                                    <p class="fw-700 mb-0 font-size-22 h-fit line-32
-                                        text-light">R${{item.saleValue}}</p>
-                                    <div (click)="likeHeart()" class="h-fit
-                                        bg-transparent-white cursor-pointer border-radius-10
-                                        pt-2 pb-1 px-3">
-                                        <i [class]="iconlikeheart ?
-                                            'bi-heart-fill':'bi-heart' " class="bi
-                                            font-size-16 text-light"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-100 mx-2 text-align-left pt-3">
-                                <span class="fw-400 font-size-14 line-20
-                                    color-black">{{item.propertyCharacteristics}}</span>
-                                <p class="fw-700 my-2 font-size-16 line-20 mb-0
-                                    color-black text-truncate" style="max-width: 90%;">{{item.description}}</p>
-                                <p class="d-flex align-items-center">
-                                    <i class="bi font-size-20 mr-2 color-black
-                                        bi-geo-alt"></i>
-                                    <span class="fw-400 font-size-14 line-20
-                                        color-black">{{item.complementAddress}}, {{item.cityAddress}}</span>
-                                </p>
-                            </div>
-                            <div class="row px-4 my-3 border-bottom-gray pb-3
-                                d-flex">
-                                <div class="col justify-content-left px-0 d-flex
-                                    align-items-center justify-content-left">
-                                    <img src="../../../assets/icon/bed.png" class="pr-2" />
-                                    <p class="fw-400 mb-0 font-size-14 line-20
-                                        color-black">{{item.rooms}} Quartos</p>
-                                </div>
-                                <div class="col justify-content-center px-0 d-flex
-                                    align-items-center justify-content-left">
-                                    <img src="../../../assets/icon/car.png" class="pr-2" />
-                                    <p class="fw-400 mb-0 font-size-14 line-20
-                                        color-black">{{item.vacancyNumber}} Vagas</p>
-                                </div>
-                                <div class="col justify-content-end px-0 d-flex
-                                    align-items-center justify-content-left">
-                                    <img src="../../../assets/icon/rule.png" class="pr-2" />
-                                    <p class="fw-400 mb-0 font-size-14 line-20
-                                        color-black">{{item.usefulArea}} m2</p>
+                                <div class="w-100 details-card-swiper d-grid h-50 pt-5
+                          align-items-end">
+                                    <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                             line-32 text-light">{{item.leaseValue | currency: 'R$'}}
+                                        <span class="fw-400 font-size-14 line-20
+                                text-light">/ mês</span>
+                                    </p>
+                                    <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                             line-32 text-light">{{item.saleValue | currency: 'R$'}}
+                                    </p>
+                                    <span class="fw-700 font-size-14 line-20
+                             text-light">{{item.description | slice: 0:28 }}</span>
                                 </div>
                             </div>
-                            <div class="w-100 d-flex align-items-center py-2 px-1">
-                                <img [src]="item.advertiser?.photo?.location" class="border-radius-100 "
-                                    style="width: 42px;" />
-                                <h3 class="fw-400 mb-0 pl-2 font-size-14 line-20 color-black">{{item.advertiser?.name ||
-                                    '-'}}</h3>
-                            </div>
-
                         </div>
                     </div>
                     <!-- <div class="col-12 my-5 py-5 justify-content-center">
@@ -147,10 +124,20 @@
                 </div>
             </div>
             <div class="col-12 px-0 mt-2 col-full">
-                <iframe
+                <div class="row">
+                    <div class="col-7">
+                        <form [formGroup]="form" class="row form-search pt-10 h-100 m-0-auto mx-5 px-5 max-w-1918">
+                            
+                        </form>
+                    </div>
+                    <div class="col-4">
+                         <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230483.17971440213!2d-49.42988400298687!3d-25.495050065287735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1674742868033!5m2!1spt-BR!2sbr"
                     class="w-100 min-h-700 h-100" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+               
             </div>
         </div>
     </form>

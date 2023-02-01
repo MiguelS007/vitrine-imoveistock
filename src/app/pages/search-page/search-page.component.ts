@@ -20,6 +20,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 })
 export class SearchPageComponent implements OnInit {
   form: FormGroup;
+  formfilter: FormGroup;
   iconlikeheart = false;
   products: any = [];
   propertyproducts: AnnouncementGetResponseDto[] = [];
