@@ -445,26 +445,26 @@
             </div>
             <div *ngIf="arrow3" class="w-100 animate__animated animate__fadeInUp">
               <div class="w-100 my-4 d-flex block-important
-                    border border-radius-10 
+                    border border-radius-10
                     justify-content-between p-4">
                 <div class="w-auto d-inline-block">
-                  <h3 class="fw-400 px-4 my-2 font-size-18 little-text-mobile
+                  <h3 class="fw-400 px-4 my-2 font-size-18
                           line-24 color-black ">Primeiro piso</h3>
                 </div>
                 <div class="w-auto d-inline-block">
-                  <h3 class="fw-400 px-4 my-2 font-size-18 little-text-mobile
+                  <h3 class="fw-400 px-4 my-2 font-size-18
                           line-24 color-black d-inline-block">Tamanho:
                     267 m²
                   </h3>
-                  <h3 class="fw-400 px-4 my-2 font-size-18 little-text-mobile
+                  <h3 class="fw-400 px-4 my-2 font-size-18
                           line-24 color-black d-inline-block">Quartos:
                     87 m²
                   </h3>
-                  <h3 class="fw-400 px-4 my-2 font-size-18 little-text-mobile
+                  <h3 class="fw-400 px-4 my-2 font-size-18
                           line-24 color-black d-inline-block">Banheiros:
                     34 m²
                   </h3>
-                  <h3 class="fw-400 px-4 my-2 font-size-18 little-text-mobile
+                  <h3 class="fw-400 px-4 my-2 font-size-18
                           line-24 color-black d-inline-block">Preço: {{response.saleValue | currency: 'R$ ' || '-'}}
                   </h3>
                 </div>
@@ -641,14 +641,14 @@
               </div>
             </div>
             <!-- undefined -->
-            <button (click)="nextScheduling('modal-scheduling')" class="bg-purple btn border-radius-10 h-74
+            <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
                     fw-700 font-size-18 line-24 mt-3 text-light
                     w-100" type="button">Agendar visita</button>
             <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
                     fw-700 font-size-18 line-24 mt-3 color-purple
                     w-100" type="button">Fazer Proposta</button>
             <!-- MODAL-STEPS -->
-            <div *ngIf="modalscheduling" class="modal modal-all fade">
+            <!-- <div *ngIf="modalscheduling" class="modal modal-all fade">
               <div class="modal-dialog
                        modal-dialog-centered" role="document">
                 <div class="modal-content p-3">
@@ -1133,14 +1133,193 @@
                     </p>
                 </div>
             </div>
+            <div class="d-flex mt-3
+                    justify-content-between">
+              <p class="fw-400 font-size-16 line-20
+                       color-black">
+                <i class="bi font-size-9
+                          bi-caret-right-fill"></i>
+                Condomínio
+              </p>
+              <p class="fw-400 d-flex font-size-16
+                       line-20 color-black">
+                <span class="fw-400 font-size-16
+                          line-20 color-black">14</span>
+                <span class="fw-400 font-size-16
+                          line-20 color-black">&nbsp;
+                  Imóveis</span>
+              </p>
+            </div>
+            <div class="d-flex mt-3
+                    justify-content-between">
+              <p class="fw-400 font-size-16 line-20
+                       color-black">
+                <i class="bi font-size-9
+                          bi-caret-right-fill"></i>
+                Casa
+              </p>
+              <p class="fw-400 d-flex font-size-16
+                       line-20 color-black">
+                <span class="fw-400 font-size-16
+                          line-20 color-black">9</span>
+                <span class="fw-400 font-size-16
+                          line-20 color-black">&nbsp;
+                  Imóveis</span>
+              </p>
+            </div>
+            <div class="d-flex mt-3
+                    justify-content-between">
+              <p class="fw-400 font-size-16 line-20
+                       color-black">
+                <i class="bi font-size-9
+                          bi-caret-right-fill"></i>
+                Sobrado
+              </p>
+              <p class="fw-400 d-flex font-size-16
+                       line-20 color-black">
+                <span class="fw-400 font-size-16
+                          line-20 color-black">26</span>
+                <span class="fw-400 font-size-16
+                          line-20 color-black">&nbsp;
+                  Imóveis</span>
+              </p>
+            </div>
+            <div class="d-flex mt-3
+                    justify-content-between">
+              <p class="fw-400 font-size-16 line-20
+                       color-black">
+                <i class="bi font-size-9
+                          bi-caret-right-fill"></i>
+                Kitnet
+              </p>
+              <p class="fw-400 d-flex font-size-16
+                       line-20 color-black">
+                <span class="fw-400 font-size-16
+                          line-20 color-black">80</span>
+                <span class="fw-400 font-size-16
+                          line-20 color-black">&nbsp;
+                  Imóveis</span>
+              </p>
+            </div>
+          </div>
+          <div class="w-100 border-radius-10 mt-4 bg-white
+                 p-5">
+            <p class="fw-700 pb-4 font-size-20 line-24
+                    color-black">Tipos de
+              Imóvel
+            </p>
+            <div class="row">
+              <div class="col-3 col-img-types-property
+                       p-0">
+                <img src="../../../assets/img/ap.png" class="border-radius-10 h-111
+                          w-100" />
+              </div>
+              <div class="col-9
+                       col-img-types-property">
+                <p class="d-grid
+                          title-property-product mb-0
+                          h-75">
+                  <span class="fw-700 font-size-18
+                             line-24
+                             color-black">Cobertura com
+                    uma vista incrível</span>
+                  <span class="fw-700 font-size-18
+                             line-24
+                             color-black">R$222,000</span>
+                </p>
+                <p class="d-flex h-25
+                          info-property-product mb-0
+                          justify-content-between">
+                  <span class="fw-400 font-size-14
+                             line-20
+                             color-black">Quartos:4</span>
+                  <span class="fw-400 font-size-14
+                             line-20
+                             color-black">Banheiros:2</span>
+                  <span class="fw-400 font-size-14
+                             line-20
+                             color-black">Metragem:192m²</span>
+                </p>
+              </div>
+            </div>
+            <div class="row mt-5">
+              <div class="col-3 col-img-types-property
+                       p-0">
+                <img src="../../../assets/img/ap.png" class="border-radius-10 h-111
+                          w-100" />
+              </div>
+              <div class="col-9
+                       col-img-types-property">
+                <p class="d-grid
+                          title-property-product mb-0
+                          h-75">
+                  <span class="fw-700 font-size-18
+                             line-24
+                             color-black">Cobertura com
+                    uma vista incrível</span>
+                  <span class="fw-700 font-size-18
+                             line-24
+                             color-black">R$222,000</span>
+                </p>
+                <p class="d-flex h-25
+                          info-property-product mb-0
+                          justify-content-between">
+                  <span class="fw-400 font-size-14
+                             line-20
+                             color-black">Quartos:4</span>
+                  <span class="fw-400 font-size-14
+                             line-20
+                             color-black">Banheiros:2</span>
+                  <span class="fw-400 font-size-14
+                             line-20
+                             color-black">Metragem:192m²</span>
+                </p>
+              </div>
+            </div>
+            <div class="row mt-5">
+              <div class="col-3 col-img-types-property
+                       p-0">
+                <img src="../../../assets/img/ap.png" class="border-radius-10 h-111
+                          w-100" />
+              </div>
+              <div class="col-9
+                       col-img-types-property">
+                <p class="d-grid
+                          title-property-product mb-0
+                          h-75">
+                  <span class="fw-700 font-size-18
+                             line-24
+                             color-black">Cobertura com
+                    uma vista incrível</span>
+                  <span class="fw-700 font-size-18
+                             line-24
+                             color-black">R$222,000</span>
+                </p>
+                <p class="d-flex h-25
+                          info-property-product mb-0
+                          justify-content-between">
+                  <span class="fw-400 font-size-14
+                             line-20 
+                             color-black">Quartos:4</span>
+                  <span class="fw-400 font-size-14
+                             line-20
+                             color-black">Banheiros:2</span>
+                  <span class="fw-400 font-size-14
+                             line-20
+                             color-black">Metragem:192m²</span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div> -->
+            <div (click)="scheduling(response)"
+              class="schedule-visit-modal d-flex cursor-pointer position-fixed z-10 border-radius-10 bg-greenlight">
+              <img src="../../../../assets/icon/calendar.svg" class="" />
+              <h2 class="fw-700 px-2 font-size-18 m-0 line-24 color-black">Agendar visita</h2>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div (click)="nextScheduling('modal-scheduling')"
-      class="schedule-visit-modal d-flex-tablet cursor-pointer position-fixed z-10 border-radius-10 bg-greenlight" style="display: none;">
-      <img src="../../../../assets/icon/calendar.svg" class="" />
-      <h2 class="fw-700 px-2 font-size-18 m-0 line-24 color-black">Agendar visita</h2>
     </div>
   </div>
 </main>

@@ -39,6 +39,9 @@ import { SearchMapComponent } from './pages/search-map/search-map.component';
 import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.resolver';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AnnouncementService } from './service/announcement.service';
+import { SchedulingStep1Component } from './pages/property-detail/components/scheduling-step1/scheduling-step1.component';
+import { SchedulingStep2Component } from './pages/property-detail/components/scheduling-step2/scheduling-step2.component';
+import { SchedulingStep3Component } from './pages/property-detail/components/scheduling-step3/scheduling-step3.component';
 
 registerLocaleData(ptBr);
 
@@ -61,6 +64,9 @@ registerLocaleData(ptBr);
     ModalCodeComponent,
     ModalSignupComponent,
     SearchMapComponent,
+    SchedulingStep1Component,
+    SchedulingStep2Component,
+    SchedulingStep3Component,
   ],
 
   imports: [

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
@@ -13,6 +14,7 @@ import { DatamokService } from 'src/app/service/datamok.service';
 import { ProfileService } from 'src/app/service/profile.service';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { SearchService } from 'src/app/service/search.service';
+import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
 
 @Component({
   selector: 'app-property-detail',
@@ -72,15 +74,12 @@ export class PropertyDetailComponent implements OnInit {
     private toastrService: ToastrService,
     private scheduleService: ScheduleService,
     private route: ActivatedRoute,
+    private ngxSpinnerService: NgxSpinnerService,
     private searchService: SearchService,
     private announcementService: AnnouncementService,
     private modalService: NgbModal
 
   ) {
-    this.form = this.formBuilder.group({
-      day: ['', [Validators.required]],
-      time: ['', [Validators.required]],
-    });
     this.formproperty = this.formBuilder.group({
       searchwords: ['', [Validators.required]],
       localproperty: ['', [Validators.required]],
@@ -109,22 +108,17 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ngxSpinnerService.show()
     this.onlyimg = this.datamokservice.onlypreview;
     this.previewimg = this.datamokservice.imagespreview; 
     this.products = this.datamokservice.resultSearch;
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
     this.response = this.route.snapshot.data['resolve'];
+    this.ngxSpinnerService.hide()
+
     console.log(this.user?._id, this.response._id);
   }
-
-
-
-
-
-
-
-
 
 
 
@@ -184,36 +178,12 @@ export class PropertyDetailComponent implements OnInit {
     }
   }
 
-  nextScheduling(value: string) {
-    if (value === 'step1') {
-      if (this.user === null) {
-        this.datamokservice.opModalLogin();
-      } else {
-        this.step1scheduling = false;
-        this.step2scheduling = true;
-      }
-      this.step1scheduling = false;
-      this.step2scheduling = true;
-    } else if (value === 'close') {
-      this.modalscheduling = false;
-      this.step1scheduling = false;
-      this.step2scheduling = false;
-      this.step3scheduling = false;
-    } else if (value === 'viewvisits') {
-      this.modalscheduling = false;
-      this.step1scheduling = false;
-      this.step2scheduling = false;
-      this.step3scheduling = false;
-      setTimeout(() => {
-        this.router.navigate(['logged/visits']);
-      }, 100);
-    }
-    // undefined
-    else if (value === 'modal-logged') {
-      this.modallogin = true;
-    } else if (value === 'modal-scheduling') {
-      this.modalscheduling = true;
-      this.step1scheduling = true;
+  scheduling(item) {
+    if(localStorage.getItem('user') !== null) {
+      localStorage.setItem('announcementOfScheduling', JSON.stringify(item))
+      this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
+    } else {
+      this.modalService.open(ModalLoginComponent, { centered: true })
     }
   }
 
@@ -293,63 +263,33 @@ export class PropertyDetailComponent implements OnInit {
     localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
     let teste: any = localStorage.getItem('recentlySeen');
     this.recentlySeenList = JSON.parse(teste);
-
-
-    let verify = { _id: value };
-
-    let list: any = this.recentlySeenList;
-
-    if (list === null) {
-      list = [];
-    }
-
-    if (this.recentlySeenList !== null) {
-      for (let i = 0; i < list.length; i++) {
-        if (list[i]._id === value) {
-          return
-        }
-      }
-    }
-
-    list.push(verify);
-
-    this.recentlySeenList = list;
-
-    this.router.navigate([`announcement/detail/${value}`]);
-
-
-
   }
 
-
-
-
-
-  confirmSchedule(value: string) {
-    if (value === 'step2') {
-      this.step2scheduling = false;
-      this.step3scheduling = true;
-    }
-    let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long" });
-    this.request = {
-      day: this.form.controls['day'].value,
-      time: this.horasSelecionada,
-      days: dayweek,
-    };
-    console.log(this.request);
-    this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(
-      success => {
-        console.log(success)
-        this.toastrService.success('Agendado com sucesso!', '', { progressBar: true });
-      },
-      error => {
-        console.error(error)
-        this.toastrService.error('Ops, erro ao agendar!', '', { progressBar: true });
-        this.step2scheduling = false;
-        this.step3scheduling = false;
-        this.step1scheduling = false;
-        this.modalscheduling = false;
-      }
-    )
-  }
+  // confirmSchedule(value: string) {
+  //   if (value === 'step2') {
+  //     this.step2scheduling = false;
+  //     this.step3scheduling = true;
+  //   }
+  //   let dayweek = this.form.controls['day'].value.toLocaleString("en-us", { weekday: "long" });
+  //   this.request = {
+  //     day: this.form.controls['day'].value,
+  //     time: this.horasSelecionada,
+  //     days: dayweek,
+  //   };
+  //   console.log(this.request);
+  //   this.scheduleService.registerSchedule(this.response._id, this.request).subscribe(
+  //     success => {
+  //       console.log(success)
+  //       this.toastrService.success('Agendado com sucesso!', '', { progressBar: true });
+  //     },
+  //     error => {
+  //       console.error(error)
+  //       this.toastrService.error('Ops, erro ao agendar!', '', { progressBar: true });
+  //       this.step2scheduling = false;
+  //       this.step3scheduling = false;
+  //       this.step1scheduling = false;
+  //       this.modalscheduling = false;
+  //     }
+  //   )
+  // }
 }
