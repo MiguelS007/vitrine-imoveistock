@@ -1,12 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ScheduleRegisterResponseDto } from 'src/app/dtos/schedule-register-response.dto';
-import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
-import { AnnouncementService } from 'src/app/service/announcement.service';
-import { ScheduleService } from 'src/app/service/schedule.service';
-import { SearchService } from 'src/app/service/search.service';
 
 @Component({
   selector: 'app-visits',
@@ -14,23 +6,19 @@ import { SearchService } from 'src/app/service/search.service';
   styleUrls: ['./visits.component.scss']
 })
 export class VisitsComponent implements OnInit {
-
+  spaceScheduling = false;
+  spaceFavorites = true;
   segment = false;
-  spaceScheduling = true;
-  spaceFavorites = false;
-
 
   constructor(
-  ) {
+  ) {}
 
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   changePage(value: string) {
     if (value === 'favorites') {
       this.segment = !this.segment;
+    } else if (value === 'tour') {
       this.spaceFavorites = true;
       this.spaceScheduling = false;
     } else if (value === 'scheduling') {
@@ -39,5 +27,4 @@ export class VisitsComponent implements OnInit {
       this.spaceScheduling = true;
     }
   }
-
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { AnnouncementService } from 'src/app/service/announcement.service';
 import { DatamokService } from 'src/app/service/datamok.service';
 
 @Component({
@@ -18,14 +20,16 @@ export class ContactComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private datamokservice: DatamokService,
+    private toastrService: ToastrService,
+    private announcementService: AnnouncementService
 
 
   ) {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      tel: [''],
-      subject: [''],
+      tel: ['',[Validators.required]],
+      subject: ['',[Validators.required]],
       msg: ['', [Validators.required]],
     });
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
@@ -35,6 +39,18 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  confirm(){
+    // FAKE FEEDBACK
+    this.announcementService.listLikes().subscribe(
+      success => {
+        this.toastrService.success('Mensagem enviada!', '', { progressBar: true });
+        this.form.setValue({ name: '', email: '', tel: '', subject: '', msg: '' });
+      },
+      error => {
+      }
+    )
   }
 
   openLogin() {

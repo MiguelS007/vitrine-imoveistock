@@ -9,6 +9,7 @@ import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.compon
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
+import { AnnouncementService } from 'src/app/service/announcement.service';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { ProfileService } from 'src/app/service/profile.service';
 import { ScheduleService } from 'src/app/service/schedule.service';
@@ -42,7 +43,6 @@ export class PropertyDetailComponent implements OnInit {
   dataSelecionada: any;
   horasSelecionada: string;
 
-  iconlikeheart = false;
   iconshare = false;
   iconprint = false;
   segment = false;
@@ -51,14 +51,22 @@ export class PropertyDetailComponent implements OnInit {
   step1scheduling = true;
   step2scheduling = false;
   step3scheduling = false;
+
   onlyimg: any = [];
   previewimg: any = [];
   products: any = [];
-  propertyproducts: any = [];
+
   paginationProduct: number = 1;
   tourvirtual = false;
   propertyvideo = true;
   finalValue: number;
+
+  listLikes: AnnouncementGetResponseDto[] = [];
+  responseAnnouncement: AnnouncementGetResponseDto[] = [];
+  propertyproducts: AnnouncementGetResponseDto[] = [];
+  recentlySeenList: AnnouncementGetResponseDto[] = [];
+
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -67,6 +75,8 @@ export class PropertyDetailComponent implements OnInit {
     private scheduleService: ScheduleService,
     private route: ActivatedRoute,
     private ngxSpinnerService: NgxSpinnerService,
+    private searchService: SearchService,
+    private announcementService: AnnouncementService,
     private modalService: NgbModal
 
   ) {
@@ -94,13 +104,13 @@ export class PropertyDetailComponent implements OnInit {
       hoje.setDate(hoje.getDate() + i);
       this.arrayDeDatas.push(hoje)
     }
+    this.list();
   }
 
   ngOnInit(): void {
     this.ngxSpinnerService.show()
     this.onlyimg = this.datamokservice.onlypreview;
-    this.previewimg = this.datamokservice.imagespreview;
-    this.propertyproducts = this.datamokservice.exclusiveProperties;
+    this.previewimg = this.datamokservice.imagespreview; 
     this.products = this.datamokservice.resultSearch;
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
@@ -113,9 +123,7 @@ export class PropertyDetailComponent implements OnInit {
 
 
   btninteractionimg(value: string) {
-    if (value === 'like') {
-      this.iconlikeheart = !this.iconlikeheart;
-    } else if (value === 'share') {
+    if (value === 'share') {
       this.iconshare = !this.iconshare;
     } else if (value === 'print') {
       this.iconprint = !this.iconprint;
@@ -123,9 +131,6 @@ export class PropertyDetailComponent implements OnInit {
     }
   }
 
-  likeHeart() {
-    this.iconlikeheart = !this.iconlikeheart;
-  }
 
   segmentvideo(value: string) {
     if (value === 'video') {
@@ -182,6 +187,83 @@ export class PropertyDetailComponent implements OnInit {
     }
   }
 
+  list() {
+    this.searchService.getPropertyHomeExclusivity().subscribe(
+      response => {
+        this.propertyproducts = response
+        this.responseAnnouncement = response;
+        if (localStorage.getItem('user') !== null) {
+          this.announcementService.listLikes().subscribe(
+            success => {
+              for (let i = 0; i < success.length; i++) {
+                for (let x = 0; x < this.responseAnnouncement.length; x++) {
+                  if (success[i].announcement._id === this.responseAnnouncement[x]._id) {
+                    Object.assign(this.responseAnnouncement[x], { liked: true });
+                  }
+                }
+                this.listLikes.push(success[i].announcement)
+              }
+            }
+          )
+        }
+      },
+      error => { console.log(error, 'data not collected') }
+    );
+  }
+
+  
+  likeHeart(value) {
+
+    let request = {
+      announcementId: value
+    }
+
+    if (localStorage.getItem('user') === null) {
+      this.modalService.open(ModalLoginComponent, { centered: true });
+      return
+    }
+
+    if (this.listLikes.length === 0) {
+      this.announcementService.registerLike(request).subscribe(
+        success => {
+          this.list()
+          return
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    }
+
+    for (let i = 0; i < this.listLikes.length; i++) {
+      if (this.listLikes[i]._id === value) {
+        this.announcementService.registerUnlike(request).subscribe(
+          success => {
+            this.list()
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      } else if (this.listLikes[i]._id !== value) {
+        this.announcementService.registerLike(request).subscribe(
+          success => {
+            this.list()
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      }
+    }
+
+  }
+
+  announcementSelected(value) {
+    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
+    let teste: any = localStorage.getItem('recentlySeen');
+    this.recentlySeenList = JSON.parse(teste);
+  }
 
   // confirmSchedule(value: string) {
   //   if (value === 'step2') {

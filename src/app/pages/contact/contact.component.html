@@ -45,7 +45,7 @@
                                     class="w-100 border border-radius-10 p-4 fw-400 font-size-16 line-18 color-black h-130 bg-whitelight"></textarea>
                             </div>
                             <div class="col-4 col-contact">
-                                <button type="submit" [disabled]="form.invalid"
+                                <button type="submit" [disabled]="form.invalid" (click)="confirm()"
                                     class="w-100 h-74 border-radius-10 bg-purple btn fw-700 font-size-16 line-20 text-light">
                                     Enviar
                                 </button>

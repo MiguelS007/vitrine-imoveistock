@@ -1,4 +1,4 @@
-<main class="bg-graylight position-relative h-100 w-100">
+<main class="bg-graylight position-relative h-100 pb-5 w-100">
   <div class="row form-search h-100 m-0-auto">
     <div class="col-12 px-0 h-100">
       <div class="row h-100 mx-0">
@@ -19,33 +19,33 @@
           </ng-template>
         </swiper>
         <div class="col-12 col-btns-preview-img px-5 d-flex py-5 align-items-center position-relative">
-          <div class="w-auto d-flex spc-btns-property align-items-center">
+          <div class="w-auto d-flex overflow-y-scroll spc-btns-property align-items-center">
             <button type="button" data-toggle="modal" data-target="#previewimage"
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <i class="bi font-size-18 text-light bi-camera-fill"></i>
-              <p class="px-2 font-size-18 text-mobile line-19 text-light mb-0">Ver fotos</p>
+              <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
+              <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
             </button>
             <button type="button" pageScroll href="#previewvideo"
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 text-light mb-0">Ver vídeo</p>
+              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
             </button>
             <button type="button" pageScroll href="#previewplant" (click)="openarrow(3)"
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/datas-block.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 text-light mb-0">Ver planta</p>
+              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver planta</p>
             </button>
             <button type="button" pageScroll href="#previewvideo" (click)="segmentvideo('tour')"
               class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/street-view.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 text-light mb-0">Visita 360°</p>
+              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
             </button>
           </div>
           <div class="options-img d-flex align-items-center">
-            <div (click)="btninteractionimg('like')"
+            <!-- <div *ng (click)="btninteractionimg('like')"
               class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
               <i [class]="iconlikeheart ?'bi-heart-fill':'bi-heart' " class="bifont-size-16 text-light"></i>
-            </div>
+            </div> -->
             <div (click)="btninteractionimg('share')"
               class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
               <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bifont-size-16 text-light"></i>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="anima-body">
                   <swiper class="h-auto max-w-1227" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
-                    <ng-template *ngFor="let item of propertyproducts" swiperSlide>
+                    <ng-template *ngFor="let item of previewimg" swiperSlide>
                       <div class="bg-img-preview d-flex
                                 justify-content-center w-100
                                 h-100 py-2 px-3
@@ -87,25 +87,24 @@
         </div>
       </div>
     </div>
-    <div class="col-12 bg-graylight d-flex justify-content-center">
-      <div class="row max-w-1918 col-md-10 row-body-details-property">
-
+    <div class="col-12 bg-graylight mt-mobile px-0 d-flex justify-content-center">
+      <div class="row max-w-1918 col-md-10 px-0 row-body-details-property">
         <div class="col-8 col-body-details-property">
-          <div class="w-100 mb-5 border-radius-10 bg-white">
-            <div class="w-100 align-items-center pt-5 px-5">
+          <div class="w-100 border-radius-10 bg-white">
+            <div class="w-100 align-items-center mt-4 pt-5 px-5">
               <h1 class="fw-400 font-size-18 d-inline-block
-                       line-19 color-black bg-graylight
+                       line-19 color-black bg-graylight small-text info-announcement
                        border-radius-10 bg-purple-light mr-3 py-4
                        px-4">Apartamento</h1>
-              <h1 class="fw-400 font-size-18 d-inline-block
-                       line-19 color-black bg-graylight  text-nowrap
+              <h1 class="fw-400 font-size-18 d-inline-block  small-text info-announcement
+                       line-19 color-black bg-graylight text-nowrap
                        border-radius-10 bg-purple-light py-4 mr-3
                        px-4">Quarto:&nbsp;{{response.bedrooms || '-'}}</h1>
-              <h1 class="fw-400 font-size-18 
+              <h1 class="fw-400 font-size-18 small-text info-announcement
                        line-19 color-black bg-graylight d-inline-block text-nowrap
                        border-radius-10 bg-purple-light py-4 mr-3
                        px-4">Banheiros:&nbsp;{{response.bathrooms || '-'}}</h1>
-              <h1 class="fw-400 font-size-18 d-inline-block
+              <h1 class="fw-400 font-size-18 d-inline-block small-text info-announcement
                        line-19 color-black bg-graylight text-nowrap
                        border-radius-10 bg-purple-light py-4 px-4 mr-3
                        ">Metragem:&nbsp;{{response.usefulArea | currency: ' '}}m²</h1>
@@ -307,7 +306,7 @@
               </table>
             </div>
           </div>
-          <div class="w-100 border-radius-10 p-5 bg-white">
+          <div class="w-100 border-radius-10 mt-4 info-cards-property p-5 bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
               <img *ngIf="!arrow1" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
@@ -418,13 +417,13 @@
               </tbody>
             </table>
           </div>
-          <div class="w-100 border-radius-10 mt-5 p-5 bg-white">
-            <div class="w-100 justify-content-between d-flex align-items-center">
-              <p
-                class="w-100 color-black d-flex block-important align-items-center justify-content-between fw-700 font-size-18 line-24 pb-3">
-                Localização
-                <span class="fw-400 font-size-14 line-20 text-primary">Endereço do local, {{response.cityAddress ||
-                  '-'}}, CEP {{response.cepAddress || '-'}}</span>
+          <div class="w-100 border-radius-10 mt-4 info-cards-property p-5 bg-white">
+            <div class="w-100 d-flex pb-3 justify-content-between align-items-center">
+              <p class="w-100 d-grid pr-1 align-items-center mb-0">
+                <span class="color-black fw-700 font-size-16 line-20">
+                  {{response.publicPlaceAddress || '-'}} ({{response.cityAddress || '-'}})
+                </span>
+                <span class="fw-400 font-size-14 px-1 line-20">CEP: {{response.cepAddress || '-'}}</span>
               </p>
               <img *ngIf="!arrow2" src="../../../assets/icon/arrow-down-blue.png" width="20"
                 class="cursor-pointer animate__animated animate__rotateIn" (click)="openarrow(2)">
@@ -436,7 +435,7 @@
               class="w-100 h-600 animate__animated animate__fadeInUp" style="border:0;" allowfullscreen=""
               loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-          <div id="previewplant" class="w-100 border-radius-10 mt-5 p-5 bg-white">
+          <div id="previewplant" class="w-100 border-radius-10 info-cards-property mt-4 p-5 bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Planta baixa</p>
               <img *ngIf="!arrow3" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
@@ -485,7 +484,7 @@
               </p>
             </div>
           </div>
-          <div class="w-100 border-radius-10 mt-5 bg-white">
+          <div class="w-100 mt-4 border-radius-10 info-cards-property bg-white">
             <div class="w-100 px-5 space-segment pt-5 mb-4
                     d-flex align-items-center
                     border-bottom-gray">
@@ -529,118 +528,80 @@
               </div>
             </div>
           </div>
-          <div class="row my-5">
+          <!-- VERSION DESK ANNOUNCEMEMNTS -->
+          <div class="row d-none-desk mt-2 my-5">
             <div class="col-12 col-cards-products px-0 col-sm-12">
-              <div
-                *ngFor="let item of products | paginate: { itemsPerPage: 4, currentPage:paginationProduct }; let i= index"
-                class="w-46
-                       card-product-result d-inline-block mt-5
-                       ml-5 p-3
-                       border-radius-10 bg-white">
-                <div style='background-image:
-                          url({{item.bgproduct}});' class="bg-img-result py-2 px-3
-                          border-radius-10">
-                  <div class="w-100 h-50 d-flex">
-                    <h4 class="bg-purple h-fit px-4
-                                py-2 mb-0
-                                border-radius-5 fw-400
-                                font-size-14 line-15
-                                text-light">{{item.sold}}</h4>
-                    <h4 class="bg-greenlight h-fit
-                                ml-2 px-3 py-2
-                                mb-0 border-radius-5 fw-400
-                                font-size-14
-                                line-15 color-black">{{item.exclusive}}</h4>
-                  </div>
-                  <div class="w-100 d-flex h-50
-                             align-items-end
-                             justify-content-between">
-                    <p class="fw-700 mb-0
-                                font-size-22 h-fit line-32
-                                text-light">R${{item.price}}</p>
-                    <div (click)="likeHeart()" class="h-fit
-                                bg-transparent-white
-                                cursor-pointer
-                                border-radius-10
-                                pt-2 pb-1 px-3">
-                      <i [class]="iconlikeheart ?
-                                   'bi-heart-fill':'bi-heart'
-                                   " class="bi
-                                   font-size-16
-                                   text-light"></i>
+              <div *ngFor="let item of responseAnnouncement | paginate: { itemsPerPage: 4, currentPage:paginationProduct }; let i= index" class="col-md-5 card-product-result d-inline-block mt-5 mx-1 p-3 border-radius-10 bg-white cursor-pointer">
+                <div class="h-100  p-2 border-radius-10 bg-white">
+                  <div class="bg-img-product py-2 px-3 border-radius-10">
+                    <div class="w-100 h-50 d-flex">
+                      <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                        Venda</h4>
+                      <h4
+                        class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
+                        Exclusivo</h4>
+                    </div>
+                    <div class="w-100 d-flex h-50 align-items-end justify-content-between">
+                      <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'sale'">
+                        {{item.saleValue | currency: 'R$'}}</p>
+                      <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'rent'">
+                        {{item.leaseValue | currency: 'R$'}}
+                      </p>
+                      <div (click)="likeHeart(item._id)"
+                        class="h-fit bg-transparent-white heart-like border-radius-10 pt-2 pb-1">
+                        <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' "
+                          class="bi bi-heart-fill font-size-16 text-light"></i>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="w-100 mx-2 text-align-left
-                          pt-3">
-                  <span class="fw-400 font-size-14
-                             line-20
-                             color-black">{{item.type}}</span>
-                  <p class="fw-700 my-2 font-size-16
-                             line-20 mb-0
-                             color-black">{{item.nameproperty}}</p>
-                  <p class="d-flex
-                             align-items-center">
-                    <i class="bi font-size-20 mr-2
-                                color-black
-                                bi-geo-alt"></i>
-                    <span class="fw-400 font-size-14
-                                line-20
-                                color-black">{{item.local}}</span>
-                  </p>
-                </div>
-                <div class="row px-4 my-3
-                          border-bottom-gray pb-3
-                          d-flex">
-                  <div class="col justify-content-left
-                             px-0 d-flex
-                             align-items-center
-                             justify-content-left">
-                    <img src="../../../assets/icon/bed.png" class="pr-2" />
-                    <p class="fw-400 mb-0  little-text-mobile
-                                font-size-14 line-20
-                                color-black">{{item.bedrooms}}
-                      Quartos
-                    </p>
+                  <div (click)="announcementSelected(item._id)" class="col-12 px-0">
+                    <div class="w-100 mx-1 pt-3">
+                      <p class="d-flex align-items-center">
+                        <span class="fw-700 font-size-16 line-20 color-black text-truncate" style="max-width: 90%;">{{item.description}}</span>
+                      </p>
+                      <p class="d-flex align-items-center">
+                        <span class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                      </p>
+                      <p class="d-flex text-left align-items-center">
+                        <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                        <span class="fw-400 font-size-14 line-20 color-black ">{{item.publicPlaceAddress}},
+                          {{item.cityAddress}} - {{item.ufAddress}}</span>
+                      </p>
+                    </div>
+                    <div class="row mx-1 pb-3 d-flex">
+                      <div
+                        class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
+                        <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
+                        <p
+                          class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
+                          {{item.bedrooms}}
+                          Quartos
+                        </p>
+                      </div>
+                      <div
+                        class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
+                        <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
+                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                          {{item.vacancyNumber}} Vagas
+                        </p>
+                      </div>
+                      <div
+                        class="col mt-2 justify-content-end left-important  px-0 d-flex align-items-center justify-content-left">
+                        <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
+                        <p
+                          class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
+                          {{item.usefulArea |
+                          currency: ' '}} m2</p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col
-                             justify-content-center px-0
-                             d-flex
-                             align-items-center
-                             justify-content-left">
-                    <img src="../../../assets/icon/car.png" class="pr-2" />
-                    <p class="fw-400 mb-0  little-text-mobile
-                                font-size-14 line-20
-                                color-black">{{item.vacancies}}
-                      Vagas
-                    </p>
-                  </div>
-                  <div class="col justify-content-end
-                             px-0 d-flex
-                             align-items-center
-                             justify-content-left">
-                    <img src="../../../assets/icon/rule.png" class="pr-2" />
-                    <p class="fw-400 mb-0  little-text-mobile
-                                font-size-14 line-20
-                                color-black">{{item.metrics}}
-                      m2
-                    </p>
-                  </div>
-                </div>
-                <div class="w-100 d-flex
-                          align-items-center py-2 px-1">
-                  <img [src]="item.picface" class="border-radius-100
-                             " />
-                  <h3 class="fw-400 mb-0 pl-2
-                             font-size-14 line-20
-                             color-black">{{item.nameface}}</h3>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-4 col-body-details-property">
-          <div class="w-100 mb-5 p-5 border-radius-10
+          <div class="w-100 mt-4 p-5 border-radius-10
                  bg-white">
             <p class="d-grid w-100">
               <span class="fw-700 font-size-18 line-24
@@ -650,92 +611,35 @@
                 imóvel recentemente</span>
             </p>
             <hr class="hr" />
-            <table class="w-100">
-              <tbody>
-                <tr class="h-40">
-                  <td>
-                    <span class="fw-700 font-size-18
-                                line-24 color-black">Aluguel</span>
-                  </td>
-                  <td class="d-tavle-cell
-                             text-align-right">
-                    <span class="fw-700 font-size-18
-                                line-24 color-black">{{response.saleValue | currency: 'R$ ' || '-'}}</span>
-                  </td>
-                </tr>
-                <tr class="h-40">
-                  <td>
-                    <span class="fw-400 font-size-18
-                                line-24 color-black">Condomínio
-                      <i class="bi font-size-14
-                                color-muted
-                                bi-info-circle"></i></span>
-                  </td>
-                  <td class="d-tavle-cell
-                             text-align-right">
-                    <span class="fw-700 font-size-18
-                                line-24 color-black">{{response.condominiumValue | currency: 'R$ ' || '-'}}</span>
-                  </td>
-                </tr>
-                <tr class="h-40">
-                  <td>
-                    <span class="fw-400 font-size-18
-                                line-24 color-black">IPTU <i class="bi font-size-14
-                                color-muted
-                                bi-info-circle"></i></span>
-                  </td>
-                  <td class="d-tavle-cell
-                             text-align-right">
-                    <span class="fw-700 font-size-18
-                                line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' || '-'}}</span>
-                  </td>
-                </tr>
-                <tr class="h-40">
-                  <td>
-                    <span class="fw-400 font-size-18
-                                line-24 color-black">Seguro
-                      incêndio <i class="bi
-                                font-size-14 color-muted
-                                bi-info-circle"></i></span>
-                  </td>
-                  <td class="d-tavle-cell
-                             text-align-right">
-                    <span class="fw-700 font-size-18
-                                line-24 color-black">R$ 79</span>
-                  </td>
-                </tr>
-                <tr class="h-40">
-                  <td>
-                    <span class="fw-400 font-size-18 line-24 color-black">Taxa de
-                      serviço <i class="bi
-                                font-size-14 color-muted
-                                bi-info-circle"></i></span>
-                  </td>
-                  <td class="d-tavle-cell
-                             text-align-right">
-                    <span class="fw-700 font-size-18
-                                line-24 color-black">R$ 84</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <h6 class="my-4" style="outline-style: dotted;"></h6>
-            <table class="w-100 mt-5">
-              <tbody>
-                <tr class="h-40">
-                  <td>
-                    <span class="fw-700 font-size-18
-                                line-24 color-black">Aluguel</span>
-                  </td>
-                  <td class="d-tavle-cell
-                             text-align-right">
-                    <span class="fw-700 font-size-18 line-24 color-black">
-                      {{finalValue | currency: 'R$ ' || '-'}}
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="row">
+              <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <span class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                </span>
+                <span class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' || '-'}}</span>
+              </div>
+              <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <span class="fw-700 font-size-18 line-24 color-black">Condomínio
+                  <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                </span>
+                <span class="fw-700 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ ' || '-'}}</span>
+              </div>
+              <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <span class="fw-700 font-size-18 line-24 color-black">IPTU
+                  <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                </span>
+                <span class="fw-700 font-size-18 line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' || '-'}}</span>
+              </div>
+              <div class="col-12">
+                <h6 class="my-4" style="outline-style: dotted;"></h6>
+              </div>
+              <div class="col-12 d-flex py-4 align-items-center justify-content-between">
+                <span class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                </span>
+                <span class="fw-700 font-size-18 line-24 color-black">{{finalValue | currency: 'R$ ' || '-'}}</span>
+              </div>
+            </div>
             <!-- undefined -->
             <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
                     fw-700 font-size-18 line-24 mt-3 text-light
@@ -761,83 +665,136 @@
                           <img src="../../../assets/img/ap.png" class="w-100 border-radius-10" />
                         </div>
                         <div class="col-9">
-                          <h5 class="fw-700 font-size-18 line-24 color-black d-inline-block text-truncate" style="max-width: 150px;">{{response.description || '-'}}</h5>
+                          <h5 class="fw-700 font-size-18 line-24 color-black d-inline-block text-truncate"
+                            style="max-width: 150px;">{{response.description || '-'}}</h5>
                           <p class="w-100 mb-0 d-grid">
-                            <span class="fw-400 font-size-14 line-19 color-black">Quartos:&nbsp;{{response.bedrooms || '-'}}</span>
-                            <span class="fw-400 font-size-14 line-19 color-black">Banheiros:&nbsp;{{response.bathrooms || '-'}}</span>
-                            <span class="fw-400 font-size-14 line-19 color-black">Metragem:&nbsp;{{response.usefulArea || '-'}}m²</span>
-                          </p> 
+                            <span class="fw-400 font-size-14 line-19 color-black">Quartos:&nbsp;{{response.bedrooms ||
+                              '-'}}</span>
+                            <span class="fw-400 font-size-14 line-19 color-black">Banheiros:&nbsp;{{response.bathrooms
+                              || '-'}}</span>
+                            <span class="fw-400 font-size-14 line-19 color-black">Metragem:&nbsp;{{response.usefulArea
+                              || '-'}}m²</span>
+                          </p>
                         </div>
                       </div>
                       <div class="col-12 px-0">
                         <p class="fw-500 mx-1 font-size-18 line-24 pt-5 color-black">Escolha um dia:</p>
                         <div class="selector flex-wrap mt-2 d-flex">
-                          <div *ngFor="let item of arrayDeDatas" class="selecotr-item cursor-pointer mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
-                            <input type="radio" [id]="item" required formControlName="day" [value]="item" name="day" (change)="selectDate(item)"
+                          <div *ngFor="let item of arrayDeDatas"
+                            class="selecotr-item cursor-pointer mx-1 d-flex h-100 position-relative justify-content-center align-items-center">
+                            <input type="radio" [id]="item" required formControlName="day" [value]="item" name="day"
+                              (change)="selectDate(item)"
                               class="selector-item_radio  border-radius-05 w-100 h-100 text-center position-relative">
-                           
-                            <label [for]="item" class="selector-item_label border-radius-100 fw-400 font-size-14 line-19 color-black border-black">
+
+                            <label [for]="item"
+                              class="selector-item_label border-radius-100 fw-400 font-size-14 line-19 color-black border-black">
                               {{item | date: 'EEE'}} {{item | date: 'dd'}}/{{item | date: 'MM'}}
                             </label>
                           </div>
                         </div>
                         <p class="fw-500 mx-1 font-size-18 line-24 pt-4 color-black">Escolha um horário:</p>
                         <div class="selector mt-2 d-flex">
-                         <div class="my-3 flex-wrap justify-content-center d-flex">
-                        
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="08:00" formControlName="time" value="08h" name="time"  class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative" (change)="selectTime('08h')">
-                            <label for="08:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">08:00</label>
+                          <div class="my-3 flex-wrap justify-content-center d-flex">
+
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="08:00" formControlName="time" value="08h" name="time"
+                                class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative"
+                                (change)="selectTime('08h')">
+                              <label for="08:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">08:00</label>
+                            </div>
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="09:00" formControlName="time" value="09h" name="time"
+                                class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative"
+                                (change)="selectTime('09h')">
+                              <label for="09:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">09:00</label>
+                            </div>
+
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="10:00" formControlName="time" value="10h" name="time"
+                                class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative"
+                                (change)="selectTime('10h')">
+                              <label for="10:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">10:00</label>
+                            </div>
+
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="11:00" formControlName="time" value="11h" name="time"
+                                class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative"
+                                (change)="selectTime('11h')">
+                              <label for="11:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">11:00</label>
+                            </div>
+
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="12:00" formControlName="time" value="12h" name="time"
+                                class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative"
+                                (change)="selectTime('12h')">
+                              <label for="12:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">12:00</label>
+                            </div>
+
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="13:00" formControlName="time" value="13h" name="time"
+                                class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative"
+                                (change)="selectTime('13h')">
+                              <label for="13:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">13:00</label>
+                            </div>
+
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="14:00" formControlName="time" value="14h" name="time"
+                                class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative"
+                                (change)="selectTime('14h')">
+                              <label for="14:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">14:00</label>
+                            </div>
+
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="15:00" formControlName="time" value="15h" name="time"
+                                class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative"
+                                (change)="selectTime('15h')">
+                              <label for="15:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">15:00</label>
+                            </div>
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="16:00" formControlName="time" value="16h" name="time"
+                                class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative"
+                                (change)="selectTime('16h')">
+                              <label for="16:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">16:00</label>
+                            </div>
+                            <div
+                              class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                              <input type="radio" id="17:00" formControlName="time" value="17h" name="time"
+                                class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative"
+                                (change)="selectTime('17h')">
+                              <label for="17:00"
+                                class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">17:00</label>
+                            </div>
                           </div>
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                              <input type="radio" id="09:00" formControlName="time" value="09h" name="time"  class="selector-item_radio border-radius-05 w-100 h-100 text-center position-relative" (change)="selectTime('09h')">
-                              <label for="09:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">09:00</label>
-                          </div>
-                        
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                              <input type="radio" id="10:00" formControlName="time" value="10h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('10h')">
-                              <label for="10:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">10:00</label>
-                          </div>
-                        
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="11:00" formControlName="time" value="11h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('11h')">
-                            <label for="11:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">11:00</label>
-                          </div>
-                        
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="12:00" formControlName="time" value="12h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('12h')">
-                            <label for="12:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">12:00</label>
-                          </div>
-                         
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="13:00" formControlName="time" value="13h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('13h')">
-                            <label for="13:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">13:00</label>
-                          </div>
-                         
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="14:00" formControlName="time" value="14h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('14h')">
-                            <label for="14:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">14:00</label>
-                          </div>
-                         
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="15:00" formControlName="time" value="15h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('15h')">
-                            <label for="15:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">15:00</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="16:00" formControlName="time" value="16h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('16h')">
-                            <label for="16:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">16:00</label>
-                          </div>
-                          <div class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="17:00" formControlName="time" value="17h" name="time" class="selector-item_radio  border-radius-05  w-100 h-100  text-center  position-relative" (change)="selectTime('17h')">
-                            <label for="17:00"  class="selector-item_label  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">17:00</label>
-                          </div>
-                        </div>
                         </div>
                         <div class="w-100 py-4 d-grid text-align-left">
-                          <button type="button" class="btn bg-transparent w-fit fw-500 font-size-16 line-20 text-primary">Tentar encaixe</button>
-                          <button type="button" class="btn bg-transparent w-fit fw-500 font-size-16 line-20 text-primary">Enviar proposta sem visitar</button>
+                          <button type="button"
+                            class="btn bg-transparent w-fit fw-500 font-size-16 line-20 text-primary">Tentar
+                            encaixe</button>
+                          <button type="button"
+                            class="btn bg-transparent w-fit fw-500 font-size-16 line-20 text-primary">Enviar proposta
+                            sem visitar</button>
                         </div>
-                        <button type="button" [disabled]="this.form.controls['time'].value == ''" (click)="nextScheduling('step1')" class="btn pb-2 bg-purple fw-700 font-size-18 line-24 text-light  border-radius-10 h-74 w-100">Continuar</button>
+                        <button type="button" [disabled]="this.form.controls['time'].value == ''"
+                          (click)="nextScheduling('step1')"
+                          class="btn pb-2 bg-purple fw-700 font-size-18 line-24 text-light  border-radius-10 h-74 w-100">Continuar</button>
                       </div>
                     </div>
                     <div *ngIf="step2scheduling" class="anima-body">
@@ -847,30 +804,33 @@
                       </p>
                       <div class="w-100">
                         <p class="fw-500 font-size-18 line-24 color-black">Resumo:
-                          {{response.description || '(sem descrição) '}} 
+                          {{response.description || '(sem descrição) '}}
                         </p>
                         <p>
                           <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
                           <span class="fw-400 font-size-16 line-20 color-black">
-                            {{response.complementAddress || '(sem endereço)'}} 
+                            {{response.complementAddress || '(sem endereço)'}}
                             {{response.yearOfConstruction || '-'}},
                             {{response.cityAddress || '(local não informado!)'}} - {{response.ufAddress || '-'}}
                           </span>
                         </p>
                         <div class="row block-important px-3  d-flex">
-                          <div class="col pt-2 pb-3 left-important justify-content-left px-0 d-flex align-items-center justify-content-left">
+                          <div
+                            class="col pt-2 pb-3 left-important justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2" />
                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
                               {{response.bedrooms || '-'}} Quartos
                             </p>
                           </div>
-                          <div class="col pt-2 pb-3 left-important justify-content-center px-0 d-flex align-items-center justify-content-left">
+                          <div
+                            class="col pt-2 pb-3 left-important justify-content-center px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/car.png" class="pr-2" />
                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
                               {{response.parkingSpaces || '-'}} Vagas
                             </p>
                           </div>
-                          <div class="col pt-2 pb-3 left-important justify-content-end px-0 d-flex align-items-center justify-content-left">
+                          <div
+                            class="col pt-2 pb-3 left-important justify-content-end px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/rule.png" class="pr-2" />
                             <p class="fw-400 mb-0 font-size-14 line-20 color-black">
                               {{response.usefulArea || '-'}} m2
@@ -882,18 +842,22 @@
                         </p>
                         <p *ngIf="dataSelecionada" class="w-100 fw-400 font-size-16  line-20 color-black">
                           <i class="bi font-size-20  mr-2 bi-calendar"></i>
-                          {{dataSelecionada | date: 'EEEE'}}, {{dataSelecionada | date: 'dd'}} de {{dataSelecionada |date: 'MMMM'}} <span *ngIf="horasSelecionada"> às {{horasSelecionada}}</span>
+                          {{dataSelecionada | date: 'EEEE'}}, {{dataSelecionada | date: 'dd'}} de {{dataSelecionada
+                          |date: 'MMMM'}} <span *ngIf="horasSelecionada"> às {{horasSelecionada}}</span>
                         </p>
                       </div>
                       <div class="w-100 my-4 align-items-center d-flex border border-radius-10 p-3">
                         <i class="bi font-size-24 color-black bi-info-circle"></i>
                         <p class="fw-400 ml-3 mb-0 font-size-16 line-20 color-black">
-                          Ao agendar essa visita, sua presença é automaticamente confirmada e um dos nossos corretores parceiros é selecionado para te acompanhar.
+                          Ao agendar essa visita, sua presença é automaticamente confirmada e um dos nossos corretores
+                          parceiros é selecionado para te acompanhar.
                         </p>
                       </div>
-                      <button type="submit" (click)="confirmSchedule('step2')" class="btn pb-2 bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100">Agendar visita</button>
+                      <button type="submit" (click)="confirmSchedule('step2')"
+                        class="btn pb-2 bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100">Agendar
+                        visita</button>
                     </div>
-                    
+
                     <div *ngIf="step3scheduling" class="anima-body">
                       <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
                         Você agendou sua visita!
@@ -904,18 +868,21 @@
                           Você vai ver quem te acompanhará
                         </p>
                         <p class="fw-400 font-size-18  line-24 color-black">
-                          {{dataSelecionada | date: 'EEEE'}},  pela sua agenda de visitas
+                          {{dataSelecionada | date: 'EEEE'}}, pela sua agenda de visitas
                         </p>
-                        <a (click)="nextScheduling('viewvisits')"  class="fw-500 font-size-16 text-primary line-20">Ver agenda de visitas</a>
+                        <a (click)="nextScheduling('viewvisits')" class="fw-500 font-size-16 text-primary line-20">Ver
+                          agenda de visitas</a>
                         <div class="row px-3 my-3 pt-3 pb-3 d-flex">
                           <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2" />
-                            <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.bedrooms || '-'}} quartos
+                            <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.bedrooms || '-'}}
+                              quartos
                             </p>
                           </div>
                           <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/car.png" class="pr-2" />
-                            <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.parkingSpaces || '-'}} vagas
+                            <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.parkingSpaces ||
+                              '-'}} vagas
                             </p>
                           </div>
                           <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
@@ -923,30 +890,109 @@
                             <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.rooms || '-'}} m2
                             </p>
                           </div>
-                         
+
                         </div>
                         <p *ngIf="dataSelecionada" class="w-100 fw-400 font-size-16  line-20 color-black">
                           <i class="bi font-size-20  mr-2 bi-calendar"></i>
-                          {{dataSelecionada | date: 'EEEE'}}, {{dataSelecionada | date: 'dd'}} de {{dataSelecionada |date: 'MMMM'}} <span *ngIf="horasSelecionada"> às {{horasSelecionada}}</span>
+                          {{dataSelecionada | date: 'EEEE'}}, {{dataSelecionada | date: 'dd'}} de {{dataSelecionada
+                          |date: 'MMMM'}} <span *ngIf="horasSelecionada"> às {{horasSelecionada}}</span>
                         </p>
                         <p>
                           <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
                           <span class="fw-400 font-size-16 line-20 color-black">
-                            {{response.complementAddress || '(sem endereço)'}} 
+                            {{response.complementAddress || '(sem endereço)'}}
                             {{response.yearOfConstruction || '-'}},
                             {{response.cityAddress || '(local não informado!)'}} - {{response.ufAddress || '-'}}
                           </span>
                         </p>
                       </div>
-                      <button type="submit" (click)="nextScheduling('close')" class="btn pb-2 mt-3 bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100">Salvar na Agenda</button>
-                      <button type="button" (click)="nextScheduling('viewvisits')" class="btn pb-2 mt-3 border-purple bg-white fw-700 font-size-18 line-24 color-purple border-radius-10  h-74 w-100">Ver visitas</button>
+                      <button type="submit" (click)="nextScheduling('close')"
+                        class="btn pb-2 mt-3 bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100">Salvar
+                        na Agenda</button>
+                      <button type="button" (click)="nextScheduling('viewvisits')"
+                        class="btn pb-2 mt-3 border-purple bg-white fw-700 font-size-18 line-24 color-purple border-radius-10  h-74 w-100">Ver
+                        visitas</button>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
           </div>
-          <form [formGroup]="formproperty" class="w-100
+          <!-- VERSION MOBILE ANNOUNCEMEMNTS -->
+          <div class="row d-block-desk mt-4" style="display: none;">
+            <swiper class="col-12 slide" [slidesPerView]="1"
+            [pagination]="{ clickable: true }" [scrollbar]="false">
+            <ng-template *ngFor="let item of responseAnnouncement" class="col-12 col-cards-products px-0 col-sm-12" swiperSlide>
+              <div class="col-md-5 card-product-result d-inline-block p-3 border-radius-10 bg-white cursor-pointer">
+                <div class="h-100  p-2 border-radius-10 bg-white">
+                  <div class="bg-img-product py-2 px-3 border-radius-10">
+                    <div class="w-100 h-50 d-flex">
+                      <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                        Venda</h4>
+                      <h4
+                        class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
+                        Exclusivo</h4>
+                    </div>
+                    <div class="w-100 d-flex h-50 align-items-end justify-content-between">
+                      <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'sale'">
+                        {{item.saleValue | currency: 'R$'}}</p>
+                      <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'rent'">
+                        {{item.leaseValue | currency: 'R$'}}
+                      </p>
+                      <div (click)="likeHeart(item._id)"
+                        class="h-fit bg-transparent-white heart-like border-radius-10 pt-2 pb-1">
+                        <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' "
+                          class="bi bi-heart-fill font-size-16 text-light"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div (click)="announcementSelected(item._id)" class="col-12 px-0">
+                    <div class="w-100 mx-1 pt-3">
+                      <p class="d-flex align-items-center">
+                        <span class="fw-700 font-size-16 line-20 color-black text-truncate" style="max-width: 90%;">{{item.description}}</span>
+                      </p>
+                      <p class="d-flex align-items-center">
+                        <span class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                      </p>
+                      <p class="d-flex text-left align-items-center">
+                        <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                        <span class="fw-400 font-size-14 line-20 color-black ">{{item.publicPlaceAddress}},
+                          {{item.cityAddress}} - {{item.ufAddress}}</span>
+                      </p>
+                    </div>
+                    <div class="row mx-1 pb-3 d-flex">
+                      <div
+                        class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
+                        <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
+                        <p
+                          class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
+                          {{item.bedrooms}}
+                          Quartos
+                        </p>
+                      </div>
+                      <div
+                        class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
+                        <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
+                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                          {{item.vacancyNumber}} Vagas
+                        </p>
+                      </div>
+                      <div
+                        class="col mt-2 justify-content-end left-important  px-0 d-flex align-items-center justify-content-left">
+                        <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
+                        <p
+                          class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
+                          {{item.usefulArea |
+                          currency: ' '}} m2</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </swiper>
+          </div>
+          <form [formGroup]="formproperty" class="w-100 d-none-desk
                  mb-5 border-radius-10 bg-white">
             <div class="w-100 border-radius-10 bg-white
                     p-5">
@@ -1021,73 +1067,71 @@
               </button>
             </div>
           </form>
-          <div class="w-100 mt-4 border-radius-10 bg-white
-                 p-5">
-            <p class="fw-700 pb-4 px-1 font-size-20
-                    line-24 color-blue">Imóveis
-              exclusivos
+          <div class="w-100 mt-4 border-radius-10 bg-white p-4">
+            <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
+                exclusivos
             </p>
-            <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }" [scrollbar]="true">
-              <ng-template *ngFor="let item of propertyproducts" swiperSlide>
-                <div style="background-image:
-                       url(../../../assets/img/gradient.png),
-                       url({{item.bgproduct}});" class="bg-img-property w-100
-                       py-2 px-3
-                       border-radius-10">
-                  <div class="w-100
-                          details-card-swiper h-50 p-4
-                          d-flex">
-                    <h4 class="w3-black h-fit
-                             px-4 py-2 mb-0 mx-1
-                             border-radius-5 fw-400
-                             font-size-18 line-24
-                             text-light">{{item.rent}}</h4>
-                    <h4 style="background-color:#878DBA;" class="mx-1 h-fit px-4
-                             py-2 mb-0
-                             border-radius-5 fw-400
-                             font-size-18 line-24
-                             text-light">{{item.exclusive}}</h4>
-                  </div>
-                  <div class="w-100
-                          details-card-swiper d-grid
-                          h-50 mx-2 pt-5 px-4
-                          align-items-end">
-                    <p class="fw-700 mt-5 mb-0
-                             font-size-22 h-fit
-                             line-32 text-light">R${{item.value}}
-                      <span class="fw-400
-                                font-size-14 line-20
-                                text-light">/ mês</span>
-                    </p>
-                    <span class="fw-700
-                             font-size-14 line-20
-                             text-light">{{item.nameproperty}}</span>
-                  </div>
-                </div>
-              </ng-template>
+            <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }"
+                [scrollbar]="true">
+                <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
+                    <div style="background-image:
+               url(../../../assets/img/gradient.png),
+               url(../../../assets/img/img-announcement-default.jpg);" class="bg-img-property w-100 py-2 px-3
+               border-radius-10" (click)="announcementSelected(item._id)">
+                        <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
+                            <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                     border-radius-5 fw-400 font-size-18 line-24
+                     text-light" *ngIf="item.typeOfAd === 'rent'">Alugar</h4>
+                            <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                     border-radius-5 fw-400 font-size-18 line-24
+                     text-light" *ngIf="item.typeOfAd === 'sale'">Vender</h4>
+                            <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
+                     border-radius-5 fw-400 font-size-18 line-24
+                     text-dark">Exclusivo</h4>
+                        </div>
+                        <div class="w-100 details-card-swiper d-grid h-50 pt-5
+                  align-items-end">
+                            <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                     line-32 text-light">{{item.leaseValue | currency: 'R$'}}
+                                <span class="fw-400 font-size-14 line-20
+                        text-light">/ mês</span>
+                            </p>
+                            <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                     line-32 text-light">{{item.saleValue | currency: 'R$'}}
+                            </p>
+                            <span class="fw-700 font-size-14 line-20
+                     text-light">{{item.description | slice: 0:28 }}</span>
+                        </div>
+                    </div>
+                </ng-template>
             </swiper>
-          </div>
-          <div class="w-100 border-radius-10 mt-4 bg-white
-                 p-5">
-            <p class="fw-700 pb-4 font-size-20 line-24
-                    color-black">Tipos de
-              Imóvel
+        </div>
+        <!-- <div *ngIf="recentlySeenList.length > 0" class="w-100 border-radius-10 my-4 bg-white p-4">
+            <p class="fw-700 pb-4 font-size-20 line-24 color-black">Visualizados recentemente
             </p>
-            <div class="d-flex justify-content-between">
-              <p class="fw-400 font-size-16 line-20
-                       color-black">
-                <i class="bi font-size-9
-                          bi-caret-right-fill"></i>
-                Apartamento
-              </p>
-              <p class="fw-400 d-flex font-size-16
-                       line-20 color-black">
-                <span class="fw-400 font-size-16
-                          line-20 color-black">6</span>
-                <span class="fw-400 font-size-16
-                          line-20 color-black">&nbsp;
-                  Imóveis</span>
-              </p>
+            <div *ngFor="let item of recentlySeenList | slice:0:3" class="row mb-4"
+                (click)="announcementSelected(item._id)">
+                <div class="col-3 col-img-types-property p-0">
+                    <img src="../../../assets/img/ap.png" class="border-radius-10 h-111 w-100" />
+                </div>
+                <div class="col-9 col-img-types-property">
+                    <p class="d-grid title-property-product mb-0 h-75">
+                        <span class="fw-700 font-size-18 line-24
+                  color-black">{{item.description}}</span>
+                        <span *ngIf="item.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24
+                  color-black">{{item.saleValue | currency: 'R$'}}</span>
+                        <span *ngIf="item.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24
+                  color-black">{{item.leaseValue | currency: 'R$'}}</span>
+                    </p>
+                    <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
+                        <span class="fw-400 font-size-14 line-20
+                  color-black">Quartos: {{item.bedrooms}}</span>
+                        <span class="fw-400 font-size-14 line-20
+                  color-black">Banheiros: {{item.bathrooms}}</span>
+                        <span class="fw-400 font-size-14 line-20
+                  color-black">Metragem: {{item.usefulArea}} m²</span>
+                    </p>
+                </div>
             </div>
             <div class="d-flex mt-3
                     justify-content-between">
