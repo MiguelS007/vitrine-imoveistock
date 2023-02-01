@@ -34,7 +34,6 @@ export class FavoritesComponent implements OnInit {
 
     this.announcementService.listLikes().subscribe(
       success => {
-        console.log('list', success);
         for (let i = 0; i < success.length; i++) {
           this.response.push(success[i].announcement);
           Object.assign(this.response[i], { liked: true });
@@ -42,7 +41,7 @@ export class FavoritesComponent implements OnInit {
         this.ngxSpinnerService.hide()
       },
       error => {
-        console.log(error);
+        console.error(error);
         this.ngxSpinnerService.hide()
       }
     )
@@ -94,7 +93,7 @@ export class FavoritesComponent implements OnInit {
             }, 1000);
           },
           error => {
-            console.log(error)
+            console.error(error)
           }
         )
       }
