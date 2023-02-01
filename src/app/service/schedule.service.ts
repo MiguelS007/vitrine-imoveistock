@@ -28,7 +28,7 @@ export class ScheduleService extends BaseService {
 
     getListVisists(): Observable<ScheduleRegisterResponseDto[]> {
         return this.httpClient
-            .get(`${this.url}app/visit/list`, this.authorizedHeader())
+            .get(`${this.url}app/announcement-visit/list`, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 

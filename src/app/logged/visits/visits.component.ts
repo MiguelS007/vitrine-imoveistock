@@ -16,8 +16,8 @@ import { SearchService } from 'src/app/service/search.service';
 export class VisitsComponent implements OnInit {
 
   segment = false;
-  spaceScheduling = false;
-  spaceFavorites = true;
+  spaceScheduling = true;
+  spaceFavorites = false;
 
 
   constructor(
