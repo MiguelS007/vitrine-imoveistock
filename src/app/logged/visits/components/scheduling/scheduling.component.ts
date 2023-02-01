@@ -4,6 +4,7 @@ import { ScheduleRegisterResponseDto } from 'src/app/dtos/schedule-register-resp
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AnnouncementGetResponseDto } from '../../../../dtos/announcement-get-response.dto';
 
 @Component({
   selector: 'app-scheduling',
@@ -24,7 +25,14 @@ export class SchedulingComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedScheduling: ScheduleRegisterResponseDto;
+  selectedScheduling: ScheduleRegisterResponseDto = {
+    _id: '',
+    cancellationReason: '',
+    visitDate: new Date,
+  };
+
+  recentlySeenList: any = [];
+
 
   constructor(
     private scheduleService: ScheduleService,
@@ -45,14 +53,26 @@ export class SchedulingComponent implements OnInit {
     this.scheduleService.getListVisists().subscribe(
       success => {
         this.response = success
-        console.log('lista de agendamentos', this.response);
-        if(success.length > 0) {
+        if (success.length > 0) {
           this.selectedScheduling = success[0];
-          console.log(this.selectedScheduling);
         }
+        this.verifyLike()
+
       },
       error => {
-        console.log(error);
+        console.error(error);
+      }
+    )
+  }
+
+  verifyLike() {
+    this.announcementService.listLikes().subscribe(
+      success => {
+        for (let i = 0; i < success.length; i++) {
+          if (success[i].announcement._id === this.selectedScheduling.announcement._id) {
+            Object.assign(this.selectedScheduling.announcement, { liked: true });
+          }
+        }
       }
     )
   }
@@ -75,20 +95,64 @@ export class SchedulingComponent implements OnInit {
       announcementId: value
     }
 
-    for (let i = 0; i < this.response.length; i++) {
-      if (this.response[i]._id === value) {
-        this.announcementService.registerUnlike(request).subscribe(
-          success => {
-            setTimeout(() => {
-              this.schedulesList()
-            }, 1000);
-          },
-          error => {
-            console.log(error)
-          }
-        )
+
+    if (this.selectedScheduling.announcement.liked === true) {
+      this.announcementService.registerUnlike(request).subscribe(
+        success => {
+          this.selectedScheduling.announcement.liked = false
+        },
+        error => {
+          console.error(error)
+        }
+      )
+    } else if (this.selectedScheduling.announcement.liked === false) {
+      this.announcementService.registerLike(request).subscribe(
+        success => {
+          this.selectedScheduling.announcement.liked = true
+        },
+        error => {
+          console.error(error)
+        }
+      )
+    }
+
+
+  }
+
+  selectVisit(item) {
+    this.selectedScheduling = item;
+    this.verifyLike()
+  }
+
+  announcementSelected(value) {
+    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
+    let teste: any = localStorage.getItem('recentlySeen');
+    this.recentlySeenList = JSON.parse(teste);
+
+
+    let verify = { _id: value };
+
+    let list: any = this.recentlySeenList;
+
+    if (list === null) {
+      list = [];
+    }
+
+    if (this.recentlySeenList !== null) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i]._id === value) {
+          return
+        }
       }
     }
+
+    list.push(verify);
+
+    this.recentlySeenList = list;
+
+    this.router.navigate([`announcement/detail/${value}`]);
+
+
 
   }
 
