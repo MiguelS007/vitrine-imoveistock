@@ -10,11 +10,15 @@ import { VisitsComponent } from './visits/visits.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ExpressProposalComponent } from './express-proposal/express-proposal.component';
 import { AnnouncementService } from '../service/announcement.service';
+import { FavoritesComponent } from './visits/components/favorites/favorites.component';
+import { SchedulingComponent } from './visits/components/scheduling/scheduling.component';
 @NgModule({
   declarations: [
     LoggedComponent,
     VisitsComponent,
     ExpressProposalComponent,
+    FavoritesComponent,
+    SchedulingComponent,
   ],
   imports: [
     CommonModule,
