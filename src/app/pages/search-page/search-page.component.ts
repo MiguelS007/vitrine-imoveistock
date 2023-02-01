@@ -8,6 +8,9 @@ import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { NgxSpinnerService } from "ngx-spinner";
+import { AnnouncementService } from 'src/app/service/announcement.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
@@ -59,13 +62,18 @@ export class SearchPageComponent implements OnInit {
 
   recentlySeenList: AnnouncementGetResponseDto[] = [];
 
+  listLikes: AnnouncementGetResponseDto[] = [];
+
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
     private userService: UserService,
     private searchService: SearchService,
     private formBuilder: FormBuilder,
-    private ngxSpinnerService: NgxSpinnerService
+    private ngxSpinnerService: NgxSpinnerService,
+    private announcementService: AnnouncementService,
+    private modalService: NgbModal
 
   ) {
     this.form = this.formBuilder.group({
@@ -110,9 +118,9 @@ export class SearchPageComponent implements OnInit {
     let typeAdTranslate: string = ''
 
     if (this.filtroSelected?.typeAd === 'rent') {
-      typeAdTranslate = 'Venda'
-    } else if (this.filtroSelected?.typeAd === 'sale') {
       typeAdTranslate = 'Alugar'
+    } else if (this.filtroSelected?.typeAd === 'sale') {
+      typeAdTranslate = 'Venda'
     }
 
     this.filtroResultDisplay = {
@@ -135,9 +143,38 @@ export class SearchPageComponent implements OnInit {
       this.searchService.getPropertyListAll().subscribe(
         success => {
           this.filterResult = success;
+          if (localStorage.getItem('user') !== null) {
+            this.announcementService.listLikes().subscribe(
+              success => {
+                for (let i = 0; i < success.length; i++) {
+                  for (let x = 0; x < this.filterResult.length; x++) {
+                    if (success[i].announcement._id === this.filterResult[x]._id) {
+                      Object.assign(this.filterResult[x], { liked: true });
+                    }
+                  }
+                  this.listLikes.push(success[i].announcement)
+                }
+              }
+            )
+          }
           this.ngxSpinnerService.hide();
-        }
+        },
       )
+    } else {
+      if (localStorage.getItem('user') !== null) {
+        this.announcementService.listLikes().subscribe(
+          success => {
+            for (let i = 0; i < success.length; i++) {
+              for (let x = 0; x < this.filterResult.length; x++) {
+                if (success[i].announcement._id === this.filterResult[x]._id) {
+                  Object.assign(this.filterResult[x], { liked: true });
+                }
+              }
+              this.listLikes.push(success[i].announcement)
+            }
+          }
+        )
+      }
     }
 
 
@@ -151,8 +188,51 @@ export class SearchPageComponent implements OnInit {
     );
   }
 
-  likeHeart() {
-    this.iconlikeheart = !this.iconlikeheart;
+  likeHeart(value) {
+
+    let request = {
+      announcementId: value
+    }
+
+    if (localStorage.getItem('user') === null) {
+      this.modalService.open(ModalLoginComponent, { centered: true });
+      return
+    }
+
+    if (this.listLikes.length === 0) {
+      this.announcementService.registerLike(request).subscribe(
+        success => {
+          this.ngOnInit()
+          return
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    }
+
+    for (let i = 0; i < this.listLikes.length; i++) {
+      if (this.listLikes[i]._id === value) {
+        this.announcementService.registerUnlike(request).subscribe(
+          success => {
+            this.ngOnInit()
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      } else if (this.listLikes[i]._id !== value) {
+        this.announcementService.registerLike(request).subscribe(
+          success => {
+            this.ngOnInit()
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      }
+    }
+
   }
 
   announcementSelected(value) {
