@@ -77,7 +77,7 @@ export class VisitsComponent implements OnInit {
 
     this.announcementService.listLikes().subscribe(
       success => {
-        for (let i = 0; i < success[i]; i++) {
+        for (let i = 0; i < success; i++) {
           console.log('lissst', success[i].length     );     
         }
         console.log('list', success[0])
