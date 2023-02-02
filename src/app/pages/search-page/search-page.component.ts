@@ -20,12 +20,14 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 })
 export class SearchPageComponent implements OnInit {
   form: FormGroup;
+  formfilter: FormGroup;
   iconlikeheart = false;
   products: any = [];
   propertyproducts: AnnouncementGetResponseDto[] = [];
   paginationProduct: number = 1;
 
   countApartment: number;
+  filterbtn = true;
   countCondominium: number;
   countHouse: number;
   countLoft: number;
@@ -233,6 +235,10 @@ export class SearchPageComponent implements OnInit {
       }
     }
 
+  }
+
+  filterSearch(){
+    this.filterbtn = !this.filterbtn
   }
 
   announcementSelected(value) {
