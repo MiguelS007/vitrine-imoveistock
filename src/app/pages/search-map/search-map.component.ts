@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup , Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -64,7 +64,7 @@ export class SearchMapComponent implements OnInit {
     private announcementService: AnnouncementService,
     private router: Router,
     private modalService: NgbModal
-  ) { 
+  ) {
     this.form = this.formBuilder.group({
       orderby: ['', [Validators.required]],
 
