@@ -1424,6 +1424,7 @@ vg-overlay-play .vg-overlay-play {
 
 .logo-navbar-desktop {
     height: 100px !important;
+    cursor: pointer;
 }
 
 .logo-navbar-mobile {
@@ -1463,6 +1464,16 @@ vg-overlay-play .vg-overlay-play {
     background-color: white !important;
     width: 150px !important;
     text-align: start !important;
+}
+
+.btn-filter-mobile {
+    display: none !important;
+}
+
+.scroll-message-header-home {
+    position: absolute !important;
+    right: 0px !important;
+    bottom: 16px !important;
 }
 
 // MEDIA
@@ -1781,6 +1792,10 @@ vg-overlay-play .vg-overlay-play {
     // .space-see-maps-area-search {
     //     flex-direction: column !important;
     // }
+
+    .btn-filter-mobile {
+        display: block !important;
+    }
 
     .btn-ver-no-mapa {
         background: #542FDF !important;

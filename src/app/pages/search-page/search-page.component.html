@@ -1,5 +1,5 @@
 <main class="bg-graylight main-search position-relative w-100 p-5">
-    <form [formGroup]="form" class="row form-search pt-10 h-100 m-0-auto mx-5 px-5
+    <form [formGroup]="form" class="row form-search pt-5 h-100 m-0-auto mx-5 px-5
        max-w-1918">
         <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
             <p class="d-flex fw-700 font-size-16 line-19 color-black
@@ -162,8 +162,8 @@
                     <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
                     <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
                 </a>
-                <div class="btn-ver-no-filter py-4 px-2 d-block-tablet" [class]="filterbtn ? 'd-none':'d-block'"
-                    data-toggle="modal" data-target="#filtersearch">
+                <div class="btn-ver-no-filter py-4 px-2 d-block-tablet btn-filter-mobile"
+                    [class]="filterbtn ? 'd-none':'d-block'" data-toggle="modal" data-target="#filtersearch">
                     <img src="../../../assets/icon/filter.png" height="23" class="mx-3" />
                     <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Filtrar</span>
                 </div>
@@ -192,12 +192,18 @@
                 </div>
             </div>
             <div class="row mx-0">
-                <div class="col-lg-6 px-0 col-cards-products" *ngFor="let item of filterResult | paginate: {
+                <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch">
+                    <img src="../../../assets/img/not-search-announcement.svg" height="80">
+                    <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
+                    <p class="text-center mb-0">explore outros filtros e confira os imoveis que podem te atender no momento</p>
+                    <span class="text-center">:(</span>
+                </div>
+                <div class="col-lg-6 px-3 col-cards-products" *ngFor="let item of filterResult | paginate: {
                 itemsPerPage: 10, currentPage: paginationProduct }; let
                 i= index">
                     <div class="w-100 card-product-result d-inline-block mt-5 p-3 border-radius-10 bg-white">
                         <div class="border-radius-10 position-relative">
-                            <img src="../../../assets/img/img-announcement-default.jpg"
+                            <img (click)="announcementSelected(item._id)" src="../../../assets/img/img-announcement-default.jpg"
                                 class="img-search-announcement-main">
                             <div class="space-sale-or-rent-search-announcement">
                                 <h4 class="bg-purple h-fit px-4 py-2 mb-0
@@ -292,7 +298,8 @@
                                     <i class="bi bi-search font-size-24"></i>
                                 </div>
                             </div>
-                            <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center mt-4">
+                            <div
+                                class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center mt-4">
                                 <input type="search"
                                     class="form-control border-0 border-radius-10 bg-light pl-4 fw-400 font-size-16 line-20"
                                     formControlName="localproperty" placeholder="Local" placeholder="Local"
