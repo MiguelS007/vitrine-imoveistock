@@ -41,6 +41,7 @@ import { AnnouncementService } from './service/announcement.service';
 import { SchedulingStep1Component } from './pages/property-detail/components/scheduling-step1/scheduling-step1.component';
 import { SchedulingStep2Component } from './pages/property-detail/components/scheduling-step2/scheduling-step2.component';
 import { SchedulingStep3Component } from './pages/property-detail/components/scheduling-step3/scheduling-step3.component';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 registerLocaleData(ptBr);
 
@@ -89,7 +90,8 @@ registerLocaleData(ptBr);
     NgxPageScrollModule,
     ToastrModule.forRoot(),
     NgxPageScrollCoreModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    CurrencyMaskModule,
   ],
   providers: [
     {
