@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup , Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AnnouncementService } from 'src/app/service/announcement.service';
@@ -25,6 +26,7 @@ export class SearchMapComponent implements OnInit {
   countHouse: number;
   countLoft: number;
   countKitnet: number;
+  products: any = [];
 
   filtroSelected: any;
   propertyproducts: AnnouncementGetResponseDto[] = [];
@@ -192,7 +194,50 @@ export class SearchMapComponent implements OnInit {
   goDetailProperty(){
 
   }
-  likeHeart(){
+  likeHeart(value) {
+
+    let request = {
+      announcementId: value
+    }
+
+    if (localStorage.getItem('user') === null) {
+      this.modalService.open(ModalLoginComponent, { centered: true });
+      return
+    }
+
+    if (this.listLikes.length === 0) {
+      this.announcementService.registerLike(request).subscribe(
+        success => {
+          this.ngOnInit()
+          return
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    }
+
+    for (let i = 0; i < this.listLikes.length; i++) {
+      if (this.listLikes[i]._id === value) {
+        this.announcementService.registerUnlike(request).subscribe(
+          success => {
+            this.ngOnInit()
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      } else if (this.listLikes[i]._id !== value) {
+        this.announcementService.registerLike(request).subscribe(
+          success => {
+            this.ngOnInit()
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      }
+    }
 
   }
 }
