@@ -907,8 +907,7 @@ input:focus {
 }
 
 .heart-like {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0.8rem 1.1rem;
 }
 
 .bg-img-product {
@@ -1199,7 +1198,7 @@ input:focus {
 // }
 
 .col-btns-preview-img {
-    top: -177px;
+    top: -155px;
     justify-content: space-evenly;
     background: linear-gradient(0deg, black, transparent);
 }
@@ -1580,6 +1579,7 @@ vg-overlay-play .vg-overlay-play {
         background: linear-gradient(0deg, black, transparent);
     }
 
+
     .btn-view-img {
         width: 100% !important;
     }
@@ -1606,6 +1606,8 @@ vg-overlay-play .vg-overlay-play {
         right: 17px !important;
         position: absolute !important;
         justify-content: center !important;
+    }
+    .options-img div{
     }
 
     .col-preview-img,

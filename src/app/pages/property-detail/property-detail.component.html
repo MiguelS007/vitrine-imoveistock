@@ -21,38 +21,37 @@
         <div class="col-12 col-btns-preview-img px-5 d-flex py-5 align-items-center position-relative">
           <div class="w-auto d-flex overflow-y-scroll spc-btns-property align-items-center">
             <button type="button" data-toggle="modal" data-target="#previewimage"
-              class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
               <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
             </button>
             <button type="button" pageScroll href="#previewvideo"
-              class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
               <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
             </button>
             <button type="button" pageScroll href="#previewplant" (click)="openarrow(3)"
-              class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/datas-block.png" class="" alt="not icon" />
               <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver planta</p>
             </button>
             <button type="button" pageScroll href="#previewvideo" (click)="segmentvideo('tour')"
-              class="fw-700 btn-view-img h-74 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
               <img src="../../../assets/icon/street-view.png" class="" alt="not icon" />
               <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
             </button>
           </div>
           <div class="options-img d-flex align-items-center">
-            <!-- <div *ng (click)="btninteractionimg('like')"
-              class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
-              <i [class]="iconlikeheart ?'bi-heart-fill':'bi-heart' " class="bifont-size-16 text-light"></i>
-            </div> -->
+            <div *ngFor="let item of filterResult | slice:0:1" (click)="likeHeart(item._id)" class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
+                <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' " class="bi font-size-24 text-light"></i>
+              </div>
             <div (click)="btninteractionimg('share')"
-              class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
-              <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bifont-size-16 text-light"></i>
+              class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
+              <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bi font-size-24 text-light"></i>
             </div>
             <div (click)="btninteractionimg('print')"
-              class="h-fit mx-1 mt-2 bg-transparent-white cursor-pointer border-radius-10 pt-2 pb-1 px-3">
-              <i [class]="iconprint?'bi-printer-fill':'bi-printer' " class="bifont-size-16 text-light"></i>
+              class="h-51 mx-1 mt-2 bg-transparent-white cursor-pointer heart-like border-radius-10 pt-2 pb-1 px-3">
+              <i [class]="iconprint?'bi-printer-fill':'bi-printer' " class="bi font-size-24 text-light"></i>
             </div>
           </div>
         </div>
@@ -731,81 +730,6 @@
                 </ng-template>
               </swiper>
             </div>
-            <form [formGroup]="formproperty" class="w-100 d-none-desk
-                 mb-5 border-radius-10 bg-white">
-              <div class="w-100 border-radius-10 bg-white
-                    p-5">
-                <label for="searchwords" class="label-search-words-details-property">
-                  <i class="bi bi-search
-                       font-size-24"></i>
-                </label>
-                <input id="searchwords" formControlName="searchwords" style="padding-right: 70px;" type="search"
-                  placeholder="Busque por palavras" class="btn border border-radius-10
-                       bg-light fw-400 text-left
-                       font-size-16 line-20 pl-4
-                       color-black w-100 h-74" />
-                <label for="localproperty" class="label-search-local-detail-property">
-                  <i class="bi bi-geo-alt
-                       font-size-24"></i>
-                </label>
-                <input id="localproperty" formControlName="localproperty" style="padding-right: 70px;" type="text"
-                  placeholder="Local" class="btn border border-radius-10
-                       bg-light fw-400 mt-4
-                       text-left font-size-16 line-20 pl-4
-                       color-black w-100
-                       h-74" />
-                <input formControlName="typeproperty" type="text" placeholder="Tipo de imóvel" class="btn border border-radius-10
-                       bg-light fw-400 mt-4
-                       text-left font-size-16 line-20 pl-4
-                       color-black w-100
-                       h-74" />
-                <input formControlName="typeprice" type="text" placeholder="Preço" class="btn border border-radius-10
-                       bg-light fw-400 mt-4
-                       text-left font-size-16 line-20 pl-4
-                       color-black w-100
-                       h-74" />
-                <input formControlName="typebathroom" type="text" placeholder="Banheiros" class="btn border border-radius-10
-                       bg-light fw-400 mt-4
-                       text-left font-size-16 line-20 pl-4
-                       color-black w-100
-                       h-74" />
-                <input formControlName="typerooms" type="text" placeholder="Quartos" class="btn border border-radius-10
-                       bg-light fw-400 mt-4
-                       text-left font-size-16 line-20 pl-4
-                       color-black w-100
-                       h-74" />
-                <input formControlName="typevacancies" type="text" placeholder="Vagas" class="btn border border-radius-10
-                       bg-light fw-400 mt-4
-                       text-left font-size-16 line-20 pl-4
-                       color-black w-100
-                       h-74" />
-                <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10
-                       bg-light fw-400 mt-4
-                       text-left font-size-16 line-20 pl-4
-                       color-black w-100
-                       h-74" />
-                <div class="w-100 d-flex
-                       align-items-center">
-                  <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border
-                          border-radius-10 bg-light fw-400
-                          mt-4
-                          mr-1 text-left font-size-16
-                          line-20 pl-4 color-black
-                          w-100 h-74" />
-                  <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border
-                          border-radius-10 bg-light fw-400
-                          mt-4
-                          ml-1 text-left font-size-16
-                          line-20 pl-4 color-black
-                          w-100 h-74" />
-                </div>
-                <button class="bg-purple btn mt-4
-                       text-light fw-700 font-size-18
-                       line-24 border-radius-10 h-74 w-100" type="submit">
-                  Encontrar
-                </button>
-              </div>
-            </form>
             <div class="w-100 mt-4 border-radius-10 bg-white p-4">
               <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
                 exclusivos

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { Subscription, window } from 'rxjs';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
@@ -61,6 +61,7 @@ export class PropertyDetailComponent implements OnInit {
   propertyvideo = true;
   finalValue: number;
 
+  filterResult: AnnouncementGetResponseDto[] = [];
   listLikes: AnnouncementGetResponseDto[] = [];
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
   propertyproducts: AnnouncementGetResponseDto[] = [];
@@ -117,7 +118,48 @@ export class PropertyDetailComponent implements OnInit {
     this.response = this.route.snapshot.data['resolve'];
     this.ngxSpinnerService.hide()
 
+    let resultadoVerify = localStorage.getItem('resultSearch');
+    this.filterResult = JSON.parse(resultadoVerify);
+
     console.log(this.user?._id, this.response._id);
+
+    if (this.filterResult === null || this.filterResult.length === 0) {
+      this.searchService.getPropertyListAll().subscribe(
+        success => {
+          this.filterResult = success;
+          if (localStorage.getItem('user') !== null) {
+            this.announcementService.listLikes().subscribe(
+              success => {
+                for (let i = 0; i < success.length; i++) {
+                  for (let x = 0; x < this.filterResult.length; x++) {
+                    if (success[i].announcement._id === this.filterResult[x]._id) {
+                      Object.assign(this.filterResult[x], { liked: true });
+                    }
+                  }
+                  this.listLikes.push(success[i].announcement)
+                }
+              }
+            )
+          }
+          this.ngxSpinnerService.hide();
+        },
+      )
+    } else {
+      if (localStorage.getItem('user') !== null) {
+        this.announcementService.listLikes().subscribe(
+          success => {
+            for (let i = 0; i < success.length; i++) {
+              for (let x = 0; x < this.filterResult.length; x++) {
+                if (success[i].announcement._id === this.filterResult[x]._id) {
+                  Object.assign(this.filterResult[x], { liked: true });
+                }
+              }
+              this.listLikes.push(success[i].announcement)
+            }
+          }
+        )
+      }
+    }
   }
 
 
@@ -127,7 +169,6 @@ export class PropertyDetailComponent implements OnInit {
       this.iconshare = !this.iconshare;
     } else if (value === 'print') {
       this.iconprint = !this.iconprint;
-      window.print();
     }
   }
 
@@ -157,9 +198,11 @@ export class PropertyDetailComponent implements OnInit {
   goExpress() {
     this.router.navigate(['logged/express']);
   }
+
   hideDetailProperty() {
     this.detailprofile = !this.detailprofile;
   }
+
   openarrow(value: number) {
     if (value === 1 && this.arrow1 === false) {
       this.arrow1 = true;
@@ -248,7 +291,7 @@ export class PropertyDetailComponent implements OnInit {
       } else if (this.listLikes[i]._id !== value) {
         this.announcementService.registerLike(request).subscribe(
           success => {
-            this.list()
+            this.list();
           },
           error => {
             console.log(error)
@@ -256,7 +299,6 @@ export class PropertyDetailComponent implements OnInit {
         )
       }
     }
-
   }
 
   announcementSelected(value) {

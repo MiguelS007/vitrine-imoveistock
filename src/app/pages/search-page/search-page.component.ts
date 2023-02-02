@@ -237,7 +237,7 @@ export class SearchPageComponent implements OnInit {
 
   }
 
-  filterSearch(){
+  filterSearch() {
     this.filterbtn = !this.filterbtn
   }
 
