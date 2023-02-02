@@ -18,8 +18,9 @@
                         <ng-template *ngFor="let item of response | slice: 0:15" swiperSlide>
                             <div class="col-md-12 mt-mobile" style="cursor: pointer;">
                                 <div class="h-100 product-announcement p-2 border-radius-10 bg-white">
-                                    <div class="bg-img-product py-2 px-3 border-radius-10">
-                                        <div class="w-100 h-50 d-flex">
+                                    <div class="py-2 px-3 position-relative" style="height: 219px;">
+                                        <img src="../../../../assets/img/ap.png" class="photo-announcement-card" (click)="announcementSelected(item._id)">
+                                        <div class="space-sale-exclusive">
                                             <h4
                                                 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
                                                 Venda</h4>
@@ -27,20 +28,20 @@
                                                 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
                                                 Exclusivo</h4>
                                         </div>
-                                        <div class="w-100 d-flex h-50 align-items-end justify-content-between">
+                                        <div class="space-value-announcement">
                                             <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                                 *ngIf="item.typeOfAd === 'sale'">{{item.saleValue | currency: 'R$'}}</p>
                                             <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                                 *ngIf="item.typeOfAd === 'rent'">{{item.leaseValue | currency: 'R$'}}
                                             </p>
-                                            <div (click)="likeHeart(item._id)"
+                                            <div (click)="likeHeart(item._id, item.liked)"
                                                 class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
                                                 <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' "
                                                     class="bi bi-heart-fill font-size-16 text-light"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div (click)="announcementSelected(item._id)" class="col-12 px-0">
+                                    <div class="col-12 px-0" (click)="announcementSelected(item._id)">
                                         <div class="w-100 mx-1 pt-3">
                                             <span
                                                 class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
@@ -88,9 +89,10 @@
                         [pagination]="{ clickable: true }" [scrollbar]="true">
                         <ng-template *ngFor="let item of response | slice: 0:10" swiperSlide>
                             <div class="col-md-12 mt-mobile px-0" style="cursor: pointer;">
-                                <div class="h-100 product-announcement p-2 border-radius-10 bg-white">
-                                    <div class="bg-img-product py-2 px-3 border-radius-10">
-                                        <div class="w-100 h-50 d-flex">
+                                <div class="h-100 w-100 product-announcement p-2 border-radius-10 bg-white">
+                                    <div class="py-2 px-3 position-relative" style="height: 219px;">
+                                        <img src="../../../../assets/img/ap.png" class="photo-announcement-card" (click)="announcementSelected(item._id)">
+                                        <div class="space-sale-exclusive">
                                             <h4
                                                 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
                                                 Venda</h4>
@@ -98,20 +100,20 @@
                                                 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
                                                 Exclusivo</h4>
                                         </div>
-                                        <div class="w-100 d-flex h-50 align-items-end justify-content-between">
+                                        <div class="space-value-announcement">
                                             <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                                 *ngIf="item.typeOfAd === 'sale'">{{item.saleValue | currency: 'R$'}}</p>
                                             <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                                 *ngIf="item.typeOfAd === 'rent'">{{item.leaseValue | currency: 'R$'}}
                                             </p>
-                                            <div (click)="likeHeart(item._id)"
-                                                class="h-fit bg-transparent-white heart-like border-radius-10 pt-2 pb-1">
+                                            <div (click)="likeHeart(item._id, item.liked)"
+                                                class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
                                                 <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' "
                                                     class="bi bi-heart-fill font-size-16 text-light"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div (click)="announcementSelected(item._id)" class="col-12 px-0">
+                                    <div class="col-12 px-0" (click)="announcementSelected(item._id)">
                                         <div class="w-100 mx-1 pt-3">
                                             <span
                                                 class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>

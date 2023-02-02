@@ -190,7 +190,7 @@ export class SearchPageComponent implements OnInit {
     );
   }
 
-  likeHeart(value) {
+  likeHeart(value, condition) {
 
     let request = {
       announcementId: value
@@ -211,10 +211,8 @@ export class SearchPageComponent implements OnInit {
           console.log(error)
         }
       )
-    }
-
-    for (let i = 0; i < this.listLikes.length; i++) {
-      if (this.listLikes[i]._id === value) {
+    } else {
+      if (condition === true) {
         this.announcementService.registerUnlike(request).subscribe(
           success => {
             this.ngOnInit()
@@ -223,7 +221,7 @@ export class SearchPageComponent implements OnInit {
             console.log(error)
           }
         )
-      } else if (this.listLikes[i]._id !== value) {
+      } else if (condition === undefined) {
         this.announcementService.registerLike(request).subscribe(
           success => {
             this.ngOnInit()
@@ -233,7 +231,10 @@ export class SearchPageComponent implements OnInit {
           }
         )
       }
+
     }
+
+
 
   }
 

@@ -59,6 +59,12 @@ export class HomeProductsComponent implements OnInit {
                 }
                 this.listLikes.push(success[i].announcement)
               }
+            },
+            error => {
+              if (error.error.message === 'Unauthorized') {
+                localStorage.removeItem('userDto');
+                localStorage.removeItem('user');
+              }
             }
           )
         }
@@ -68,7 +74,7 @@ export class HomeProductsComponent implements OnInit {
   }
 
 
-  likeHeart(value) {
+  likeHeart(value, condition) {
 
     let request = {
       announcementId: value
@@ -89,10 +95,8 @@ export class HomeProductsComponent implements OnInit {
           console.log(error)
         }
       )
-    }
-
-    for (let i = 0; i < this.listLikes.length; i++) {
-      if (this.listLikes[i]._id === value) {
+    } else {
+      if (condition === true) {
         this.announcementService.registerUnlike(request).subscribe(
           success => {
             this.list()
@@ -101,7 +105,7 @@ export class HomeProductsComponent implements OnInit {
             console.log(error)
           }
         )
-      } else if (this.listLikes[i]._id !== value) {
+      } else if (condition === undefined) {
         this.announcementService.registerLike(request).subscribe(
           success => {
             this.list()
@@ -111,10 +115,12 @@ export class HomeProductsComponent implements OnInit {
           }
         )
       }
+
     }
 
-  }
 
+
+  }
 
 
   announcementSelected(value) {
