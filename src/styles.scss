@@ -973,11 +973,13 @@ input:focus {
 .space-value-announcement {
     position: absolute !important;
     bottom: 0px !important;
+    left: 0px !important;
     display: flex !important;
     justify-content: space-between !important;
     width: 100% !important;
     align-items: center !important;
     padding: 0px 16px 8px 16px !important;
+    z-index: 99999 !important;
 }
 
 //HEADER-CARDS
@@ -988,6 +990,22 @@ input:focus {
 .scheduling-visit-selected {
     border: 1px solid var(--greenlight);
     box-shadow: 1px 1px 19px var(--greenlight);
+}
+
+.photo-announcement-card {
+    position: absolute;
+    height: 219px !important;
+    width: 100% !important;
+    top: 0px !important;
+    left: 0px !important;
+    z-index: 1;
+}
+
+.space-sale-exclusive {
+    position: absolute !important;
+    z-index: 2 !important;
+    top: 16px !important;
+    display: flex !important;
 }
 
 @media (max-width: 1776px) {
@@ -1419,6 +1437,7 @@ vg-overlay-play .vg-overlay-play {
 
 .logo-navbar-desktop {
     height: 100px !important;
+    cursor: pointer;
 }
 
 .logo-navbar-mobile {
@@ -1459,6 +1478,16 @@ vg-overlay-play .vg-overlay-play {
     background-color: white !important;
     width: 150px !important;
     text-align: start !important;
+}
+
+.btn-filter-mobile {
+    display: none !important;
+}
+
+.scroll-message-header-home {
+    position: absolute !important;
+    right: 0px !important;
+    bottom: 16px !important;
 }
 
 // MEDIA
@@ -1801,6 +1830,10 @@ vg-overlay-play .vg-overlay-play {
     // .space-see-maps-area-search {
     //     flex-direction: column !important;
     // }
+
+    .btn-filter-mobile {
+        display: block !important;
+    }
 
     .btn-ver-no-mapa {
         background: #542FDF !important;

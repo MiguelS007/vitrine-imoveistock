@@ -81,7 +81,6 @@ export class ModalCodeComponent implements OnInit {
           success => {
             let user = JSON.stringify(success);
             localStorage.setItem('userDto', user);
-            this.router.navigate(['/']);
             this.modalService.dismissAll()
           },
           error => {

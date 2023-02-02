@@ -66,6 +66,8 @@ export class SearchPageComponent implements OnInit {
 
   listLikes: AnnouncementGetResponseDto[] = [];
 
+  messageNotSearch: boolean = false;
+
 
   constructor(
     private router: Router,
@@ -100,7 +102,14 @@ export class SearchPageComponent implements OnInit {
     this.products = this.datamokservice.resultSearch;
 
     let resultadoVerify = localStorage.getItem('resultSearch');
-    this.filterResult = JSON.parse(resultadoVerify);
+    if (resultadoVerify !== null) {
+      this.filterResult = JSON.parse(resultadoVerify);
+      if (this.filterResult.length === 0) {
+        this.messageNotSearch = true;
+      }
+    } else {
+      this.filterResult = [];
+    }
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
@@ -140,6 +149,10 @@ export class SearchPageComponent implements OnInit {
       checkconstruction: '',
       checkrenovated: '',
     }
+
+    // if(this.filterResult.length === 0) {
+    //   console.log('veio do click search')
+    // }
 
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.searchService.getPropertyListAll().subscribe(
@@ -190,7 +203,7 @@ export class SearchPageComponent implements OnInit {
     );
   }
 
-  likeHeart(value) {
+  likeHeart(value, condition) {
 
     let request = {
       announcementId: value
@@ -211,10 +224,8 @@ export class SearchPageComponent implements OnInit {
           console.log(error)
         }
       )
-    }
-
-    for (let i = 0; i < this.listLikes.length; i++) {
-      if (this.listLikes[i]._id === value) {
+    } else {
+      if (condition === true) {
         this.announcementService.registerUnlike(request).subscribe(
           success => {
             this.ngOnInit()
@@ -223,7 +234,7 @@ export class SearchPageComponent implements OnInit {
             console.log(error)
           }
         )
-      } else if (this.listLikes[i]._id !== value) {
+      } else if (condition === undefined) {
         this.announcementService.registerLike(request).subscribe(
           success => {
             this.ngOnInit()
@@ -233,7 +244,10 @@ export class SearchPageComponent implements OnInit {
           }
         )
       }
+
     }
+
+
 
   }
 

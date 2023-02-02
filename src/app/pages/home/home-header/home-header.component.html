@@ -21,7 +21,7 @@
                             Alugar
                         </button>
                     </div>
-                    <div class="col-12 px-0 mt-4 d-flex justify-content-center">
+                    <div class="col-12 px-0 mt-4 d-flex justify-content-center mb-5 pb-5">
                         <div class="w-100 painel-browser h-auto border-radius-10 max-w-1227">
                             <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
                                 <div class="dropdown">
@@ -79,7 +79,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="w-100">
+                                <div class="">
                                     <input #searchresult (keyup)="resultSearch(searchresult.value)"
                                         [value]="selectedcities" style="width: 220px;" type="text" placeholder="Local"
                                         formControlName="typePropertyLocal" maxlength="30"
@@ -492,33 +492,36 @@
 
                                         </div>
                                     </div>
-                                    <button (click)="propertyCharacteristics('propertyCharacteristics')"
+                                    <!-- <button (click)="propertyCharacteristics('propertyCharacteristics')"
                                         class="btn bg-light h-51 my-2 border-radius-100 px-3" type="button">
                                         <i class="bi color-blue bi-three-dots-vertical"></i>
-                                    </button>
+                                    </button> -->
                                 </div>
-                                <button (click)="confirm()"
-                                    class="btn input-property btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5 mx-2"
-                                    type="submit">Encontrar</button>
+                                <div class="d-flex justify-content-end w-100">
+
+                                    <button (click)="confirm()"
+                                        class="btn input-property btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5 mx-2"
+                                        type="submit">Encontrar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 d-none-mobile mt-5 d-flex justify-content-end">
-                        <div class="d-flex w-fit align-items-center">
-                            <p class="d-grid mr-5 pr-5">
-                                <span class="fw-700 font-size-18 black-mobile line-24 color-white">Role para baixo</span>
-                                <span style="opacity: 0.5;" class="fw-400 black-mobile font-size-18 line-24 color-white">para
-                                    descobrir mais</span>
-                            </p>
-                            <div class="scroll-down"></div>
-                        </div>
-                    </div>
                 </form>
             </div>
-
-
+            
+            
         </div>
     </div>
-
+    
+    <div class="scroll-message-header-home">
+        <div class="d-flex w-fit align-items-center">
+            <p class="d-grid mr-5 pr-5">
+                <span class="fw-700 font-size-18 black-mobile line-24 color-white">Role para baixo</span>
+                <span style="opacity: 0.5;" class="fw-400 black-mobile font-size-18 line-24 color-white">para
+                    descobrir mais</span>
+            </p>
+            <div class="scroll-down"></div>
+        </div>
+    </div>
 </main>
