@@ -54,7 +54,11 @@ export class ContactComponent implements OnInit {
   }
 
   openLogin() {
-    this.datamokservice.opModalLogin();
+    if (localStorage.getItem('user') === null) {
+      this.datamokservice.opModalLogin();
+    } else {
+      window.open('https://imoveistock-app.vercel.app/logged/home', '_blank');
+    }
   }
 
 }

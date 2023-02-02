@@ -66,6 +66,8 @@ export class SearchPageComponent implements OnInit {
 
   listLikes: AnnouncementGetResponseDto[] = [];
 
+  messageNotSearch: boolean = false;
+
 
   constructor(
     private router: Router,
@@ -100,7 +102,14 @@ export class SearchPageComponent implements OnInit {
     this.products = this.datamokservice.resultSearch;
 
     let resultadoVerify = localStorage.getItem('resultSearch');
-    this.filterResult = JSON.parse(resultadoVerify);
+    if (resultadoVerify !== null) {
+      this.filterResult = JSON.parse(resultadoVerify);
+      if (this.filterResult.length === 0) {
+        this.messageNotSearch = true;
+      }
+    } else {
+      this.filterResult = [];
+    }
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
@@ -140,6 +149,10 @@ export class SearchPageComponent implements OnInit {
       checkconstruction: '',
       checkrenovated: '',
     }
+
+    // if(this.filterResult.length === 0) {
+    //   console.log('veio do click search')
+    // }
 
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.searchService.getPropertyListAll().subscribe(
@@ -238,7 +251,7 @@ export class SearchPageComponent implements OnInit {
 
   }
 
-  filterSearch(){
+  filterSearch() {
     this.filterbtn = !this.filterbtn
   }
 
