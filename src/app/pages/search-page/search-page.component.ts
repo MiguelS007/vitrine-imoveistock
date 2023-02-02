@@ -68,6 +68,8 @@ export class SearchPageComponent implements OnInit {
 
   messageNotSearch: boolean = false;
 
+  selectTypeAd: string = 'Selecione';
+
 
   constructor(
     private router: Router,
@@ -81,17 +83,18 @@ export class SearchPageComponent implements OnInit {
 
   ) {
     this.form = this.formBuilder.group({
-      searchwords: ['', [Validators.required]],
-      localproperty: ['', [Validators.required]],
-      typeproperty: ['', [Validators.required]],
-      typeprice: ['', [Validators.required]],
-      typebathroom: ['', [Validators.required]],
-      typerooms: ['', [Validators.required]],
-      typevacancies: ['', [Validators.required]],
-      typeconstruction: ['', [Validators.required]],
-      typefootagemax: ['', [Validators.required]],
-      typefootagemin: ['', [Validators.required]],
-      orderby: ['', [Validators.required]],
+      searchwords: [''],
+      localproperty: [''],
+      propertyType: [''],
+      typeproperty: [''],
+      typeprice: [''],
+      typebathroom: [''],
+      typerooms: [''],
+      typevacancies: [''],
+      typeconstruction: [''],
+      typefootagemax: [''],
+      typefootagemin: [''],
+      orderby: [''],
     });
 
   }
@@ -101,6 +104,10 @@ export class SearchPageComponent implements OnInit {
     this.ngxSpinnerService.show();
     this.products = this.datamokservice.resultSearch;
 
+    
+    let recentlySeenList = localStorage.getItem('recentlySeen');
+    this.recentlySeenIdsList = JSON.parse(recentlySeenList);
+    
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
       this.filterResult = JSON.parse(resultadoVerify);
@@ -110,10 +117,7 @@ export class SearchPageComponent implements OnInit {
     } else {
       this.filterResult = [];
     }
-
-    let recentlySeenList = localStorage.getItem('recentlySeen');
-    this.recentlySeenIdsList = JSON.parse(recentlySeenList);
-
+    
     if (this.recentlySeenIdsList !== null) {
       for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
         this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
@@ -134,6 +138,7 @@ export class SearchPageComponent implements OnInit {
       typeAdTranslate = 'Venda'
     }
 
+    
     this.filtroResultDisplay = {
       typeAd: typeAdTranslate,
       where: this.filtroSelected?.where,
@@ -149,11 +154,18 @@ export class SearchPageComponent implements OnInit {
       checkconstruction: '',
       checkrenovated: '',
     }
+    
+    if(filtro !== null) {
+      this.form.patchValue({
+        typeproperty: this.filtroSelected.whatAreYouLookingFor,
+        localproperty: this.filtroSelected.where,
+        propertyType: this.filtroSelected.propertyType
+      })
+      this.searchByTypeAd(this.filtroSelected?.typeAd);
 
-    // if(this.filterResult.length === 0) {
-    //   console.log('veio do click search')
-    // }
-
+      console.log(this.filtroSelected)
+    }
+    
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.searchService.getPropertyListAll().subscribe(
         success => {
@@ -270,13 +282,12 @@ export class SearchPageComponent implements OnInit {
 
     if (this.recentlySeenList !== null) {
       for (let i = 0; i < list.length; i++) {
-        if (list[i]._id === value) {
-          return
+        if (list[i]._id !== value) {
+          list.push(verify);
         }
       }
     }
 
-    list.push(verify);
 
     this.recentlySeenList = list;
 
@@ -289,5 +300,12 @@ export class SearchPageComponent implements OnInit {
     this.orderBy = value
   }
 
+  searchByTypeAd(item) {
+    if(item === 'sale') {
+      this.selectTypeAd = 'Venda'
+    } else if (item === 'rent') {
+      this.selectTypeAd = 'Alugar'
+    }
+  }
 
 }
