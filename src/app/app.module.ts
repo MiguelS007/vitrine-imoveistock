@@ -1,5 +1,4 @@
 import { forwardRef, NgModule, LOCALE_ID } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 import { AppRoutingModule } from "./app-routing.module";
@@ -71,7 +70,6 @@ registerLocaleData(ptBr);
 
   imports: [
     HttpClientModule,
-    BrowserModule,
     BrowserAnimationsModule,
     NgbModule,
     AppRoutingModule,

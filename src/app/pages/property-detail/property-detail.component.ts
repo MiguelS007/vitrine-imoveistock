@@ -194,10 +194,11 @@ export class PropertyDetailComponent implements OnInit {
     console.log(value)
     this.horasSelecionada = value
   }
-
   goExpress() {
     this.router.navigate(['logged/express']);
   }
+
+
 
   hideDetailProperty() {
     this.detailprofile = !this.detailprofile;

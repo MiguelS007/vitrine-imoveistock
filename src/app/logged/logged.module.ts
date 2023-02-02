@@ -12,10 +12,6 @@ import { ExpressProposalComponent } from './express-proposal/express-proposal.co
 import { AnnouncementService } from '../service/announcement.service';
 import { FavoritesComponent } from './visits/components/favorites/favorites.component';
 import { SchedulingComponent } from './visits/components/scheduling/scheduling.component';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -25,10 +21,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SchedulingComponent,
   ],
   imports: [
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    NgbModule,
     CommonModule,
     LoggedRouteModule,
     FormsModule,

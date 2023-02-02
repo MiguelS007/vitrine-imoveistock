@@ -18,7 +18,8 @@
             <div style="background-image: url({{item.previews}})" class="bg-property-view w-100 h-600"></div>
           </ng-template>
         </swiper>
-        <div class="col-12 col-btns-preview-img px-5 d-flex py-5 align-items-center position-relative">
+        <div class="col-12 col-btns-preview-img px-5 d-flex py-5 align-items-center position-absolute">
+          <!-- OPTIONS HEADER BTNS -->
           <div class="w-auto d-flex overflow-y-scroll spc-btns-property align-items-center">
             <button type="button" data-toggle="modal" data-target="#previewimage"
               class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
@@ -41,10 +42,12 @@
               <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
             </button>
           </div>
+          <!-- HEART, SHARE ETC...BTNS -->
           <div class="options-img d-flex align-items-center">
-            <div *ngFor="let item of filterResult | slice:0:1" (click)="likeHeart(item._id)" class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' " class="bi font-size-24 text-light"></i>
-              </div>
+            <div *ngFor="let item of filterResult | slice:0:1" (click)="likeHeart(item._id)"
+              class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
+              <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' " class="bi font-size-24 text-light"></i>
+            </div>
             <div (click)="btninteractionimg('share')"
               class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
               <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bi font-size-24 text-light"></i>
@@ -56,7 +59,7 @@
           </div>
         </div>
         <div class="col-12">
-          <!-- Modal -->
+          <!-- Modal VIEW IMAGES -->
           <div class="modal fade" id="previewimage" tabindex="-1" role="dialog" aria-labelledby="previewimageTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-lg-preview
@@ -86,9 +89,12 @@
         </div>
       </div>
     </div>
+
     <div class="col-12 bg-graylight mt-mobile px-0 d-flex justify-content-center">
       <div class="row max-w-1918 col-md-10 px-0 row-body-details-property">
         <div class="col-8 col-body-details-property">
+          <!-- FIRST INFO CARD -->
+
           <div class="w-100 border-radius-10 bg-white">
             <div class="w-100 align-items-center mt-4 pt-5 px-5">
               <h1 class="fw-400 font-size-18 d-inline-block
@@ -114,45 +120,9 @@
                        color-black">o que está te acontecendo</span>
               <br />
               <br />
-              <p class="fw-400 font-size-18 line-24
-                       color-black" style="white-space:pre-line">
-                Evans Tower very high demand corner
-                junior one bedroom plus a large balcony
-                boasting full open NYC views. You need
-                to see the views to believe them. Mint
-                condition with new hardwood floors. Lots
-                of closets plus washer and dryer.
-              </p>
               <p class="fw-400 font-size-18 line-24 py-3
                        color-black" style="white-space:pre-line">
-                Fully furnished. Elegantly appointed
-                condominium unit situated on premier
-                location. PS6. The wide entry hall leads
-                to a large living room with dining area.
-                This expansive 2 bedroom and 2 renovated
-                marble bathroom apartment has great
-                windows. Despite the interior views, the
-                apartments Southern and Eastern
-                exposures allow for lovely natural light
-                to fill every room. The master suite is
-                surrounded by handcrafted milkwork and
-                features incredible walk-in closet and
-                storage space.
-                The second bedroom is a corner room with
-                double windows.
-              </p>
-              <p class="fw-400 font-size-18 line-24 py-3
-                       color-black" style="white-space:pre-line">
-                The kitchen has fabulous space, new
-                appliances, and a laundry area. Other
-                features include rich herringbone
-                floors, crown moldings and coffered
-                ceilings throughout the apartment. 1049
-                5th Avenue is a classic pre-war building
-                located across from Central Park, the
-                reservoir and The Metropolitan Museum.
-                Elegant lobby and 24 hours doorman. This
-                is a pet-friendly building.
+                       {{response.description || '-'}}
               </p>
             </div>
             <div class="w-100 py-4 border-bottom-gray px-5">
@@ -305,7 +275,9 @@
               </table>
             </div>
           </div>
-          <div class="w-100 border-radius-10 mt-4 info-cards-property p-5 bg-white">
+          <!-- INFO CARDS -->
+
+          <div class="w-100 border-radius-10 mt-4 info-cards-property px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
               <img *ngIf="!arrow1" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
@@ -416,7 +388,7 @@
               </tbody>
             </table>
           </div>
-          <div class="w-100 border-radius-10 mt-4 info-cards-property p-5 bg-white">
+          <div class="w-100 border-radius-10 mt-4 info-cards-property px-5 pt-4 pb-3  bg-white">
             <div class="w-100 d-flex pb-3 justify-content-between align-items-center">
               <p class="w-100 d-grid pr-1 align-items-center mb-0">
                 <span class="color-black fw-700 font-size-16 line-20">
@@ -434,7 +406,7 @@
               class="w-100 h-600 animate__animated animate__fadeInUp" style="border:0;" allowfullscreen=""
               loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-          <div id="previewplant" class="w-100 border-radius-10 info-cards-property mt-4 p-5 bg-white">
+          <div id="previewplant" class="w-100 border-radius-10 info-cards-property mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Planta baixa</p>
               <img *ngIf="!arrow3" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
@@ -532,7 +504,7 @@
             <div class="col-12 col-cards-products px-0 col-sm-12">
               <div
                 *ngFor="let item of responseAnnouncement | paginate: { itemsPerPage: 4, currentPage:paginationProduct }; let i= index"
-                class="col-md-5 card-product-result d-inline-block mt-5 mx-1 p-3 border-radius-10 bg-white cursor-pointer">
+                class="card-product-result d-inline-block mt-5 mr-3 p-3 border-radius-10 bg-white cursor-pointer">
                 <div class="h-100  p-2 border-radius-10 bg-white">
                   <div class="bg-img-product py-2 px-3 border-radius-10">
                     <div class="w-100 h-50 d-flex">
@@ -603,57 +575,60 @@
             </div>
           </div>
         </div>
+        <!-- PAYMENT METHOD -->
+
         <div class="col-4 col-body-details-property">
-          <div class="w-100 mt-4 p-5 border-radius-10
-                 bg-white">
-            <p class="d-grid w-100">
-              <span class="fw-700 font-size-18 line-24
+          <div class="w-100 mt-4 border-radius-10">
+            <div class="w-100 mt-4 bg-white p-4 border-radius-10">
+
+              <p class="d-grid w-100">
+                <span class="fw-700 font-size-18 line-24
                        color-black">Alta procura</span>
-              <span class="fw-400 font-size-14 line-19
+                <span class="fw-400 font-size-14 line-19
                        color-black">226 pessoas viram esse
-                imóvel recentemente</span>
-            </p>
-            <hr class="hr" />
-            <div class="row">
-              <div class="col-12 d-flex py-2 align-items-center justify-content-between">
-                <span class="fw-700 font-size-18 line-24 color-black">Aluguel
-                  <i class="bi font-size-14 color-muted bi-info-circle"></i>
-                </span>
-                <span class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
-                  '-'}}</span>
+                  imóvel recentemente</span>
+              </p>
+              <hr class="hr" />
+              <div class="row">
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                </div>
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-700 font-size-18 line-24 color-black">Condomínio
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span class="fw-700 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                </div>
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-700 font-size-18 line-24 color-black">IPTU
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span class="fw-700 font-size-18 line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' ||
+                    '-'}}</span>
+                </div>
+                <div class="col-12">
+                  <h6 class="my-4" style="outline-style: dotted;"></h6>
+                </div>
+                <div class="col-12 d-flex py-4 align-items-center justify-content-between">
+                  <span class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span class="fw-700 font-size-18 line-24 color-black">{{finalValue | currency: 'R$ ' || '-'}}</span>
+                </div>
               </div>
-              <div class="col-12 d-flex py-2 align-items-center justify-content-between">
-                <span class="fw-700 font-size-18 line-24 color-black">Condomínio
-                  <i class="bi font-size-14 color-muted bi-info-circle"></i>
-                </span>
-                <span class="fw-700 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ ' ||
-                  '-'}}</span>
-              </div>
-              <div class="col-12 d-flex py-2 align-items-center justify-content-between">
-                <span class="fw-700 font-size-18 line-24 color-black">IPTU
-                  <i class="bi font-size-14 color-muted bi-info-circle"></i>
-                </span>
-                <span class="fw-700 font-size-18 line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' ||
-                  '-'}}</span>
-              </div>
-              <div class="col-12">
-                <h6 class="my-4" style="outline-style: dotted;"></h6>
-              </div>
-              <div class="col-12 d-flex py-4 align-items-center justify-content-between">
-                <span class="fw-700 font-size-18 line-24 color-black">Aluguel
-                  <i class="bi font-size-14 color-muted bi-info-circle"></i>
-                </span>
-                <span class="fw-700 font-size-18 line-24 color-black">{{finalValue | currency: 'R$ ' || '-'}}</span>
-              </div>
-            </div>
-            <!-- undefined -->
-            <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
+              <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
                     fw-700 font-size-18 line-24 mt-3 text-light
                     w-100" type="button">Agendar visita</button>
-            <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
+              <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
                     fw-700 font-size-18 line-24 mt-3 color-purple
                     w-100" type="button">Fazer Proposta</button>
-          <!-- VERSION MOBILE ANNOUNCEMEMNTS -->
+            </div>
+            <!-- VERSION MOBILE ANNOUNCEMEMNTS -->
             <div class="row d-block-desk mt-4" style="display: none;">
               <swiper class="col-12 slide" [slidesPerView]="1" [pagination]="{ clickable: true }" [scrollbar]="false">
                 <ng-template *ngFor="let item of responseAnnouncement" class="col-12 col-cards-products px-0 col-sm-12"
@@ -730,7 +705,8 @@
                 </ng-template>
               </swiper>
             </div>
-            <div class="w-100 mt-4 border-radius-10 bg-white p-4">
+            <!-- EXCLUSIVE MOBILES -->
+            <div class="w-100 mt-4 p-4 border-radius-10 bg-white mb-5 pt-4">
               <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
                 exclusivos
               </p>
@@ -769,6 +745,7 @@
                 </ng-template>
               </swiper>
             </div>
+            <!-- FLOAT BTN SCHEDULE -->
             <div (click)="scheduling(response)"
               class="schedule-visit-modal d-flex cursor-pointer position-fixed z-10 border-radius-10 bg-greenlight">
               <img src="../../../../assets/icon/calendar.svg" class="" />
