@@ -1549,6 +1549,8 @@ vg-overlay-play .vg-overlay-play {
     }
     .form-search{
         flex-direction: column-reverse !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
     }
 
     .space-see-maps-area-search{
@@ -1693,7 +1695,7 @@ vg-overlay-play .vg-overlay-play {
         padding: 20px 12px !important;
     }
 
-    .btn-view-img img {
+    .btn-view-img img{
         width: 16px !important;
     }
 
@@ -1789,6 +1791,14 @@ vg-overlay-play .vg-overlay-play {
     .w-full {
         width: 100% !important;
     }
+
+    // SEARCH-MAP
+    .btn-map-mobile, .btn-map-filter{
+        padding: 0.6rem 1rem !important;
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-right: 0 !important;
+    }
 }
 
 // mobile-zone
@@ -1853,10 +1863,6 @@ vg-overlay-play .vg-overlay-play {
         margin: initial !important;
     }
 
-    .form-search {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
 
     .label-search-words,
     .label-search-local {
