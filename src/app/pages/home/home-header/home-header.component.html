@@ -79,7 +79,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="w-100">
+                                <div class="">
                                     <input #searchresult (keyup)="resultSearch(searchresult.value)"
                                         [value]="selectedcities" style="width: 220px;" type="text" placeholder="Local"
                                         formControlName="typePropertyLocal" maxlength="30"
@@ -497,9 +497,12 @@
                                         <i class="bi color-blue bi-three-dots-vertical"></i>
                                     </button> -->
                                 </div>
-                                <button (click)="confirm()"
-                                    class="btn input-property btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5 mx-2"
-                                    type="submit">Encontrar</button>
+                                <div class="d-flex justify-content-end w-100">
+
+                                    <button (click)="confirm()"
+                                        class="btn input-property btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5 mx-2"
+                                        type="submit">Encontrar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
