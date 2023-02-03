@@ -12,6 +12,7 @@ import { ExpressProposalComponent } from './express-proposal/express-proposal.co
 import { AnnouncementService } from '../service/announcement.service';
 import { FavoritesComponent } from './visits/components/favorites/favorites.component';
 import { SchedulingComponent } from './visits/components/scheduling/scheduling.component';
+import { SchedulingSelectedModalComponent } from './visits/components/scheduling/scheduling-selected-modal/scheduling-selected-modal.component';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -19,6 +20,7 @@ import { SchedulingComponent } from './visits/components/scheduling/scheduling.c
     ExpressProposalComponent,
     FavoritesComponent,
     SchedulingComponent,
+    SchedulingSelectedModalComponent,
   ],
   imports: [
     CommonModule,

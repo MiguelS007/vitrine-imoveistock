@@ -1,9 +1,7 @@
 <main class="bg-graylight main-search position-relative w-100 p-5">
-    <form [formGroup]="form" class="row form-search pt-5 h-100 m-0-auto mx-5 px-5
-       max-w-1918">
+    <form [formGroup]="form" class="row form-search pt-5 h-100 m-0-auto mx-5 px-5 max-w-1918">
         <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
-            <p class="d-flex fw-700 font-size-16 line-19 color-black
-             align-items-center">Página Inicial /
+            <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">Página Inicial /
                 <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;
                     Resultado de busca
                 </span>
@@ -21,59 +19,119 @@
         </div>
         <div class="col-4 col-body-products mt-5">
             <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
-                <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center">
+                <!-- <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center">
                     <input type="search"
-                        class="form-control border-0 border-radius-10 bg-light pl-4 fw-400 font-size-16 line-20 text-capitalize"
-                        formControlName="typeproperty" placeholder="O que esta buscando?"
-                        aria-describedby="button-addon2">
+                        class="form-control border-0 border-radius-10 bg-light pl-3 fw-400 font-size-16 line-20 text-capitalize"
+                        formControlName="typeproperty" placeholder="O que esta buscando?" aria-describedby="button-addon2">
                     <div class="input-group-append mx-2">
                         <i class="bi bi-search font-size-24"></i>
                     </div>
+                </div> -->
+                <div class="dropdown">
+                    <button style="min-width: 162.23px !important;"
+                        class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                        type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        {{whatAreYouLookingForTitle}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" (click)="whatAreYouLookingFor('Edifício')">Edifício</a>
+                        <a class="dropdown-item" (click)="whatAreYouLookingFor('Terreno')">Terreno</a>
+                        <a class="dropdown-item" (click)="whatAreYouLookingFor('Casa')">Casa</a>
+                    </div>
                 </div>
                 <div class="dropdown">
-                    <a class="btn pl-4 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                        href="#" role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         {{selectTypeAd}}
                     </a>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="resultSituation">
                         <a class="dropdown-item" (click)="searchByTypeAd('sale')">Comprar</a>
                         <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
                     </div>
                 </div>
                 <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center mt-4">
                     <input type="search"
-                        class="form-control border-0 border-radius-10 bg-light pl-4 fw-400 font-size-16 line-20"
+                        class="form-control border-0 border-radius-10 bg-light pl-3 fw-400 font-size-16 line-20"
                         formControlName="localproperty" placeholder="Local" aria-describedby="button-addon2">
                     <div class="input-group-append mx-2">
                         <i class="bi bi-geo-alt font-size-24"></i>
                     </div>
                 </div>
                 <input formControlName="propertyType" type="text" placeholder="Tipo de imóvel" class="btn border text-capitalize border-radius-10 bg-light fw-400 mt-4
-                text-left font-size-16 line-20 pl-4 color-black w-100
+                text-left font-size-16 line-20 pl-3 color-black w-100
                 h-74" />
-                <input formControlName="typeprice" type="text" placeholder="Preço" class="btn border border-radius-10 bg-light fw-400 mt-4
-                text-left font-size-16 line-20 pl-4 color-black w-100
-                h-74" maxlength="10"/>
-                <input formControlName="typebathroom" type="text" placeholder="Banheiros" class="btn border border-radius-10 bg-light fw-400 mt-4
-                text-left font-size-16 line-20 pl-4 color-black w-100
-                h-74" mask="000" />
-                <input formControlName="typerooms" type="text" placeholder="Quartos" class="btn border border-radius-10 bg-light fw-400 mt-4
-                text-left font-size-16 line-20 pl-4 color-black w-100
-                h-74" mask="000" />
-                <input formControlName="typevacancies" type="text" placeholder="Vagas" class="btn border border-radius-10 bg-light fw-400 mt-4
-                text-left font-size-16 line-20 pl-4 color-black w-100
-                h-74" mask="000"/>
+                <div class="row mt-4 px-0">
+                    <div class="col-12">
+                        <p class="fw-400 pl-1 pb-0 color-black text-left font-size-16 line-20 ">Preço</p>
+                    </div>
+                    <div class="col-6">
+                        <input formControlName="typeMinPrice" type="text" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
+                            class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                            maxlength="15" />
+                    </div>
+                    <div class="col-6">
+                        <input formControlName="typeMaxPrice" type="text" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
+                            class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                            maxlength="20" />
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <input type="text" formControlName="typerooms" [value]="selectRooms" [placeholder]="selectRooms"
+                        class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                        role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        readonly>
+                    <div class="dropdown-menu" aria-labelledby="resultRooms">
+                        <a class="dropdown-item" (click)="searchBy('1')">1+</a>
+                        <a class="dropdown-item" (click)="searchBy('2')">2+</a>
+                        <a class="dropdown-item" (click)="searchBy('3')">3+</a>
+                        <a class="dropdown-item" (click)="searchBy('4')">4+</a>
+                        <a class="dropdown-item" (click)="searchBy('5')">5+</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <input type="text" formControlName="typebathroom" [value]="selectBathrooms"
+                        [placeholder]="selectBathrooms"
+                        class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                        role="button" id="resultBadRooms" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" readonly>
+                    <div class="dropdown-menu" aria-labelledby="resultBadRooms">
+                        <a class="dropdown-item" (click)="searchBy('1b')">1+</a>
+                        <a class="dropdown-item" (click)="searchBy('2b')">2+</a>
+                        <a class="dropdown-item" (click)="searchBy('3b')">3+</a>
+                        <a class="dropdown-item" (click)="searchBy('4b')">4+</a>
+                        <a class="dropdown-item" (click)="searchBy('5b')">5+</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <input type="text" formControlName="typevacancies" [value]="selectVacancies"
+                        [placeholder]="selectVacancies"
+                        class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                        role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" readonly>
+                    <div class="dropdown-menu" aria-labelledby="resultVacancies">
+                        <a class="dropdown-item" (click)="searchBy('tf')">Tanto faz</a>
+                        <a class="dropdown-item" (click)="searchBy('1v')">1+</a>
+                        <a class="dropdown-item" (click)="searchBy('2v')">2+</a>
+                        <a class="dropdown-item" (click)="searchBy('3v')">3+</a>
+                        <a class="dropdown-item" (click)="searchBy('4v')">4+</a>
+                        <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                        <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                    </div>
+                </div>
                 <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
-                text-left font-size-16 line-20 pl-4 color-black w-100
-                h-74" mask="0000"/>
+                text-left font-size-16 line-20 pl-3 color-black w-100
+                h-74" mask="0000" />
                 <div class="w-100 d-flex align-items-center">
                     <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
-                   mr-1 text-left font-size-16 line-20 pl-4 color-black
-                   w-100 h-74" mask="000"/>
+                   mr-1 text-left font-size-16 line-20 pl-3 color-black
+                   w-100 h-74" mask="000" />
                     <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
-                   ml-1 text-left font-size-16 line-20 pl-4 color-black
-                   w-100 h-74" mask="000"/>
+                   ml-1 text-left font-size-16 line-20 pl-3 color-black
+                   w-100 h-74" mask="000" />
                 </div>
                 <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
                 line-24 border-radius-10 h-74 w-100" type="submit">
@@ -172,7 +230,7 @@
                     <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
                     <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
                 </a>
-                <div class="btn-ver-no-filter py-4 px-2 d-block-tablet btn-filter-mobile"
+                <div class="btn-ver-no-filter py-4 px-2 d-block-desk btn-filter-mobile"
                     [class]="filterbtn ? 'd-none':'d-block'" data-toggle="modal" data-target="#filtersearch">
                     <img src="../../../assets/icon/filter.png" height="23" class="mx-3" />
                     <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Filtrar</span>
@@ -300,51 +358,111 @@
                         </button>
                     </div>
                     <div class="anima-body">
-                        <div class="w-100 border-radius-10 bg-white p-5">
+                        <div class="w-100 d-block-desk border-radius-10 bg-white p-5">
                             <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center">
                                 <input type="search"
-                                    class="form-control border-0 border-radius-10 bg-light pl-4 fw-400 font-size-16 line-20"
-                                    formControlName="localproperty" placeholder="Local" placeholder="Local"
+                                    class="form-control border-0 border-radius-10 bg-light pl-3 fw-400 font-size-16 line-20 text-capitalize"
+                                    formControlName="typeproperty" placeholder="O que esta buscando?"
                                     aria-describedby="button-addon2">
                                 <div class="input-group-append mx-2">
                                     <i class="bi bi-search font-size-24"></i>
                                 </div>
                             </div>
+                            <div class="dropdown">
+                                <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                                    href="#" role="button" id="resultSituation" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    {{selectTypeAd}}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="resultSituation">
+                                    <a class="dropdown-item" (click)="searchByTypeAd('sale')">Comprar</a>
+                                    <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
+                                </div>
+                            </div>
                             <div
                                 class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center mt-4">
                                 <input type="search"
-                                    class="form-control border-0 border-radius-10 bg-light pl-4 fw-400 font-size-16 line-20"
-                                    formControlName="localproperty" placeholder="Local" placeholder="Local"
+                                    class="form-control border-0 border-radius-10 bg-light pl-3 fw-400 font-size-16 line-20"
+                                    formControlName="localproperty" placeholder="Local"
                                     aria-describedby="button-addon2">
                                 <div class="input-group-append mx-2">
                                     <i class="bi bi-geo-alt font-size-24"></i>
                                 </div>
                             </div>
-                            <input formControlName="typeproperty" type="text" placeholder="Tipo de imóvel" class="btn border border-radius-10 bg-light fw-400 mt-4
-                            text-left font-size-16 line-20 pl-4 color-black w-100
+                            <input formControlName="propertyType" type="text" placeholder="Tipo de imóvel" class="btn border text-capitalize border-radius-10 bg-light fw-400 mt-4
+                            text-left font-size-16 line-20 pl-3 color-black w-100
                             h-74" />
-                            <input formControlName="typeprice" type="text" placeholder="Preço" class="btn border border-radius-10 bg-light fw-400 mt-4
-                            text-left font-size-16 line-20 pl-4 color-black w-100
-                            h-74" />
-                            <input formControlName="typebathroom" type="text" placeholder="Banheiros" class="btn border border-radius-10 bg-light fw-400 mt-4
-                            text-left font-size-16 line-20 pl-4 color-black w-100
-                            h-74" />
-                            <input formControlName="typerooms" type="text" placeholder="Quartos" class="btn border border-radius-10 bg-light fw-400 mt-4
-                            text-left font-size-16 line-20 pl-4 color-black w-100
-                            h-74" />
-                            <input formControlName="typevacancies" type="text" placeholder="Vagas" class="btn border border-radius-10 bg-light fw-400 mt-4
-                            text-left font-size-16 line-20 pl-4 color-black w-100
-                            h-74" />
+                            <div class="row mt-4 px-0">
+                                <div class="col-12">
+                                    <p class="fw-400 pl-1 pb-0 color-black text-left font-size-16 line-20 ">Preço</p>
+                                </div>
+                                <div class="col-6">
+                                    <input formControlName="typeMinPrice" type="text" currencyMask
+                                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
+                                        class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                                        maxlength="15" />
+                                </div>
+                                <div class="col-6">
+                                    <input formControlName="typeMaxPrice" type="text" currencyMask
+                                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
+                                        class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                                        maxlength="20" />
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <input type="text" formControlName="typerooms" [value]="selectRooms"
+                                    [placeholder]="selectRooms"
+                                    class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                                    role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" readonly>
+                                <div class="dropdown-menu" aria-labelledby="resultRooms">
+                                    <a class="dropdown-item" (click)="searchBy('1')">1+</a>
+                                    <a class="dropdown-item" (click)="searchBy('2')">2+</a>
+                                    <a class="dropdown-item" (click)="searchBy('3')">3+</a>
+                                    <a class="dropdown-item" (click)="searchBy('4')">4+</a>
+                                    <a class="dropdown-item" (click)="searchBy('5')">5+</a>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <input type="text" formControlName="typebathroom" [value]="selectBathrooms"
+                                    [placeholder]="selectBathrooms"
+                                    class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                                    role="button" id="resultBadRooms" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" readonly>
+                                <div class="dropdown-menu" aria-labelledby="resultBadRooms">
+                                    <a class="dropdown-item" (click)="searchBy('1b')">1+</a>
+                                    <a class="dropdown-item" (click)="searchBy('2b')">2+</a>
+                                    <a class="dropdown-item" (click)="searchBy('3b')">3+</a>
+                                    <a class="dropdown-item" (click)="searchBy('4b')">4+</a>
+                                    <a class="dropdown-item" (click)="searchBy('5b')">5+</a>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <input type="text" formControlName="typevacancies" [value]="selectVacancies"
+                                    [placeholder]="selectVacancies"
+                                    class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                                    role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" readonly>
+                                <div class="dropdown-menu" aria-labelledby="resultVacancies">
+                                    <a class="dropdown-item" (click)="searchBy('tf')">Tanto faz</a>
+                                    <a class="dropdown-item" (click)="searchBy('1v')">1+</a>
+                                    <a class="dropdown-item" (click)="searchBy('2v')">2+</a>
+                                    <a class="dropdown-item" (click)="searchBy('3v')">3+</a>
+                                    <a class="dropdown-item" (click)="searchBy('4v')">4+</a>
+                                    <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                                    <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                                </div>
+                            </div>
                             <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
-                            text-left font-size-16 line-20 pl-4 color-black w-100
-                            h-74" />
+                            text-left font-size-16 line-20 pl-3 color-black w-100
+                            h-74" mask="0000" />
                             <div class="w-100 d-flex align-items-center">
                                 <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
-                               mr-1 text-left font-size-16 line-20 pl-4 color-black
-                               w-100 h-74" />
+                               mr-1 text-left font-size-16 line-20 pl-3 color-black
+                               w-100 h-74" mask="000" />
                                 <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
-                               ml-1 text-left font-size-16 line-20 pl-4 color-black
-                               w-100 h-74" />
+                               ml-1 text-left font-size-16 line-20 pl-3 color-black
+                               w-100 h-74" mask="000" />
                             </div>
                             <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
                             line-24 border-radius-10 h-74 w-100" type="submit">

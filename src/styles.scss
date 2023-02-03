@@ -975,7 +975,7 @@ input:focus {
     width: 100% !important;
     align-items: center !important;
     padding: 0px 16px 8px 16px !important;
-    z-index: 99999 !important;
+    z-index: 99 !important;
 }
 
 //HEADER-CARDS
@@ -1651,7 +1651,6 @@ vg-overlay-play .vg-overlay-play {
         justify-content: center !important;
     }
 
-    .options-img div {}
 
     .col-preview-img,
     .col-body-details-property {
@@ -1826,6 +1825,15 @@ vg-overlay-play .vg-overlay-play {
     // .space-see-maps-area-search {
     //     flex-direction: column !important;
     // }
+
+    .scheduling-visit-selected {
+        border: none;
+        box-shadow: none;
+    } 
+
+    .model-desktop-announcement-selected {
+        display: none !important;
+    }
 
     .btn-filter-mobile {
         display: block !important;

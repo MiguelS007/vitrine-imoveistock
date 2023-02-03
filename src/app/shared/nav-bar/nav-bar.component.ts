@@ -6,6 +6,7 @@ import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { ModalLoginComponent } from '../../auth/modal-login/modal-login.component';
+import { ModalCodeComponent } from 'src/app/auth/modal-code/modal-code.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -51,8 +52,6 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // console.log(this.user.name , 'the user');
-
   }
 
   ngOnInit(): void {

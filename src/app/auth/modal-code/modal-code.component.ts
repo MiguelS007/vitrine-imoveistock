@@ -5,9 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AuthetincatedUserDto } from 'src/app/dtos/authenticated-user.dto';
 import { AuthenticateCodeConfirmationRequestDto } from 'src/app/dtos/authentication-code-confirmation.dtos';
-import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import { DatamokService } from 'src/app/service/datamok.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -21,7 +19,7 @@ export class ModalCodeComponent implements OnInit {
   phone: string = '';
   spinnerload = false;
   continued = true;
-  notsendcodemsg = false;
+
   request: any = AuthenticateCodeConfirmationRequestDto;
   numberTel;
 
@@ -31,6 +29,12 @@ export class ModalCodeComponent implements OnInit {
   codigo2: string;
   codigo3: string;
   codigo4: string;
+
+  counterdown: any;
+  notsendcodemsg = false;
+  resendcode = true;
+  msgkeepcalm = false;
+  codereceived = 'Não recebi o código';
 
   constructor(
     private router: Router,
@@ -52,15 +56,32 @@ export class ModalCodeComponent implements OnInit {
     if (this.phone === null) {
       this.modalService.dismissAll()
     }
-
     this.numberTel = this.phone
   }
-  notSendCode(value: string) {
-    if (value === 'open') {
-      this.notsendcodemsg = true;
-    } else if (value === 'close') {
-      this.notsendcodemsg = false;
-    }
+
+
+  timer(minute) {
+    this.codereceived = 'Reenviar código';
+    this.resendcode = false;
+    this.msgkeepcalm = true;
+    let seconds: number = minute * 120;
+    let textSec: any = "0";
+    let statSec: number = 60;
+    const prefix = minute < 10 ? "0" : "";
+    const timer = setInterval(() => {
+      seconds--;
+      if (statSec != 0) statSec--;
+      else statSec = 59;
+      if (statSec < 10) {
+        textSec = "0" + statSec;
+      } else textSec = statSec;
+      this.counterdown = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
+      if (seconds == 0) {
+        this.resendcode = true;
+        this.msgkeepcalm = false;
+        clearInterval(timer);
+      }
+    }, 1000);
   }
   async confirm() {
     this.spinnerload = true;
@@ -84,19 +105,25 @@ export class ModalCodeComponent implements OnInit {
             this.modalService.dismissAll()
           },
           error => {
+
             console.error(error)
           }
         )
       },
       async error => {
-        this.toastrService.error('Erro ao confirmar codigo', '', { progressBar: true });
+        this.toastrService.error('Erro codigo Inválido', '', { progressBar: true });
         this.spinnerload = false;
         this.continued = true;
+        this.form.controls['code1'].setValue('');
+        this.form.controls['code2'].setValue('');
+        this.form.controls['code3'].setValue('');
+        this.form.controls['code4'].setValue('');
       }
     )
   }
 
   onDigitInput(event: any, item) {
+
     let digito = event.target.value
     if (item === 'code1') {
       this.codigo1 = digito;
@@ -117,12 +144,5 @@ export class ModalCodeComponent implements OnInit {
     }
   }
 
-  async runError(error: any) {
-    this.toastrService.error('Código Inválido! ', '', { progressBar: true });
 
-    this.spinnerload = false;
-    this.form.setValue({ coden1: '', coden2: '', coden3: '', coden4: '' });
-
-
-  }
 }
