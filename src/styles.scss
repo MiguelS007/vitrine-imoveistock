@@ -41,18 +41,29 @@
     background: #01FF5F !important;
 }
 
+.icon-menu-navbar {
+    font-size: 24px !important;
+}
+
 .changeColorNavbar {
     app-nav-bar {
         background-color: white !important;
     }
+
     .nav-link {
         color: #000000 !important;
     }
+
     .logo-navbar-desktop-branca {
         display: none !important;
     }
+
     .logo-navbar-desktop-preta {
         display: block !important;
+    }
+
+    .icon-menu-navbar {
+        color: black !important;
     }
 }
 
@@ -1506,10 +1517,11 @@ vg-overlay-play .vg-overlay-play {
 
 // MEDIA
 @media (max-width: 1240px) {
-    
+
     .margin-header-title-custom {
-       padding-top: 30% !important; 
+        padding-top: 30% !important;
     }
+
     // HOME-HEADER
     .bg-home-header {
         background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
@@ -1850,7 +1862,7 @@ vg-overlay-play .vg-overlay-play {
     .scheduling-visit-selected {
         border: none;
         box-shadow: none;
-    } 
+    }
 
     .model-desktop-announcement-selected {
         display: none !important;
@@ -2053,13 +2065,15 @@ vg-overlay-play .vg-overlay-play {
         display: none !important;
     }
 
-    .logo-navbar-desktop-preta {
-        display: none !important;
-    }
-
     .logo-navbar-mobile {
         display: flex !important;
         height: 100px !important;
+    }
+
+    .changeColorNavbar {
+        .logo-navbar-desktop-preta {
+            display: none !important;
+        }
     }
 }
 
