@@ -44,9 +44,9 @@
           </div>
           <!-- HEART, SHARE ETC...BTNS -->
           <div class="options-img d-flex align-items-center">
-            <div *ngFor="let item of filterResult | slice:0:1" (click)="likeHeart(item._id)"
+            <div (click)="likeHeartMain(response._id, response.liked)"
               class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-              <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' " class="bi font-size-24 text-light"></i>
+              <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' " class="bi font-size-24 text-light"></i>
             </div>
             <div (click)="btninteractionimg('share')"
               class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">

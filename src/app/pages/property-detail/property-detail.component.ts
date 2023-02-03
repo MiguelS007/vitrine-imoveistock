@@ -106,7 +106,7 @@ export class PropertyDetailComponent implements OnInit {
   ngOnInit(): void {
     this.ngxSpinnerService.show()
     this.onlyimg = this.datamokservice.onlypreview;
-    this.previewimg = this.datamokservice.imagespreview; 
+    this.previewimg = this.datamokservice.imagespreview;
     this.products = this.datamokservice.resultSearch;
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
@@ -118,44 +118,56 @@ export class PropertyDetailComponent implements OnInit {
 
     console.log(this.user?._id, this.response._id);
 
-    if (this.filterResult === null || this.filterResult.length === 0) {
-      this.searchService.getPropertyListAll().subscribe(
-        success => {
-          this.filterResult = success;
-          if (localStorage.getItem('user') !== null) {
-            this.announcementService.listLikes().subscribe(
-              success => {
-                for (let i = 0; i < success.length; i++) {
-                  for (let x = 0; x < this.filterResult.length; x++) {
-                    if (success[i].announcement._id === this.filterResult[x]._id) {
-                      Object.assign(this.filterResult[x], { liked: true });
-                    }
-                  }
-                  this.listLikes.push(success[i].announcement)
-                }
-              }
-            )
+    // if (this.filterResult === null || this.filterResult.length === 0) {
+    //   this.searchService.getPropertyListAll().subscribe(
+    //     success => {
+    //       this.filterResult = success;
+    //       if (localStorage.getItem('user') !== null) {
+    //         this.announcementService.listLikes().subscribe(
+    //           success => {
+    //             for (let i = 0; i < success.length; i++) {
+    //               for (let x = 0; x < this.filterResult.length; x++) {
+    //                 if (success[i].announcement._id === this.filterResult[x]._id) {
+    //                   Object.assign(this.filterResult[x], { liked: true });
+    //                 }
+    //               }
+    //               this.listLikes.push(success[i].announcement)
+    //             }
+    //           }
+    //         )
+    //       }
+    //       this.ngxSpinnerService.hide();
+
+    //     },
+    //   )
+    // } else {
+    //   if (localStorage.getItem('user') !== null) {
+    //     this.announcementService.listLikes().subscribe(
+    //       success => {
+    //         for (let i = 0; i < success.length; i++) {
+    //           for (let x = 0; x < this.filterResult.length; x++) {
+    //             if (success[i].announcement._id === this.filterResult[x]._id) {
+    //               Object.assign(this.filterResult[x], { liked: true });
+    //             }
+    //           }
+    //           this.listLikes.push(success[i].announcement)
+    //         }
+    //       }
+    //     )
+    //   }
+    // }
+
+
+    this.announcementService.listLikes().subscribe(
+      success => {
+        for (let i = 0; i < success.length; i++) {
+          if (success[i].announcement._id === this.response._id) {
+            Object.assign(this.response, { liked: true });
           }
-          this.ngxSpinnerService.hide();
-         
-        },
-      )
-    } else {
-      if (localStorage.getItem('user') !== null) {
-        this.announcementService.listLikes().subscribe(
-          success => {
-            for (let i = 0; i < success.length; i++) {
-              for (let x = 0; x < this.filterResult.length; x++) {
-                if (success[i].announcement._id === this.filterResult[x]._id) {
-                  Object.assign(this.filterResult[x], { liked: true });
-                }
-              }
-              this.listLikes.push(success[i].announcement)
-            }
-          }
-        )
+          this.listLikes.push(success[i].announcement)
+        }
       }
-    }
+    )
   }
 
 
@@ -183,12 +195,11 @@ export class PropertyDetailComponent implements OnInit {
 
 
   selectDate(value) {
-    
+
     this.dataSelecionada = value
   }
 
   selectTime(value) {
-    console.log(value)
     this.horasSelecionada = value
   }
   goExpress() {
@@ -220,7 +231,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   scheduling(item) {
-    if(localStorage.getItem('user') !== null) {
+    if (localStorage.getItem('user') !== null) {
       localStorage.setItem('announcementOfScheduling', JSON.stringify(item))
       this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
     } else {
@@ -248,18 +259,62 @@ export class PropertyDetailComponent implements OnInit {
           )
         }
       },
-      error => { console.log(error, 'data not collected') }
+      error => { console.error(error, 'data not collected') }
     );
   }
 
-  
+  likeHeartMain(value, condition) {
+    let request = {
+      announcementId: value
+    }
+
+    if (localStorage.getItem('user') === null) {
+      this.modalService.open(ModalLoginComponent, { centered: true });
+      return
+    }
+    if (this.listLikes.length === 0) {
+      this.announcementService.registerLike(request).subscribe(
+        success => {
+          this.response.liked = true;
+          return
+        },
+        error => {
+          console.error(error)
+        }
+      )
+    } else {
+      if (condition === true) {
+        this.announcementService.registerUnlike(request).subscribe(
+          success => {
+            this.response.liked = false;
+          },
+          error => {
+            console.error(error)
+          }
+        )
+      } else if (condition === undefined || condition === false) {
+        this.announcementService.registerLike(request).subscribe(
+          success => {
+            this.response.liked = true;
+          },
+          error => {
+            console.error(error)
+          }
+        )
+      }
+
+    }
+
+  }
+
+
   likeHeart(value) {
 
     let request = {
       announcementId: value
     }
 
-    
+
 
     if (localStorage.getItem('user') === null) {
       this.modalService.open(ModalLoginComponent, { centered: true });
@@ -307,5 +362,5 @@ export class PropertyDetailComponent implements OnInit {
     this.recentlySeenList = JSON.parse(teste);
   }
 
-  
+
 }
