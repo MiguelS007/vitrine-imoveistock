@@ -66,9 +66,14 @@ export class SearchPageComponent implements OnInit {
 
   listLikes: AnnouncementGetResponseDto[] = [];
 
-  messageNotSearch: boolean = false;
+  messageNotSearch = false;
 
-  selectTypeAd: string = 'Selecione';
+  selectTypeAd = 'Selecione';
+  selectBathrooms = 'Banheiros';
+  selectRooms = 'Dormitórios';
+  selectVacancies = 'Vagas';
+  valuePrices: 0;
+
 
 
   constructor(
@@ -87,7 +92,8 @@ export class SearchPageComponent implements OnInit {
       localproperty: [''],
       propertyType: [''],
       typeproperty: [''],
-      typeprice: [''],
+      typeMaxPrice: [''],
+      typeMinPrice: [''],
       typebathroom: [''],
       typerooms: [''],
       typevacancies: [''],
@@ -104,10 +110,10 @@ export class SearchPageComponent implements OnInit {
     this.ngxSpinnerService.show();
     this.products = this.datamokservice.resultSearch;
 
-    
+
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
-    
+
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
       this.filterResult = JSON.parse(resultadoVerify);
@@ -117,7 +123,7 @@ export class SearchPageComponent implements OnInit {
     } else {
       this.filterResult = [];
     }
-    
+
     if (this.recentlySeenIdsList !== null) {
       for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
         this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
@@ -138,7 +144,7 @@ export class SearchPageComponent implements OnInit {
       typeAdTranslate = 'Venda'
     }
 
-    
+
     this.filtroResultDisplay = {
       typeAd: typeAdTranslate,
       where: this.filtroSelected?.where,
@@ -154,8 +160,8 @@ export class SearchPageComponent implements OnInit {
       checkconstruction: '',
       checkrenovated: '',
     }
-    
-    if(filtro !== null) {
+
+    if (filtro !== null) {
       this.form.patchValue({
         typeproperty: this.filtroSelected.whatAreYouLookingFor,
         localproperty: this.filtroSelected.where,
@@ -165,7 +171,7 @@ export class SearchPageComponent implements OnInit {
 
       console.log(this.filtroSelected)
     }
-    
+
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.searchService.getPropertyListAll().subscribe(
         success => {
@@ -301,11 +307,52 @@ export class SearchPageComponent implements OnInit {
   }
 
   searchByTypeAd(item) {
-    if(item === 'sale') {
+    if (item === 'sale') {
       this.selectTypeAd = 'Venda'
     } else if (item === 'rent') {
       this.selectTypeAd = 'Alugar'
     }
+  }
+  searchBy(item) {
+    // SELECT BADROOMS
+    if (item === '1') {
+      this.selectRooms = '+1 Quarto'
+    } else if (item === '2') {
+      this.selectRooms = '+2  Quartos'
+    } else if (item === '3') {
+      this.selectRooms = '+3  Quartos'
+    } else if (item === '4') {
+      this.selectRooms = '+4  Quartos'
+    } else if (item === '5') {
+      this.selectRooms = '+5  Quartos'
+    }
+    // SELECT BATHROOMS
+    else if (item === '1b') {
+      this.selectBathrooms = '+1  Banheiro'
+    }  else if (item === '2b') {
+      this.selectBathrooms = '+2  Banheiros'
+    } else if (item === '3b') {
+      this.selectBathrooms = '+3  Banheiros'
+    } else if (item === '4b') {
+      this.selectBathrooms = '+4  Banheiros'
+    } else if (item === '5b') {
+      this.selectBathrooms = '+5  Banheiros'
+    }
+    // SELECT ROOMS
+    else if (item === 'tf') {
+      this.selectVacancies = 'Tanto faz'
+    }  else if (item === '1v') {
+      this.selectVacancies = '+1  Vagas'
+    } else if (item === '2v') {
+      this.selectVacancies = '+2  Vagas'
+    } else if (item === '3v') {
+      this.selectVacancies = '+3  Vagas'
+    } else if (item === '4v') {
+      this.selectVacancies = '+4  Vagas'
+    } else if (item === '5v') {
+      this.selectVacancies = '+5  Vagas'
+    }
+
   }
 
 }
