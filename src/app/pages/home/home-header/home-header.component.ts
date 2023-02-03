@@ -43,7 +43,9 @@ export class HomeHeaderComponent implements OnInit {
 
   resultType: any = [];
 
-  whatAreYouLookingForTitle: string = 'O que está buscando?';
+  whatAreYouLookingForTitle = 'O que está buscando?';
+  typePropertyTitle = 'Tipo do imóvel';
+
 
   typeAd: string = 'sale';
 
@@ -52,13 +54,11 @@ export class HomeHeaderComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private searchService: SearchService,
-    private toastrService: ToastrService
   ) {
     this.form = this.formBuilder.group({
       search: ['', [Validators.required]],
       typeStatus: ['', [Validators.required]],
       typeProperty: ['', [Validators.required]],
-      typepropertyTeste: [''],
       typePropertyLocal: ['', [Validators.required]],
       typePropertyOptions: ['', [Validators.required]],
       typeOfResidential: ['', [Validators.required]],
@@ -93,6 +93,8 @@ export class HomeHeaderComponent implements OnInit {
   confirm() {
 
     let oqEstaBuscando: string = '';
+    let tipoDeImovel: string = '';
+
 
     if (this.whatAreYouLookingForTitle !== 'O que está buscando?') {
       if (this.whatAreYouLookingForTitle === 'Terreno') {
@@ -103,12 +105,21 @@ export class HomeHeaderComponent implements OnInit {
         oqEstaBuscando = 'casa'
       }
     }
+    if (this.typePropertyTitle !== 'Tipo do imóvel') {
+      if (this.typePropertyTitle === 'Residencial') {
+        tipoDeImovel = 'Residencial'
+      } else if (this.typePropertyTitle === 'Rural') {
+        tipoDeImovel = 'Rural'
+      } else if (this.typePropertyTitle === 'Comercial') {
+        tipoDeImovel = 'Comercial'
+      }
+    }
 
     let filter: any = {
       typeAd: this.typeAd,
       where: this.form.controls['typePropertyLocal'].value,
       whatAreYouLookingFor: oqEstaBuscando,
-      propertyType: this.searchfilterTypeProperty,
+      typeProperty: tipoDeImovel,
       goal: this.searchfilterType,
       checkvacancies: this.form.controls['checkvacancies'].value,
       checkbathrooms: this.form.controls['checkbathrooms'].value,
@@ -152,16 +163,15 @@ export class HomeHeaderComponent implements OnInit {
           announcementPropertyCharacteristicsGroup.push(announcementCityGroup[i]);
         }
       }
-
     } else {
       announcementPropertyCharacteristicsGroup = announcementCityGroup;
     }
 
     let announcementpropertyTypeGroup: AnnouncementGetResponseDto[] = [];
 
-    if (filter.propertyType !== undefined) {
+    if (filter.typeProperty !== undefined) {
       for (let i = 0; i < announcementPropertyCharacteristicsGroup.length; i++) {
-        if (announcementPropertyCharacteristicsGroup[i].goal === filter.propertyType) {
+        if (announcementPropertyCharacteristicsGroup[i].goal === filter.typeProperty) {
           announcementpropertyTypeGroup.push(announcementPropertyCharacteristicsGroup[i]);
         }
       }
@@ -223,30 +233,30 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
 
-  typePropertyStep1(value: string) {
-    let typepropertyTesteRename = value
-    this.form.patchValue({
-      typepropertyTeste: typepropertyTesteRename
-    })
-    if (value === 'residencial') {
-      this.searchfilterTypeProperty = 'residencial';
-    } else if (value === 'rural') {
-      this.searchfilterTypeProperty = 'rural';
-    } else if (value === 'comercial') {
-      this.searchfilterTypeProperty = 'comercial';
-    }
-    this.typepropertydiv = !this.typepropertydiv;
-  }
+  // typePropertyStep1(value: string) {
+  //   let typepropertyTesteRename = value
+  //   this.form.patchValue({
+  //     typepropertyTeste: typepropertyTesteRename
+  //   })
+  //   if (value === 'residencial') {
+  //     this.searchfilterTypeProperty = 'residencial';
+  //   } else if (value === 'rural') {
+  //     this.searchfilterTypeProperty = 'rural';
+  //   } else if (value === 'comercial') {
+  //     this.searchfilterTypeProperty = 'comercial';
+  //   }
+  //   this.typepropertydiv = !this.typepropertydiv;
+  // }
 
 
 
-  typeProperty(value: string) {
-    this.searchfilterType = value
-    this.typeoffResidential = false;
-    this.typeoffRural = false;
-    this.typeoffCommercial = false;
+  // typeProperty(value: string) {
+  //   this.searchfilterType = value
+  //   this.typeoffResidential = false;
+  //   this.typeoffRural = false;
+  //   this.typeoffCommercial = false;
 
-  }
+  // }
 
 
   typePropertyOptions(value: string) {
@@ -267,8 +277,13 @@ export class HomeHeaderComponent implements OnInit {
 
   whatAreYouLookingFor(value) {
     this.whatAreYouLookingForTitle = value
-
   }
+  typeProperty(value) {
+    this.typePropertyTitle = value
+  }
+  // whatAreYouLookingFor(value) {
+  //   this.whatAreYouLookingForTitle = value
+  // }
 
 
 

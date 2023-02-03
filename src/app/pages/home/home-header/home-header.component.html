@@ -26,11 +26,11 @@
                             <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
                                 <div class="dropdown">
                                     <button style="min-width: 162.23px !important;" class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue dropdown-toggle" type="button"
-                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        id="drophomeheader" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         {{whatAreYouLookingForTitle}}
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <div class="dropdown-menu" aria-labelledby="drophomeheader">
                                         <a class="dropdown-item"  (click)="whatAreYouLookingFor('Edifício')">Edifício</a>
                                         <a class="dropdown-item" (click)="whatAreYouLookingFor('Terreno')">Terreno</a>
                                         <a class="dropdown-item" (click)="whatAreYouLookingFor('Casa')">Casa</a>
@@ -39,14 +39,14 @@
                                 <div class="nav-item dropdown">
                                     <div class="dropdown">
                                         <button style="min-width: 162.23px !important;" class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue dropdown-toggle" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            id="drophomeheader" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
-                                            {{whatAreYouLookingForTitle}}
+                                            {{typePropertyTitle}}
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item"  (click)="whatAreYouLookingFor('Edifício')">Edifício</a>
-                                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Terreno')">Terreno</a>
-                                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Casa')">Casa</a>
+                                        <div class="dropdown-menu" aria-labelledby="drophomeheader">
+                                            <a class="dropdown-item"  (click)="typeProperty('Residencial')">Residencial</a>
+                                            <a class="dropdown-item" (click)="typeProperty('Rural')">Rural</a>
+                                            <a class="dropdown-item" (click)="typeProperty('Comercial')">Comercial</a>
                                         </div>
                                     </div>
                                     <!-- <input type="text" (click)="typePropertyOptions('typeproperty')"
