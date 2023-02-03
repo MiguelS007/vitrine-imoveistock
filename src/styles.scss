@@ -20,8 +20,8 @@
 }
 
 @media (min-width: 1200px) {
-    .container {
-        max-width: 1212px !important;
+    .margin-header-title-custom {
+       padding-top: 30% !important; 
     }
 }
 
@@ -48,7 +48,10 @@
 
 .changeColorNavbar {
     app-nav-bar {
-        background-color: rgba(0, 0, 0, 0.377) !important;
+        background-color: white !important;
+    }
+    .nav-link {
+        color: #000000 !important;
     }
 }
 
@@ -793,9 +796,10 @@ input:focus {
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
-    height: fit-content;
+    height: 90vh;
     width: 100% !important;
 }
+
 
 .swiper-mobile {
     display: none;
@@ -806,7 +810,7 @@ input:focus {
 }
 
 .title-header {
-    padding-top: 21%;
+    padding-top: 33%;
 }
 
 .painel-browser {
@@ -861,7 +865,7 @@ input:focus {
 }
 
 .scroll-down {
-    border: 2px solid var(--purplelight);
+    border: 2px solid #01FF5F;
     border-radius: 20px;
     height: 50px;
     position: absolute;
@@ -871,7 +875,7 @@ input:focus {
 
 .scroll-down::before {
     animation: scrollDownAnimation 2s infinite;
-    background-color: var(--purplelight);
+    background-color: #01FF5F;
     border-radius: 100%;
     content: '';
     height: 6px;
@@ -1484,6 +1488,11 @@ vg-overlay-play .vg-overlay-play {
     position: absolute !important;
     right: 0px !important;
     bottom: 16px !important;
+}
+
+.space-home-cards-custom {
+    display: flex !important;
+    justify-content: space-around !important;
 }
 
 // MEDIA
