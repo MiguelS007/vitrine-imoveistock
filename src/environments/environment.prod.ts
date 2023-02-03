@@ -5,6 +5,4 @@ export const environment = {
     // imoveistock: 'https://market-inkluziva.mustblockchain.com/imoveistock/',
     imoveistock: 'http://localhost:5000/',
   },
-
-};
 };
