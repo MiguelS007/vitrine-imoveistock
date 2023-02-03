@@ -98,11 +98,12 @@ export class SchedulingSelectedModalComponent implements OnInit {
   }
 
   cancelVisits(value: string) {
-    if (value === 'cancelmodal') {
-      this.confirmcancel = !this.confirmcancel;
-    } else if (value === 'cancel') {
-      this.location = true;
-    }
+    // if (value === 'cancelmodal') {
+    //   this.confirmcancel = !this.confirmcancel;
+    // } else if (value === 'cancel') {
+    //   this.location = true;
+    // }
+    this.exit()
   }
 
   exit() {
