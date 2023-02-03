@@ -48,6 +48,12 @@
     .nav-link {
         color: #000000 !important;
     }
+    .logo-navbar-desktop-branca {
+        display: none !important;
+    }
+    .logo-navbar-desktop-preta {
+        display: block !important;
+    }
 }
 
 .swiper-button-prev,
@@ -1430,9 +1436,16 @@ vg-overlay-play .vg-overlay-play {
 
 
 
-.logo-navbar-desktop {
+.logo-navbar-desktop-branca {
     height: 100px !important;
     cursor: pointer;
+    display: block !important;
+}
+
+.logo-navbar-desktop-preta {
+    height: 100px !important;
+    cursor: pointer;
+    display: none !important;
 }
 
 .logo-navbar-mobile {
@@ -2036,7 +2049,11 @@ vg-overlay-play .vg-overlay-play {
 }
 
 @media (max-width: 540px) {
-    .logo-navbar-desktop {
+    .logo-navbar-desktop-branca {
+        display: none !important;
+    }
+
+    .logo-navbar-desktop-preta {
         display: none !important;
     }
 
