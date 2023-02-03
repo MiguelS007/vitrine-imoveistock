@@ -74,6 +74,7 @@ export class SearchPageComponent implements OnInit {
   selectVacancies = 'Vagas';
   valuePrices: 0;
 
+  whatAreYouLookingForTitle: string = 'O que está buscando?';
 
 
   constructor(
@@ -163,11 +164,16 @@ export class SearchPageComponent implements OnInit {
 
     if (filtro !== null) {
       this.form.patchValue({
-        typeproperty: this.filtroSelected.whatAreYouLookingFor,
+        // typeproperty: this.filtroSelected.whatAreYouLookingFor,
         localproperty: this.filtroSelected.where,
         propertyType: this.filtroSelected.propertyType
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
+
+      if(this.filtroSelected.whatAreYouLookingFor !== '') {
+        this.whatAreYouLookingFor(this.filtroSelected.whatAreYouLookingFor)
+      }
+
 
       console.log(this.filtroSelected)
     }
@@ -329,7 +335,7 @@ export class SearchPageComponent implements OnInit {
     // SELECT BATHROOMS
     else if (item === '1b') {
       this.selectBathrooms = '+1  Banheiro'
-    }  else if (item === '2b') {
+    } else if (item === '2b') {
       this.selectBathrooms = '+2  Banheiros'
     } else if (item === '3b') {
       this.selectBathrooms = '+3  Banheiros'
@@ -341,7 +347,7 @@ export class SearchPageComponent implements OnInit {
     // SELECT ROOMS
     else if (item === 'tf') {
       this.selectVacancies = 'Tanto faz'
-    }  else if (item === '1v') {
+    } else if (item === '1v') {
       this.selectVacancies = '+1  Vagas'
     } else if (item === '2v') {
       this.selectVacancies = '+2  Vagas'
@@ -352,7 +358,10 @@ export class SearchPageComponent implements OnInit {
     } else if (item === '5v') {
       this.selectVacancies = '+5  Vagas'
     }
+  }
 
+  whatAreYouLookingFor(value) {
+    this.whatAreYouLookingForTitle = value
   }
 
 }

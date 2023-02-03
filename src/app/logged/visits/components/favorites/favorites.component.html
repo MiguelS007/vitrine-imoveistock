@@ -12,60 +12,72 @@
     </div>
     <div *ngIf="listofvisits" class="row d-flex  justify-content-center w-100">
         <div *ngFor="let item of response" class="col-md-4 max-w-400 p-3">
-            <div (click)="announcementSelected(item._id)" class="w-100 mb-4 border-radius-10 box-shadow hover-green"
-                style="cursor: pointer;">
-                <div class="h-100 product-announcement p-2 border-radius-10 bg-white">
-                    <div class="bg-img-product py-2 px-3 border-radius-10">
-                        <div class="w-100 h-50 d-flex">
-                            <h4 *ngIf="item.typeOfAd === 'sale'"
+            <div class="w-100 mb-4 border-radius-10 box-shadow hover-green" style="cursor: pointer;">
+                <div class="h-100 w-100 product-announcement p-2 border-radius-10 bg-white">
+                    <div class="py-2 px-3 position-relative" style="height: 219px;">
+                        <img src="../../../../assets/img/ap.png" class="photo-announcement-card"
+                            (click)="announcementSelected(item._id)">
+                        <div class="space-sale-exclusive">
+                            <h4
                                 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
                                 Venda</h4>
-                            <h4 *ngIf="item.typeOfAd === 'rent'"
+                            <h4
                                 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
-                                Alugar</h4>
+                                Exclusivo</h4>
                         </div>
-                        <div class="w-100 d-flex h-50 align-items-end justify-content-between">
-                            <p *ngIf="item.typeOfAd === 'sale'"
-                                class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">
-                                {{item.saleValue | currency: 'R$'}}</p>
-                            <p *ngIf="item.typeOfAd === 'rent'"
-                                class="fw-700 mb-0 font-size-22 h-fit line-32 text-light">
-                                {{item.leaseValue | currency: 'R$'}}</p>
+                        <div class="space-value-announcement">
+                            <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
+                                *ngIf="item.typeOfAd === 'sale'">{{item.saleValue | currency: 'R$'}}</p>
+                            <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
+                                *ngIf="item.typeOfAd === 'rent'">{{item.leaseValue | currency: 'R$'}}
+                            </p>
                             <div (click)="likeHeart(item._id)"
                                 class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
                                 <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' "
-                                    class="bi font-size-16 text-light"></i>
+                                    class="bi bi-heart-fill font-size-16 text-light"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="w-100 mx-1 pt-3">
-                        <span
-                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
-                        <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate" style="max-width: 90%;">
-                            {{item.description}}</p>
-                        <p class="d-flex align-items-center">
-                            <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
-                            <span class="fw-400 font-size-14 line-20 color-black">{{item.publicPlaceAddress}},
-                                {{item.cityAddress}} - {{item.ufAddress}}</span>
-                        </p>
+                    <div class="col-12 px-0" (click)="announcementSelected(item._id)">
+                        <div class="w-100 mx-1 pt-3">
+                            <span
+                                class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                            <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
+                                style="max-width: 90%;">{{item.description}}</p>
+                            <p class="d-flex align-items-center  text-left">
+                                <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                                <span class="fw-400 font-size-14 line-20 color-black">{{item.publicPlaceAddress}},
+                                    {{item.cityAddress}} - {{item.ufAddress}}</span>
+                            </p>
+                        </div>
+                        <div class="row mx-1 pb-2 d-flex">
+                            <div
+                                class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
+                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                    {{item.bedrooms}}
+                                    Quartos
+                                </p>
+                            </div>
+                            <div
+                                class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
+                                <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                    {{item.vacancyNumber}} Vagas
+                                </p>
+                            </div>
+                            <div
+                                class="col mt-2 justify-content-end left-important  px-0 d-flex align-items-center justify-content-left">
+                                <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
+                                <p
+                                    class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
+                                    {{item.usefulArea |
+                                    currency: ' '}} m2</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row mx-1 pb-3 d-flex">
-                        <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
-                            <img src="../../../assets/icon/bed.png" class="pr-2" />
-                            <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                                {{item.bedrooms}} Quartos</p>
-                        </div>
-                        <div class="col justify-content-center px-0 d-flex align-items-center justify-content-left">
-                            <img src="../../../assets/icon/car.png" class="pr-2" />
-                            <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                                {{item.vacancyNumber}} Vagas</p>
-                        </div>
-                        <div class="col justify-content-end px-0 d-flex align-items-center justify-content-left">
-                            <img src="../../../assets/icon/rule.png" class="pr-2" />
-                            <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                                {{item.usefulArea | currency: ' '}} m2</p>
-                        </div>
-                    </div>
+
+
                 </div>
             </div>
         </div>
