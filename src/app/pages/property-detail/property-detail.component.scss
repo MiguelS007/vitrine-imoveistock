@@ -33,3 +33,9 @@
         height: auto !important;
     }
 }
+
+@media (min-width: 1200px) {
+    .container, .navbar {
+        max-width: 1514px !important;
+    }
+}

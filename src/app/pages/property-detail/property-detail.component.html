@@ -20,28 +20,33 @@
         </swiper>
         <div class="col-12 col-btns-preview-img px-5 justify-content-center d-flex py-5 align-items-center position-absolute">
           <!-- OPTIONS HEADER BTNS -->
-          <div class="w-auto d-flex overflow-y-scroll spc-btns-property align-items-center">
-            <button type="button" data-toggle="modal" data-target="#previewimage"
-              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
-              <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
-            </button>
-            <button type="button" pageScroll href="#previewvideo"
-              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
-            </button>
-            <button type="button" pageScroll href="#previewplant" (click)="openarrow(3)"
-              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <img src="../../../assets/icon/datas-block.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver planta</p>
-            </button>
-            <button type="button" pageScroll href="#previewvideo" (click)="segmentvideo('tour')"
-              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <img src="../../../assets/icon/street-view.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
-            </button>
+          <div class="row container">
+            <div class="col-12">
+              <div class="w-auto d-flex overflow-y-scroll spc-btns-property align-items-center">
+                <button type="button" data-toggle="modal" data-target="#previewimage"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
+                  <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
+                </button>
+                <button type="button" pageScroll href="#previewvideo"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
+                  <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
+                </button>
+                <button type="button" pageScroll href="#previewplant" (click)="openarrow(3)"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <img src="../../../assets/icon/datas-block.png" class="" alt="not icon" />
+                  <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver planta</p>
+                </button>
+                <button type="button" pageScroll href="#previewvideo" (click)="segmentvideo('tour')"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <img src="../../../assets/icon/street-view.png" class="" alt="not icon" />
+                  <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
+                </button>
+              </div>
+            </div>
           </div>
+          
           <!-- HEART, SHARE ETC...BTNS -->
           <div class="options-img d-flex align-items-center">
             <div (click)="likeHeartMain(response._id, response.liked)"
