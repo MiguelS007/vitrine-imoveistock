@@ -327,6 +327,22 @@ export class HomeHeaderComponent implements OnInit {
     const divviewoptions = document.querySelector('.divviewoptions') as HTMLElement
     divviewoptions.style.display = 'none'
     this.hideviewoptions = false;
+     this.form.controls['checkvacancies'].setValue(false);
+     this.form.controls['checkbathrooms'].setValue(false);
+     this.form.controls['checksuites'].setValue(false);
+     this.form.controls['checkrooms'].setValue(false);
+     this.form.controls['checkcondominium'].setValue(false);
+     this.form.controls['checkfootage'].setValue(false);
+     this.form.controls['checkconstruction'].setValue(false);
+     this.form.controls['checkrenovated'].setValue(false);
+      this.viewvacancies = false
+      this.viewbathrooms = false;
+      this.viewsuites = false;
+      this.viewrooms = false;
+      this.viewcondominium = false;
+      this.viewfootage = false;
+      this.viewconstruction = false;
+      this.viewrenovated = false;
   }
 
 
