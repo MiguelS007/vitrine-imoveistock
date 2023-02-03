@@ -6,19 +6,23 @@
         </div>
         <div class="px-0">
             <form [formGroup]="form" class="row justify-content-center form-header">
-                <div class="justify-content-center d-flex">
-                    <button type="button" formControlName="typeStatus" ngDefaultControl value="sale"
-                        [class]="collapsed! ? 'bg-light color-black' : 'bg-purple text-light arrow-box-buy'"
-                        (click)="buyOption('sale')"
-                        class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20 ">
-                        Comprar
-                    </button>
-                    <button type="button" formControlName="typeStatus" ngDefaultControl value="rent"
-                        [class]="collapsed ? 'bg-purple text-light arrow-box-rent' : 'bg-light color-black '"
-                        (click)="buyOption('rent')"
-                        class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20">
-                        Alugar
-                    </button>
+                <div class="position-relative d-flex">
+                    <div>
+                        <button type="button" formControlName="typeStatus" ngDefaultControl value="sale"
+                            [class]="collapsed! ? 'bg-light color-black' : 'bg-purple text-light arrow-box-buy'"
+                            (click)="buyOption('sale')"
+                            class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20 ">
+                            Comprar
+                        </button>
+                    </div>
+                    <div class="position-relative">
+                        <button type="button" formControlName="typeStatus" ngDefaultControl value="rent"
+                            [class]="collapsed ? 'bg-purple text-light arrow-box-rent' : 'bg-light color-black '"
+                            (click)="buyOption('rent')"
+                            class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20">
+                            Alugar
+                        </button>
+                    </div>
                 </div>
                 <div class="col-12 px-0 mt-4 d-flex justify-content-center pb-4">
                     <div class="w-100 painel-browser h-auto border-radius-10 max-w-1227">

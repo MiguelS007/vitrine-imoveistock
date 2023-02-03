@@ -19,11 +19,6 @@
     font-family: 'Nunito', sans-serif !important;
 }
 
-@media (min-width: 1200px) {
-    .margin-header-title-custom {
-       padding-top: 30% !important; 
-    }
-}
 
 .modal-backdrop {
     display: none;
@@ -52,6 +47,12 @@
     }
     .nav-link {
         color: #000000 !important;
+    }
+    .logo-navbar-desktop-branca {
+        display: none !important;
+    }
+    .logo-navbar-desktop-preta {
+        display: block !important;
     }
 }
 
@@ -834,8 +835,8 @@ input:focus {
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 46.2%;
-    top: 94%;
+    left: 53px !important;
+    bottom: -25px;
 }
 
 .arrow-box-rent:after {
@@ -848,8 +849,8 @@ input:focus {
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 52.8%;
-    top: 94%;
+    right: 30px !important;
+    bottom: -25px;
 }
 
 .input-local {
@@ -1435,9 +1436,16 @@ vg-overlay-play .vg-overlay-play {
 
 
 
-.logo-navbar-desktop {
+.logo-navbar-desktop-branca {
     height: 100px !important;
     cursor: pointer;
+    display: block !important;
+}
+
+.logo-navbar-desktop-preta {
+    height: 100px !important;
+    cursor: pointer;
+    display: none !important;
 }
 
 .logo-navbar-mobile {
@@ -1495,9 +1503,13 @@ vg-overlay-play .vg-overlay-play {
     justify-content: space-around !important;
 }
 
+
 // MEDIA
 @media (max-width: 1240px) {
-
+    
+    .margin-header-title-custom {
+       padding-top: 30% !important; 
+    }
     // HOME-HEADER
     .bg-home-header {
         background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
@@ -2037,7 +2049,11 @@ vg-overlay-play .vg-overlay-play {
 }
 
 @media (max-width: 540px) {
-    .logo-navbar-desktop {
+    .logo-navbar-desktop-branca {
+        display: none !important;
+    }
+
+    .logo-navbar-desktop-preta {
         display: none !important;
     }
 
