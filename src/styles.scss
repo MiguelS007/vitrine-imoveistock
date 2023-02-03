@@ -1486,6 +1486,11 @@ vg-overlay-play .vg-overlay-play {
     bottom: 16px !important;
 }
 
+.space-home-cards-custom {
+    display: flex !important;
+    justify-content: space-around !important;
+}
+
 // MEDIA
 @media (max-width: 1240px) {
 
