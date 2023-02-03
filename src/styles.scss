@@ -19,11 +19,6 @@
     font-family: 'Nunito', sans-serif !important;
 }
 
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1212px !important;
-    }
-}
 
 .modal-backdrop {
     display: none;
@@ -48,7 +43,16 @@
 
 .changeColorNavbar {
     app-nav-bar {
-        background-color: rgba(0, 0, 0, 0.377) !important;
+        background-color: white !important;
+    }
+    .nav-link {
+        color: #000000 !important;
+    }
+    .logo-navbar-desktop-branca {
+        display: none !important;
+    }
+    .logo-navbar-desktop-preta {
+        display: block !important;
     }
 }
 
@@ -793,9 +797,10 @@ input:focus {
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
-    height: fit-content;
+    height: 90vh;
     width: 100% !important;
 }
+
 
 .swiper-mobile {
     display: none;
@@ -806,7 +811,7 @@ input:focus {
 }
 
 .title-header {
-    padding-top: 21%;
+    padding-top: 33%;
 }
 
 .painel-browser {
@@ -830,8 +835,8 @@ input:focus {
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 46.2%;
-    top: 94%;
+    left: 53px !important;
+    bottom: -25px;
 }
 
 .arrow-box-rent:after {
@@ -844,8 +849,8 @@ input:focus {
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 52.8%;
-    top: 94%;
+    right: 30px !important;
+    bottom: -25px;
 }
 
 .input-local {
@@ -861,7 +866,7 @@ input:focus {
 }
 
 .scroll-down {
-    border: 2px solid var(--purplelight);
+    border: 2px solid #01FF5F;
     border-radius: 20px;
     height: 50px;
     position: absolute;
@@ -871,7 +876,7 @@ input:focus {
 
 .scroll-down::before {
     animation: scrollDownAnimation 2s infinite;
-    background-color: var(--purplelight);
+    background-color: #01FF5F;
     border-radius: 100%;
     content: '';
     height: 6px;
@@ -1431,9 +1436,16 @@ vg-overlay-play .vg-overlay-play {
 
 
 
-.logo-navbar-desktop {
+.logo-navbar-desktop-branca {
     height: 100px !important;
     cursor: pointer;
+    display: block !important;
+}
+
+.logo-navbar-desktop-preta {
+    height: 100px !important;
+    cursor: pointer;
+    display: none !important;
 }
 
 .logo-navbar-mobile {
@@ -1486,9 +1498,18 @@ vg-overlay-play .vg-overlay-play {
     bottom: 16px !important;
 }
 
+.space-home-cards-custom {
+    display: flex !important;
+    justify-content: space-around !important;
+}
+
+
 // MEDIA
 @media (max-width: 1240px) {
-
+    
+    .margin-header-title-custom {
+       padding-top: 30% !important; 
+    }
     // HOME-HEADER
     .bg-home-header {
         background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
@@ -2028,7 +2049,11 @@ vg-overlay-play .vg-overlay-play {
 }
 
 @media (max-width: 540px) {
-    .logo-navbar-desktop {
+    .logo-navbar-desktop-branca {
+        display: none !important;
+    }
+
+    .logo-navbar-desktop-preta {
         display: none !important;
     }
 
