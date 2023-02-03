@@ -861,7 +861,7 @@ input:focus {
 }
 
 .scroll-down {
-    border: 2px solid var(--purplelight);
+    border: 2px solid #01FF5F;
     border-radius: 20px;
     height: 50px;
     position: absolute;
@@ -871,7 +871,7 @@ input:focus {
 
 .scroll-down::before {
     animation: scrollDownAnimation 2s infinite;
-    background-color: var(--purplelight);
+    background-color: #01FF5F;
     border-radius: 100%;
     content: '';
     height: 6px;
