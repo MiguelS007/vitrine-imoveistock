@@ -2,43 +2,40 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LoggedRouteModule } from "./logged.route";
-import { SearchPageComponent } from './search-page/search-page.component';
 import { LoggedComponent } from './logged.component';
 import { SwiperModule } from 'swiper/angular';
 import { AppComponent } from '../app.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PropertyDetailComponent } from './property-detail/property-detail.component';
-import {VgCoreModule} from '@videogular/ngx-videogular/core';
-import {VgControlsModule} from '@videogular/ngx-videogular/controls';
-import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
-import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { VisitsComponent } from './visits/visits.component';
-import { ModalLoginComponent } from './modal-login/modal-login.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ExpressProposalComponent } from './express-proposal/express-proposal.component';
+import { AnnouncementService } from '../service/announcement.service';
+import { FavoritesComponent } from './visits/components/favorites/favorites.component';
+import { SchedulingComponent } from './visits/components/scheduling/scheduling.component';
+import { SchedulingSelectedModalComponent } from './visits/components/scheduling/scheduling-selected-modal/scheduling-selected-modal.component';
 @NgModule({
   declarations: [
     LoggedComponent,
-    SearchPageComponent,
-    PropertyDetailComponent,
     VisitsComponent,
-    ModalLoginComponent,
     ExpressProposalComponent,
+    FavoritesComponent,
+    SchedulingComponent,
+    SchedulingSelectedModalComponent,
   ],
   imports: [
     CommonModule,
     LoggedRouteModule,
     FormsModule,
-    ReactiveFormsModule,
     NgxPaginationModule,
+    ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     SwiperModule,
-    VgCoreModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule
+   
   ],
   schemas: [],
+  providers: [
+    AnnouncementService
+  ],
   bootstrap: [AppComponent]
 
 })

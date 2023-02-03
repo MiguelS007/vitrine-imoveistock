@@ -1,0 +1,35 @@
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0) !important;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 904px !important;
+        margin: 1.75rem auto;
+    }
+
+}
+
+@media (max-width: 576px) {
+    input {
+        padding-right: 1.5rem !important;
+    }
+}
+
+// MEDIA
+@media (max-width: 1240px) {
+    tr {
+        display: grid !important;
+        height: auto !important;
+    }
+}

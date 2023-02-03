@@ -31,3 +31,8 @@
     right: 8%;
     top: -21%;
 } 
+
+// // NAV-BAR
+.dropdown-toggle::after {
+    display: none !important;
+}

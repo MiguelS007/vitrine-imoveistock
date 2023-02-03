@@ -106,8 +106,6 @@
                 </div>
             </div>
            </div> 
-           
-
             <div *ngIf="detailfinalvalue" class="w-100">
                 <div class="w-100 bg-white border-radius-10 mb-3 p-5">
                     <table class="w-100">
@@ -374,7 +372,7 @@
                                     </tbody>
                                 </table>
                                 <p class="d-flex py-4 border-top-gray justify-content-end">
-                                    <span class="fw-400 font-size-18 line-24 text-primary">Propor novo valor</span>
+                                    <span (click)="proposeValue('open')" class="fw-400 font-size-18 line-24 text-primary">Propor novo valor</span>
                                 </p>
                             </div>
                             <div *ngIf="modalwarning" class="w-100 bg-white border-radius-10 p-5">
@@ -460,8 +458,84 @@
                         </div>
                     </div>
                 </div>
+                 <!-- modal-custom -->
+                 <div *ngIf="modalvalue" class="modal modal-all fade">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content border-none bg-transparent p-3">
+                            <div class="w-100 bg-white border-radius-10 mb-3">
+                                <div class="row bg-purple border-radius-top-10 px-3 py-4">
+                                    <div class="col-12 pb-3 border-radius-10 d-flex justify-content-between">
+                                        <p class="fw-500 font-size-20 mb-0 line-26 text-light">Propor outro valor</p>
+                                        <button type="button" (click)="proposeValue('close')" class="close border-radius-100 bg-transparent">
+                                            <i class="bi font-size-36 color-white bi-x"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-12 py-3 border-radius-10 d-flex justify-content-between">
+                                        <span class="fw-400 font-size-18 line-24 text-light">Valor do anúncio</span>
+                                        <span class="fw-400 font-size-18 line-24 text-light">R$ 4.200,00</span>
+                                    </div>
+                                    <div class="col-12 pb-3 border-radius-10 d-flex justify-content-between">
+                                        <span class="fw-400 font-size-18 line-24 text-light">Aluguel</span>
+                                        <span class="fw-400 font-size-18 line-24 text-light">R$ 3.500,00</span>
+                                    </div>
+                                </div>
+                                <div class="row bg-white border-radius-bottom-10 px-3 py-4">
+                                    <div class="col-12 py-2 d-flex justify-content-between">
+                                        <p class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
+                                            Valor do anúncio
+                                            <i class="bi color-muted px-2 font-size-30 bi-info-circle"></i>
+                                        </p>
+                                        <span class="fw-400 font-size-18 line-24 color-black">R$ 0</span>
+                                    </div>
+                                    <div class="col-12 py-2 d-flex justify-content-between">
+                                        <p class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
+                                            IPTU
+                                            <i class="bi color-muted px-2 font-size-30 bi-info-circle"></i>
+                                        </p>
+                                        <span class="fw-400 font-size-18 line-24 color-black">R$ 58</span>
+                                    </div>
+                                    <div class="col-12 py-2 d-flex justify-content-between">
+                                        <p class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
+                                            Seguro incêndio
+                                            <i class="bi color-muted px-2 font-size-30 bi-info-circle"></i>
+                                        </p>
+                                        <span class="fw-400 font-size-18 line-24 color-black">R$ 79</span>
+                                    </div>
+                                    <div class="col-12 py-2 d-flex justify-content-between">
+                                        <p class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
+                                            Taxa de serviço
+                                            <i class="bi color-muted px-2 font-size-30 bi-info-circle"></i>
+                                        </p>
+                                        <span class="fw-400 font-size-18 line-24 color-black">R$ 84</span>
+                                    </div>
+                                    <img src="../../../assets/img/line.png" class="px-3 w-100"/>
+                                    <div class="col-12 py-3">
+                                        <p class="w-100 pb-4 d-flex align-items-center justify-content-between">
+                                            <span class="fw-700 font-size-18 line-24 color-black">Valor total</span>
+                                            <span class="fw-700 font-size-18 line-24 color-black">R$ 4.421,00</span>
+                                        </p>
+                                        <span class="fw-400 font-size-18 line-24 color-black">
+                                            Comentários sobre essa negociação
+                                        </span>
+                                        <div class="fw-400 my-3 font-size-18 line-24 color-black border border-radius-10 px-4 py-3">
+                                            Evans Tower very high demand corner junior one bedroom plus <br/> a large balcony boasting full open NYC views. 
+                                        </div>
+                                        <p class="fw-400 px-3 font-size-18 line-24 color-black">
+                                            Você pode aproveitar esse espaço para explicar o motivo do seu
+                                            desconto ao proprietário. <a [routerLink]="['#']" class="fw-400 font-size-18 line-24">Saiba mais</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-12 justify-content-end d-flex py-3">
+                                        <button  (click)="proposeValue('close')" type="button" class="btn bg-purple border-radius-10 h-74 w-50 fw-700 font-size-18 line-24 text-light">
+                                            Continuar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
     </form>
 </main>
