@@ -257,7 +257,6 @@ export class HomeHeaderComponent implements OnInit {
       setTimeout(() => {
         this.alertPropertyOptions = false;
       }, 3000)
-    }else{
     }
     if (value === 'typeproperty') {
       this.typeoffResidential = false;
