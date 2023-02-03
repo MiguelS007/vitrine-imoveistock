@@ -1459,6 +1459,12 @@ vg-overlay-play .vg-overlay-play {
     display: none !important;
 }
 
+.logo-navbar-desktop-preta-visits {
+    height: 100px !important;
+    cursor: pointer;
+    display: block !important;
+}
+
 .logo-navbar-mobile {
     display: none !important;
 }
@@ -1512,6 +1518,28 @@ vg-overlay-play .vg-overlay-play {
 .space-home-cards-custom {
     display: flex !important;
     justify-content: space-around !important;
+}
+
+.nav-link-visits {
+    color: #000000 !important;
+}
+
+.icon-menu-navbar-visits {
+    color: black !important;
+}
+
+.btn-search-property {
+    padding: 24px;
+    gap: 10px;
+    width: 379px;
+    height: 73px;
+    background: #542FDF;
+    border-radius: 9px;
+    color: white !important;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    margin-top: 32px !important;
 }
 
 
@@ -1754,9 +1782,18 @@ vg-overlay-play .vg-overlay-play {
 @media(max-width: 992px) {
 
     // NAV-BAR
+    #navbarSupportedContentVisits {
+        backdrop-filter: blur(55px);
+        background: white;
+    }
+
     #navbarSupportedContent {
         backdrop-filter: blur(55px);
         background: #00000063;
+    }
+
+    .model-desktop-announcement-selected {
+        display: none !important;
     }
 
     // PROPERTY-DETAILS
@@ -1862,10 +1899,6 @@ vg-overlay-play .vg-overlay-play {
     .scheduling-visit-selected {
         border: none;
         box-shadow: none;
-    }
-
-    .model-desktop-announcement-selected {
-        display: none !important;
     }
 
     .btn-filter-mobile {
@@ -2068,6 +2101,12 @@ vg-overlay-play .vg-overlay-play {
     .logo-navbar-mobile {
         display: flex !important;
         height: 100px !important;
+    }
+
+    .logo-navbar-desktop-preta-visits {
+        height: 100px !important;
+        cursor: pointer;
+        display: none !important;
     }
 
     .changeColorNavbar {

@@ -1,23 +1,25 @@
 <main class="bg-clear position-relative h-100 w-100">
-    <div class="row h-100 m-0-auto border-top-gray pt-5">
-        <div class="col-12 px-0 h-100">
-            <div class="w-100 h-100" style="min-height: calc(100vh - 100px);">
-                <div
-                    class="w-100 px-5 mt-3rem space-segment justify-content-center pt-4 mb-4 d-flex align-items-center">
-                    <button [class]="segment ? 'color-muted fw-400':'border-bottom-green fw-700 color-black' "
-                        (click)="changePage('favorites')"
-                        class="btn bg-transparent py-2 px-3 mx-2 btn-segment font-size-16 line-20"
-                        type="button">Favoritos</button>
-                    <button [class]="segment ? 'border-bottom-green fw-700 color-black':'color-muted fw-400' "
-                        (click)="changePage('scheduling')"
-                        class="btn bg-transparent py-2 px-3 mx-2 btn-segment font-size-16 line-20"
-                        type="button">Agendamento</button>
-                </div>
-                <div *ngIf="spaceFavorites">
-                    <app-favorites></app-favorites>
-                </div>
-                <div *ngIf="spaceScheduling">
-                    <app-scheduling></app-scheduling>
+    <div class="container">
+        <div class="row h-100 m-0-auto border-top-gray pt-5">
+            <div class="col-12 px-0 h-100">
+                <div class="w-100 h-100" style="min-height: calc(100vh - 100px);">
+                    <div
+                        class="w-100 px-5 mt-3rem space-segment justify-content-center pt-4 mb-4 d-flex align-items-center">
+                        <button [class]="segment ? 'color-muted fw-400':'border-bottom-green fw-700 color-black' "
+                            (click)="changePage('favorites')"
+                            class="btn bg-transparent py-2 px-3 mx-2 btn-segment font-size-16 line-20"
+                            type="button">Favoritos</button>
+                        <button [class]="segment ? 'border-bottom-green fw-700 color-black':'color-muted fw-400' "
+                            (click)="changePage('scheduling')"
+                            class="btn bg-transparent py-2 px-3 mx-2 btn-segment font-size-16 line-20"
+                            type="button">Agendamento</button>
+                    </div>
+                    <div *ngIf="spaceFavorites">
+                        <app-favorites></app-favorites>
+                    </div>
+                    <div *ngIf="spaceScheduling">
+                        <app-scheduling></app-scheduling>
+                    </div>
                 </div>
             </div>
         </div>
