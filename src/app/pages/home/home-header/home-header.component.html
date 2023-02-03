@@ -29,12 +29,11 @@
                         <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
                             <div class="dropdown">
                                 <button style="min-width: 162.23px !important;" 
-                                    class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue dropdown-toggle"
-                                    type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
+                                    class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark dropdown-toggle"
+                                    type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{whatAreYouLookingForTitle}}
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-menu border-radius-10" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" (click)="whatAreYouLookingFor('Edifício')">Edifício</a>
                                     <a class="dropdown-item" (click)="whatAreYouLookingFor('Terreno')">Terreno</a>
                                     <a class="dropdown-item" (click)="whatAreYouLookingFor('Casa')">Casa</a>
@@ -45,8 +44,8 @@
                                     placeholder="Tipo do imóvel" readonly value="{{searchfilterTypeProperty}}"
                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     formControlName="typepropertyTeste"
-                                    class="btn border input-type-property mx-3 text-left input-property border-radius-10 py-2 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
-                                <ul class="z-10 box-shadow  filter-search position-absolute bg-light w-100 arrow-box-type-property border-radius-10 dropdown-menu-left dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    class="btn border input-type-property mx-3 text-left input-property border-radius-10 py-2 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark" />
+                                <ul class="z-10 filter-search position-absolute bg-light w-100 arrow-box-type-property border-radius-10 dropdown-menu-left dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                         <label for="typePropertyresidential" class="mb-0">
                                             <input type="radio" id="typePropertyresidential"
@@ -54,7 +53,7 @@
                                                 formControlName="typeProperty" name="typeProperty"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Residencial</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Residencial</span>
                                             </div>
                                         </label>
                                     </li>
@@ -64,7 +63,7 @@
                                                 (click)="typePropertyStep1('rural')" formControlName="typeProperty"
                                                 name="typeProperty" class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Rural</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Rural</span>
                                             </div>
                                         </label>
                                     </li>
@@ -74,7 +73,7 @@
                                                 (click)="typePropertyStep1('comercial')" formControlName="typeProperty"
                                                 name="typeProperty" class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Comercial</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Comercial</span>
                                             </div>
                                         </label>
                                     </li>
@@ -84,7 +83,7 @@
                                 <input #searchresult (keyup)="resultSearch(searchresult.value)" [value]="selectedcities"
                                     style="width: 220px;" type="text" placeholder="Local"
                                     formControlName="typePropertyLocal" maxlength="30"
-                                    class="btn border input-local input-type-property pr-5 mr-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
+                                    class="btn border input-local input-type-property pr-5 mr-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark" />
                                 <div *ngIf="filtersearch" class="w-100 z-10 border-radius-10 bg-light position-absolute"
                                     style="max-width: 220px; top: 120px;">
                                     <ul id="bodyresponseresultfilter"
@@ -94,16 +93,15 @@
                                             style="max-width: 190px;">
                                             <a (click)="selectCites(item)" class="w-100 h-100">{{item}}</a>
                                         </li>
-                                    </ul> -->
+                                    </ul>
                                 </div>
                             </div>
                             <div class="nav-item dropdown">
                                 <input type="text" (click)="typePropertyOptions(searchfilterTypeProperty)"
-                                    placeholder="Finalidade" readonly value="{{searchfilterType}}"
-                                    class="btn border input-type-property mx-3 text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
+                                    placeholder="Finalidade" readonly value="{{searchfilterType}}"   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    class="btn border input-type-property mx-3 text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark" />
                                 <!-- MOSTRAR CASO OPÇÃO SEJA RESIDENCIAL -->
-                                <ul *ngIf="typeoffResidential"
-                                    class="z-10 box-shadow filter-search position-absolute bg-light w-100 arrow-box-type-off border-radius-10 py-2 mt-5 dropdown-menu-left">
+                                <ul *ngIf="typeoffResidential" class="z-10 filter-search border position-absolute bg-light w-100 arrow-box-type-off border-radius-10 py-2 dropdown-menu-left">
                                     <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                         <label for="typePropertyapartment" class="mb-0">
                                             <input type="radio" id="typePropertyapartment"
@@ -111,7 +109,7 @@
                                                 formControlName="typeOfResidential" name="typeOfResidential"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Apartamento</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Apartamento</span>
                                             </div>
                                         </label>
                                     </li>
@@ -121,7 +119,7 @@
                                                 formControlName="typeOfResidential" name="typeOfResidential"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Studio</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Studio</span>
                                             </div>
                                         </label>
                                     </li>
@@ -131,7 +129,7 @@
                                                 formControlName="typeOfResidential" name="typeOfResidential"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Kitnet</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Kitnet</span>
                                             </div>
                                         </label>
                                     </li>
@@ -141,7 +139,7 @@
                                                 formControlName="typeOfResidential" name="typeOfResidential"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">casa</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">casa</span>
                                             </div>
                                         </label>
                                     </li>
@@ -152,7 +150,7 @@
                                                 formControlName="typeOfResidential" name="typeOfResidential"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Casa de
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Casa de
                                                     condomínio</span>
                                             </div>
                                         </label>
@@ -163,7 +161,7 @@
                                                 (click)="typeProperty('casadevila')" formControlName="typeOfResidential"
                                                 name="typeOfResidential" class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Casa de
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Casa de
                                                     vila</span>
                                             </div>
                                         </label>
@@ -174,7 +172,7 @@
                                                 (click)="typeProperty('cobertura')" formControlName="typeOfResidential"
                                                 name="typeOfResidential" class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Cobertura</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Cobertura</span>
                                             </div>
                                         </label>
                                     </li>
@@ -184,7 +182,7 @@
                                                 formControlName="typeOfResidential" name="typeOfResidential"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Flat</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Flat</span>
                                             </div>
                                         </label>
                                     </li>
@@ -194,7 +192,7 @@
                                                 formControlName="typeOfResidential" name="typeOfResidential"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Loft</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Loft</span>
                                             </div>
                                         </label>
                                     </li>
@@ -205,21 +203,21 @@
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
                                                 <span
-                                                    class="fw-400 font-size-14 line-20 color-blue">Terreno/Lote/Condomínio</span>
+                                                    class="fw-400 font-size-14 line-20 color-dark">Terreno/Lote/Condomínio</span>
                                             </div>
                                         </label>
                                     </li>
                                 </ul>
                                 <!-- MOSTRAR CASO OPÇÃO SEJA RURAL -->
                                 <ul *ngIf="typeoffRural"
-                                    class="z-10 box-shadow filter-search position-absolute bg-light w-100 arrow-box-type-off border-radius-10 py-2 mt-5 dropdown-menu-left">
-                                    <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
+                                    class="z-10 filter-search position-absolute bg-light w-100 arrow-box-type-off border-radius-10 py-2 dropdown-menu-left">
+                                    <li class="dropdown-item py-0 border px-0 border-radius-10 mb-0">
                                         <label for="typePropertyfarm" class="mb-0">
                                             <input type="radio" id="typePropertyfarm" (click)="typeProperty('fazenda')"
                                                 formControlName="typeOfRural" name="typeOfRural"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Fazenda / Sítio
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Fazenda / Sítio
                                                     / Chácara</span>
                                             </div>
                                         </label>
@@ -227,14 +225,14 @@
                                 </ul>
                                 <!-- MOSTAR CASO OPÇÃO SEJA COMERCIAL -->
                                 <ul *ngIf="typeoffCommercial"
-                                    class="z-10 box-shadow filter-search position-absolute bg-light w-100 arrow-box-type-off border-radius-10 py-2 mt-5 dropdown-menu-left">
+                                    class="z-10 filter-search position-absolute border bg-light w-100 arrow-box-type-off border-radius-10 py-2 dropdown-menu-left">
                                     <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                         <label for="typePropertyshop" class="mb-0">
                                             <input type="radio" id="typePropertyshop" (click)="typeProperty('loja')"
                                                 formControlName="typeOfCommercial" name="typeOfCommercial"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Loja/Salão/Ponto
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Loja/Salão/Ponto
                                                     Comercial</span>
                                             </div>
                                         </label>
@@ -246,7 +244,7 @@
                                                 formControlName="typeOfCommercial" name="typeOfCommercial"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Conjunto
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Conjunto
                                                     comercial/Sala</span>
                                             </div>
                                         </label>
@@ -258,7 +256,7 @@
                                                 formControlName="typeOfCommercial" name="typeOfCommercial"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Casa
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Casa
                                                     comercial</span>
                                             </div>
                                         </label>
@@ -270,7 +268,7 @@
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
                                                 <span
-                                                    class="fw-400 font-size-14 line-20 color-blue">Hotel/Motel/Pousada</span>
+                                                    class="fw-400 font-size-14 line-20 color-dark">Hotel/Motel/Pousada</span>
                                             </div>
                                         </label>
                                     </li>
@@ -281,7 +279,7 @@
                                                 formControlName="typeOfCommercial" name="typeOfCommercial"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Andar/Laje
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Andar/Laje
                                                     corporativa</span>
                                             </div>
                                         </label>
@@ -293,7 +291,7 @@
                                                 formControlName="typeOfCommercial" name="typeOfCommercial"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Prédio/Torre</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Prédio/Torre</span>
                                             </div>
                                         </label>
                                     </li>
@@ -303,7 +301,7 @@
                                                 formControlName="typeOfCommercial" name="typeOfCommercial"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Terrenos/Lotes
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Terrenos/Lotes
                                                     comerciais</span>
                                             </div>
                                         </label>
@@ -315,7 +313,7 @@
                                                 name="typeOfCommercial" class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
                                                 <span
-                                                    class="fw-400 font-size-14 line-20 color-blue">Galpão/Depósitos/Armazéms</span>
+                                                    class="fw-400 font-size-14 line-20 color-dark">Galpão/Depósitos/Armazéms</span>
                                             </div>
                                         </label>
                                     </li>
@@ -325,17 +323,22 @@
                                                 formControlName="typeOfCommercial" name="typeOfCommercial"
                                                 class="card-input-element" />
                                             <div class="py-2 px-4 card-input">
-                                                <span class="fw-400 font-size-14 line-20 color-blue">Garagem</span>
+                                                <span class="fw-400 font-size-14 line-20 color-dark">Garagem</span>
                                             </div>
                                         </label>
                                     </li>
                                 </ul>
 
+                                <div *ngIf="alertPropertyOptions" class="z-10 filter-search position-absolute bg-warning w-100 arrow-box-type-off mt-4 border-radius-10 px-3 py-2 dropdown-menu-left">
+                                    <p class="mb-0 text-white font-size-12">Selecione o Tipo de Imóvel primeiro!</p>
+                                </div>
+
+
                             </div>
                             <div
                                 class="input-property nav-item dropdown d-flex justify-content-center align-items-center">
                                 <button (click)="propertyCharacteristics('propertyCharacteristics')"
-                                    class="btn bg-light fw-400 font-size-14 line-20 color-blue h-51 mx-2 px-3"
+                                    class="btn bg-light fw-400 font-size-14 line-20 color-dark h-51 mx-2 px-3"
                                     type="button">+ Opções</button>
                                 <div *ngIf="propertyCharacteristicsOptions"
                                     class="z-10 position-absolute bg-light w-550 border-radius-10 py-2 painel-options-header dropdown-menu-left">

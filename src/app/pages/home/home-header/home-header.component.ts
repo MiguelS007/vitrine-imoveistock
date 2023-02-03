@@ -40,7 +40,7 @@ export class HomeHeaderComponent implements OnInit {
   viewrenovated = false;
   hideviewoptions = false;
   showviewoptions = false;
-
+  alertPropertyOptions = false;
   resultType: any = [];
 
   whatAreYouLookingForTitle: string = 'O que está buscando?';
@@ -250,6 +250,15 @@ export class HomeHeaderComponent implements OnInit {
 
 
   typePropertyOptions(value: string) {
+    this.propertyCharacteristicsOptions = false;
+    let typetest = this.form.controls['typepropertyTeste'].value;
+    if(typetest == ''){
+      this.alertPropertyOptions = true;
+      setTimeout(() => {
+        this.alertPropertyOptions = false;
+      }, 3000)
+    }else{
+    }
     if (value === 'typeproperty') {
       this.typeoffResidential = false;
       this.typeoffRural = false;
@@ -278,6 +287,9 @@ export class HomeHeaderComponent implements OnInit {
 
 
   propertyCharacteristics(value: string) {
+    this.typeoffResidential = false;
+    this.typeoffRural = false;
+    this.typeoffCommercial = false;
     const divviewoptions = document.querySelector('.divviewoptions') as HTMLElement
     if (value === 'propertyCharacteristics') {
       this.propertyCharacteristicsOptions = !this.propertyCharacteristicsOptions;
