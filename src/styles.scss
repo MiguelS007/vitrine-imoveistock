@@ -1826,6 +1826,15 @@ vg-overlay-play .vg-overlay-play {
     //     flex-direction: column !important;
     // }
 
+    .scheduling-visit-selected {
+        border: none;
+        box-shadow: none;
+    } 
+
+    .model-desktop-announcement-selected {
+        display: none !important;
+    }
+
     .btn-filter-mobile {
         display: block !important;
     }

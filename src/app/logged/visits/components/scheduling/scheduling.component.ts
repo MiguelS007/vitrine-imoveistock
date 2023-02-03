@@ -5,6 +5,8 @@ import { AnnouncementService } from 'src/app/service/announcement.service';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnnouncementGetResponseDto } from '../../../../dtos/announcement-get-response.dto';
+import { SchedulingSelectedModalComponent } from './scheduling-selected-modal/scheduling-selected-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-scheduling',
@@ -40,7 +42,8 @@ export class SchedulingComponent implements OnInit {
     private scheduleService: ScheduleService,
     private router: Router,
     private announcementService: AnnouncementService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal
   ) {
     this.form = this.formBuilder.group({
       cancelvisit: ['', [Validators.required]],
@@ -130,16 +133,27 @@ export class SchedulingComponent implements OnInit {
     this.selectedScheduling = item;
     this.verifyLike();
     let checkOld
-    setTimeout(() => {
-      checkOld = localStorage.getItem('announcementChecked');
-    }, 100);
-    let teste = document.getElementById(item._id);
-    teste.classList.add('scheduling-visit-selected');
-    setTimeout(() => {
-      localStorage.setItem('announcementChecked', item._id)
-      let removeOld = document.getElementById(checkOld);
-      removeOld.classList.remove('scheduling-visit-selected')
-    }, 110);
+    if (window.screen.width < 768) {
+      localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling))
+      const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
+      modalRef.result.then(data => {
+      }, error => {
+        localStorage.removeItem('announcementChecked')
+      });
+
+    } else {
+      setTimeout(() => {
+        checkOld = localStorage.getItem('announcementChecked');
+      }, 100);
+      let teste = document.getElementById(item._id);
+      teste.classList.add('scheduling-visit-selected');
+      setTimeout(() => {
+        localStorage.setItem('announcementChecked', item._id)
+        let removeOld = document.getElementById(checkOld);
+        removeOld.classList.remove('scheduling-visit-selected')
+      }, 110);
+    }
+
   }
 
   announcementSelected(value) {
