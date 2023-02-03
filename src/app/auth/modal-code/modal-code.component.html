@@ -21,12 +21,16 @@
             class="btn w56h56 bg-whitelight ml-3 border-radius-10 border p-3 fw-400 font-size-24 line-20 color-black"
             id="code4" />
       </div>
-      <p (click)="timer(1)" *ngIf="resendcode" class="fw-500 py-4 font-size-16 line-20 text-primary w-100 text-center">
-         {{codereceived}}
+      <p (click)="timer(1, 'sms')" *ngIf="resendcode" class="fw-500 pt-4 font-size-16 line-20 text-primary w-100 text-center" style="cursor: pointer;">
+         {{codereceivedSms}}
+      </p>
+
+      <p (click)="timer(1, 'email')" *ngIf="resendcode" class="fw-500 font-size-16 line-20 text-primary w-100 text-center" style="cursor: pointer;">
+         {{codereceivedEmail}}
       </p>
       <div *ngIf="msgkeepcalm" class="w-100 text-center pt-5">
          <p class="fw-500 font-size-16 line-20 color-black w-100 text-center">
-            Código reviado <br/>
+            Código reenviado <br/>
             Aguarde 2min para enviar o código novamente!
          </p>
          <span class="fw-700 font-size-24 line-32 color-black">

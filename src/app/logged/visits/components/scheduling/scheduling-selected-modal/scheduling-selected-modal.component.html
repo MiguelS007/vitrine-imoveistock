@@ -1,6 +1,6 @@
 <section class="container-fluid p-4">
     <div class="d-flex justify-content-end">
-        <img src="../../../../../../assets/icon/x.png" (click)="exit()">
+        <img src="../../../../../../assets/icon/times.svg" (click)="exit()" height="23">
     </div>
     <div [class]="confirmcancel ? 'd-grid':'d-none'" class="w-100 mb-4 bg-white border-pink border-radius-10 p-4 h-auto">
         <p class="fw-700 font-size-18 line-24 color-pink mb-0 py-3">
@@ -41,12 +41,10 @@
                 <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
                 <span class="fw-400 font-size-14 line-18 color-black">11 9 1234-1234</span>
             </p>
-            <!-- <span class="fw-400 font-size-14 line-18 color-black">
-                            Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
-                        </span> -->
         </div>
     </div>
-    <div class="w-100 bg-white mt-4 border-radius-10 h-auto">
+    <hr>
+    <div class="w-100 bg-white mt-4 border-radius-10 h-auto border">
         <div class="w-100
                                         d-inline-blocks 
                                         p-3 

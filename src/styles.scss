@@ -804,8 +804,8 @@ input:focus {
 
 // HOME-HEADER
 .bg-home-header {
-    background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
-    background-position: center top;
+    background-image: url(./assets/img/gradient.png), url(./assets/img/img-bg-header-home.svg);
+    background-position: center 45%;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
     height: 90vh;
@@ -846,7 +846,7 @@ input:focus {
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 53px !important;
+    left: 36px !important;
     bottom: -25px;
 }
 
@@ -1012,6 +1012,7 @@ input:focus {
     left: 0px !important;
     z-index: 1;
 }
+
 
 .space-sale-exclusive {
     position: absolute !important;
@@ -1459,6 +1460,12 @@ vg-overlay-play .vg-overlay-play {
     display: none !important;
 }
 
+.logo-navbar-desktop-preta-visits {
+    height: 100px !important;
+    cursor: pointer;
+    display: block !important;
+}
+
 .logo-navbar-mobile {
     display: none !important;
 }
@@ -1514,9 +1521,43 @@ vg-overlay-play .vg-overlay-play {
     justify-content: space-around !important;
 }
 
+.nav-link-visits {
+    color: #000000 !important;
+}
+
+.icon-menu-navbar-visits {
+    color: black !important;
+}
+
+.btn-search-property {
+    padding: 24px;
+    gap: 10px;
+    width: 379px;
+    height: 73px;
+    background: #542FDF;
+    border-radius: 9px;
+    color: white !important;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    margin-top: 32px !important;
+}
+
+.space-exclusivos-mobile-search-page {
+    display: none !important;
+}
+
 
 // MEDIA
 @media (max-width: 1240px) {
+
+    .space-exclusivos-desktop-search-page {
+        display: none !important;
+    }
+
+    .space-exclusivos-mobile-search-page {
+        display: block !important;
+    }
 
     .margin-header-title-custom {
         padding-top: 30% !important;
@@ -1754,9 +1795,18 @@ vg-overlay-play .vg-overlay-play {
 @media(max-width: 992px) {
 
     // NAV-BAR
+    #navbarSupportedContentVisits {
+        backdrop-filter: blur(55px);
+        background: white;
+    }
+
     #navbarSupportedContent {
         backdrop-filter: blur(55px);
         background: #00000063;
+    }
+
+    .model-desktop-announcement-selected {
+        display: none !important;
     }
 
     // PROPERTY-DETAILS
@@ -1859,13 +1909,23 @@ vg-overlay-play .vg-overlay-play {
     //     flex-direction: column !important;
     // }
 
+    .btn-search-property {
+        padding: 24px;
+        gap: 10px;
+        width: 100% !important;
+        height: 73px;
+        background: #542FDF;
+        border-radius: 9px;
+        color: white !important;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 25px;
+        margin-top: 32px !important;
+    }
+
     .scheduling-visit-selected {
         border: none;
         box-shadow: none;
-    }
-
-    .model-desktop-announcement-selected {
-        display: none !important;
     }
 
     .btn-filter-mobile {
@@ -2068,6 +2128,12 @@ vg-overlay-play .vg-overlay-play {
     .logo-navbar-mobile {
         display: flex !important;
         height: 100px !important;
+    }
+
+    .logo-navbar-desktop-preta-visits {
+        height: 100px !important;
+        cursor: pointer;
+        display: none !important;
     }
 
     .changeColorNavbar {

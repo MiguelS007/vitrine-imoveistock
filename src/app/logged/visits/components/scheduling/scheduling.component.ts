@@ -133,7 +133,7 @@ export class SchedulingComponent implements OnInit {
     this.selectedScheduling = item;
     this.verifyLike();
     let checkOld
-    if (window.screen.width < 768) {
+    if (window.screen.width < 992) {
       localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling))
       const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
       modalRef.result.then(data => {
