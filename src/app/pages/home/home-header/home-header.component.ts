@@ -251,13 +251,7 @@ export class HomeHeaderComponent implements OnInit {
 
   typePropertyOptions(value: string) {
     this.propertyCharacteristicsOptions = false;
-    let typetest = this.form.controls['typepropertyTeste'].value;
-    if(typetest == ''){
-      this.alertPropertyOptions = true;
-      setTimeout(() => {
-        this.alertPropertyOptions = false;
-      }, 3000)
-    }
+   console.log(value)
     if (value === 'typeproperty') {
       this.typeoffResidential = false;
       this.typeoffRural = false;
@@ -268,6 +262,11 @@ export class HomeHeaderComponent implements OnInit {
       this.typeoffRural = !this.typeoffRural;
     } else if (value === 'comercial') {
       this.typeoffCommercial = !this.typeoffCommercial;
+    } else if(value == undefined){
+        this.alertPropertyOptions = true;
+        setTimeout(() => {
+          this.alertPropertyOptions = false;
+        }, 3000)
     }
   }
 
