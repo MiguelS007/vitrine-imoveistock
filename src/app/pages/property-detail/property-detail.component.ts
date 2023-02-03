@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastrService } from 'ngx-toastr';
 import { Subscription, window } from 'rxjs';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
@@ -11,8 +10,6 @@ import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-reque
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { DatamokService } from 'src/app/service/datamok.service';
-import { ProfileService } from 'src/app/service/profile.service';
-import { ScheduleService } from 'src/app/service/schedule.service';
 import { SearchService } from 'src/app/service/search.service';
 import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
 
@@ -72,8 +69,6 @@ export class PropertyDetailComponent implements OnInit {
     private router: Router,
     private datamokservice: DatamokService,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService,
-    private scheduleService: ScheduleService,
     private route: ActivatedRoute,
     private ngxSpinnerService: NgxSpinnerService,
     private searchService: SearchService,
@@ -142,6 +137,7 @@ export class PropertyDetailComponent implements OnInit {
             )
           }
           this.ngxSpinnerService.hide();
+         
         },
       )
     } else {
@@ -187,6 +183,7 @@ export class PropertyDetailComponent implements OnInit {
 
 
   selectDate(value) {
+    
     this.dataSelecionada = value
   }
 
@@ -261,6 +258,8 @@ export class PropertyDetailComponent implements OnInit {
     let request = {
       announcementId: value
     }
+
+    
 
     if (localStorage.getItem('user') === null) {
       this.modalService.open(ModalLoginComponent, { centered: true });
