@@ -32,8 +32,8 @@ export class ModalCodeComponent implements OnInit {
 
   counterdown: any;
   notsendcodemsg = false;
-  resendcode = true;
-  msgkeepcalm = false;
+  resendcode = false;
+  msgkeepcalm = true;
   codereceived = 'Não recebi o código';
 
   constructor(
@@ -56,7 +56,9 @@ export class ModalCodeComponent implements OnInit {
     if (this.phone === null) {
       this.modalService.dismissAll()
     }
-    this.numberTel = this.phone
+    this.numberTel = this.phone;
+    this.timer(1);
+
   }
 
 
