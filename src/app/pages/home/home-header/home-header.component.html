@@ -37,7 +37,19 @@
                                     </div>
                                 </div>
                                 <div class="nav-item dropdown">
-                                    <input type="text" (click)="typePropertyOptions('typeproperty')"
+                                    <div class="dropdown">
+                                        <button style="min-width: 162.23px !important;" class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            {{whatAreYouLookingForTitle}}
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item"  (click)="whatAreYouLookingFor('Edifício')">Edifício</a>
+                                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Terreno')">Terreno</a>
+                                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Casa')">Casa</a>
+                                        </div>
+                                    </div>
+                                    <!-- <input type="text" (click)="typePropertyOptions('typeproperty')"
                                         placeholder="Tipo do imóvel" readonly value="{{searchfilterTypeProperty}}"
                                         formControlName="typepropertyTeste"
                                         class="btn border input-type-property mx-3 text-left input-property border-radius-10 py-2 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
@@ -77,7 +89,7 @@
                                                 </div>
                                             </label>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
                                 <div class="">
                                     <input #searchresult (keyup)="resultSearch(searchresult.value)"
