@@ -18,7 +18,7 @@
                     </b>
                 </p>
             </div>
-            <div class="col-4 col-body-products pl-0 mt-5">
+            <div class="col-4 col-body-products pl-0">
                 <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
                     <!-- <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center">
                         <input type="search"
@@ -139,7 +139,7 @@
                         Encontrar
                     </button>
                 </div>
-                <div class="w-100 mt-4 border-radius-10 bg-white p-4">
+                <div class="w-100 mt-4 border-radius-10 bg-white p-4 space-exclusivos-desktop-search-page">
                     <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
                         exclusivos
                     </p>
@@ -344,6 +344,45 @@
                             </pagination-controls>
                         </div>
                     </div>
+                </div>
+                <div class="w-100 mt-4 border-radius-10 bg-white p-4 space-exclusivos-mobile-search-page">
+                    <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
+                        exclusivos
+                    </p>
+                    <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }"
+                        [scrollbar]="true">
+                        <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
+                            <div style="background-image:
+                       url(../../../assets/img/gradient.png),
+                       url(../../../assets/img/img-announcement-default.jpg);" class="bg-img-property w-100 py-2 px-3
+                       border-radius-10" (click)="announcementSelected(item._id)">
+                                <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
+                                    <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-light" *ngIf="item.typeOfAd === 'rent'">Alugar</h4>
+                                    <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-light" *ngIf="item.typeOfAd === 'sale'">Vender</h4>
+                                    <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-dark">Exclusivo</h4>
+                                </div>
+                                <div class="w-100 details-card-swiper d-grid h-50 pt-5
+                          align-items-end">
+                                    <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                             line-32 text-light">{{item.leaseValue | currency: 'R$'}}
+                                        <span class="fw-400 font-size-14 line-20
+                                text-light">/ mês</span>
+                                    </p>
+                                    <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                             line-32 text-light">{{item.saleValue | currency: 'R$'}}
+                                    </p>
+                                    <span class="fw-700 font-size-14 line-20
+                             text-light">{{item.description | slice: 0:28 }}</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </swiper>
                 </div>
             </div>
             <!-- MODAL FILTER-SEATRCH FOR MOBILE -->

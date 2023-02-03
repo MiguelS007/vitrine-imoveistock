@@ -1013,6 +1013,7 @@ input:focus {
     z-index: 1;
 }
 
+
 .space-sale-exclusive {
     position: absolute !important;
     z-index: 2 !important;
@@ -1542,9 +1543,21 @@ vg-overlay-play .vg-overlay-play {
     margin-top: 32px !important;
 }
 
+.space-exclusivos-mobile-search-page {
+    display: none !important;
+}
+
 
 // MEDIA
 @media (max-width: 1240px) {
+
+    .space-exclusivos-desktop-search-page {
+        display: none !important;
+    }
+
+    .space-exclusivos-mobile-search-page {
+        display: block !important;
+    }
 
     .margin-header-title-custom {
         padding-top: 30% !important;
