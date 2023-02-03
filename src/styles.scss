@@ -805,7 +805,7 @@ input:focus {
 // HOME-HEADER
 .bg-home-header {
     background-image: url(./assets/img/gradient.png), url(./assets/img/img-bg-header-home.svg);
-    background-position: center 30%;
+    background-position: center 45%;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
     height: 90vh;
@@ -846,7 +846,7 @@ input:focus {
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 53px !important;
+    left: 36px !important;
     bottom: -25px;
 }
 
