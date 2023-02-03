@@ -28,7 +28,7 @@
                     <div class="w-100 painel-browser h-auto border-radius-10 max-w-1227">
                         <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
                             <div class="dropdown">
-                                <button style="min-width: 162.23px !important;"
+                                <button style="min-width: 162.23px !important;" 
                                     class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue dropdown-toggle"
                                     type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
@@ -43,10 +43,10 @@
                             <div class="nav-item dropdown">
                                 <input type="text" (click)="typePropertyOptions('typeproperty')"
                                     placeholder="Tipo do imóvel" readonly value="{{searchfilterTypeProperty}}"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     formControlName="typepropertyTeste"
                                     class="btn border input-type-property mx-3 text-left input-property border-radius-10 py-2 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-blue" />
-                                <ul *ngIf="typepropertydiv"
-                                    class="z-10 box-shadow  filter-search position-absolute bg-light w-100 arrow-box-type-property border-radius-10 mt-5 dropdown-menu-left">
+                                <ul class="z-10 box-shadow  filter-search position-absolute bg-light w-100 arrow-box-type-property border-radius-10 dropdown-menu-left dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                         <label for="typePropertyresidential" class="mb-0">
                                             <input type="radio" id="typePropertyresidential"

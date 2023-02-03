@@ -251,11 +251,9 @@ export class HomeHeaderComponent implements OnInit {
 
   typePropertyOptions(value: string) {
     if (value === 'typeproperty') {
-      this.typepropertydiv = !this.typepropertydiv;
       this.typeoffResidential = false;
       this.typeoffRural = false;
       this.typeoffCommercial = false;
-
     } else if (value === 'residencial') {
       this.typeoffResidential = !this.typeoffResidential;
     } else if (value === 'rural') {
