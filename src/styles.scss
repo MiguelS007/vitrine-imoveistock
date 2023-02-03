@@ -1896,6 +1896,20 @@ vg-overlay-play .vg-overlay-play {
     //     flex-direction: column !important;
     // }
 
+    .btn-search-property {
+        padding: 24px;
+        gap: 10px;
+        width: 100% !important;
+        height: 73px;
+        background: #542FDF;
+        border-radius: 9px;
+        color: white !important;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 25px;
+        margin-top: 32px !important;
+    }
+
     .scheduling-visit-selected {
         border: none;
         box-shadow: none;
