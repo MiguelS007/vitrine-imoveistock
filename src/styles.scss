@@ -19,11 +19,6 @@
     font-family: 'Nunito', sans-serif !important;
 }
 
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1212px !important;
-    }
-}
 
 .modal-backdrop {
     display: none;
@@ -46,9 +41,29 @@
     background: #01FF5F !important;
 }
 
+.icon-menu-navbar {
+    font-size: 24px !important;
+}
+
 .changeColorNavbar {
     app-nav-bar {
-        background-color: rgba(0, 0, 0, 0.377) !important;
+        background-color: white !important;
+    }
+
+    .nav-link {
+        color: #000000 !important;
+    }
+
+    .logo-navbar-desktop-branca {
+        display: none !important;
+    }
+
+    .logo-navbar-desktop-preta {
+        display: block !important;
+    }
+
+    .icon-menu-navbar {
+        color: black !important;
     }
 }
 
@@ -144,7 +159,7 @@ input:focus {
     width: 100%;
     z-index: 999 !important;
 
-    &:nth-child(2) {
+    &:nth-child(2) { 
         z-index: 999 !important;
         bottom: 0px !important;
         left: 0;
@@ -156,6 +171,9 @@ input:focus {
     background-color: black !important;
 }
 
+.flex-none{
+    flex: none !important;
+}
 .max-w-400 {
     max-width: 471px;
 }
@@ -263,6 +281,9 @@ input:focus {
 
 .font-size-12 {
     font-size: 12px;
+}
+.font-size-11 {
+    font-size: 11px;
 }
 
 .font-size-14 {
@@ -688,7 +709,7 @@ input:focus {
 }
 
 .flex-wrap {
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
 }
 
 .bg-whitelight {
@@ -789,13 +810,14 @@ input:focus {
 
 // HOME-HEADER
 .bg-home-header {
-    background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
-    background-position: center top;
+    background-image: url(./assets/img/gradient.png), url(./assets/img/img-bg-header-home.svg);
+    background-position: center 45%;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
-    height: fit-content;
+    height: 90vh;
     width: 100% !important;
 }
+
 
 .swiper-mobile {
     display: none;
@@ -806,7 +828,7 @@ input:focus {
 }
 
 .title-header {
-    padding-top: 21%;
+    padding-top: 33%;
 }
 
 .painel-browser {
@@ -830,8 +852,8 @@ input:focus {
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 46.2%;
-    top: 94%;
+    left: 36px !important;
+    bottom: -25px;
 }
 
 .arrow-box-rent:after {
@@ -844,8 +866,8 @@ input:focus {
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 52.8%;
-    top: 94%;
+    right: 30px !important;
+    bottom: -25px;
 }
 
 .input-local {
@@ -861,7 +883,7 @@ input:focus {
 }
 
 .scroll-down {
-    border: 2px solid var(--purplelight);
+    border: 2px solid #01FF5F;
     border-radius: 20px;
     height: 50px;
     position: absolute;
@@ -871,7 +893,7 @@ input:focus {
 
 .scroll-down::before {
     animation: scrollDownAnimation 2s infinite;
-    background-color: var(--purplelight);
+    background-color: #01FF5F;
     border-radius: 100%;
     content: '';
     height: 6px;
@@ -997,6 +1019,7 @@ input:focus {
     z-index: 1;
 }
 
+
 .space-sale-exclusive {
     position: absolute !important;
     z-index: 2 !important;
@@ -1075,6 +1098,14 @@ input:focus {
     .arrow-box-rent:after {
         left: 59%;
     }
+}
+// SEARCH-MAP
+.card-product-map {
+    width: 47% !important;
+    margin-left: 0 !important;
+}
+.heart-like-map{
+    padding: 6px 9px 2px 8px;
 }
 
 // SEARCH-PAGE
@@ -1431,9 +1462,22 @@ vg-overlay-play .vg-overlay-play {
 
 
 
-.logo-navbar-desktop {
+.logo-navbar-desktop-branca {
     height: 100px !important;
     cursor: pointer;
+    display: block !important;
+}
+
+.logo-navbar-desktop-preta {
+    height: 100px !important;
+    cursor: pointer;
+    display: none !important;
+}
+
+.logo-navbar-desktop-preta-visits {
+    height: 100px !important;
+    cursor: pointer;
+    display: block !important;
 }
 
 .logo-navbar-mobile {
@@ -1472,7 +1516,6 @@ vg-overlay-play .vg-overlay-play {
 
 .dropdown-orderby-custom {
     background-color: white !important;
-    width: 150px !important;
     text-align: start !important;
 }
 
@@ -1486,8 +1529,52 @@ vg-overlay-play .vg-overlay-play {
     bottom: 16px !important;
 }
 
+.space-home-cards-custom {
+    display: flex !important;
+    justify-content: space-around !important;
+}
+
+.nav-link-visits {
+    color: #000000 !important;
+}
+
+.icon-menu-navbar-visits {
+    color: black !important;
+}
+
+.btn-search-property {
+    padding: 24px;
+    gap: 10px;
+    width: 379px;
+    height: 73px;
+    background: #542FDF;
+    border-radius: 9px;
+    color: white !important;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    margin-top: 32px !important;
+}
+
+.space-exclusivos-mobile-search-page {
+    display: none !important;
+}
+
+
 // MEDIA
 @media (max-width: 1240px) {
+
+    .space-exclusivos-desktop-search-page {
+        display: none !important;
+    }
+
+    .space-exclusivos-mobile-search-page {
+        display: block !important;
+    }
+
+    .margin-header-title-custom {
+        padding-top: 30% !important;
+    }
 
     // HOME-HEADER
     .bg-home-header {
@@ -1721,9 +1808,18 @@ vg-overlay-play .vg-overlay-play {
 @media(max-width: 992px) {
 
     // NAV-BAR
+    #navbarSupportedContentVisits {
+        backdrop-filter: blur(55px);
+        background: white;
+    }
+
     #navbarSupportedContent {
         backdrop-filter: blur(55px);
         background: #00000063;
+    }
+
+    .model-desktop-announcement-selected {
+        display: none !important;
     }
 
     // PROPERTY-DETAILS
@@ -1826,13 +1922,23 @@ vg-overlay-play .vg-overlay-play {
     //     flex-direction: column !important;
     // }
 
+    .btn-search-property {
+        padding: 24px;
+        gap: 10px;
+        width: 100% !important;
+        height: 73px;
+        background: #542FDF;
+        border-radius: 9px;
+        color: white !important;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 25px;
+        margin-top: 32px !important;
+    }
+
     .scheduling-visit-selected {
         border: none;
         box-shadow: none;
-    } 
-
-    .model-desktop-announcement-selected {
-        display: none !important;
     }
 
     .btn-filter-mobile {
@@ -2028,13 +2134,25 @@ vg-overlay-play .vg-overlay-play {
 }
 
 @media (max-width: 540px) {
-    .logo-navbar-desktop {
+    .logo-navbar-desktop-branca {
         display: none !important;
     }
 
     .logo-navbar-mobile {
         display: flex !important;
         height: 100px !important;
+    }
+
+    .logo-navbar-desktop-preta-visits {
+        height: 100px !important;
+        cursor: pointer;
+        display: none !important;
+    }
+
+    .changeColorNavbar {
+        .logo-navbar-desktop-preta {
+            display: none !important;
+        }
     }
 }
 

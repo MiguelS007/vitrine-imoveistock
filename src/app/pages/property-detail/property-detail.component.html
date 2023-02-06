@@ -18,30 +18,35 @@
             <div style="background-image: url({{item.previews}})" class="bg-property-view w-100 h-600"></div>
           </ng-template>
         </swiper>
-        <div class="col-12 col-btns-preview-img px-5 d-flex py-5 align-items-center position-absolute">
+        <div class="col-12 col-btns-preview-img px-5 justify-content-center d-flex py-5 align-items-center position-absolute">
           <!-- OPTIONS HEADER BTNS -->
-          <div class="w-auto d-flex overflow-y-scroll spc-btns-property align-items-center">
-            <button type="button" data-toggle="modal" data-target="#previewimage"
-              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
-              <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
-            </button>
-            <button type="button" pageScroll href="#previewvideo"
-              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
-            </button>
-            <button type="button" pageScroll href="#previewplant" (click)="openarrow(3)"
-              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <img src="../../../assets/icon/datas-block.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver planta</p>
-            </button>
-            <button type="button" pageScroll href="#previewvideo" (click)="segmentvideo('tour')"
-              class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-              <img src="../../../assets/icon/street-view.png" class="" alt="not icon" />
-              <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
-            </button>
+          <div class="row container">
+            <div class="col-12">
+              <div class="w-auto d-flex overflow-y-scroll spc-btns-property align-items-center">
+                <button type="button" data-toggle="modal" data-target="#previewimage"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
+                  <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
+                </button>
+                <button type="button" pageScroll href="#previewvideo"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
+                  <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
+                </button>
+                <button type="button" pageScroll href="#previewplant" (click)="openarrow(3)"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <img src="../../../assets/icon/datas-block.png" class="" alt="not icon" />
+                  <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver planta</p>
+                </button>
+                <button type="button" pageScroll href="#previewvideo" (click)="segmentvideo('tour')"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <img src="../../../assets/icon/street-view.png" class="" alt="not icon" />
+                  <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
+                </button>
+              </div>
+            </div>
           </div>
+          
           <!-- HEART, SHARE ETC...BTNS -->
           <div class="options-img d-flex align-items-center">
             <div (click)="likeHeartMain(response._id, response.liked)"
@@ -91,7 +96,7 @@
     </div>
 
     <div class="col-12 bg-graylight mt-mobile px-0 d-flex justify-content-center">
-      <div class="row max-w-1918 col-md-10 px-0 row-body-details-property">
+      <div class="row container px-0 row-body-details-property">
         <div class="col-8 col-body-details-property">
           <!-- FIRST INFO CARD -->
 
@@ -479,15 +484,14 @@
                 <vg-controls>
                   <vg-play-pause></vg-play-pause>
                   <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-                  <vg-scrub-bar style="pointer-events:
-                             none;"></vg-scrub-bar>
+                  <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
                   <vg-mute></vg-mute>
                   <vg-volume></vg-volume>
                   <vg-fullscreen></vg-fullscreen>
                 </vg-controls>
                 <video [vgMedia]="$any(media)" poster="../../../assets/img/preview1.png" #media id="singleVideo"
                   preload="auto" crossorigin>
-                  <source src="../../../assets/vid/lambo.mp4" type="video/mp4">
+                  <source src="../../../assets/vid/test.mp4" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
                 </video>
               </vg-player>
@@ -501,7 +505,7 @@
           </div>
           <!-- VERSION DESK ANNOUNCEMEMNTS -->
           <div class="row d-none-desk mt-2 my-5">
-            <div class="col-12 col-cards-products px-0 col-sm-12">
+            <div class="col-12 col-cards-products col-sm-12">
               <div
                 *ngFor="let item of responseAnnouncement | paginate: { itemsPerPage: 4, currentPage:paginationProduct }; let i= index"
                 class="card-product-result d-inline-block mt-5 mr-3 p-3 border-radius-10 bg-white cursor-pointer">

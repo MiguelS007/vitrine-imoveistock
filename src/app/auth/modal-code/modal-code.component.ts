@@ -7,6 +7,7 @@ import { AuthetincatedUserDto } from 'src/app/dtos/authenticated-user.dto';
 import { AuthenticateCodeConfirmationRequestDto } from 'src/app/dtos/authentication-code-confirmation.dtos';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { UserService } from 'src/app/service/user.service';
+import { AuthenticateRequestDto } from '../../dtos/authenticate-request.dto';
 
 @Component({
   selector: 'app-modal-code',
@@ -32,9 +33,10 @@ export class ModalCodeComponent implements OnInit {
 
   counterdown: any;
   notsendcodemsg = false;
-  resendcode = true;
+  resendcode = false;
+  codereceivedEmail: string = '';
   msgkeepcalm = false;
-  codereceived = 'Não recebi o código';
+  codereceivedSms = 'Não recebi o código';
 
   constructor(
     private router: Router,
@@ -56,12 +58,15 @@ export class ModalCodeComponent implements OnInit {
     if (this.phone === null) {
       this.modalService.dismissAll()
     }
-    this.numberTel = this.phone
+    this.numberTel = this.phone;
+    this.timer(1, '');
+
   }
 
 
-  timer(minute) {
-    this.codereceived = 'Reenviar código';
+  timer(minute, value) {
+    this.codereceivedSms = 'Reenviar código via SMS';
+    this.codereceivedEmail = 'Reenviar código via E-mail';
     this.resendcode = false;
     this.msgkeepcalm = true;
     let seconds: number = minute * 120;
@@ -82,7 +87,40 @@ export class ModalCodeComponent implements OnInit {
         clearInterval(timer);
       }
     }, 1000);
+
+    if (value === 'sms') {
+      let request: AuthenticateRequestDto = {
+        phone: this.phone
+      }
+      this.authenticationService.authenticate(request).subscribe(
+        success => {
+          this.toastrService.success('SMS reenviado com sucesso', '', { progressBar: true })
+        },
+        error => this.runError(error, value)
+      )
+    } else if (value === 'email') {
+      let request: AuthenticateRequestDto = {
+        phone: this.phone
+      }
+      this.authenticationService.authenticateByEmail(request).subscribe(
+        success => {
+          this.toastrService.success('E-mail enviado com sucesso', '', { progressBar: true })
+        },
+        error => this.runError(error, value)
+      )
+    }
   }
+
+  runError(error, value) {
+    if(value === 'email') {
+      this.toastrService.error('Erro ao enviar E-mail', '', { progressBar: true })
+      console.error(error)
+    } else if (value === 'sms') {
+      this.toastrService.error('Erro ao enviar SMS', '', { progressBar: true })
+      console.error(error)
+    }
+  }
+
   async confirm() {
     this.spinnerload = true;
     this.continued = false;

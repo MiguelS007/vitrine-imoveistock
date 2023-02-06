@@ -1,7 +1,7 @@
 <section class="bg-whitelight position-relative w-100 h-auto">
     <div class="container">
-        <div class="row h-auto m-0-auto max-w-1918">
-            <div class="col-12 pt-3 pb-5">
+        <div class="row h-auto m-0-auto w-100">
+            <div class="col-12 pt-3 pb-5 px-0">
                 <div class="w-100 my-5 text-align-center">
                     <p class="fw-700 text-mobile mb-0 font-size-32 line-43">
                         Imóveis exclusivos? Temos!
@@ -10,14 +10,13 @@
                         opções que você só encontra aqui
                     </h4>
                 </div>
-                
-                <div class="row justify-content-center px-4">
+                <div class="row justify-content-center">
                     <!-- VERSION DESK -->
                     <swiper class="col-12 swiper-desk h-500 max-w-1477" [spaceBetween]="2" [slidesPerView]="3"
                         [pagination]="{ clickable: true }" [scrollbar]="true">
                         <ng-template *ngFor="let item of response | slice: 0:15" swiperSlide>
-                            <div class="col-md-12 mt-mobile" style="cursor: pointer;">
-                                <div class="h-100 product-announcement p-2 border-radius-10 bg-white">
+                            <div class="col-md-12 px-0 mt-mobile" style="cursor: pointer;">
+                                <div class="h-100 product-announcement p-2 mx-3 border-radius-10 bg-white">
                                     <div class="py-2 px-3 position-relative" style="height: 219px;">
                                         <img src="../../../../assets/img/ap.png" class="photo-announcement-card" (click)="announcementSelected(item._id)">
                                         <div class="space-sale-exclusive">

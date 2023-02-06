@@ -46,6 +46,15 @@ export class AuthenticationService extends BaseService {
           );
   }
 
+  authenticateByEmail(dto: AuthenticateRequestDto): Observable<AuthenticateResponseDto> {
+    return this.httpClient
+        .post(`${this.url}authenticate-email`, dto, this.anonymousHeader())
+        .pipe(
+            map(this.extractData),
+            catchError(this.serviceError)
+        );
+}
+
   authenticateCodeConfirmation(dto: AuthenticateCodeConfirmationRequestDto): Observable<AuthetincatedUserDto> {
       return this.httpClient
           .post(`${this.url}authenticate-code-confirmation`, dto, this.anonymousHeader())
@@ -73,5 +82,9 @@ export class AuthenticationService extends BaseService {
       this.token = this.getAuthenticatedUser();
       return this.jwtPayload = jwtDecode(this.token.token);
   }
+
+//   authenticateByEmail() {
+
+//   }
 
 }
