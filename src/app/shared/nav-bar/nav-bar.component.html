@@ -1,4 +1,4 @@
-<nav *ngIf="router.url !== '/logged/visits' && router.url !== '/search'" class="navbar navbar-expand-lg navbar-dark container navbar-custom">
+<nav *ngIf="router.url !== '/logged/visits' && router.url !== '/search' && router.url !== '/logged/express'" class="navbar navbar-expand-lg navbar-dark container navbar-custom">
   <img [routerLink]="['/']" src="../../../assets/logo/logo-vitrine.svg" class="logo-navbar-desktop-branca">
   <img [routerLink]="['/']" src="../../../assets/logo/logo-preta.svg" class="logo-navbar-desktop-preta">
   <img [routerLink]="['/']" src="../../../assets/logo/logo-mobile.svg" class="logo-navbar-mobile">
@@ -56,7 +56,7 @@
     </ul>
   </div>
 </nav>
-<nav *ngIf="router.url === '/logged/visits' || router.url === '/search'" class="navbar navbar-expand-lg navbar-dark container navbar-custom">
+<nav *ngIf="router.url === '/logged/visits' || router.url === '/search' || router.url === '/logged/express'" class="navbar navbar-expand-lg navbar-dark container navbar-custom">
   <img [routerLink]="['/']" src="../../../assets/logo/logo-preta.svg" class="logo-navbar-desktop-preta-visits">
   <img [routerLink]="['/']" src="../../../assets/logo/logo-mobile.svg" class="logo-navbar-mobile">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentVisits"

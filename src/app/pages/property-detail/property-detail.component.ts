@@ -158,16 +158,18 @@ export class PropertyDetailComponent implements OnInit {
     // }
 
 
-    this.announcementService.listLikes().subscribe(
-      success => {
-        for (let i = 0; i < success.length; i++) {
-          if (success[i].announcement._id === this.response._id) {
-            Object.assign(this.response, { liked: true });
+    if (localStorage.getItem('user') !== null) {
+      this.announcementService.listLikes().subscribe(
+        success => {
+          for (let i = 0; i < success.length; i++) {
+            if (success[i].announcement._id === this.response._id) {
+              Object.assign(this.response, { liked: true });
+            }
+            this.listLikes.push(success[i].announcement)
           }
-          this.listLikes.push(success[i].announcement)
         }
-      }
-    )
+      )
+    }
   }
 
 
