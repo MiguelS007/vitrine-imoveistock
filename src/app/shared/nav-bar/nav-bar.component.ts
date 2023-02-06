@@ -139,7 +139,8 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/about']);
     } else if (value === 'indicateProperties') {
       if (this.user !== null) {
-        window.open('https://imoveistock-app.vercel.app/logged/home', '_blank');
+        // window.open('https://imoveistock-app.vercel.app/logged/home', '_blank');
+        window.open('https://imoveistock-app.vercel.app/auth/insert-tel', '_blank');
       } else {
         this.openLogin()
       }
@@ -148,7 +149,8 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.contact = false;
     } else if (value === 'ownerRegistration') {
       if (this.user !== null) {
-        window.open('https://imoveistock-app.vercel.app/logged/owner-registration', '_blank');
+        // window.open('https://imoveistock-app.vercel.app/logged/owner-registration', '_blank');
+        window.open('https://imoveistock-app.vercel.app/auth/insert-tel', '_blank');
       } else {
         this.openLogin()
       }
@@ -157,7 +159,8 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.contact = false;
     } else if (value === 'forBrokers') {
       if (this.user !== null) {
-        window.open('https://imoveistock-app.vercel.app/logged/broker-registration', '_blank');
+        // window.open('https://imoveistock-app.vercel.app/logged/broker-registration', '_blank');
+        window.open('https://imoveistock-app.vercel.app/auth/insert-tel', '_blank');
       } else {
         this.openLogin()
       }
