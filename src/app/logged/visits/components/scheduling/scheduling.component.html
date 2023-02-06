@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-7 mt-4 model-desktop-announcement-selected">
+        <div *ngIf="response.length > 0" class="col-lg-7 mt-4 model-desktop-announcement-selected">
             <div [class]="confirmcancel ? 'd-grid':'d-none'"
                 class="w-100 mb-4 bg-white border-pink border-radius-10 p-4 h-auto">
                 <p class="fw-700 font-size-18 line-24 color-pink mb-0 py-3">
