@@ -29,6 +29,8 @@ export class SearchMapComponent implements OnInit {
   countLoft: number;
   countKitnet: number;
   products: any = [];
+  messageNotSearch = false;
+
 
   filtroSelected: any;
   propertyproducts: AnnouncementGetResponseDto[] = [];
@@ -39,6 +41,7 @@ export class SearchMapComponent implements OnInit {
   recentlySeenList: AnnouncementGetResponseDto[] = [];
   listLikes: AnnouncementGetResponseDto[] = [];
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
+
 
   filtroResultDisplay: {
     typeAd: string,
@@ -55,6 +58,13 @@ export class SearchMapComponent implements OnInit {
     checkconstruction: string,
     checkrenovated: string,
   }
+
+  
+  selectTypeAd = 'Selecione';
+  selectBathrooms = 'Banheiros';
+  selectRooms = 'Dormitórios';
+  selectVacancies = 'Vagas';
+  valuePrices: 0;
 
 
   constructor(
@@ -80,7 +90,14 @@ export class SearchMapComponent implements OnInit {
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
-
+    if (resultadoVerify !== null) {
+      this.filterResult = JSON.parse(resultadoVerify);
+      if (this.filterResult.length === 0) {
+        this.messageNotSearch = true;
+      }
+    } else {
+      this.filterResult = [];
+    }
     if (this.recentlySeenIdsList !== null) {
       for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
         this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
@@ -219,7 +236,57 @@ export class SearchMapComponent implements OnInit {
       error => { console.log(error, 'data not collected') }
     );
   }
-  likeHeart(value) {
+  changeOderBy(value) {
+    this.orderBy = value
+  }
+  searchByTypeAd(item) {
+    if (item === 'sale') {
+      this.selectTypeAd = 'Venda'
+    } else if (item === 'rent') {
+      this.selectTypeAd = 'Alugar'
+    }
+  }
+  searchBy(item) {
+    // SELECT BADROOMS
+    if (item === '1') {
+      this.selectRooms = '+1 Quarto'
+    } else if (item === '2') {
+      this.selectRooms = '+2  Quartos'
+    } else if (item === '3') {
+      this.selectRooms = '+3  Quartos'
+    } else if (item === '4') {
+      this.selectRooms = '+4  Quartos'
+    } else if (item === '5') {
+      this.selectRooms = '+5  Quartos'
+    }
+    // SELECT BATHROOMS
+    else if (item === '1b') {
+      this.selectBathrooms = '+1  Banheiro'
+    } else if (item === '2b') {
+      this.selectBathrooms = '+2  Banheiros'
+    } else if (item === '3b') {
+      this.selectBathrooms = '+3  Banheiros'
+    } else if (item === '4b') {
+      this.selectBathrooms = '+4  Banheiros'
+    } else if (item === '5b') {
+      this.selectBathrooms = '+5  Banheiros'
+    }
+    // SELECT ROOMS
+    else if (item === 'tf') {
+      this.selectVacancies = 'Tanto faz'
+    } else if (item === '1v') {
+      this.selectVacancies = '+1  Vagas'
+    } else if (item === '2v') {
+      this.selectVacancies = '+2  Vagas'
+    } else if (item === '3v') {
+      this.selectVacancies = '+3  Vagas'
+    } else if (item === '4v') {
+      this.selectVacancies = '+4  Vagas'
+    } else if (item === '5v') {
+      this.selectVacancies = '+5  Vagas'
+    }
+  }
+  likeHeart(value, condition) {
 
     let request = {
       announcementId: value
@@ -240,10 +307,8 @@ export class SearchMapComponent implements OnInit {
           console.log(error)
         }
       )
-    }
-
-    for (let i = 0; i < this.listLikes.length; i++) {
-      if (this.listLikes[i]._id === value) {
+    } else {
+      if (condition === true) {
         this.announcementService.registerUnlike(request).subscribe(
           success => {
             this.ngOnInit()
@@ -252,7 +317,7 @@ export class SearchMapComponent implements OnInit {
             console.log(error)
           }
         )
-      } else if (this.listLikes[i]._id !== value) {
+      } else if (condition === undefined) {
         this.announcementService.registerLike(request).subscribe(
           success => {
             this.ngOnInit()
@@ -262,7 +327,10 @@ export class SearchMapComponent implements OnInit {
           }
         )
       }
+
     }
+
+
 
   }
 }
