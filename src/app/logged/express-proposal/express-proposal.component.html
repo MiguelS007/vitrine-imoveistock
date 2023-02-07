@@ -259,6 +259,29 @@
                 </div>
             </div>
 
+
+            <div *ngIf="detailfinalvalueChange" class="w-100">
+                <div class="w-100 bg-white border-radius-10 mb-3 p-5">
+                    <div class="w-100">
+                        <div class="w-100 border-bottom-gray d-flex align-items-center justify-content-between">
+                            <h5 class="fw-700 font-size-18 line-24 color-black">Alterar</h5>
+                            <i class="bi cursor-pointer font-size-30 color-black bi-three-dots-vertical"></i>
+                        </div>
+                    </div>
+                    <div class="w-100 pt-4 d-flex align-items-center">
+                        <i class="bi bi-person font-size-28"></i>
+                        <div class="d-grid px-3 mb-0">
+                            <p class="fw-400 font-size-16 line-20 color-black mb-1">
+                                Quero pedir que o proprietário altere
+                            </p>
+                            <p class="fw-400 font-size-16 line-20 text-primary mt-1 mb-0 text-capitalize">
+                                {{form.controls['faqChange'].value}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div *ngIf="spaceCustomizeProposalChanges" class="w-100 bg-white border-radius-10 p-5">
                 <p class="fw-700 font-size-18 line-18 color-black">Mudanças do imóvel</p>
                 <hr class="bg-whitelight" />
@@ -296,13 +319,55 @@
                                 algo novo</span>
                         </p>
                         <p class="d-flex align-items-center mb-2">
-                            <img src="../../../assets/icon/tools.png" class="pl-1 pr-2 pb-2" />
-                            <span class="fw-400 font-size-16 line-20 color-black">Fazer manutenção ou reparo</span>
+                            <img src="../../../assets/icon/tools.png" class="pl-1 pr-2 pb-2" (click)="changeItem('open')"/>
+                            <span class="fw-400 font-size-16 line-20 color-black" (click)="changeItem('open')">Fazer manutenção ou reparo</span>
                         </p>
                         <p class="d-flex align-items-center mb-2">
-                            <img src="../../../assets/icon/list.png" class="pl-1 pr-2 pb-2" />
-                            <span class="fw-400 font-size-16 line-20 color-black">Modificar ou substituir algo</span>
+                            <img src="../../../assets/icon/list.png" class="pl-1 pr-2 pb-2" (click)="changeItem('open')"/>
+                            <span class="fw-400 font-size-16 line-20 color-black" (click)="changeItem('open')">Modificar ou substituir algo</span>
                         </p>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="spaceChangeItem" class="w-100 bg-white border-radius-10 p-5 mt-4">
+                <div class="w-100">
+                    <div class="w-100 d-flex align-items-center justify-content-between">
+                        <h5 class="fw-700 font-size-18 line-24 color-black">Alteração</h5>
+                        <i (click)="changeItem('close')" class="bi cursor-pointer font-size-36 color-black bi-x"></i>
+                    </div>
+                    <div class="w-100">
+                        
+                        <p class="fw-700 font-size-16 mt-4 line-20 color-black">
+                            Quero pedir que o proprietário altere
+                        </p>
+                        <input type="text" formControlName="faqChange"
+                            class="w-100 py-2 border-none border-bottom-gray bg-white color-blue fw-400 font-size-14 line-18"
+                            maxlength="200" placeholder="descreva o que deseja retirar" id="faqChange" />
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p class="fw-400 m-0 font-size-12 line-15 color-black">
+                                ex: a cama e o colchão da suíte principal
+                            </p>
+                            <p class="fw-400 m-0 font-size-12 line-15 color-blue">
+                                {{form.controls['faqremove'].value.length}}/200
+                            </p>
+                        </div>
+                        <div class="row d-flex justify-content-end ">
+                            <div class="col-7 d-flex col-express block-important">
+                                <button (click)="changeItem('close')"
+                                    class="bg-white m-1 border-black w-100 cursor-pointer border-radius-10 h-51 fw-700 font-size-18 line-24 color-black"
+                                    type="submit">
+                                    Cancelar
+                                </button>
+                                <button (click)="changeItem('submit')"
+                                    [disabled]="form.controls['faqChange'].value === ''"
+                                    class="bg-purple m-1 w-100 border-radius-10 cursor-pointer h-51 fw-700 font-size-18 line-24 border-none text-light"
+                                    type="submit">
+                                    Salvar
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

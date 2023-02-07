@@ -46,9 +46,14 @@ export class ExpressProposalComponent implements OnInit {
 
   spaceAddedItem: boolean = false;
 
+  spaceChangeItem: boolean = false;
+
   spaceCustomizeProposalChangesOptions: boolean = false;
 
   detailfinalvalueAdd: boolean = false;
+
+  detailfinalvalueChange: boolean = false;
+
 
 
   constructor(
@@ -63,6 +68,7 @@ export class ExpressProposalComponent implements OnInit {
     this.form = this.formBuilder.group({
       faqremove: [''],
       faqAdded: [''],
+      faqChange: ['']
     });
   }
 
@@ -264,6 +270,37 @@ export class ExpressProposalComponent implements OnInit {
     }
   }
 
+  changeItem(value) {
+    if (value === 'open') {
+      this.spaceCustomizeProposalChangesOptions = false
+      this.spaceCustomizeProposalChanges = false
+      this.spaceChangeItem = true;
+    } else if (value === 'close') {
+      this.spaceCustomizeProposalChangesOptions = true
+      this.spaceCustomizeProposalChanges = false
+      this.spaceChangeItem = false;
+    } else if (value === 'submit') {
+
+      let requestChange = {
+        type: 'modifyOrReplaceItem',
+        description: this.form.controls['faqChange'].value
+      };
+
+      sessionStorage.setItem('addItem', JSON.stringify(requestChange));
+
+      setTimeout(() => {
+        this.titleexpress = false;
+        this.cardproduct = false;
+        this.cardinfotwo = false;
+        this.cardinfoone = false;
+        this.btnsend = false;
+        this.detailfinalvalueChange = true;
+      }, 100);
+      this.spaceCustomizeProposalChangesOptions = true
+      this.spaceCustomizeProposalChanges = false
+      this.spaceChangeItem = false;
+    }
+  }
 
 
   proposeValue(value: string) {
