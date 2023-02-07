@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatamokService } from 'src/app/service/datamok.service';
@@ -39,11 +39,14 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   userName: string;
 
+  navbarSelect: string = ''
+
   constructor(
     public router: Router,
     private datamokservice: DatamokService,
     private modalService: NgbModal,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public route: ActivatedRoute
 
   ) {
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
@@ -101,6 +104,16 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.about = false;
       this.contact = false;
     }
+
+    this.router.events.pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    ).subscribe((data) => {
+      if(data.url.includes('/logged') || data.url.includes('/announcement') || data.url.includes('/search')) {
+        this.navbarSelect = 'black'
+      } else {
+        this.navbarSelect = 'white'
+      } 
+    });
 
   }
 

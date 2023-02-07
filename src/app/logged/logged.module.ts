@@ -14,6 +14,7 @@ import { FavoritesComponent } from './visits/components/favorites/favorites.comp
 import { SchedulingComponent } from './visits/components/scheduling/scheduling.component';
 import { SchedulingSelectedModalComponent } from './visits/components/scheduling/scheduling-selected-modal/scheduling-selected-modal.component';
 import { AnnouncementGetByIdResolve } from '../resolvers/announcement-getById.resolver';
+import { ProposalService } from '../service/proposal.service';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -36,7 +37,8 @@ import { AnnouncementGetByIdResolve } from '../resolvers/announcement-getById.re
   schemas: [],
   providers: [
     AnnouncementService,
-    AnnouncementGetByIdResolve
+    AnnouncementGetByIdResolve,
+    ProposalService
   ],
   bootstrap: [AppComponent]
 

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ProposalRequestDto } from 'src/app/dtos/proposal-request-dto';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { ProposalService } from 'src/app/service/proposal.service';
 import { AnnouncementGetResponseDto } from '../../dtos/announcement-get-response.dto';
 import { AnnouncementService } from '../../service/announcement.service';
 
@@ -33,16 +36,33 @@ export class ExpressProposalComponent implements OnInit {
 
   listLikes: AnnouncementGetResponseDto[] = [];
 
+  request: ProposalRequestDto;
+
+  spaceCustomizeProposal: boolean = false;
+
+  spaceCustomizeProposalChanges: boolean = true;
+
+  spaceRemoveitem: boolean = false;
+
+  spaceAddedItem: boolean = false;
+
+  spaceCustomizeProposalChangesOptions: boolean = false;
+
+  detailfinalvalueAdd: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private datamokservice: DatamokService,
     private router: Router,
     private route: ActivatedRoute,
-    private announcementService: AnnouncementService
+    private announcementService: AnnouncementService,
+    private proposalService: ProposalService,
+    private toastrService: ToastrService
   ) {
     this.form = this.formBuilder.group({
-      faqremove: ['', [Validators.required]],
+      faqremove: [''],
+      faqAdded: [''],
     });
   }
 
@@ -66,6 +86,10 @@ export class ExpressProposalComponent implements OnInit {
         }
       }
     )
+  }
+
+  public toNumber(paremetro1: string) {
+    return Number(paremetro1)
   }
 
   likeHeart(value) {
@@ -112,6 +136,8 @@ export class ExpressProposalComponent implements OnInit {
     if (value === 'open') {
       this.modalcustomizedproposal = true;
       this.modalwarning = true;
+
+      this.spaceCustomizeProposal = true;
     } else if (value === 'close') {
       this.modalcustomizedproposal = false;
       this.modalsendproposalexpress = false;
@@ -119,35 +145,79 @@ export class ExpressProposalComponent implements OnInit {
       this.modalremoveitem = false;
     }
   }
+
+
   sendProposalExpress(value: string) {
     if (value === 'open') {
       this.modalsendproposalexpress = true;
     } else if (value === 'close') {
       this.modalsendproposalexpress = false;
     } else if (value === 'confirm') {
-      this.modalsendproposalexpress = false;
+      if (this.response.typeOfAd === 'rent') {
+
+        let valueTotal = this.toNumber(this.response.valueOfIptu) / 12 + this.toNumber(this.response.condominiumValue) + this.toNumber(this.response.leaseValue)
+
+        this.request = {
+          type: this.response.typeOfAd,
+          rentAmount: parseFloat(this.toNumber(this.response.leaseValue).toFixed(2)),
+          suggestedRentAmount: this.toNumber(this.response.leaseValue),
+          iptuAmount: this.toNumber(this.response.valueOfIptu),
+          condominiumAmount: this.toNumber(this.response.condominiumValue),
+          rentAmountTotal: parseFloat(valueTotal.toFixed(2)),
+          announcementId: this.response._id
+        }
+      } else {
+        this.request = {
+          type: this.response.typeOfAd,
+          saleAmount: parseFloat(this.toNumber(this.response.saleValue).toFixed(2)),
+          suggestedSaleAmount: this.toNumber(this.response.saleValue),
+          saleAmountTotal: parseFloat(this.toNumber(this.response.saleValue).toFixed(2)),
+          announcementId: this.response._id
+        }
+      }
+      this.proposalService.register(this.request).subscribe({
+        next: data => {
+          this.toastrService.success('Proposta enviada!', '', { progressBar: true })
+          this.modalsendproposalexpress = false;
+        },
+        error: error => {
+          this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true })
+        }
+      })
     } else if (value === 'cancelar') {
       this.modalsendproposalexpress = false;
     }
   }
+
   propertyChange(value: string) {
     if (value === 'open') {
-      this.modalpropertychange = true;
-      this.modalwarning = false;
+      this.spaceCustomizeProposalChanges = false;
+      this.spaceCustomizeProposalChangesOptions = true;
     } else if (value === 'close') {
-      this.modalpropertychange = false;
-      this.modalwarning = true;
+      this.spaceCustomizeProposalChanges = true
+      this.spaceCustomizeProposalChangesOptions = false;
+
     }
   }
+
   removeItem(value: string) {
     if (value === 'open') {
-      this.modalwarning = false;
-      this.modalpropertychange = false;
-      this.modalremoveitem = true;
+      this.spaceCustomizeProposalChangesOptions = false
+      this.spaceCustomizeProposalChanges = false
+      this.spaceRemoveitem = true;
     } else if (value === 'close') {
-      this.modalwarning = true;
-      this.modalremoveitem = false;
+      this.spaceCustomizeProposalChangesOptions = true
+      this.spaceCustomizeProposalChanges = false
+      this.spaceRemoveitem = false;
     } else if (value === 'submit') {
+
+      let requestRemove = {
+        type: 'removeItem',
+        description: this.form.controls['faqremove'].value
+      };
+
+      sessionStorage.setItem('removeItem', JSON.stringify(requestRemove));
+
       setTimeout(() => {
         this.titleexpress = false;
         this.cardproduct = false;
@@ -156,9 +226,46 @@ export class ExpressProposalComponent implements OnInit {
         this.btnsend = false;
         this.detailfinalvalue = true;
       }, 100);
-      this.modalcustomizedproposal = false;
+      this.spaceCustomizeProposalChangesOptions = true
+      this.spaceCustomizeProposalChanges = false
+      this.spaceRemoveitem = false;
     }
   }
+
+  addedItem(value: string) { 
+    if (value === 'open') {
+      this.spaceCustomizeProposalChangesOptions = false
+      this.spaceCustomizeProposalChanges = false
+      this.spaceAddedItem = true;
+    } else if (value === 'close') {
+      this.spaceCustomizeProposalChangesOptions = true
+      this.spaceCustomizeProposalChanges = false
+      this.spaceAddedItem = false;
+    } else if (value === 'submit') {
+
+      let requestAdded = {
+        type: 'addItem',
+        description: this.form.controls['faqAdded'].value
+      };
+
+      sessionStorage.setItem('addItem', JSON.stringify(requestAdded));
+
+      setTimeout(() => {
+        this.titleexpress = false;
+        this.cardproduct = false;
+        this.cardinfotwo = false;
+        this.cardinfoone = false;
+        this.btnsend = false;
+        this.detailfinalvalueAdd = true;
+      }, 100);
+      this.spaceCustomizeProposalChangesOptions = true
+      this.spaceCustomizeProposalChanges = false
+      this.spaceAddedItem = false;
+    }
+  }
+
+
+
   proposeValue(value: string) {
     if (value === 'open') {
       this.modalvalue = true;
