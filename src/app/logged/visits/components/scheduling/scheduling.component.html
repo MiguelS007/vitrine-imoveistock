@@ -14,7 +14,7 @@
                         '-'}}{{item.visitDate | date: 'dd'||
                         '-'}}</span>
                 </div>
-                <div [class]="confirmcancel ? 'd-flex':'d-none'" class="w-100" class="w-100">
+                <div [class]="item.cancellationReason ? 'd-flex':'d-none'" class="w-100" class="w-100">
                     <span
                         class="fw-400 font-size-14 line-19 color-pink py-1 px-3 mb-0 border-pink border-radius-100 mr-2">Visita
                         cancelada</span>
@@ -37,11 +37,12 @@
                     </div>
                 </div>
                 <div class="w-100 d-flex mt-3">
-                    <button type="button" (click)="goExpress()"
+                    <button type="button" (click)="goExpress(item.announcement?._id)"
                         class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
                         Fazer proposta
                     </button>
-                    <button type="button"
+                    <button type="submit" type="button" data-toggle="modal" (click)="openCancelVisitModal(selectedScheduling)"
+                    data-target="#cancelvisits"
                         class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
                         Cancelar
                     </button>
@@ -49,7 +50,7 @@
             </div>
         </div>
         <div *ngIf="response.length > 0" class="col-lg-7 mt-4 model-desktop-announcement-selected">
-            <div [class]="confirmcancel ? 'd-grid':'d-none'"
+            <div [class]="selectedScheduling.cancellationReason ? 'd-grid':'d-none'"
                 class="w-100 mb-4 bg-white border-pink border-radius-10 p-4 h-auto">
                 <p class="fw-700 font-size-18 line-24 color-pink mb-0 py-3">
                     Visita Cancelada
@@ -214,7 +215,7 @@
                         class="btn bg-purple text-light border-radius-10 h-74 w-100 mr-1 fw-700 font-size-18 line-24">
                         Remarcar
                     </button>
-                    <button type="submit" type="button" data-toggle="modal" (click)="cancelVisits('cancel')"
+                    <button type="submit" type="button" data-toggle="modal" (click)="openCancelVisitModal(selectedScheduling)"
                         data-target="#cancelvisits"
                         class="btn bg-white border-purple color-purple ml-1 border-radius-10 h-74 w-100 fw-700 font-size-18 line-24">Cancelar
                     </button>
@@ -235,7 +236,7 @@
                                         Para confirmar, conte pra gente o motivo
                                     </p>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input w18h18" value="reason1"
+                                        <input class="form-check-input w18h18" value="nao_tenho_mais_interesse_neste_imovel"
                                             formControlName="cancelvisit" type="radio" name="cancelvisit"
                                             id="cancelreason1">
                                         <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
@@ -245,7 +246,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input w18h18" value="reason2"
+                                        <input class="form-check-input w18h18" value="imprevisto"
                                             formControlName="cancelvisit" type="radio" name="cancelvisit"
                                             id="cancelreason2">
                                         <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
@@ -255,7 +256,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input w18h18" value="reason3"
+                                        <input class="form-check-input w18h18" value="nao_quero_mais_alugar"
                                             formControlName="cancelvisit" type="radio" name="cancelvisit"
                                             id="cancelreason3">
                                         <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
@@ -264,7 +265,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input w18h18" value="reason4"
+                                        <input class="form-check-input w18h18" value="outro_motivo"
                                             formControlName="cancelvisit" type="radio" name="cancelvisit"
                                             id="cancelreason3">
                                         <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black"
@@ -274,7 +275,7 @@
                                     </div>
 
                                     <button type="submit" data-dismiss="modal" aria-label="Close"
-                                        (click)="cancelVisits('cancelmodal')" [disabled]="form.invalid" class="btn pb-2
+                                        (click)="confirmCancelVisitModal()" [disabled]="form.invalid" class="btn pb-2
                                                     bg-purple fw-700
                                                     font-size-18 line-24
                                                     text-light mt-3
