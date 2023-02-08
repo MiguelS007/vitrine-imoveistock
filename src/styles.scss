@@ -1560,6 +1560,20 @@ vg-overlay-play .vg-overlay-play {
     display: none !important;
 }
 
+.input-custom-proposal {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid #FEFFFF !important;
+    border-radius: 0px !important;
+    width: 170px !important;
+    text-align: end !important;
+    line-height: 24px !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    color: #f8f9fa !important;
+    padding-right: 0px !important;
+}
+
 
 // MEDIA
 @media (max-width: 1240px) {

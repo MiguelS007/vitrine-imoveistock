@@ -15,6 +15,7 @@ import { SchedulingComponent } from './visits/components/scheduling/scheduling.c
 import { SchedulingSelectedModalComponent } from './visits/components/scheduling/scheduling-selected-modal/scheduling-selected-modal.component';
 import { AnnouncementGetByIdResolve } from '../resolvers/announcement-getById.resolver';
 import { ProposalService } from '../service/proposal.service';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -32,6 +33,7 @@ import { ProposalService } from '../service/proposal.service';
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     SwiperModule,
+    CurrencyMaskModule,
    
   ],
   schemas: [],

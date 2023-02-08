@@ -54,7 +54,21 @@ export class ExpressProposalComponent implements OnInit {
 
   detailfinalvalueChange: boolean = false;
 
+  formCustomizeProposal: FormGroup;
 
+  acceptVehicle: boolean = false;
+  valueVehicle: number = 0;
+
+  acceptProperty: boolean = false;
+  valueProperty: number = 0;
+
+  acceptFinancing: boolean = false;
+  valueFinancing: number = 0;
+
+  acceptInstallment: boolean = false;
+  valueInstallment: number = 0;
+
+  changesRequest: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -70,15 +84,60 @@ export class ExpressProposalComponent implements OnInit {
       faqAdded: [''],
       faqChange: ['']
     });
+
+    this.formCustomizeProposal = this.formBuilder.group({
+      suggestedRentAmount: [''],
+      suggestedSaleAmount: [''],
+      saleCarAsPaymentAmount: [''],
+      salePropertyAsPaymentAmount: [''],
+      saleDirectInstallmentAsPaymentAmount: [''],
+      saleFinancingAsPaymentAmount: [''],
+      comment: ['']
+    })
   }
 
   ngOnInit(): void {
     this.products = this.datamokservice.resultSearch;
 
     this.response = this.route.snapshot.data['resolve'];
-    console.log(this.response)
 
-    this.listLike()
+    this.listLike();
+
+    this.formCustomizeProposal.patchValue({
+      suggestedRentAmount: this.response.leaseValue,
+      suggestedSaleAmount: this.response.saleValue
+    })
+
+    for (let i = 0; i < this.response.paymentMethods.length; i++) {
+      if (this.response.paymentMethods[i].type === 'property') {
+        this.acceptProperty = true;
+        this.formCustomizeProposal.patchValue({
+          salePropertyAsPaymentAmount: 0
+        })
+      }
+
+      if (this.response.paymentMethods[i].type === 'vehicle') {
+        this.acceptVehicle = true;
+        this.formCustomizeProposal.patchValue({
+          saleCarAsPaymentAmount: 0
+        })
+      }
+
+      if (this.response.paymentMethods[i].type === 'financing') {
+        this.acceptFinancing = true;
+        this.formCustomizeProposal.patchValue({
+          saleFinancingAsPaymentAmount: 0
+        })
+      }
+
+      if (this.response.paymentMethods[i].type === 'installment') {
+        this.acceptInstallment = true
+        this.formCustomizeProposal.patchValue({
+          saleDirectInstallmentAsPaymentAmount: 0
+        })
+      }
+    }
+
   }
 
   listLike() {
@@ -112,7 +171,7 @@ export class ExpressProposalComponent implements OnInit {
           return
         },
         error => {
-          console.log(error)
+          console.error(error)
         }
       )
     }
@@ -222,7 +281,8 @@ export class ExpressProposalComponent implements OnInit {
         description: this.form.controls['faqremove'].value
       };
 
-      sessionStorage.setItem('removeItem', JSON.stringify(requestRemove));
+
+      this.changesRequest.push(requestRemove)
 
       setTimeout(() => {
         this.titleexpress = false;
@@ -238,7 +298,7 @@ export class ExpressProposalComponent implements OnInit {
     }
   }
 
-  addedItem(value: string) { 
+  addedItem(value: string) {
     if (value === 'open') {
       this.spaceCustomizeProposalChangesOptions = false
       this.spaceCustomizeProposalChanges = false
@@ -254,7 +314,7 @@ export class ExpressProposalComponent implements OnInit {
         description: this.form.controls['faqAdded'].value
       };
 
-      sessionStorage.setItem('addItem', JSON.stringify(requestAdded));
+      this.changesRequest.push(requestAdded)
 
       setTimeout(() => {
         this.titleexpress = false;
@@ -286,7 +346,7 @@ export class ExpressProposalComponent implements OnInit {
         description: this.form.controls['faqChange'].value
       };
 
-      sessionStorage.setItem('addItem', JSON.stringify(requestChange));
+      this.changesRequest.push(requestChange)
 
       setTimeout(() => {
         this.titleexpress = false;
@@ -308,6 +368,79 @@ export class ExpressProposalComponent implements OnInit {
       this.modalvalue = true;
     } else if (value === 'close') {
       this.modalvalue = false;
+    } else if (value === 'submit') {
+      if (this.acceptProperty) {
+        this.valueProperty = this.formCustomizeProposal.controls['salePropertyAsPaymentAmount'].value
+      }
+
+      if (this.acceptVehicle) {
+        this.valueVehicle = this.formCustomizeProposal.controls['saleCarAsPaymentAmount'].value
+      }
+
+      if (this.acceptFinancing) {
+        this.valueFinancing = this.formCustomizeProposal.controls['saleFinancingAsPaymentAmount'].value
+      }
+
+      if (this.acceptInstallment) {
+        this.valueInstallment = this.formCustomizeProposal.controls['saleDirectInstallmentAsPaymentAmount'].value
+      }
+      this.modalvalue = false;
+    }
+  }
+
+  send() {
+    if (this.response.typeOfAd === 'sale') {
+
+      this.request = {
+        type: 'sale',
+        iptuAmount: this.toNumber(this.response.valueOfIptu),
+        condominiumAmount: this.toNumber(this.response.condominiumValue),
+        saleAmount: this.toNumber(this.response.saleValue),
+        suggestedSaleAmount: this.formCustomizeProposal.controls['suggestedSaleAmount'].value,
+        saleAmountTotal: this.toNumber(this.formCustomizeProposal.controls['suggestedSaleAmount'].value) + this.valueProperty + this.valueVehicle + this.valueFinancing + this.valueInstallment,
+        saleCarAsPaymentAmount: this.valueProperty,
+        salePropertyAsPaymentAmount: this.valueVehicle,
+        saleDirectInstallmentAsPaymentAmount: this.valueInstallment,
+        saleFinancingAsPaymentAmount: this.valueFinancing,
+        changes: this.changesRequest,
+        comment: this.formCustomizeProposal.controls['comment'].value,
+        announcementId: this.response._id
+      }
+
+      this.proposalService.register(this.request).subscribe({
+        next: data => {
+          this.toastrService.success('Proposta enviada!', '', { progressBar: true });
+          this.ngOnInit()
+        },
+        error: error => {
+          this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true });
+        }
+      })
+    } else if (this.response.typeOfAd === 'rent') {
+
+      let valueTotal = this.toNumber(this.response.valueOfIptu) / 12 + this.toNumber(this.response.condominiumValue) + this.toNumber(this.response.leaseValue)
+
+      this.request = {
+        type: 'sale',
+        iptuAmount: this.toNumber(this.response.valueOfIptu),
+        condominiumAmount: this.toNumber(this.response.condominiumValue),
+        rentAmount: parseFloat(this.toNumber(this.response.leaseValue).toFixed(2)),
+        suggestedRentAmount: this.toNumber(this.formCustomizeProposal.controls['suggestedRentAmount'].value),
+        rentAmountTotal: parseFloat(valueTotal.toFixed(2)),
+        changes: this.changesRequest,
+        comment: this.formCustomizeProposal.controls['comment'].value,
+        announcementId: this.response._id
+      }
+
+      this.proposalService.register(this.request).subscribe({
+        next: data => {
+          this.toastrService.success('Proposta enviada!', '', { progressBar: true });
+          this.ngOnInit()
+        },
+        error: error => {
+          this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true });
+        }
+      })
     }
   }
 

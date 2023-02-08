@@ -1,5 +1,6 @@
 export abstract class ProposalRequestDto {
     type: string;
+    comment?: string; 
     rentAmount?: number;
     suggestedRentAmount?: number;
     iptuAmount?: number;
