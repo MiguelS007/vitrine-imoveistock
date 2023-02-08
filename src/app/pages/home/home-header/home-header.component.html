@@ -1,17 +1,17 @@
-<main class="bg-home-header position-relative w-100">
-    <div class="container d-flex flex-column justify-content-end h-100">
+<main class="bg-home-header px-5p  d-flex justify-content-center position-relative w-100">
+    <div class="w-100  max-w-1918 d-flex flex-column justify-content-end h-100">
         <div class="px-0 margin-header-title-custom align-items-end text-align-center">
             <h1 class="fw-700 font-size-55 text-mobile line-50 text-light ">Seu próximo espaço está aqui</h1>
-            <p class="fw-400 font-size-18 line-24 text-light">O maior estoque de imóveis de Curitiba</p>
+            <p class="fw-400 pt-3 pb-5 mb-0 font-size-18 line-24 text-light">O maior estoque de imóveis de Curitiba</p>
         </div>
-        <div class="px-0">
-            <form [formGroup]="form" class="row justify-content-center form-header">
+        <div class="px-0 w-100 mb-5">
+            <form [formGroup]="form" class="row mx-0 justify-content-center form-header">
                 <div class="position-relative d-flex">
                     <div>
                         <button type="button" formControlName="typeStatus" ngDefaultControl value="sale"
                             [class]="collapsed! ? 'bg-light color-black' : 'bg-purple text-light arrow-box-buy'"
                             (click)="buyOption('sale')"
-                            class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20 ">
+                            class="btn mx-2 h-51 border-radius-10 w-152 fw-400 font-size-16 line-20 ">
                             Comprar
                         </button>
                     </div>
@@ -19,32 +19,31 @@
                         <button type="button" formControlName="typeStatus" ngDefaultControl value="rent"
                             [class]="collapsed ? 'bg-purple text-light arrow-box-rent' : 'bg-light color-black '"
                             (click)="buyOption('rent')"
-                            class="btn mx-2 h-51 border-radius-10 w-111 fw-400 font-size-16 line-20">
+                            class="btn mx-2 h-51 border-radius-10 w-152 fw-400 font-size-16 line-20">
                             Alugar
                         </button>
                     </div>
                 </div>
                 <div class="col-12 px-0 mt-4 d-flex justify-content-center pb-4">
-                    <div class="w-100 painel-browser h-auto border-radius-10 max-w-1227">
-                        <div class="w-100 p-3 d-flex content-painel align-items-center bg-light border-radius-10">
-                            <div class="dropdown">
-                                <button style="min-width: 162.23px !important;" 
-                                    class="btn border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark dropdown-toggle"
+                    <div class="w-100 painel-browser h-auto  border-radius-10 max-w-1918">
+                        <div class="row px-0 mx-0 py-4 d-flex content-painel align-items-center bg-light border-radius-10">
+                            <div class="dropdown col">
+                                <button class="btn w-100 border text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark dropdown-toggle"
                                     type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{whatAreYouLookingForTitle}}
                                 </button>
-                                <div class="dropdown-menu border-radius-10" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-menu border-radius-10 w-100" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" (click)="whatAreYouLookingFor('Edifício')">Edifício</a>
                                     <a class="dropdown-item" (click)="whatAreYouLookingFor('Terreno')">Terreno</a>
                                     <a class="dropdown-item" (click)="whatAreYouLookingFor('Casa')">Casa</a>
                                 </div>
                             </div>
-                            <div class="nav-item dropdown">
+                            <div class="nav-item col dropdown">
                                 <input type="text" (click)="typePropertyOptions('typeproperty')"
                                     placeholder="Tipo do imóvel" readonly value="{{searchfilterTypeProperty}}"
                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     formControlName="typepropertyTeste"
-                                    class="btn border input-type-property mx-3 text-left input-property border-radius-10 py-2 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark text-capitalize" />
+                                    class="btn border w-100  input-type-property text-left input-property border-radius-10 py-2 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark text-capitalize" />
                                 <ul class="z-10 filter-search position-absolute bg-light w-100 arrow-box-type-property border-radius-10 dropdown-menu-left dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
                                         <label for="typePropertyresidential" class="mb-0">
@@ -79,11 +78,11 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="">
+                            <div class="col">
                                 <input #searchresult (keyup)="resultSearch(searchresult.value)" [value]="selectedcities"
                                     style="width: 220px;" type="text" placeholder="Local"
                                     formControlName="typePropertyLocal" maxlength="30"
-                                    class="btn border input-local input-type-property pr-5 mr-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark" />
+                                    class="btn border w-100 input-local input-type-property pr-5 mr-2 pl-2 text-left border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark" />
                                 <div *ngIf="filtersearch" class="w-100 z-10 border-radius-10 bg-light position-absolute"
                                     style="max-width: 220px; top: 120px;">
                                     <ul id="bodyresponseresultfilter"
@@ -96,10 +95,10 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="nav-item dropdown">
+                            <div class="nav-item dropdown col">
                                 <input type="text" (click)="typePropertyOptions(searchfilterTypeProperty)"
-                                    placeholder="Finalidade" readonly value="{{searchfilterType}}"   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    class="btn border input-type-property mx-3 text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark" />
+                                    placeholder="Tipo" readonly value="{{searchfilterType}}"   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    class="btn w-100 border input-type-property text-left input-property border-radius-10 color-gray h-51 bg-light fw-400 font-size-14 line-20 color-dark" />
                                 <!-- MOSTRAR CASO OPÇÃO SEJA RESIDENCIAL -->
                                 <ul *ngIf="typeoffResidential" class="z-10 filter-search border position-absolute bg-light w-100 arrow-box-type-off border-radius-10 py-2 dropdown-menu-left">
                                     <li class="dropdown-item py-0 px-0 border-radius-10 mb-0">
@@ -335,8 +334,7 @@
 
 
                             </div>
-                            <div
-                                class="input-property nav-item dropdown d-flex justify-content-center align-items-center">
+                            <div class="nav-item dropdown d-flex justify-content-center align-items-center">
                                 <button (click)="propertyCharacteristics('propertyCharacteristics')"
                                     class="btn bg-light fw-400 font-size-14 line-20 color-dark h-51 mx-2 px-3"
                                     type="button">+ Opções</button>
@@ -496,10 +494,9 @@
                                         <i class="bi color-blue bi-three-dots-vertical"></i>
                                     </button> -->
                             </div>
-                            <div class="d-flex justify-content-end w-100">
-
+                            <div class="d-flex col justify-content-end">
                                 <button (click)="confirm()"
-                                    class="btn input-property btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5 mx-2"
+                                    class="btn w-100 btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5 mx-2"
                                     type="submit">Encontrar</button>
                             </div>
                         </div>
@@ -511,15 +508,4 @@
 
 
     </div>
-
-    <!-- <div class="scroll-message-header-home">
-        <div class="d-flex w-fit align-items-center">
-            <p class="d-grid mr-5 pr-5">
-                <span class="fw-700 font-size-18 black-mobile line-24 color-white">Role para baixo</span>
-                <span style="opacity: 0.5;" class="fw-400 black-mobile font-size-18 line-24 color-white">para
-                    descobrir mais</span>
-            </p>
-            <div class="scroll-down"></div>
-        </div>
-    </div> -->
 </main>
