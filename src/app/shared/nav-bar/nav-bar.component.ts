@@ -105,16 +105,6 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.contact = false;
     }
 
-    this.router.events.pipe(
-      filter((event: any) => event instanceof NavigationEnd)
-    ).subscribe((data) => {
-      if(data.url.includes('/logged') || data.url.includes('/announcement') || data.url.includes('/search')) {
-        this.navbarSelect = 'black'
-      } else {
-        this.navbarSelect = 'white'
-      } 
-    });
-
   }
 
   verificationLogged(value) {
