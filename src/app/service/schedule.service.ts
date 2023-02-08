@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { BaseService } from './base.service';
 import { ScheduleRegisterRequestDto } from '../dtos/schedule-register-request.dto';
 import { ScheduleRegisterResponseDto } from '../dtos/schedule-register-response.dto';
+import { VisitCancelRequestDto } from '../dtos/visit-cancel-request.dto';
 
 @Injectable({
     providedIn: 'root'
@@ -29,6 +30,12 @@ export class ScheduleService extends BaseService {
     getListVisists(): Observable<ScheduleRegisterResponseDto[]> {
         return this.httpClient
             .get(`${this.url}app/announcement-visit/list`, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
+    cancelVisit(visitId: string, dto: VisitCancelRequestDto): Observable<any> {
+        return this.httpClient
+            .patch(`${this.url}app/announcement-visit/cancel-visit/${visitId}`, dto, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 

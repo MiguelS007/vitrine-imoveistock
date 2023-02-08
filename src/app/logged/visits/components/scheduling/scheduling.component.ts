@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnnouncementGetResponseDto } from '../../../../dtos/announcement-get-response.dto';
 import { SchedulingSelectedModalComponent } from './scheduling-selected-modal/scheduling-selected-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { VisitCancelRequestDto } from 'src/app/dtos/visit-cancel-request.dto';
 
 @Component({
   selector: 'app-scheduling',
@@ -27,15 +28,17 @@ export class SchedulingComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedScheduling: ScheduleRegisterResponseDto = {
-    _id: '',
-    cancellationReason: '',
-    visitDate: new Date,
-  };
+  selectedScheduling: ScheduleRegisterResponseDto;;
 
   recentlySeenList: any = [];
 
   announcementChecked: string;
+
+  itemSelectedForCancel: ScheduleRegisterResponseDto = {
+    _id: '',
+    cancellationReason: '',
+    visitDate: new Date,
+  };
 
 
   constructor(
@@ -78,25 +81,41 @@ export class SchedulingComponent implements OnInit {
   verifyLike() {
     this.announcementService.listLikes().subscribe(
       success => {
-        for (let i = 0; i < success.length; i++) {
-          if (success[i].announcement._id === this.selectedScheduling.announcement._id) {
-            Object.assign(this.selectedScheduling.announcement, { liked: true });
+        if (this.selectedScheduling !== undefined) {
+          for (let i = 0; i < success.length; i++) {
+            if (success[i].announcement._id === this.selectedScheduling.announcement._id) {
+              Object.assign(this.selectedScheduling.announcement, { liked: true });
+            }
           }
         }
       }
     )
   }
 
-  cancelVisits(value: string) {
-    if (value === 'cancelmodal') {
-      this.confirmcancel = !this.confirmcancel;
-    } else if (value === 'cancel') {
-      this.location = true;
-    }
+
+  openCancelVisitModal(item) {
+    this.itemSelectedForCancel = item;
+    this.location = true;
   }
 
-  goExpress() {
-    this.router.navigate(['logged/express']);
+  confirmCancelVisitModal() {
+
+    let request: VisitCancelRequestDto = {
+      cancelationReason: this.form.controls['cancelvisit'].value
+    }
+
+    this.scheduleService.cancelVisit(this.itemSelectedForCancel._id, request).subscribe({
+      next: data => {
+        this.schedulesList()
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
+  }
+
+  goExpress(announcementId) {
+    this.router.navigate([`logged/express/${announcementId}`]);
   }
 
   likeHeart(value) {
@@ -132,7 +151,10 @@ export class SchedulingComponent implements OnInit {
   selectVisit(item) {
     this.selectedScheduling = item;
     this.verifyLike();
-    let checkOld
+    let checkOld;
+
+    let teste: any = localStorage.getItem('announcementChecked');
+
     if (window.screen.width < 992) {
       localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling))
       const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
@@ -140,7 +162,8 @@ export class SchedulingComponent implements OnInit {
       }, error => {
         localStorage.removeItem('announcementChecked')
       });
-
+    } else if (teste === item._id) {
+      return
     } else {
       setTimeout(() => {
         checkOld = localStorage.getItem('announcementChecked');

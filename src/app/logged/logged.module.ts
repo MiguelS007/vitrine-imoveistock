@@ -16,6 +16,7 @@ import { SchedulingSelectedModalComponent } from './visits/components/scheduling
 import { AnnouncementGetByIdResolve } from '../resolvers/announcement-getById.resolver';
 import { ProposalService } from '../service/proposal.service';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { ScheduleService } from '../service/schedule.service';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -40,7 +41,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
   providers: [
     AnnouncementService,
     AnnouncementGetByIdResolve,
-    ProposalService
+    ProposalService,
+    ScheduleService
   ],
   bootstrap: [AppComponent]
 
