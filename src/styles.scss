@@ -252,6 +252,7 @@ input:focus {
     --whitegreen: #F2FFF5;
     --orangelight: #FFFAEC;
     --graylight: #E9EBF6;
+    --gray: #F0F1F3;
     --light: #E6E6E6;
     --white: white;
     --pink: #F9528E;
@@ -754,6 +755,9 @@ input:focus {
     background-color: var(--graylight);
 }
 
+.bg-gray {
+    background-color: var(--gray);
+}
 
 .bg-transparent-white {
     background: var(--transparentwhite) !important;
@@ -1020,6 +1024,10 @@ input:focus {
 
 //HEADER-CARDS
 .icon-cards {
+    padding: 20% 0;
+    width: 111px;
+}
+.icon-cards-about {
     padding: 20% 0;
     width: 111px;
 }
@@ -1881,6 +1889,36 @@ vg-overlay-play .vg-overlay-play {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
+    .col-cards-about{
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        justify-content: center;
+        display: flex;
+        width: 100% !important;
+
+    }
+    .col-cards-about div{
+        max-width: 500px !important;
+        width: 100% !important;
+        padding-top: 5% !important;
+        padding-bottom: 5%  !important;
+
+    }
+    .px-5p{
+        padding: 0 !important;
+    }
+    .padding-x{
+        padding-right: 5% !important;
+        padding-left: 5% !important;
+    }
+    .icon-cards-about {
+        padding: 6% 0;
+        width: 77px;
+    }
+    .icon-cards-about {
+        padding: 6% 0;
+        width: 77px;
+    }
 
 
 }
@@ -2003,6 +2041,12 @@ vg-overlay-play .vg-overlay-play {
         margin-top: 1rem;
         justify-content: center;
         display: flex;
+    }
+
+    // ABOUT
+    .icon-cards-about {
+        padding: 6% 0;
+        width: 66px;
     }
 
 
