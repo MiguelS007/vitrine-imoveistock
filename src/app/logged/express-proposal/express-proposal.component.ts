@@ -163,7 +163,6 @@ export class ExpressProposalComponent implements OnInit {
       announcementId: value
     }
 
-
     if (this.listLikes.length === 0) {
       this.announcementService.registerLike(request).subscribe(
         success => {
