@@ -13,6 +13,9 @@ import { AnnouncementService } from '../service/announcement.service';
 import { FavoritesComponent } from './visits/components/favorites/favorites.component';
 import { SchedulingComponent } from './visits/components/scheduling/scheduling.component';
 import { SchedulingSelectedModalComponent } from './visits/components/scheduling/scheduling-selected-modal/scheduling-selected-modal.component';
+import { AnnouncementGetByIdResolve } from '../resolvers/announcement-getById.resolver';
+import { ProposalService } from '../service/proposal.service';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -30,11 +33,14 @@ import { SchedulingSelectedModalComponent } from './visits/components/scheduling
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     SwiperModule,
+    CurrencyMaskModule,
    
   ],
   schemas: [],
   providers: [
-    AnnouncementService
+    AnnouncementService,
+    AnnouncementGetByIdResolve,
+    ProposalService
   ],
   bootstrap: [AppComponent]
 

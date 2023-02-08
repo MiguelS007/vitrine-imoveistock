@@ -182,5 +182,8 @@ export class ModalCodeComponent implements OnInit {
     }
   }
 
+  exit() {
+    this.modalService.dismissAll()
+  }
 
 }

@@ -205,7 +205,11 @@ export class PropertyDetailComponent implements OnInit {
     this.horasSelecionada = value
   }
   goExpress() {
-    this.router.navigate(['logged/express']);
+    if (localStorage.getItem('user') !== null) {
+      this.router.navigate([`logged/express/${this.response._id}`]);
+    } else {
+      this.modalService.open(ModalLoginComponent, { centered: true })
+    }
   }
 
 

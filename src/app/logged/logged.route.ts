@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AnnouncementGetByIdResolve } from '../resolvers/announcement-getById.resolver';
 import { ExpressProposalComponent } from './express-proposal/express-proposal.component';
 
 import { LoggedComponent } from './logged.component';
@@ -15,8 +16,8 @@ const routes: Routes = [
         component: VisitsComponent,
       },
       {
-        path: 'express',
-        component: ExpressProposalComponent, 
+        path: 'express/:_id',
+        component: ExpressProposalComponent, resolve: { resolve: AnnouncementGetByIdResolve }
       },
     ],
   },
