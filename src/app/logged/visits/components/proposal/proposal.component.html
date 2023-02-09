@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="w-100 d-flex mt-3">
-                    <button type="button" (click)="goExpress(item)"
+                    <button *ngIf="item.status === 'denied'" type="button" (click)="goExpress(item)"
                         class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
                         Contra proposta
                     </button>

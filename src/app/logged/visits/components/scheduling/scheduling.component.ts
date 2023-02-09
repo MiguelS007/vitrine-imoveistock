@@ -58,15 +58,6 @@ export class SchedulingComponent implements OnInit {
 
   ngOnInit(): void {
     this.schedulesList();
-
-    this.scheduleService.listeningEdition.subscribe({
-      next: value => {
-        if (value === true) {
-          this.schedulesList();
-        }
-        console.log(value)
-      },
-    })
   }
 
   schedulesList() {
