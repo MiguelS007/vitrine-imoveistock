@@ -107,7 +107,8 @@ export class SchedulingComponent implements OnInit {
 
     this.scheduleService.cancelVisit(this.itemSelectedForCancel._id, request).subscribe({
       next: data => {
-        this.schedulesList()
+        this.schedulesList();
+        this.form.reset();
       },
       error: error => {
         console.log(error)
