@@ -152,8 +152,61 @@
                         *ngIf="selectedProposal.announcement?.typeOfAd === 'sale'">
                         {{selectedProposal.announcement?.saleValue | currency: 'R$'}}</h5>
                 </div>
+                <div *ngIf="selectedProposal.saleCarAsPaymentAmount > 0" class="d-flex justify-content-between">
+                    <span class="fw-400 font-size-18
+                                    line-24 color-black">Valor da proposta de carro
+                        <i class="bi font-size-14
+                                        color-muted
+                                        bi-info-circle"></i></span>
+                    <span class="fw-400 font-size-18
+                                        line-24 color-black">{{selectedProposal.saleCarAsPaymentAmount | currency: 'R$'}}
+                    </span>
+                </div>
+                <div *ngIf="selectedProposal.salePropertyAsPaymentAmount > 0" class="d-flex justify-content-between">
+                    <span class="fw-400 font-size-18
+                                    line-24 color-black">Valor da proposta de imóvel
+                        <i class="bi font-size-14
+                                        color-muted
+                                        bi-info-circle"></i></span>
+                    <span class="fw-400 font-size-18
+                                        line-24 color-black">{{selectedProposal.salePropertyAsPaymentAmount | currency: 'R$'}}
+                    </span>
+                </div>
+                <div *ngIf="selectedProposal.saleDirectInstallmentAsPaymentAmount > 0" class="d-flex justify-content-between">
+                    <span class="fw-400 font-size-18
+                                    line-24 color-black">Valor da proposta de financiamento direto
+                        <i class="bi font-size-14
+                                        color-muted
+                                        bi-info-circle"></i></span>
+                    <span class="fw-400 font-size-18
+                                        line-24 color-black">{{selectedProposal.saleDirectInstallmentAsPaymentAmount | currency: 'R$'}}
+                    </span>
+                </div>
+                <div *ngIf="selectedProposal.saleFinancingAsPaymentAmount > 0" class="d-flex justify-content-between">
+                    <span class="fw-400 font-size-18
+                                    line-24 color-black">Valor da proposta de financiamento
+                        <i class="bi font-size-14
+                                        color-muted
+                                        bi-info-circle"></i></span>
+                    <span class="fw-400 font-size-18
+                                        line-24 color-black">{{selectedProposal.saleFinancingAsPaymentAmount | currency: 'R$'}}
+                    </span>
+                </div>
                 <hr class="bg-graylight">
                 <div class="d-flex justify-content-between">
+                    <span class="fw-400 font-size-18
+                                    line-24 color-black">Valor da proposta
+                        <i class="bi font-size-14
+                                        color-muted
+                                        bi-info-circle"></i></span>
+                    <span *ngIf="selectedProposal.announcement?.typeOfAd === 'rent'" class="fw-400 font-size-18
+                                        line-24 color-black">{{selectedProposal.suggestedRentAmount | currency: 'R$'}}
+                    </span>
+                    <span *ngIf="selectedProposal.announcement?.typeOfAd === 'sale'" class="fw-400 font-size-18
+                                        line-24 color-black">{{selectedProposal.suggestedSaleAmount | currency: 'R$'}}
+                    </span>
+                </div>
+                <div class="d-flex justify-content-between py-2">
                     <span class="fw-400 font-size-18
                                     line-24 color-black">Condomínio
                         <i class="bi font-size-14
@@ -163,7 +216,7 @@
                                         line-24 color-black">{{selectedProposal.announcement?.condominiumValue | currency: 'R$'}}
                     </span>
                 </div>
-                <div class="d-flex justify-content-between py-2">
+                <div class="d-flex justify-content-between">
                     <span class="fw-400 font-size-18
                                     line-24 color-black">IPTU
                         <i class="bi font-size-14
