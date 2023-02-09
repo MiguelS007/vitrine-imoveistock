@@ -4,6 +4,7 @@ import { BaseService } from "./base.service";
 import { HttpClient } from '@angular/common/http';
 import { ProposalRequestDto } from "../dtos/proposal-request-dto";
 import { Observable, map, catchError } from 'rxjs';
+import { ProposalGetResponseDto } from "../dtos/proposal-get-response.dto";
 
 @Injectable({
     providedIn: 'root'
@@ -21,6 +22,12 @@ export class ProposalService extends BaseService {
     register(dto: ProposalRequestDto): Observable<any> {
         return this.httpClient
             .post(`${this.url}`, dto, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
+    list(): Observable<any> {
+        return this.httpClient
+            .get(`${this.url}/user`, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 

@@ -5,20 +5,27 @@
                 <div class="w-100 h-100" style="min-height: calc(100vh - 100px);">
                     <div
                         class="w-100 px-5 mt-3rem space-segment justify-content-center pt-4 mb-4 d-flex align-items-center">
-                        <button [class]="segment ? 'color-muted fw-400':'border-bottom-green fw-700 color-black' "
+                        <button [class]="spaceFavorites ? 'btn-change-page-selected':'btn-change-page-disabled'"
                             (click)="changePage('favorites')"
                             class="btn bg-transparent py-2 px-3 mx-2 btn-segment font-size-16 line-20"
                             type="button">Favoritos</button>
-                        <button [class]="segment ? 'border-bottom-green fw-700 color-black':'color-muted fw-400' "
+                        <button [class]="spaceScheduling ? 'btn-change-page-selected':'btn-change-page-disabled'"
                             (click)="changePage('scheduling')"
                             class="btn bg-transparent py-2 px-3 mx-2 btn-segment font-size-16 line-20"
                             type="button">Agendamento</button>
+                        <button [class]="spaceProposal ? 'btn-change-page-selected':'btn-change-page-disabled'"
+                            (click)="changePage('proposal')"
+                            class="btn bg-transparent py-2 px-3 mx-2 btn-segment font-size-16 line-20"
+                            type="button">Proposta</button>
                     </div>
                     <div *ngIf="spaceFavorites">
                         <app-favorites></app-favorites>
                     </div>
                     <div *ngIf="spaceScheduling">
                         <app-scheduling></app-scheduling>
+                    </div>
+                    <div *ngIf="spaceProposal">
+                        <app-proposal></app-proposal>
                     </div>
                 </div>
             </div>

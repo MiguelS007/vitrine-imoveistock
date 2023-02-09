@@ -17,6 +17,12 @@ import { AnnouncementGetByIdResolve } from '../resolvers/announcement-getById.re
 import { ProposalService } from '../service/proposal.service';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ScheduleService } from '../service/schedule.service';
+import { ProposalComponent } from './visits/components/proposal/proposal.component';
+import { ProposalSelectedModalComponent } from './visits/components/proposal/proposal-selected-modal/proposal-selected-modal.component';
+import { ProposalCancelModalComponent } from './visits/components/proposal/proposal-cancel-modal/proposal-cancel-modal.component';
+import { EditSchedulingModalComponent } from './visits/components/scheduling/edit-scheduling-modal/edit-scheduling-modal.component';
+import { EditScheduling2ModalComponent } from './visits/components/scheduling/edit-scheduling2-modal/edit-scheduling2-modal.component';
+import { EditScheduling3ModalComponent } from './visits/components/scheduling/edit-scheduling3-modal/edit-scheduling3-modal.component';
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -25,6 +31,12 @@ import { ScheduleService } from '../service/schedule.service';
     FavoritesComponent,
     SchedulingComponent,
     SchedulingSelectedModalComponent,
+    ProposalComponent,
+    ProposalSelectedModalComponent,
+    ProposalCancelModalComponent,
+    EditSchedulingModalComponent,
+    EditScheduling2ModalComponent,
+    EditScheduling3ModalComponent,
   ],
   imports: [
     CommonModule,
