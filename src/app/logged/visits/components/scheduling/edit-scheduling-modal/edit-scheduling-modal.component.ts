@@ -68,7 +68,6 @@ export class EditSchedulingModalComponent implements OnInit {
     if (result === true) {
       localStorage.setItem('dateScheduling', JSON.stringify(dateFormat));
       this.modalService.dismissAll()
-      this.modalService.open(EditScheduling2ModalComponent, { centered: true, backdrop: 'static', keyboard: false });
     } else {
       this.toastrService.error('Selecione uma data valida', '', { progressBar: true })
     }

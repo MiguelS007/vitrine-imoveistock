@@ -41,7 +41,7 @@ export class EditScheduling2ModalComponent implements OnInit {
   }
 
   confirm() {
-    this.scheduleService.registerSchedule(this.response.announcement._id, this.dateSend).subscribe(
+    this.scheduleService.reschedule(this.response._id, this.dateSend).subscribe(
       success => this.registerSuccess(success),
       error => console.error(error)
     )
@@ -49,12 +49,6 @@ export class EditScheduling2ModalComponent implements OnInit {
 
   registerSuccess(success) {
     this.modalService.dismissAll();
-    const modalRef =  this.modalService.open(EditScheduling3ModalComponent, { centered: true, backdrop: 'static', keyboard: false });
-    modalRef.result.then(data => {
-    }, error => {
-      localStorage.removeItem('announcementSelected');
-      localStorage.removeItem('dateScheduling');
-    });
   }
 
 }
