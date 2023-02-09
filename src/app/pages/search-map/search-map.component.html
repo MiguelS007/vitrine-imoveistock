@@ -1,6 +1,6 @@
-<main class="bg-graylight position-relative w-100">
-    <form [formGroup]="form" class="row px-0 form-search h-100 m-0-auto container">
-        <div class="col-12 mt-5 pt-5">
+<main class="bg-graylight position-relative w-100 px-5p justify-content-center d-flex">
+    <form [formGroup]="form" class="row max-w-1918 w-100 px-0 form-search h-100 m-0-aut0">
+        <div class="col-12 col-map mt-5 pt-5">
             <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
                 <p class="d-flex fw-700 font-size-12 line-19 color-black
                  align-items-center">Página Inicial /
@@ -20,17 +20,17 @@
                 </p>
             </div>
         </div>
-        <div class="row mb-5 mx-0 px-0 block-important w-100">
+        <div class="row mb-5 mx-0 block-important w-100">
             <div class="col-6 col-full">
                 <div class="row">
-                    <div class="col-3 col-search-map">
+                    <div class="col-2 col-search-map">
                         <div style="width: 100px;" data-toggle="modal" data-target="#filtersearch"
                             class="px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex justify-content-center w3-black align-items-center border-radius-10">
                             <i class="bi bi-funnel-fill thinks-small pr-2"></i>
                             <span class="fw-700 font-size-12 thinks-small line-24 text-light">Filtrar</span>
                         </div>
                     </div>
-                    <div class="col-6 d-none-desk">
+                    <div class="col-8 d-none-desk">
                         <div
                             class="w-100  h-51 w-full  mt-3 d-flex align-items-center results-bar justify-content-between px-3 border-radius-10 bg-white">
                             <p class="d-flex mb-0 fw-400 font-size-11 line-20 color-black">
@@ -40,9 +40,9 @@
                             <div class="d-flex align-items-center">
                                 <p class="fw-700 mb-0 font-size-11 line-20 color-black">Ordenar por:</p>
                                 <div class="dropdown">
-                                    <button class="btn dropdown-orderby-custom dropdown-toggle font-size-12" type="button"
-                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
+                                    <button class="btn dropdown-orderby-custom dropdown-toggle font-size-12"
+                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
                                         {{orderBy}}
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -54,14 +54,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                    <div class="col-3 col-search-map justify-content-end d-flex">
-                        <div style="width: 100px;"  [routerLink]="['/search']"
-                        class="px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex justify-content-center bg-purple align-items-center border-radius-10">
-                        <i class="bi bi-list thinks-small text-light pr-2"></i>
-                        <span class="fw-700 font-size-12 thinks-small line-24 text-light">Ver&nbsp;Lista</span>
                     </div>
-                        
+                    <div class="col-2 col-search-map justify-content-end d-flex">
+                        <div style="width: 100px;" [routerLink]="['/search']"
+                            class="px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex justify-content-center bg-purple align-items-center border-radius-10">
+                            <i class="bi bi-list thinks-small text-light pr-2"></i>
+                            <span class="fw-700 font-size-12 thinks-small line-24 text-light">Ver&nbsp;Lista</span>
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-6 d-none-desk col-cards-products px-0 col-sm-12">
@@ -80,7 +80,7 @@
                                     <h4 class="bg-purple h-fit px-4 py-2 mb-0
                                     border-radius-5 fw-400 font-size-14 line-15
                                     text-light">Venda</h4>
-                                        <h4 *ngIf="item.exclusivity === true" class="bg-greenlight h-fit ml-2 px-3 py-2
+                                    <h4 *ngIf="item.exclusivity === true" class="bg-greenlight h-fit ml-2 px-3 py-2
                                     mb-0 border-radius-5 fw-400 font-size-14
                                     line-15 color-black">Exclusivo</h4>
                                 </div>
@@ -92,7 +92,7 @@
                                         *ngIf="item.typeOfAd === 'rent'">
                                         {{item.leaseValue | currency: 'R$'}}
                                     </p>
-                                    <div  (click)="likeHeart(item._id, item.liked)"
+                                    <div (click)="likeHeart(item._id, item.liked)"
                                         class=" mx-1 mt-2 heart-like-map bg-transparent-white cursor-pointer border-radius-10">
                                         <i [class]="item.liked ? 'bi-heart-fill':'bi-heart' "
                                             class="bi bi-heart-fill font-size-16 text-light"></i>
@@ -114,17 +114,24 @@
                                     </p>
                                 </div>
                                 <div class="row px-4 mt-4 d-block">
-                                    <div class="col justify-content-left px-0 mt-2 d-flex align-items-center justify-content-left">
+                                    <div
+                                        class="col justify-content-left px-0 mt-2 d-flex align-items-center justify-content-left">
                                         <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">{{item.bedrooms}} Quartos</p>
+                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                            {{item.bedrooms}} Quartos</p>
                                     </div>
-                                    <div class="col justify-content-left px-0 mt-2 d-flex align-items-center justify-content-left">
+                                    <div
+                                        class="col justify-content-left px-0 mt-2 d-flex align-items-center justify-content-left">
                                         <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">{{item.vacancyNumber}} Vagas</p>
+                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                                            {{item.vacancyNumber}} Vagas</p>
                                     </div>
-                                    <div class="col justify-content-left px-0 mt-2 d-flex align-items-center justify-content-left">
+                                    <div
+                                        class="col justify-content-left px-0 mt-2 d-flex align-items-center justify-content-left">
                                         <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black text-truncate">{{item.usefulArea | currency: ' '}} m²</p>
+                                        <p
+                                            class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black text-truncate">
+                                            {{item.usefulArea | currency: ' '}} m²</p>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 px-0 mt-2 col-full">
+            <div class="col-6 mt-2 col-map  col-full">
                 <div class="col-12 px-0 col-full">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230483.17971440213!2d-49.42988400298687!3d-25.495050065287735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1674742868033!5m2!1spt-BR!2sbr"
@@ -149,138 +156,132 @@
             </div>
         </div>
     </form>
+
     <!-- MODAL FILTER-SEATRCH FOR MOBILE -->
     <div class="modal fade" id="filtersearch" tabindex="-1" role="dialog" aria-labelledby="filtersearchTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg-preview
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg-preview
         modal-dialog-centered" role="document">
-        <div class="modal-content pb-4
+            <div class="modal-content pb-4
            modal-content-preview">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="text-light font-size-55" aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="anima-body">
-                <div class="w-100 d-block-desk border-radius-10 bg-white p-5">
-                    <div
-                        class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center">
-                        <input type="search"
-                            class="form-control border-0 border-radius-10 bg-light pl-3 fw-400 font-size-16 line-20 text-capitalize"
-                            formControlName="typeproperty" placeholder="O que esta buscando?"
-                            aria-describedby="button-addon2">
-                        <div class="input-group-append mx-2">
-                            <i class="bi bi-search font-size-24"></i>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="anima-body">
+                    <div class="w-100 d-block-desk border-radius-10 bg-white p-5">
+                        <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center">
+                            <input type="search"
+                                class="form-control border-0 border-radius-10 bg-light pl-3 fw-400 font-size-16 line-20 text-capitalize"
+                                formControlName="typeproperty" placeholder="O que esta buscando?"
+                                aria-describedby="button-addon2">
+                            <div class="input-group-append mx-2">
+                                <i class="bi bi-search font-size-24"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="dropdown">
-                        <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                            href="#" role="button" id="resultSituation" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            {{selectTypeAd}}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="resultSituation">
-                            <a class="dropdown-item" (click)="searchByTypeAd('sale')">Comprar</a>
-                            <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
+                        <div class="dropdown">
+                            <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                                href="#" role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                {{selectTypeAd}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="resultSituation">
+                                <a class="dropdown-item" (click)="searchByTypeAd('sale')">Comprar</a>
+                                <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
+                            </div>
                         </div>
-                    </div>
-                    <div
-                        class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center mt-4">
-                        <input type="search"
-                            class="form-control border-0 border-radius-10 bg-light pl-3 fw-400 font-size-16 line-20"
-                            formControlName="localproperty" placeholder="Local"
-                            aria-describedby="button-addon2">
-                        <div class="input-group-append mx-2">
-                            <i class="bi bi-geo-alt font-size-24"></i>
+                        <div class="input-group border border-radius-10 bg-light h-74 d-flex align-items-center mt-4">
+                            <input type="search"
+                                class="form-control border-0 border-radius-10 bg-light pl-3 fw-400 font-size-16 line-20"
+                                formControlName="localproperty" placeholder="Local" aria-describedby="button-addon2">
+                            <div class="input-group-append mx-2">
+                                <i class="bi bi-geo-alt font-size-24"></i>
+                            </div>
                         </div>
-                    </div>
-                    <input formControlName="propertyType" type="text" placeholder="Tipo de imóvel" class="btn border text-capitalize border-radius-10 bg-light fw-400 mt-4
+                        <input formControlName="propertyType" type="text" placeholder="Tipo de imóvel" class="btn border text-capitalize border-radius-10 bg-light fw-400 mt-4
                     text-left font-size-16 line-20 pl-3 color-black w-100
                     h-74" />
-                    <div class="row mt-4 px-0">
-                        <div class="col-12">
-                            <p class="fw-400 pl-1 pb-0 color-black text-left font-size-16 line-20 ">Preço
-                            </p>
+                        <div class="row mt-4 px-0">
+                            <div class="col-12">
+                                <p class="fw-400 pl-1 pb-0 color-black text-left font-size-16 line-20 ">Preço
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <input formControlName="typeMinPrice" type="text" currencyMask
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
+                                    class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                                    maxlength="15" />
+                            </div>
+                            <div class="col-6">
+                                <input formControlName="typeMaxPrice" type="text" currencyMask
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
+                                    class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                                    maxlength="20" />
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input formControlName="typeMinPrice" type="text" currencyMask
-                                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
-                                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
-                                maxlength="15" />
+                        <div class="dropdown">
+                            <input type="text" formControlName="typerooms" [value]="selectRooms"
+                                [placeholder]="selectRooms"
+                                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                                role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" readonly>
+                            <div class="dropdown-menu" aria-labelledby="resultRooms">
+                                <a class="dropdown-item" (click)="searchBy('1')">1+</a>
+                                <a class="dropdown-item" (click)="searchBy('2')">2+</a>
+                                <a class="dropdown-item" (click)="searchBy('3')">3+</a>
+                                <a class="dropdown-item" (click)="searchBy('4')">4+</a>
+                                <a class="dropdown-item" (click)="searchBy('5')">5+</a>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input formControlName="typeMaxPrice" type="text" currencyMask
-                                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                                placeholder="Até"
-                                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
-                                maxlength="20" />
+                        <div class="dropdown">
+                            <input type="text" formControlName="typebathroom" [value]="selectBathrooms"
+                                [placeholder]="selectBathrooms"
+                                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                                role="button" id="resultBadRooms" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" readonly>
+                            <div class="dropdown-menu" aria-labelledby="resultBadRooms">
+                                <a class="dropdown-item" (click)="searchBy('1b')">1+</a>
+                                <a class="dropdown-item" (click)="searchBy('2b')">2+</a>
+                                <a class="dropdown-item" (click)="searchBy('3b')">3+</a>
+                                <a class="dropdown-item" (click)="searchBy('4b')">4+</a>
+                                <a class="dropdown-item" (click)="searchBy('5b')">5+</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="dropdown">
-                        <input type="text" formControlName="typerooms" [value]="selectRooms"
-                            [placeholder]="selectRooms"
-                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                            role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" readonly>
-                        <div class="dropdown-menu" aria-labelledby="resultRooms">
-                            <a class="dropdown-item" (click)="searchBy('1')">1+</a>
-                            <a class="dropdown-item" (click)="searchBy('2')">2+</a>
-                            <a class="dropdown-item" (click)="searchBy('3')">3+</a>
-                            <a class="dropdown-item" (click)="searchBy('4')">4+</a>
-                            <a class="dropdown-item" (click)="searchBy('5')">5+</a>
+                        <div class="dropdown">
+                            <input type="text" formControlName="typevacancies" [value]="selectVacancies"
+                                [placeholder]="selectVacancies"
+                                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                                role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" readonly>
+                            <div class="dropdown-menu" aria-labelledby="resultVacancies">
+                                <a class="dropdown-item" (click)="searchBy('tf')">Tanto faz</a>
+                                <a class="dropdown-item" (click)="searchBy('1v')">1+</a>
+                                <a class="dropdown-item" (click)="searchBy('2v')">2+</a>
+                                <a class="dropdown-item" (click)="searchBy('3v')">3+</a>
+                                <a class="dropdown-item" (click)="searchBy('4v')">4+</a>
+                                <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                                <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="dropdown">
-                        <input type="text" formControlName="typebathroom" [value]="selectBathrooms"
-                            [placeholder]="selectBathrooms"
-                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                            role="button" id="resultBadRooms" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" readonly>
-                        <div class="dropdown-menu" aria-labelledby="resultBadRooms">
-                            <a class="dropdown-item" (click)="searchBy('1b')">1+</a>
-                            <a class="dropdown-item" (click)="searchBy('2b')">2+</a>
-                            <a class="dropdown-item" (click)="searchBy('3b')">3+</a>
-                            <a class="dropdown-item" (click)="searchBy('4b')">4+</a>
-                            <a class="dropdown-item" (click)="searchBy('5b')">5+</a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <input type="text" formControlName="typevacancies" [value]="selectVacancies"
-                            [placeholder]="selectVacancies"
-                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                            role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" readonly>
-                        <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                            <a class="dropdown-item" (click)="searchBy('tf')">Tanto faz</a>
-                            <a class="dropdown-item" (click)="searchBy('1v')">1+</a>
-                            <a class="dropdown-item" (click)="searchBy('2v')">2+</a>
-                            <a class="dropdown-item" (click)="searchBy('3v')">3+</a>
-                            <a class="dropdown-item" (click)="searchBy('4v')">4+</a>
-                            <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
-                            <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
-                        </div>
-                    </div>
-                    <input formControlName="typeconstruction" type="text" placeholder="Ano de construção"
-                        class="btn border border-radius-10 bg-light fw-400 mt-4
+                        <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
                     text-left font-size-16 line-20 pl-3 color-black w-100
                     h-74" mask="0000" />
-                    <div class="w-100 d-flex align-items-center">
-                        <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima"
-                            class="btn border border-radius-10 bg-light fw-400 mt-4
+                        <div class="w-100 d-flex align-items-center">
+                            <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
                        mr-1 text-left font-size-16 line-20 pl-3 color-black
                        w-100 h-74" mask="000" />
-                        <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima"
-                            class="btn border border-radius-10 bg-light fw-400 mt-4
+                            <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
                        ml-1 text-left font-size-16 line-20 pl-3 color-black
                        w-100 h-74" mask="000" />
-                    </div>
-                    <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
+                        </div>
+                        <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
                     line-24 border-radius-10 h-74 w-100" type="submit">
-                        Encontrar
-                    </button>
+                            Encontrar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </main>
