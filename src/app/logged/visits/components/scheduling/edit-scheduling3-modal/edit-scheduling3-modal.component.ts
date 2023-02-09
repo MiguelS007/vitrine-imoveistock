@@ -24,7 +24,7 @@ export class EditScheduling3ModalComponent implements OnInit {
     let dateSelected = localStorage.getItem('dateScheduling')
     this.dateSelected = JSON.parse(dateSelected);
 
-    let announcementSelected = localStorage.getItem('announcementChecked');
+    let announcementSelected = localStorage.getItem('announcementSelected');
     this.response = JSON.parse(announcementSelected);
   }
 

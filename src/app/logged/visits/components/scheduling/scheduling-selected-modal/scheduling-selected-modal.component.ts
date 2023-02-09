@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ScheduleRegisterResponseDto } from '../../../../../dtos/schedule-register-response.dto';
 import { AnnouncementService } from '../../../../../service/announcement.service';
+import { EditSchedulingModalComponent } from '../edit-scheduling-modal/edit-scheduling-modal.component';
 
 @Component({
   selector: 'app-scheduling-selected-modal',
@@ -108,6 +109,14 @@ export class SchedulingSelectedModalComponent implements OnInit {
 
   exit() {
     this.modalService.dismissAll()
+  }
+
+
+  editScheduling(selectedScheduling) {
+    localStorage.setItem('announcementSelected', JSON.stringify(selectedScheduling));
+    this.modalService.dismissAll();
+    this.modalService.open(EditSchedulingModalComponent, { centered: true });
+    console.log(selectedScheduling)
   }
 
 }

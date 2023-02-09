@@ -213,7 +213,7 @@ export class SchedulingComponent implements OnInit {
   }
 
   editScheduling(selectedScheduling) {
-    localStorage.setItem('announcementChecked', JSON.stringify(selectedScheduling));
+    localStorage.setItem('announcementSelected', JSON.stringify(selectedScheduling));
     this.modalService.open(EditSchedulingModalComponent, { centered: true });
   }
 

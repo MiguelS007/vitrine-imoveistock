@@ -28,7 +28,7 @@ export class EditScheduling2ModalComponent implements OnInit {
     let dateSelected = localStorage.getItem('dateScheduling')
     this.dateSelected = JSON.parse(dateSelected);
 
-    let announcementSelected = localStorage.getItem('announcementChecked');
+    let announcementSelected = localStorage.getItem('announcementSelected');
     this.response = JSON.parse(announcementSelected);
 
     this.dateSend = {
@@ -52,7 +52,7 @@ export class EditScheduling2ModalComponent implements OnInit {
     const modalRef =  this.modalService.open(EditScheduling3ModalComponent, { centered: true, backdrop: 'static', keyboard: false });
     modalRef.result.then(data => {
     }, error => {
-      localStorage.removeItem('announcementOfScheduling');
+      localStorage.removeItem('announcementSelected');
       localStorage.removeItem('dateScheduling');
     });
   }

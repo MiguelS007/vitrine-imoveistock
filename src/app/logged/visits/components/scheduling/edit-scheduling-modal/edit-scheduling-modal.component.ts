@@ -38,7 +38,7 @@ export class EditSchedulingModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let response = localStorage.getItem('announcementChecked');
+    let response = localStorage.getItem('announcementSelected');
     this.response = JSON.parse(response);
 
     console.log(this.response)
