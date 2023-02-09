@@ -32,7 +32,7 @@ export abstract class ProposalGetResponseDto {
 
     changes?: ProposalChangesModel[];
 
-    status?: ProposalStatusEnum;
+    status?: string;
 
     announcement?: AnnouncementGetResponseDto;
 
@@ -44,6 +44,7 @@ class ProposalStatusEnum {
     approved: string;
     canceled: string;
     counterProposal: string;
+    denied: string;
 }
 
 class ProposalChangesModel {

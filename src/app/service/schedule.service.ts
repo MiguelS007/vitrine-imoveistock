@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BaseService } from './base.service';
@@ -15,8 +15,6 @@ import { VisitRescheduleRegisterDto } from '../dtos/visit-reschedule-request.dto
 export class ScheduleService extends BaseService {
 
     url: string = `${environment.apis.imoveistock}`;
-
-    listeningEdition = new Subject();
 
     constructor(
         private httpClient: HttpClient,

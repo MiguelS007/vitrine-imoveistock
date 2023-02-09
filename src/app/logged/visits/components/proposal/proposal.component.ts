@@ -43,14 +43,16 @@ export class ProposalComponent implements OnInit {
     const modalRef = this.modalService.open(ProposalCancelModalComponent, { centered: true });
       modalRef.result.then(data => {
       }, error => {
-        localStorage.removeItem('poposalCancel')
+        localStorage.removeItem('poposalCancel');
+        this.listProposal()
       });
   }
 
   listProposal() {
     this.proposalService.list().subscribe({
       next: data => {
-        this.response = data
+        this.response = data;
+        console.log(this.response)
         if (data.length > 0) {
           this.selectedProposal = data[0];
           setTimeout(() => {
