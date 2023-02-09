@@ -8,6 +8,7 @@ import { AnnouncementGetResponseDto } from '../../../../dtos/announcement-get-re
 import { SchedulingSelectedModalComponent } from './scheduling-selected-modal/scheduling-selected-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VisitCancelRequestDto } from 'src/app/dtos/visit-cancel-request.dto';
+import { EditSchedulingModalComponent } from './edit-scheduling-modal/edit-scheduling-modal.component';
 
 @Component({
   selector: 'app-scheduling',
@@ -28,7 +29,7 @@ export class SchedulingComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedScheduling: ScheduleRegisterResponseDto;;
+  selectedScheduling: ScheduleRegisterResponseDto;
 
   recentlySeenList: any = [];
 
@@ -106,7 +107,8 @@ export class SchedulingComponent implements OnInit {
 
     this.scheduleService.cancelVisit(this.itemSelectedForCancel._id, request).subscribe({
       next: data => {
-        this.schedulesList()
+        this.schedulesList();
+        this.form.reset();
       },
       error: error => {
         console.log(error)
@@ -211,5 +213,9 @@ export class SchedulingComponent implements OnInit {
 
   }
 
+  editScheduling(selectedScheduling) {
+    localStorage.setItem('announcementSelected', JSON.stringify(selectedScheduling));
+    this.modalService.open(EditSchedulingModalComponent, { centered: true });
+  }
 
 }

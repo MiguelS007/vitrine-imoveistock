@@ -1,29 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ScheduleRegisterResponseDto } from '../../../../../dtos/schedule-register-response.dto';
+import { ProposalGetResponseDto } from '../../../../../dtos/proposal-get-response.dto';
 import { AnnouncementService } from '../../../../../service/announcement.service';
-import { EditSchedulingModalComponent } from '../edit-scheduling-modal/edit-scheduling-modal.component';
+import { ProposalCancelModalComponent } from '../proposal-cancel-modal/proposal-cancel-modal.component';
 
 @Component({
-  selector: 'app-scheduling-selected-modal',
-  templateUrl: './scheduling-selected-modal.component.html',
-  styleUrls: ['./scheduling-selected-modal.component.scss']
+  selector: 'app-proposal-selected-modal',
+  templateUrl: './proposal-selected-modal.component.html',
+  styleUrls: ['./proposal-selected-modal.component.scss']
 })
-export class SchedulingSelectedModalComponent implements OnInit {
+export class ProposalSelectedModalComponent implements OnInit {
 
-  selectedScheduling: ScheduleRegisterResponseDto = {
-    _id: '',
-    cancellationReason: '',
-    visitDate: new Date,
-  };
-
+  selectedProposal: ProposalGetResponseDto;
   recentlySeenList: any = [];
 
   location = false;
-
-  confirmcancel = false;
-
 
   constructor(
     private modalService: NgbModal,
@@ -32,8 +24,12 @@ export class SchedulingSelectedModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let selectedScheduling = localStorage.getItem('announcementChecked');
-    this.selectedScheduling = JSON.parse(selectedScheduling)
+    let selectedProposal = localStorage.getItem('proposalChecked');
+    this.selectedProposal = JSON.parse(selectedProposal)
+  }
+
+  public toNumber(paremetro1: string) {
+    return Number(paremetro1)
   }
 
   announcementSelected(value) {
@@ -75,19 +71,19 @@ export class SchedulingSelectedModalComponent implements OnInit {
     }
 
 
-    if (this.selectedScheduling.announcement.liked === true) {
+    if (this.selectedProposal.announcement.liked === true) {
       this.announcementService.registerUnlike(request).subscribe(
         success => {
-          this.selectedScheduling.announcement.liked = false
+          this.selectedProposal.announcement.liked = false
         },
         error => {
           console.error(error)
         }
       )
-    } else if (this.selectedScheduling.announcement.liked === false) {
+    } else if (this.selectedProposal.announcement.liked === false) {
       this.announcementService.registerLike(request).subscribe(
         success => {
-          this.selectedScheduling.announcement.liked = true
+          this.selectedProposal.announcement.liked = true
         },
         error => {
           console.error(error)
@@ -110,13 +106,23 @@ export class SchedulingSelectedModalComponent implements OnInit {
   exit() {
     this.modalService.dismissAll()
   }
+  
 
-
-  editScheduling(selectedScheduling) {
-    localStorage.setItem('announcementSelected', JSON.stringify(selectedScheduling));
-    this.modalService.dismissAll();
-    this.modalService.open(EditSchedulingModalComponent, { centered: true });
-    console.log(selectedScheduling)
+  goExpress(item) {
+    this.router.navigate([`logged/express/${item.announcement._id}`]);
+    this.exit();
   }
+
+  cancelProposal(item) {
+    localStorage.setItem('poposalCancel', JSON.stringify(item));
+    this.exit()
+
+    const modalRef = this.modalService.open(ProposalCancelModalComponent, { centered: true });
+      modalRef.result.then(data => {
+      }, error => {
+        localStorage.removeItem('poposalCancel')
+      });
+  }
+
 
 }

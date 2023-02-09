@@ -20,17 +20,17 @@
             <div class="row px-3 my-3 pt-3 pb-3 d-flex">
                 <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                     <img src="../../../assets/icon/bed.png" class="pr-2" />
-                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.bedrooms || '-'}} quartos
+                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.announcement?.bedrooms || '-'}} quartos
                     </p>
                 </div>
                 <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                     <img src="../../../assets/icon/car.png" class="pr-2" />
-                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.parkingSpaces || '-'}} vagas
+                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.announcement?.parkingSpaces || '-'}} vagas
                     </p>
                 </div>
                 <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                     <img src="../../../assets/icon/rule.png" class="pr-2" />
-                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.rooms || '-'}} m2
+                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.announcement?.rooms || '-'}} m2
                     </p>
                 </div>
 
@@ -44,9 +44,9 @@
             <p>
                 <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
                 <span class="fw-400 font-size-16 line-20 color-black">
-                    {{response.complementAddress || '(sem endereço)'}}
-                    {{response.yearOfConstruction || '-'}},
-                    {{response.cityAddress || '(local não informado!)'}} - {{response.ufAddress || '-'}}
+                    {{response.announcement?.complementAddress || '(sem endereço)'}}
+                    {{response.announcement?.yearOfConstruction || '-'}},
+                    {{response.announcement?.cityAddress || '(local não informado!)'}} - {{response.announcement?.ufAddress || '-'}}
                 </span>
             </p>
         </div>
