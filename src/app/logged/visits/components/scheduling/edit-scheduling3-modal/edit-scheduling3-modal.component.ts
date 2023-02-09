@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ScheduleRegisterResponseDto } from '../../../../../dtos/schedule-register-response.dto';
+import { ScheduleService } from '../../../../../service/schedule.service';
 
 @Component({
   selector: 'app-edit-scheduling3-modal',
@@ -16,7 +17,8 @@ export class EditScheduling3ModalComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private scheduleService: ScheduleService
 
   ) { }
 
@@ -29,12 +31,12 @@ export class EditScheduling3ModalComponent implements OnInit {
   }
 
   exit() {
-    this.modalService.dismissAll()
+    this.modalService.dismissAll();
   }
 
   goToVisits() {
-    this.modalService.dismissAll()
     this.router.navigate(['logged/visits'])
+    this.exit();
   }
 
 }

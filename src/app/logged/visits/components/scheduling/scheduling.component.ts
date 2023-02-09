@@ -9,6 +9,8 @@ import { SchedulingSelectedModalComponent } from './scheduling-selected-modal/sc
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VisitCancelRequestDto } from 'src/app/dtos/visit-cancel-request.dto';
 import { EditSchedulingModalComponent } from './edit-scheduling-modal/edit-scheduling-modal.component';
+import { EditScheduling2ModalComponent } from './edit-scheduling2-modal/edit-scheduling2-modal.component';
+import { EditScheduling3ModalComponent } from './edit-scheduling3-modal/edit-scheduling3-modal.component';
 
 @Component({
   selector: 'app-scheduling',
@@ -56,6 +58,15 @@ export class SchedulingComponent implements OnInit {
 
   ngOnInit(): void {
     this.schedulesList();
+
+    this.scheduleService.listeningEdition.subscribe({
+      next: value => {
+        if (value === true) {
+          this.schedulesList();
+        }
+        console.log(value)
+      },
+    })
   }
 
   schedulesList() {
@@ -162,7 +173,8 @@ export class SchedulingComponent implements OnInit {
       const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
       modalRef.result.then(data => {
       }, error => {
-        localStorage.removeItem('announcementChecked')
+        localStorage.removeItem('announcementChecked');
+        this.schedulesList();
       });
     } else if (teste === item._id) {
       return
@@ -215,7 +227,30 @@ export class SchedulingComponent implements OnInit {
 
   editScheduling(selectedScheduling) {
     localStorage.setItem('announcementSelected', JSON.stringify(selectedScheduling));
-    this.modalService.open(EditSchedulingModalComponent, { centered: true });
+    const modalRef = this.modalService.open(EditSchedulingModalComponent, { centered: true });
+      modalRef.result.then(data => {
+      }, error => {
+        this.editScheduling2();
+      });
   }
+
+  editScheduling2() {
+    const modalRef = this.modalService.open(EditScheduling2ModalComponent, { centered: true });
+    modalRef.result.then(data => {
+    }, error => {
+      this.editScheduling3();
+    });
+  }
+
+  editScheduling3() {
+    const modalRef = this.modalService.open(EditScheduling3ModalComponent, { centered: true });
+    modalRef.result.then(data => {
+    }, error => {
+      localStorage.removeItem('announcementSelected');
+      localStorage.removeItem('dateScheduling');
+      this.schedulesList();
+    });
+  }
+
 
 }
