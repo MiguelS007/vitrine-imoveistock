@@ -395,6 +395,12 @@ input:focus {
 .z-10 {
     z-index: 10;
 }
+.z-100 {
+    z-index: 100;
+}
+.z-1000 {
+    z-index: 1000;
+}
 
 .h-80 {
     height: 80px;
@@ -1130,6 +1136,7 @@ input:focus {
     }
 }
 
+
 @media (max-width: 600px) {
     .arrow-box-rent:after {
         left: 59%;
@@ -1287,6 +1294,21 @@ input:focus {
     bottom: 5%;
     right: 5%;
     padding: 1.5rem 2rem;
+}
+.schedule-visit{
+    bottom: 5%;
+}
+
+.col-body-details-property:nth-child(2) {
+    padding-left: 0 !important;
+}
+
+.col-body-details-property:nth-child(3) {
+    padding-right: 0 !important;
+}
+
+.card-ingo-buy {
+    position: fixed;
 }
 
 // .row-body-details-property{
@@ -1783,7 +1805,7 @@ vg-overlay-play .vg-overlay-play {
     .form-search {
         padding-left: 0 !important;
         padding-right: 0 !important;
-        padding-top: 3rem !important;
+        padding-top: 100px !important;
     }
 
     .col-full {
@@ -1812,7 +1834,10 @@ vg-overlay-play .vg-overlay-play {
         background: linear-gradient(0deg, black, transparent);
     }
 
-
+    .col-btns-announcements {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
     .btn-view-img {
         width: 100% !important;
     }
@@ -1845,6 +1870,13 @@ vg-overlay-play .vg-overlay-play {
     .col-body-details-property {
         flex: 0 0 100% !important;
         max-width: 100% !important;
+    }
+    .col-body-details-property:nth-child(2) {
+        padding-left: 15px !important;
+    }
+    
+    .col-body-details-property:nth-child(3) {
+        padding-right: 15px !important;
     }
 
     // .row-body-details-property {
@@ -1986,14 +2018,14 @@ vg-overlay-play .vg-overlay-play {
     }
 
     // PROPERTY-DETAILS
-    .spc-btns-property {
-        top: 71px !important;
-        position: relative !important;
-    }
+    // .spc-btns-property {
+    //     top: 71px !important;
+    //     position: relative !important;
+    // }
 
     .options-img {
         padding-top: 1rem !important;
-        top: 38px !important;
+        top: -77px !important;
         right: 64px !important;
         position: absolute !important;
         justify-content: center !important;
@@ -2051,9 +2083,11 @@ vg-overlay-play .vg-overlay-play {
     .col-btns-preview-img {
         position: absolute !important;
         display: block !important;
-        top: 211px;
+        top: 259px;
         background: none;
         z-index: 1;
+        background: linear-gradient(0deg, #0000008c, transparent);
+
     }
 
     // HEADER
@@ -2221,7 +2255,23 @@ vg-overlay-play .vg-overlay-play {
         top: 796px;
         right: 17%;
     }
+    .col-btns-preview-img {
+        position: absolute !important;
+        display: block !important;
+        top: 321px;
+        background: none;
+        z-index: 1;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.5490196078), transparent);
+    }
+    .p-y-0 {
+        padding-top: 0 !important;
+        padding-bottom: 2rem !important;
+    }
 
+    .col-btns-announcements {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
     .card-product-result {
         width: 95% !important;
         margin-left: 0 !important;
@@ -2288,15 +2338,6 @@ vg-overlay-play .vg-overlay-play {
     }
 }
 
-@media(max-height: 800px) {
-
-    // PROPERTY DETAILS
-    .modal-content {
-        border-radius: 1rem !important;
-        overflow-y: none !important;
-        overflow-y: none !important;
-    }
-}
 
 @media (max-width: 540px) {
     .logo-navbar-desktop-branca {
@@ -2364,6 +2405,10 @@ vg-overlay-play .vg-overlay-play {
         display: none !important;
     }
 
+    .spc-btns-property {
+        max-width: 91vw;
+    }
+
     // SEARCH PAGE
     .space-see-maps-area-search {
         justify-content: space-between !important;
@@ -2394,4 +2439,14 @@ vg-overlay-play .vg-overlay-play {
         padding: 3rem 0rem !important;
     }
 
+}
+
+@media(max-height: 800px) {
+
+    // PROPERTY DETAILS
+    .modal-content {
+        border-radius: 1rem !important;
+        overflow-y: none !important;
+        overflow-y: none !important;
+    }
 }
