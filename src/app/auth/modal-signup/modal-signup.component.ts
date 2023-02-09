@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { ProfileService } from 'src/app/service/profile.service';
 import { UserService } from 'src/app/service/user.service';
 import { ProfileClientEnum } from '../../../app/dtos/enum/profile-client.enum';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal-signup',
@@ -24,11 +25,10 @@ export class ModalSignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private profileService: ProfileService,
     private userService: UserService,
-    private authenticationService: AuthenticationService,
     private toastrService: ToastrService,
-    private router: Router
+    private modalService: NgbModal
+
   ) {
     this.form = this.formBuilder.group({
       phone: ['', [Validators.required]],
@@ -43,7 +43,9 @@ export class ModalSignupComponent implements OnInit {
 
   }
 
-
+  exit() {
+    this.modalService.dismissAll()
+  }
 
 
 
