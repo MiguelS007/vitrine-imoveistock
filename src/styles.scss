@@ -395,9 +395,11 @@ input:focus {
 .z-10 {
     z-index: 10;
 }
+
 .z-100 {
     z-index: 100;
 }
+
 .z-1000 {
     z-index: 1000;
 }
@@ -1304,7 +1306,8 @@ input:focus {
     right: 5%;
     padding: 1.5rem 2rem;
 }
-.schedule-visit{
+
+.schedule-visit {
     bottom: 5%;
 }
 
@@ -1827,6 +1830,16 @@ vg-overlay-play .vg-overlay-play {
         max-width: 50% !important;
     }
 
+    .col-search-map:nth-child(1) {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    .col-search-map:nth-child(2) {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+
     .h-400 {
         height: 400px;
     }
@@ -1847,6 +1860,7 @@ vg-overlay-play .vg-overlay-play {
         padding-left: 15px !important;
         padding-right: 15px !important;
     }
+
     .btn-view-img {
         width: 100% !important;
     }
@@ -1880,10 +1894,11 @@ vg-overlay-play .vg-overlay-play {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
+
     .col-body-details-property:nth-child(2) {
         padding-left: 15px !important;
     }
-    
+
     .col-body-details-property:nth-child(3) {
         padding-right: 15px !important;
     }
@@ -1982,6 +1997,16 @@ vg-overlay-play .vg-overlay-play {
         padding: 6% 0;
         width: 77px;
     }
+
+    // SEARCH MAP
+    .col-map:nth-child(1) {
+        padding-left: 15px !important;
+    }
+
+    .col-map:nth-child(2) {
+        padding-right: 15px !important;
+    }
+
 
 
 }
@@ -2264,6 +2289,7 @@ vg-overlay-play .vg-overlay-play {
         top: 796px;
         right: 17%;
     }
+
     .col-btns-preview-img {
         position: absolute !important;
         display: block !important;
@@ -2272,6 +2298,7 @@ vg-overlay-play .vg-overlay-play {
         z-index: 1;
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.5490196078), transparent);
     }
+
     .p-y-0 {
         padding-top: 0 !important;
         padding-bottom: 2rem !important;
@@ -2281,6 +2308,7 @@ vg-overlay-play .vg-overlay-play {
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
+
     .card-product-result {
         width: 95% !important;
         margin-left: 0 !important;
