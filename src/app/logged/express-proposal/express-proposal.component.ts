@@ -70,6 +70,8 @@ export class ExpressProposalComponent implements OnInit {
 
   changesRequest: any = [];
 
+  sendRescheduling: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private datamokservice: DatamokService,
@@ -106,7 +108,10 @@ export class ExpressProposalComponent implements OnInit {
     this.formCustomizeProposal.patchValue({
       suggestedRentAmount: this.response.leaseValue,
       suggestedSaleAmount: this.response.saleValue
-    })
+    });
+
+
+    console.log(localStorage.getItem('counter-proposal'))
 
     for (let i = 0; i < this.response.paymentMethods.length; i++) {
       if (this.response.paymentMethods[i].type === 'property') {
@@ -137,6 +142,18 @@ export class ExpressProposalComponent implements OnInit {
         })
       }
     }
+
+    this.proposalService.list().subscribe({
+      next: data => {
+        if (data.length > 0) {
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].announcement._id === this.response._id) {
+              this.sendRescheduling = true;
+            }
+          }
+        }
+      }
+    })
 
   }
 
@@ -406,15 +423,11 @@ export class ExpressProposalComponent implements OnInit {
         announcementId: this.response._id
       }
 
-      this.proposalService.register(this.request).subscribe({
-        next: data => {
-          this.toastrService.success('Proposta enviada!', '', { progressBar: true });
-          this.ngOnInit()
-        },
-        error: error => {
-          this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true });
-        }
-      })
+      if (this.sendRescheduling) {
+        this.sendCounterProposal(this.request)
+      } else {
+        this.sendProposal(this.request)
+      }
     } else if (this.response.typeOfAd === 'rent') {
 
       let valueTotal = this.toNumber(this.response.valueOfIptu) / 12 + this.toNumber(this.response.condominiumValue) + this.toNumber(this.response.leaseValue)
@@ -431,16 +444,43 @@ export class ExpressProposalComponent implements OnInit {
         announcementId: this.response._id
       }
 
-      this.proposalService.register(this.request).subscribe({
-        next: data => {
-          this.toastrService.success('Proposta enviada!', '', { progressBar: true });
-          this.ngOnInit()
-        },
-        error: error => {
-          this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true });
-        }
-      })
+      if (this.sendRescheduling) {
+        this.sendCounterProposal(this.request)
+      } else {
+        this.sendProposal(this.request)
+      }
     }
+  }
+
+
+  sendProposal(request) {
+    this.proposalService.register(request).subscribe({
+      next: data => {
+        this.toastrService.success('Proposta enviada!', '', { progressBar: true });
+        this.ngOnInit()
+      },
+      error: error => {
+        this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true });
+      }
+    })
+  }
+
+  sendCounterProposal(request) {
+    this.proposalService.counterProposal(this.request).subscribe({
+      next: data => {
+        this.toastrService.success('Contra proposta enviada!', '', { progressBar: true });
+        this.ngOnInit();
+        localStorage.removeItem('counter-proposal')
+      },
+      error: error => {
+        if (error.error.errors[0] === 'there is no proposal denied') {
+          this.toastrService.error('Ja existe uma proposta em negociação neste anuncio!', '', { progressBar: true });
+        } else {
+          this.toastrService.error('Erro ao enviar contra proposta!', '', { progressBar: true });
+        }
+        console.log(error)
+      }
+    })
   }
 
 }
