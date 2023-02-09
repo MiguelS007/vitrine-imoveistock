@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,9 @@ import { SearchService } from 'src/app/service/search.service';
 export class HomeHeaderComponent implements OnInit {
   @Input() fieldvalue = '';
   form: FormGroup;
+  @ViewChild('searchresult') targetElement: ElementRef;
 
+  
   response: AnnouncementGetResponseDto[] = [];
   filterResponse: AnnouncementGetResponseDto[] = [];
 
@@ -84,6 +86,7 @@ export class HomeHeaderComponent implements OnInit {
     this.searchService.getPropertyListAll().subscribe(
       success => {
         this.response = success;
+        // console.log(this.form.controls['typePropertyLocal'].value)
       },
       error => { console.log(error, 'data not collected') }
     );
@@ -238,8 +241,6 @@ export class HomeHeaderComponent implements OnInit {
     this.typepropertydiv = !this.typepropertydiv;
   }
 
-
-
   typeProperty(value: string) {
     this.searchfilterType = value
     this.typeoffResidential = false;
@@ -247,7 +248,6 @@ export class HomeHeaderComponent implements OnInit {
     this.typeoffCommercial = false;
 
   }
-
 
   typePropertyOptions(value: string) {
     this.propertyCharacteristicsOptions = false;
@@ -274,15 +274,6 @@ export class HomeHeaderComponent implements OnInit {
     this.whatAreYouLookingForTitle = value
 
   }
-
-
-
-  // addItem(value: string) {
-  //   if (value === 'residential') {
-  //   }
-  // }
-
-
 
   propertyCharacteristics(value: string) {
     this.typeoffResidential = false;
@@ -323,6 +314,7 @@ export class HomeHeaderComponent implements OnInit {
     };
 
   }
+
   hideView() {
     const divviewoptions = document.querySelector('.divviewoptions') as HTMLElement
     divviewoptions.style.display = 'none'
