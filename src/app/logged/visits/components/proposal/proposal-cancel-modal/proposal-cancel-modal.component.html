@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <form [formGroup]="form" class="px-4 py-3">
+        <div class="modal-header">
+            <button type="button" (click)="exit()" class="close" data-dismiss="modal" aria-label="Close">
+                <img src="../../../assets/icon/x.png" />
+            </button>
+        </div>
+        <div class="anima-body">
+            <p class="fw-700 w-100 text-center font-size-24 line-32 color-black">
+                Cancelar visita
+            </p>
+            <p class="fw-400 py-4 w-100 text-center font-size-14 line-18 color-black">
+                Para confirmar, conte pra gente o motivo
+            </p>
+            <div class="form-check d-flex align-items-center">
+                <input class="form-check-input w18h18" value="nao_tenho_mais_interesse_neste_imovel"
+                    formControlName="cancelvisit" type="radio" name="cancelvisit" id="cancelreason1">
+                <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black" for="cancelreason1">
+                    Não tenho mais interesse neste imóvel, mas continuo
+                    procurando outras opções
+                </label>
+            </div>
+            <div class="form-check d-flex align-items-center">
+                <input class="form-check-input w18h18" value="imprevisto" formControlName="cancelvisit" type="radio"
+                    name="cancelvisit" id="cancelreason2">
+                <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black" for="cancelreason2">
+                    Tive um imprevisto, mas ainda tenho interesse neste
+                    imóvel
+                </label>
+            </div>
+            <div class="form-check d-flex align-items-center">
+                <input class="form-check-input w18h18" value="nao_quero_mais_alugar" formControlName="cancelvisit"
+                    type="radio" name="cancelvisit" id="cancelreason3">
+                <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black" for="cancelreason3">
+                    Não quero mais alugar
+                </label>
+            </div>
+            <div class="form-check d-flex align-items-center">
+                <input class="form-check-input w18h18" value="outro_motivo" formControlName="cancelvisit" type="radio"
+                    name="cancelvisit" id="cancelreason3">
+                <label class="form-check-label m-2 fw-400 font-size-14 line-18 color-black" for="cancelreason3">
+                    Outro motivo
+                </label>
+            </div>
+
+            <button type="submit" data-dismiss="modal" aria-label="Close" (click)="confirmCancelVisitModal()"
+                [disabled]="form.invalid" class="btn pb-2
+                                                    bg-purple fw-700
+                                                    font-size-18 line-24
+                                                    text-light mt-3
+                                                    border-radius-10 h-74
+                                                    w-100">Confirmar
+            </button>
+        </div>
+    </form>
+</div>
