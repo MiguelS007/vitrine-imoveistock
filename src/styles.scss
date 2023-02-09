@@ -1153,6 +1153,15 @@ input:focus {
     padding: 6px 9px 2px 8px;
 }
 
+.col-map:nth-child(1) {
+    padding-left: 0 !important;
+}
+
+.col-map:nth-child(2) {
+    padding-right: 0 !important;
+}
+
+
 // SEARCH-PAGE
 .label-search-words {
     position: absolute;
@@ -1507,7 +1516,7 @@ vg-overlay-play .vg-overlay-play {
     height: 100%;
     width: 100%;
     display: flex;
-    padding-top: 94px;
+    padding-top: 25px;
     justify-content: center;
     align-items: center;
 }
@@ -2323,7 +2332,6 @@ vg-overlay-play .vg-overlay-play {
     // SEARCH-PAGE
 
     .card-product-result-search {
-        width: 380px !important;
         margin-left: 0 !important;
     }
 
