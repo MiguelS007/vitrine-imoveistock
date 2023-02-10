@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { UserSendMessageRequestDto } from '../../dtos/user-send-message-request.dto';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-contact',
@@ -22,9 +24,8 @@ export class ContactComponent implements OnInit {
     private formBuilder: FormBuilder,
     private datamokservice: DatamokService,
     private toastrService: ToastrService,
-    private announcementService: AnnouncementService
-
-
+    private announcementService: AnnouncementService,
+    private userService: UserService
   ) {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -49,12 +50,22 @@ export class ContactComponent implements OnInit {
 
   confirm(){
     // FAKE FEEDBACK
-    this.announcementService.listLikes().subscribe(
+    let request: UserSendMessageRequestDto = {
+      email: this.form.controls['email'].value,
+      message: this.form.controls['msg'].value,
+      name: this.form.controls['name'].value,
+      phone: `55$${this.form.controls['tel'].value}`.replace(/\D/g, ''),
+      subject: this.form.controls['subject'].value,
+    }
+
+    console.log(request)
+    this.userService.sendMessage(request).subscribe(
       success => {
         this.toastrService.success('Mensagem enviada!', '', { progressBar: true });
-        this.form.setValue({ name: '', email: '', tel: '', subject: '', msg: '' });
+        this.form.reset();
       },
       error => {
+        console.error(error)
       }
     )
   }
