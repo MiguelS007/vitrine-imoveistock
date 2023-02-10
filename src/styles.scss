@@ -169,7 +169,7 @@ input:focus {
 
     &:nth-child(2) {
         z-index: 999 !important;
-        bottom: 0px !important;
+        bottom: 0px;
         left: 0;
         width: 100%;
     }
@@ -843,7 +843,7 @@ input:focus {
 
 // HOME-HEADER
 .bg-home-header {
-    background-image: url(./assets/img/gradient.png), url(./assets/img/img-bg-header-home.svg);
+    background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
     background-position: center 45%;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
@@ -1703,6 +1703,10 @@ vg-overlay-play .vg-overlay-play {
     .d-block-desk-2 {
         display: block !important;
     }
+    // ABOUT
+    vg-player{
+        height: 426px !important;
+    }
 
 }
 
@@ -1984,7 +1988,9 @@ vg-overlay-play .vg-overlay-play {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
-
+  vg-player{
+    height: 100% !important;
+}
     .col-cards-about {
         flex: 0 0 100% !important;
         max-width: 100% !important;
