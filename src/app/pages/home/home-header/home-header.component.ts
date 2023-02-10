@@ -26,7 +26,6 @@ export class HomeHeaderComponent implements OnInit {
   typeoffRural = false;
   typeoffCommercial = false;
   searchresult: any;
-  propertyCharacteristicsOptions = false;
   filtersearch = false;
   liresultsearch: any = [];
   selectedcities: string;
@@ -197,7 +196,6 @@ export class HomeHeaderComponent implements OnInit {
 
   // search filter
   resultSearch(tableName: string) {
-    this.propertyCharacteristicsOptions = false;
     // console.log(tableName.length)
     if (tableName.length == 0) { this.filtersearch = false }
     else { this.filtersearch = true }
@@ -251,7 +249,6 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   typePropertyOptions(value: string) {
-    this.propertyCharacteristicsOptions = false;
     this.filtersearch = false;
     console.log(value)
     if (value === 'typeproperty') {
@@ -275,7 +272,6 @@ export class HomeHeaderComponent implements OnInit {
   whatAreYouLookingFor(value) {
     this.filtersearch = false;
     this.whatAreYouLookingForTitle = value
-
   }
 
   propertyCharacteristics(value: string) {
@@ -285,7 +281,6 @@ export class HomeHeaderComponent implements OnInit {
     this.typeoffCommercial = false;
     const divviewoptions = document.querySelector('.divviewoptions') as HTMLElement
     if (value === 'propertyCharacteristics') {
-      this.propertyCharacteristicsOptions = !this.propertyCharacteristicsOptions;
     } else if (value === 'vacancies') {
       this.viewvacancies = !this.viewvacancies;
       divviewoptions.style.display = 'flex'
