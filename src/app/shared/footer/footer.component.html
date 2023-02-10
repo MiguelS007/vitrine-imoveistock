@@ -1,64 +1,87 @@
-<footer [class]="handlerLoggedLinks(router.url)" class="w-100 h-100 px-5p bg-purple d-flex justify-content-center" style="max-height: 700px;">
+<footer [class]="handlerLoggedLinks(router.url)" class="w-100 h-100 px-5p bg-purple d-flex justify-content-center">
     <div class="max-w-1918 mt-5 mx-0 w-100 row h-auto">
         <div class="col-4 px-0 padding-x pt-4 d-flex justify-content-center h-auto col-footer">
             <div class="w-100">
-            <p class="fw-700 mb-3 font-size-18 line-24 text-light">
-                Somos a Imoveistock
-            </p>
-            <p class="d-grid mb-0">
-                <span class="fw-400 font-size-14 line-32 text-light">
-                    Um novo jeito de buscar e encontrar imóveis. <br/>
-                    Estamos aqui para abrir portas para você.
-                </span>
-            </p>
+                <p class="fw-700 mb-3 font-size-18 line-24 text-light">
+                    <img src="../../../assets/logo/white-logo.png" class="w-50" />
+                </p>
+                <p class="d-grid mb-0">
+                    <span class="fw-400 font-size-14 line-32 text-light">
+                        Um novo jeito de buscar e encontrar imóveis. <br />
+                        Estamos aqui para abrir portas para você.
+                    </span>
+                </p>
             </div>
         </div>
-        <div class="col-4 pt-4 px-0 padding-x  d-flex justify-content-center h-auto col-footer">
+        <div class="col-3 pt-4 px-0 padding-x  d-flex justify-content-center h-auto col-footer">
             <div class="w-100">
                 <p class="fw-700 mb-3  font-size-18 line-24 text-light">
-               Fale com a gente
-           </p>
-           <p class="d-grid  mb-0">
-               <span class="fw-400 inline-size font-size-14 line-32 text-light">
-                   contato@imoveistock.com
-                   Alameda Pres. Taunay, 829 
-                   Batel, Curitiba - PR 
-                   80420-180
-                   <br/>
-                   (41) 98721-2409
-               </span>
-           </p>
-           </div>
+                    Fale com a gente
+                </p>
+                <p class="fw-700 d-grid pb-5 pt-3 font-size-18 line-24 text-light">
+                    <span class="fw-400 py-1 font-size-14 line-20 text-light">Hotmilk PUC/PR</span>
+                    <span class="fw-400 py-1 font-size-14 line-20 text-light">Rua Imaculada Conceição 1430</span>
+                    <span class="fw-400 py-1 font-size-14 line-20 text-light">Prado Velho - Curitiba - PR</span>
+                </p>
+                <div class="fw-700 d-grid pb-5 pt-3 font-size-14 line-20 text-light">
+                    Telefone
+                    <p class="fw-400 d-flex pt-2  align-items-center line-20 text-light">
+                        <i class="bi pr-2 text-success bi-whatsapp"></i>
+                        (11) 4003-7764
+                    </p>
+                    <p class="fw-400 d-flex align-items-center line-20 text-light">
+                        <i class="bi pr-2 text-success bi-telephone"></i>
+                        4003-7764
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="col-4 pt-4 px-0 padding-x  h-auto col-footer">
+        <div class="col-3 pt-4 px-0 padding-x  d-flex justify-content-center h-auto col-footer">
+            <div class="w-100">
+                <p class="fw-700 mb-3  font-size-18 line-24 text-light">
+                    Trabalhe com a gente
+                </p>
+                <p class="fw-700 d-grid pb-5 pt-3 font-size-18 line-24 text-light">
+                    <a href="https://landingpage-corretor.vercel.app/" class="fw-400 py-1 font-size-14 line-20 text-light">Corretagem</a>
+                    <a href="https://landingpage-fotografo.vercel.app/" class="fw-400 py-1 font-size-14 line-20 text-light">Fotografia</a>
+                    <a href="https://landingpage-vistoriador.vercel.app/" class="fw-400 py-1 font-size-14 line-20 text-light">Vistorias</a>
+                </p>
+            </div>
+        </div>
+        <div class="col-2 pt-4 px-0 padding-x  h-auto col-footer">
             <p class="fw-700 mb-3 font-size-18 line-24 text-light">
                 Siga nossas redes
             </p>
-            <p class="d-flex w-50 justify-content-between mb-0">
+            <p class="d-flex block-important w-100 justify-content-between mb-0">
                 <a href="https://www.facebook.com/imoveistock">
-                    <img  src="../../../assets/icon/facebook-light.png"/>
+                    <img src="../../../assets/icon/facebook-light.png" />
                 </a>
                 <a href="https://www.instagram.com/imoveistock/">
-                    <img src="../../../assets/icon/instagram-light.png"/>
+                    <img src="../../../assets/icon/instagram-light.png" />
                 </a>
                 <a href="https://www.linkedin.com/company/imoveistock/">
-                    <img src="../../../assets/icon/linkedin-light.png"/>
+                    <img src="../../../assets/icon/linkedin-light.png" />
                 </a>
                 <a href="https://www.youtube.com/@imoveistock5198">
-                    <img src="../../../assets/icon/youtube-light.png"/>
+                    <img src="../../../assets/icon/youtube-light.png" />
                 </a>
             </p>
-        </div> 
-        <div class="col-12 my-5 block-important d-flex">
-            <div class="w-50 col-w-100 d-flex">
-                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['']" [routerLinkActive]="['text-light']">Home</a>
-                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['/search']" [routerLinkActive]="['text-light']">Imóveis</a>
-                <a class="fw-400 font-size-14 line-20 color-muted px-3" (click)="changePage()" [routerLinkActive]="['text-light']">Indique</a>
-                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['/contact']" [routerLinkActive]="['text-light']">Contato</a>
+        </div>
+        <div class="col-12 px-0 my-5 grid-important d-flex">
+            <div class="w-75 col-full col-w-100 grid-important d-flex">
+                <a class="fw-700 font-size-14 line-20 color-muted px-3">CRECI PR J:5588</a>
+                <a (click)="openTermsModal('politica')"
+                    class="fw-400 cursor-pointer hover-white font-size-14 line-20 color-muted px-3">Política de
+                    privacidade</a>
+                <a (click)="openTermsModal('termos')"
+                    class="fw-400 cursor-pointer hover-white font-size-14 line-20 color-muted px-3">Termos de uso</a>
+                <a [routerLink]="['/cookie-policy']" [routerLinkActive]="['text-light']"
+                    class="fw-400 cursor-pointer hover-white font-size-14 line-20 color-muted px-3">Política de
+                    coockies</a>
             </div>
-            <div class="w-50 col-w-100 justify-content-end d-flex">
+            <div class="w-25 col-full col-w-100 justify-content-end d-flex">
                 <p class="mb-0 year fw-400 font-size-14 line-20 color-muted">
-                    {{year}} - Imoveistock Tecnologia e Negócios LTDA.
+                    {{year}} - imoveistock Tecnologia e Negócios LTDA.
                 </p>
             </div>
         </div>

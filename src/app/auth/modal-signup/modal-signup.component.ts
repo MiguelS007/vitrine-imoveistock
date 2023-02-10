@@ -8,6 +8,7 @@ import { ProfileService } from 'src/app/service/profile.service';
 import { UserService } from 'src/app/service/user.service';
 import { ProfileClientEnum } from '../../../app/dtos/enum/profile-client.enum';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TermsComponent } from '../terms/terms.component';
 
 @Component({
   selector: 'app-modal-signup',
@@ -49,7 +50,7 @@ export class ModalSignupComponent implements OnInit {
 
   openTermsModal(value: string){
     this.userService.termsOrPolitic = value;
-    // this.modalService.open(TermComponent,{size:"lg"})
+    this.modalService.open(TermsComponent,{size:"lg"})
   }
 
   confirm() {

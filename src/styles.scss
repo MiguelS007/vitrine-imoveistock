@@ -169,7 +169,7 @@ input:focus {
 
     &:nth-child(2) {
         z-index: 999 !important;
-        bottom: 0px !important;
+        bottom: 0px;
         left: 0;
         width: 100%;
     }
@@ -194,6 +194,11 @@ input:focus {
     background-repeat:no-repeat;
     background-position: left;
     background-size: cover;
+}
+
+.hover-white:hover{
+    color: white !important;
+    transition: .3s;
 }
 
 .navbar-brand {
@@ -843,7 +848,7 @@ input:focus {
 
 // HOME-HEADER
 .bg-home-header {
-    background-image: url(./assets/img/gradient.png), url(./assets/img/img-bg-header-home.svg);
+    background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
     background-position: center 45%;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
@@ -1703,6 +1708,10 @@ vg-overlay-play .vg-overlay-play {
     .d-block-desk-2 {
         display: block !important;
     }
+    // ABOUT
+    vg-player{
+        height: 426px !important;
+    }
 
 }
 
@@ -1873,6 +1882,25 @@ vg-overlay-play .vg-overlay-play {
         top: 1058px;
         background: linear-gradient(0deg, black, transparent);
     }
+    .bg-img-preview{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+}
+.swiper-button-prev, .swiper-button-next {
+    position: absolute;
+    top: 50%;
+    width: calc(var(--swiper-navigation-size) / 44 * 27);
+    height: var(--swiper-navigation-size);
+    margin-top: calc(0px - var(--swiper-navigation-size) / 2);
+    z-index: 10;
+    background: var(--greenlight) !important;;
+    padding: 29px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black !important;
+}
 
     .col-btns-announcements {
         padding-left: 15px !important;
@@ -1949,6 +1977,9 @@ vg-overlay-play .vg-overlay-play {
     .block-important {
         display: block !important;
     }
+    .grid-important {
+        display: grid !important;
+    }
 
     .left-important {
         justify-content: start !important;
@@ -1984,7 +2015,9 @@ vg-overlay-play .vg-overlay-play {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
-
+  vg-player{
+    height: 100% !important;
+}
     .col-cards-about {
         flex: 0 0 100% !important;
         max-width: 100% !important;

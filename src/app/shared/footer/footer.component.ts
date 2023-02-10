@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TermsComponent } from 'src/app/auth/terms/terms.component';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-footer',
@@ -11,11 +14,18 @@ export class FooterComponent implements OnInit {
 
   constructor(
     public router: Router,
+    private modalService: NgbModal,
+    private userService: UserService,
+
   ) { }
 
   ngOnInit(): void {   
   }
 
+  openTermsModal(value: string){
+    this.userService.termsOrPolitic = value;
+    this.modalService.open(TermsComponent,{size:"lg"})
+  }
   
   handlerLoggedLinks(url: string): string {
     if (url === '/auth/login')
@@ -23,11 +33,4 @@ export class FooterComponent implements OnInit {
     return 'footer-';
   }
 
-  changePage() {
-      if (localStorage.getItem('user') !== null) {
-        window.open('https://imoveistock-app.vercel.app/auth/insert-tel', '_blank');
-      } else {
-        window.open('https://imoveistock-app.vercel.app/', '_blank');
-      }
-  }
 }

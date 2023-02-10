@@ -143,7 +143,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     } else if (value === 'indicateProperties') {
       if (localStorage.getItem('user') !== null) {
         // window.open('https://imoveistock-app.vercel.app/logged/home', '_blank');
-        window.open('https://imoveistock-app.vercel.app/auth/insert-tel', '_blank');
+        window.open('https://imoveistock-app.vercel.app/auth/login-or-register', '_blank');
       } else {
         window.open('https://imoveistock-app.vercel.app/', '_blank');
       }
@@ -153,7 +153,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     } else if (value === 'ownerRegistration') {
       if (localStorage.getItem('user') !== null) {
         // window.open('https://imoveistock-app.vercel.app/logged/owner-registration', '_blank');
-        window.open('https://imoveistock-app.vercel.app/auth/insert-tel', '_blank');
+        window.open('https://imoveistock-app.vercel.app/auth/login-or-register', '_blank');
       } else {
         window.open('https://imoveistock-app.vercel.app/', '_blank');
       }
@@ -163,7 +163,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     } else if (value === 'forBrokers') {
       if (localStorage.getItem('user') !== null) {
         // window.open('https://imoveistock-app.vercel.app/logged/broker-registration', '_blank');
-        window.open('https://imoveistock-app.vercel.app/auth/insert-tel', '_blank');
+        window.open('https://imoveistock-app.vercel.app/auth/login-or-register', '_blank');
       } else {
         window.open('https://imoveistock-app.vercel.app/', '_blank');
       }

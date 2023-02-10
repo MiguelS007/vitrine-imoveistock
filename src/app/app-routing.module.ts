@@ -7,6 +7,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgModule } from '@angular/core';
 import { SearchMapComponent } from './pages/search-map/search-map.component';
 import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.resolver';
+import { CookiePolicyComponent } from './pages/cookie-policy/cookie-policy.component';
 
 export const routes: Routes = [
 
@@ -16,6 +17,10 @@ export const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent,
+  },
+  {
+    path: 'cookie-policy',
+    component: CookiePolicyComponent,
   },
   {
     path: 'about',

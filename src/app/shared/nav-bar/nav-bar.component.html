@@ -11,45 +11,45 @@
     <ul class="navbar-nav flex-fill justify-content-end">
       <li class="nav-item-visits">
         <a (click)="changePage('home')" [class]="home ? 'item-navbar-selected' : 'item-navbar-disabled'"
-          class="nav-link-visits px-3 fw-400 font-size-14 line-20" [routerLink]="['/']">Home</a>
+          class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20" [routerLink]="['/']">Home</a>
       </li>
       <li class="nav-item-visits">
         <a (click)="changePage('about')" [class]="about ? 'item-navbar-selected' : 'item-navbar-disabled'"
-          class="nav-link-visits  px-3 fw-400 font-size-14 line-20">Sobre</a>
+          class="nav-link-visits cursor-pointer px-3 fw-400 font-size-14 line-20">Sobre</a>
       </li>
       <li class="nav-item-visits dropdown">
         <a (click)="changePage('indicateProperties')"
-          class="nav-link-visits  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Indicar imóveis</a>
+          class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Indicar imóveis</a>
       </li>
       <li class="nav-item-visits dropdown">
-        <a (click)="changePage('ownerRegistration')"
-          class="nav-link-visits  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Proprietários</a>
+        <a href="https://imoveistock-proprietario.vercel.app/"
+          class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Proprietários</a>
       </li>
       <li class="nav-item-visits dropdown">
         <a (click)="changePage('forBrokers')"
-          class="nav-link-visits  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores</a>
+          class="nav-link-visits cursor-pointer   px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores</a>
       </li>
       <li class="nav-item-visits">
-        <a class="nav-link-visits  px-3 fw-400 font-size-14 line-20"
+        <a class="nav-link-visits  cursor-pointer px-3 fw-400 font-size-14 line-20"
           [class]="contact ? 'item-navbar-selected' : 'item-navbar-disabled'"
           (click)="changePage('contact')">Contato</a>
       </li>
       <li class="nav-item-visits dropdown">
         <a *ngIf="loginopt" (click)="openLogin()" [routerLinkActive]="['link-active']"
-          class="nav-link-visits px-3 fw-400 font-size-14 line-20 item-navbar-disabled">
+          class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">
           Login
         </a>
         <a *ngIf="loggedname"
-          class="nav-link-visits pl-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled text-capitalize"
+          class="nav-link-visits cursor-pointer  pl-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled text-capitalize"
           id="droplogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="bi font-size-20 bi-person"></i> {{userName}}
           <img src="../../../assets/icon/arrow-black.svg" />
         </a>
         <div *ngIf="loggedopt" class="dropdown-menu arrow_box px-4 border-radius-10 dropdown-menu-right"
           aria-labelledby="droplogin">
-          <a (click)="goDeashboard()" style="cursor: pointer;" class="dropdown-item px-0  py-2 fw-400 font-size-14 line-20 color-black">Meus
+          <a (click)="goDeashboard()" class="dropdown-item cursor-pointer px-0  py-2 fw-400 font-size-14 line-20 color-black">Meus
             Imóveis</a>
-          <h2 (click)="logOut()" style="cursor: pointer;" class="dropdown-item px-0  py-2 fw-400 font-size-14 line-20 color-black">Sair da
+          <h2 (click)="logOut()" class="dropdown-item cursor-pointer px-0  py-2 fw-400 font-size-14 line-20 color-black">Sair da
             conta</h2>
         </div>
       </li>

@@ -608,20 +608,20 @@
     
   </div>
   <!-- Modal VIEW IMAGES -->
-  <div class="modal fade" id="previewimage" tabindex="-1" role="dialog" aria-labelledby="previewimageTitle"
+  <div class="modal px-0 fade" id="previewimage" tabindex="-1" role="dialog" aria-labelledby="previewimageTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg-preview modal-dialog-centered" role="document">
-      <div class="modal-content pb-4  modal-content-preview">
+    <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
+      <div class="modal-content pb-4 h-100 modal-content-preview">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="text-light font-size-55" aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="anima-body">
-          <swiper class="h-auto max-w-1227" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
+        <div class="anima-body h-100 d-flex align-items-center">
+          <swiper class="h-fit max-w-1227" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
             <ng-template *ngFor="let item of previewimg" swiperSlide>
-              <div class="bg-img-preview d-flex justify-content-center w-100 h-100 py-2 px-3 border-radius-10 px-5">
-                <img src="{{item.previews}}" class="w-100" />
+              <div class="bg-img-preview d-flex justify-content-center w-100 h-100 py-2 border-radius-10 px-5">
+                <img src="{{item.previews}}" class="w-100 preview-img-property" />
               </div>
             </ng-template>
           </swiper>

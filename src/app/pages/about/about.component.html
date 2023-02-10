@@ -21,7 +21,7 @@
                 <p class="w-100 fw-700 font-size-32 pb-5 mb-5 text-mobile line-40 color-black text-center">
                     Estamos aqui para abrir portas
                 </p>
-                <div class="row mt-4 mx-0 block-important">
+                <div class="row mt-4 mx-0">
                     <div class="col-8 col-about">
                         <p class="fw-700 pb-5 text-mobile font-size-32 line-40 color-black">
                             Sabemos que a busca pelo espaço ideal pode <br /> ser desafiadora e por isso estamos aqui.
@@ -63,8 +63,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4 col-about">
-                        <vg-player class="w-100 m-0-auto h-100 ">
+                    <div class="col- d-flex align-items-center col-about">
+                        <vg-player class="w-100 m-0-auto" style="height: 100%">
                             <vg-overlay-play></vg-overlay-play>
                             <vg-buffering></vg-buffering>
                             <vg-scrub-bar>
@@ -97,8 +97,8 @@
         <div class="w-100 m-0-auto">
             <div class="row h-100 pb-5  m-0-auto mt-5">
                 <div class="col-12 text-center mt-5 mb-3">
-                    <h4 class="fw-700 font-size-32 color-black line-43">Abrindo portas</h4>
-                    <span class="fw-400 font-size-16 line-20 color-black">A Imoveistock é diferente de
+                    <h4 class="fw-700 font-size-32 color-black line-43">Abrindo novas portas</h4>
+                    <span class="fw-400 font-size-16 line-20 color-black">A imoveistock é diferente de
                         tudo.</span>
                 </div>
                 <div class="col-4 col-cards-about  mt-3">
@@ -109,7 +109,7 @@
                                 encontra primero aqui</span>
                             <br />
                             <span class="fw-400 font-size-14 line-240color-black">Os imóveis chegam primeiro a
-                                Imoveistock, os segredo para isso?
+                                imoveistock, os segredo para isso?
                                 Bem, isso não podemos contar :)
                             </span>
                         </p>
@@ -147,19 +147,20 @@
     </div>
 </section>
 
-<section class="row mx-0 px-5p bg-white justify-content-center">
-    <div class="col-12 max-w-1918 mt-5 ">
-        <swiper class="mySwip my-5 h-100 w-100" [slidesPerView]="1" [pagination]="{ clickable: true }"
+<section class="row mx-0 px-5p mb-5 bg-white justify-content-center">
+    <div class="col-12 max-w-1918 my-5 ">
+        <swiper class="mySwip my-4 h-100 w-100" [slidesPerView]="1" [pagination]="{ clickable: true }"
             [scrollbar]="true">
+
             <ng-template swiperSlide>
-                <div class="w-100 text-align-center pb-6">
+                <div class="w-100 text-align-center ">
                     <p class="d-grid text-center">
-                        <span class="fw-700 font-size-32 line-40 color-black">Quem vendeu, quem comprou</span>
+                        <span class="fw-700 font-size-24 line-40 color-black">Quem vendeu, quem comprou</span>
                         <br />
                         <span class="fw-400 font-size-18 line-20 color-black">Aqui, centenas de proprietários felizes
                             tem muito a dizer</span>
                     </p>
-                    <div class="w-100 d-grid text-center justify-content-center">
+                    <div class="w-100 d-grid mt-5 text-center justify-content-center">
                         <div class="d-flex my-4 justify-content-center">
                             <label class="" for="img-guy">
                                 <img src="../../assets/icon/comma.png" style="position: absolute; top: 36%;left: 52%;"
@@ -172,21 +173,21 @@
                         <span class="fw-400 font-size-14 line-20 color-black">Achou um apartamento em
                             abril/2021</span>
                     </div>
-                    <p class="fw-400 text-center font-size-16 line-20">
+                    <p class="fw-400 text-center mt-5 font-size-16 line-20">
                         "Procurei em todos os sites, mas só na imóveistock encontrei o espaço <br /> do jeto que eu
                         queria. Foi a sorte grande!"
                     </p>
                 </div>
             </ng-template>
             <ng-template swiperSlide>
-                <div class="w-100 text-align-center pb-6">
+                <div class="w-100 text-align-center ">
                     <p class="d-grid text-center">
-                        <span class="fw-700 font-size-32 line-40 color-black">Quem vendeu, quem comprou</span>
+                        <span class="fw-700 font-size-24 line-40 color-black">Quem vendeu, quem comprou</span>
                         <br />
                         <span class="fw-400 font-size-18 line-20 color-black">Aqui, centenas de proprietários felizes
                             tem muito a dizer</span>
                     </p>
-                    <div class="w-100 d-grid text-center justify-content-center">
+                    <div class="w-100 d-grid mt-5 text-center justify-content-center">
                         <div class="d-flex my-4 justify-content-center">
                             <label class="" for="img-guy">
                                 <img src="../../assets/icon/comma.png" style="position: absolute; top: 36%;left: 52%;"
@@ -199,7 +200,7 @@
                         <span class="fw-400 font-size-14 line-20 color-black">Achou um apartamento em
                             abril/2021</span>
                     </div>
-                    <p class="fw-400 text-center font-size-16 line-20">
+                    <p class="fw-400 text-center mt-5 font-size-16 line-20">
                         "Procurei em todos os sites, mas só na imóveistock encontrei o espaço <br /> do jeto que eu
                         queria. Foi a sorte grande!"
                     </p>
@@ -213,11 +214,11 @@
 <section class="row mx-0  px-5p  bg-whitelight mt-5 justify-content-center">
     <div class="col-12 d-flex max-w-1918 px-0 padding-x justify-content-center">
         <div class="w-100 py-5 col-final-card d-flex align-items-center">
-            <p class="w-100 d-grid">
-                <span class="fw-700 dmsans font-size-28 line-34 color-black">Tem um imóvel para indicar?</span>
-                <span class="fw-400 dmsans font-size-16 line-20 color-black">Acesse nossa plataforma de indicação e comece
-                    a ganhar dinheiro.</span>
-            </p>
+            <div class="d-grid w-100">
+                <p class="fw-900 dmsans font-size-28 line-34 color-black">Tem um imóvel para indicar?</p>
+                <span class="fw-400 dmsans font-size-16 line-20 color-black">Acesse nossa plataforma de indicação e
+                    comece a ganhar dinheiro.</span>
+            </div>
             <button type="button" (click)="openLogin()"
                 class="btn dmsans bg-purple h-74 w-25 btn-indicate  fw-400 font-size-16 line-20 text-light border-radius-10">
                 Indique agora
