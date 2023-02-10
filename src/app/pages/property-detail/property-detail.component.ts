@@ -31,9 +31,11 @@ export class PropertyDetailComponent implements OnInit {
   request: ScheduleRegisterRequestDto;
 
   detailprofile = false;
-  arrow1: boolean = false;
-  arrow2: boolean = false;
-  arrow3: boolean = false;
+  arrow1 = false;
+  arrow2 = false;
+  arrow3 = false;
+  arrowinfo = false;
+  arrowpff = false;
 
   cardinfobuy;
   arrayDeDatas: any = [];
@@ -54,7 +56,7 @@ export class PropertyDetailComponent implements OnInit {
   previewimg: any = [];
   products: any = [];
 
-  paginationProduct: number = 1;
+  paginationProduct = 1;
   tourvirtual = false;
   propertyvideo = true;
   finalValue;
@@ -196,6 +198,16 @@ export class PropertyDetailComponent implements OnInit {
       this.arrow3 = true;
     } else {
       this.arrow3 = false;
+    }
+    if (value === 24 && this.arrowpff === false) {
+      this.arrowpff = true;
+    } else {
+      this.arrowpff = false;
+    }
+    if (value === 42 && this.arrowinfo === false) {
+      this.arrowinfo = true;
+    } else {
+      this.arrowinfo = false;
     }
   }
 

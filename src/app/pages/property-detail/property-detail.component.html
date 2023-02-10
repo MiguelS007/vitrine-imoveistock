@@ -106,7 +106,7 @@
                     '-'}}</span>
                 </div>
                 <div class="col-12">
-                  <h6 class="my-4" style="outline-style: dotted;"></h6>
+                  <h6 class="my-4 w-100 bg-whitelight" style="height:1px;"></h6>
                 </div>
                 <div class="col-12 d-flex py-4 align-items-center justify-content-between">
                   <span class="fw-700 font-size-18 line-24 color-black">Aluguel
@@ -156,9 +156,16 @@
                 {{response.description || '-'}}
               </p>
             </div>
+            
             <div class="w-100 py-4 border-bottom-gray px-5">
-              <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Detalhes doImóvel</p>
-              <table class="w-100">
+              <div class="w-100 d-flex align-items-center justify-content-between">
+                <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Detalhes do Imóvel</p>
+                <img *ngIf="!arrowpff" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
+                  class="animate__animated animate__rotateIn" (click)="openarrow(24)">
+                <img *ngIf="arrowpff" src="../../../assets/icon/arrow-top-blue.png"
+                  class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;" (click)="openarrow(24)">
+              </div>
+              <table *ngIf="arrowpff" class="w-100 animate__animated animate__fadeInUp">
                 <tbody>
                   <tr class="h-51">
                     <td>
@@ -256,12 +263,15 @@
                 </tbody>
               </table>
             </div>
-            <div class="w-50 py-4 border-bottom-gray px-5">
-              <p class="w-100 color-black fw-700
-                       font-size-18 line-24 pb-3">Informações
-                Adicionais
-              </p>
-              <table class="w-100">
+            <div class="w-100 py-4 border-bottom-gray px-5">
+              <div class="w-100 d-flex align-items-center justify-content-between">
+                <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Informações Adicionais</p>
+                <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
+                  class="animate__animated animate__rotateIn" (click)="openarrow(42)">
+                <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png"
+                  class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;" (click)="openarrow(42)">
+              </div>
+              <table *ngIf="arrowinfo" class="w-100 animate__animated animate__fadeInUp">
                 <tbody>
                   <tr class="h-51">
                     <td>
@@ -568,7 +578,7 @@
                     '-'}}</span>
                 </div>
                 <div class="col-12">
-                  <h6 class="my-4" style="outline-style: dotted;"></h6>
+                  <h6 class="my-4 w-100 bg-graylight" style="height: 1px;"></h6>
                 </div>
                 <div class="col-12 d-flex py-4 align-items-center justify-content-between">
                   <span class="fw-700 font-size-18 line-24 color-black">Aluguel
