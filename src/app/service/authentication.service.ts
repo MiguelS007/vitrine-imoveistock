@@ -13,78 +13,81 @@ import jwtDecode from 'jwt-decode';
 import { AuthenticateCodeConfirmationRequestDto } from '../dtos/authentication-code-confirmation.dtos';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthenticationService extends BaseService {
 
-  url: string = `${environment.apis.imoveistock}app/authentication/`;
+    url: string = `${environment.apis.imoveistock}app/authentication/`;
 
-  token = {
-      userId: '',
-      phone: '',
-      token: '',
-      profileId: '',
-      apiFunctionsId: [],
-  }
+    token = {
+        userId: '',
+        phone: '',
+        token: '',
+        profileId: '',
+        apiFunctionsId: [],
+    }
 
-  jwtPayload: JwtPayload;
+    jwtPayload: JwtPayload;
 
-  logged = new Subject();
+    logged = new Subject();
 
-  constructor(
-      private httpClient: HttpClient
-  ) {
-      super();
-  }
+    constructor(
+        private httpClient: HttpClient
+    ) {
+        super();
+    }
 
-  authenticate(dto: AuthenticateRequestDto): Observable<AuthenticateResponseDto> {
-      return this.httpClient
-          .post(`${this.url}authenticate`, dto, this.anonymousHeader())
-          .pipe(
-              map(this.extractData),
-              catchError(this.serviceError)
-          );
-  }
+    authenticate(dto: AuthenticateRequestDto): Observable<AuthenticateResponseDto> {
+        return this.httpClient
+            .post(`${this.url}authenticate`, dto, this.anonymousHeader())
+            .pipe(
+                map(this.extractData),
+                catchError(this.serviceError)
+            );
+    }
 
-  authenticateByEmail(dto: AuthenticateRequestDto): Observable<AuthenticateResponseDto> {
-    return this.httpClient
-        .post(`${this.url}authenticate-email`, dto, this.anonymousHeader())
-        .pipe(
-            map(this.extractData),
-            catchError(this.serviceError)
-        );
-}
+    authenticateByEmail(dto: AuthenticateRequestDto): Observable<AuthenticateResponseDto> {
+        return this.httpClient
+            .post(`${this.url}authenticate-email`, dto, this.anonymousHeader())
+            .pipe(
+                map(this.extractData),
+                catchError(this.serviceError)
+            );
+    }
 
-  authenticateCodeConfirmation(dto: AuthenticateCodeConfirmationRequestDto): Observable<AuthetincatedUserDto> {
-      return this.httpClient
-          .post(`${this.url}authenticate-code-confirmation`, dto, this.anonymousHeader())
-          .pipe(
-              map(this.extractData),
-              catchError(this.serviceError)
-          );
-  }
+    // app/authentication/authenticate-email
+    // app/authentication/authenticate-email
 
-  getPayLoadFromLocalStorage(): JwtPayload {
-      const token = this.getAuthenticatedUser();
-      return jwtDecode(token.token);
-  }
+    authenticateCodeConfirmation(dto: AuthenticateCodeConfirmationRequestDto): Observable<AuthetincatedUserDto> {
+        return this.httpClient
+            .post(`${this.url}authenticate-code-confirmation`, dto, this.anonymousHeader())
+            .pipe(
+                map(this.extractData),
+                catchError(this.serviceError)
+            );
+    }
 
-  setAuthenticatedUser(dto: AuthetincatedUserDto) {
-      LocalStorageUtil.set(LocalStorageKeys.user, dto);
-      this.getPayLoadFromJWT();
-  }
+    getPayLoadFromLocalStorage(): JwtPayload {
+        const token = this.getAuthenticatedUser();
+        return jwtDecode(token.token);
+    }
 
-  getAuthenticatedUser(): AuthetincatedUserDto {
-      return LocalStorageUtil.get(LocalStorageKeys.user);
-  }
+    setAuthenticatedUser(dto: AuthetincatedUserDto) {
+        LocalStorageUtil.set(LocalStorageKeys.user, dto);
+        this.getPayLoadFromJWT();
+    }
 
-  getPayLoadFromJWT() {
-      this.token = this.getAuthenticatedUser();
-      return this.jwtPayload = jwtDecode(this.token.token);
-  }
+    getAuthenticatedUser(): AuthetincatedUserDto {
+        return LocalStorageUtil.get(LocalStorageKeys.user);
+    }
 
-//   authenticateByEmail() {
+    getPayLoadFromJWT() {
+        this.token = this.getAuthenticatedUser();
+        return this.jwtPayload = jwtDecode(this.token.token);
+    }
 
-//   }
+    //   authenticateByEmail() {
+
+    //   }
 
 }
