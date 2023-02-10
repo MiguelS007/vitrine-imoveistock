@@ -19,6 +19,9 @@
     font-family: 'Nunito', sans-serif !important;
 }
 
+.dmsans{
+    font-family: 'DM sans', sans-serif !important;
+}
 
 .modal-backdrop {
     display: none;
@@ -48,6 +51,7 @@
 app-nav-bar {
     background-color: white !important;
 }
+
 // 
 .changeColorNavbar {
     app-nav-bar {
@@ -182,10 +186,14 @@ input:focus {
 .max-w-400 {
     max-width: 471px;
 }
+
 // NAVBAR
 .navbar {
     padding: 0 !important;
-    background: linear-gradient(90deg, #01ff5f, white, white);
+    background-image: url('./assets/img/grama.png');
+    background-repeat:no-repeat;
+    background-position: left;
+    background-size: cover;
 }
 
 .navbar-brand {
@@ -1164,6 +1172,14 @@ input:focus {
     padding-right: 0 !important;
 }
 
+.col-contact-us:nth-child(1) {
+    padding-left: 0 !important;
+}
+
+.col-contact-us:nth-child(2) {
+    padding-right: 0 !important;
+}
+
 
 // SEARCH-PAGE
 .label-search-words {
@@ -1835,6 +1851,7 @@ vg-overlay-play .vg-overlay-play {
         padding-left: 15px !important;
         padding-right: 15px !important;
     }
+
     .col-search-map:nth-child(2) {
         padding-left: 0px !important;
         padding-right: 0px !important;
@@ -1948,6 +1965,13 @@ vg-overlay-play .vg-overlay-play {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
+    .col-contact-us:nth-child(1) {
+        padding-left: 5% !important;
+    }
+    
+    .col-contact-us:nth-child(2) {
+        padding-right: 5% !important;
+    }
 
     // PROPOSAL-EXPRESS
     .col-express {
@@ -2039,7 +2063,7 @@ vg-overlay-play .vg-overlay-play {
 
     // header card
     .icon-cards {
-        padding: 12%;
+        padding: 12% 0%;
         width: 66px;
     }
 
@@ -2434,6 +2458,10 @@ vg-overlay-play .vg-overlay-play {
 
     .d-none-mobile {
         display: none;
+    }
+
+    .btn-home-sale-rent {
+        width: 133px !important;
     }
 
     // DETAIL-PROPERTY

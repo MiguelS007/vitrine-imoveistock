@@ -15,7 +15,7 @@ import { UserSendMessageRequestDto } from '../dtos/user-send-message-request.dto
 export class UserService extends BaseService {
 
     url: string = `${environment.apis.imoveistock}app/`;
-
+    termsOrPolitic?: string ;
     constructor(
         private httpClient: HttpClient,
     ) {

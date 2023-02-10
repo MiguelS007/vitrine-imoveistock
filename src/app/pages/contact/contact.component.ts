@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AnnouncementService } from 'src/app/service/announcement.service';
@@ -39,6 +40,11 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+});
 
   }
 

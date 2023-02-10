@@ -51,9 +51,9 @@
         </div> 
         <div class="col-12 my-5 block-important d-flex">
             <div class="w-50 col-w-100 d-flex">
-                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['/home']" [routerLinkActive]="['text-light']">Home</a>
+                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['']" [routerLinkActive]="['text-light']">Home</a>
                 <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['/search']" [routerLinkActive]="['text-light']">Imóveis</a>
-                <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['']" [routerLinkActive]="['text-light']">Indique</a>
+                <a class="fw-400 font-size-14 line-20 color-muted px-3" (click)="changePage()" [routerLinkActive]="['text-light']">Indique</a>
                 <a class="fw-400 font-size-14 line-20 color-muted px-3" [routerLink]="['/contact']" [routerLinkActive]="['text-light']">Contato</a>
             </div>
             <div class="w-50 col-w-100 justify-content-end d-flex">

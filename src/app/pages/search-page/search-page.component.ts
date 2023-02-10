@@ -75,7 +75,7 @@ export class SearchPageComponent implements OnInit {
   valuePrices: 0;
 
   whatAreYouLookingForTitle: string = 'O que está buscando?';
-
+  TypeProperty = 'Tipo de Imóvel'
 
   constructor(
     private router: Router,
@@ -270,9 +270,6 @@ export class SearchPageComponent implements OnInit {
       }
 
     }
-
-
-
   }
 
   filterSearch() {
@@ -314,7 +311,7 @@ export class SearchPageComponent implements OnInit {
 
   searchByTypeAd(item) {
     if (item === 'sale') {
-      this.selectTypeAd = 'Venda'
+      this.selectTypeAd = 'Comprar'
     } else if (item === 'rent') {
       this.selectTypeAd = 'Alugar'
     }
@@ -362,6 +359,9 @@ export class SearchPageComponent implements OnInit {
 
   whatAreYouLookingFor(value) {
     this.whatAreYouLookingForTitle = value
+  }
+  filterTypeProperty(value) {
+    this.TypeProperty = value
   }
 
 }
