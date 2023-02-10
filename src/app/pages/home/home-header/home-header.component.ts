@@ -15,7 +15,7 @@ export class HomeHeaderComponent implements OnInit {
   form: FormGroup;
   @ViewChild('searchresult') targetElement: ElementRef;
 
-  
+
   response: AnnouncementGetResponseDto[] = [];
   filterResponse: AnnouncementGetResponseDto[] = [];
 
@@ -188,7 +188,7 @@ export class HomeHeaderComponent implements OnInit {
     this.resultType = announcementGoalGroup;
 
 
-  
+
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
     this.router.navigate(['/search']);
@@ -197,17 +197,18 @@ export class HomeHeaderComponent implements OnInit {
 
   // search filter
   resultSearch(tableName: string) {
-    if (tableName.length > 0) this.filtersearch = true
-    else this.filtersearch = false
+    this.propertyCharacteristicsOptions = false;
+    // console.log(tableName.length)
+    if (tableName.length == 0) { this.filtersearch = false }
+    else { this.filtersearch = true }
     this.filterResponse;
     let removeRepets: any = [];
     for (let i = 0; i < this.response.length; i++) {
       removeRepets.push(this.response[i].cityAddress);
     };
-    console.log(this.filterResponse)
+    // console.log(this.filterResponse)
     const filtered = removeRepets.filter((item, index) => removeRepets.indexOf(item) === index);
     this.filterResponse = filtered;
-    this.filtersearch = true
   }
 
   selectCites(selected) {
@@ -251,7 +252,8 @@ export class HomeHeaderComponent implements OnInit {
 
   typePropertyOptions(value: string) {
     this.propertyCharacteristicsOptions = false;
-   console.log(value)
+    this.filtersearch = false;
+    console.log(value)
     if (value === 'typeproperty') {
       this.typeoffResidential = false;
       this.typeoffRural = false;
@@ -262,15 +264,16 @@ export class HomeHeaderComponent implements OnInit {
       this.typeoffRural = !this.typeoffRural;
     } else if (value === 'comercial') {
       this.typeoffCommercial = !this.typeoffCommercial;
-    } else if(value == undefined){
-        this.alertPropertyOptions = true;
-        setTimeout(() => {
-          this.alertPropertyOptions = false;
-        }, 3000)
+    } else if (value == undefined) {
+      this.alertPropertyOptions = true;
+      setTimeout(() => {
+        this.alertPropertyOptions = false;
+      }, 3000)
     }
   }
 
   whatAreYouLookingFor(value) {
+    this.filtersearch = false;
     this.whatAreYouLookingForTitle = value
 
   }
@@ -278,6 +281,7 @@ export class HomeHeaderComponent implements OnInit {
   propertyCharacteristics(value: string) {
     this.typeoffResidential = false;
     this.typeoffRural = false;
+    this.filtersearch = false;
     this.typeoffCommercial = false;
     const divviewoptions = document.querySelector('.divviewoptions') as HTMLElement
     if (value === 'propertyCharacteristics') {
@@ -319,22 +323,22 @@ export class HomeHeaderComponent implements OnInit {
     const divviewoptions = document.querySelector('.divviewoptions') as HTMLElement
     divviewoptions.style.display = 'none'
     this.hideviewoptions = false;
-     this.form.controls['checkvacancies'].setValue(false);
-     this.form.controls['checkbathrooms'].setValue(false);
-     this.form.controls['checksuites'].setValue(false);
-     this.form.controls['checkrooms'].setValue(false);
-     this.form.controls['checkcondominium'].setValue(false);
-     this.form.controls['checkfootage'].setValue(false);
-     this.form.controls['checkconstruction'].setValue(false);
-     this.form.controls['checkrenovated'].setValue(false);
-      this.viewvacancies = false
-      this.viewbathrooms = false;
-      this.viewsuites = false;
-      this.viewrooms = false;
-      this.viewcondominium = false;
-      this.viewfootage = false;
-      this.viewconstruction = false;
-      this.viewrenovated = false;
+    this.form.controls['checkvacancies'].setValue(false);
+    this.form.controls['checkbathrooms'].setValue(false);
+    this.form.controls['checksuites'].setValue(false);
+    this.form.controls['checkrooms'].setValue(false);
+    this.form.controls['checkcondominium'].setValue(false);
+    this.form.controls['checkfootage'].setValue(false);
+    this.form.controls['checkconstruction'].setValue(false);
+    this.form.controls['checkrenovated'].setValue(false);
+    this.viewvacancies = false
+    this.viewbathrooms = false;
+    this.viewsuites = false;
+    this.viewrooms = false;
+    this.viewcondominium = false;
+    this.viewfootage = false;
+    this.viewconstruction = false;
+    this.viewrenovated = false;
   }
 
 
