@@ -42,6 +42,7 @@ import { SchedulingStep1Component } from './pages/property-detail/components/sch
 import { SchedulingStep2Component } from './pages/property-detail/components/scheduling-step2/scheduling-step2.component';
 import { SchedulingStep3Component } from './pages/property-detail/components/scheduling-step3/scheduling-step3.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { TermsComponent } from './auth/terms/terms.component';
 
 registerLocaleData(ptBr);
 
@@ -67,6 +68,7 @@ registerLocaleData(ptBr);
     SchedulingStep1Component,
     SchedulingStep2Component,
     SchedulingStep3Component,
+    TermsComponent,
   ],
 
   imports: [
