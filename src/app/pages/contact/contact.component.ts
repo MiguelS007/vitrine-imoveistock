@@ -65,6 +65,7 @@ export class ContactComponent implements OnInit {
         this.form.reset();
       },
       error => {
+        this.toastrService.error('Erro ao enviar mensagem!', '', { progressBar: true });
         console.error(error)
       }
     )
