@@ -22,4 +22,12 @@ export class FooterComponent implements OnInit {
       return 'footer-log';
     return 'footer-';
   }
+
+  changePage() {
+      if (localStorage.getItem('user') !== null) {
+        window.open('https://imoveistock-app.vercel.app/auth/insert-tel', '_blank');
+      } else {
+        window.open('https://imoveistock-app.vercel.app/', '_blank');
+      }
+  }
 }

@@ -171,7 +171,6 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.about = false;
       this.contact = false;
     } else if (value === 'contact') {
-
       this.home = false;
       this.about = false;
       this.contact = true;
