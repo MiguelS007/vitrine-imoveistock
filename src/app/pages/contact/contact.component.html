@@ -1,10 +1,10 @@
 <section class="container-fluid px-5p justify-content-center d-flex bg-header-contact" style="margin-top: 100px;">
-        <div class="row max-w-1918 w-100 align-items-end">
-            <div class="col-12 d-flex padding-x flex-column justify-content-end" style="height: 50vh !important;">
-                <p class="fw-700 font-size-18 line-24 text-black">home > Contato</p>
-                <p class="fw-700 font-size-40 line-56 text-black">Fale conosco</p>
-            </div>
+    <div class="row max-w-1918 w-100 align-items-end">
+        <div class="col-12 d-flex padding-x flex-column justify-content-end" style="height: 50vh !important;">
+            <p class="fw-700 font-size-18 line-24 text-black">home > Contato</p>
+            <p class="fw-700 font-size-40 line-56 text-black">Fale conosco</p>
         </div>
+    </div>
 </section>
 <main class="bg-whitelight px-5p position-relative d-flex justify-content-center">
     <form [formGroup]="form" class="max-w-1918 w-100">
@@ -32,7 +32,8 @@
                             </div>
                             <div class="col-6 col-contact mb-5">
                                 <input type="tel" placeholder="Telefone/Whatsapp" formControlName="tel"
-                                    class="w-100 border border-radius-10 px-3 fw-400 font-size-16 line-18 color-black h-74 bg-whitelight" mask="00 00000-0000" />
+                                    class="w-100 border border-radius-10 px-3 fw-400 font-size-16 line-18 color-black h-74 bg-whitelight"
+                                    mask="00 00000-0000" />
                             </div>
                             <div class="col-6 col-contact mb-5">
                                 <input type="text" placeholder="Assunto" formControlName="subject"
@@ -43,7 +44,7 @@
                                     class="w-100 border border-radius-10 p-4 fw-400 font-size-16 line-18 color-black h-130 bg-whitelight"></textarea>
                             </div>
                             <div class="col-4 col-contact">
-                                <button type="submit" [disabled]="form.invalid" (click)="confirm()"
+                                <button type="submit" (click)="confirm()"
                                     class="w-100 h-74 border-radius-10 bg-purple btn fw-700 font-size-16 line-20 text-light">
                                     Enviar
                                 </button>
@@ -61,12 +62,21 @@
                         </p>
                         <p class="fw-700 d-grid pb-5 pt-3 font-size-18 line-24 color-black">
                             Endereço
-                            <span class="fw-400 font-size-14 line-20 color-black">Alameda Pres. Taunay, 829 </span>
+                            <span class="fw-400 font-size-14 line-20 color-black">Hotmilk PUC/PR</span>
+                            <span class="fw-400 font-size-14 line-20 color-black">Rua Imaculada Conceição 1430</span>
+                            <span class="fw-400 font-size-14 line-20 color-black">Prado Velho - Curitiba - PR</span>
                         </p>
-                        <p class="fw-700 d-grid pb-5 pt-3 font-size-18 line-24 color-black">
+                        <div class="fw-700 d-grid pb-5 pt-3 font-size-14 line-20 color-black">
                             Telefone
-                            <span class="fw-400 font-size-14 line-20 color-black">(41) 9.8721-2409</span>
-                        </p>
+                            <p class="fw-400 d-flex align-items-center line-20 color-black">
+                                <i class="bi pr-2 text-success bi-whatsapp"></i>
+                                (11) 4003-7764
+                            </p>
+                            <p class="fw-400 d-flex align-items-center line-20 color-black">
+                                <i class="bi pr-2 text-success bi-telephone"></i>
+                                4003-7764
+                            </p>
+                        </div>
                         <p class="fw-700 d-grid pb-5 pt-3 font-size-18 line-24 color-black">
                             E-mail
                             <span class="fw-400 font-size-14 line-20 color-black">contato@imoveistock.com</span>
@@ -105,18 +115,18 @@
             </div>
         </div>
         <div class="col-12 px-0  mt-5">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d900.7922080862112!2d-49.2873814761269!3d-25.43261847848742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce3f44c0ec38d%3A0x93b4438f366d8c18!2sAlameda%20Pres.%20Taunay%2C%20829%20-%20Batel%2C%20Curitiba%20-%20PR%2C%2080430-000!5e0!3m2!1spt-BR!2sbr!4v1675111176941!5m2!1spt-BR!2sbr" 
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d900.7922080862112!2d-49.2873814761269!3d-25.43261847848742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce3f44c0ec38d%3A0x93b4438f366d8c18!2sAlameda%20Pres.%20Taunay%2C%20829%20-%20Batel%2C%20Curitiba%20-%20PR%2C%2080430-000!5e0!3m2!1spt-BR!2sbr!4v1675111176941!5m2!1spt-BR!2sbr"
                 class="w-100 h-600" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </form>
-  
+
 </main>
 <section class="container-fluid px-5p justify-content-center d-flex bg-white">
     <div class="max-w-1918 w-100">
         <div class="row mx-0 d-flex justify-content-center">
-            <div class="col-12 padding-x py-5 w-100 col-final-card d-flex align-items-center">
+            <div class="col-12 padding-x py-5 px-0 w-100 col-final-card d-flex align-items-center">
                 <div class="d-grid w-100">
                     <p class="fw-900 dmsans font-size-28 line-34 color-black">Tem um imóvel para indicar?</p>
                     <span class="fw-400 dmsans font-size-16 line-20 color-black">Acesse nossa plataforma de indicação e
