@@ -8,6 +8,7 @@ import { AnnouncementService } from 'src/app/service/announcement.service';
 import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { AuthenticationService } from '../../../service/authentication.service';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -37,11 +38,20 @@ export class HomeProductsComponent implements OnInit {
     private userService: UserService,
     private searchService: SearchService,
     private announcementService: AnnouncementService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
     this.list();
+
+    this.authenticationService.logged.subscribe({
+      next: value => {
+        if (value === true) {
+          this.list();
+        }
+      }
+    })
   }
 
   list() {
