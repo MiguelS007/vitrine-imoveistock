@@ -47,7 +47,10 @@ export class ModalSignupComponent implements OnInit {
     this.modalService.dismissAll()
   }
 
-
+  openTermsModal(value: string){
+    this.userService.termsOrPolitic = value;
+    // this.modalService.open(TermComponent,{size:"lg"})
+  }
 
   confirm() {
     this.isSubmitted = true;
