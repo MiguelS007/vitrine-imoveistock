@@ -269,9 +269,12 @@
                                     src="../../../assets/img/img-announcement-default.jpg"
                                     class="img-search-announcement-main">
                                 <div class="space-sale-or-rent-search-announcement">
-                                    <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                                    <h4 *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
                                 border-radius-5 fw-400 font-size-14 line-15
                                 text-light">Venda</h4>
+                                <h4 *ngIf="item.typeOfAd === 'rent'" class="bg-purple h-fit px-4 py-2 mb-0
+                                border-radius-5 fw-400 font-size-14 line-15
+                                text-light">Aluguel</h4>
                                     <h4 *ngIf="item.exclusivity === true" class="bg-greenlight h-fit ml-2 px-3 py-2
                                 mb-0 border-radius-5 fw-400 font-size-14
                                 line-15 color-black">Exclusivo</h4>
