@@ -48,7 +48,7 @@
 app-nav-bar {
     background-color: white !important;
 }
-
+// 
 .changeColorNavbar {
     app-nav-bar {
         background-color: white !important;
@@ -182,9 +182,10 @@ input:focus {
 .max-w-400 {
     max-width: 471px;
 }
-
+// NAVBAR
 .navbar {
     padding: 0 !important;
+    background: linear-gradient(90deg, #01ff5f, white, white);
 }
 
 .navbar-brand {
