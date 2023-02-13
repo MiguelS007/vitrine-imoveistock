@@ -44,8 +44,33 @@ import { SchedulingStep3Component } from './pages/property-detail/components/sch
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { TermsComponent } from './auth/terms/terms.component';
 import { CookiePolicyComponent } from './pages/cookie-policy/cookie-policy.component';
+import {NgcCookieConsentConfig, NgcCookieConsentModule} from "ngx-cookieconsent";
 
 registerLocaleData(ptBr);
+
+const cookieConfig:NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'imoveistock.com.br'
+  },
+  palette: {
+    popup: {
+      background: '#000000'
+    },
+    button: {
+      background: '#01FF5F',
+      border: `#000000`,
+      text: `#000000`,
+    }
+  },
+  theme: 'classic',
+  type: 'info',
+  content:{
+    message: 'Nossa plataforma utiliza cookies para otimizar e personalizar sua experiência. Ao continuar navegando, você automaticamente concorda com a nossa',
+    link: 'Política de cookies',
+    href: 'cookie-policy',
+    dismiss:'Aceitar cookies',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -96,6 +121,7 @@ registerLocaleData(ptBr);
     NgxPageScrollCoreModule,
     NgxSpinnerModule,
     CurrencyMaskModule,
+    NgcCookieConsentModule.forRoot(cookieConfig),
   ],
   providers: [
     {
