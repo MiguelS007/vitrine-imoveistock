@@ -118,10 +118,11 @@ const cookieConfig:NgcCookieConsentConfig = {
     VgBufferingModule,
     NgxPageScrollModule,
     ToastrModule.forRoot(),
-    NgcCookieConsentModule.forRoot(cookieConfig),
     NgxPageScrollCoreModule,
     NgxSpinnerModule,
     CurrencyMaskModule,
+    NgcCookieConsentModule.forRoot(cookieConfig),
+
   ],
   providers: [
     {

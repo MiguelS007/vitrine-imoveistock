@@ -36,11 +36,22 @@
     }
 }
 
+@media (max-height: 1030px){
+    .img-plant-property{
+        height: 100% !important;
+        width: auto !important;
+    }
+}
+
 // MEDIA
 @media (max-width: 1240px) {
     tr {
         display: grid !important;
         height: auto !important;
+    }
+    .img-plant-property{
+        height: auto !important;
+        width: 100% !important;
     }
 
 }
