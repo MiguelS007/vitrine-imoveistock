@@ -31,6 +31,20 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
+.close:not(:disabled):not(.disabled) {
+    z-index: 10000 !important;
+    cursor: pointer !important;
+    padding: 0.5rem 1.2rem !important;
+    background: gray !important;
+    border-radius: 10rem 10rem !important;
+    margin: 1rem 1rem -4rem auto !important;
+}
+
+.modal-header .close {
+    padding: 1rem;
+    margin: 1rem 1rem -4rem auto !important;
+}
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -1024,6 +1038,7 @@ input:focus {
     background-repeat: no-repeat no-repeat;
     background-size: cover;
 }
+
 // OTHER CARROUSSEL
 
 .bg-city-05 {
@@ -2498,7 +2513,11 @@ vg-overlay-play .vg-overlay-play {
     .bg-city-01,
     .bg-city-02,
     .bg-city-03,
-    .bg-city-04 {
+    .bg-city-04,
+    .bg-city-05,
+    .bg-city-06,
+    .bg-city-07,
+    .bg-city-08 {
         height: 340px !important;
     }
 
