@@ -99,6 +99,7 @@ export class SchedulingComponent implements OnInit {
   openCancelVisitModal(item) {
     this.itemSelectedForCancel = item;
     this.location = true;
+    // console.log('clicou')
   }
 
   confirmCancelVisitModal() {

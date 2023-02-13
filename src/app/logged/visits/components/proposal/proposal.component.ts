@@ -30,7 +30,10 @@ export class ProposalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listProposal()
+    this.listProposal();
+    if(localStorage.getItem('poposalCancel') !== null) {
+      localStorage.removeItem('poposalCancel')
+    }
   }
 
   public toNumber(paremetro1: string) {
@@ -39,6 +42,8 @@ export class ProposalComponent implements OnInit {
 
   cancelProposal(item) {
     localStorage.setItem('poposalCancel', JSON.stringify(item));
+
+    console.log()
 
     const modalRef = this.modalService.open(ProposalCancelModalComponent, { centered: true });
       modalRef.result.then(data => {

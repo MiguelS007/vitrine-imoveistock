@@ -2,12 +2,12 @@
     <div class="row w-100 d-flex max-w-1227">
         <div *ngIf="response.length > 0" class="col-lg-5 mt-4">
             <div *ngFor="let item of response" [id]="item._id"
-                class="w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4" (click)="selectProposal(item)">
+                class="w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4">
                 <div class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex">
                     <div class="col-3 col-visits p-0">
-                        <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 " />
+                        <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 " (click)="selectProposal(item)" />
                     </div>
-                    <div class="col-9 px-2 col-visits">
+                    <div (click)="selectProposal(item)" class="col-9 px-2 col-visits">
                         <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
                             style="max-width: 150px;">{{item.announcement?.description}}</h5>
                         <div class="w-100 d-inline-block mb-0">
@@ -273,7 +273,7 @@
                     Após agendar uma proposta seu histórico de proposta aparecerá aqui
                 </p>
                 <button style="max-width: 345px;" [routerLink]="['/search']"
-                    class="btn mt-3 d-inline-block border-radius-10 bg-purple text-light h-74 w-100 fw-700 font-size-18 line-24"
+                    class="btn btn-search-property"
                     type="button">Procurar imóveis</button>
             </div>
         </div>
