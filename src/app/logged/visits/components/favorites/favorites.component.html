@@ -1,15 +1,5 @@
 <div class="w-100 anima-body position-relative d-flex justify-content-center h-100 pt-4">
-    <div *ngIf="noregisteredvisit" class="w-100 text-center pt-10 pb-10 h-100 mx-2 max-w-1918 ">
-        <p class="fw-700 mb-3 font-size-24 line-32 color-black">
-            Você não tem histórico de visitas
-        </p>
-        <p class="fw-400 font-size-18 line-24 color-black">
-            Após visitar um imóvel seu histórico de visitas aparecerá aqui
-        </p>
-        <button style="max-width: 345px;" [routerLink]="['/search']"
-            class="btn mt-3 d-inline-block border-radius-10 bg-purple text-light h-74 w-100 fw-700 font-size-18 line-24"
-            type="button">Procurar imóveis</button>
-    </div>
+   
     <div *ngIf="listofvisits" class="row d-flex  justify-content-center w-100">
      
         <div *ngFor="let item of response" class="col-md-6 col-lg-4 max-w-400 p-3">
@@ -74,9 +64,18 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="response.length === 0" class="d-flex flex-column align-items-center h-100">
-            <h4 class="text-center text-dark">Você não tem imóveis na sua lista de favoritos</h4>
-            <button class="btn btn-search-property" routerLink="/search">Procurar imóveis</button>
+        <div *ngIf="response.length === 0" class="d-flex w-100 justify-content-center">
+            <div class="w-100 text-center pt-10 pb-10 h-100 mx-3 max-w-1918 ">
+                <p class="fw-700 mb-3 font-size-24 line-32 color-black">
+                    Você não tem imóveis na sua lista de favoritos
+                </p>
+                <p class="fw-400 font-size-18 line-24 color-black">
+                    Após visitar um imóvel seu histórico de favoritos aparecerá aqui
+                </p>
+                <button style="max-width: 345px;" [routerLink]="['/search']"
+                    class="btn mt-3 d-inline-block border-radius-10 bg-purple text-light h-74 w-100 fw-700 font-size-18 line-24"
+                    type="button">Procurar imóveis</button>
+            </div>
         </div>
     </div>
 </div>
