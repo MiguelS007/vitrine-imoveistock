@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +19,46 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
   styleUrls: ['./property-detail.component.scss']
 })
 export class PropertyDetailComponent implements OnInit {
+  infopay = true;
+  infopaymobile = false;
+
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition = window.pageYOffset;
+    const widthWindow = window.innerWidth;
+    let interdistance = Math.trunc(scrollPosition);
+    // INFO-PAY-MOBILE
+    if (interdistance >= 270) {
+      this.infopay = false;
+      this.infopaymobile = true;
+    } else {
+      this.infopay = true;
+      this.infopaymobile = false;
+    }
+    // STATIC-INFO-PAY-IN-SCROLL-PAGE
+    const infopaydesk = document.querySelector(
+      '#infopaydesk'
+    ) as HTMLElement;
+    if (interdistance >= 511) {
+      if (widthWindow <= 1922) {
+        infopaydesk.style.position = 'fixed';
+        infopaydesk.style.maxWidth = '415px';
+        infopaydesk.style.top = '96px';
+        infopaydesk.style.zIndex = '20';
+      } else {
+        infopaydesk.style.position = 'fixed';
+        infopaydesk.style.maxWidth = '626px';
+        infopaydesk.style.top = '96px';
+        infopaydesk.style.zIndex = '20';
+      }
+    } else {
+      infopaydesk.style.position = 'relative';
+      infopaydesk.style.top = '0px';
+    }
+    console.log(interdistance, window.innerWidth)
+
+  }
+
 
   form: FormGroup;
   formproperty: FormGroup;
@@ -106,6 +146,7 @@ export class PropertyDetailComponent implements OnInit {
     this.list();
   }
 
+
   ngOnInit(): void {
     this.ngxSpinnerService.show()
     this.onlyimg = this.datamokservice.onlypreview;
@@ -120,7 +161,7 @@ export class PropertyDetailComponent implements OnInit {
     this.filterResult = JSON.parse(resultadoVerify);
     this.finalValue = (parseInt(this.response.valueOfIptu) + parseInt(this.response.condominiumValue) + this.response.saleValue);
 
-    console.log(this.user?._id, this.response._id , this.finalValue);
+    console.log(this.user?._id, this.response._id, this.finalValue);
 
 
     if (localStorage.getItem('user') !== null) {
@@ -162,7 +203,6 @@ export class PropertyDetailComponent implements OnInit {
 
 
   selectDate(value) {
-
     this.dataSelecionada = value
   }
 
