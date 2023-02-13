@@ -1,4 +1,4 @@
-<main  class="bg-graylight position-relative h-100 pb-5 w-100">
+<main class="bg-graylight position-relative h-100 pb-5 w-100">
   <div class="row form-search h-100 m-0-auto">
     <div class="col-12 px-0 h-100">
       <div class="row h-100 mx-0">
@@ -18,7 +18,8 @@
             <div style="background-image: url({{item.previews}})" class="bg-property-view w-100 h-600"></div>
           </ng-template>
         </swiper>
-        <div class="col-12 px-5p col-btns-preview-img  position-absolute justify-content-center d-flex align-items-center">
+        <div
+          class="col-12 px-5p col-btns-preview-img  position-absolute justify-content-center d-flex align-items-center">
           <!-- OPTIONS HEADER BTNS -->
           <div class="w-100 max-w-1918 p-y-0 py-5 d-flex justify-content-between">
             <div class="row mx-0">
@@ -29,19 +30,19 @@
                     <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
                     <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
                   </button>
-                  <button type="button" pageScroll href="#previewvideo"
+                  <button type="button" data-toggle="modal" data-target="#playvideo"
                     class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-                    <img src="../../../assets/icon/play-circle.png" class="" alt="not icon" />
+                    <img src="../../../assets/icon/play-circle.png" alt="not icon" />
                     <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
                   </button>
-                  <button type="button" pageScroll href="#previewplant" (click)="openarrow(3)"
+                  <button type="button" data-toggle="modal" data-target="#viewplant"
                     class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-                    <img src="../../../assets/icon/datas-block.png" class="" alt="not icon" />
+                    <img src="../../../assets/icon/datas-block.png" alt="not icon" />
                     <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver planta</p>
                   </button>
-                  <button type="button" pageScroll href="#previewvideo" (click)="segmentvideo('tour')"
+                  <button type="button" data-toggle="modal" data-target="#view360video"
                     class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-                    <img src="../../../assets/icon/street-view.png" class="" alt="not icon" />
+                    <img src="../../../assets/icon/street-view.png" alt="not icon" />
                     <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
                   </button>
                 </div>
@@ -155,14 +156,15 @@
                 {{response.description || '-'}}
               </p>
             </div>
-            
+
             <div class="w-100 py-4 border-bottom-gray px-5">
               <div class="w-100 d-flex align-items-center justify-content-between">
                 <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Detalhes do Imóvel</p>
-                <img *ngIf="!arrowpff" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
-                  class="animate__animated animate__rotateIn" (click)="openarrow(24)">
+                <img *ngIf="!arrowpff" src="../../../assets/icon/arrow-down-blue.png" width="20"
+                  style="cursor: pointer;" class="animate__animated animate__rotateIn" (click)="openarrow(24)">
                 <img *ngIf="arrowpff" src="../../../assets/icon/arrow-top-blue.png"
-                  class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;" (click)="openarrow(24)">
+                  class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;"
+                  (click)="openarrow(24)">
               </div>
               <table *ngIf="arrowpff" class="w-100 animate__animated animate__fadeInUp">
                 <tbody>
@@ -265,10 +267,11 @@
             <div class="w-100 py-4 border-bottom-gray px-5">
               <div class="w-100 d-flex align-items-center justify-content-between">
                 <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Informações Adicionais</p>
-                <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
-                  class="animate__animated animate__rotateIn" (click)="openarrow(42)">
+                <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20"
+                  style="cursor: pointer;" class="animate__animated animate__rotateIn" (click)="openarrow(42)">
                 <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png"
-                  class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;" (click)="openarrow(42)">
+                  class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;"
+                  (click)="openarrow(42)">
               </div>
               <table *ngIf="arrowinfo" class="w-100 animate__animated animate__fadeInUp">
                 <tbody>
@@ -598,21 +601,24 @@
     </div>
   </div>
   <!-- FLOAT BTN SCHEDULE -->
-  <div *ngIf="infopaymobile" class="schedule-visit d-none bg-white border-top-gray py-3 d-flex-desk justify-content-center cursor-pointer position-fixed z-1000 w-100">
+  <div *ngIf="infopaymobile"
+    class="schedule-visit d-none bg-white border-top-gray py-3 d-flex-desk justify-content-center cursor-pointer position-fixed z-1000 w-100">
     <div class="w-100 max-w-800 padding-x schedule-visit-modal">
       <div class="w-100">
-        <h3 class="">{{finalValue | currency: 'R$ ' || '-'}}</h3>
+        <h3>{{finalValue | currency: 'R$ ' || '-'}}</h3>
       </div>
       <div class="row">
         <div class="col-6">
-          <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple fw-700 font-size-14 line-24 color-purple w-100">
+          <button (click)="goExpress()"
+            class="bg-white btn border-radius-10 border-purple fw-700 font-size-14 line-24 color-purple w-100">
             Enviar proposta
           </button>
         </div>
         <div class="col-6">
 
-          <button (click)="scheduling(response)"  class="bg-purple btn border-radius-10 fw-700 font-size-14 line-24 text-light w-100">
-             Agendar visita
+          <button (click)="scheduling(response)"
+            class="bg-purple btn border-radius-10 fw-700 font-size-14 line-24 text-light w-100">
+            Agendar visita
           </button>
         </div>
       </div>
@@ -631,7 +637,8 @@
         <div class="anima-body h-100 d-flex justify-content-center align-items-center">
           <swiper class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
             <ng-template class="w-100" *ngFor="let item of previewimg" swiperSlide>
-              <div class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
+              <div
+                class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
                 <img src="{{item.previews}}" class="w-100 h-auto preview-img-property" />
               </div>
             </ng-template>
@@ -640,4 +647,81 @@
       </div>
     </div>
   </div>
+  <!-- Modal PLAY VIDEO -->
+  <div class="modal px-0 fade" id="playvideo" tabindex="-1" role="dialog" aria-labelledby="playvideoTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
+      <div class="modal-content h-100 modal-content-preview">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="anima-body h-100 d-flex justify-content-center align-items-center">
+          <div class="w-100 max-w-1918 position-relative pt-4 pb-5">
+            <div
+              class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
+              <vg-player class="w-100 h-auto preview-img-property">
+                <vg-overlay-play></vg-overlay-play>
+                <vg-buffering></vg-buffering>
+                <vg-scrub-bar>
+                  <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                  <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                </vg-scrub-bar>
+                <vg-controls>
+                  <vg-play-pause></vg-play-pause>
+                  <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                  <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+                  <vg-mute></vg-mute>
+                  <vg-volume></vg-volume>
+                  <vg-fullscreen></vg-fullscreen>
+                </vg-controls>
+                <video [vgMedia]="$any(media)" poster="../../../assets/img/preview1.png" #media id="singleVideo"
+                  preload="auto" crossorigin>
+                  <source src="../../../assets/vid/test.mp4" type="video/mp4">
+                  <img src="../../../assets/icon/play.png" />
+                </video>
+              </vg-player>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal VIEW PLANT -->
+  <div class="modal px-0 fade" id="viewplant" tabindex="-1" role="dialog" aria-labelledby="viewplantTitle"aria-hidden="true">
+    <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
+      <div class="modal-content h-100 modal-content-preview">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="w-100 d-flex align-items-center justify-content-center h-100">
+          <img src="../../../assets/img/plant.png" class="h-fit img-plant-property max-w-1227 w-100" />
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- Modal PLAY VIDEO360 -->
+   <div class="modal px-0 fade" id="view360video" tabindex="-1" role="dialog" aria-labelledby="view360videoTitle"aria-hidden="true">
+    <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
+      <div class="modal-content h-100 modal-content-preview">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    
+        <div class="w-100 d-grid align-items-center justify-content-center h-100">
+            <div class="d-block h-auto w-100">
+  <p class="fw-500 py-3 w-100 font-size-20 text-center line-26 text-light">Este anúncio ainda não possui Visita em 360°</p>
+          <img src="../../../assets/img/360video.png" class="h-fit img-plant-property max-w-1227 w-100" />
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
