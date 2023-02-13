@@ -65,15 +65,17 @@
                     </div>
                     <div class="row mt-4 px-0">
                         <div class="col-12">
-                            <p class="fw-400 pl-1 pb-0 color-black text-left font-size-16 line-20 ">Preço</p>
+                            <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor</p>
                         </div>
                         <div class="col-6">
+                            <label for="typeMinPrice">De</label>
                             <input formControlName="typeMinPrice" type="text" currencyMask
                                 [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
                                 class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
                                 maxlength="15" />
                         </div>
                         <div class="col-6">
+                            <label for="typeMaxPrice">Até</label>
                             <input formControlName="typeMaxPrice" type="text" currencyMask
                                 [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
                                 class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
@@ -436,17 +438,19 @@
                              
                                 <div class="row mt-4 px-0">
                                     <div class="col-12">
-                                        <p class="fw-400 pl-1 pb-0 color-black text-left font-size-16 line-20 ">Preço
+                                        <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor
                                         </p>
                                     </div>
                                     <div class="col-6">
-                                        <input formControlName="typeMinPrice" type="text" currencyMask
+                                        <label for="typeMinPrice">De</label>
+                                        <input formControlName="typeMinPrice" type="text" currencyMask id="typeMinPrice"
                                             [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
                                             class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
                                             maxlength="15" />
                                     </div>
                                     <div class="col-6">
-                                        <input formControlName="typeMaxPrice" type="text" currencyMask
+                                        <label for="typeMaxPrice">Até</label>
+                                        <input formControlName="typeMaxPrice" id="typeMaxPrice" type="text" currencyMask
                                             [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                                             placeholder="Até"
                                             class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"

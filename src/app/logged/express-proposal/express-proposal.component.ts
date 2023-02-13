@@ -474,7 +474,7 @@ export class ExpressProposalComponent implements OnInit {
       },
       error: error => {
         if (error.error.errors[0] === 'there is no proposal denied') {
-          this.toastrService.error('Ja existe uma proposta em negociação neste anuncio!', '', { progressBar: true });
+          this.toastrService.error('Ja existe uma proposta em negociação neste anúncio!', '', { progressBar: true });
         } else {
           this.toastrService.error('Erro ao enviar contra proposta!', '', { progressBar: true });
         }
