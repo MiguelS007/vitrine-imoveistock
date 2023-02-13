@@ -177,12 +177,16 @@
                                     line-24 color-black">Aluguel
                             <i class="bi font-size-14
                                         color-muted
-                                        bi-info-circle"></i></span>
+                                        bi-info-circle" alt="icons group" placement="end"
+                                ngbTooltip="Valor definido para aluguel. Caso queira enviar uma proposta com outro valor clique em Propor novo valor"
+                                container="body"></i></span>
                         <span *ngIf="response.typeOfAd === 'sale'" class="fw-400 font-size-18
                                         line-24 color-black">Venda
                             <i class="bi font-size-14
                                             color-muted
-                                            bi-info-circle"></i></span>
+                                            bi-info-circle" alt="icons group" placement="end"
+                                ngbTooltip="Valor definido para Venda. Caso queira enviar uma proposta com outro valor clique em Propor novo valor"
+                                container="body"></i></span>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-sm-end mt-3">
                         <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18
@@ -195,7 +199,8 @@
                     </div>
                 </div>
                 <p class="d-flex pt-3 mt-2 border-top-gray justify-content-end">
-                    <span (click)="proposeValue('open')" class="fw-400 font-size-18 line-24 text-primary">Propor novo
+                    <span (click)="proposeValue('open')" style="cursor: pointer;"
+                        class="fw-400 font-size-18 line-24 text-primary">Propor novo
                         valor</span>
                 </p>
             </div>
@@ -492,7 +497,8 @@
                                                         line-24 color-black">Condomínio
                                                 <i class="bi font-size-14
                                                             color-muted
-                                                            bi-info-circle"></i></span>
+                                                            bi-info-circle" alt="icons group" placement="end"
+                                                    ngbTooltip="Valor total do condomínio" container="body"></i></span>
                                         </td>
                                         <td class="d-tavle-cell
                                                     text-align-right">
@@ -503,10 +509,17 @@
                                     </tr>
                                     <tr class="h-40">
                                         <td>
-                                            <span class="fw-400 font-size-18
+                                            <span *ngIf="response.typeOfAd === 'rent'" class="fw-400 font-size-18
                                                         line-24 color-black">IPTU <i class="bi font-size-14
                                                             color-muted
-                                                            bi-info-circle"></i></span>
+                                                            bi-info-circle" alt="icons group" placement="end"
+                                                    ngbTooltip="Valor parcelado em 12x do IPTU"
+                                                    container="body"></i></span>
+                                            <span *ngIf="response.typeOfAd === 'sale'" class="fw-400 font-size-18
+                                                        line-24 color-black">IPTU <i class="bi font-size-14
+                                                            color-muted
+                                                            bi-info-circle" alt="icons group" placement="end"
+                                                    ngbTooltip="Valor total do IPTU" container="body"></i></span>
                                         </td>
                                         <td class="d-tavle-cell
                                                     text-align-right">
@@ -520,7 +533,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <h6 class="my-4" style="outline-style: dotted;"></h6>
+                            <hr>
                             <table class="w-100 mt-5">
                                 <tbody>
                                     <tr class="h-40">
@@ -676,7 +689,8 @@
                             <div class="col-12 py-2 d-flex justify-content-between">
                                 <p class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
                                     Valor do anúncio
-                                    <i class="bi color-muted px-2 font-size-30 bi-info-circle"></i>
+                                    <i class="bi color-muted px-2 font-size-30 bi-info-circle" alt="icons group"
+                                        placement="end" ngbTooltip="Valor total do anúncio" container="body"></i>
                                 </p>
                                 <span *ngIf="response.typeOfAd === 'rent'"
                                     class="fw-400 font-size-18 line-24 color-black">{{response.leaseValue |
@@ -698,17 +712,32 @@
                                             'R$'}}</span> -->
                             </div>
                             <div class="col-12 py-2 d-flex justify-content-between">
-                                <p class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
+                                <p *ngIf="response.typeOfAd === 'sale'"
+                                    class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
                                     IPTU
-                                    <i class="bi color-muted px-2 font-size-30 bi-info-circle"></i>
+                                    <i class="bi color-muted px-2 font-size-30 bi-info-circle" alt="icons group"
+                                        placement="end" ngbTooltip="Valor total do IPTU" container="body"></i>
+                                <p *ngIf="response.typeOfAd === 'rent'"
+                                    class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
+                                    IPTU
+                                    <i class="bi color-muted px-2 font-size-30 bi-info-circle" alt="icons group"
+                                        placement="end" ngbTooltip="Valor parcelado em 12x do IPTU"
+                                        container="body"></i>
                                 </p>
-                                <span class="fw-400 font-size-18 line-24 color-black">{{response.valueOfIptu | currency:
+                                <span *ngIf="response.typeOfAd === 'rent'"
+                                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) /
+                                    12 | currency:
+                                    'R$'}}</span>
+                                <span *ngIf="response.typeOfAd === 'sale'"
+                                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) | currency:
                                     'R$'}}</span>
                             </div>
                             <div class="col-12 py-2 d-flex justify-content-between">
                                 <p class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
                                     Condomínio
-                                    <i class="bi color-muted px-2 font-size-30 bi-info-circle"></i>
+                                    <i class="bi color-muted px-2 font-size-30 bi-info-circle" alt="icons group"
+                                    placement="end" ngbTooltip="Valor total do condomínio"
+                                    container="body"></i>
                                 </p>
                                 <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue |
                                     currency: 'R$'}}</span>
