@@ -16,7 +16,6 @@ import { HomeHeaderComponent } from './pages/home/home-header/home-header.compon
 import { LoggedModule } from './logged/logged.module';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AboutComponent } from './pages/about/about.component';
-import {NgcCookieConsentConfig, NgcCookieConsentModule} from "ngx-cookieconsent";
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgCoreModule } from '@videogular/ngx-videogular/core';
@@ -123,7 +122,6 @@ const cookieConfig:NgcCookieConsentConfig = {
     NgxPageScrollCoreModule,
     NgxSpinnerModule,
     CurrencyMaskModule,
-    NgcCookieConsentModule.forRoot(cookieConfig),
   ],
   providers: [
     {
