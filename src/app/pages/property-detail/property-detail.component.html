@@ -1,4 +1,4 @@
-<main class="bg-graylight position-relative h-100 pb-5 w-100">
+<main  class="bg-graylight position-relative h-100 pb-5 w-100">
   <div class="row form-search h-100 m-0-auto">
     <div class="col-12 px-0 h-100">
       <div class="row h-100 mx-0">
@@ -70,8 +70,7 @@
     <div class="col-12 bg-graylight mt-mobile px-5p d-flex justify-content-center">
       <div class="row max-w-1918 px-0 w-100 row-body-details-property">
         <!-- PAYMENT METHOD MOBILE -->
-        
-        <div class="col-12 d-none d-block-desk col-body-details-property">
+        <div *ngIf="infopay" class="col-12 d-none d-block-desk col-body-details-property">
           <div class="w-100 mt-4 border-radius-10">
             <div class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
 
@@ -542,14 +541,13 @@
 
         </div>
         <!-- PAYMENT METHOD DESK-->
-
-        <div class="col-4 d-none-desk col-body-details-property">
+        <div  class="col-4  d-none-desk col-body-details-property">
           <div class="w-100 mt-4 border-radius-10">
-            <div class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
+            <div id="infopaydesk" class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
 
               <p class="d-grid w-100">
                 <span class="fw-700 font-size-18 line-24
-                       color-black">Alta procura</span>
+                       color-black">Altass procura</span>
                 <span class="fw-400 font-size-14 line-19
                        color-black">226 pessoas viram esse
                   imóvel recentemente</span>
@@ -600,28 +598,41 @@
     </div>
   </div>
   <!-- FLOAT BTN SCHEDULE -->
-  <div (click)="scheduling(response)" class="schedule-visit d-none d-flex-tablet justify-content-center cursor-pointer position-fixed z-1000 w-100">
-    <div class="bg-greenlight w-fit border-radius-10 d-flex schedule-visit-modal">
-      <img src="../../../../assets/icon/calendar.svg" class="" />
-    <h2 class="fw-700 px-2 font-size-18 m-0 line-24 color-black">Agendar visita</h2>
+  <div *ngIf="infopaymobile" class="schedule-visit d-none bg-white border-top-gray py-3 d-flex-desk justify-content-center cursor-pointer position-fixed z-1000 w-100">
+    <div class="w-100 max-w-800 padding-x schedule-visit-modal">
+      <div class="w-100">
+        <h3 class="">{{finalValue | currency: 'R$ ' || '-'}}</h3>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple fw-700 font-size-14 line-24 color-purple w-100">
+            Enviar proposta
+          </button>
+        </div>
+        <div class="col-6">
+
+          <button (click)="scheduling(response)"  class="bg-purple btn border-radius-10 fw-700 font-size-14 line-24 text-light w-100">
+             Agendar visita
+          </button>
+        </div>
+      </div>
     </div>
-    
   </div>
   <!-- Modal VIEW IMAGES -->
   <div class="modal px-0 fade" id="previewimage" tabindex="-1" role="dialog" aria-labelledby="previewimageTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
-      <div class="modal-content pb-4 h-100 modal-content-preview">
+      <div class="modal-content h-100 modal-content-preview">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="text-light font-size-55" aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="anima-body h-100 d-flex align-items-center">
-          <swiper class="h-fit max-w-1227" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
-            <ng-template *ngFor="let item of previewimg" swiperSlide>
-              <div class="bg-img-preview d-flex justify-content-center w-100 h-100 py-2 border-radius-10 px-5">
-                <img src="{{item.previews}}" class="w-100 preview-img-property" />
+        <div class="anima-body h-100 d-flex justify-content-center align-items-center">
+          <swiper class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
+            <ng-template class="w-100" *ngFor="let item of previewimg" swiperSlide>
+              <div class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
+                <img src="{{item.previews}}" class="w-100 h-auto preview-img-property" />
               </div>
             </ng-template>
           </swiper>
