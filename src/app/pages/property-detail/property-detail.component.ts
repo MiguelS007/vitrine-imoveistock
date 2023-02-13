@@ -39,22 +39,46 @@ export class PropertyDetailComponent implements OnInit {
     const infopaydesk = document.querySelector(
       '#infopaydesk'
     ) as HTMLElement;
-    if (interdistance >= 511) {
+    const colinfopay = document.querySelector(
+      '#colinfopay'
+    ) as HTMLElement;
+    
+
+
+    if (interdistance >= 1460) {
       if (widthWindow <= 1922) {
-        infopaydesk.style.position = 'fixed';
+        colinfopay.style.alignSelf = 'self-end'
+        infopaydesk.style.position = 'relative';
+        infopaydesk.style.top = '0px';
         infopaydesk.style.maxWidth = '415px';
-        infopaydesk.style.top = '96px';
         infopaydesk.style.zIndex = '20';
-      } else {
-        infopaydesk.style.position = 'fixed';
+      }else{
+        colinfopay.style.alignSelf = 'self-end'
+        infopaydesk.style.position = 'relative';
+        infopaydesk.style.top = '0px';
         infopaydesk.style.maxWidth = '626px';
-        infopaydesk.style.top = '96px';
         infopaydesk.style.zIndex = '20';
       }
     } else {
-      infopaydesk.style.position = 'relative';
-      infopaydesk.style.top = '0px';
+      if (interdistance >= 511) {
+        if (widthWindow <= 1922) {
+          infopaydesk.style.position = 'fixed';
+          infopaydesk.style.maxWidth = '415px';
+          infopaydesk.style.top = '96px';
+          infopaydesk.style.zIndex = '20';
+        } else {
+          infopaydesk.style.position = 'fixed';
+          infopaydesk.style.maxWidth = '626px';
+          infopaydesk.style.top = '96px';
+          infopaydesk.style.zIndex = '20';
+        }
+      } else {
+        infopaydesk.style.position = 'relative';
+        infopaydesk.style.top = '0px';
+        colinfopay.style.alignSelf = 'auto'
+      }
     }
+
     console.log(interdistance, window.innerWidth)
 
   }

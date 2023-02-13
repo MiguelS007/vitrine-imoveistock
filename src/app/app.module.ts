@@ -16,6 +16,7 @@ import { HomeHeaderComponent } from './pages/home/home-header/home-header.compon
 import { LoggedModule } from './logged/logged.module';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AboutComponent } from './pages/about/about.component';
+import {NgcCookieConsentConfig, NgcCookieConsentModule} from "ngx-cookieconsent";
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgCoreModule } from '@videogular/ngx-videogular/core';
@@ -46,6 +47,30 @@ import { TermsComponent } from './auth/terms/terms.component';
 import { CookiePolicyComponent } from './pages/cookie-policy/cookie-policy.component';
 
 registerLocaleData(ptBr);
+
+const cookieConfig:NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'imoveistock.com.br'
+  },
+  palette: {
+    popup: {
+      background: '#000000'
+    },
+    button: {
+      background: '#01FF5F',
+      border: `#000000`,
+      text: `#000000`,
+    }
+  },
+  theme: 'classic',
+  type: 'info',
+  content:{
+    message: 'Nossa plataforma utiliza cookies para otimizar e personalizar sua experiência. Ao continuar navegando, você automaticamente concorda com a nossa',
+    link: 'Política de cookies',
+    href: 'cookie-policy',
+    dismiss:'Aceitar cookies',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -93,6 +118,7 @@ registerLocaleData(ptBr);
     VgBufferingModule,
     NgxPageScrollModule,
     ToastrModule.forRoot(),
+    NgcCookieConsentModule.forRoot(cookieConfig),
     NgxPageScrollCoreModule,
     NgxSpinnerModule,
     CurrencyMaskModule,

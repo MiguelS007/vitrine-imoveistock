@@ -30,6 +30,7 @@
     "jwt-decode": "^3.1.2",
     "jwt-payload": "^1.0.7",
     "ng2-currency-mask": "^13.0.3",
+    "ngx-cookieconsent": "^4.0.1",
     "ngx-mask": "^14.2.4",
     "ngx-page-scroll": "^8.0.0",
     "ngx-page-scroll-core": "^10.0.0",
