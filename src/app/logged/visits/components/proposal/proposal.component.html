@@ -25,7 +25,7 @@
                         class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
                         Contra proposta
                     </button>
-                    <button  type="button" (click)="cancelProposal(item)"
+                    <button type="button" (click)="cancelProposal(item)"
                         class="btn border-radius-10 bg-white mt-2 mx-1 border-pink color-pink h-74 fw-700 font-size-18 line-24 w-100">
                         Cancelar
                     </button>
@@ -157,9 +157,11 @@
                                     line-24 color-black">Valor da proposta de carro
                         <i class="bi font-size-14
                                         color-muted
-                                        bi-info-circle"></i></span>
+                                        bi-info-circle" alt="icons group" placement="end"
+                            ngbTooltip="Valor ofertado para carro" container="body"></i></span>
                     <span class="fw-400 font-size-18
-                                        line-24 color-black">{{selectedProposal.saleCarAsPaymentAmount | currency: 'R$'}}
+                                        line-24 color-black">{{selectedProposal.saleCarAsPaymentAmount | currency:
+                        'R$'}}
                     </span>
                 </div>
                 <div *ngIf="selectedProposal.salePropertyAsPaymentAmount > 0" class="d-flex justify-content-between">
@@ -167,19 +169,24 @@
                                     line-24 color-black">Valor da proposta de imóvel
                         <i class="bi font-size-14
                                         color-muted
-                                        bi-info-circle"></i></span>
+                                        bi-info-circle" alt="icons group" placement="end"
+                            ngbTooltip="Valor ofertado para imóvel" container="body"></i></span>
                     <span class="fw-400 font-size-18
-                                        line-24 color-black">{{selectedProposal.salePropertyAsPaymentAmount | currency: 'R$'}}
+                                        line-24 color-black">{{selectedProposal.salePropertyAsPaymentAmount | currency:
+                        'R$'}}
                     </span>
                 </div>
-                <div *ngIf="selectedProposal.saleDirectInstallmentAsPaymentAmount > 0" class="d-flex justify-content-between">
+                <div *ngIf="selectedProposal.saleDirectInstallmentAsPaymentAmount > 0"
+                    class="d-flex justify-content-between">
                     <span class="fw-400 font-size-18
                                     line-24 color-black">Valor da proposta de financiamento direto
                         <i class="bi font-size-14
                                         color-muted
-                                        bi-info-circle"></i></span>
+                                        bi-info-circle" alt="icons group" placement="end"
+                            ngbTooltip="Valor ofertado para financiamento direto" container="body"></i></span>
                     <span class="fw-400 font-size-18
-                                        line-24 color-black">{{selectedProposal.saleDirectInstallmentAsPaymentAmount | currency: 'R$'}}
+                                        line-24 color-black">{{selectedProposal.saleDirectInstallmentAsPaymentAmount |
+                        currency: 'R$'}}
                     </span>
                 </div>
                 <div *ngIf="selectedProposal.saleFinancingAsPaymentAmount > 0" class="d-flex justify-content-between">
@@ -187,9 +194,11 @@
                                     line-24 color-black">Valor da proposta de financiamento
                         <i class="bi font-size-14
                                         color-muted
-                                        bi-info-circle"></i></span>
+                                        bi-info-circle" alt="icons group" placement="end"
+                            ngbTooltip="Valor ofertado para financiamento" container="body"></i></span>
                     <span class="fw-400 font-size-18
-                                        line-24 color-black">{{selectedProposal.saleFinancingAsPaymentAmount | currency: 'R$'}}
+                                        line-24 color-black">{{selectedProposal.saleFinancingAsPaymentAmount |
+                        currency: 'R$'}}
                     </span>
                 </div>
                 <hr class="bg-graylight">
@@ -198,7 +207,8 @@
                                     line-24 color-black">Valor da proposta
                         <i class="bi font-size-14
                                         color-muted
-                                        bi-info-circle"></i></span>
+                                        bi-info-circle" alt="icons group" placement="end" ngbTooltip="Valor ofertado"
+                            container="body"></i></span>
                     <span *ngIf="selectedProposal.announcement?.typeOfAd === 'rent'" class="fw-400 font-size-18
                                         line-24 color-black">{{selectedProposal.suggestedRentAmount | currency: 'R$'}}
                     </span>
@@ -211,19 +221,29 @@
                                     line-24 color-black">Condomínio
                         <i class="bi font-size-14
                                         color-muted
-                                        bi-info-circle"></i></span>
+                                        bi-info-circle" alt="icons group" placement="end"
+                            ngbTooltip="Valor total do condomínio" container="body"></i></span>
                     <span class="fw-400 font-size-18
-                                        line-24 color-black">{{selectedProposal.announcement?.condominiumValue | currency: 'R$'}}
+                                        line-24 color-black">{{selectedProposal.announcement?.condominiumValue |
+                        currency: 'R$'}}
                     </span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span class="fw-400 font-size-18
+                    <span *ngIf="selectedProposal.announcement?.typeOfAd === 'rent'" class="fw-400 font-size-18
                                     line-24 color-black">IPTU
                         <i class="bi font-size-14
                                         color-muted
-                                        bi-info-circle"></i></span>
+                                        bi-info-circle" alt="icons group" placement="end"
+                            ngbTooltip="Valor parcelado em 12x do IPTU" container="body"></i></span>
+                    <span *ngIf="selectedProposal.announcement?.typeOfAd === 'sale'" class="fw-400 font-size-18
+                                    line-24 color-black">IPTU
+                        <i class="bi font-size-14
+                                        color-muted
+                                        bi-info-circle" alt="icons group" placement="end"
+                            ngbTooltip="Valor total do IPTU" container="body"></i></span>
                     <span class="fw-400 font-size-18
-                                        line-24 color-black">{{selectedProposal.announcement?.valueOfIptu | currency: 'R$'}}
+                                        line-24 color-black">{{selectedProposal.announcement?.valueOfIptu | currency:
+                        'R$'}}
                     </span>
                 </div>
                 <hr class="bg-graylight">
@@ -235,8 +255,9 @@
                     <h5 class="font-size-18 fw-700 color-dark line-24"
                         *ngIf="selectedProposal.announcement?.typeOfAd === 'rent'">
                         {{toNumber(selectedProposal.announcement?.valueOfIptu) / 12 +
-                            toNumber(selectedProposal.announcement?.leaseValue) + toNumber(selectedProposal.announcement?.condominiumValue) |
-                            currency: 'R$'}}</h5>
+                        toNumber(selectedProposal.announcement?.leaseValue) +
+                        toNumber(selectedProposal.announcement?.condominiumValue) |
+                        currency: 'R$'}}</h5>
                     <h5 class="font-size-18 fw-700 color-dark line-24"
                         *ngIf="selectedProposal.announcement?.typeOfAd === 'sale'">
                         {{selectedProposal.announcement?.saleValue | currency: 'R$'}}</h5>
