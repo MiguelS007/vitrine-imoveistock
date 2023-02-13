@@ -23,6 +23,8 @@ import { ProposalCancelModalComponent } from './visits/components/proposal/propo
 import { EditSchedulingModalComponent } from './visits/components/scheduling/edit-scheduling-modal/edit-scheduling-modal.component';
 import { EditScheduling2ModalComponent } from './visits/components/scheduling/edit-scheduling2-modal/edit-scheduling2-modal.component';
 import { EditScheduling3ModalComponent } from './visits/components/scheduling/edit-scheduling3-modal/edit-scheduling3-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     LoggedComponent,
@@ -47,7 +49,7 @@ import { EditScheduling3ModalComponent } from './visits/components/scheduling/ed
     NgxMaskModule.forRoot(),
     SwiperModule,
     CurrencyMaskModule,
-   
+    NgbModule
   ],
   schemas: [],
   providers: [

@@ -25,6 +25,7 @@ export class AppComponent {
   }
   ngOnInit(){
     // subscribe to cookieconsent observables to react to main events
+    
     this.popupOpenSubscription = this.ngCookieService.popupOpen$.subscribe(
       () => {
         this.ngCookieService.init(this.ngCookieService.getConfig())
