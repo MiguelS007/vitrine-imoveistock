@@ -31,20 +31,6 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
-.close:not(:disabled):not(.disabled) {
-    z-index: 10000 !important;
-    cursor: pointer !important;
-    padding: 0.5rem 1.2rem !important;
-    background: gray !important;
-    border-radius: 10rem 10rem !important;
-    margin: 1rem 1rem -4rem auto !important;
-}
-
-.modal-header .close {
-    padding: 1rem;
-    margin: 1rem 1rem -4rem auto !important;
-}
-
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
