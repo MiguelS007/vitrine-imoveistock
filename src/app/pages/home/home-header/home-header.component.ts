@@ -20,32 +20,22 @@ export class HomeHeaderComponent implements OnInit {
   response: AnnouncementGetResponseDto[] = [];
   filterResponse: AnnouncementGetResponseDto[] = [];
 
+
+  selectedResidencial = 'residencial'
+  selectedRural = 'rural'
+  selectedComercial = 'comercial'
   stateSelected = 'Primeiro escolha um estado'
   citySelected = 'Escolha uma cidade'
   cities: any[];
   states: any[];
-  valueUntilArray: any[] = [ 100000, 200000, 300000, 400000, 500000, 1000000 , 2000000, 3000000, 4000000, 5000000, 10000000, 20000000, ];
-  valueUntil: string[] = 
-  [`R$ ${this.valueUntilArray[0]}`,
-  `R$ ${this.valueUntilArray[1]}`,
-  `R$ ${this.valueUntilArray[2]}`,
-  `R$ ${this.valueUntilArray[3]}`,
-  `R$ ${this.valueUntilArray[4]}`,
-  `R$ ${this.valueUntilArray[5]}`,
-  `R$ ${this.valueUntilArray[6]}`,
-  `R$ ${this.valueUntilArray[7]}`,
-  `R$ ${this.valueUntilArray[8]}`,
-  `R$ ${this.valueUntilArray[9]}`,
-  `R$ ${this.valueUntilArray[10]}`,
-  `R$ ${this.valueUntilArray[11]}`];
+  valueUntilArray: any[] = [100000, 200000, 300000, 400000, 500000, 1000000, 2000000, 3000000, 4000000, 5000000, 10000000, 20000000,];
+  badroomsArray: any[] = [1, 2, 3, 4, 5];
+  goal: string;
+  styleforPropertyE: 'Edifício';
+  styleforPropertyT: 'Terreno';
+  styleProperty: string;
 
-  badroomsArray: any[] = [ 1, 2, 3, 4, 5 ];
-  badroomsQnt: string[] = 
-  [`+${this.badroomsArray[0]}`,
-  `+${this.badroomsArray[1]}`,
-  `+${this.badroomsArray[2]}`,
-  `+${this.badroomsArray[3]}`,
-  `+${this.badroomsArray[4]}`,];
+
 
   resultsearchfor: any = [];
   collapsed = false;
@@ -75,6 +65,7 @@ export class HomeHeaderComponent implements OnInit {
   typePropertyAllTitle: string = 'Tipo do imóvel';
 
   typeAd: string = 'sale';
+  typeofProperty: string;
 
 
   constructor(
@@ -92,18 +83,17 @@ export class HomeHeaderComponent implements OnInit {
       typePropertyState: ['', [Validators.required]],
       typePropertyValue: ['', [Validators.required]],
       typePropertyBadrooms: ['', [Validators.required]],
-      typePropertyOptions: ['', [Validators.required]],
-      typeOfResidential: ['', [Validators.required]],
-      typeOfRural: ['', [Validators.required]],
-      typeOfCommercial: ['', [Validators.required]],
-      checkvacancies: ['', [Validators.required]],
-      checkbathrooms: ['', [Validators.required]],
-      checksuites: ['', [Validators.required]],
-      checkrooms: ['', [Validators.required]],
-      checkcondominium: ['', [Validators.required]],
-      checkfootage: ['', [Validators.required]],
-      checkconstruction: ['', [Validators.required]],
-      checkrenovated: ['', [Validators.required]],
+
+
+      // typePropertyOptions: ['', [Validators.required]],
+      // checkvacancies: ['', [Validators.required]],
+      // checkbathrooms: ['', [Validators.required]],
+      // checksuites: ['', [Validators.required]],
+      // checkrooms: ['', [Validators.required]],
+      // checkcondominium: ['', [Validators.required]],
+      // checkfootage: ['', [Validators.required]],
+      // checkconstruction: ['', [Validators.required]],
+      // checkrenovated: ['', [Validators.required]],
     });
   }
 
@@ -116,48 +106,47 @@ export class HomeHeaderComponent implements OnInit {
     this.searchService.getPropertyHomeExclusivity().subscribe(
       success => {
         this.response = success;
-        // console.log(this.form.controls['typePropertyCity'].value)
       },
       error => { console.log(error, 'data not collected') }
     );
-    this.cities = cities(this.citySelected);
     this.states = states();
+
   }
 
-  // make full search
+  typePropertyAll(typeOf: string, styleforProperty: string, value: string) {
+    this.goal = typeOf
+    this.typeofProperty = value
+    this.styleProperty = styleforProperty;
+    this.typePropertyAllTitle = value
+  }
+  getCities() {
+    this.cities = cities(this.stateSelected);
+    console.log(this.stateSelected, this.citySelected)
+  }
+
   confirm() {
 
-    let typePropertyFilter: string = '';
-
-    if (this.typePropertyAllTitle !== 'Tipo do imóvel') {
-      if (this.typePropertyAllTitle === 'Todos os imóveis') {
-        typePropertyFilter = 'allProperty'
-      } else if (this.typePropertyAllTitle === 'Todos os imóveis em Residencial') {
-        typePropertyFilter = 'allResidential'
-      }
-      else if (this.typePropertyAllTitle === 'Apartamento') {
-        typePropertyFilter = 'apartament'
-      }
-    }
-
+    if (this.stateSelected === 'Primeiro escolha um estado') this.form.controls['typePropertyState'].setValue('')
     let filter: any = {
       typeAd: this.typeAd,
-      where: this.form.controls['typePropertyCity'].value,
-      whatAreYouLookingFor: typePropertyFilter,
-      propertyType: this.searchfilterTypeProperty,
-      goal: this.searchfilterType,
-      checkvacancies: this.form.controls['checkvacancies'].value,
-      checkbathrooms: this.form.controls['checkbathrooms'].value,
-      checksuites: this.form.controls['checksuites'].value,
-      checkrooms: this.form.controls['checkrooms'].value,
-      checkcondominium: this.form.controls['checkcondominium'].value,
-      checkfootage: this.form.controls['checkfootage'].value,
-      checkconstruction: this.form.controls['checkconstruction'].value,
-      checkrenovated: this.form.controls['checkrenovated'].value,
+      state: this.form.controls['typePropertyState'].value,
+      city: this.form.controls['typePropertyCity'].value,
+      untilValue: this.form.controls['typePropertyValue'].value,
+      goal: this.goal,
+      typeofProperty: this.typeofProperty,
+      styleProperty: this.typeofProperty,
+      badRoomsQnt: this.form.controls['typePropertyBadrooms'].value,
+      // checkvacancies: this.form.controls['checkvacancies'].value,
+      // checkbathrooms: this.form.controls['checkbathrooms'].value,
+      // checksuites: this.form.controls['checksuites'].value,
+      // checkrooms: this.form.controls['checkrooms'].value,
+      // checkcondominium: this.form.controls['checkcondominium'].value,
+      // checkfootage: this.form.controls['checkfootage'].value,
+      // checkconstruction: this.form.controls['checkconstruction'].value,
+      // checkrenovated: this.form.controls['checkrenovated'].value,
     };
 
     let announcementTypeAdGroup: AnnouncementGetResponseDto[] = [];
-
     if (filter.typeAd !== '') {
       for (let i = 0; i < this.response.length; i++) {
         if (this.response[i].typeOfAd === filter.typeAd) {
@@ -167,59 +156,80 @@ export class HomeHeaderComponent implements OnInit {
     } else {
       announcementTypeAdGroup = this.response;
     }
-
+    // --------------------------
     let announcementCityGroup: AnnouncementGetResponseDto[] = [];
-
-    if (filter.where !== '') {
+    if (filter.city !== '') {
       for (let i = 0; i < announcementTypeAdGroup.length; i++) {
-        if (announcementTypeAdGroup[i].cityAddress === filter.where) {
+        if (announcementTypeAdGroup[i].cityAddress === filter.city) {
           announcementCityGroup.push(announcementTypeAdGroup[i]);
         }
       }
     } else {
       announcementCityGroup = announcementTypeAdGroup;
     }
-
-    let announcementPropertyCharacteristicsGroup: AnnouncementGetResponseDto[] = [];
-
-    if (filter.whatAreYouLookingFor !== '') {
+    // --------------------------
+    let announcementStateGroup: AnnouncementGetResponseDto[] = [];
+    if (filter.state !== '') {
       for (let i = 0; i < announcementCityGroup.length; i++) {
-        if (announcementCityGroup[i].propertyCharacteristics === filter.whatAreYouLookingFor) {
-          announcementPropertyCharacteristicsGroup.push(announcementCityGroup[i]);
-        }
-      }
-
-    } else {
-      announcementPropertyCharacteristicsGroup = announcementCityGroup;
-    }
-
-    let announcementpropertyTypeGroup: AnnouncementGetResponseDto[] = [];
-
-    if (filter.propertyType !== undefined) {
-      for (let i = 0; i < announcementPropertyCharacteristicsGroup.length; i++) {
-        if (announcementPropertyCharacteristicsGroup[i].goal === filter.propertyType) {
-          announcementpropertyTypeGroup.push(announcementPropertyCharacteristicsGroup[i]);
+        if (announcementCityGroup[i].ufAddress === filter.state) {
+          announcementStateGroup.push(announcementCityGroup[i]);
         }
       }
     } else {
-      announcementpropertyTypeGroup = announcementPropertyCharacteristicsGroup
+      announcementStateGroup = announcementCityGroup;
     }
+    // --------------------------
+
+    let announcementStylePropertyGroup: AnnouncementGetResponseDto[] = [];
+    if (filter.styleProperty !== undefined) {
+      for (let i = 0; i < announcementStateGroup.length; i++) {
+        if (announcementStateGroup[i].propertyCharacteristics === filter.styleProperty) {
+          announcementStylePropertyGroup.push(announcementStateGroup[i]);
+        }
+      }
+    } else {
+      announcementStylePropertyGroup = announcementStateGroup
+    }
+    // --------------------------
 
     let announcementGoalGroup: AnnouncementGetResponseDto[] = [];
-
     if (filter.goal !== undefined) {
-      for (let i = 0; i < announcementpropertyTypeGroup.length; i++) {
-        if (announcementpropertyTypeGroup[i].propertyType
-          === filter.goal) {
-          announcementGoalGroup.push(announcementpropertyTypeGroup[i]);
+      for (let i = 0; i < announcementStylePropertyGroup.length; i++) {
+        if (announcementStylePropertyGroup[i].goal === filter.goal) {
+          announcementGoalGroup.push(announcementStylePropertyGroup[i]);
         }
       }
     } else {
-      announcementGoalGroup = announcementpropertyTypeGroup
+      announcementGoalGroup = announcementStylePropertyGroup
     }
+    // --------------------------
+    let announcementtypeofPropertyGroup: AnnouncementGetResponseDto[] = [];
+    if (filter.typeofProperty !== undefined) {
+      for (let i = 0; i < announcementGoalGroup.length; i++) {
+        if (announcementGoalGroup[i].propertyType === filter.typeofProperty) {
+          announcementtypeofPropertyGroup.push(announcementGoalGroup[i]);
+        }
+      }
+    } else {
+      announcementtypeofPropertyGroup = announcementGoalGroup
+    }
+    // --------------------------
+    let announcementValueUntilGroup: AnnouncementGetResponseDto[] = [];
+    if (filter.untilValue !== undefined) {
+      for (let i = 0; i < announcementtypeofPropertyGroup.length; i++) {
+        if (announcementtypeofPropertyGroup[i].saleValue === filter.untilValue) {
+          announcementValueUntilGroup.push(announcementtypeofPropertyGroup[i]);
+        }
+      }
+    } else {
+      announcementValueUntilGroup = announcementtypeofPropertyGroup
+    }
+    // --------------------------
 
-    this.resultType = announcementGoalGroup;
 
+
+    this.resultType = announcementtypeofPropertyGroup;
+    console.log(this.resultType, filter)
 
 
     localStorage.setItem('filtro', JSON.stringify(filter))
@@ -228,31 +238,21 @@ export class HomeHeaderComponent implements OnInit {
 
   }
 
-  
-  getCities() {
-    this.cities = cities(this.stateSelected);
-  }
 
 
-  // search filter
-  resultSearch(tableName: string) {
-    if (tableName.length == 0) { this.filtersearch = false }
-    else { this.filtersearch = true }
-    this.filterResponse;
-    let removeRepets: any = [];
-    for (let i = 0; i < this.response.length; i++) {
-      removeRepets.push(this.response[i].cityAddress);
-    };
-    const filtered = removeRepets.filter((item, index) => removeRepets.indexOf(item) === index);
-    this.filterResponse = filtered;
-  }
 
-  selectCites(selected) {
-    this.form.patchValue({
-      typePropertyCity: selected
-    });
-    this.filtersearch = false;
-  }
+  // filterCity(tableName: string) {
+  //   if (tableName.length == 0) { this.filtersearch = false }
+  //   else { this.filtersearch = true }
+  //   this.filterResponse;
+  //   let removeRepets: any = [];
+  //   for (let i = 0; i < this.response.length; i++) {
+  //     removeRepets.push(this.response[i].cityAddress);
+  //   };
+  //   const filtered = removeRepets.filter((item, index) => removeRepets.indexOf(item) === index);
+  //   this.filterResponse = filtered;
+  // }
+
 
   buyOption(value: string) {
     this.typeAd = value;
@@ -263,54 +263,50 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
 
-  typePropertyStep1(value: string) {
-    let typepropertyTesteRename = value
-    this.form.patchValue({
-      typepropertyTeste: typepropertyTesteRename
-    })
-    if (value === 'residencial') {
-      this.searchfilterTypeProperty = 'residencial';
-    } else if (value === 'rural') {
-      this.searchfilterTypeProperty = 'rural';
-    } else if (value === 'comercial') {
-      this.searchfilterTypeProperty = 'comercial';
-    }
-    this.typepropertydiv = !this.typepropertydiv;
-  }
+  // typePropertyStep1(value: string) {
+  //   let typepropertyTesteRename = value
+  //   this.form.patchValue({
+  //     typepropertyTeste: typepropertyTesteRename
+  //   })
+  //   if (value === 'residencial') {
+  //     this.searchfilterTypeProperty = 'residencial';
+  //   } else if (value === 'rural') {
+  //     this.searchfilterTypeProperty = 'rural';
+  //   } else if (value === 'comercial') {
+  //     this.searchfilterTypeProperty = 'comercial';
+  //   }
+  //   this.typepropertydiv = !this.typepropertydiv;
+  // }
 
-  typeProperty(value: string) {
-    this.searchfilterType = value
-    this.typeoffResidential = false;
-    this.typeoffRural = false;
-    this.typeoffCommercial = false;
+  // typeProperty(value: string) {
+  //   this.searchfilterType = value
+  //   this.typeoffResidential = false;
+  //   this.typeoffRural = false;
+  //   this.typeoffCommercial = false;
+  // }
 
-  }
+  // typePropertyOptions(value: string) {
+  //   this.filtersearch = false;
+  //   console.log(value)
+  //   if (value === 'typeproperty') {
+  //     this.typeoffResidential = false;
+  //     this.typeoffRural = false;
+  //     this.typeoffCommercial = false;
+  //   } else if (value === 'residencial') {
+  //     this.typeoffResidential = !this.typeoffResidential;
+  //   } else if (value === 'rural') {
+  //     this.typeoffRural = !this.typeoffRural;
+  //   } else if (value === 'comercial') {
+  //     this.typeoffCommercial = !this.typeoffCommercial;
+  //   } else if (value == undefined) {
+  //     this.alertPropertyOptions = true;
+  //     setTimeout(() => {
+  //       this.alertPropertyOptions = false;
+  //     }, 3000)
+  //   }
+  // }
 
-  typePropertyOptions(value: string) {
-    this.filtersearch = false;
-    console.log(value)
-    if (value === 'typeproperty') {
-      this.typeoffResidential = false;
-      this.typeoffRural = false;
-      this.typeoffCommercial = false;
-    } else if (value === 'residencial') {
-      this.typeoffResidential = !this.typeoffResidential;
-    } else if (value === 'rural') {
-      this.typeoffRural = !this.typeoffRural;
-    } else if (value === 'comercial') {
-      this.typeoffCommercial = !this.typeoffCommercial;
-    } else if (value == undefined) {
-      this.alertPropertyOptions = true;
-      setTimeout(() => {
-        this.alertPropertyOptions = false;
-      }, 3000)
-    }
-  }
 
-  typePropertyAll(value) {
-    // this.filtersearch = false;
-    this.typePropertyAllTitle = value
-  }
 
   propertyCharacteristics(value: string) {
     this.typeoffResidential = false;
@@ -352,27 +348,27 @@ export class HomeHeaderComponent implements OnInit {
 
   }
 
-  hideView() {
-    const divviewoptions = document.querySelector('.divviewoptions') as HTMLElement
-    divviewoptions.style.display = 'none'
-    this.hideviewoptions = false;
-    this.form.controls['checkvacancies'].setValue(false);
-    this.form.controls['checkbathrooms'].setValue(false);
-    this.form.controls['checksuites'].setValue(false);
-    this.form.controls['checkrooms'].setValue(false);
-    this.form.controls['checkcondominium'].setValue(false);
-    this.form.controls['checkfootage'].setValue(false);
-    this.form.controls['checkconstruction'].setValue(false);
-    this.form.controls['checkrenovated'].setValue(false);
-    this.viewvacancies = false
-    this.viewbathrooms = false;
-    this.viewsuites = false;
-    this.viewrooms = false;
-    this.viewcondominium = false;
-    this.viewfootage = false;
-    this.viewconstruction = false;
-    this.viewrenovated = false;
-  }
+  // hideView() {
+  //   const divviewoptions = document.querySelector('.divviewoptions') as HTMLElement
+  //   divviewoptions.style.display = 'none'
+  //   this.hideviewoptions = false;
+  //   this.form.controls['checkvacancies'].setValue(false);
+  //   this.form.controls['checkbathrooms'].setValue(false);
+  //   this.form.controls['checksuites'].setValue(false);
+  //   this.form.controls['checkrooms'].setValue(false);
+  //   this.form.controls['checkcondominium'].setValue(false);
+  //   this.form.controls['checkfootage'].setValue(false);
+  //   this.form.controls['checkconstruction'].setValue(false);
+  //   this.form.controls['checkrenovated'].setValue(false);
+  //   this.viewvacancies = false
+  //   this.viewbathrooms = false;
+  //   this.viewsuites = false;
+  //   this.viewrooms = false;
+  //   this.viewcondominium = false;
+  //   this.viewfootage = false;
+  //   this.viewconstruction = false;
+  //   this.viewrenovated = false;
+  // }
 
 
 }

@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { states, cities } from 'estados-cidades';
 import { SearchService } from 'src/app/service/search.service';
-import { UserService } from 'src/app/service/user.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { NgxSpinnerService } from "ngx-spinner";
 import { AnnouncementService } from 'src/app/service/announcement.service';
@@ -33,6 +33,9 @@ export class SearchPageComponent implements OnInit {
   countLoft: number;
   countKitnet: number;
 
+  stateSelected = 'Escolha o Estado'
+  citySelected = 'Selecione uma ciadade'
+
   response: AnnouncementGetResponseDto[] = [];
   user: UserGetResponseDto;
   urlsimg: any = [];
@@ -42,19 +45,15 @@ export class SearchPageComponent implements OnInit {
   filtroSelected: any;
 
   filtroResultDisplay: {
+    state: string,
+    city: string,
+    untilValue: string,
+    badRoomsQnt: string,
+    propertiesType: string,
+    typeofProperty: string,
     typeAd: string,
-    where: string,
-    whatAreYouLookingFor: string,
-    propertyType: string,
     goal: string,
-    checkvacancies: string,
-    checkbathrooms: string,
-    checksuites: string,
-    checkrooms: string,
-    checkcondominium: string,
-    checkfootage: string,
-    checkconstruction: string,
-    checkrenovated: string,
+    styleProperty: string
   }
 
   orderBy: string = 'Selecione'
@@ -94,11 +93,12 @@ export class SearchPageComponent implements OnInit {
   formModal: FormGroup;
 
   modalFilterOpen: boolean = false;
+  states: string[];
+  cities: string[];
 
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
-    private userService: UserService,
     private searchService: SearchService,
     private formBuilder: FormBuilder,
     private ngxSpinnerService: NgxSpinnerService,
@@ -108,9 +108,9 @@ export class SearchPageComponent implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       searchwords: [''],
-      localproperty: [''],
       propertyType: [''],
       typeproperty: [''],
+      typePropertyState: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
       typebathroom: [''],
@@ -125,9 +125,9 @@ export class SearchPageComponent implements OnInit {
 
     this.formModal = this.formBuilder.group({
       searchwords: [''],
-      localproperty: [''],
       propertyType: [''],
       typeproperty: [''],
+      typePropertyState: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
       typebathroom: [''],
@@ -145,6 +145,7 @@ export class SearchPageComponent implements OnInit {
 
     this.ngxSpinnerService.show();
     this.products = this.datamokservice.resultSearch;
+    this.states = states();
 
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
@@ -180,28 +181,22 @@ export class SearchPageComponent implements OnInit {
       typeAdTranslate = 'Venda'
     }
 
-
     this.filtroResultDisplay = {
-      typeAd: typeAdTranslate,
-      where: this.filtroSelected?.where,
-      whatAreYouLookingFor: this.filtroSelected?.whatAreYouLookingFor,
-      propertyType: this.filtroSelected?.propertyType,
+      state: this.filtroSelected?.state,
+      city: this.filtroSelected?.city,
+      untilValue: this.filtroSelected?.untilValue,
+      badRoomsQnt: this.filtroSelected?.badRoomsQnt,
+      propertiesType: this.filtroSelected?.propertiesType,
+      typeofProperty: this.filtroSelected?.typeofProperty,
       goal: this.filtroSelected?.goal,
-      checkvacancies: '',
-      checkbathrooms: '',
-      checksuites: '',
-      checkrooms: '',
-      checkcondominium: '',
-      checkfootage: '',
-      checkconstruction: '',
-      checkrenovated: '',
+      styleProperty: this.filtroSelected?.styleProperty,
+      typeAd: typeAdTranslate
     }
 
     if (filtro !== null) {
       this.form.patchValue({
-        // typeproperty: this.filtroSelected.whatAreYouLookingFor,
-        localproperty: this.filtroSelected.where,
-        propertyType: this.filtroSelected.propertyType
+        typeMaxPrice: this.filtroResultDisplay.untilValue,
+        typeofProperty: this.filtroResultDisplay.typeofProperty
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
 
@@ -262,9 +257,6 @@ export class SearchPageComponent implements OnInit {
       }
     })
 
-
-
-
     this.searchService.getPropertyHomeExclusivity().subscribe(
       success => {
         this.propertyproducts = success
@@ -274,6 +266,11 @@ export class SearchPageComponent implements OnInit {
       error => { console.log(error, 'data not collected') }
     );
   }
+  getCities() {
+    this.cities = cities(this.stateSelected);
+  }
+
+
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -291,7 +288,6 @@ export class SearchPageComponent implements OnInit {
     }
     return array
   }
-
 
   likeHeart(value, condition) {
 
@@ -382,6 +378,7 @@ export class SearchPageComponent implements OnInit {
       this.selectTypeAd = 'Alugar'
     }
   }
+
   searchBy(item) {
     // SELECT BADROOMS
     if (item === '1') {
@@ -426,6 +423,7 @@ export class SearchPageComponent implements OnInit {
   whatAreYouLookingFor(value) {
     this.whatAreYouLookingForTitle = value
   }
+
   filterTypeProperty(value) {
     this.TypeProperty = value
   }
@@ -532,11 +530,11 @@ export class SearchPageComponent implements OnInit {
         let maxValue: number = 0;
 
 
-        if(this.modalFilterOpen === false) {
+        if (this.modalFilterOpen === false) {
           if (this.form.controls['typeMinPrice'].value !== '') {
             valueMin = this.form.controls['typeMinPrice'].value;
           }
-  
+
           if (this.form.controls['typeMaxPrice'].value !== '') {
             maxValue = this.form.controls['typeMaxPrice'].value;
           }
@@ -544,12 +542,12 @@ export class SearchPageComponent implements OnInit {
           if (this.form.controls['typeMinPrice'].value !== '') {
             valueMin = this.formModal.controls['typeMinPrice'].value;
           }
-  
+
           if (this.form.controls['typeMaxPrice'].value !== '') {
             maxValue = this.formModal.controls['typeMaxPrice'].value;
           }
         }
-        
+
 
         if (valueMin !== 0 && maxValue !== 0) {
           if (this.selectTypeAd === 'Comprar') {
@@ -606,11 +604,11 @@ export class SearchPageComponent implements OnInit {
         let areaMax: number = 0;
         let minArea: number = 0;
 
-        if(this.modalFilterOpen === false) {
+        if (this.modalFilterOpen === false) {
           if (this.form.controls['typefootagemin'].value !== '') {
             minArea = this.form.controls['typefootagemin'].value;
           }
-  
+
           if (this.form.controls['typefootagemax'].value !== '') {
             areaMax = this.form.controls['typefootagemax'].value;
           }
@@ -618,7 +616,7 @@ export class SearchPageComponent implements OnInit {
           if (this.form.controls['typefootagemin'].value !== '') {
             minArea = this.formModal.controls['typefootagemin'].value;
           }
-  
+
           if (this.form.controls['typefootagemax'].value !== '') {
             areaMax = this.formModal.controls['typefootagemax'].value;
           }
@@ -652,11 +650,11 @@ export class SearchPageComponent implements OnInit {
     this.modalFilterOpen = true
 
     const modalRef = this.modalService.open(content, { centered: true });
-      modalRef.result.then(data => {
-      }, error => {
-        this.modalFilterOpen = false
-      });
-	}
+    modalRef.result.then(data => {
+    }, error => {
+      this.modalFilterOpen = false
+    });
+  }
 
   exit() {
     this.modalService.dismissAll()

@@ -3,18 +3,17 @@
         <form [formGroup]="form" class="row form-search pt-5 h-100 m-0-auto">
             <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
                 <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">Página Inicial /
-                    <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;
-                        Resultado de busca
-                    </span>
+                    <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
                 </p>
-                <p class="fw-700 font-size-32 line-40 color-black">
-                    Resultado da sua busca por <b>
-                        <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}}</span>
-                        <span *ngIf="filtroResultDisplay.whatAreYouLookingFor">
-                            {{filtroResultDisplay.whatAreYouLookingFor}},</span>
-                        <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
+                <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
+                    <b>
+                        <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
+                        <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
+                        <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
+                        <span *ngIf="filtroResultDisplay.badRoomsQnt"> {{filtroResultDisplay.badRoomsQnt}},</span>
+                        <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
+                        <span *ngIf="filtroResultDisplay.typeofProperty"> {{filtroResultDisplay.typeofProperty}},</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                        <span *ngIf="filtroResultDisplay.where"> em {{filtroResultDisplay.where}}</span>
                     </b>
                 </p>
             </div>
@@ -51,7 +50,7 @@
                             aria-expanded="false">
                             {{selectCity}} <i class="bi bi-geo-alt font-size-24"></i>
                         </a>
-                        <div class="dropdown-menu w-100" aria-labelledby="resultSituation">
+                        <div class="dropdown-menu max-h-400 w-100 overflow-x-scroll" aria-labelledby="resultSituation">
                             <a *ngFor="let item of listAllCity" class="dropdown-item"
                                 (click)="searchByCity(item)">{{item}}</a>
                         </div>
@@ -223,14 +222,17 @@
                             Resultado de busca
                         </span>
                     </p>
-                    <p class="fw-700 font-size-32 line-40 color-black">
-                        Resultado da sua busca por <b>
-                            <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}}</span>
-                            <span *ngIf="filtroResultDisplay.whatAreYouLookingFor">
-                                {{filtroResultDisplay.whatAreYouLookingFor}},</span>
-                            <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
+                    <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
+                        <b>
+                            <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
+                          
+                            <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
+                            <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
+                            <span *ngIf="filtroResultDisplay.untilValue"> {{filtroResultDisplay.untilValue}},</span>
+                            <span *ngIf="filtroResultDisplay.badRoomsQnt"> {{filtroResultDisplay.badRoomsQnt}},</span>
+                            <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
+                            <span *ngIf="filtroResultDisplay.typeofProperty"> {{filtroResultDisplay.typeofProperty}},</span>
                             <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                            <span *ngIf="filtroResultDisplay.where"> em {{filtroResultDisplay.where}}</span>
                         </b>
                     </p>
                 </div>

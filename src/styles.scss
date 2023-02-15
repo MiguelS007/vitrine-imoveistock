@@ -2343,7 +2343,7 @@ vg-overlay-play .vg-overlay-play {
     .bg-home-header {
         background-image: url(./assets/img/family-mobile.png);
         background-position: center top;
-        background-size: contain;
+        background-size: cover;
         width: 100% !important;
     }
 
@@ -2482,6 +2482,11 @@ vg-overlay-play .vg-overlay-play {
 
 
 @media (max-width: 540px) {
+    
+    .col-12-mobile {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
     .logo-navbar-desktop-branca {
         display: none !important;
     }
