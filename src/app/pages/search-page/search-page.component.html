@@ -8,12 +8,12 @@
                 <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                     <b>
                         <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
-                        <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
-                        <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
-                        <span *ngIf="filtroResultDisplay.badRoomsQnt"> {{filtroResultDisplay.badRoomsQnt}},</span>
-                        <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
                         <span *ngIf="filtroResultDisplay.typeofProperty"> {{filtroResultDisplay.typeofProperty}},</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
+                        <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
+                        <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
+                        <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
+                        <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
                     </b>
                 </p>
             </div>
@@ -224,15 +224,13 @@
                     </p>
                     <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                         <b>
-                            <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
-                          
-                            <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
-                            <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
-                            <span *ngIf="filtroResultDisplay.untilValue"> {{filtroResultDisplay.untilValue}},</span>
-                            <span *ngIf="filtroResultDisplay.badRoomsQnt"> {{filtroResultDisplay.badRoomsQnt}},</span>
-                            <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
-                            <span *ngIf="filtroResultDisplay.typeofProperty"> {{filtroResultDisplay.typeofProperty}},</span>
-                            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.typeofProperty"> {{filtroResultDisplay.typeofProperty}},</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
+                            <span class="d-flex flex-wrap text-capitalize" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
                         </b>
                     </p>
                 </div>

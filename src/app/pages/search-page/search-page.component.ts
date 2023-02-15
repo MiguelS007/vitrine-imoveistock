@@ -51,6 +51,7 @@ export class SearchPageComponent implements OnInit {
     badRoomsQnt: string,
     propertiesType: string,
     typeofProperty: string,
+    
     typeAd: string,
     goal: string,
     styleProperty: string
@@ -110,7 +111,7 @@ export class SearchPageComponent implements OnInit {
       searchwords: [''],
       propertyType: [''],
       typeproperty: [''],
-      typePropertyState: [''],
+      localproperty: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
       typebathroom: [''],
@@ -127,7 +128,7 @@ export class SearchPageComponent implements OnInit {
       searchwords: [''],
       propertyType: [''],
       typeproperty: [''],
-      typePropertyState: [''],
+      localproperty: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
       typebathroom: [''],
@@ -196,6 +197,7 @@ export class SearchPageComponent implements OnInit {
     if (filtro !== null) {
       this.form.patchValue({
         typeMaxPrice: this.filtroResultDisplay.untilValue,
+        localproperty: this.filtroResultDisplay.city,
         typeofProperty: this.filtroResultDisplay.typeofProperty
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
