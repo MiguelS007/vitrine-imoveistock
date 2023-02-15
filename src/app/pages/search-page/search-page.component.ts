@@ -430,29 +430,6 @@ export class SearchPageComponent implements OnInit {
     this.TypeProperty = value
   }
 
-  // listForFilterOnClick() {
-  //   this.searchService.getPropertyListAll().subscribe(
-  //     success => {
-  //       this.filterResult = success;
-  //       if (localStorage.getItem('user') !== null) {
-  //         this.announcementService.listLikes().subscribe(
-  //           success => {
-  //             for (let i = 0; i < success.length; i++) {
-  //               for (let x = 0; x < this.filterResult.length; x++) {
-  //                 if (success[i].announcement._id === this.filterResult[x]._id) {
-  //                   Object.assign(this.filterResult[x], { liked: true });
-  //                 }
-  //               }
-  //               this.listLikes.push(success[i].announcement)
-  //             }
-  //           }
-  //         )
-  //       }
-  //       this.ngxSpinnerService.hide();
-  //     },
-  //   )
-  // }
-
   searchByCity(item) {
     this.selectCity = item
   }
@@ -461,6 +438,7 @@ export class SearchPageComponent implements OnInit {
     // this.listForFilterOnClick();
     // let listAll:  AnnouncementGetResponseDto[] = [];
     // let listLikesFilter: AnnouncementGetResponseDto[] = [];
+    this.ngxSpinnerService.show();
     this.searchService.getPropertyListAll().subscribe(
       success => {
         this.listAllForFilter = success;
@@ -493,7 +471,7 @@ export class SearchPageComponent implements OnInit {
           console.log(filter1)
         }
         let filter2: AnnouncementGetResponseDto[] = [];
-        if (this.selectTypeAd) {
+        if (this.selectTypeAd !== 'Selecione') {
           if (filter1.length !== 0) {
             let type = ''
             if (this.selectTypeAd === 'Comprar') {
@@ -504,6 +482,8 @@ export class SearchPageComponent implements OnInit {
             filter2 = filter1.filter(elemento => elemento.typeOfAd === type)
             console.log('entrou no filtro 2', type);
           }
+        } else {
+          filter2 = filter1
         }
         let filter3: AnnouncementGetResponseDto[] = [];
         if (this.selectCity !== 'Local') {
