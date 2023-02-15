@@ -75,7 +75,25 @@ export class SearchPageComponent implements OnInit {
   valuePrices: 0;
 
   whatAreYouLookingForTitle: string = 'O que está buscando?';
-  TypeProperty = 'Tipo de Imóvel'
+  TypeProperty = 'Tipo de Imóvel';
+
+
+  listAllForFilter: AnnouncementGetResponseDto[] = [];
+  listLikesForFilter: AnnouncementGetResponseDto[] = [];
+
+  listAllCity: any = [
+    {
+      cidade: ''
+    }
+  ];
+
+  selectCity: string = 'Local';
+
+  modalFilter: boolean = false;
+
+  formModal: FormGroup;
+
+  modalFilterOpen: boolean = false;
 
   constructor(
     private router: Router,
@@ -89,6 +107,23 @@ export class SearchPageComponent implements OnInit {
 
   ) {
     this.form = this.formBuilder.group({
+      searchwords: [''],
+      localproperty: [''],
+      propertyType: [''],
+      typeproperty: [''],
+      typeMaxPrice: [''],
+      typeMinPrice: [''],
+      typebathroom: [''],
+      typerooms: [''],
+      typevacancies: [''],
+      typeconstruction: [''],
+      typefootagemax: [''],
+      typefootagemin: [''],
+      orderby: [''],
+    });
+
+
+    this.formModal = this.formBuilder.group({
       searchwords: [''],
       localproperty: [''],
       propertyType: [''],
@@ -170,12 +205,9 @@ export class SearchPageComponent implements OnInit {
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
 
-      if(this.filtroSelected.whatAreYouLookingFor !== '') {
+      if (this.filtroSelected.whatAreYouLookingFor !== '') {
         this.whatAreYouLookingFor(this.filtroSelected.whatAreYouLookingFor)
       }
-
-
-      console.log(this.filtroSelected)
     }
 
     if (this.filterResult === null || this.filterResult.length === 0) {
@@ -216,6 +248,22 @@ export class SearchPageComponent implements OnInit {
       }
     }
 
+    let teste: any = [];
+
+    this.searchService.getPropertyListAll().subscribe({
+      next: data => {
+        this.listAllCity = [];
+        let removeRepets: any = [];
+        for (let i = 0; i < data.length; i++) {
+          removeRepets.push(data[i].cityAddress)
+        }
+        teste = new Set(removeRepets)
+        this.listAllCity = teste
+      }
+    })
+
+
+
 
     this.searchService.getPropertyHomeExclusivity().subscribe(
       success => {
@@ -226,6 +274,24 @@ export class SearchPageComponent implements OnInit {
       error => { console.log(error, 'data not collected') }
     );
   }
+
+  limpaValoresRepetidos(array) {
+    for (let i in array) {
+      let valorComparado = array[i]
+      let cont = 0         //contador de incidencia de repeticao, seu valor deve ser 1
+      for (let i in array) {
+        if (valorComparado === array[i]) {
+          cont += 1
+          if (cont > 1) {
+            cont--
+            delete array[i]
+          }
+        }
+      }
+    }
+    return array
+  }
+
 
   likeHeart(value, condition) {
 
@@ -362,6 +428,250 @@ export class SearchPageComponent implements OnInit {
   }
   filterTypeProperty(value) {
     this.TypeProperty = value
+  }
+
+  // listForFilterOnClick() {
+  //   this.searchService.getPropertyListAll().subscribe(
+  //     success => {
+  //       this.filterResult = success;
+  //       if (localStorage.getItem('user') !== null) {
+  //         this.announcementService.listLikes().subscribe(
+  //           success => {
+  //             for (let i = 0; i < success.length; i++) {
+  //               for (let x = 0; x < this.filterResult.length; x++) {
+  //                 if (success[i].announcement._id === this.filterResult[x]._id) {
+  //                   Object.assign(this.filterResult[x], { liked: true });
+  //                 }
+  //               }
+  //               this.listLikes.push(success[i].announcement)
+  //             }
+  //           }
+  //         )
+  //       }
+  //       this.ngxSpinnerService.hide();
+  //     },
+  //   )
+  // }
+
+  searchByCity(item) {
+    this.selectCity = item
+  }
+
+  filtrar() {
+    // this.listForFilterOnClick();
+    // let listAll:  AnnouncementGetResponseDto[] = [];
+    // let listLikesFilter: AnnouncementGetResponseDto[] = [];
+    this.searchService.getPropertyListAll().subscribe(
+      success => {
+        this.listAllForFilter = success;
+        console.log(this.listAllForFilter)
+        if (localStorage.getItem('user') !== null) {
+          this.announcementService.listLikes().subscribe(
+            success => {
+              for (let i = 0; i < success.length; i++) {
+                for (let x = 0; x < this.listAllForFilter.length; x++) {
+                  if (success[i].announcement._id === this.listAllForFilter[x]._id) {
+                    Object.assign(this.listAllForFilter[x], { liked: true });
+                  }
+                }
+                this.listLikesForFilter.push(success[i].announcement)
+              }
+            }
+          )
+        }
+        let filter1: AnnouncementGetResponseDto[] = [];
+        if (this.whatAreYouLookingForTitle !== 'O que está buscando?') {
+          console.log('filtro um é', this.whatAreYouLookingForTitle)
+          filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.whatAreYouLookingForTitle))
+          if (filter1.length === 0) {
+            // filter1 = this.listAllForFilter;
+            console.log('nao tem', this.whatAreYouLookingForTitle)
+          }
+        } else {
+          filter1 = this.listAllForFilter;
+          console.log('não tem filtro', this.whatAreYouLookingForTitle);
+          console.log(filter1)
+        }
+        let filter2: AnnouncementGetResponseDto[] = [];
+        if (this.selectTypeAd) {
+          if (filter1.length !== 0) {
+            let type = ''
+            if (this.selectTypeAd === 'Comprar') {
+              type = 'sale'
+            } else {
+              type = 'rent'
+            }
+            filter2 = filter1.filter(elemento => elemento.typeOfAd === type)
+            console.log('entrou no filtro 2', type);
+          }
+        }
+        let filter3: AnnouncementGetResponseDto[] = [];
+        if (this.selectCity !== 'Local') {
+          filter3 = filter2.filter(elemento => elemento.cityAddress === this.selectCity)
+          console.log('cidade selecionada', this.selectCity)
+          if (filter3.length === 0) {
+            console.log('filtro 3 zerado')
+          }
+        } else {
+          filter3 = filter2
+        }
+
+        let filter4: AnnouncementGetResponseDto[] = [];
+        if (this.TypeProperty !== 'Tipo de Imóvel') {
+          filter4 = filter3.filter(elemento => elemento.propertyType === this.TypeProperty)
+          if (filter4.length === 0) {
+            console.log('caiu no filtro 4, zerado')
+          }
+        } else {
+          filter4 = filter3
+        }
+
+        let filter5: AnnouncementGetResponseDto[] = [];
+
+        let valueMin: number = 0;
+        let maxValue: number = 0;
+
+
+        if(this.modalFilterOpen === false) {
+          if (this.form.controls['typeMinPrice'].value !== '') {
+            valueMin = this.form.controls['typeMinPrice'].value;
+          }
+  
+          if (this.form.controls['typeMaxPrice'].value !== '') {
+            maxValue = this.form.controls['typeMaxPrice'].value;
+          }
+        } else {
+          if (this.form.controls['typeMinPrice'].value !== '') {
+            valueMin = this.formModal.controls['typeMinPrice'].value;
+          }
+  
+          if (this.form.controls['typeMaxPrice'].value !== '') {
+            maxValue = this.formModal.controls['typeMaxPrice'].value;
+          }
+        }
+        
+
+        if (valueMin !== 0 && maxValue !== 0) {
+          if (this.selectTypeAd === 'Comprar') {
+            filter5 = filter4.filter(elemento => parseInt(elemento.saleValue) <= maxValue && parseInt(elemento.saleValue) >= valueMin)
+          } else if (this.selectTypeAd === 'Alugar') {
+            filter5 = filter4.filter(elemento => parseInt(elemento.leaseValue) <= maxValue && parseInt(elemento.leaseValue) >= valueMin)
+          }
+        } else {
+          filter5 = filter4;
+        }
+
+        let filter6: AnnouncementGetResponseDto[] = [];
+
+        if (this.selectRooms !== 'Dormitórios') {
+          let quartos = this.selectRooms.replace(/\D/gim, '')
+          filter6 = filter5.filter(elemento => elemento.bedrooms >= parseInt(quartos))
+          console.log(quartos)
+        } else {
+          filter6 = filter5
+        }
+
+        let filter7: AnnouncementGetResponseDto[] = [];
+
+        if (this.selectBathrooms !== 'Banheiros') {
+          let banheiros = this.selectBathrooms.replace(/\D/gim, '')
+          filter7 = filter6.filter(elemento => elemento.bathrooms >= parseInt(banheiros))
+          console.log(banheiros)
+        } else {
+          filter7 = filter6
+        }
+
+        let filter8: AnnouncementGetResponseDto[] = [];
+
+        if (this.selectVacancies !== 'Vagas' && this.selectVacancies !== 'Tanto faz') {
+          let vagas = this.selectVacancies.replace(/\D/gim, '')
+          filter8 = filter7.filter(elemento => elemento.parkingSpaces >= parseInt(vagas))
+          console.log(vagas)
+        } else {
+          filter8 = filter7
+        }
+
+        let filter9: AnnouncementGetResponseDto[] = [];
+
+        let constructionYear = this.form.controls['typeconstruction'].value
+        if (constructionYear !== 0 && constructionYear !== '') {
+          filter9 = filter8.filter(elemento => parseInt(elemento.yearOfConstruction) >= constructionYear)
+        } else {
+          filter9 = filter8
+        }
+
+        let filter10: AnnouncementGetResponseDto[] = [];
+
+
+        let areaMax: number = 0;
+        let minArea: number = 0;
+
+        if(this.modalFilterOpen === false) {
+          if (this.form.controls['typefootagemin'].value !== '') {
+            minArea = this.form.controls['typefootagemin'].value;
+          }
+  
+          if (this.form.controls['typefootagemax'].value !== '') {
+            areaMax = this.form.controls['typefootagemax'].value;
+          }
+        } else {
+          if (this.form.controls['typefootagemin'].value !== '') {
+            minArea = this.formModal.controls['typefootagemin'].value;
+          }
+  
+          if (this.form.controls['typefootagemax'].value !== '') {
+            areaMax = this.formModal.controls['typefootagemax'].value;
+          }
+        }
+
+
+        if (minArea !== 0 && areaMax !== 0) {
+          filter10 = filter9.filter(elemento => parseInt(elemento.usefulArea) <= areaMax && parseInt(elemento.usefulArea) >= minArea)
+        } else {
+          filter10 = filter9;
+        }
+
+        this.filterResult = filter10;
+
+        if (filter10.length === 0) {
+          this.messageNotSearch = true;
+          this.filterResult = this.listAllForFilter;
+        }
+
+        if (this.modalFilterOpen === true) {
+          this.exit()
+        }
+
+        this.ngxSpinnerService.hide();
+      },
+    );
+  }
+
+  openFilter(content) {
+
+    this.modalFilterOpen = true
+
+    const modalRef = this.modalService.open(content, { centered: true });
+      modalRef.result.then(data => {
+      }, error => {
+        this.modalFilterOpen = false
+      });
+	}
+
+  exit() {
+    this.modalService.dismissAll()
+  }
+
+
+  public removerAcento(text) {
+    text = text.toLowerCase();
+    text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
+    text = text.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
+    text = text.replace(new RegExp('[ÍÌÎ]', 'gi'), 'i');
+    text = text.replace(new RegExp('[ÓÒÔÕ]', 'gi'), 'o');
+    text = text.replace(new RegExp('[ÚÙÛ]', 'gi'), 'u');
+    text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
+    return text.toLocaleLowerCase();
   }
 
 }
