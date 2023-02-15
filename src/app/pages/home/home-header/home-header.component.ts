@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { states, cities } from 'estados-cidades';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { SearchService } from 'src/app/service/search.service';
 
@@ -18,6 +19,33 @@ export class HomeHeaderComponent implements OnInit {
 
   response: AnnouncementGetResponseDto[] = [];
   filterResponse: AnnouncementGetResponseDto[] = [];
+
+  stateSelected = 'Primeiro escolha um estado'
+  citySelected = 'Escolha uma cidade'
+  cities: any[];
+  states: any[];
+  valueUntilArray: any[] = [ 100000, 200000, 300000, 400000, 500000, 1000000 , 2000000, 3000000, 4000000, 5000000, 10000000, 20000000, ];
+  valueUntil: string[] = 
+  [`R$ ${this.valueUntilArray[0]}`,
+  `R$ ${this.valueUntilArray[1]}`,
+  `R$ ${this.valueUntilArray[2]}`,
+  `R$ ${this.valueUntilArray[3]}`,
+  `R$ ${this.valueUntilArray[4]}`,
+  `R$ ${this.valueUntilArray[5]}`,
+  `R$ ${this.valueUntilArray[6]}`,
+  `R$ ${this.valueUntilArray[7]}`,
+  `R$ ${this.valueUntilArray[8]}`,
+  `R$ ${this.valueUntilArray[9]}`,
+  `R$ ${this.valueUntilArray[10]}`,
+  `R$ ${this.valueUntilArray[11]}`];
+
+  badroomsArray: any[] = [ 1, 2, 3, 4, 5 ];
+  badroomsQnt: string[] = 
+  [`+${this.badroomsArray[0]}`,
+  `+${this.badroomsArray[1]}`,
+  `+${this.badroomsArray[2]}`,
+  `+${this.badroomsArray[3]}`,
+  `+${this.badroomsArray[4]}`,];
 
   resultsearchfor: any = [];
   collapsed = false;
@@ -44,7 +72,7 @@ export class HomeHeaderComponent implements OnInit {
   alertPropertyOptions = false;
   resultType: any = [];
 
-  whatAreYouLookingForTitle: string = 'O que está buscando?';
+  typePropertyAllTitle: string = 'Tipo do imóvel';
 
   typeAd: string = 'sale';
 
@@ -60,7 +88,10 @@ export class HomeHeaderComponent implements OnInit {
       typeStatus: ['', [Validators.required]],
       typeProperty: ['', [Validators.required]],
       typepropertyTeste: [''],
-      typePropertyLocal: ['', [Validators.required]],
+      typePropertyCity: ['', [Validators.required]],
+      typePropertyState: ['', [Validators.required]],
+      typePropertyValue: ['', [Validators.required]],
+      typePropertyBadrooms: ['', [Validators.required]],
       typePropertyOptions: ['', [Validators.required]],
       typeOfResidential: ['', [Validators.required]],
       typeOfRural: ['', [Validators.required]],
@@ -82,34 +113,37 @@ export class HomeHeaderComponent implements OnInit {
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro')
 
-    this.searchService.getPropertyListAll().subscribe(
+    this.searchService.getPropertyHomeExclusivity().subscribe(
       success => {
         this.response = success;
-        // console.log(this.form.controls['typePropertyLocal'].value)
+        // console.log(this.form.controls['typePropertyCity'].value)
       },
       error => { console.log(error, 'data not collected') }
     );
+    this.cities = cities(this.citySelected);
+    this.states = states();
   }
 
   // make full search
   confirm() {
 
-    let oqEstaBuscando: string = '';
+    let typePropertyFilter: string = '';
 
-    if (this.whatAreYouLookingForTitle !== 'O que está buscando?') {
-      if (this.whatAreYouLookingForTitle === 'Terreno') {
-        oqEstaBuscando = 'terreno'
-      } else if (this.whatAreYouLookingForTitle === 'Edifício') {
-        oqEstaBuscando = 'edificio'
-      } else if (this.whatAreYouLookingForTitle === 'Casa') {
-        oqEstaBuscando = 'casa'
+    if (this.typePropertyAllTitle !== 'Tipo do imóvel') {
+      if (this.typePropertyAllTitle === 'Todos os imóveis') {
+        typePropertyFilter = 'allProperty'
+      } else if (this.typePropertyAllTitle === 'Todos os imóveis em Residencial') {
+        typePropertyFilter = 'allResidential'
+      }
+      else if (this.typePropertyAllTitle === 'Apartamento') {
+        typePropertyFilter = 'apartament'
       }
     }
 
     let filter: any = {
       typeAd: this.typeAd,
-      where: this.form.controls['typePropertyLocal'].value,
-      whatAreYouLookingFor: oqEstaBuscando,
+      where: this.form.controls['typePropertyCity'].value,
+      whatAreYouLookingFor: typePropertyFilter,
       propertyType: this.searchfilterTypeProperty,
       goal: this.searchfilterType,
       checkvacancies: this.form.controls['checkvacancies'].value,
@@ -194,9 +228,14 @@ export class HomeHeaderComponent implements OnInit {
 
   }
 
+  
+  getCities() {
+    this.cities = cities(this.stateSelected);
+  }
+
+
   // search filter
   resultSearch(tableName: string) {
-    // console.log(tableName.length)
     if (tableName.length == 0) { this.filtersearch = false }
     else { this.filtersearch = true }
     this.filterResponse;
@@ -204,14 +243,13 @@ export class HomeHeaderComponent implements OnInit {
     for (let i = 0; i < this.response.length; i++) {
       removeRepets.push(this.response[i].cityAddress);
     };
-    // console.log(this.filterResponse)
     const filtered = removeRepets.filter((item, index) => removeRepets.indexOf(item) === index);
     this.filterResponse = filtered;
   }
 
   selectCites(selected) {
     this.form.patchValue({
-      typePropertyLocal: selected
+      typePropertyCity: selected
     });
     this.filtersearch = false;
   }
@@ -269,9 +307,9 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
 
-  whatAreYouLookingFor(value) {
-    this.filtersearch = false;
-    this.whatAreYouLookingForTitle = value
+  typePropertyAll(value) {
+    // this.filtersearch = false;
+    this.typePropertyAllTitle = value
   }
 
   propertyCharacteristics(value: string) {

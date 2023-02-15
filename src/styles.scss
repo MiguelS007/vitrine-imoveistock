@@ -548,6 +548,9 @@ input:focus {
 .max-h-700 {
     max-height: 700px;
 }
+.max-h-400 {
+    max-height: 400px;
+}
 
 .w-90 {
     width: 90%;
@@ -627,8 +630,12 @@ input:focus {
     border-radius: 5px;
 }
 
+.border-radius-0{
+    border-radius: 0;
+}
+
 .border-radius-10 {
-    border-radius: 10px;
+    border-radius: 10px !important;
 }
 
 .border-radius-top-10 {
@@ -859,6 +866,14 @@ input:focus {
     height: 90vh;
     width: 100% !important;
 }
+.form-check-input {
+    position: absolute;
+    margin-top: 0px !important;
+    margin-left: -1.7rem !important;
+    border-radius: 68px !important;
+    width: 21px;
+    height: 21px;
+}
 
 .px-5p {
     padding-left: 5% !important;
@@ -878,10 +893,7 @@ input:focus {
     padding-top: 33%;
 }
 
-.painel-browser {
-    border: 10px solid transparent;
-    background: #ffffff3f;
-}
+
 
 .box-shadow {
     box-shadow: 2px 3px 14px 5px #00000050;
@@ -920,7 +932,7 @@ input:focus {
 .input-local {
     background-image: url(./assets/icon/local.png);
     background-repeat: no-repeat;
-    background-position: 92% 50%;
+    background-position: 97% 50%;
 }
 
 // SCROLL DOWN ANIMATION
