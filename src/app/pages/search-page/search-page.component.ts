@@ -53,7 +53,7 @@ export class SearchPageComponent implements OnInit {
     typeofProperty: string,
     typeAd: string,
     goal: string,
-    styleProperty: string
+    styleProperty: string,
   }
 
   orderBy: string = 'Selecione'
@@ -73,7 +73,7 @@ export class SearchPageComponent implements OnInit {
   selectVacancies = 'Vagas';
   valuePrices: 0;
 
-  searchByStylePropertyTitle: string = 'O que está buscando?';
+  stylePropertyTitle: string = 'O que está buscando?';
   TypeProperty = 'Tipo de Imóvel';
 
 
@@ -95,6 +95,7 @@ export class SearchPageComponent implements OnInit {
   modalFilterOpen: boolean = false;
   states: string[];
   cities: string[];
+
 
   constructor(
     private router: Router,
@@ -201,23 +202,9 @@ export class SearchPageComponent implements OnInit {
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
 
-      if (this.filtroResultDisplay.styleProperty !== '') {
-        this.searchByStyleProperty(this.filtroResultDisplay.styleProperty)
+      if (this.filtroSelected.styleProperty !== '') {
+        this.searchByStyleProperty(this.filtroSelected.styleProperty)
       }
-
-      // this.searchService.getPropertyListAll().subscribe(
-      //   success => {
-      //     this.filterResult = success;
-      //     console.log('oijoijojojoij')
-      //     if (this.filterResult !== null) {
-      //       for (let i = 0; i < this.filterResult.length; i++) {
-      //         if (this.filtroResultDisplay.untilValue >= this.filterResult[i]?.saleValue) this.messageNotSearch = true;
-      //         else this.messageNotSearch = false;
-      //         console.log(this.filtroResultDisplay.untilValue, this.filterResult[i].saleValue)
-      //       }
-      //     }
-      //   }
-      // )
     }
 
     if (this.filterResult === null || this.filterResult.length === 0) {
@@ -281,11 +268,11 @@ export class SearchPageComponent implements OnInit {
       error => { console.log(error, 'data not collected') }
     );
   }
-
-
   getCities() {
     this.cities = cities(this.stateSelected);
   }
+
+
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -393,13 +380,7 @@ export class SearchPageComponent implements OnInit {
       this.selectTypeAd = 'Alugar'
     }
   }
-  searchByStyleProperty(item) {
-    if (item === 'Edifício') {
-      this.searchByStylePropertyTitle = 'Edifício'
-    } else if (item === 'Terreno') {
-      this.searchByStylePropertyTitle = 'Terreno'
-    }
-  }
+
   searchBy(item) {
     // SELECT BADROOMS
     if (item === '1') {
@@ -441,6 +422,10 @@ export class SearchPageComponent implements OnInit {
     }
   }
 
+  searchByStyleProperty(value) {
+    this.stylePropertyTitle = value
+  }
+
   filterTypeProperty(value) {
     this.TypeProperty = value
   }
@@ -473,16 +458,16 @@ export class SearchPageComponent implements OnInit {
           )
         }
         let filter1: AnnouncementGetResponseDto[] = [];
-        if (this.searchByStylePropertyTitle !== 'O que está buscando?') {
-          console.log('filtro um é', this.searchByStylePropertyTitle)
-          filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.searchByStylePropertyTitle))
+        if (this.stylePropertyTitle !== 'O que está buscando?') {
+          console.log('filtro um é', this.stylePropertyTitle)
+          filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.stylePropertyTitle))
           if (filter1.length === 0) {
             // filter1 = this.listAllForFilter;
-            console.log('nao tem', this.searchByStylePropertyTitle)
+            console.log('nao tem', this.stylePropertyTitle)
           }
         } else {
           filter1 = this.listAllForFilter;
-          console.log('não tem filtro', this.searchByStylePropertyTitle);
+          console.log('não tem filtro', this.stylePropertyTitle);
           console.log(filter1)
         }
         let filter2: AnnouncementGetResponseDto[] = [];
@@ -670,3 +655,6 @@ export class SearchPageComponent implements OnInit {
   }
 
 }
+
+
+

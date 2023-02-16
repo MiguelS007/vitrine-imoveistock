@@ -31,9 +31,9 @@ export class HomeHeaderComponent implements OnInit {
   valueUntilArray: any[] = [100000, 200000, 300000, 400000, 500000, 1000000, 2000000, 3000000, 4000000, 5000000, 10000000, 20000000,];
   badroomsArray: any[] = [1, 2, 3, 4, 5];
   goal: string;
-  styleforPropertyE: 'Edifício';
-  styleforPropertyT: 'Terreno';
-  styleProperty: string;
+  styleforPropertyE: 'edificio';
+  styleforPropertyT: 'terreno';
+  stylePropertys: string;
 
 
 
@@ -116,7 +116,8 @@ export class HomeHeaderComponent implements OnInit {
   typePropertyAll(typeOf: string, styleforProperty: string, value: string) {
     this.goal = typeOf
     this.typeofProperty = value
-    this.styleProperty = styleforProperty;
+    this.stylePropertys = styleforProperty;
+    console.log(styleforProperty)
     this.typePropertyAllTitle = value
   }
   getCities() {
@@ -132,19 +133,12 @@ export class HomeHeaderComponent implements OnInit {
       state: this.form.controls['typePropertyState'].value,
       city: this.form.controls['typePropertyCity'].value,
       untilValue: this.form.controls['typePropertyValue'].value,
-      goal: this.goal,
-      typeofProperty: this.typeofProperty,
-      styleProperty: this.styleProperty,
-      badRoomsQnt: this.form.controls['typePropertyBadrooms'].value,
-      // checkvacancies: this.form.controls['checkvacancies'].value,
-      // checkbathrooms: this.form.controls['checkbathrooms'].value,
-      // checksuites: this.form.controls['checksuites'].value,
-      // checkrooms: this.form.controls['checkrooms'].value,
-      // checkcondominium: this.form.controls['checkcondominium'].value,
-      // checkfootage: this.form.controls['checkfootage'].value,
-      // checkconstruction: this.form.controls['checkconstruction'].value,
-      // checkrenovated: this.form.controls['checkrenovated'].value,
+      goal: this.goal, //residencial , comercial
+      typeofProperty: this.typeofProperty, // APARTAMENTO, CASA, STUDIO, FLAT, LOFT
+      styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
+      badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
+    console.log(filter.styleProperty)
 
     let announcementTypeAdGroup: AnnouncementGetResponseDto[] = [];
     if (filter.typeAd !== '') {
@@ -178,57 +172,55 @@ export class HomeHeaderComponent implements OnInit {
     } else {
       announcementStateGroup = announcementCityGroup;
     }
-    // --------------------------
-
-    let announcementStylePropertyGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.styleProperty !== undefined) {
-      for (let i = 0; i < announcementStateGroup.length; i++) {
-        if (announcementStateGroup[i].propertyCharacteristics === filter.styleProperty) {
-          announcementStylePropertyGroup.push(announcementStateGroup[i]);
-        }
-      }
-    } else {
-      announcementStylePropertyGroup = announcementStateGroup
-    }
-    // --------------------------
 
     let announcementGoalGroup: AnnouncementGetResponseDto[] = [];
     if (filter.goal !== undefined) {
-      for (let i = 0; i < announcementStylePropertyGroup.length; i++) {
-        if (announcementStylePropertyGroup[i].goal === filter.goal) {
-          announcementGoalGroup.push(announcementStylePropertyGroup[i]);
+      for (let i = 0; i < announcementStateGroup.length; i++) {
+        if (announcementStateGroup[i].goal === filter.goal) {
+          announcementGoalGroup.push(announcementStateGroup[i]);
         }
       }
     } else {
-      announcementGoalGroup = announcementStylePropertyGroup
+      announcementGoalGroup = announcementStateGroup
     }
     // --------------------------
-    let announcementtypeofPropertyGroup: AnnouncementGetResponseDto[] = [];
+    let announcementTypeofPropertyGroup: AnnouncementGetResponseDto[] = [];
     if (filter.typeofProperty !== undefined) {
       for (let i = 0; i < announcementGoalGroup.length; i++) {
         if (announcementGoalGroup[i].propertyType === filter.typeofProperty) {
-          announcementtypeofPropertyGroup.push(announcementGoalGroup[i]);
+          announcementTypeofPropertyGroup.push(announcementGoalGroup[i]);
         }
       }
     } else {
-      announcementtypeofPropertyGroup = announcementGoalGroup
+      announcementTypeofPropertyGroup = announcementGoalGroup
     }
     // --------------------------
     let announcementValueUntilGroup: AnnouncementGetResponseDto[] = [];
     if (filter.untilValue !== undefined) {
-      for (let i = 0; i < announcementtypeofPropertyGroup.length; i++) {
-        if (announcementtypeofPropertyGroup[i].saleValue === filter.untilValue) {
-          announcementValueUntilGroup.push(announcementtypeofPropertyGroup[i]);
+      for (let i = 0; i < announcementTypeofPropertyGroup.length; i++) {
+        if (announcementTypeofPropertyGroup[i].saleValue === filter.untilValue) {
+          announcementValueUntilGroup.push(announcementTypeofPropertyGroup[i]);
         }
       }
     } else {
-      announcementValueUntilGroup = announcementtypeofPropertyGroup
+      announcementValueUntilGroup = announcementTypeofPropertyGroup
+    }
+    // --------------------------
+    let announcementStylePropertyGroup: AnnouncementGetResponseDto[] = [];
+    if (filter.styleProperty !== undefined) {
+      for (let i = 0; i < announcementValueUntilGroup.length; i++) {
+        if (announcementValueUntilGroup[i].propertyCharacteristics === filter.styleProperty) {
+          announcementStylePropertyGroup.push(announcementValueUntilGroup[i]);
+        }
+      }
+    } else {
+      announcementStylePropertyGroup = announcementValueUntilGroup
     }
     // --------------------------
 
 
 
-    this.resultType = announcementtypeofPropertyGroup;
+    this.resultType = announcementStylePropertyGroup;
     console.log(this.resultType, filter)
 
 
@@ -347,28 +339,6 @@ export class HomeHeaderComponent implements OnInit {
     };
 
   }
-
-  // hideView() {
-  //   const divviewoptions = document.querySelector('.divviewoptions') as HTMLElement
-  //   divviewoptions.style.display = 'none'
-  //   this.hideviewoptions = false;
-  //   this.form.controls['checkvacancies'].setValue(false);
-  //   this.form.controls['checkbathrooms'].setValue(false);
-  //   this.form.controls['checksuites'].setValue(false);
-  //   this.form.controls['checkrooms'].setValue(false);
-  //   this.form.controls['checkcondominium'].setValue(false);
-  //   this.form.controls['checkfootage'].setValue(false);
-  //   this.form.controls['checkconstruction'].setValue(false);
-  //   this.form.controls['checkrenovated'].setValue(false);
-  //   this.viewvacancies = false
-  //   this.viewbathrooms = false;
-  //   this.viewsuites = false;
-  //   this.viewrooms = false;
-  //   this.viewcondominium = false;
-  //   this.viewfootage = false;
-  //   this.viewconstruction = false;
-  //   this.viewrenovated = false;
-  // }
 
 
 }
