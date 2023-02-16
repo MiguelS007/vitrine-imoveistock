@@ -8,6 +8,7 @@
                 <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                     <b>
                         <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
+                        <span *ngIf="filtroResultDisplay.typeofProperty"> {{filtroResultDisplay.styleProperty}},</span>
                         <span *ngIf="filtroResultDisplay.typeofProperty"> {{filtroResultDisplay.typeofProperty}},</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
                         <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
@@ -24,12 +25,11 @@
                             class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
                             type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                            {{whatAreYouLookingForTitle}}
+                            {{searchByStylePropertyTitle}}
                         </button>
                         <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Edifício')">Edifício</a>
-                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Terreno')">Terreno</a>
-                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Casa')">Casa</a>
+                            <a class="dropdown-item" (click)="searchByStyleProperty('Edifício')">Edifício</a>
+                            <a class="dropdown-item" (click)="searchByStyleProperty('Terreno')">Terreno</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -273,8 +273,7 @@
                     <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch">
                         <img src="../../../assets/img/not-search-announcement.svg" height="80">
                         <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
-                        <p class="text-center mb-0">explore outros filtros e confira os imoveis que podem te atender no
-                            momento</p>
+                        <p class="text-center mb-0">explore outros filtros e confira os imoveis abaixo que podem te atender no momento</p>
                         <span class="text-center">:(</span>
                     </div>
                     <div class="col-lg-6 px-3 col-cards-products" *ngFor="let item of filterResult | paginate: {

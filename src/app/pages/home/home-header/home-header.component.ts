@@ -134,7 +134,7 @@ export class HomeHeaderComponent implements OnInit {
       untilValue: this.form.controls['typePropertyValue'].value,
       goal: this.goal,
       typeofProperty: this.typeofProperty,
-      styleProperty: this.typeofProperty,
+      styleProperty: this.styleProperty,
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value,
       // checkvacancies: this.form.controls['checkvacancies'].value,
       // checkbathrooms: this.form.controls['checkbathrooms'].value,
@@ -234,7 +234,7 @@ export class HomeHeaderComponent implements OnInit {
 
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
-    this.router.navigate(['/search']);
+    // this.router.navigate(['/search']);
 
   }
 
