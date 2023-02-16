@@ -6,24 +6,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./visits.component.scss']
 })
 export class VisitsComponent implements OnInit {
-  spaceScheduling = false;
-  spaceFavorites = true;
-  segment = false;
+  spaceFavorites: boolean = true;
+  spaceScheduling: boolean = false;
+  spaceProposal: boolean = false
 
   constructor(
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.changePage('favorites')
+   }
 
   changePage(value: string) {
+    console.log(value)
     if (value === 'favorites') {
-      this.segment = !this.segment;
       this.spaceFavorites = true;
       this.spaceScheduling = false;
+      this.spaceProposal = false;
     } else if (value === 'scheduling') {
-      this.segment = !this.segment;
       this.spaceFavorites = false;
       this.spaceScheduling = true;
+      this.spaceProposal = false;
+    } else if (value === 'proposal') {
+      this.spaceFavorites = false;
+      this.spaceScheduling = false;
+      this.spaceProposal = true;
     }
   }
 }

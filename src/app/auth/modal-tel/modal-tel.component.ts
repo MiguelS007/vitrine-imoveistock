@@ -51,6 +51,10 @@ export class ModalTelComponent implements OnInit {
     console.error(error)
   }
 
+  exit() {
+    this.modalService.dismissAll()
+  }
+
   registerSuccess(success) {
     localStorage.setItem('phone', success.phone);
     this.modalService.dismissAll();

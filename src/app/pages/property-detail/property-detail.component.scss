@@ -12,19 +12,105 @@
     background: rgba(255, 255, 255, 0) !important;
 }
 
+.modal-header {
+    padding: 0 1rem !important;
+}
+.modal {
+    background: rgb(0 0 0 / 73%);
+}
+.modal-content-preview {
+    background:none !important;
+}
+.modal-content {
+    border-radius: 0 !important;
+    overflow-y: none !important;
+}
+.close:not(:disabled):not(.disabled) {
+    z-index: 10000 !important;
+    cursor: pointer !important;
+    padding: 0.5rem 1.2rem !important;
+    background: gray !important;
+    border-radius: 10rem 10rem !important;
+    margin: 1rem 1rem -4rem auto !important;
+}
+
+.modal-header .close {
+    padding: 1rem;
+    margin: 1rem 1rem -4rem auto !important;
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 0rem !important;
+    pointer-events: none;
+}
+
 @media (min-width: 576px) {
     .modal-dialog {
-        max-width: 904px !important;
-        margin: 1.75rem auto;
+        max-width: 100% !important;
+        margin: 0rem auto !important;
     }
+}
 
+@media (max-height: 580px) {
+    .preview-img-property {
+        height: 100% !important;
+        width: auto !important;
+    }
+    .img-plant-property{
+        height: 100% !important;
+        width: auto !important;
+    }
 }
 
 @media (max-width: 576px) {
     input {
         padding-right: 1.5rem !important;
     }
+    // .img-plant-property {
+    //     height: 100% !important;
+    //     width: auto !important;
+    // }
+    
 }
+
+@media (max-height: 1030px) {
+    .img-plant-property {
+        height: 100% !important;
+        width: auto !important;
+    }
+}
+
+@media(max-height: 835px){
+    .video-play{
+        height: 100%!important;
+        width: max-content !important;
+    }
+    .anima-body div{
+        padding-bottom: 0 !important;
+    }
+    .img-notvideo-360{
+        height: 100% !important;
+        width: auto !important;
+        padding: 0 60% 0% 35%;
+    
+    }
+}
+@media(max-width: 1030px){
+    .img-plant-property{
+        max-width: 300px !important;
+
+    }
+}
+
+@media(max-width: 1030px){
+    .img-plant-property{
+        height: auto !important;
+        width: 100% !important;
+    }
+}
+
 
 // MEDIA
 @media (max-width: 1240px) {

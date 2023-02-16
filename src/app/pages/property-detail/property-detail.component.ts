@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Subscription, window } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
@@ -19,6 +19,70 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
   styleUrls: ['./property-detail.component.scss']
 })
 export class PropertyDetailComponent implements OnInit {
+  infopay = true;
+  infopaymobile = false;
+
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition = window.pageYOffset;
+    const widthWindow = window.innerWidth;
+    let interdistance = Math.trunc(scrollPosition);
+    // INFO-PAY-MOBILE
+    if (interdistance >= 270) {
+      this.infopay = false;
+      this.infopaymobile = true;
+    } else {
+      this.infopay = true;
+      this.infopaymobile = false;
+    }
+    // STATIC-INFO-PAY-IN-SCROLL-PAGE
+    const infopaydesk = document.querySelector(
+      '#infopaydesk'
+    ) as HTMLElement;
+    const colinfopay = document.querySelector(
+      '#colinfopay'
+    ) as HTMLElement;
+    
+
+
+    if (interdistance >= 1460) {
+      if (widthWindow <= 1922) {
+        colinfopay.style.alignSelf = 'self-end'
+        infopaydesk.style.position = 'relative';
+        infopaydesk.style.top = '0px';
+        infopaydesk.style.maxWidth = '415px';
+        infopaydesk.style.zIndex = '20';
+      }else{
+        colinfopay.style.alignSelf = 'self-end'
+        infopaydesk.style.position = 'relative';
+        infopaydesk.style.top = '0px';
+        infopaydesk.style.maxWidth = '626px';
+        infopaydesk.style.zIndex = '20';
+      }
+    } else {
+      if (interdistance >= 511) {
+        if (widthWindow <= 1922) {
+          infopaydesk.style.position = 'fixed';
+          infopaydesk.style.maxWidth = '415px';
+          infopaydesk.style.top = '96px';
+          infopaydesk.style.zIndex = '20';
+        } else {
+          infopaydesk.style.position = 'fixed';
+          infopaydesk.style.maxWidth = '626px';
+          infopaydesk.style.top = '96px';
+          infopaydesk.style.zIndex = '20';
+        }
+      } else {
+        infopaydesk.style.position = 'relative';
+        infopaydesk.style.top = '0px';
+        colinfopay.style.alignSelf = 'auto'
+      }
+    }
+
+    console.log(interdistance, window.innerWidth)
+
+  }
+
 
   form: FormGroup;
   formproperty: FormGroup;
@@ -31,10 +95,13 @@ export class PropertyDetailComponent implements OnInit {
   request: ScheduleRegisterRequestDto;
 
   detailprofile = false;
-  arrow1: boolean = false;
-  arrow2: boolean = false;
-  arrow3: boolean = false;
+  arrow1 = false;
+  arrow2 = false;
+  arrow3 = false;
+  arrowinfo = false;
+  arrowpff = false;
 
+  cardinfobuy;
   arrayDeDatas: any = [];
 
   dataSelecionada: any;
@@ -53,10 +120,10 @@ export class PropertyDetailComponent implements OnInit {
   previewimg: any = [];
   products: any = [];
 
-  paginationProduct: number = 1;
+  paginationProduct = 1;
   tourvirtual = false;
   propertyvideo = true;
-  finalValue: number;
+  finalValue;
 
   filterResult: AnnouncementGetResponseDto[] = [];
   listLikes: AnnouncementGetResponseDto[] = [];
@@ -103,6 +170,7 @@ export class PropertyDetailComponent implements OnInit {
     this.list();
   }
 
+
   ngOnInit(): void {
     this.ngxSpinnerService.show()
     this.onlyimg = this.datamokservice.onlypreview;
@@ -115,47 +183,9 @@ export class PropertyDetailComponent implements OnInit {
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
+    this.finalValue = (parseInt(this.response.valueOfIptu) + parseInt(this.response.condominiumValue) + this.response.saleValue);
 
-    console.log(this.user?._id, this.response._id);
-
-    // if (this.filterResult === null || this.filterResult.length === 0) {
-    //   this.searchService.getPropertyListAll().subscribe(
-    //     success => {
-    //       this.filterResult = success;
-    //       if (localStorage.getItem('user') !== null) {
-    //         this.announcementService.listLikes().subscribe(
-    //           success => {
-    //             for (let i = 0; i < success.length; i++) {
-    //               for (let x = 0; x < this.filterResult.length; x++) {
-    //                 if (success[i].announcement._id === this.filterResult[x]._id) {
-    //                   Object.assign(this.filterResult[x], { liked: true });
-    //                 }
-    //               }
-    //               this.listLikes.push(success[i].announcement)
-    //             }
-    //           }
-    //         )
-    //       }
-    //       this.ngxSpinnerService.hide();
-
-    //     },
-    //   )
-    // } else {
-    //   if (localStorage.getItem('user') !== null) {
-    //     this.announcementService.listLikes().subscribe(
-    //       success => {
-    //         for (let i = 0; i < success.length; i++) {
-    //           for (let x = 0; x < this.filterResult.length; x++) {
-    //             if (success[i].announcement._id === this.filterResult[x]._id) {
-    //               Object.assign(this.filterResult[x], { liked: true });
-    //             }
-    //           }
-    //           this.listLikes.push(success[i].announcement)
-    //         }
-    //       }
-    //     )
-    //   }
-    // }
+    console.log(this.user?._id, this.response._id, this.finalValue);
 
 
     if (localStorage.getItem('user') !== null) {
@@ -197,7 +227,6 @@ export class PropertyDetailComponent implements OnInit {
 
 
   selectDate(value) {
-
     this.dataSelecionada = value
   }
 
@@ -205,7 +234,11 @@ export class PropertyDetailComponent implements OnInit {
     this.horasSelecionada = value
   }
   goExpress() {
-    this.router.navigate(['logged/express']);
+    if (localStorage.getItem('user') !== null) {
+      this.router.navigate([`logged/express/${this.response._id}`]);
+    } else {
+      this.modalService.open(ModalLoginComponent, { centered: true })
+    }
   }
 
 
@@ -229,6 +262,16 @@ export class PropertyDetailComponent implements OnInit {
       this.arrow3 = true;
     } else {
       this.arrow3 = false;
+    }
+    if (value === 24 && this.arrowpff === false) {
+      this.arrowpff = true;
+    } else {
+      this.arrowpff = false;
+    }
+    if (value === 42 && this.arrowinfo === false) {
+      this.arrowinfo = true;
+    } else {
+      this.arrowinfo = false;
     }
   }
 

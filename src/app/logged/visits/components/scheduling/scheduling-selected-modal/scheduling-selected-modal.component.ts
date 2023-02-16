@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ScheduleRegisterResponseDto } from '../../../../../dtos/schedule-register-response.dto';
 import { AnnouncementService } from '../../../../../service/announcement.service';
+import { EditSchedulingModalComponent } from '../edit-scheduling-modal/edit-scheduling-modal.component';
+import { EditScheduling2ModalComponent } from '../edit-scheduling2-modal/edit-scheduling2-modal.component';
+import { EditScheduling3ModalComponent } from '../edit-scheduling3-modal/edit-scheduling3-modal.component';
 
 @Component({
   selector: 'app-scheduling-selected-modal',
@@ -109,5 +112,34 @@ export class SchedulingSelectedModalComponent implements OnInit {
   exit() {
     this.modalService.dismissAll()
   }
+
+
+  editScheduling(selectedScheduling) {
+    localStorage.setItem('announcementSelected', JSON.stringify(selectedScheduling));
+    const modalRef = this.modalService.open(EditSchedulingModalComponent, { centered: true });
+      modalRef.result.then(data => {
+      }, error => {
+        this.editScheduling2();
+      });
+  }
+
+  editScheduling2() {
+    const modalRef = this.modalService.open(EditScheduling2ModalComponent, { centered: true });
+    modalRef.result.then(data => {
+    }, error => {
+      this.editScheduling3();
+    });
+  }
+
+  editScheduling3() {
+    const modalRef = this.modalService.open(EditScheduling3ModalComponent, { centered: true });
+    modalRef.result.then(data => {
+    }, error => {
+      localStorage.removeItem('announcementSelected');
+      localStorage.removeItem('dateScheduling');
+    });
+  }
+
+
 
 }

@@ -111,6 +111,8 @@ export class ModalCodeComponent implements OnInit {
     }
   }
 
+
+
   runError(error, value) {
     if(value === 'email') {
       this.toastrService.error('Erro ao enviar E-mail', '', { progressBar: true })
@@ -182,5 +184,8 @@ export class ModalCodeComponent implements OnInit {
     }
   }
 
+  exit() {
+    this.modalService.dismissAll()
+  }
 
 }

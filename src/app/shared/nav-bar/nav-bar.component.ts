@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatamokService } from 'src/app/service/datamok.service';
@@ -39,11 +39,14 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   userName: string;
 
+  navbarSelect: string = ''
+
   constructor(
     public router: Router,
     private datamokservice: DatamokService,
     private modalService: NgbModal,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public route: ActivatedRoute
 
   ) {
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
@@ -138,34 +141,37 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.contact = false;
       this.router.navigate(['/about']);
     } else if (value === 'indicateProperties') {
-      if (this.user !== null) {
-        window.open('https://imoveistock-app.vercel.app/logged/home', '_blank');
+      if (localStorage.getItem('user') !== null) {
+        // window.open('https://imoveistock-app.vercel.app/logged/home', '_blank');
+        window.open('https://imoveistock-app.vercel.app/auth/login-or-register', '_blank');
       } else {
-        this.openLogin()
+        window.open('https://imoveistock-app.vercel.app/', '_blank');
       }
       this.home = false;
       this.about = false;
       this.contact = false;
-    } else if (value === 'ownerRegistration') {
-      if (this.user !== null) {
-        window.open('https://imoveistock-app.vercel.app/logged/owner-registration', '_blank');
+    } 
+    else if (value === 'ownerRegistration') {
+      if (localStorage.getItem('user') !== null) {
+        // window.open('https://imoveistock-app.vercel.app/logged/owner-registration', '_blank');
+        window.open('https://imoveistock-app.vercel.app/auth/login-or-register', '_blank');
       } else {
-        this.openLogin()
+        window.open('https://imoveistock-app.vercel.app/', '_blank');
       }
       this.home = false;
       this.about = false;
       this.contact = false;
     } else if (value === 'forBrokers') {
-      if (this.user !== null) {
-        window.open('https://imoveistock-app.vercel.app/logged/broker-registration', '_blank');
+      if (localStorage.getItem('user') !== null) {
+        // window.open('https://imoveistock-app.vercel.app/logged/broker-registration', '_blank');
+        window.open('https://imoveistock-app.vercel.app/auth/login-or-register', '_blank');
       } else {
-        this.openLogin()
+        window.open('https://imoveistock-app.vercel.app/', '_blank');
       }
       this.home = false;
       this.about = false;
       this.contact = false;
     } else if (value === 'contact') {
-
       this.home = false;
       this.about = false;
       this.contact = true;

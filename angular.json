@@ -30,9 +30,12 @@
             "styles": [
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/cookieconsent/build/cookieconsent.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/cookieconsent/build/cookieconsent.min.js"
+            ]
           },
           "configurations": {
             "production": {
