@@ -53,7 +53,7 @@ export class SearchPageComponent implements OnInit {
     typeofProperty: string,
     typeAd: string,
     goal: string,
-    styleProperty: string,
+    // styleProperty: string,
   }
 
   orderBy: string = 'Selecione'
@@ -190,7 +190,7 @@ export class SearchPageComponent implements OnInit {
       propertiesType: this.filtroSelected?.propertiesType,
       typeofProperty: this.filtroSelected?.typeofProperty,
       goal: this.filtroSelected?.goal,
-      styleProperty: this.filtroSelected?.styleProperty,
+      // styleProperty: this.filtroSelected?.styleProperty,
       typeAd: typeAdTranslate
     }
 

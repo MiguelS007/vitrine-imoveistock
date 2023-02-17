@@ -31,8 +31,8 @@ export class HomeHeaderComponent implements OnInit {
   valueUntilArray: any[] = [100000, 200000, 300000, 400000, 500000, 1000000, 2000000, 3000000, 4000000, 5000000, 10000000, 20000000,];
   badroomsArray: any[] = [1, 2, 3, 4, 5];
   goal: string;
-  styleforPropertyE: 'edificio';
-  styleforPropertyT: 'terreno';
+  styleforPropertyE = 'edificio';
+  styleforPropertyT = 'terreno';
   stylePropertys: string;
 
 
@@ -113,11 +113,10 @@ export class HomeHeaderComponent implements OnInit {
 
   }
 
-  typePropertyAll(typeOf: string, styleforProperty: string, value: string) {
-    this.goal = typeOf
+  typePropertyAll(typeOf: string , item: string , value: string) {
+    this.goal = typeOf;
     this.typeofProperty = value
-    this.stylePropertys = styleforProperty;
-    console.log(styleforProperty)
+    this.stylePropertys = item;
     this.typePropertyAllTitle = value
   }
   getCities() {
@@ -138,7 +137,7 @@ export class HomeHeaderComponent implements OnInit {
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
-    console.log(filter.styleProperty)
+    console.log('este e o tipão', filter.styleProperty)
 
     let announcementTypeAdGroup: AnnouncementGetResponseDto[] = [];
     if (filter.typeAd !== '') {
@@ -206,21 +205,21 @@ export class HomeHeaderComponent implements OnInit {
       announcementValueUntilGroup = announcementTypeofPropertyGroup
     }
     // --------------------------
-    let announcementStylePropertyGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.styleProperty !== undefined) {
-      for (let i = 0; i < announcementValueUntilGroup.length; i++) {
-        if (announcementValueUntilGroup[i].propertyCharacteristics === filter.styleProperty) {
-          announcementStylePropertyGroup.push(announcementValueUntilGroup[i]);
-        }
-      }
-    } else {
-      announcementStylePropertyGroup = announcementValueUntilGroup
-    }
+    // let announcementStylePropertyGroup: AnnouncementGetResponseDto[] = [];
+    // if (filter.styleProperty !== undefined) {
+    //   for (let i = 0; i < announcementValueUntilGroup.length; i++) {
+    //     if (announcementValueUntilGroup[i].propertyCharacteristics === filter.styleProperty) {
+    //       announcementStylePropertyGroup.push(announcementValueUntilGroup[i]);
+    //     }
+    //   }
+    // } else {
+    //   announcementStylePropertyGroup = announcementValueUntilGroup
+    // }
     // --------------------------
 
 
 
-    this.resultType = announcementStylePropertyGroup;
+    this.resultType = announcementValueUntilGroup;
     console.log(this.resultType, filter)
 
 
