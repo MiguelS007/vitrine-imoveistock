@@ -56,7 +56,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AnnouncementService,
     AnnouncementGetByIdResolve,
     ProposalService,
-    ScheduleService
+    ScheduleService,
   ],
   bootstrap: [AppComponent]
 

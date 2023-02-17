@@ -36,4 +36,17 @@ export class AnnouncementService extends BaseService {
             .get(`${this.url}/like/list-by-user`, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
+
+    listAnnouncement(): Observable<AnnouncementGetResponseDto[]> {
+        return this.httpClient
+            .get(`${this.url}/list-all-showcase`, this.anonymousHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
+    announcementGetById(_id: string): Observable<AnnouncementGetResponseDto> {
+        return this.httpClient
+            .get(`${this.url}detail/${_id}`, this.anonymousHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
 }

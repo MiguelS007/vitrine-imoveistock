@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
-import { SearchService } from 'src/app/service/search.service';
+import { AnnouncementService } from '../../../service/announcement.service';
 
 @Component({
   selector: 'app-home-header',
@@ -52,7 +52,7 @@ export class HomeHeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private searchService: SearchService,
+    private announcementService: AnnouncementService,
     private toastrService: ToastrService
   ) {
     this.form = this.formBuilder.group({
@@ -82,7 +82,7 @@ export class HomeHeaderComponent implements OnInit {
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro')
 
-    this.searchService.getPropertyListAll().subscribe(
+    this.announcementService.listAnnouncement().subscribe(
       success => {
         this.response = success;
         // console.log(this.form.controls['typePropertyLocal'].value)

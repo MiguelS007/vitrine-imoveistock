@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
-import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { NgxSpinnerService } from "ngx-spinner";
@@ -99,7 +98,6 @@ export class SearchPageComponent implements OnInit {
     private router: Router,
     private datamokservice: DatamokService,
     private userService: UserService,
-    private searchService: SearchService,
     private formBuilder: FormBuilder,
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
@@ -162,7 +160,7 @@ export class SearchPageComponent implements OnInit {
 
     if (this.recentlySeenIdsList !== null) {
       for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
-        this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
+        this.announcementService.announcementGetById(this.recentlySeenIdsList[i]._id).subscribe(
           success => this.recentlySeenList.push(success),
           error => console.log(error)
         )
@@ -211,7 +209,7 @@ export class SearchPageComponent implements OnInit {
     }
 
     if (this.filterResult === null || this.filterResult.length === 0) {
-      this.searchService.getPropertyListAll().subscribe(
+      this.announcementService.listAnnouncement().subscribe(
         success => {
           this.filterResult = success;
           if (localStorage.getItem('user') !== null) {
@@ -250,7 +248,7 @@ export class SearchPageComponent implements OnInit {
 
     let teste: any = [];
 
-    this.searchService.getPropertyListAll().subscribe({
+    this.announcementService.listAnnouncement().subscribe({
       next: data => {
         this.listAllCity = [];
         let removeRepets: any = [];
@@ -258,21 +256,14 @@ export class SearchPageComponent implements OnInit {
           removeRepets.push(data[i].cityAddress)
         }
         teste = new Set(removeRepets)
-        this.listAllCity = teste
+        this.listAllCity = teste;
+        this.propertyproducts = data
+        this.response = data;
+        this.ngxSpinnerService.hide();
       }
     })
 
-
-
-
-    this.searchService.getPropertyHomeExclusivity().subscribe(
-      success => {
-        this.propertyproducts = success
-        this.response = success;
-        this.ngxSpinnerService.hide();
-      },
-      error => { console.log(error, 'data not collected') }
-    );
+    
   }
 
   limpaValoresRepetidos(array) {
@@ -439,7 +430,7 @@ export class SearchPageComponent implements OnInit {
     // let listAll:  AnnouncementGetResponseDto[] = [];
     // let listLikesFilter: AnnouncementGetResponseDto[] = [];
     this.ngxSpinnerService.show();
-    this.searchService.getPropertyListAll().subscribe(
+    this.announcementService.listAnnouncement().subscribe(
       success => {
         this.listAllForFilter = success;
         console.log(this.listAllForFilter)
@@ -616,6 +607,22 @@ export class SearchPageComponent implements OnInit {
         if (filter10.length === 0) {
           this.messageNotSearch = true;
           this.filterResult = this.listAllForFilter;
+        }
+
+        this.filtroResultDisplay = {
+          typeAd: '',
+          where: '',
+          whatAreYouLookingFor: '',
+          propertyType: '',
+          goal: '',
+          checkvacancies: '',
+          checkbathrooms: '',
+          checksuites: '',
+          checkrooms: '',
+          checkcondominium: '',
+          checkfootage: '',
+          checkconstruction: '',
+          checkrenovated: '',
         }
 
         if (this.modalFilterOpen === true) {

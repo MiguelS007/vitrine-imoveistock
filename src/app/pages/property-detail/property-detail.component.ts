@@ -10,7 +10,6 @@ import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-reque
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { DatamokService } from 'src/app/service/datamok.service';
-import { SearchService } from 'src/app/service/search.service';
 import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
 
 @Component({
@@ -138,7 +137,6 @@ export class PropertyDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private ngxSpinnerService: NgxSpinnerService,
-    private searchService: SearchService,
     private announcementService: AnnouncementService,
     private modalService: NgbModal
 
@@ -285,7 +283,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   list() {
-    this.searchService.getPropertyHomeExclusivity().subscribe(
+    this.announcementService.listAnnouncement().subscribe(
       response => {
         this.propertyproducts = response
         this.responseAnnouncement = response;
