@@ -61,6 +61,12 @@
                                                 </label>
                                             </div>
                                             <div class="form-check px-5  mb-3">
+                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'studio')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+                                                    Studio
+                                                </label>
+                                            </div>
+                                            <div class="form-check px-5  mb-3">
                                                 <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'casacondominio')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   casa de condomínio
@@ -82,6 +88,12 @@
                                                 <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'flat')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   flat
+                                                </label>
+                                            </div>
+                                            <div class="form-check px-5  mb-3">
+                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'loft')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+                                                  Loft
                                                 </label>
                                             </div>
                                             <div class="form-check px-5  mb-3">
@@ -116,6 +128,12 @@
                                                 <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'sala')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   sala
+                                                </label>
+                                            </div>
+                                            <div class="form-check px-5 mb-3">
+                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyE, 'galpao')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+                                                  Galpão
                                                 </label>
                                             </div>
                                             <div class="form-check px-5 mb-3">
@@ -181,13 +199,22 @@
                                     <div class="col-12 px-0 mb-3">
                                         <div class="row">
                                             <div class="col-6">
-                                                <div class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
+                                                <div *ngIf="!collapsed" class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
                                                     <div style="border-right: 0px !important;" class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
                                                         <p class="fw-400 pl-3 mb-0 font-size-14 line-15"> Valor até R$</p>
                                                     </div>
-                                                    <select formControlName="typePropertyValue" style="border-left: 0px !important;" 
+                                                    <select formControlName="typePropertyValueSale" style="border-left: 0px !important;" 
                                                     class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black" id="state" aria-label="Default select example">
-                                                       <option *ngFor="let item of valueUntilArray" [value]="item">{{item}}</option>
+                                                       <option *ngFor="let item of valueUntilSaleArray" [value]="item">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                                <div *ngIf="collapsed"class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
+                                                    <div style="border-right: 0px !important;" class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
+                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15"> Valor até R$</p>
+                                                    </div>
+                                                    <select formControlName="typePropertyValueRent" style="border-left: 0px !important;" 
+                                                    class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black" id="state" aria-label="Default select example">
+                                                       <option *ngFor="let item of valueUntilRentArray" [value]="item">{{item}}</option>
                                                     </select>
                                                 </div>
                                             </div>

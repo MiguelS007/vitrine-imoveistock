@@ -47,8 +47,9 @@ export class SearchPageComponent implements OnInit {
   filtroResultDisplay: {
     state: string,
     city: string,
-    untilValue: string,
-    badRoomsQnt: string,
+    untilValueSale: string,
+    untilValueRent: string,
+    badRoomsQnt: number,
     propertiesType: string,
     typeofProperty: string,
     typeAd: string,
@@ -69,7 +70,7 @@ export class SearchPageComponent implements OnInit {
 
   selectTypeAd = 'Selecione';
   selectBathrooms = 'Banheiros';
-  selectRooms = 'Dormitórios';
+  selectBadRooms = 'Dormitórios';
   selectVacancies = 'Vagas';
   valuePrices: 0;
 
@@ -114,8 +115,8 @@ export class SearchPageComponent implements OnInit {
       localproperty: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
-      typebathroom: [''],
-      typerooms: [''],
+      typeBathRoom: [''],
+      typeBadrooms: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
@@ -131,8 +132,8 @@ export class SearchPageComponent implements OnInit {
       localproperty: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
-      typebathroom: [''],
-      typerooms: [''],
+      typeBathRoom: [''],
+      typeBadrooms: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
@@ -185,7 +186,8 @@ export class SearchPageComponent implements OnInit {
     this.filtroResultDisplay = {
       state: this.filtroSelected?.state,
       city: this.filtroSelected?.city,
-      untilValue: this.filtroSelected?.untilValue,
+      untilValueSale: this.filtroSelected?.untilValueSale,
+      untilValueRent: this.filtroSelected?.untilValueRent,
       badRoomsQnt: this.filtroSelected?.badRoomsQnt,
       propertiesType: this.filtroSelected?.propertiesType,
       typeofProperty: this.filtroSelected?.typeofProperty,
@@ -196,17 +198,22 @@ export class SearchPageComponent implements OnInit {
 
     if (filtro !== null) {
       this.form.patchValue({
-        typeMaxPrice: this.filtroResultDisplay.untilValue,
+        typeMaxPrice: this.filtroResultDisplay.untilValueSale,
         localproperty: this.filtroResultDisplay.city,
         typeofProperty: this.filtroResultDisplay.typeofProperty
+
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
-
+      this.searchByCity(this.filtroSelected?.city);
+      this.filterTypeProperty(this.filtroSelected?.goal);
+      this.searchByBadRoom(this.filtroSelected?.badRoomsQnt)
       if (this.filtroSelected.styleProperty !== '') {
         this.searchByStyleProperty(this.filtroSelected.styleProperty)
       }
     }
 
+
+    // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.searchService.getPropertyListAll().subscribe(
         success => {
@@ -244,9 +251,8 @@ export class SearchPageComponent implements OnInit {
         )
       }
     }
-
+    // GET-CITIES
     let teste: any = [];
-
     this.searchService.getPropertyListAll().subscribe({
       next: data => {
         this.listAllCity = [];
@@ -259,6 +265,7 @@ export class SearchPageComponent implements OnInit {
       }
     })
 
+    // GET-GENERAL-PROPERTIES
     this.searchService.getPropertyHomeExclusivity().subscribe(
       success => {
         this.propertyproducts = success
@@ -381,43 +388,47 @@ export class SearchPageComponent implements OnInit {
     }
   }
 
-  searchBy(item) {
+  searchByBadRoom(item) {
     // SELECT BADROOMS
     if (item === '1') {
-      this.selectRooms = '+1 Quarto'
+      this.selectBadRooms = '+1 Quarto'
     } else if (item === '2') {
-      this.selectRooms = '+2  Quartos'
+      this.selectBadRooms = '+2  Quartos'
     } else if (item === '3') {
-      this.selectRooms = '+3  Quartos'
+      this.selectBadRooms = '+3  Quartos'
     } else if (item === '4') {
-      this.selectRooms = '+4  Quartos'
+      this.selectBadRooms = '+4  Quartos'
     } else if (item === '5') {
-      this.selectRooms = '+5  Quartos'
+      this.selectBadRooms = '+5  Quartos'
     }
+  }
+  searchByBathRoom(item) {
     // SELECT BATHROOMS
-    else if (item === '1b') {
+    if (item === '1') {
       this.selectBathrooms = '+1  Banheiro'
-    } else if (item === '2b') {
+    } else if (item === '2') {
       this.selectBathrooms = '+2  Banheiros'
-    } else if (item === '3b') {
+    } else if (item === '3') {
       this.selectBathrooms = '+3  Banheiros'
-    } else if (item === '4b') {
+    } else if (item === '4') {
       this.selectBathrooms = '+4  Banheiros'
-    } else if (item === '5b') {
+    } else if (item === '5') {
       this.selectBathrooms = '+5  Banheiros'
     }
-    // SELECT ROOMS
-    else if (item === 'tf') {
+  }
+  searchByVacancies(item) {
+    // SELECT VACANCES
+    if (item === '0') {
       this.selectVacancies = 'Tanto faz'
-    } else if (item === '1v') {
+    } else if (item === '1') {
       this.selectVacancies = '+1  Vagas'
-    } else if (item === '2v') {
+    } else if (item === '2') {
       this.selectVacancies = '+2  Vagas'
-    } else if (item === '3v') {
+    } else if (item === '3') {
       this.selectVacancies = '+3  Vagas'
-    } else if (item === '4v') {
+    } else if (item === '4') {
       this.selectVacancies = '+4  Vagas'
-    } else if (item === '5v') {
+    } else if (item === '5') {
       this.selectVacancies = '+5  Vagas'
     }
   }
@@ -457,6 +468,7 @@ export class SearchPageComponent implements OnInit {
             }
           )
         }
+        // 1° filtro
         let filter1: AnnouncementGetResponseDto[] = [];
         if (this.stylePropertyTitle !== 'O que está buscando?') {
           console.log('filtro um é', this.stylePropertyTitle)
@@ -470,6 +482,8 @@ export class SearchPageComponent implements OnInit {
           console.log('não tem filtro', this.stylePropertyTitle);
           console.log(filter1)
         }
+
+        // 2° filtro
         let filter2: AnnouncementGetResponseDto[] = [];
         if (this.selectTypeAd !== 'Selecione') {
           if (filter1.length !== 0) {
@@ -485,6 +499,8 @@ export class SearchPageComponent implements OnInit {
         } else {
           filter2 = filter1
         }
+
+        // 2° filtro
         let filter3: AnnouncementGetResponseDto[] = [];
         if (this.selectCity !== 'Local') {
           filter3 = filter2.filter(elemento => elemento.cityAddress === this.selectCity)
@@ -496,8 +512,10 @@ export class SearchPageComponent implements OnInit {
           filter3 = filter2
         }
 
+        // 3-4° filtro
         let filter4: AnnouncementGetResponseDto[] = [];
         if (this.TypeProperty !== 'Tipo de Imóvel') {
+         
           filter4 = filter3.filter(elemento => elemento.propertyType === this.TypeProperty)
           if (filter4.length === 0) {
             console.log('caiu no filtro 4, zerado')
@@ -506,11 +524,10 @@ export class SearchPageComponent implements OnInit {
           filter4 = filter3
         }
 
+        // 4-5° filtro
         let filter5: AnnouncementGetResponseDto[] = [];
-
         let valueMin: number = 0;
         let maxValue: number = 0;
-
 
         if (this.modalFilterOpen === false) {
           if (this.form.controls['typeMinPrice'].value !== '') {
@@ -530,7 +547,6 @@ export class SearchPageComponent implements OnInit {
           }
         }
 
-
         if (valueMin !== 0 && maxValue !== 0) {
           if (this.selectTypeAd === 'Comprar') {
             filter5 = filter4.filter(elemento => parseInt(elemento.saleValue) <= maxValue && parseInt(elemento.saleValue) >= valueMin)
@@ -541,16 +557,19 @@ export class SearchPageComponent implements OnInit {
           filter5 = filter4;
         }
 
+        // 6° filtro
+
         let filter6: AnnouncementGetResponseDto[] = [];
 
-        if (this.selectRooms !== 'Dormitórios') {
-          let quartos = this.selectRooms.replace(/\D/gim, '')
+        if (this.selectBadRooms !== 'Dormitórios') {
+          let quartos = this.selectBadRooms.replace(/\D/gim, '')
           filter6 = filter5.filter(elemento => elemento.bedrooms >= parseInt(quartos))
           console.log(quartos)
         } else {
           filter6 = filter5
         }
 
+        // 7° filtro
         let filter7: AnnouncementGetResponseDto[] = [];
 
         if (this.selectBathrooms !== 'Banheiros') {
@@ -561,6 +580,7 @@ export class SearchPageComponent implements OnInit {
           filter7 = filter6
         }
 
+        // 8° filtro
         let filter8: AnnouncementGetResponseDto[] = [];
 
         if (this.selectVacancies !== 'Vagas' && this.selectVacancies !== 'Tanto faz') {
@@ -571,6 +591,8 @@ export class SearchPageComponent implements OnInit {
           filter8 = filter7
         }
 
+
+        // 9° filtro
         let filter9: AnnouncementGetResponseDto[] = [];
 
         let constructionYear = this.form.controls['typeconstruction'].value
@@ -580,6 +602,7 @@ export class SearchPageComponent implements OnInit {
           filter9 = filter8
         }
 
+        // 10° filtro
         let filter10: AnnouncementGetResponseDto[] = [];
 
 

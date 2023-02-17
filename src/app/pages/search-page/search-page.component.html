@@ -1,6 +1,6 @@
 <main class="bg-graylight d-flex justify-content-center position-relative w-100 py-5 px-5p">
     <div class="padding-x w-100 max-w-1918 mb-5">
-        <form [formGroup]="form" class="row form-search pt-5 h-100 m-0-auto">
+        <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto">
             <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
                 <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">Página Inicial /
                     <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
@@ -18,7 +18,7 @@
                     </b>
                 </p>
             </div>
-            <div class="col-4 col-body-products pl-0">
+            <div class="col-4 col-body-products mt-5 pt-5 pl-0">
                 <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
                     <div class="dropdown">
                         <button style="min-width: 162.23px !important;"
@@ -88,30 +88,30 @@
                         </div>
                     </div>
                     <div class="dropdown">
-                        <input type="text" formControlName="typerooms" [value]="selectRooms" [placeholder]="selectRooms"
+                        <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
                             class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
                             role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
                         <div class="dropdown-menu" aria-labelledby="resultRooms">
-                            <a class="dropdown-item" (click)="searchBy('1')">1+</a>
-                            <a class="dropdown-item" (click)="searchBy('2')">2+</a>
-                            <a class="dropdown-item" (click)="searchBy('3')">3+</a>
-                            <a class="dropdown-item" (click)="searchBy('4')">4+</a>
-                            <a class="dropdown-item" (click)="searchBy('5')">5+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('1')">1+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('2')">2+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('3')">3+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('4')">4+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('5')">5+</a>
                         </div>
                     </div>
                     <div class="dropdown">
-                        <input type="text" formControlName="typebathroom" [value]="selectBathrooms"
+                        <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms"
                             [placeholder]="selectBathrooms"
                             class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                            role="button" id="resultBadRooms" data-toggle="dropdown" aria-haspopup="true"
+                            role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
-                        <div class="dropdown-menu" aria-labelledby="resultBadRooms">
-                            <a class="dropdown-item" (click)="searchBy('1b')">1+</a>
-                            <a class="dropdown-item" (click)="searchBy('2b')">2+</a>
-                            <a class="dropdown-item" (click)="searchBy('3b')">3+</a>
-                            <a class="dropdown-item" (click)="searchBy('4b')">4+</a>
-                            <a class="dropdown-item" (click)="searchBy('5b')">5+</a>
+                        <div class="dropdown-menu" aria-labelledby="resultbathroom">
+                            <a class="dropdown-item" (click)="searchByBathRoom('1')">1+</a>
+                            <a class="dropdown-item" (click)="searchByBathRoom('2')">2+</a>
+                            <a class="dropdown-item" (click)="searchByBathRoom('3')">3+</a>
+                            <a class="dropdown-item" (click)="searchByBathRoom('4')">4+</a>
+                            <a class="dropdown-item" (click)="searchByBathRoom('5')">5+</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -121,13 +121,13 @@
                             role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
                         <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                            <a class="dropdown-item" (click)="searchBy('tf')">Tanto faz</a>
-                            <a class="dropdown-item" (click)="searchBy('1v')">1+</a>
-                            <a class="dropdown-item" (click)="searchBy('2v')">2+</a>
-                            <a class="dropdown-item" (click)="searchBy('3v')">3+</a>
-                            <a class="dropdown-item" (click)="searchBy('4v')">4+</a>
-                            <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
-                            <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('0')">Tanto faz</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                         </div>
                     </div>
                     <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
@@ -214,7 +214,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8 col-body-products px-0 mt-5">
+            <div class="col-8 col-body-products px-0 pt-5 mt-5">
                 <div class="col-12 d-block-desk d-none mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
                     <p class="d-flex fw-700 font-size-16 line-19 color-black
                      align-items-center">Página Inicial /
@@ -456,44 +456,46 @@
                 </div>
             </div>
             <div class="dropdown">
-                <input type="text" formControlName="typerooms" [value]="selectRooms" [placeholder]="selectRooms"
+                <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
                     class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                    role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    readonly>
+                    role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" readonly>
                 <div class="dropdown-menu" aria-labelledby="resultRooms">
-                    <a class="dropdown-item" (click)="searchBy('1')">1+</a>
-                    <a class="dropdown-item" (click)="searchBy('2')">2+</a>
-                    <a class="dropdown-item" (click)="searchBy('3')">3+</a>
-                    <a class="dropdown-item" (click)="searchBy('4')">4+</a>
-                    <a class="dropdown-item" (click)="searchBy('5')">5+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('1')">1+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('2')">2+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('3')">3+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('4')">4+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('5')">5+</a>
                 </div>
             </div>
             <div class="dropdown">
-                <input type="text" formControlName="typebathroom" [value]="selectBathrooms" [placeholder]="selectBathrooms"
+                <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms"
+                    [placeholder]="selectBathrooms"
                     class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                    role="button" id="resultBadRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    readonly>
-                <div class="dropdown-menu" aria-labelledby="resultBadRooms">
-                    <a class="dropdown-item" (click)="searchBy('1b')">1+</a>
-                    <a class="dropdown-item" (click)="searchBy('2b')">2+</a>
-                    <a class="dropdown-item" (click)="searchBy('3b')">3+</a>
-                    <a class="dropdown-item" (click)="searchBy('4b')">4+</a>
-                    <a class="dropdown-item" (click)="searchBy('5b')">5+</a>
+                    role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" readonly>
+                <div class="dropdown-menu" aria-labelledby="resultbathroom">
+                    <a class="dropdown-item" (click)="searchByBathRoom('1')">1+</a>
+                    <a class="dropdown-item" (click)="searchByBathRoom('2')">2+</a>
+                    <a class="dropdown-item" (click)="searchByBathRoom('3')">3+</a>
+                    <a class="dropdown-item" (click)="searchByBathRoom('4')">4+</a>
+                    <a class="dropdown-item" (click)="searchByBathRoom('5')">5+</a>
                 </div>
             </div>
             <div class="dropdown">
-                <input type="text" formControlName="typevacancies" [value]="selectVacancies" [placeholder]="selectVacancies"
+                <input type="text" formControlName="typevacancies" [value]="selectVacancies"
+                    [placeholder]="selectVacancies"
                     class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                    role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    readonly>
+                    role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" readonly>
                 <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                    <a class="dropdown-item" (click)="searchBy('tf')">Tanto faz</a>
-                    <a class="dropdown-item" (click)="searchBy('1v')">1+</a>
-                    <a class="dropdown-item" (click)="searchBy('2v')">2+</a>
-                    <a class="dropdown-item" (click)="searchBy('3v')">3+</a>
-                    <a class="dropdown-item" (click)="searchBy('4v')">4+</a>
-                    <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
-                    <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('0')">Tanto faz</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                 </div>
             </div>
             <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
