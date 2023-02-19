@@ -18,8 +18,8 @@ export class HomeHeaderComponent implements OnInit {
 
   response: AnnouncementGetResponseDto[] = [];
   filterResponse: AnnouncementGetResponseDto[] = [];
-
-
+  isChecked = false;
+  stringValue = '';
   selectedResidencial = 'residencial'
   selectedRural = 'rural'
   selectedComercial = 'comercial'
@@ -34,6 +34,21 @@ export class HomeHeaderComponent implements OnInit {
   styleforPropertyE = 'edificio';
   styleforPropertyT = 'terreno';
   stylePropertys: string;
+  checkedAll = false;
+  checkedapartamento = false;
+  checkedstudio = false;
+  checkedAllResidencial = false;
+  checkedComercial = false;
+
+  // propertykitnet: 'kitnet';
+  // propertycasacondominio: 'casacondominio';
+  // propertycasadevila: 'casadevila';
+  // propertycobertura: 'cobertura';
+  // propertyflat: 'flat';
+  // propertyloft: 'loft';
+  // propertyterreno: 'terreno';
+
+
 
 
 
@@ -66,6 +81,10 @@ export class HomeHeaderComponent implements OnInit {
 
   typeAd: string = 'sale';
   typeofProperty: string;
+  typepropertyfull: string;
+  typepropertyCR: string;
+  propertyapartamento: void;
+  propertystudio: void;
 
 
   constructor(
@@ -83,6 +102,9 @@ export class HomeHeaderComponent implements OnInit {
       typePropertyValueRent: [''],
       typePropertyValueSale: [''],
       typePropertyBadrooms: [''],
+      propertyapartamento: [''],
+      propertystudio: [''],
+
     });
   }
 
@@ -102,12 +124,58 @@ export class HomeHeaderComponent implements OnInit {
 
   }
 
-  typePropertyAll(typeOf: string, item: string, value: string) {
-    this.goal = typeOf;
-    this.typeofProperty = value
-    this.stylePropertys = item;
-    this.typePropertyAllTitle = value
+
+  typePropertyAll(value: string) {
+    // if (this.checkedResidencial != false) {
+    //   this.checkedResidencial = false;
+    // }
+    this.typepropertyfull = value;
+    this.checkedAll = !this.checkedAll;
   }
+  
+  typePropertyComercialResidencial(value: string) {
+    if (value === 'Todos os imóveis em Residencial') {
+      // if(this.checkedResidencial === true){
+      //   this.checkedResidencial === true
+      // }else{
+      //   this.checkedResidencial = !this.checkedResidencial;
+      // }
+      this.checkedAllResidencial = !this.checkedAllResidencial
+    }
+    // this.checkedAll = true;
+  }
+
+  // typePropertyCharacteristics(typeOf: string, item: string, value: string) {
+  //   this.goal = typeOf;
+  //   this.typeofProperty = value
+  //   this.stylePropertys = item;
+  //   this.typePropertyAllTitle = value
+  //   this.checkedResidencial = true;
+  //   this.checkedAll = true;
+
+
+  // }
+  typePropertyCharacteristics(typeOf: string, item: string) {
+    this.goal = typeOf;
+    this.typeofProperty
+    this.stylePropertys = item;
+    this.form.controls['propertyapartamento'].setValue('apartamento');
+    // this.form.controls['propertystudio'].setValue('studio');
+    // this.checkedResidencial = true;
+
+    // apartamento
+    if(this.checkedapartamento === false) this.checkedapartamento = true
+    else this.checkedapartamento = false
+    // studio
+    if(this.checkedstudio === false) this.checkedstudio = true
+    else this.checkedstudio = false
+    
+    this.checkedAllResidencial = false;
+    this.checkedAll = true;
+    console.log(this.form.controls['propertyapartamento'].value)
+  }
+
+
   getCities() {
     this.cities = cities(this.stateSelected);
     console.log(this.stateSelected, this.citySelected)
@@ -120,15 +188,21 @@ export class HomeHeaderComponent implements OnInit {
       typeAd: this.typeAd,
       state: this.form.controls['typePropertyState'].value,
       city: this.form.controls['typePropertyCity'].value,
+      allResidential: this.typepropertyfull,
       untilValueSale: this.form.controls['typePropertyValueSale'].value,
       untilValueRent: this.form.controls['typePropertyValueRent'].value,
       goal: this.goal, //residencial , comercial
       typeofProperty: this.typeofProperty, // APARTAMENTO, CASA, STUDIO, FLAT, LOFT
+      propertyapartamento: this.propertyapartamento,
+      propertystudio: this.propertystudio,
+
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
-    let quarto = parseInt(filter.badRoomsQnt);
-    console.log('este e o tipão', filter.styleProperty, 'esse é o valor', filter.untilValueSale, filter.untilValueRent)
+
+    console.log(filter.propertyapartamento);
+
+
 
 
     // ---------------------------
@@ -180,10 +254,18 @@ export class HomeHeaderComponent implements OnInit {
     }
     // ---------------------------
 
+
+
     let announcementTypeofPropertyGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.typeofProperty !== undefined) {
+    if (
+      filter.propertyapartamento !== undefined,
+      filter.propertystudio !== undefined
+    ) {
       for (let i = 0; i < announcementGoalGroup.length; i++) {
-        if (announcementGoalGroup[i].propertyType === filter.typeofProperty) {
+        if (
+          announcementGoalGroup[i].propertyType === filter.propertyapartamento ||
+          announcementGoalGroup[i].propertyType === filter.propertystudio
+        ) {
           announcementTypeofPropertyGroup.push(announcementGoalGroup[i]);
         }
       }
@@ -247,7 +329,7 @@ export class HomeHeaderComponent implements OnInit {
 
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
-    this.router.navigate(['/search']);
+    // this.router.navigate(['/search']);
 
   }
 

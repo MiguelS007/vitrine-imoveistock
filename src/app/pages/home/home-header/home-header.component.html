@@ -34,7 +34,7 @@
                                         </button>
                                         <div class="dropdown-menu border-radius-10 py-4 max-h-400 overflow-x-scroll w-100" aria-labelledby="dropdownforhome">
                                             <div class="form-check px-5">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE,  'Todos os imóveis')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <input (click)="typePropertyAll('todososimoveis')" [checked]="checkedAll"  class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label cursor-pointer" for="chooseFilter">
                                                   Todos os imóveis
                                                 </label>
@@ -43,141 +43,78 @@
                                                 <h3 class="fw-700 font-size-14 line-20 color-black">Residencial</h3>
                                             </div>
                                             <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE,'Todosresidencial')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <input (click)="typePropertyComercialResidencial('Todos os imóveis em Residencial')" class="form-check-input cursor-pointer" [checked]="checkedAllResidencial" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label cursor-pointer" for="chooseFilter">
                                                   Todos os imóveis em Residencial
                                                 </label>
                                             </div>
                                             <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'apartamento')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE)" 
+                                                    class="form-check-input cursor-pointer" [checked]="checkedapartamento" type="checkbox" id="chooseFilter"
+                                                    formControlName="propertyapartamento">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   Apartamento
                                                 </label>
                                             </div>
-                                            <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'kitnet')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                    kitnet
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'studio')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                               <div class="form-check px-5  mb-3">
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE)" 
+                                                class="form-check-input cursor-pointer" [checked]="checkedstudio" type="checkbox" id="chooseFilter"
+                                                formControlName="propertystudio">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                     Studio
                                                 </label>
                                             </div>
+                                            <!-- <div class="form-check px-5  mb-3">
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'kitnet')" class="form-check-input cursor-pointer" [checked]="checkedResidencial === false" type="checkbox" id="chooseFilter">
+                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+                                                    kitnet
+                                                </label>
+                                            </div>
+                                         
                                             <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'casacondominio')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'casacondominio')" class="form-check-input cursor-pointer" [checked]="checkedResidencial === false" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   casa de condomínio
                                                 </label>
                                             </div>
                                             <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'casadevila')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'casadevila')" class="form-check-input cursor-pointer" [checked]="checkedResidencial === false" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   casa de vila
                                                 </label>
                                             </div>
                                             <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'cobertura')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'cobertura')" class="form-check-input cursor-pointer" [checked]="checkedResidencial === false" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   cobertura
                                                 </label>
                                             </div>
                                             <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'flat')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'flat')" class="form-check-input cursor-pointer" [checked]="checkedResidencial === false" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   flat
                                                 </label>
                                             </div>
                                             <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'loft')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'loft')" class="form-check-input cursor-pointer" [checked]="checkedResidencial === false"type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   Loft
                                                 </label>
                                             </div>
                                             <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'terreno')"  class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter"/>
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'terreno')"  class="form-check-input cursor-pointer" [checked]="checkedResidencial === false"type="checkbox" id="chooseFilter"/>
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                     Terrenos / Lotes / condomínio
                                                 </label>
                                             </div>
                                             <div class="form-check px-5  mb-3">
-                                                <input (click)="typePropertyAll(selectedResidencial, styleforPropertyE, 'chacara')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+                                                <input (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'chacara')" class="form-check-input cursor-pointer" [checked]="checkedResidencial === false" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
                                                   Fazenda / Sítio / Chácara
                                                 </label>
-                                            </div>
+                                            </div> -->
                                             <!-- COMERCIAL -->
-                                            <div class="w-100 px-3 pt-4 pb-2">
-                                                <h3 class="fw-700 font-size-14 line-20 color-black">Comercial</h3>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'loja')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                  Loja / Ponto Comercial
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'salao')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                  Salão
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'sala')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                  sala
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyE, 'galpao')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                  Galpão
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'conjuntocomercial')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                  Conjunto comercial
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'casacomercial')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                  casa comercial
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'hotel')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                  hotel
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'motel')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                  motel
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'pousada')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                  pousada
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'lajecorporativa')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                    Laje corporativa
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input (click)="typePropertyAll(selectedComercial, styleforPropertyT, 'prediointeiro')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
-                                                    Prédio inteiro
-                                                </label>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                     <div class="col-12 px-0 mb-3 ">
@@ -232,9 +169,9 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="d-flex col-12 justify-content-end">
+                                    <div class="d-flex col-12 px-0 justify-content-end">
                                         <button (click)="confirm()"
-                                            class="btn w-100 btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5 mx-2"
+                                            class="btn w-100 btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5"
                                             type="submit">Procurar imóveis</button>
                                     </div>
                                 </div>
@@ -246,3 +183,81 @@
         </div>
     </div>
 </main>
+
+
+
+<!-- <div class="w-100 px-3 pt-4 pb-2">
+    <h3 class="fw-700 font-size-14 line-20 color-black">Comercial</h3>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyComercialResidencial('todoscomercial')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      Todos os imóveis em Comercial
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'loja')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      Loja / Ponto Comercial
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'salao')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      Salão
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'sala')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      sala
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyE, 'galpao')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      Galpão
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'conjuntocomercial')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      Conjunto comercial
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'casacomercial')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      casa comercial
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'hotel')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      hotel
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'motel')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      motel
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'pousada')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+      pousada
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'lajecorporativa')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+        Laje corporativa
+    </label>
+</div>
+<div class="form-check px-5 mb-3">
+    <input (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'prediointeiro')" class="form-check-input cursor-pointer" type="checkbox" id="chooseFilter">
+    <label class="form-check-label text-capitalize cursor-pointer" for="chooseFilter">
+        Prédio inteiro
+    </label>
+</div> -->

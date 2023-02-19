@@ -906,12 +906,12 @@ input:focus {
     content: " ";
     height: 0;
     width: 0;
-    position: absolute;
+    position: absolute;left: 44%;
     border-color: transparent;
+    z-index: 1;
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 72px !important;
     bottom: -24px;
 }
 
@@ -920,6 +920,8 @@ input:focus {
     content: " ";
     height: 0;
     width: 0;
+    z-index: 1;
+    left: 37%;
     position: absolute;
     border-color: transparent;
     rotate: 90deg;
@@ -1131,80 +1133,63 @@ input:focus {
     display: flex !important;
 }
 
-@media (max-width: 1776px) {
+@media (max-width: 1920px) {
     .arrow-box-buy:after {
-        left: 45.8%;
+        left: 40%;
     }
 }
 
 @media (max-width: 1600px) {
     .arrow-box-buy:after {
-        left: 44.8%;
+        left: 40%;
+    }
+}
+@media (max-width: 1000px) {
+    .arrow-box-buy:after {
+        left: 37%;
     }
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 800px) {
     .arrow-box-buy:after {
-        left: 45%;
+        left: 29%;
     }
 }
-
-@media (max-width: 1300px) {
+@media (max-width: 400px) {
     .arrow-box-buy:after {
-        left: 44.2%;
-    }
-}
-
-@media (max-width: 1192px) {
-    .arrow-box-buy:after {
-        left: 43.7%;
-    }
-}
-
-@media (max-width: 1192px) {
-    .arrow-box-buy:after {
-        left: 43.7%;
-    }
-}
-
-@media (max-width: 600px) {
-    .arrow-box-buy:after {
-        left: 38%;
+        left: 22%;
     }
 }
 
 // RENT
-@media (max-width: 1776px) {
+
+@media (max-width: 1920px) {
     .arrow-box-rent:after {
-        left: 52.8%;
+        left: 37%;
     }
 }
 
 @media (max-width: 1600px) {
     .arrow-box-rent:after {
-        left: 53.5%;
+        left: 40%;
     }
 }
-
-@media (max-width: 1300px) {
+@media (max-width: 1000px) {
     .arrow-box-rent:after {
-        left: 53.9%;
+        left: 37%;
     }
 }
 
-@media (max-width: 1192px) {
+@media (max-width: 800px) {
     .arrow-box-rent:after {
-        left: 44.2%;
+        left: 46%;
     }
 }
-
-
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     .arrow-box-rent:after {
-        left: 59%;
+        left: 47%;
     }
 }
-
 // SEARCH-MAP
 .card-product-map {
     width: 47% !important;
