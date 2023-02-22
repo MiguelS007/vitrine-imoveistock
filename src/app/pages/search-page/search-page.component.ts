@@ -226,11 +226,11 @@ export class SearchPageComponent implements OnInit {
 
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
-      this.searchByCity(this.filtroSelected?.city);
-      this.filterTypeProperty(this.filtroSelected?.goal);
+      this.searchByCity(this.filtroSelected?.city  || 'Local');
+      this.filterTypeProperty(this.filtroSelected?.goal || 'Tipo do Imóvel');
       this.searchByBadRoom(this.filtroSelected?.badRoomsQnt)
       if (this.filtroSelected.styleProperty !== '') {
-        this.searchByStyleProperty(this.filtroSelected.styleProperty)
+        this.searchByStyleProperty(this.filtroSelected.styleProperty || 'O que está buscando')
       }
     }
 
