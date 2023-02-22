@@ -34,21 +34,74 @@ export class HomeHeaderComponent implements OnInit {
   styleforPropertyE = 'edificio';
   styleforPropertyT = 'terreno';
   stylePropertys: string;
+
+
+  typePropertyAllTitle: string = 'Tipo do imóvel';
+  typeAd: string = 'sale';
+  typeofProperty: string;
+  typepropertyfull: string;
+  typepropertyCR: string;
+
+
   checkedAll = false;
+
+  AllResidencial = true;
+  AllResidencial2 = false;
+  checkedAllResidencial = false;
+  checkedAllResidencial2 = false;
+
   checkedapartamento = false;
   checkedstudio = false;
-  checkedAllResidencial = false;
-  checkedComercial = false;
+  checkedkitnet = false;
+  checkedcasa = false;
+  checkedcasacondominio = false;
+  checkedcasadevila = false;
+  checkedcobertura = false;
+  checkedloft = false;
+  checkedflat = false;
+  checkedterreno = false;
+  checkedchacara = false;
+  propertyapartamento: string;
+  propertystudio: string;
+  propertykitnet: string;
+  propertycasa: string;
+  propertycasacondominio: string;
+  propertycasadevila: string;
+  propertycobertura: string;
+  propertyloft: string;
+  propertyflat: string;
+  propertyterreno: string;
+  propertychacara: string;
 
-  // propertykitnet: 'kitnet';
-  // propertycasacondominio: 'casacondominio';
-  // propertycasadevila: 'casadevila';
-  // propertycobertura: 'cobertura';
-  // propertyflat: 'flat';
-  // propertyloft: 'loft';
-  // propertyterreno: 'terreno';
 
 
+  AllComercial = true;
+  AllComercial2 = false;
+  checkedAllComercial = false;
+  checkedAllComercial2 = false;
+
+  checkedloja = false;
+  checkedsalao = false;
+  checkedsala = false;
+  checkedgalpao = false;
+  checkedconjuntocomercial = false;
+  checkedcasacomercial = false;
+  checkedhotel = false;
+  checkedmotel = false;
+  checkedpousada = false;
+  checkedlajecorporativa = false;
+  checkedprediointeiro = false;
+  propertyloja: string;
+  propertysalao: string;
+  propertysala: string;
+  propertygalpao: string;
+  propertyconjuntocomercial: string;
+  propertycasacomercial: string;
+  propertypousada: string;
+  propertyhotel: string;
+  propertymotel: string;
+  propertylajecorporativa: string;
+  propertyprediointeiro: string;
 
 
 
@@ -77,14 +130,6 @@ export class HomeHeaderComponent implements OnInit {
   alertPropertyOptions = false;
   resultType: any = [];
 
-  typePropertyAllTitle: string = 'Tipo do imóvel';
-
-  typeAd: string = 'sale';
-  typeofProperty: string;
-  typepropertyfull: string;
-  typepropertyCR: string;
-  propertyapartamento: void;
-  propertystudio: void;
 
 
   constructor(
@@ -102,9 +147,6 @@ export class HomeHeaderComponent implements OnInit {
       typePropertyValueRent: [''],
       typePropertyValueSale: [''],
       typePropertyBadrooms: [''],
-      propertyapartamento: [''],
-      propertystudio: [''],
-
     });
   }
 
@@ -114,7 +156,7 @@ export class HomeHeaderComponent implements OnInit {
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro')
 
-    this.searchService.getPropertyHomeExclusivity().subscribe(
+    this.searchService.getPropertyListAll().subscribe(
       success => {
         this.response = success;
       },
@@ -124,55 +166,253 @@ export class HomeHeaderComponent implements OnInit {
 
   }
 
-
-  typePropertyAll(value: string) {
-    // if (this.checkedResidencial != false) {
-    //   this.checkedResidencial = false;
-    // }
-    this.typepropertyfull = value;
-    this.checkedAll = !this.checkedAll;
-  }
-  
-  typePropertyComercialResidencial(value: string) {
-    if (value === 'Todos os imóveis em Residencial') {
-      // if(this.checkedResidencial === true){
-      //   this.checkedResidencial === true
-      // }else{
-      //   this.checkedResidencial = !this.checkedResidencial;
-      // }
-      this.checkedAllResidencial = !this.checkedAllResidencial
-    }
-    // this.checkedAll = true;
-  }
-
-  // typePropertyCharacteristics(typeOf: string, item: string, value: string) {
-  //   this.goal = typeOf;
-  //   this.typeofProperty = value
-  //   this.stylePropertys = item;
-  //   this.typePropertyAllTitle = value
-  //   this.checkedResidencial = true;
-  //   this.checkedAll = true;
-
-
-  // }
-  typePropertyCharacteristics(typeOf: string, item: string) {
+  typePropertyCharacteristics(typeOf: string, item: string, value: string) {
+    this.checkedAll = false;
     this.goal = typeOf;
-    this.typeofProperty
     this.stylePropertys = item;
-    this.form.controls['propertyapartamento'].setValue('apartamento');
-    // this.form.controls['propertystudio'].setValue('studio');
-    // this.checkedResidencial = true;
 
-    // apartamento
-    if(this.checkedapartamento === false) this.checkedapartamento = true
-    else this.checkedapartamento = false
-    // studio
-    if(this.checkedstudio === false) this.checkedstudio = true
-    else this.checkedstudio = false
-    
-    this.checkedAllResidencial = false;
-    this.checkedAll = true;
-    console.log(this.form.controls['propertyapartamento'].value)
+    // residencial
+    if (value === 'apartamento') {
+      this.checkedAllResidencial = false;
+      this.checkedapartamento = !this.checkedapartamento;
+      this.checkedapartamento ? this.propertyapartamento = 'apartamento' : this.propertyapartamento = '';
+      console.log(this.propertyapartamento, this.checkedapartamento);
+    }
+    if (value === 'studio') {
+      this.checkedAllResidencial = false;
+      this.checkedstudio = !this.checkedstudio;
+      this.checkedstudio ? this.propertystudio = 'studio' : this.propertystudio = '';
+      console.log(this.propertystudio, this.checkedstudio);
+
+    }
+    if (value === 'kitnet') {
+      this.checkedAllResidencial = false;
+      this.checkedkitnet = !this.checkedkitnet;
+      this.checkedkitnet ? this.propertykitnet = 'kitnet' : this.propertykitnet = '';
+    }
+    if (value === 'casa') {
+      this.checkedAllResidencial = false;
+      this.checkedcasa = !this.checkedcasa;
+      this.checkedcasa ? this.propertycasa = 'casa' : this.propertycasa = '';
+    }
+    if (value === 'casacondominio') {
+      this.checkedAllResidencial = false;
+      this.checkedcasacondominio = !this.checkedcasacondominio;
+      this.checkedcasacondominio ? this.propertycasacondominio = 'casacondominio' : this.propertycasacondominio = '';
+    }
+    if (value === 'casadevila') {
+      this.checkedAllResidencial = false;
+      this.checkedcasadevila = !this.checkedcasadevila;
+      this.checkedcasadevila ? this.propertycasadevila = 'casadevila' : this.propertycasadevila = '';
+    }
+    if (value === 'loft') {
+      this.checkedAllResidencial = false;
+      this.checkedloft = !this.checkedloft;
+      this.checkedloft ? this.propertyloft = 'loft' : this.propertyloft = '';
+    }
+    if (value === 'flat') {
+      this.checkedAllResidencial = false;
+      this.checkedflat = !this.checkedflat;
+      this.checkedflat ? this.propertyflat = 'flat' : this.propertyflat = '';
+    }
+    if (value === 'terreno') {
+      this.checkedAllResidencial = false;
+      this.checkedterreno = !this.checkedterreno;
+      this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
+    }
+    if (value === 'chacara') {
+      this.checkedAllResidencial = false;
+      this.checkedchacara = !this.checkedchacara;
+      this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
+    }
+    if (value === 'todosesidencial') {
+      this.AllResidencial = false;
+      this.AllResidencial2 = true;
+      this.checkedAllResidencial = false;
+      this.checkedAllResidencial2 = true;
+
+      this.checkedapartamento = true;
+      this.checkedapartamento ? this.propertyapartamento = 'apartamento' : this.propertyapartamento = '';
+      this.checkedstudio = true;
+      this.checkedstudio ? this.propertystudio = 'studio' : this.propertystudio = '';
+      this.checkedkitnet = true;
+      this.checkedkitnet ? this.propertykitnet = 'kitnet' : this.propertykitnet = '';
+      this.checkedcasa = true;
+      this.checkedcasa ? this.propertycasa = 'casa' : this.propertycasa = '';
+      this.checkedcobertura = true;
+      this.checkedcobertura ? this.propertycobertura = 'cobertura' : this.propertycobertura = '';
+      this.checkedcasacondominio = true;
+      this.checkedcasacondominio ? this.propertycasacondominio = 'casacondominio' : this.propertycasacondominio = '';
+      this.checkedcasadevila = true;
+      this.checkedcasadevila ? this.propertycasadevila = 'casadevila' : this.propertycasadevila = '';
+      this.checkedloft = true;
+      this.checkedloft ? this.propertyloft = 'loft' : this.propertyloft = '';
+      this.checkedflat = true;
+      this.checkedflat ? this.propertyflat = 'flat' : this.propertyflat = '';
+      this.checkedterreno = true;
+      this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
+      this.checkedchacara = true;
+      this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
+    }
+    if (value === 'todosesidencial2') {
+      this.AllResidencial = true;
+      this.AllResidencial2 = false;
+      this.checkedAllResidencial = false;
+      this.checkedAllResidencial2 = !this.checkedAllResidencial2;
+
+      this.checkedapartamento = !this.checkedapartamento;
+      this.checkedapartamento ? this.propertyapartamento = 'apartamento' : this.propertyapartamento = '';
+      this.checkedstudio = !this.checkedstudio;
+      this.checkedstudio ? this.propertystudio = 'studio' : this.propertystudio = '';
+      this.checkedkitnet = !this.checkedkitnet;
+      this.checkedkitnet ? this.propertykitnet = 'kitnet' : this.propertykitnet = '';
+      this.checkedcobertura = !this.checkedcobertura;
+      this.checkedcobertura ? this.propertycobertura = 'cobertura' : this.propertycobertura = '';
+      this.checkedcasa = !this.checkedcasa;
+      this.checkedcasa ? this.propertycasa = 'casa' : this.propertycasa = '';
+      this.checkedcasacondominio = !this.checkedcasacondominio;
+      this.checkedcasacondominio ? this.propertycasacondominio = 'casacondominio' : this.propertycasacondominio = '';
+      this.checkedcasadevila = !this.checkedcasadevila;
+      this.checkedcasadevila ? this.propertycasadevila = 'casadevila' : this.propertycasadevila = '';
+      this.checkedloft = !this.checkedloft;
+      this.checkedloft ? this.propertyloft = 'loft' : this.propertyloft = '';
+      this.checkedflat = !this.checkedflat;
+      this.checkedflat ? this.propertyflat = 'flat' : this.propertyflat = '';
+      this.checkedterreno = !this.checkedterreno;
+      this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
+      this.checkedchacara = !this.checkedchacara;
+      this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
+    }
+
+
+    // Comercial
+    if (value === 'loja') {
+      this.checkedAllComercial = false;
+      this.checkedloja = !this.checkedloja;
+      this.checkedloja ? this.propertyloja = 'loja' : this.propertyloja = '';
+      console.log(this.propertyloja, this.checkedloja);
+    }
+    if (value === 'salao') {
+      this.checkedAllComercial = false;
+      this.checkedsalao = !this.checkedsalao;
+      this.checkedsalao ? this.propertysalao = 'salao' : this.propertysalao = '';
+      console.log(this.propertysalao, this.checkedsalao);
+    }
+    if (value === 'sala') {
+      this.checkedAllComercial = false;
+      this.checkedsala = !this.checkedsala;
+      this.checkedsala ? this.propertysala = 'sala' : this.propertysala = '';
+      console.log(this.propertysala, this.checkedsala);
+    }
+    if (value === 'galpao') {
+      this.checkedAllComercial = false;
+      this.checkedgalpao = !this.checkedgalpao;
+      this.checkedgalpao ? this.propertygalpao = 'galpao' : this.propertygalpao = '';
+      console.log(this.propertygalpao, this.checkedgalpao);
+    }
+    if (value === 'conjuntocomercial') {
+      this.checkedAllComercial = false;
+      this.checkedconjuntocomercial = !this.checkedconjuntocomercial;
+      this.checkedconjuntocomercial ? this.propertyconjuntocomercial = 'conjuntocomercial' : this.propertyconjuntocomercial = '';
+      console.log(this.propertyconjuntocomercial, this.checkedconjuntocomercial);
+    }
+    if (value === 'casacomercial') {
+      this.checkedAllComercial = false;
+      this.checkedcasacomercial = !this.checkedcasacomercial;
+      this.checkedcasacomercial ? this.propertycasacomercial = 'casacomercial' : this.propertycasacomercial = '';
+      console.log(this.propertycasacomercial, this.checkedcasacomercial);
+    }
+    if (value === 'hotel') {
+      this.checkedAllComercial = false;
+      this.checkedhotel = !this.checkedhotel;
+      this.checkedhotel ? this.propertyhotel = 'hotel' : this.propertyhotel = '';
+      console.log(this.propertyhotel, this.checkedhotel);
+    }
+    if (value === 'motel') {
+      this.checkedAllComercial = false;
+      this.checkedmotel = !this.checkedmotel;
+      this.checkedmotel ? this.propertymotel = 'motel' : this.propertymotel = '';
+      console.log(this.propertymotel, this.checkedmotel);
+    }
+    if (value === 'pousada') {
+      this.checkedAllComercial = false;
+      this.checkedpousada = !this.checkedpousada;
+      this.checkedpousada ? this.propertypousada = 'pousada' : this.propertypousada = '';
+      console.log(this.propertypousada, this.checkedpousada);
+    }
+    if (value === 'lajecorporativa') {
+      this.checkedAllComercial = false;
+      this.checkedlajecorporativa = !this.checkedlajecorporativa;
+      this.checkedlajecorporativa ? this.propertylajecorporativa = 'lajecorporativa' : this.propertylajecorporativa = '';
+      console.log(this.propertylajecorporativa, this.checkedlajecorporativa);
+    }
+    if (value === 'prediointeiro') {
+      this.checkedAllComercial = false;
+      this.checkedprediointeiro = !this.checkedprediointeiro;
+      this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
+      console.log(this.propertyprediointeiro, this.checkedprediointeiro);
+    }
+
+    if (value === 'todoscomercial') {
+      this.AllComercial = false;
+      this.AllComercial2 = true;
+      this.checkedAllComercial = false;
+      this.checkedAllComercial2 = true;
+
+      this.checkedloja = true;
+      this.checkedloja ? this.propertyloja = 'loja' : this.propertyloja = '';
+      this.checkedsalao = true;
+      this.checkedsalao ? this.propertysalao = 'salao' : this.propertysalao = '';
+      this.checkedsala = true;
+      this.checkedsala ? this.propertysala = 'sala' : this.propertysala = '';
+      this.checkedgalpao = true;
+      this.checkedgalpao ? this.propertygalpao = 'galpao' : this.propertygalpao = '';
+      this.checkedconjuntocomercial = true;
+      this.checkedconjuntocomercial ? this.propertyconjuntocomercial = 'conjuntocomercial' : this.propertyconjuntocomercial = '';
+      this.checkedcasacomercial = true;
+      this.checkedcasacomercial ? this.propertycasacomercial = 'casacomercial' : this.propertycasacomercial = '';
+      this.checkedhotel = true;
+      this.checkedhotel ? this.propertyhotel = 'hotel' : this.propertyhotel = '';
+      this.checkedmotel = true;
+      this.checkedmotel ? this.propertymotel = 'motel' : this.propertymotel = '';
+      this.checkedpousada = true;
+      this.checkedpousada ? this.propertypousada = 'pousada' : this.propertypousada = '';
+      this.checkedlajecorporativa = true;
+      this.checkedlajecorporativa ? this.propertylajecorporativa = 'lajecorporativa' : this.propertylajecorporativa = '';
+      this.checkedprediointeiro = true;
+      this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
+    }
+
+    if (value === 'todoscomercial2') {
+      this.AllComercial = true;
+      this.AllComercial2 = false;
+      this.checkedAllComercial = false;
+      this.checkedAllComercial2 = !this.checkedAllComercial2;
+
+      this.checkedloja = !this.checkedloja;
+      this.checkedloja ? this.propertyloja = 'loja' : this.propertyloja = '';
+      this.checkedsalao = !this.checkedsalao;
+      this.checkedsalao ? this.propertysalao = 'salao' : this.propertysalao = '';
+      this.checkedsala = !this.checkedsala;
+      this.checkedsala ? this.propertysala = 'sala' : this.propertysala = '';
+      this.checkedgalpao = !this.checkedgalpao;
+      this.checkedgalpao ? this.propertygalpao = 'galpao' : this.propertygalpao = '';
+      this.checkedconjuntocomercial = !this.checkedconjuntocomercial;
+      this.checkedconjuntocomercial ? this.propertyconjuntocomercial = 'conjuntocomercial' : this.propertyconjuntocomercial = '';
+      this.checkedcasacomercial = !this.checkedcasacomercial;
+      this.checkedcasacomercial ? this.propertycasacomercial = 'casacomercial' : this.propertycasacomercial = '';
+      this.checkedhotel = !this.checkedhotel;
+      this.checkedhotel ? this.propertyhotel = 'hotel' : this.propertyhotel = '';
+      this.checkedmotel = !this.checkedmotel;
+      this.checkedmotel ? this.propertymotel = 'motel' : this.propertymotel = '';
+      this.checkedpousada = !this.checkedpousada;
+      this.checkedpousada ? this.propertypousada = 'pousada' : this.propertypousada = '';
+      this.checkedlajecorporativa = !this.checkedlajecorporativa;
+      this.checkedlajecorporativa ? this.propertylajecorporativa = 'lajecorporativa' : this.propertylajecorporativa = '';
+      this.checkedprediointeiro = !this.checkedprediointeiro;
+      this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
+    }
+
   }
 
 
@@ -192,17 +432,33 @@ export class HomeHeaderComponent implements OnInit {
       untilValueSale: this.form.controls['typePropertyValueSale'].value,
       untilValueRent: this.form.controls['typePropertyValueRent'].value,
       goal: this.goal, //residencial , comercial
-      typeofProperty: this.typeofProperty, // APARTAMENTO, CASA, STUDIO, FLAT, LOFT
+      // residencial
       propertyapartamento: this.propertyapartamento,
       propertystudio: this.propertystudio,
-
+      propertykitnet: this.propertykitnet,
+      propertycasa: this.propertycasa,
+      propertycasacondominio: this.propertycasacondominio,
+      propertycasadevila: this.propertycasadevila,
+      propertycobertura: this.propertycobertura,
+      propertyloft: this.propertyloft,
+      propertyflat: this.propertyflat,
+      propertyterreno: this.propertyterreno,
+      propertychacara: this.propertychacara,
+      // comercial
+      propertyloja: this.propertyloja,
+      propertysalao: this.propertysalao,
+      propertysala: this.propertysala,
+      propertygalpao: this.propertygalpao,
+      propertyconjuntocomercial: this.propertyconjuntocomercial,
+      propertycasacomercial: this.propertycasacomercial,
+      propertypousada: this.propertypousada,
+      propertyhotel: this.propertyhotel,
+      propertymotel: this.propertymotel,
+      propertylajecorporativa: this.propertylajecorporativa,
+      propertyprediointeiro: this.propertyprediointeiro,
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
-
-    console.log(filter.propertyapartamento);
-
-
 
 
     // ---------------------------
@@ -258,13 +514,57 @@ export class HomeHeaderComponent implements OnInit {
 
     let announcementTypeofPropertyGroup: AnnouncementGetResponseDto[] = [];
     if (
-      filter.propertyapartamento !== undefined,
-      filter.propertystudio !== undefined
+      // residencial
+      filter.propertyapartamento !== undefined ||
+      filter.propertystudio !== undefined ||
+      filter.propertykitnet !== undefined ||
+      filter.propertycasa !== undefined ||
+      filter.propertycasacondominio !== undefined ||
+      filter.propertycasadevila !== undefined ||
+      filter.propertycobertura !== undefined ||
+      filter.propertyloft !== undefined ||
+      filter.propertyflat !== undefined ||
+      filter.propertyterreno !== undefined ||
+      filter.propertychacara !== undefined ||
+      // comercial
+      filter.propertyloja !== undefined ||
+      filter.propertysalao !== undefined ||
+      filter.propertysala !== undefined ||
+      filter.propertygalpao !== undefined ||
+      filter.propertyconjuntocomercial !== undefined ||
+      filter.propertycasacomercial !== undefined ||
+      filter.propertypousada !== undefined ||
+      filter.propertyhotel !== undefined ||
+      filter.propertymotel !== undefined ||
+      filter.propertylajecorporativa !== undefined ||
+      filter.propertyprediointeiro !== undefined
     ) {
       for (let i = 0; i < announcementGoalGroup.length; i++) {
         if (
+          // residencial
           announcementGoalGroup[i].propertyType === filter.propertyapartamento ||
-          announcementGoalGroup[i].propertyType === filter.propertystudio
+          announcementGoalGroup[i].propertyType === filter.propertystudio ||
+          announcementGoalGroup[i].propertyType === filter.propertykitnet ||
+          announcementGoalGroup[i].propertyType === filter.propertycasa ||
+          announcementGoalGroup[i].propertyType === filter.propertycasacondominio ||
+          announcementGoalGroup[i].propertyType === filter.propertycasadevila ||
+          announcementGoalGroup[i].propertyType === filter.propertycobertura ||
+          announcementGoalGroup[i].propertyType === filter.propertyloft ||
+          announcementGoalGroup[i].propertyType === filter.propertyflat ||
+          announcementGoalGroup[i].propertyType === filter.propertyterreno ||
+          announcementGoalGroup[i].propertyType === filter.propertychacara ||
+          // comercial
+          announcementGoalGroup[i].propertyType === filter.propertyloja ||
+          announcementGoalGroup[i].propertyType === filter.propertysalao ||
+          announcementGoalGroup[i].propertyType === filter.propertysala ||
+          announcementGoalGroup[i].propertyType === filter.propertygalpao ||
+          announcementGoalGroup[i].propertyType === filter.propertyconjuntocomercial ||
+          announcementGoalGroup[i].propertyType === filter.propertycasacomercial ||
+          announcementGoalGroup[i].propertyType === filter.propertypousada ||
+          announcementGoalGroup[i].propertyType === filter.propertyhotel ||
+          announcementGoalGroup[i].propertyType === filter.propertymotel ||
+          announcementGoalGroup[i].propertyType === filter.propertylajecorporativa ||
+          announcementGoalGroup[i].propertyType === filter.propertyprediointeiro
         ) {
           announcementTypeofPropertyGroup.push(announcementGoalGroup[i]);
         }
@@ -329,8 +629,8 @@ export class HomeHeaderComponent implements OnInit {
 
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
-    // this.router.navigate(['/search']);
-
+    this.router.navigate(['/search']);
+ 
   }
 
 
@@ -343,4 +643,3 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
 }
-
