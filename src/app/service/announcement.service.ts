@@ -45,7 +45,7 @@ export class AnnouncementService extends BaseService {
 
     announcementGetById(_id: string): Observable<AnnouncementGetResponseDto> {
         return this.httpClient
-            .get(`${this.url}detail/${_id}`, this.anonymousHeader())
+            .get(`${this.url}/detail/${_id}`, this.anonymousHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
