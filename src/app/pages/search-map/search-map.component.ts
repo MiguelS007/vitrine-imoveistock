@@ -173,7 +173,7 @@ export class SearchMapComponent implements OnInit {
     }
 
 
-    this.searchService.getPropertyHomeExclusivity().subscribe(
+    this.searchService.getPropertyListAll().subscribe(
       success => {
         this.propertyproducts = success
         this.response = success;
@@ -214,7 +214,7 @@ export class SearchMapComponent implements OnInit {
   }
 
   list() {
-    this.searchService.getPropertyHomeExclusivity().subscribe(
+    this.searchService.getPropertyListAll().subscribe(
       response => {
         this.propertyproducts = response
         this.responseAnnouncement = response;
