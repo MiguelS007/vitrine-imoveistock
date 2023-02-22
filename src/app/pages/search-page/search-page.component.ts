@@ -54,29 +54,7 @@ export class SearchPageComponent implements OnInit {
     typeAd: string,
     goal: string,
     styleProperty: string,
-    typeOfProperty: string[];
-    propertyapartamento: string;
-    propertystudio: string;
-    propertykitnet: string;
-    propertycasa: string;
-    propertycasacondominio: string;
-    propertycasadevila: string;
-    propertycobertura: string;
-    propertyloft: string;
-    propertyflat: string;
-    propertyterreno: string;
-    propertychacara: string;
-    propertyloja: string;
-    propertysalao: string;
-    propertysala: string;
-    propertygalpao: string;
-    propertyconjuntocomercial: string;
-    propertycasacomercial: string;
-    propertypousada: string;
-    propertyhotel: string;
-    propertymotel: string;
-    propertylajecorporativa: string;
-    propertyprediointeiro: string;
+    typeOfProperty: any[];
   }
 
   orderBy: string = 'Selecione'
@@ -215,58 +193,36 @@ export class SearchPageComponent implements OnInit {
       styleProperty: this.filtroSelected?.styleProperty,
       typeAd: typeAdTranslate,
       goal: this.filtroSelected?.goal,
-      propertyapartamento: this.filtroSelected?.this.propertyapartamento || this.filtroSelected?.this.propertystudio,
-      propertystudio: this.filtroSelected?.this.propertystudio,
-      propertykitnet: this.filtroSelected?.this.propertykitnet,
-      propertycasa: this.filtroSelected?.this.propertycasa,
-      propertycasacondominio: this.filtroSelected?.this.propertycasacondominio,
-      propertycasadevila: this.filtroSelected?.this.propertycasadevila,
-      propertycobertura: this.filtroSelected?.this.propertycobertura,
-      propertyloft: this.filtroSelected?.this.propertyloft,
-      propertyflat: this.filtroSelected?.this.propertyflat,
-      propertyterreno: this.filtroSelected?.this.propertyterreno,
-      propertychacara: this.filtroSelected?.this.propertychacara,
-      propertyloja: this.filtroSelected?.this.propertyloja,
-      propertysalao: this.filtroSelected?.this.propertysalao,
-      propertysala: this.filtroSelected?.this.propertysala,
-      propertygalpao: this.filtroSelected?.this.propertygalpao,
-      propertyconjuntocomercial: this.filtroSelected?.this.propertyconjuntocomercial,
-      propertycasacomercial: this.filtroSelected?.this.propertycasacomercial,
-      propertypousada: this.filtroSelected?.this.propertypousada,
-      propertyhotel: this.filtroSelected?.this.propertyhotel,
-      propertymotel: this.filtroSelected?.this.propertymotel,
-      propertylajecorporativa: this.filtroSelected?.this.propertylajecorporativa,
-      propertyprediointeiro: this.filtroSelected?.this.propertyprediointeiro,
-
+      typeOfProperty:
+        this.filtroSelected?.propertyapartamento ||
+        this.filtroSelected?.propertystudio ||
+        this.filtroSelected?.propertykitnet ||
+        this.filtroSelected?.propertycasa ||
+        this.filtroSelected?.propertycasacondominio ||
+        this.filtroSelected?.propertycasadevila ||
+        this.filtroSelected?.propertycobertura ||
+        this.filtroSelected?.propertyloft ||
+        this.filtroSelected?.propertyflat ||
+        this.filtroSelected?.propertyterreno || 
+        this.filtroSelected?.propertychacara || 
+        this.filtroSelected?.propertyloja ||
+        this.filtroSelected?.propertysalao ||
+        this.filtroSelected?.propertysala ||
+        this.filtroSelected?.propertygalpao ||
+        this.filtroSelected?.propertyconjuntocomercial ||
+        this.filtroSelected?.propertycasacomercial ||
+        this.filtroSelected?.propertypousada ||
+        this.filtroSelected?.propertyhotel ||
+        this.filtroSelected?.propertymotel ||
+        this.filtroSelected?.propertylajecorporativa ||
+        this.filtroSelected?.propertyprediointeiro
     }
 
     if (filtro !== null) {
       this.form.patchValue({
         typeMaxPrice: this.filtroResultDisplay.untilValueSale,
         localproperty: this.filtroResultDisplay.city,
-        propertyapartamento: this.filtroResultDisplay.propertyapartamento,
-        propertystudio: this.filtroResultDisplay.propertystudio,
-        propertykitnet: this.filtroResultDisplay.propertykitnet,
-        propertycasa: this.filtroResultDisplay.propertycasa,
-        propertycasacondominio: this.filtroResultDisplay.propertycasacondominio,
-        propertycasadevila: this.filtroResultDisplay.propertycasadevila,
-        propertycobertura: this.filtroResultDisplay.propertycobertura,
-        propertyloft: this.filtroResultDisplay.propertyloft,
-        propertyflat: this.filtroResultDisplay.propertyflat,
-        propertyterreno: this.filtroResultDisplay.propertyterreno,
-        propertychacara: this.filtroResultDisplay.propertychacara,
-        // comercial
-        propertyloja: this.filtroResultDisplay.propertyloja,
-        propertysalao: this.filtroResultDisplay.propertysalao,
-        propertysala: this.filtroResultDisplay.propertysala,
-        propertygalpao: this.filtroResultDisplay.propertygalpao,
-        propertyconjuntocomercial: this.filtroResultDisplay.propertyconjuntocomercial,
-        propertycasacomercial: this.filtroResultDisplay.propertycasacomercial,
-        propertypousada: this.filtroResultDisplay.propertypousada,
-        propertyhotel: this.filtroResultDisplay.propertyhotel,
-        propertymotel: this.filtroResultDisplay.propertymotel,
-        propertylajecorporativa: this.filtroResultDisplay.propertylajecorporativa,
-        propertyprediointeiro: this.filtroResultDisplay.propertyprediointeiro,
+        typeOfProperty: this.filtroSelected?.typeOfProperty
 
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
