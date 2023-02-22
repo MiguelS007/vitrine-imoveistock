@@ -55,7 +55,7 @@ export class HomeProductsComponent implements OnInit {
   }
 
   list() {
-    this.searchService.getPropertyHomeExclusivity().subscribe(
+    this.searchService.getPropertyListAll().subscribe(
       response => {
         this.response = response;
         if (localStorage.getItem('user') !== null) {

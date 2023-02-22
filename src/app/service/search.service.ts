@@ -22,11 +22,11 @@ export class SearchService extends BaseService {
       .get(`${this.url}app/profile-client`, this.anonymousHeader())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
-  getPropertyHomeExclusivity(): Observable<AnnouncementGetResponseDto[]> {
-    return this.httpClient
-      .get(`${this.url}app/announcement/list`, this.anonymousHeader())
-      .pipe(map(this.extractData), catchError(this.serviceError));
-  }
+  // getPropertyHomeExclusivity(): Observable<AnnouncementGetResponseDto[]> {
+  //   return this.httpClient
+  //     .get(`${this.url}app/announcement/list`, this.anonymousHeader())
+  //     .pipe(map(this.extractData), catchError(this.serviceError));
+  // }
 
   getPropertyListAll(): Observable<AnnouncementGetResponseDto[]> {
     return this.httpClient

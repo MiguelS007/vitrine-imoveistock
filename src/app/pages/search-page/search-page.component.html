@@ -1,36 +1,34 @@
 <main class="bg-graylight d-flex justify-content-center position-relative w-100 py-5 px-5p">
     <div class="padding-x w-100 max-w-1918 mb-5">
-        <form [formGroup]="form" class="row form-search pt-5 h-100 m-0-auto">
+        <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto">
             <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
                 <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">Página Inicial /
-                    <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;
-                        Resultado de busca
-                    </span>
+                    <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
                 </p>
-                <p class="fw-700 font-size-32 line-40 color-black">
-                    Resultado da sua busca por <b>
-                        <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}}</span>
-                        <span *ngIf="filtroResultDisplay.whatAreYouLookingFor">
-                            {{filtroResultDisplay.whatAreYouLookingFor}},</span>
-                        <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
+                <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
+                    <b>
+                        <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                        <span *ngIf="filtroResultDisplay.where"> em {{filtroResultDisplay.where}}</span>
+                        <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}},</span>
+                        <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
+                        <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
+                        <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
+                        <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
                     </b>
                 </p>
             </div>
-            <div class="col-4 col-body-products pl-0">
+            <div class="col-4 col-body-products mt-5 pt-5 pl-0">
                 <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
                     <div class="dropdown">
                         <button style="min-width: 162.23px !important;"
                             class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
                             type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                            {{whatAreYouLookingForTitle}}
+                            {{stylePropertyTitle}}
                         </button>
                         <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Edifício')">Edifício</a>
-                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Terreno')">Terreno</a>
-                            <a class="dropdown-item" (click)="whatAreYouLookingFor('Casa')">Casa</a>
+                            <a class="dropdown-item" (click)="searchByStyleProperty('Edifício')">Edifício</a>
+                            <a class="dropdown-item" (click)="searchByStyleProperty('Terreno')">Terreno</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -51,7 +49,7 @@
                             aria-expanded="false">
                             {{selectCity}} <i class="bi bi-geo-alt font-size-24"></i>
                         </a>
-                        <div class="dropdown-menu w-100" aria-labelledby="resultSituation">
+                        <div class="dropdown-menu max-h-400 w-100 overflow-x-scroll" aria-labelledby="resultSituation">
                             <a *ngFor="let item of listAllCity" class="dropdown-item"
                                 (click)="searchByCity(item)">{{item}}</a>
                         </div>
@@ -89,30 +87,30 @@
                         </div>
                     </div>
                     <div class="dropdown">
-                        <input type="text" formControlName="typerooms" [value]="selectRooms" [placeholder]="selectRooms"
+                        <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
                             class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
                             role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
                         <div class="dropdown-menu" aria-labelledby="resultRooms">
-                            <a class="dropdown-item" (click)="searchBy('1')">1+</a>
-                            <a class="dropdown-item" (click)="searchBy('2')">2+</a>
-                            <a class="dropdown-item" (click)="searchBy('3')">3+</a>
-                            <a class="dropdown-item" (click)="searchBy('4')">4+</a>
-                            <a class="dropdown-item" (click)="searchBy('5')">5+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('1')">1+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('2')">2+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('3')">3+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('4')">4+</a>
+                            <a class="dropdown-item" (click)="searchByBadRoom('5')">5+</a>
                         </div>
                     </div>
                     <div class="dropdown">
-                        <input type="text" formControlName="typebathroom" [value]="selectBathrooms"
+                        <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms"
                             [placeholder]="selectBathrooms"
                             class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                            role="button" id="resultBadRooms" data-toggle="dropdown" aria-haspopup="true"
+                            role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
-                        <div class="dropdown-menu" aria-labelledby="resultBadRooms">
-                            <a class="dropdown-item" (click)="searchBy('1b')">1+</a>
-                            <a class="dropdown-item" (click)="searchBy('2b')">2+</a>
-                            <a class="dropdown-item" (click)="searchBy('3b')">3+</a>
-                            <a class="dropdown-item" (click)="searchBy('4b')">4+</a>
-                            <a class="dropdown-item" (click)="searchBy('5b')">5+</a>
+                        <div class="dropdown-menu" aria-labelledby="resultbathroom">
+                            <a class="dropdown-item" (click)="searchByBathRoom('1')">1+</a>
+                            <a class="dropdown-item" (click)="searchByBathRoom('2')">2+</a>
+                            <a class="dropdown-item" (click)="searchByBathRoom('3')">3+</a>
+                            <a class="dropdown-item" (click)="searchByBathRoom('4')">4+</a>
+                            <a class="dropdown-item" (click)="searchByBathRoom('5')">5+</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -122,13 +120,13 @@
                             role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
                         <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                            <a class="dropdown-item" (click)="searchBy('tf')">Tanto faz</a>
-                            <a class="dropdown-item" (click)="searchBy('1v')">1+</a>
-                            <a class="dropdown-item" (click)="searchBy('2v')">2+</a>
-                            <a class="dropdown-item" (click)="searchBy('3v')">3+</a>
-                            <a class="dropdown-item" (click)="searchBy('4v')">4+</a>
-                            <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
-                            <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('0')">Tanto faz</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
+                            <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                         </div>
                     </div>
                     <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
@@ -215,7 +213,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8 col-body-products px-0 mt-5">
+            <div class="col-8 col-body-products px-0 pt-5 mt-5">
                 <div class="col-12 d-block-desk d-none mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
                     <p class="d-flex fw-700 font-size-16 line-19 color-black
                      align-items-center">Página Inicial /
@@ -223,14 +221,15 @@
                             Resultado de busca
                         </span>
                     </p>
-                    <p class="fw-700 font-size-32 line-40 color-black">
-                        Resultado da sua busca por <b>
-                            <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}}</span>
-                            <span *ngIf="filtroResultDisplay.whatAreYouLookingFor">
-                                {{filtroResultDisplay.whatAreYouLookingFor}},</span>
-                            <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
-                            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                            <span *ngIf="filtroResultDisplay.where"> em {{filtroResultDisplay.where}}</span>
+                    <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
+                        <b>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
+                            <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}},</span>
+                            <span class="d-flex flex-wrap text-capitalize" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
+                            <span class="text-capitalize" *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
                         </b>
                     </p>
                 </div>
@@ -273,14 +272,13 @@
                     <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch">
                         <img src="../../../assets/img/not-search-announcement.svg" height="80">
                         <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
-                        <p class="text-center mb-0">explore outros filtros e confira os imoveis que podem te atender no
-                            momento</p>
+                        <p class="text-center mb-0">explore outros filtros e confira os imoveis abaixo que podem te atender no momento</p>
                         <span class="text-center">:(</span>
                     </div>
                     <div class="col-lg-6 px-3 col-cards-products" *ngFor="let item of filterResult | paginate: {
                     itemsPerPage: 6, currentPage: paginationProduct }; let
                     i= index">
-                        <div class="w-100 card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
+                        <div class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
                             <div class="border-radius-10 position-relative">
                                 <img (click)="announcementSelected(item._id)"
                                     src="../../../assets/img/img-announcement-default.jpg"
@@ -457,44 +455,46 @@
                 </div>
             </div>
             <div class="dropdown">
-                <input type="text" formControlName="typerooms" [value]="selectRooms" [placeholder]="selectRooms"
+                <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
                     class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                    role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    readonly>
+                    role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" readonly>
                 <div class="dropdown-menu" aria-labelledby="resultRooms">
-                    <a class="dropdown-item" (click)="searchBy('1')">1+</a>
-                    <a class="dropdown-item" (click)="searchBy('2')">2+</a>
-                    <a class="dropdown-item" (click)="searchBy('3')">3+</a>
-                    <a class="dropdown-item" (click)="searchBy('4')">4+</a>
-                    <a class="dropdown-item" (click)="searchBy('5')">5+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('1')">1+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('2')">2+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('3')">3+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('4')">4+</a>
+                    <a class="dropdown-item" (click)="searchByBadRoom('5')">5+</a>
                 </div>
             </div>
             <div class="dropdown">
-                <input type="text" formControlName="typebathroom" [value]="selectBathrooms" [placeholder]="selectBathrooms"
+                <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms"
+                    [placeholder]="selectBathrooms"
                     class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                    role="button" id="resultBadRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    readonly>
-                <div class="dropdown-menu" aria-labelledby="resultBadRooms">
-                    <a class="dropdown-item" (click)="searchBy('1b')">1+</a>
-                    <a class="dropdown-item" (click)="searchBy('2b')">2+</a>
-                    <a class="dropdown-item" (click)="searchBy('3b')">3+</a>
-                    <a class="dropdown-item" (click)="searchBy('4b')">4+</a>
-                    <a class="dropdown-item" (click)="searchBy('5b')">5+</a>
+                    role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" readonly>
+                <div class="dropdown-menu" aria-labelledby="resultbathroom">
+                    <a class="dropdown-item" (click)="searchByBathRoom('1')">1+</a>
+                    <a class="dropdown-item" (click)="searchByBathRoom('2')">2+</a>
+                    <a class="dropdown-item" (click)="searchByBathRoom('3')">3+</a>
+                    <a class="dropdown-item" (click)="searchByBathRoom('4')">4+</a>
+                    <a class="dropdown-item" (click)="searchByBathRoom('5')">5+</a>
                 </div>
             </div>
             <div class="dropdown">
-                <input type="text" formControlName="typevacancies" [value]="selectVacancies" [placeholder]="selectVacancies"
+                <input type="text" formControlName="typevacancies" [value]="selectVacancies"
+                    [placeholder]="selectVacancies"
                     class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                    role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    readonly>
+                    role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" readonly>
                 <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                    <a class="dropdown-item" (click)="searchBy('tf')">Tanto faz</a>
-                    <a class="dropdown-item" (click)="searchBy('1v')">1+</a>
-                    <a class="dropdown-item" (click)="searchBy('2v')">2+</a>
-                    <a class="dropdown-item" (click)="searchBy('3v')">3+</a>
-                    <a class="dropdown-item" (click)="searchBy('4v')">4+</a>
-                    <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
-                    <a class="dropdown-item" (click)="searchBy('5v')">5+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('0')">Tanto faz</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
+                    <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                 </div>
             </div>
             <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4

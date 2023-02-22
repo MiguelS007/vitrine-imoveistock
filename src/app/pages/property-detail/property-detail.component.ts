@@ -79,7 +79,7 @@ export class PropertyDetailComponent implements OnInit {
       }
     }
 
-    console.log(interdistance, window.innerWidth)
+    // console.log(interdistance, window.innerWidth)
 
   }
 
@@ -285,7 +285,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   list() {
-    this.searchService.getPropertyHomeExclusivity().subscribe(
+    this.searchService.getPropertyListAll().subscribe(
       response => {
         this.propertyproducts = response
         this.responseAnnouncement = response;
