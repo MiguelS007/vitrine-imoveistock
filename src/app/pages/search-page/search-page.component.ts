@@ -51,10 +51,32 @@ export class SearchPageComponent implements OnInit {
     untilValueRent: string,
     badRoomsQnt: number,
     propertiesType: string,
-    typeofProperty: string,
     typeAd: string,
     goal: string,
-    // styleProperty: string,
+    styleProperty: string,
+    typeOfProperty: string[];
+    propertyapartamento: string;
+    propertystudio: string;
+    propertykitnet: string;
+    propertycasa: string;
+    propertycasacondominio: string;
+    propertycasadevila: string;
+    propertycobertura: string;
+    propertyloft: string;
+    propertyflat: string;
+    propertyterreno: string;
+    propertychacara: string;
+    propertyloja: string;
+    propertysalao: string;
+    propertysala: string;
+    propertygalpao: string;
+    propertyconjuntocomercial: string;
+    propertycasacomercial: string;
+    propertypousada: string;
+    propertyhotel: string;
+    propertymotel: string;
+    propertylajecorporativa: string;
+    propertyprediointeiro: string;
   }
 
   orderBy: string = 'Selecione'
@@ -190,17 +212,61 @@ export class SearchPageComponent implements OnInit {
       untilValueRent: this.filtroSelected?.untilValueRent,
       badRoomsQnt: this.filtroSelected?.badRoomsQnt,
       propertiesType: this.filtroSelected?.propertiesType,
-      typeofProperty: this.filtroSelected?.typeofProperty,
+      styleProperty: this.filtroSelected?.styleProperty,
+      typeAd: typeAdTranslate,
       goal: this.filtroSelected?.goal,
-      // styleProperty: this.filtroSelected?.styleProperty,
-      typeAd: typeAdTranslate
+      propertyapartamento: this.filtroSelected?.this.propertyapartamento || this.filtroSelected?.this.propertystudio,
+      propertystudio: this.filtroSelected?.this.propertystudio,
+      propertykitnet: this.filtroSelected?.this.propertykitnet,
+      propertycasa: this.filtroSelected?.this.propertycasa,
+      propertycasacondominio: this.filtroSelected?.this.propertycasacondominio,
+      propertycasadevila: this.filtroSelected?.this.propertycasadevila,
+      propertycobertura: this.filtroSelected?.this.propertycobertura,
+      propertyloft: this.filtroSelected?.this.propertyloft,
+      propertyflat: this.filtroSelected?.this.propertyflat,
+      propertyterreno: this.filtroSelected?.this.propertyterreno,
+      propertychacara: this.filtroSelected?.this.propertychacara,
+      propertyloja: this.filtroSelected?.this.propertyloja,
+      propertysalao: this.filtroSelected?.this.propertysalao,
+      propertysala: this.filtroSelected?.this.propertysala,
+      propertygalpao: this.filtroSelected?.this.propertygalpao,
+      propertyconjuntocomercial: this.filtroSelected?.this.propertyconjuntocomercial,
+      propertycasacomercial: this.filtroSelected?.this.propertycasacomercial,
+      propertypousada: this.filtroSelected?.this.propertypousada,
+      propertyhotel: this.filtroSelected?.this.propertyhotel,
+      propertymotel: this.filtroSelected?.this.propertymotel,
+      propertylajecorporativa: this.filtroSelected?.this.propertylajecorporativa,
+      propertyprediointeiro: this.filtroSelected?.this.propertyprediointeiro,
+
     }
 
     if (filtro !== null) {
       this.form.patchValue({
         typeMaxPrice: this.filtroResultDisplay.untilValueSale,
         localproperty: this.filtroResultDisplay.city,
-        typeofProperty: this.filtroResultDisplay.typeofProperty
+        propertyapartamento: this.filtroResultDisplay.propertyapartamento,
+        propertystudio: this.filtroResultDisplay.propertystudio,
+        propertykitnet: this.filtroResultDisplay.propertykitnet,
+        propertycasa: this.filtroResultDisplay.propertycasa,
+        propertycasacondominio: this.filtroResultDisplay.propertycasacondominio,
+        propertycasadevila: this.filtroResultDisplay.propertycasadevila,
+        propertycobertura: this.filtroResultDisplay.propertycobertura,
+        propertyloft: this.filtroResultDisplay.propertyloft,
+        propertyflat: this.filtroResultDisplay.propertyflat,
+        propertyterreno: this.filtroResultDisplay.propertyterreno,
+        propertychacara: this.filtroResultDisplay.propertychacara,
+        // comercial
+        propertyloja: this.filtroResultDisplay.propertyloja,
+        propertysalao: this.filtroResultDisplay.propertysalao,
+        propertysala: this.filtroResultDisplay.propertysala,
+        propertygalpao: this.filtroResultDisplay.propertygalpao,
+        propertyconjuntocomercial: this.filtroResultDisplay.propertyconjuntocomercial,
+        propertycasacomercial: this.filtroResultDisplay.propertycasacomercial,
+        propertypousada: this.filtroResultDisplay.propertypousada,
+        propertyhotel: this.filtroResultDisplay.propertyhotel,
+        propertymotel: this.filtroResultDisplay.propertymotel,
+        propertylajecorporativa: this.filtroResultDisplay.propertylajecorporativa,
+        propertyprediointeiro: this.filtroResultDisplay.propertyprediointeiro,
 
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
@@ -266,7 +332,7 @@ export class SearchPageComponent implements OnInit {
     })
 
     // GET-GENERAL-PROPERTIES
-    this.searchService.getPropertyHomeExclusivity().subscribe(
+    this.searchService.getPropertyListAll().subscribe(
       success => {
         this.propertyproducts = success
         this.response = success;
@@ -515,7 +581,7 @@ export class SearchPageComponent implements OnInit {
         // 3-4° filtro
         let filter4: AnnouncementGetResponseDto[] = [];
         if (this.TypeProperty !== 'Tipo de Imóvel') {
-         
+
           filter4 = filter3.filter(elemento => elemento.propertyType === this.TypeProperty)
           if (filter4.length === 0) {
             console.log('caiu no filtro 4, zerado')
