@@ -7,7 +7,6 @@ import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.compon
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AnnouncementService } from 'src/app/service/announcement.service';
-import { SearchService } from 'src/app/service/search.service';
 
 @Component({
   selector: 'app-search-map',
@@ -68,7 +67,6 @@ export class SearchMapComponent implements OnInit {
 
 
   constructor(
-    private searchService: SearchService,
     private formBuilder: FormBuilder,
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
@@ -100,7 +98,7 @@ export class SearchMapComponent implements OnInit {
     }
     if (this.recentlySeenIdsList !== null) {
       for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
-        this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
+        this.announcementService.announcementGetById(this.recentlySeenIdsList[i]._id).subscribe(
           success => this.recentlySeenList.push(success),
           error => console.log(error)
         )
@@ -135,7 +133,7 @@ export class SearchMapComponent implements OnInit {
     }
 
     if (this.filterResult === null || this.filterResult.length === 0) {
-      this.searchService.getPropertyListAll().subscribe(
+      this.announcementService.listAnnouncement().subscribe(
         success => {
           this.filterResult = success;
           if (localStorage.getItem('user') !== null) {
@@ -173,7 +171,7 @@ export class SearchMapComponent implements OnInit {
     }
 
 
-    this.searchService.getPropertyListAll().subscribe(
+    this.announcementService.listAnnouncement().subscribe(
       success => {
         this.propertyproducts = success
         this.response = success;
@@ -214,7 +212,7 @@ export class SearchMapComponent implements OnInit {
   }
 
   list() {
-    this.searchService.getPropertyListAll().subscribe(
+    this.announcementService.listAnnouncement().subscribe(
       response => {
         this.propertyproducts = response
         this.responseAnnouncement = response;
@@ -300,7 +298,7 @@ export class SearchMapComponent implements OnInit {
     if (this.listLikes.length === 0) {
       this.announcementService.registerLike(request).subscribe(
         success => {
-          this.ngOnInit()
+          this.list()
           return
         },
         error => {
@@ -311,7 +309,7 @@ export class SearchMapComponent implements OnInit {
       if (condition === true) {
         this.announcementService.registerUnlike(request).subscribe(
           success => {
-            this.ngOnInit()
+            this.list()
           },
           error => {
             console.log(error)
@@ -320,7 +318,7 @@ export class SearchMapComponent implements OnInit {
       } else if (condition === undefined) {
         this.announcementService.registerLike(request).subscribe(
           success => {
-            this.ngOnInit()
+            this.list()
           },
           error => {
             console.log(error)

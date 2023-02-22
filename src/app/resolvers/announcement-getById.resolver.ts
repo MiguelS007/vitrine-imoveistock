@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
-import { SearchService } from "../service/search.service"
+import { AnnouncementService } from "../service/announcement.service";
 
 @Injectable()
 export class AnnouncementGetByIdResolve implements Resolve<any> {
 
     constructor(
-        private searchService: SearchService,
+        private announcementService: AnnouncementService,
     ) { }
 
     resolve(route: ActivatedRouteSnapshot) {
-        return this.searchService.getPropertyDetails(route.params['_id']);
+        return this.announcementService.announcementGetById(route.params['_id']);
     }
 }

@@ -5,7 +5,6 @@ import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.compon
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AnnouncementService } from 'src/app/service/announcement.service';
-import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { AuthenticationService } from '../../../service/authentication.service';
@@ -36,7 +35,6 @@ export class HomeProductsComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private searchService: SearchService,
     private announcementService: AnnouncementService,
     private modalService: NgbModal,
     private authenticationService: AuthenticationService
@@ -55,7 +53,7 @@ export class HomeProductsComponent implements OnInit {
   }
 
   list() {
-    this.searchService.getPropertyListAll().subscribe(
+    this.announcementService.listAnnouncement().subscribe(
       response => {
         this.response = response;
         if (localStorage.getItem('user') !== null) {

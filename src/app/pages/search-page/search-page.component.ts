@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { UserService } from 'src/app/service/user.service';
 import { states, cities } from 'estados-cidades';
-import { SearchService } from 'src/app/service/search.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { NgxSpinnerService } from "ngx-spinner";
 import { AnnouncementService } from 'src/app/service/announcement.service';
@@ -101,7 +101,7 @@ export class SearchPageComponent implements OnInit {
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
-    private searchService: SearchService,
+    private userService: UserService,
     private formBuilder: FormBuilder,
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
@@ -165,7 +165,7 @@ export class SearchPageComponent implements OnInit {
 
     if (this.recentlySeenIdsList !== null) {
       for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
-        this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
+        this.announcementService.announcementGetById(this.recentlySeenIdsList[i]._id).subscribe(
           success => this.recentlySeenList.push(success),
           error => console.log(error)
         )
@@ -203,8 +203,8 @@ export class SearchPageComponent implements OnInit {
         this.filtroSelected?.propertycobertura ||
         this.filtroSelected?.propertyloft ||
         this.filtroSelected?.propertyflat ||
-        this.filtroSelected?.propertyterreno || 
-        this.filtroSelected?.propertychacara || 
+        this.filtroSelected?.propertyterreno ||
+        this.filtroSelected?.propertychacara ||
         this.filtroSelected?.propertyloja ||
         this.filtroSelected?.propertysalao ||
         this.filtroSelected?.propertysala ||
@@ -237,7 +237,7 @@ export class SearchPageComponent implements OnInit {
 
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
-      this.searchService.getPropertyListAll().subscribe(
+      this.announcementService.listAnnouncement().subscribe(
         success => {
           this.filterResult = success;
           if (localStorage.getItem('user') !== null) {
@@ -275,7 +275,8 @@ export class SearchPageComponent implements OnInit {
     }
     // GET-CITIES
     let teste: any = [];
-    this.searchService.getPropertyListAll().subscribe({
+
+    this.announcementService.listAnnouncement().subscribe({
       next: data => {
         this.listAllCity = [];
         let removeRepets: any = [];
@@ -283,20 +284,16 @@ export class SearchPageComponent implements OnInit {
           removeRepets.push(data[i].cityAddress)
         }
         teste = new Set(removeRepets)
-        this.listAllCity = teste
+        this.listAllCity = teste;
+        this.propertyproducts = data
+        this.response = data;
+        this.ngxSpinnerService.hide();
       }
     })
 
-    // GET-GENERAL-PROPERTIES
-    this.searchService.getPropertyListAll().subscribe(
-      success => {
-        this.propertyproducts = success
-        this.response = success;
-        this.ngxSpinnerService.hide();
-      },
-      error => { console.log(error, 'data not collected') }
-    );
+
   }
+
   getCities() {
     this.cities = cities(this.stateSelected);
   }
@@ -472,7 +469,7 @@ export class SearchPageComponent implements OnInit {
     // let listAll:  AnnouncementGetResponseDto[] = [];
     // let listLikesFilter: AnnouncementGetResponseDto[] = [];
     this.ngxSpinnerService.show();
-    this.searchService.getPropertyListAll().subscribe(
+    this.announcementService.listAnnouncement().subscribe(
       success => {
         this.listAllForFilter = success;
         console.log(this.listAllForFilter)
@@ -661,6 +658,19 @@ export class SearchPageComponent implements OnInit {
         if (filter10.length === 0) {
           this.messageNotSearch = true;
           this.filterResult = this.listAllForFilter;
+        }
+
+        this.filtroResultDisplay = {
+          state: '',
+          city: '',
+          untilValueSale: '',
+          untilValueRent: '',
+          badRoomsQnt: 0,
+          propertiesType: '',
+          typeAd: '',
+          goal: '',
+          styleProperty: '',
+          typeOfProperty: []
         }
 
         if (this.modalFilterOpen === true) {
