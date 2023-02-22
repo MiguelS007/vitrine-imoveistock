@@ -180,7 +180,7 @@ export class SearchPageComponent implements OnInit {
     if (this.filtroSelected?.typeAd === 'rent') {
       typeAdTranslate = 'Alugar'
     } else if (this.filtroSelected?.typeAd === 'sale') {
-      typeAdTranslate = 'Venda'
+      typeAdTranslate = 'Comprar'
     }
 
     this.filtroResultDisplay = {
