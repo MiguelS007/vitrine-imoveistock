@@ -285,7 +285,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   list() {
-    this.searchService.getPropertyHomeExclusivity().subscribe(
+    this.searchService.getPropertyListAll().subscribe(
       response => {
         this.propertyproducts = response
         this.responseAnnouncement = response;
