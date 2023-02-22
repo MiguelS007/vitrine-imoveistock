@@ -548,6 +548,9 @@ input:focus {
 .max-h-700 {
     max-height: 700px;
 }
+.max-h-400 {
+    max-height: 400px;
+}
 
 .w-90 {
     width: 90%;
@@ -627,8 +630,12 @@ input:focus {
     border-radius: 5px;
 }
 
+.border-radius-0{
+    border-radius: 0;
+}
+
 .border-radius-10 {
-    border-radius: 10px;
+    border-radius: 10px !important;
 }
 
 .border-radius-top-10 {
@@ -859,6 +866,14 @@ input:focus {
     height: 90vh;
     width: 100% !important;
 }
+.form-check-input {
+    position: absolute;
+    margin-top: 0px !important;
+    margin-left: -1.7rem !important;
+    border-radius: 68px !important;
+    width: 21px;
+    height: 21px;
+}
 
 .px-5p {
     padding-left: 5% !important;
@@ -878,10 +893,7 @@ input:focus {
     padding-top: 33%;
 }
 
-.painel-browser {
-    border: 10px solid transparent;
-    background: #ffffff3f;
-}
+
 
 .box-shadow {
     box-shadow: 2px 3px 14px 5px #00000050;
@@ -894,12 +906,12 @@ input:focus {
     content: " ";
     height: 0;
     width: 0;
-    position: absolute;
+    position: absolute;left: 44%;
     border-color: transparent;
+    z-index: 1;
     rotate: 90deg;
     border-left-color: var(--purple);
     border-width: 14px 11px;
-    left: 72px !important;
     bottom: -24px;
 }
 
@@ -908,6 +920,8 @@ input:focus {
     content: " ";
     height: 0;
     width: 0;
+    z-index: 1;
+    left: 37%;
     position: absolute;
     border-color: transparent;
     rotate: 90deg;
@@ -920,7 +934,7 @@ input:focus {
 .input-local {
     background-image: url(./assets/icon/local.png);
     background-repeat: no-repeat;
-    background-position: 92% 50%;
+    background-position: 97% 50%;
 }
 
 // SCROLL DOWN ANIMATION
@@ -1119,80 +1133,63 @@ input:focus {
     display: flex !important;
 }
 
-@media (max-width: 1776px) {
+@media (max-width: 1920px) {
     .arrow-box-buy:after {
-        left: 45.8%;
+        left: 40%;
     }
 }
 
 @media (max-width: 1600px) {
     .arrow-box-buy:after {
-        left: 44.8%;
+        left: 40%;
+    }
+}
+@media (max-width: 1000px) {
+    .arrow-box-buy:after {
+        left: 37%;
     }
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 800px) {
     .arrow-box-buy:after {
-        left: 45%;
+        left: 29%;
     }
 }
-
-@media (max-width: 1300px) {
+@media (max-width: 400px) {
     .arrow-box-buy:after {
-        left: 44.2%;
-    }
-}
-
-@media (max-width: 1192px) {
-    .arrow-box-buy:after {
-        left: 43.7%;
-    }
-}
-
-@media (max-width: 1192px) {
-    .arrow-box-buy:after {
-        left: 43.7%;
-    }
-}
-
-@media (max-width: 600px) {
-    .arrow-box-buy:after {
-        left: 38%;
+        left: 22%;
     }
 }
 
 // RENT
-@media (max-width: 1776px) {
+
+@media (max-width: 1920px) {
     .arrow-box-rent:after {
-        left: 52.8%;
+        left: 37%;
     }
 }
 
 @media (max-width: 1600px) {
     .arrow-box-rent:after {
-        left: 53.5%;
+        left: 40%;
     }
 }
-
-@media (max-width: 1300px) {
+@media (max-width: 1000px) {
     .arrow-box-rent:after {
-        left: 53.9%;
+        left: 37%;
     }
 }
 
-@media (max-width: 1192px) {
+@media (max-width: 800px) {
     .arrow-box-rent:after {
-        left: 44.2%;
+        left: 46%;
     }
 }
-
-
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     .arrow-box-rent:after {
-        left: 59%;
+        left: 47%;
     }
 }
-
 // SEARCH-MAP
 .card-product-map {
     width: 47% !important;
@@ -2331,7 +2328,7 @@ vg-overlay-play .vg-overlay-play {
     .bg-home-header {
         background-image: url(./assets/img/family-mobile.png);
         background-position: center top;
-        background-size: contain;
+        background-size: cover;
         width: 100% !important;
     }
 
@@ -2470,6 +2467,11 @@ vg-overlay-play .vg-overlay-play {
 
 
 @media (max-width: 540px) {
+    
+    .col-12-mobile {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
     .logo-navbar-desktop-branca {
         display: none !important;
     }
