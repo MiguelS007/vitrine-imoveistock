@@ -79,7 +79,7 @@ export class PropertyDetailComponent implements OnInit {
       }
     }
 
-    console.log(interdistance, window.innerWidth)
+    // console.log(interdistance, window.innerWidth)
 
   }
 
