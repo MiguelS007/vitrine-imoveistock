@@ -161,12 +161,12 @@
               <div class="w-100 d-flex align-items-center justify-content-between">
                 <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Detalhes do Imóvel</p>
                 <img *ngIf="!arrowpff" src="../../../assets/icon/arrow-down-blue.png" width="20"
-                  style="cursor: pointer;" class="animate__animated animate__rotateIn" (click)="openarrow(24)">
+                  style="cursor: pointer;" class="animate__animated" (click)="openarrow(24)">
                 <img *ngIf="arrowpff" src="../../../assets/icon/arrow-top-blue.png"
-                  class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;"
+                  class="animate__animated" width="18" style="cursor: pointer;"
                   (click)="openarrow(24)">
               </div>
-              <table *ngIf="arrowpff" class="w-100 animate__animated animate__fadeInUp">
+              <table *ngIf="arrowpff" class="w-100 animate__animated">
                 <tbody>
                   <tr class="h-51">
                     <td>
@@ -268,12 +268,12 @@
               <div class="w-100 d-flex align-items-center justify-content-between">
                 <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Informações Adicionais</p>
                 <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20"
-                  style="cursor: pointer;" class="animate__animated animate__rotateIn" (click)="openarrow(42)">
+                  style="cursor: pointer;" class="animate__animated" (click)="openarrow(42)">
                 <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png"
-                  class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;"
+                  class="animate__animated" width="18" style="cursor: pointer;"
                   (click)="openarrow(42)">
               </div>
-              <table *ngIf="arrowinfo" class="w-100 animate__animated animate__fadeInUp">
+              <table *ngIf="arrowinfo" class="w-100 animate__animated">
                 <tbody>
                   <tr class="h-51">
                     <td>
@@ -324,11 +324,11 @@
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
               <img *ngIf="!arrow1" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
-                class="animate__animated animate__rotateIn" (click)="openarrow(1)">
+                class="animate__animated" (click)="openarrow(1)">
               <img *ngIf="arrow1" src="../../../assets/icon/arrow-top-blue.png"
-                class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;" (click)="openarrow(1)">
+                class="animate__animated" width="18" style="cursor: pointer;" (click)="openarrow(1)">
             </div>
-            <table *ngIf="arrow1" class="w-100 animate__animated animate__fadeInUp">
+            <table *ngIf="arrow1" class="w-100 animate__animated">
               <tbody>
                 <tr class="h-51">
                   <td class="align-items-center">
@@ -440,24 +440,24 @@
                 <span class="fw-400 font-size-14 px-1 line-20">CEP: {{response.cepAddress || '-'}}</span>
               </p>
               <img *ngIf="!arrow2" src="../../../assets/icon/arrow-down-blue.png" width="20"
-                class="cursor-pointer animate__animated animate__rotateIn" (click)="openarrow(2)">
+                class="cursor-pointer animate__animated" (click)="openarrow(2)">
               <img *ngIf="arrow2" src="../../../assets/icon/arrow-top-blue.png"
-                class="cursor-pointer animate__animated animate__rotateIn" width="18" (click)="openarrow(2)">
+                class="cursor-pointer animate__animated" width="18" (click)="openarrow(2)">
             </div>
             <iframe *ngIf="arrow2"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7205.665528434405!2d-49.26210139554594!3d-25.443854055282333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1669903101993!5m2!1spt-BR!2sbr"
-              class="w-100 h-600 animate__animated animate__fadeInUp" style="border:0;" allowfullscreen=""
+              class="w-100 h-600 animate__animated" style="border:0;" allowfullscreen=""
               loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
           <div id="previewplant" class="w-100 border-radius-10 info-cards-property mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Planta baixa</p>
               <img *ngIf="!arrow3" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
-                class="animate__animated animate__rotateIn" (click)="openarrow(3)">
+                class="animate__animated" (click)="openarrow(3)">
               <img *ngIf="arrow3" src="../../../assets/icon/arrow-top-blue.png"
-                class="animate__animated animate__rotateIn" width="18" style="cursor: pointer;" (click)="openarrow(3)">
+                class="animate__animated" width="18" style="cursor: pointer;" (click)="openarrow(3)">
             </div>
-            <div *ngIf="arrow3" class="w-100 animate__animated animate__fadeInUp">
+            <div *ngIf="arrow3" class="w-100 animate__animated">
               <div class="w-100 my-4 d-flex block-important
                     border border-radius-10
                     justify-content-between p-4">
