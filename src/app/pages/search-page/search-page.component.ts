@@ -226,7 +226,7 @@ export class SearchPageComponent implements OnInit {
 
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
-      this.searchByCity(this.filtroSelected?.city  || 'Local');
+      this.searchByCity(this.filtroSelected?.city || 'Local');
       this.filterTypeProperty(this.filtroSelected?.goal || 'Tipo do Imóvel');
       this.searchByBadRoom(this.filtroSelected?.badRoomsQnt)
       if (this.filtroSelected.styleProperty !== '') {
@@ -487,19 +487,13 @@ export class SearchPageComponent implements OnInit {
             }
           )
         }
+
         // 1° filtro
         let filter1: AnnouncementGetResponseDto[] = [];
-        if (this.stylePropertyTitle !== 'O que está buscando?') {
-          console.log('filtro um é', this.stylePropertyTitle)
+        if (this.stylePropertyTitle !== 'O que está buscando') {
           filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.stylePropertyTitle))
-          if (filter1.length === 0) {
-            // filter1 = this.listAllForFilter;
-            console.log('nao tem', this.stylePropertyTitle)
-          }
         } else {
           filter1 = this.listAllForFilter;
-          console.log('não tem filtro', this.stylePropertyTitle);
-          console.log(filter1)
         }
 
         // 2° filtro
@@ -509,11 +503,10 @@ export class SearchPageComponent implements OnInit {
             let type = ''
             if (this.selectTypeAd === 'Comprar') {
               type = 'sale'
-            } else {
+            } else if (this.selectTypeAd === 'Alugar') {
               type = 'rent'
             }
             filter2 = filter1.filter(elemento => elemento.typeOfAd === type)
-            console.log('entrou no filtro 2', type);
           }
         } else {
           filter2 = filter1
@@ -523,22 +516,14 @@ export class SearchPageComponent implements OnInit {
         let filter3: AnnouncementGetResponseDto[] = [];
         if (this.selectCity !== 'Local') {
           filter3 = filter2.filter(elemento => elemento.cityAddress === this.selectCity)
-          console.log('cidade selecionada', this.selectCity)
-          if (filter3.length === 0) {
-            console.log('filtro 3 zerado')
-          }
         } else {
-          filter3 = filter2
+          filter3 = filter2;
         }
 
         // 3-4° filtro
         let filter4: AnnouncementGetResponseDto[] = [];
-        if (this.TypeProperty !== 'Tipo de Imóvel') {
-
+        if (this.TypeProperty !== 'Tipo do Imóvel') {
           filter4 = filter3.filter(elemento => elemento.propertyType === this.TypeProperty)
-          if (filter4.length === 0) {
-            console.log('caiu no filtro 4, zerado')
-          }
         } else {
           filter4 = filter3
         }
@@ -583,7 +568,6 @@ export class SearchPageComponent implements OnInit {
         if (this.selectBadRooms !== 'Dormitórios') {
           let quartos = this.selectBadRooms.replace(/\D/gim, '')
           filter6 = filter5.filter(elemento => elemento.bedrooms >= parseInt(quartos))
-          console.log(quartos)
         } else {
           filter6 = filter5
         }
@@ -594,7 +578,6 @@ export class SearchPageComponent implements OnInit {
         if (this.selectBathrooms !== 'Banheiros') {
           let banheiros = this.selectBathrooms.replace(/\D/gim, '')
           filter7 = filter6.filter(elemento => elemento.bathrooms >= parseInt(banheiros))
-          console.log(banheiros)
         } else {
           filter7 = filter6
         }
@@ -605,7 +588,6 @@ export class SearchPageComponent implements OnInit {
         if (this.selectVacancies !== 'Vagas' && this.selectVacancies !== 'Tanto faz') {
           let vagas = this.selectVacancies.replace(/\D/gim, '')
           filter8 = filter7.filter(elemento => elemento.parkingSpaces >= parseInt(vagas))
-          console.log(vagas)
         } else {
           filter8 = filter7
         }
