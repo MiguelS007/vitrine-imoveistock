@@ -318,14 +318,20 @@
                                         </div>
                                     </div>
                                     <div class="col-12 px-0 mb-3 ">
-                                        <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
+                                        <!-- <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                                             <select formControlName="typePropertyCity"
                                                 class="w-100 px-3 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black"
                                                 id="state" aria-label="Default select example">
                                                 <option disabled selected value>{{citySelected}}</option>
                                                 <option *ngFor="let item of cities" [value]="item">{{item}}</option>
                                             </select>
-                                        </div>
+                                        </div> -->
+                                        <input type='text' #searchfiltercity (keyup)='onkeypress(searchfiltercity.value)'>
+                                        <ol>
+                                            <li *ngFor='let name of names$|async'>
+                                                {{name}}
+                                            </li> 
+                                        </ol>
                                     </div>
                                     <div class="col-12 px-0 mb-3">
                                         <div class="row">
@@ -334,30 +340,28 @@
                                                     class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
                                                     <div style="border-right: 0px !important;"
                                                         class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
-                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15"> Valor até R$
+                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15"> Valor até
                                                         </p>
                                                     </div>
                                                     <select formControlName="typePropertyValueSale"
                                                         style="border-left: 0px !important;"
                                                         class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black"
                                                         id="state" aria-label="Default select example">
-                                                        <option *ngFor="let item of valueUntilSaleArray" [value]="item">
-                                                            {{item}}</option>
+                                                        <option *ngFor="let item of valueUntilSaleArray" [value]="item">&nbsp;{{item | currency:'R$':'symbol':'1.0'}}</option>
                                                     </select>
                                                 </div>
                                                 <div *ngIf="collapsed"
                                                     class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
                                                     <div style="border-right: 0px !important;"
                                                         class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
-                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15"> Valor até R$
+                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15"> Valor até
                                                         </p>
                                                     </div>
                                                     <select formControlName="typePropertyValueRent"
                                                         style="border-left: 0px !important;"
                                                         class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black"
                                                         id="state" aria-label="Default select example">
-                                                        <option *ngFor="let item of valueUntilRentArray" [value]="item">
-                                                            {{item}}</option>
+                                                        <option *ngFor="let item of valueUntilRentArray" [value]="item">&nbsp;{{item | currency:'R$':'symbol':'1.0'}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -366,14 +370,13 @@
                                                     class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
                                                     <div style="border-right: 0px !important;"
                                                         class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
-                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15">Quartos +</p>
+                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15">Quartos </p>
                                                     </div>
                                                     <select formControlName="typePropertyBadrooms"
                                                         style="border-left: 0px !important;"
                                                         class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black"
                                                         id="state" aria-label="Default select example">
-                                                        <option *ngFor="let item of badroomsArray" [value]="item">
-                                                            {{item}}</option>
+                                                        <option *ngFor="let item of badroomsArray" [value]="item">&nbsp; {{item}} +</option>
                                                     </select>
                                                 </div>
                                             </div>
