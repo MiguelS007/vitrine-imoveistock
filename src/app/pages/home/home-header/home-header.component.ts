@@ -190,17 +190,6 @@ export class HomeHeaderComponent implements OnInit {
     //     });
   }
 
-  // <input type="text" placeholder="{{'CASHGAME.SEARCH' | translate }}"
-  // class="form-control input-box body-300-md text-white" #inputNameFilter
-  // (keyup)="onTypeTableName(inputNameFilter.value)">
-
-
-  // onTypeTableName(tableName: string) {
-  //   this.cashGamesToShow = this.cashGames.filter(el => el.tableName.toLowerCase().includes(tableName.toLowerCase()));
-  // }
-
-
-
 
 
 
