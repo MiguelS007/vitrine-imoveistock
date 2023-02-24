@@ -790,7 +790,7 @@ export class HomeHeaderComponent implements OnInit {
 
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
-    this.router.navigate(['/search']);
+    // this.router.navigate(['/search']);
 
   }
 
@@ -812,6 +812,7 @@ export class HomeHeaderComponent implements OnInit {
       if(valor === estados.estados[i].nome){
         for (let x = 0; x < estados.estados[i].cidades.length; x++) {
           this.listAllCity.push({name: estados.estados[i].cidades[x]})
+          this.stateSelected = estados.estados[i].sigla
         }
       }
     }
