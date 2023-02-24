@@ -5,7 +5,6 @@ import { states, cities } from 'estados-cidades';
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { AnnouncementService } from '../../../service/announcement.service';
-import { Observable, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-home-header',
@@ -134,6 +133,8 @@ export class HomeHeaderComponent implements OnInit {
 
 
   listAllCity: any = [];
+  keyword = 'name'
+  getSelectedCity: string;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -157,15 +158,19 @@ export class HomeHeaderComponent implements OnInit {
   ngAfterViewInit(): void {
     this.announcementService.listAnnouncement().subscribe({
       next: data => {
-        this.listAllCity = [];
         let removeRepets: any = [];
         for (let i = 0; i < data.length; i++) {
           removeRepets.push(data[i].cityAddress)
         }
-        this.listAllCity = new Set(removeRepets)
+        var novaArr = removeRepets.filter((este, i) => removeRepets.indexOf(este) === i);
+        for (let i = 0; i < novaArr.length; i++) {
+          let testeCity = {
+            name: novaArr[i]
+          }
+          this.listAllCity.push(testeCity)
+        }
       }
     })
-    console.log(this.listAllCity);
   }
 
 
@@ -181,15 +186,19 @@ export class HomeHeaderComponent implements OnInit {
     );
     this.states = states();
   }
-  onkeypress(value: string) {
-    // const set = new Set();
-    //     set.forEach((el: string)=> {
-    //         if (!el.includes(value)) {
-    //             set.delete(el);
-    //         }
-    //     });
+  selectEvent(item) {
+    this.getSelectedCity = item.name;
+    // do something with selected item
   }
 
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+    // do something
+  }
 
 
 
@@ -467,7 +476,7 @@ export class HomeHeaderComponent implements OnInit {
     let filter: any = {
       typeAd: this.typeAd,
       state: this.form.controls['typePropertyState'].value,
-      city: this.form.controls['typePropertyCity'].value,
+      city: this.getSelectedCity,
       allResidential: this.typepropertyfull,
       untilValueSale: this.form.controls['typePropertyValueSale'].value,
       untilValueRent: this.form.controls['typePropertyValueRent'].value,
@@ -499,6 +508,8 @@ export class HomeHeaderComponent implements OnInit {
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
+
+    console.log(filter.state, filter.city)
 
 
     // ---------------------------

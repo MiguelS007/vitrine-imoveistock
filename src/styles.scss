@@ -53,6 +53,26 @@ app-nav-bar {
 }
 
 // 
+
+.autocomplete-container .input-container .x i {
+    display: none !important;
+}
+
+.autocomplete-container .input-container input {
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid #dee2e6!important;
+    box-shadow: none;
+    outline: none;
+    background-color: white !important;
+    color: #000000de;
+    width: 100%;
+    padding: 0 15px;
+    margin-bottom: 1rem;
+    line-height: 40px;
+    height: 51px !important;
+}
+
 .changeColorNavbar {
     app-nav-bar {
         background-color: white !important;
@@ -1558,7 +1578,7 @@ vg-overlay-play .vg-overlay-play {
     max-height: 550px;
 }
 
-.h-29{
+.h-29 {
     height: 29px;
 }
 
