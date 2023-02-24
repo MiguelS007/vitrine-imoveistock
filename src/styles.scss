@@ -74,9 +74,26 @@ app-nav-bar {
     height: 51px !important;
 }
 
-
-#search-cityes-test > .input-container > input {
-    background-color: red !important;
+::placeholder{
+    color: black;
+}
+ #search-cityes-test > .autocomplete-container > .input-container > input {
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid #dee2e6 !important;
+    box-shadow: none;
+    outline: none;
+    background-color: #f8f9fa !important;
+    color: black;
+    width: 100%;
+    padding: 0 15px;
+    margin-bottom: 1rem;
+    line-height: 40px;
+    border-radius: 10px;
+    height: 74px !important;
+}
+#search-cityes-test > .autocomplete-container{
+    box-shadow: none !important;
 }
 
 
