@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
-import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
+import { states, cities } from 'estados-cidades';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { NgxSpinnerService } from "ngx-spinner";
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
+import estados from '../../../assets/json/estados-cidades.json';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
@@ -33,6 +34,9 @@ export class SearchPageComponent implements OnInit {
   countLoft: number;
   countKitnet: number;
 
+  stateSelected = 'Escolha o Estado'
+  citySelected = 'Selecione uma ciadade'
+
   response: AnnouncementGetResponseDto[] = [];
   user: UserGetResponseDto;
   urlsimg: any = [];
@@ -42,19 +46,16 @@ export class SearchPageComponent implements OnInit {
   filtroSelected: any;
 
   filtroResultDisplay: {
+    state: string,
+    city: string,
+    untilValueSale: string,
+    untilValueRent: string,
+    badRoomsQnt: number,
+    propertiesType: string,
     typeAd: string,
-    where: string,
-    whatAreYouLookingFor: string,
-    propertyType: string,
     goal: string,
-    checkvacancies: string,
-    checkbathrooms: string,
-    checksuites: string,
-    checkrooms: string,
-    checkcondominium: string,
-    checkfootage: string,
-    checkconstruction: string,
-    checkrenovated: string,
+    styleProperty: string,
+    typeOfProperty: any[];
   }
 
   orderBy: string = 'Selecione'
@@ -70,11 +71,11 @@ export class SearchPageComponent implements OnInit {
 
   selectTypeAd = 'Selecione';
   selectBathrooms = 'Banheiros';
-  selectRooms = 'Dormitórios';
+  selectBadRooms = 'Dormitórios';
   selectVacancies = 'Vagas';
   valuePrices: 0;
 
-  whatAreYouLookingForTitle: string = 'O que está buscando?';
+  stylePropertyTitle: string = 'O que está buscando?';
   TypeProperty = 'Tipo de Imóvel';
 
 
@@ -94,12 +95,16 @@ export class SearchPageComponent implements OnInit {
   formModal: FormGroup;
 
   modalFilterOpen: boolean = false;
+  states: string[];
+  cities: string[];
 
+  keyword = 'name'
+  getSelectedCity: string;
+  estados: any;
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
     private userService: UserService,
-    private searchService: SearchService,
     private formBuilder: FormBuilder,
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
@@ -108,13 +113,14 @@ export class SearchPageComponent implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       searchwords: [''],
-      localproperty: [''],
       propertyType: [''],
       typeproperty: [''],
+      typePropertyState: [''],
+      localproperty: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
-      typebathroom: [''],
-      typerooms: [''],
+      typeBathRoom: [''],
+      typeBadrooms: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
@@ -125,19 +131,21 @@ export class SearchPageComponent implements OnInit {
 
     this.formModal = this.formBuilder.group({
       searchwords: [''],
-      localproperty: [''],
       propertyType: [''],
       typeproperty: [''],
+      typePropertyState: [''],
+      localproperty: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
-      typebathroom: [''],
-      typerooms: [''],
+      typeBathRoom: [''],
+      typeBadrooms: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
       typefootagemin: [''],
       orderby: [''],
     });
+    this.estados = estados;
 
   }
 
@@ -145,6 +153,7 @@ export class SearchPageComponent implements OnInit {
 
     this.ngxSpinnerService.show();
     this.products = this.datamokservice.resultSearch;
+    this.states = states();
 
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
@@ -162,7 +171,7 @@ export class SearchPageComponent implements OnInit {
 
     if (this.recentlySeenIdsList !== null) {
       for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
-        this.searchService.getPropertyDetails(this.recentlySeenIdsList[i]._id).subscribe(
+        this.announcementService.announcementGetById(this.recentlySeenIdsList[i]._id).subscribe(
           success => this.recentlySeenList.push(success),
           error => console.log(error)
         )
@@ -177,41 +186,64 @@ export class SearchPageComponent implements OnInit {
     if (this.filtroSelected?.typeAd === 'rent') {
       typeAdTranslate = 'Alugar'
     } else if (this.filtroSelected?.typeAd === 'sale') {
-      typeAdTranslate = 'Venda'
+      typeAdTranslate = 'Comprar'
     }
 
-
     this.filtroResultDisplay = {
+      state: this.filtroSelected?.state,
+      city: this.filtroSelected?.city,
+      untilValueSale: this.filtroSelected?.untilValueSale,
+      untilValueRent: this.filtroSelected?.untilValueRent,
+      badRoomsQnt: this.filtroSelected?.badRoomsQnt,
+      propertiesType: this.filtroSelected?.propertiesType,
+      styleProperty: this.filtroSelected?.styleProperty,
       typeAd: typeAdTranslate,
-      where: this.filtroSelected?.where,
-      whatAreYouLookingFor: this.filtroSelected?.whatAreYouLookingFor,
-      propertyType: this.filtroSelected?.propertyType,
       goal: this.filtroSelected?.goal,
-      checkvacancies: '',
-      checkbathrooms: '',
-      checksuites: '',
-      checkrooms: '',
-      checkcondominium: '',
-      checkfootage: '',
-      checkconstruction: '',
-      checkrenovated: '',
+      typeOfProperty:
+        this.filtroSelected?.propertyapartamento ||
+        this.filtroSelected?.propertystudio ||
+        this.filtroSelected?.propertykitnet ||
+        this.filtroSelected?.propertycasa ||
+        this.filtroSelected?.propertycasacondominio ||
+        this.filtroSelected?.propertycasadevila ||
+        this.filtroSelected?.propertycobertura ||
+        this.filtroSelected?.propertyloft ||
+        this.filtroSelected?.propertyflat ||
+        this.filtroSelected?.propertyterreno ||
+        this.filtroSelected?.propertychacara ||
+        this.filtroSelected?.propertyloja ||
+        this.filtroSelected?.propertysalao ||
+        this.filtroSelected?.propertysala ||
+        this.filtroSelected?.propertygalpao ||
+        this.filtroSelected?.propertyconjuntocomercial ||
+        this.filtroSelected?.propertycasacomercial ||
+        this.filtroSelected?.propertypousada ||
+        this.filtroSelected?.propertyhotel ||
+        this.filtroSelected?.propertymotel ||
+        this.filtroSelected?.propertylajecorporativa ||
+        this.filtroSelected?.propertyprediointeiro
     }
 
     if (filtro !== null) {
       this.form.patchValue({
-        // typeproperty: this.filtroSelected.whatAreYouLookingFor,
-        localproperty: this.filtroSelected.where,
-        propertyType: this.filtroSelected.propertyType
+        typeMaxPrice: this.filtroResultDisplay.untilValueSale,
+        localproperty: this.filtroResultDisplay.city,
+        typeOfProperty: this.filtroSelected?.typeOfProperty
+
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
-
-      if (this.filtroSelected.whatAreYouLookingFor !== '') {
-        this.whatAreYouLookingFor(this.filtroSelected.whatAreYouLookingFor)
+      this.searchByCity(this.filtroSelected?.city || 'Local');
+      this.filterTypeProperty(this.filtroSelected?.goal || 'Tipo do Imóvel');
+      this.searchByBadRoom(this.filtroSelected?.badRoomsQnt)
+      if (this.filtroSelected.styleProperty !== '') {
+        this.searchByStyleProperty(this.filtroSelected.styleProperty || 'O que está buscando')
       }
     }
 
+
+    // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
-      this.searchService.getPropertyListAll().subscribe(
+      this.announcementService.listAnnouncement().subscribe(
         success => {
           this.filterResult = success;
           if (localStorage.getItem('user') !== null) {
@@ -247,10 +279,10 @@ export class SearchPageComponent implements OnInit {
         )
       }
     }
-
+    // GET-CITIES
     let teste: any = [];
 
-    this.searchService.getPropertyListAll().subscribe({
+    this.announcementService.listAnnouncement().subscribe({
       next: data => {
         this.listAllCity = [];
         let removeRepets: any = [];
@@ -258,22 +290,37 @@ export class SearchPageComponent implements OnInit {
           removeRepets.push(data[i].cityAddress)
         }
         teste = new Set(removeRepets)
-        this.listAllCity = teste
+        // this.listAllCity = teste;
+        this.propertyproducts = data
+        this.response = data;
+        this.ngxSpinnerService.hide();
+        console.log(this.listAllCity);
       }
     })
 
 
-
-
-    this.searchService.getPropertyHomeExclusivity().subscribe(
-      success => {
-        this.propertyproducts = success
-        this.response = success;
-        this.ngxSpinnerService.hide();
-      },
-      error => { console.log(error, 'data not collected') }
-    );
   }
+
+  selectEvent(item) {
+    this.getSelectedCity = item.name;
+    // do something with selected item
+  }
+
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+    // do something
+  }
+
+
+  getCities() {
+    this.cities = cities(this.stateSelected);
+  }
+
+
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -291,7 +338,6 @@ export class SearchPageComponent implements OnInit {
     }
     return array
   }
-
 
   likeHeart(value, condition) {
 
@@ -382,50 +428,56 @@ export class SearchPageComponent implements OnInit {
       this.selectTypeAd = 'Alugar'
     }
   }
-  searchBy(item) {
+
+  searchByBadRoom(item) {
     // SELECT BADROOMS
     if (item === '1') {
-      this.selectRooms = '+1 Quarto'
+      this.selectBadRooms = '+1 Quarto'
     } else if (item === '2') {
-      this.selectRooms = '+2  Quartos'
+      this.selectBadRooms = '+2  Quartos'
     } else if (item === '3') {
-      this.selectRooms = '+3  Quartos'
+      this.selectBadRooms = '+3  Quartos'
     } else if (item === '4') {
-      this.selectRooms = '+4  Quartos'
+      this.selectBadRooms = '+4  Quartos'
     } else if (item === '5') {
-      this.selectRooms = '+5  Quartos'
+      this.selectBadRooms = '+5  Quartos'
     }
+  }
+  searchByBathRoom(item) {
     // SELECT BATHROOMS
-    else if (item === '1b') {
+    if (item === '1') {
       this.selectBathrooms = '+1  Banheiro'
-    } else if (item === '2b') {
+    } else if (item === '2') {
       this.selectBathrooms = '+2  Banheiros'
-    } else if (item === '3b') {
+    } else if (item === '3') {
       this.selectBathrooms = '+3  Banheiros'
-    } else if (item === '4b') {
+    } else if (item === '4') {
       this.selectBathrooms = '+4  Banheiros'
-    } else if (item === '5b') {
+    } else if (item === '5') {
       this.selectBathrooms = '+5  Banheiros'
     }
-    // SELECT ROOMS
-    else if (item === 'tf') {
+  }
+  searchByVacancies(item) {
+    // SELECT VACANCES
+    if (item === '0') {
       this.selectVacancies = 'Tanto faz'
-    } else if (item === '1v') {
+    } else if (item === '1') {
       this.selectVacancies = '+1  Vagas'
-    } else if (item === '2v') {
+    } else if (item === '2') {
       this.selectVacancies = '+2  Vagas'
-    } else if (item === '3v') {
+    } else if (item === '3') {
       this.selectVacancies = '+3  Vagas'
-    } else if (item === '4v') {
+    } else if (item === '4') {
       this.selectVacancies = '+4  Vagas'
-    } else if (item === '5v') {
+    } else if (item === '5') {
       this.selectVacancies = '+5  Vagas'
     }
   }
 
-  whatAreYouLookingFor(value) {
-    this.whatAreYouLookingForTitle = value
+  searchByStyleProperty(value) {
+    this.stylePropertyTitle = value
   }
+
   filterTypeProperty(value) {
     this.TypeProperty = value
   }
@@ -439,7 +491,7 @@ export class SearchPageComponent implements OnInit {
     // let listAll:  AnnouncementGetResponseDto[] = [];
     // let listLikesFilter: AnnouncementGetResponseDto[] = [];
     this.ngxSpinnerService.show();
-    this.searchService.getPropertyListAll().subscribe(
+    this.announcementService.listAnnouncement().subscribe(
       success => {
         this.listAllForFilter = success;
         console.log(this.listAllForFilter)
@@ -457,66 +509,67 @@ export class SearchPageComponent implements OnInit {
             }
           )
         }
+
+        // 1° filtro
         let filter1: AnnouncementGetResponseDto[] = [];
-        if (this.whatAreYouLookingForTitle !== 'O que está buscando?') {
-          console.log('filtro um é', this.whatAreYouLookingForTitle)
-          filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.whatAreYouLookingForTitle))
-          if (filter1.length === 0) {
-            // filter1 = this.listAllForFilter;
-            console.log('nao tem', this.whatAreYouLookingForTitle)
-          }
+        if (this.stylePropertyTitle !== 'O que está buscando') {
+          console.log('filtro um é', this.stylePropertyTitle)
+          filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.stylePropertyTitle))
         } else {
           filter1 = this.listAllForFilter;
-          console.log('não tem filtro', this.whatAreYouLookingForTitle);
-          console.log(filter1)
         }
+
+        // 2° filtro
         let filter2: AnnouncementGetResponseDto[] = [];
         if (this.selectTypeAd !== 'Selecione') {
           if (filter1.length !== 0) {
             let type = ''
             if (this.selectTypeAd === 'Comprar') {
               type = 'sale'
-            } else {
+            } else if (this.selectTypeAd === 'Alugar') {
               type = 'rent'
             }
             filter2 = filter1.filter(elemento => elemento.typeOfAd === type)
-            console.log('entrou no filtro 2', type);
           }
         } else {
           filter2 = filter1
         }
+
+        // 2° filtro
         let filter3: AnnouncementGetResponseDto[] = [];
         if (this.selectCity !== 'Local') {
-          filter3 = filter2.filter(elemento => elemento.cityAddress === this.selectCity)
-          console.log('cidade selecionada', this.selectCity)
+          filter3 = filter2.filter(elemento => elemento.cityAddress === this.getSelectedCity)
+          console.log('cidade selecionada', this.getSelectedCity)
           if (filter3.length === 0) {
-            console.log('filtro 3 zerado')
+            console.log(this.getSelectedCity,'filtro 3 zerado')
           }
         } else {
-          filter3 = filter2
+          filter3 = filter2;
         }
 
+        // 3-4° filtro
         let filter4: AnnouncementGetResponseDto[] = [];
-        if (this.TypeProperty !== 'Tipo de Imóvel') {
-          filter4 = filter3.filter(elemento => elemento.propertyType === this.TypeProperty)
+        if (this.TypeProperty !== 'Tipo do Imóvel') {
+
+          filter4 = filter3.filter(elemento => elemento.goal === this.TypeProperty)
           if (filter4.length === 0) {
+            console.log(filter4, )
             console.log('caiu no filtro 4, zerado')
           }
         } else {
           filter4 = filter3
         }
 
+        // 4-5° filtro
         let filter5: AnnouncementGetResponseDto[] = [];
-
         let valueMin: number = 0;
         let maxValue: number = 0;
 
-
-        if(this.modalFilterOpen === false) {
+        if (this.modalFilterOpen === false) {
           if (this.form.controls['typeMinPrice'].value !== '') {
             valueMin = this.form.controls['typeMinPrice'].value;
           }
-  
+
           if (this.form.controls['typeMaxPrice'].value !== '') {
             maxValue = this.form.controls['typeMaxPrice'].value;
           }
@@ -524,12 +577,11 @@ export class SearchPageComponent implements OnInit {
           if (this.form.controls['typeMinPrice'].value !== '') {
             valueMin = this.formModal.controls['typeMinPrice'].value;
           }
-  
+
           if (this.form.controls['typeMaxPrice'].value !== '') {
             maxValue = this.formModal.controls['typeMaxPrice'].value;
           }
         }
-        
 
         if (valueMin !== 0 && maxValue !== 0) {
           if (this.selectTypeAd === 'Comprar') {
@@ -541,36 +593,39 @@ export class SearchPageComponent implements OnInit {
           filter5 = filter4;
         }
 
+        // 6° filtro
+
         let filter6: AnnouncementGetResponseDto[] = [];
 
-        if (this.selectRooms !== 'Dormitórios') {
-          let quartos = this.selectRooms.replace(/\D/gim, '')
+        if (this.selectBadRooms !== 'Dormitórios') {
+          let quartos = this.selectBadRooms.replace(/\D/gim, '')
           filter6 = filter5.filter(elemento => elemento.bedrooms >= parseInt(quartos))
-          console.log(quartos)
         } else {
           filter6 = filter5
         }
 
+        // 7° filtro
         let filter7: AnnouncementGetResponseDto[] = [];
 
         if (this.selectBathrooms !== 'Banheiros') {
           let banheiros = this.selectBathrooms.replace(/\D/gim, '')
           filter7 = filter6.filter(elemento => elemento.bathrooms >= parseInt(banheiros))
-          console.log(banheiros)
         } else {
           filter7 = filter6
         }
 
+        // 8° filtro
         let filter8: AnnouncementGetResponseDto[] = [];
 
         if (this.selectVacancies !== 'Vagas' && this.selectVacancies !== 'Tanto faz') {
           let vagas = this.selectVacancies.replace(/\D/gim, '')
           filter8 = filter7.filter(elemento => elemento.parkingSpaces >= parseInt(vagas))
-          console.log(vagas)
         } else {
           filter8 = filter7
         }
 
+
+        // 9° filtro
         let filter9: AnnouncementGetResponseDto[] = [];
 
         let constructionYear = this.form.controls['typeconstruction'].value
@@ -580,17 +635,18 @@ export class SearchPageComponent implements OnInit {
           filter9 = filter8
         }
 
+        // 10° filtro
         let filter10: AnnouncementGetResponseDto[] = [];
 
 
         let areaMax: number = 0;
         let minArea: number = 0;
 
-        if(this.modalFilterOpen === false) {
+        if (this.modalFilterOpen === false) {
           if (this.form.controls['typefootagemin'].value !== '') {
             minArea = this.form.controls['typefootagemin'].value;
           }
-  
+
           if (this.form.controls['typefootagemax'].value !== '') {
             areaMax = this.form.controls['typefootagemax'].value;
           }
@@ -598,7 +654,7 @@ export class SearchPageComponent implements OnInit {
           if (this.form.controls['typefootagemin'].value !== '') {
             minArea = this.formModal.controls['typefootagemin'].value;
           }
-  
+
           if (this.form.controls['typefootagemax'].value !== '') {
             areaMax = this.formModal.controls['typefootagemax'].value;
           }
@@ -612,10 +668,24 @@ export class SearchPageComponent implements OnInit {
         }
 
         this.filterResult = filter10;
+        console.log(this.filterResult)
 
         if (filter10.length === 0) {
           this.messageNotSearch = true;
           this.filterResult = this.listAllForFilter;
+        }
+
+        this.filtroResultDisplay = {
+          state: '',
+          city: '',
+          untilValueSale: '',
+          untilValueRent: '',
+          badRoomsQnt: 0,
+          propertiesType: '',
+          typeAd: '',
+          goal: '',
+          styleProperty: '',
+          typeOfProperty: []
         }
 
         if (this.modalFilterOpen === true) {
@@ -625,18 +695,19 @@ export class SearchPageComponent implements OnInit {
         this.ngxSpinnerService.hide();
       },
     );
+    
   }
 
   openFilter(content) {
 
-    this.modalFilterOpen = true
-
+    this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
-      modalRef.result.then(data => {
-      }, error => {
-        this.modalFilterOpen = false
-      });
-	}
+    modalRef.result.then(data => {
+    }, error => {
+      this.modalFilterOpen = false;
+
+    });
+  }
 
   exit() {
     this.modalService.dismissAll()
@@ -654,4 +725,22 @@ export class SearchPageComponent implements OnInit {
     return text.toLocaleLowerCase();
   }
 
+  getEstados(value) {
+    let valor = value.target.value;
+    console.log(valor);
+    this.listAllCity = [];
+    for (let i = 0; i < estados.estados.length; i++) {
+      if (valor === estados.estados[i].nome) {
+        for (let x = 0; x < estados.estados[i].cidades.length; x++) {
+          this.listAllCity.push({ name: estados.estados[i].cidades[x] })
+          this.stateSelected = estados.estados[i].sigla
+        }
+      }
+    }
+    console.log(this.listAllCity, 'lista');
+  }
+
 }
+
+
+
