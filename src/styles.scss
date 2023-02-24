@@ -54,14 +54,15 @@ app-nav-bar {
 
 // 
 
-.x i, .heading {
+.x i,
+.heading {
     display: none !important;
 }
 
 .autocomplete-container .input-container input {
     font-size: 14px;
     box-sizing: border-box;
-    border: 1px solid #dee2e6!important;
+    border: 1px solid #dee2e6 !important;
     box-shadow: none;
     outline: none;
     background-color: white !important;
@@ -72,6 +73,13 @@ app-nav-bar {
     line-height: 40px;
     height: 51px !important;
 }
+
+
+#search-cityes-test > .input-container > input {
+    background-color: red !important;
+}
+
+
 
 .changeColorNavbar {
     app-nav-bar {
@@ -2245,12 +2253,13 @@ vg-overlay-play .vg-overlay-play {
     }
 
     // HEADER
-    .row-of-home{
+    .row-of-home {
         position: relative;
         top: 20rem;
         z-index: 4;
     }
-    .col-of-products{
+
+    .col-of-products {
         padding-top: 19rem !important;
     }
 
@@ -2262,7 +2271,7 @@ vg-overlay-play .vg-overlay-play {
         width: 100% !important;
         height: 800px;
         max-height: 100%;
-               
+
     }
 
     .swiper-mobile {
@@ -2572,12 +2581,14 @@ vg-overlay-play .vg-overlay-play {
     }
 
     // HEADER
-    .open-doors-title{
+    .open-doors-title {
         font-size: 31px !important;
     }
-    .form-header{
+
+    .form-header {
         margin: 0% !important;
     }
+
     .top-black-mobile {
         color: black !important;
     }
