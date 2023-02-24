@@ -509,19 +509,13 @@ export class SearchPageComponent implements OnInit {
             }
           )
         }
+
         // 1° filtro
         let filter1: AnnouncementGetResponseDto[] = [];
         if (this.stylePropertyTitle !== 'O que está buscando') {
-          console.log('filtro um é', this.stylePropertyTitle)
           filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.stylePropertyTitle))
-          if (filter1.length === 0) {
-            // filter1 = this.listAllForFilter;
-            console.log('nao tem', this.stylePropertyTitle)
-          }
         } else {
           filter1 = this.listAllForFilter;
-          console.log('não tem filtro', this.stylePropertyTitle);
-          console.log(filter1)
         }
 
         // 2° filtro
@@ -531,11 +525,10 @@ export class SearchPageComponent implements OnInit {
             let type = ''
             if (this.selectTypeAd === 'Comprar') {
               type = 'sale'
-            } else {
+            } else if (this.selectTypeAd === 'Alugar') {
               type = 'rent'
             }
             filter2 = filter1.filter(elemento => elemento.typeOfAd === type)
-            console.log('entrou no filtro 2', type);
           }
         } else {
           filter2 = filter1
@@ -550,7 +543,7 @@ export class SearchPageComponent implements OnInit {
             console.log(this.getSelectedCity,'filtro 3 zerado')
           }
         } else {
-          filter3 = filter2
+          filter3 = filter2;
         }
 
         // 3-4° filtro
@@ -606,7 +599,6 @@ export class SearchPageComponent implements OnInit {
         if (this.selectBadRooms !== 'Dormitórios') {
           let quartos = this.selectBadRooms.replace(/\D/gim, '')
           filter6 = filter5.filter(elemento => elemento.bedrooms >= parseInt(quartos))
-          console.log(quartos)
         } else {
           filter6 = filter5
         }
@@ -617,7 +609,6 @@ export class SearchPageComponent implements OnInit {
         if (this.selectBathrooms !== 'Banheiros') {
           let banheiros = this.selectBathrooms.replace(/\D/gim, '')
           filter7 = filter6.filter(elemento => elemento.bathrooms >= parseInt(banheiros))
-          console.log(banheiros)
         } else {
           filter7 = filter6
         }
@@ -628,7 +619,6 @@ export class SearchPageComponent implements OnInit {
         if (this.selectVacancies !== 'Vagas' && this.selectVacancies !== 'Tanto faz') {
           let vagas = this.selectVacancies.replace(/\D/gim, '')
           filter8 = filter7.filter(elemento => elemento.parkingSpaces >= parseInt(vagas))
-          console.log(vagas)
         } else {
           filter8 = filter7
         }

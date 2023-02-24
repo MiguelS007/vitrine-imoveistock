@@ -268,27 +268,11 @@ export class HomeHeaderComponent implements OnInit {
 
 
   ngAfterViewInit(): void {
-    // this.announcementService.listAnnouncement().subscribe({
-    //   next: data => {
-    //     let removeRepets: any = [];
-    //     for (let i = 0; i < data.length; i++) {
-    //       removeRepets.push(data[i].cityAddress)
-    //     }
-    //     var novaArr = removeRepets.filter((este, i) => removeRepets.indexOf(este) === i);
-    //     for (let i = 0; i < novaArr.length; i++) {
-    //       let testeCity = {
-    //         name: novaArr[i]
-    //       }
-    //       this.listAllCity.push(testeCity)
-    //     }
-    //     console.log(this.listAllCity, 'lista cidades');
-    //   }
-    // })
+    
   }
 
 
   ngOnInit() {
-    console.log(this.estados);
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro')
 
@@ -296,7 +280,7 @@ export class HomeHeaderComponent implements OnInit {
       success => {
         this.response = success;
       },
-      error => { console.log(error, 'data not collected') }
+      error => { console.error(error, 'data not collected') }
     );
   }
 
@@ -619,8 +603,6 @@ export class HomeHeaderComponent implements OnInit {
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
 
-    console.log(filter.state, filter.city)
-
 
     // ---------------------------
     let announcementTypeAdGroup: AnnouncementGetResponseDto[] = [];
@@ -785,7 +767,6 @@ export class HomeHeaderComponent implements OnInit {
 
 
     this.resultType = announcementValueUntilRentGroup;
-    console.log(this.resultType, filter)
 
 
     localStorage.setItem('filtro', JSON.stringify(filter))
@@ -806,7 +787,6 @@ export class HomeHeaderComponent implements OnInit {
 
   getEstados(value){
     let valor = value.target.value;
-    console.log(valor);
     this.listAllCity = [];
     for (let i = 0; i < estados.estados.length; i++) {
       if(valor === estados.estados[i].nome){
@@ -816,7 +796,6 @@ export class HomeHeaderComponent implements OnInit {
         }
       }
     }
-    console.log(this.listAllCity, 'lista');
   }
 }
 
