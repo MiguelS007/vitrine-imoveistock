@@ -134,17 +134,6 @@ export class HomeHeaderComponent implements OnInit {
 
 
   listAllCity: any = [];
-
-
-
-
-
-
-
-
-
-  data$: Observable<any[]>;
-  names$: Observable<any[]>;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -168,10 +157,12 @@ export class HomeHeaderComponent implements OnInit {
   ngAfterViewInit(): void {
     this.announcementService.listAnnouncement().subscribe({
       next: data => {
-        console.log(data);
-      //   this.listAllCity = data.map(x => {
-      //     return x.filter(y=>y.toLowerCase().indexOf(value.toLowerCase())>-1); 
-      // })
+        this.listAllCity = [];
+        let removeRepets: any = [];
+        for (let i = 0; i < data.length; i++) {
+          removeRepets.push(data[i].cityAddress)
+        }
+        this.listAllCity = new Set(removeRepets)
       }
     })
     console.log(this.listAllCity);
@@ -189,22 +180,14 @@ export class HomeHeaderComponent implements OnInit {
       error => { console.log(error, 'data not collected') }
     );
     this.states = states();
-
-
-
-
-
-
-
-
-
-    // this.data$ = of([this.listAllCity]);
-    // this.names$ = this.data$;
   }
   onkeypress(value: string) {
-    console.log(value);
-    this.listAllCity = this.data$.pipe(
-      map(x => { return x.filter(y => y.toLowerCase().indexOf(value.toLowerCase()) > -1) }))
+    // const set = new Set();
+    //     set.forEach((el: string)=> {
+    //         if (!el.includes(value)) {
+    //             set.delete(el);
+    //         }
+    //     });
   }
 
   // <input type="text" placeholder="{{'CASHGAME.SEARCH' | translate }}"

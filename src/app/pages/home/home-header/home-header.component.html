@@ -328,7 +328,7 @@
                                         </div> -->
                                         <input type='text' #searchfiltercity (keyup)='onkeypress(searchfiltercity.value)'>
                                         <ol>
-                                            <li *ngFor='let name of names$|async'>
+                                            <li *ngFor='let name of listAllCity'>
                                                 {{name}}
                                             </li> 
                                         </ol>
