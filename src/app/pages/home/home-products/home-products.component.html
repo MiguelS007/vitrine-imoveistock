@@ -1,6 +1,6 @@
 <section class="bg-whitelight position-relative w-100 h-auto">
     <div class="row h-auto m-0-auto w-100">
-        <div class="col-12 pt-3 pb-5 px-0">
+        <div class="col-12 col-of-products pt-3 pb-5 px-0">
             <div class="w-100 my-5 text-align-center">
                 <p class="fw-700 text-mobile mb-0 font-size-32 line-43">
                     Imóveis exclusivos? Temos!
@@ -155,7 +155,7 @@
                     </ng-template>
                 </swiper>
                 <!-- VERSION MOBILE -->
-                <swiper class="col-12 d-block-tablet d-none h-500 max-w-1477" [spaceBetween]="50" [slidesPerView]="1"
+                <swiper class="col-12 d-block-tablet d-none h-500 max-w-1477" [spaceBetween]="50" [slidesPerView]="1" 
                     [pagination]="{ clickable: true }" [scrollbar]="true">
                     <ng-template *ngFor="let item of response | slice: 0:10" swiperSlide>
                         <div class="col-md-12 mt-mobile padding-x px-0 cursor-pointer">
