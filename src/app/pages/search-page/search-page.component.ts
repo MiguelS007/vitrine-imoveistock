@@ -133,6 +133,7 @@ export class SearchPageComponent implements OnInit {
       searchwords: [''],
       propertyType: [''],
       typeproperty: [''],
+      typePropertyState: [''],
       localproperty: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
@@ -708,12 +709,12 @@ export class SearchPageComponent implements OnInit {
 
   openFilter(content) {
 
-    this.modalFilterOpen = true
-
+    this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(data => {
     }, error => {
-      this.modalFilterOpen = false
+      this.modalFilterOpen = false;
+
     });
   }
 
