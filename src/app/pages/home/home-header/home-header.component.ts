@@ -5,6 +5,7 @@ import { states, cities } from 'estados-cidades';
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { AnnouncementService } from '../../../service/announcement.service';
+import { Observable, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-home-header',
@@ -132,7 +133,18 @@ export class HomeHeaderComponent implements OnInit {
   resultType: any = [];
 
 
+  listAllCity: any = [];
 
+
+
+
+
+
+
+
+
+  data$: Observable<any[]>;
+  names$: Observable<any[]>;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -152,9 +164,21 @@ export class HomeHeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    let user = JSON.parse(localStorage.getItem('userDto'));
 
+  ngAfterViewInit(): void {
+    this.announcementService.listAnnouncement().subscribe({
+      next: data => {
+        console.log(data);
+      //   this.listAllCity = data.map(x => {
+      //     return x.filter(y=>y.toLowerCase().indexOf(value.toLowerCase())>-1); 
+      // })
+      }
+    })
+    console.log(this.listAllCity);
+  }
+
+
+  ngOnInit() {
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro')
 
@@ -166,7 +190,49 @@ export class HomeHeaderComponent implements OnInit {
     );
     this.states = states();
 
+
+
+
+
+
+
+
+
+    // this.data$ = of([this.listAllCity]);
+    // this.names$ = this.data$;
   }
+  onkeypress(value: string) {
+    console.log(value);
+    this.listAllCity = this.data$.pipe(
+      map(x => { return x.filter(y => y.toLowerCase().indexOf(value.toLowerCase()) > -1) }))
+  }
+
+  // <input type="text" placeholder="{{'CASHGAME.SEARCH' | translate }}"
+  // class="form-control input-box body-300-md text-white" #inputNameFilter
+  // (keyup)="onTypeTableName(inputNameFilter.value)">
+
+
+  // onTypeTableName(tableName: string) {
+  //   this.cashGamesToShow = this.cashGames.filter(el => el.tableName.toLowerCase().includes(tableName.toLowerCase()));
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   typePropertyCharacteristics(typeOf: string, item: string, value: string) {
     this.checkedAll = false;
@@ -632,7 +698,7 @@ export class HomeHeaderComponent implements OnInit {
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
     this.router.navigate(['/search']);
- 
+
   }
 
 
