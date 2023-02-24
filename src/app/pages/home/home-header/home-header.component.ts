@@ -268,22 +268,22 @@ export class HomeHeaderComponent implements OnInit {
 
 
   ngAfterViewInit(): void {
-    this.announcementService.listAnnouncement().subscribe({
-      next: data => {
-        let removeRepets: any = [];
-        for (let i = 0; i < data.length; i++) {
-          removeRepets.push(data[i].cityAddress)
-        }
-        var novaArr = removeRepets.filter((este, i) => removeRepets.indexOf(este) === i);
-        for (let i = 0; i < novaArr.length; i++) {
-          let testeCity = {
-            name: novaArr[i]
-          }
-          this.listAllCity.push(testeCity)
-        }
-        console.log(this.listAllCity, 'lista cidades');
-      }
-    })
+    // this.announcementService.listAnnouncement().subscribe({
+    //   next: data => {
+    //     let removeRepets: any = [];
+    //     for (let i = 0; i < data.length; i++) {
+    //       removeRepets.push(data[i].cityAddress)
+    //     }
+    //     var novaArr = removeRepets.filter((este, i) => removeRepets.indexOf(este) === i);
+    //     for (let i = 0; i < novaArr.length; i++) {
+    //       let testeCity = {
+    //         name: novaArr[i]
+    //       }
+    //       this.listAllCity.push(testeCity)
+    //     }
+    //     console.log(this.listAllCity, 'lista cidades');
+    //   }
+    // })
   }
 
 
