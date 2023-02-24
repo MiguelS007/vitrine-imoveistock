@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserRegisterRequestDto } from 'src/app/dtos/user-register-request.dto';
-import { AuthenticationService } from 'src/app/service/authentication.service';
-import { ProfileService } from 'src/app/service/profile.service';
 import { UserService } from 'src/app/service/user.service';
 import { ProfileClientEnum } from '../../../app/dtos/enum/profile-client.enum';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TermsComponent } from '../terms/terms.component';
+import { ModalTelComponent } from '../modal-tel/modal-tel.component';
 
 @Component({
   selector: 'app-modal-signup',
@@ -48,9 +46,9 @@ export class ModalSignupComponent implements OnInit {
     this.modalService.dismissAll()
   }
 
-  openTermsModal(value: string){
+  openTermsModal(value: string) {
     this.userService.termsOrPolitic = value;
-    this.modalService.open(TermsComponent,{size:"lg"})
+    this.modalService.open(TermsComponent, { size: "lg" })
   }
 
   confirm() {
@@ -72,7 +70,8 @@ export class ModalSignupComponent implements OnInit {
       this.userService.register(this.request).subscribe(
         success => {
           this.toastrService.success('Cadastrado com sucesso!', '', { progressBar: true });
-          window.location.reload();
+          this.modalService.dismissAll();
+          this.modalService.open(ModalTelComponent, { centered: true })
         },
         error => {
           console.log(error)
@@ -83,6 +82,7 @@ export class ModalSignupComponent implements OnInit {
     else if (this.form.controls['termsAndPolicy'].value === false) {
       this.toastrService.error('Necessario estar de acordo com os termos e condições de uso!', '', { progressBar: true });
     }
+
   }
 
 

@@ -132,7 +132,9 @@ export class HomeHeaderComponent implements OnInit {
   resultType: any = [];
 
 
-
+  listAllCity: any = [];
+  keyword = 'name'
+  getSelectedCity: string;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -152,9 +154,27 @@ export class HomeHeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    let user = JSON.parse(localStorage.getItem('userDto'));
 
+  ngAfterViewInit(): void {
+    this.announcementService.listAnnouncement().subscribe({
+      next: data => {
+        let removeRepets: any = [];
+        for (let i = 0; i < data.length; i++) {
+          removeRepets.push(data[i].cityAddress)
+        }
+        var novaArr = removeRepets.filter((este, i) => removeRepets.indexOf(este) === i);
+        for (let i = 0; i < novaArr.length; i++) {
+          let testeCity = {
+            name: novaArr[i]
+          }
+          this.listAllCity.push(testeCity)
+        }
+      }
+    })
+  }
+
+
+  ngOnInit() {
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro')
 
@@ -165,8 +185,35 @@ export class HomeHeaderComponent implements OnInit {
       error => { console.log(error, 'data not collected') }
     );
     this.states = states();
-
   }
+  selectEvent(item) {
+    this.getSelectedCity = item.name;
+    // do something with selected item
+  }
+
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+    // do something
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   typePropertyCharacteristics(typeOf: string, item: string, value: string) {
     this.checkedAll = false;
@@ -429,7 +476,7 @@ export class HomeHeaderComponent implements OnInit {
     let filter: any = {
       typeAd: this.typeAd,
       state: this.form.controls['typePropertyState'].value,
-      city: this.form.controls['typePropertyCity'].value,
+      city: this.getSelectedCity,
       allResidential: this.typepropertyfull,
       untilValueSale: this.form.controls['typePropertyValueSale'].value,
       untilValueRent: this.form.controls['typePropertyValueRent'].value,
@@ -461,6 +508,8 @@ export class HomeHeaderComponent implements OnInit {
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
+
+    console.log(filter.state, filter.city)
 
 
     // ---------------------------
@@ -632,7 +681,7 @@ export class HomeHeaderComponent implements OnInit {
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
     this.router.navigate(['/search']);
- 
+
   }
 
 
