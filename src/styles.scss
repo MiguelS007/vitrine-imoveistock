@@ -54,7 +54,7 @@ app-nav-bar {
 
 // 
 
-.autocomplete-container .input-container .x i {
+.x i, .heading {
     display: none !important;
 }
 
@@ -884,6 +884,7 @@ input:focus {
     background-position: center 45%;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
+    max-height: 900px;
     height: 90vh;
     width: 100% !important;
 }
@@ -1784,15 +1785,6 @@ vg-overlay-play .vg-overlay-play {
     }
 
     // HOME-HEADER
-    .bg-home-header {
-        background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
-        background-position: center top;
-        background-repeat: no-repeat no-repeat;
-        background-size: cover contain;
-        height: fit-content !important;
-        width: 100% !important;
-        max-height: 1969px;
-    }
 
 
     .filter-search {
@@ -2253,6 +2245,26 @@ vg-overlay-play .vg-overlay-play {
     }
 
     // HEADER
+    .row-of-home{
+        position: relative;
+        top: 20rem;
+        z-index: 4;
+    }
+    .col-of-products{
+        padding-top: 19rem !important;
+    }
+
+    .bg-home-header {
+        background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
+        background-position: center center;
+        background-repeat: no-repeat no-repeat;
+        background-size: cover contain;
+        width: 100% !important;
+        height: 800px;
+        max-height: 100%;
+               
+    }
+
     .swiper-mobile {
         display: block;
     }
@@ -2363,12 +2375,6 @@ vg-overlay-play .vg-overlay-play {
 
 
     // HOME-HEADER
-    .bg-home-header {
-        background-image: url(./assets/img/family-mobile.png);
-        background-position: center top;
-        background-size: cover;
-        width: 100% !important;
-    }
 
     .d-none-mobile {
         display: none !important;
@@ -2566,6 +2572,12 @@ vg-overlay-play .vg-overlay-play {
     }
 
     // HEADER
+    .open-doors-title{
+        font-size: 31px !important;
+    }
+    .form-header{
+        margin: 0% !important;
+    }
     .top-black-mobile {
         color: black !important;
     }
