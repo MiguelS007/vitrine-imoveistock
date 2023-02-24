@@ -513,6 +513,7 @@ export class SearchPageComponent implements OnInit {
         // 1° filtro
         let filter1: AnnouncementGetResponseDto[] = [];
         if (this.stylePropertyTitle !== 'O que está buscando') {
+          console.log('filtro um é', this.stylePropertyTitle)
           filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.stylePropertyTitle))
         } else {
           filter1 = this.listAllForFilter;
