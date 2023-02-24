@@ -11,6 +11,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
+import estados from '../../../assets/json/estados-cidades.json';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
@@ -97,7 +98,9 @@ export class SearchPageComponent implements OnInit {
   states: string[];
   cities: string[];
 
-
+  keyword = 'name'
+  getSelectedCity: string;
+  estados: any;
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -112,6 +115,7 @@ export class SearchPageComponent implements OnInit {
       searchwords: [''],
       propertyType: [''],
       typeproperty: [''],
+      typePropertyState: [''],
       localproperty: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
@@ -129,6 +133,7 @@ export class SearchPageComponent implements OnInit {
       searchwords: [''],
       propertyType: [''],
       typeproperty: [''],
+      typePropertyState: [''],
       localproperty: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
@@ -140,6 +145,7 @@ export class SearchPageComponent implements OnInit {
       typefootagemin: [''],
       orderby: [''],
     });
+    this.estados = estados;
 
   }
 
@@ -284,15 +290,31 @@ export class SearchPageComponent implements OnInit {
           removeRepets.push(data[i].cityAddress)
         }
         teste = new Set(removeRepets)
-        this.listAllCity = teste;
+        // this.listAllCity = teste;
         this.propertyproducts = data
         this.response = data;
         this.ngxSpinnerService.hide();
+        console.log(this.listAllCity);
       }
     })
 
 
   }
+
+  selectEvent(item) {
+    this.getSelectedCity = item.name;
+    // do something with selected item
+  }
+
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+    // do something
+  }
+
 
   getCities() {
     this.cities = cities(this.stateSelected);
@@ -491,6 +513,7 @@ export class SearchPageComponent implements OnInit {
         // 1° filtro
         let filter1: AnnouncementGetResponseDto[] = [];
         if (this.stylePropertyTitle !== 'O que está buscando') {
+          console.log('filtro um é', this.stylePropertyTitle)
           filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.stylePropertyTitle))
         } else {
           filter1 = this.listAllForFilter;
@@ -515,7 +538,11 @@ export class SearchPageComponent implements OnInit {
         // 2° filtro
         let filter3: AnnouncementGetResponseDto[] = [];
         if (this.selectCity !== 'Local') {
-          filter3 = filter2.filter(elemento => elemento.cityAddress === this.selectCity)
+          filter3 = filter2.filter(elemento => elemento.cityAddress === this.getSelectedCity)
+          console.log('cidade selecionada', this.getSelectedCity)
+          if (filter3.length === 0) {
+            console.log(this.getSelectedCity,'filtro 3 zerado')
+          }
         } else {
           filter3 = filter2;
         }
@@ -523,7 +550,12 @@ export class SearchPageComponent implements OnInit {
         // 3-4° filtro
         let filter4: AnnouncementGetResponseDto[] = [];
         if (this.TypeProperty !== 'Tipo do Imóvel') {
-          filter4 = filter3.filter(elemento => elemento.propertyType === this.TypeProperty)
+
+          filter4 = filter3.filter(elemento => elemento.goal === this.TypeProperty)
+          if (filter4.length === 0) {
+            console.log(filter4, )
+            console.log('caiu no filtro 4, zerado')
+          }
         } else {
           filter4 = filter3
         }
@@ -636,6 +668,7 @@ export class SearchPageComponent implements OnInit {
         }
 
         this.filterResult = filter10;
+        console.log(this.filterResult)
 
         if (filter10.length === 0) {
           this.messageNotSearch = true;
@@ -662,16 +695,17 @@ export class SearchPageComponent implements OnInit {
         this.ngxSpinnerService.hide();
       },
     );
+    
   }
 
   openFilter(content) {
 
-    this.modalFilterOpen = true
-
+    this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(data => {
     }, error => {
-      this.modalFilterOpen = false
+      this.modalFilterOpen = false;
+
     });
   }
 
@@ -689,6 +723,21 @@ export class SearchPageComponent implements OnInit {
     text = text.replace(new RegExp('[ÚÙÛ]', 'gi'), 'u');
     text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
     return text.toLocaleLowerCase();
+  }
+
+  getEstados(value) {
+    let valor = value.target.value;
+    console.log(valor);
+    this.listAllCity = [];
+    for (let i = 0; i < estados.estados.length; i++) {
+      if (valor === estados.estados[i].nome) {
+        for (let x = 0; x < estados.estados[i].cidades.length; x++) {
+          this.listAllCity.push({ name: estados.estados[i].cidades[x] })
+          this.stateSelected = estados.estados[i].sigla
+        }
+      }
+    }
+    console.log(this.listAllCity, 'lista');
   }
 
 }
