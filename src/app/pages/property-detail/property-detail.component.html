@@ -85,7 +85,10 @@
               <hr class="hr" />
               <div class="row">
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
-                  <span class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
@@ -109,7 +112,10 @@
                   <h6 class="my-4 w-100 bg-whitelight" style="height:1px;"></h6>
                 </div>
                 <div class="col-12 d-flex py-4 align-items-center justify-content-between">
-                  <span class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span class="fw-700 font-size-18 line-24 color-black">{{finalValue | currency: 'R$ ' || '-'}}</span>
@@ -558,7 +564,10 @@
               <hr class="hr" />
               <div class="row">
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
-                  <span class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
@@ -582,7 +591,10 @@
                   <h6 class="my-4 w-100 bg-graylight" style="height: 1px;"></h6>
                 </div>
                 <div class="col-12 d-flex py-4 align-items-center justify-content-between">
-                  <span class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span class="fw-700 font-size-18 line-24 color-black">{{finalValue | currency: 'R$ ' || '-'}}</span>

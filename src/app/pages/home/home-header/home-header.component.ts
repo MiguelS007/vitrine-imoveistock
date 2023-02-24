@@ -1,10 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { states, cities } from 'estados-cidades';
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { AnnouncementService } from '../../../service/announcement.service';
+import  estados  from '../../../../assets/json/estados-cidades.json';
 
 @Component({
   selector: 'app-home-header',
@@ -27,7 +27,117 @@ export class HomeHeaderComponent implements OnInit {
   stateSelected = 'Primeiro escolha um estado'
   citySelected = 'Escolha uma cidade'
   cities: any[];
-  states: any[];
+  states: any[] = [
+    {
+      uf: 'AC',
+      ufLirycs: 'Acre'
+    },
+    {
+      uf: 'AL',
+      ufLirycs: 'Alagoas'
+    },
+    {
+      uf: 'AP',
+      ufLirycs: 'Amapá'
+    },
+    {
+      uf: 'AM',
+      ufLirycs: 'Amazonas'
+    },
+    {
+      uf: 'BA',
+      ufLirycs: 'Bahia'
+    },
+    {
+      uf: 'CE',
+      ufLirycs: 'Ceara'
+    },
+    {
+      uf: 'DF',
+      ufLirycs: 'Distrito Federal'
+    },
+    {
+      uf: 'ES',
+      ufLirycs: 'Espírito Santo	'
+    },
+    {
+      uf: 'GO',
+      ufLirycs: 'Goiás'
+    },
+    {
+      uf: 'MA',
+      ufLirycs: 'Maranhão'
+    },
+    {
+      uf: 'MT',
+      ufLirycs: 'Mato Grosso'
+    },
+    {
+      uf: 'MS',
+      ufLirycs: 'Mato Grosso do Sul'
+    },
+    {
+      uf: 'MG',
+      ufLirycs: 'Minas Gerais'
+    },
+    {
+      uf: 'PA',
+      ufLirycs: 'Pará'
+    },
+    {
+      uf: 'PB',
+      ufLirycs: 'Paraíba'
+    },
+    {
+      uf: 'PR',
+      ufLirycs: 'Paraná'
+    },
+    {
+      uf: 'PE',
+      ufLirycs: 'Pernambuco'
+    },
+    {
+      uf: 'PI',
+      ufLirycs: 'Piauí'
+    },
+    {
+      uf: 'RJ',
+      ufLirycs: 'Rio de Janeiro	'
+    },
+    {
+      uf: 'RN',
+      ufLirycs: 'Rio Grande do Norte	'
+    },
+    {
+      uf: 'RS',
+      ufLirycs: 'Rio Grande do Sul	'
+    },
+    {
+      uf: 'RO',
+      ufLirycs: 'Rondônia'
+    },
+    {
+      uf: 'RR',
+      ufLirycs: 'Roraima'
+    },
+       {
+      uf: 'SC',
+      ufLirycs: 'Santa Catarina	'
+    },
+    {
+      uf: 'SP',
+      ufLirycs: 'São Paulo	'
+    },
+       {
+      uf: 'SE',
+      ufLirycs: 'Sergipe'
+    },
+       {
+      uf: 'TO',
+      ufLirycs: 'Tocantins	'
+    },
+    
+  ];
   valueUntilSaleArray: any[] = [100000, 200000, 300000, 400000, 500000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000, 10000000, 20000000,];
   valueUntilRentArray: any[] = [100, 200, 300, 400, 500, 800, 1000, 2000, 3000, 4000, 5000, 10000, 20000];
   badroomsArray: any[] = [1, 2, 3, 4, 5];
@@ -135,6 +245,7 @@ export class HomeHeaderComponent implements OnInit {
   listAllCity: any = [];
   keyword = 'name'
   getSelectedCity: string;
+  estados: any;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -152,6 +263,7 @@ export class HomeHeaderComponent implements OnInit {
       typePropertyValueSale: [''],
       typePropertyBadrooms: [''],
     });
+    this.estados = estados;
   }
 
 
@@ -169,12 +281,14 @@ export class HomeHeaderComponent implements OnInit {
           }
           this.listAllCity.push(testeCity)
         }
+        console.log(this.listAllCity, 'lista cidades');
       }
     })
   }
 
 
   ngOnInit() {
+    console.log(this.estados);
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro')
 
@@ -184,8 +298,8 @@ export class HomeHeaderComponent implements OnInit {
       },
       error => { console.log(error, 'data not collected') }
     );
-    this.states = states();
   }
+
   selectEvent(item) {
     this.getSelectedCity = item.name;
     // do something with selected item
@@ -465,10 +579,6 @@ export class HomeHeaderComponent implements OnInit {
   }
 
 
-  getCities() {
-    this.cities = cities(this.stateSelected);
-    console.log(this.stateSelected, this.citySelected)
-  }
 
   confirm() {
 
@@ -538,7 +648,7 @@ export class HomeHeaderComponent implements OnInit {
     // ---------------------------
 
     let announcementCityGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.city !== '') {
+    if (filter.city !== undefined) {
       for (let i = 0; i < announcementStateGroup.length; i++) {
         if (announcementStateGroup[i].cityAddress === filter.city) {
           announcementCityGroup.push(announcementStateGroup[i]);
@@ -693,4 +803,20 @@ export class HomeHeaderComponent implements OnInit {
       this.collapsed = true;
     }
   }
+
+  getEstados(value){
+    let valor = value.target.value;
+    console.log(valor);
+    this.listAllCity = [];
+    for (let i = 0; i < estados.estados.length; i++) {
+      if(valor === estados.estados[i].nome){
+        for (let x = 0; x < estados.estados[i].cidades.length; x++) {
+          this.listAllCity.push({name: estados.estados[i].cidades[x]})
+        }
+      }
+    }
+    console.log(this.listAllCity, 'lista');
+  }
 }
+
+

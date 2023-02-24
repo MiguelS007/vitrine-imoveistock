@@ -235,7 +235,8 @@ export class SearchMapComponent implements OnInit {
     );
   }
   changeOderBy(value) {
-    this.orderBy = value
+    this.orderBy = value;
+    
   }
   searchByTypeAd(item) {
     if (item === 'sale') {
