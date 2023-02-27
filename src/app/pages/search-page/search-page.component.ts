@@ -5,7 +5,6 @@ import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-respon
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { UserService } from 'src/app/service/user.service';
-import { states, cities } from 'estados-cidades';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { NgxSpinnerService } from "ngx-spinner";
 import { AnnouncementService } from 'src/app/service/announcement.service';
@@ -153,7 +152,6 @@ export class SearchPageComponent implements OnInit {
 
     this.ngxSpinnerService.show();
     this.products = this.datamokservice.resultSearch;
-    this.states = states();
 
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
@@ -229,7 +227,6 @@ export class SearchPageComponent implements OnInit {
         typeMaxPrice: this.filtroResultDisplay.untilValueSale,
         localproperty: this.filtroResultDisplay.city,
         typeOfProperty: this.filtroSelected?.typeOfProperty
-
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
       this.filterTypeProperty(this.filtroSelected?.goal || 'Tipo do Imóvel');
@@ -303,19 +300,6 @@ export class SearchPageComponent implements OnInit {
     // do something with selected item
   }
 
-  onChangeSearch(search: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-  }
-
-  onFocused(e) {
-    // do something
-  }
-
-
-  getCities() {
-    this.cities = cities(this.stateSelected);
-  }
 
 
 
@@ -501,7 +485,7 @@ export class SearchPageComponent implements OnInit {
                 this.listLikesForFilter.push(success[i].announcement)
               }
             }
-          )
+          ) 
         }
 
         // 1° filtro

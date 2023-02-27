@@ -130,7 +130,6 @@ export class PropertyDetailComponent implements OnInit {
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
 
-
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -221,6 +220,10 @@ export class PropertyDetailComponent implements OnInit {
       this.propertyvideo = false;
       this.tourvirtual = true;
     }
+  }
+
+  closePause(videomedia: HTMLVideoElement){
+    videomedia.pause();
   }
 
 

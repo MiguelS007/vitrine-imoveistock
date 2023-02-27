@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -16,19 +16,9 @@ import estados from '../../../assets/json/estados-cidades.json';
 })
 export class SearchMapComponent implements OnInit {
   response: AnnouncementGetResponseDto[] = [];
-  dataResponse: AnnouncementGetResponseDto[] = [];
   user: UserGetResponseDto;
   form: FormGroup;
-  formsearch: FormGroup;
-
-
-  iconlikeheart: boolean;
   paginationProduct: number = 1;
-  countApartment: number;
-  countCondominium: number;
-  countHouse: number;
-  countLoft: number;
-  countKitnet: number;
   products: any = [];
   messageNotSearch = false;
 
@@ -36,15 +26,14 @@ export class SearchMapComponent implements OnInit {
   filtroSelected: any;
   propertyproducts: AnnouncementGetResponseDto[] = [];
   filterResult: AnnouncementGetResponseDto[] = [];
-  orderBy: string = 'Selecione';
-  modalFilterOpen: boolean = false;
-  recentlySeenIdsList: any = [];
-
+  orderBy: string = 'Selecione'
+  listAllForFilter: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
+  listLikesForFilter: AnnouncementGetResponseDto[] = [];
+
   listLikes: AnnouncementGetResponseDto[] = [];
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
-  listAllForFilter: AnnouncementGetResponseDto[] = [];
-  listLikesForFilter: AnnouncementGetResponseDto[] = [];
+
 
   filtroResultDisplay: {
     state: string,
@@ -60,30 +49,23 @@ export class SearchMapComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
+  selectTypeAd = 'Selecione';
+  selectBathrooms = 'Banheiros';
+  selectBadRooms = 'Dormitórios';
+  selectCity: string = 'Local';
+  selectVacancies = 'Vagas';
+  getSelectedCity: string;
+  valuePrices: 0;
+  stateSelected = 'Escolha o Estado'
+  TypeProperty = 'Tipo de Imóvel';
+  keyword = 'name'
+  stylePropertyTitle: string = 'O que está buscando?';
   listAllCity: any = [
     {
       cidade: ''
     }
   ];
   estados: any;
-  stateSelected = 'Escolha o Estado'
-  stylePropertyTitle: string = 'O que está buscando';
-  selectTypeAd = 'Selecione';
-  TypeProperty = 'Tipo de Imóvel';
-  selectCity: string = 'Local';
-  selectBathrooms = 'Banheiros';
-  selectBadRooms = 'Dormitórios';
-  selectVacancies = 'Vagas';
-  keyword = 'name';
-  valuePrices: 0;
-  getSelectedCity: string;
 
 
   constructor(
@@ -110,33 +92,19 @@ export class SearchMapComponent implements OnInit {
       orderby: [''],
     });
     this.estados = estados;
-
   }
   ngOnInit(): void {
 
     this.ngxSpinnerService.show();
-    this.list();
-
     let resultadoVerify = localStorage.getItem('resultSearch');
-    this.filterResult = JSON.parse(resultadoVerify);
-
-    let recentlySeenList = localStorage.getItem('recentlySeen');
-    this.recentlySeenIdsList = JSON.parse(recentlySeenList);
     if (resultadoVerify !== null) {
       this.filterResult = JSON.parse(resultadoVerify);
+      console.log(this.filterResult, 'segundo')
       if (this.filterResult.length === 0) {
         this.messageNotSearch = true;
       }
     } else {
       this.filterResult = [];
-    }
-    if (this.recentlySeenIdsList !== null) {
-      for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
-        this.announcementService.announcementGetById(this.recentlySeenIdsList[i]._id).subscribe(
-          success => this.recentlySeenList.push(success),
-          error => console.log(error)
-        )
-      }
     }
 
     let filtro = localStorage.getItem('filtro');
@@ -147,9 +115,8 @@ export class SearchMapComponent implements OnInit {
     if (this.filtroSelected?.typeAd === 'rent') {
       typeAdTranslate = 'Alugar'
     } else if (this.filtroSelected?.typeAd === 'sale') {
-      typeAdTranslate = 'Venda'
+      typeAdTranslate = 'Comprar'
     }
-
     this.filtroResultDisplay = {
       state: this.filtroSelected?.state,
       city: this.filtroSelected?.city,
@@ -189,18 +156,15 @@ export class SearchMapComponent implements OnInit {
         typeMaxPrice: this.filtroResultDisplay.untilValueSale,
         localproperty: this.filtroResultDisplay.city,
         typeOfProperty: this.filtroSelected?.typeOfProperty
-
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
-      this.searchByCity(this.filtroSelected?.city || 'Local');
       this.filterTypeProperty(this.filtroSelected?.goal || 'Tipo do Imóvel');
       this.searchByBadRoom(this.filtroSelected?.badRoomsQnt)
       if (this.filtroSelected.styleProperty !== '') {
         this.searchByStyleProperty(this.filtroSelected.styleProperty || 'O que está buscando')
       }
     }
-
-
+    // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.announcementService.listAnnouncement().subscribe(
         success => {
@@ -238,17 +202,9 @@ export class SearchMapComponent implements OnInit {
         )
       }
     }
-
-
-    this.announcementService.listAnnouncement().subscribe(
-      success => {
-        this.propertyproducts = success
-        this.response = success;
-        this.ngxSpinnerService.hide();
-      },
-      error => { console.log(error, 'data not collected') }
-    );
+    // GET-CITIES
     let teste: any = [];
+
     this.announcementService.listAnnouncement().subscribe({
       next: data => {
         this.listAllCity = [];
@@ -259,52 +215,106 @@ export class SearchMapComponent implements OnInit {
         teste = new Set(removeRepets)
         // this.listAllCity = teste;
         this.propertyproducts = data
-        this.dataResponse = data;
+        this.response = data;
         this.ngxSpinnerService.hide();
         console.log(this.listAllCity);
       }
     })
   }
-
+  // compo-get-states
   selectEvent(item) {
     this.getSelectedCity = item.name;
-    // do something with selected item
   }
 
-  onChangeSearch(search: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-  }
+  announcementSelected(value) {
+    let teste: any = localStorage.getItem('recentlySeen');
+    this.recentlySeenList = JSON.parse(teste);
 
-  onFocused(e) {
-    // do something
-  }
 
-  searchByStyleProperty(value) {
-    this.stylePropertyTitle = value
-  }
+    let verify = { _id: value };
 
-  getEstados(value) {
-    let valor = value.target.value;
-    console.log(valor);
-    this.listAllCity = [];
-    for (let i = 0; i < estados.estados.length; i++) {
-      if (valor === estados.estados[i].nome) {
-        for (let x = 0; x < estados.estados[i].cidades.length; x++) {
-          this.listAllCity.push({ name: estados.estados[i].cidades[x] })
-          this.stateSelected = estados.estados[i].sigla
+    let list: any = this.recentlySeenList;
+
+    if (list === null) {
+      list = [];
+    }
+
+    if (this.recentlySeenList !== null) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i]._id !== value) {
+          list.push(verify);
         }
       }
     }
-    console.log(this.listAllCity, 'lista');
+
+
+    this.recentlySeenList = list;
+
+
+    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList))
+    this.router.navigate([`announcement/detail/${value}`])
+  }
+
+  likeHeart(value, condition) {
+
+    let request = {
+      announcementId: value
+    }
+
+    if (localStorage.getItem('user') === null) {
+      this.modalService.open(ModalLoginComponent, { centered: true });
+      return
+    }
+
+    if (this.listLikes.length === 0) {
+      this.announcementService.registerLike(request).subscribe(
+        success => {
+          this.ngOnInit()
+          return
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    } else {
+      if (condition === true) {
+        this.announcementService.registerUnlike(request).subscribe(
+          success => {
+            this.ngOnInit()
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      } else if (condition === undefined) {
+        this.announcementService.registerLike(request).subscribe(
+          success => {
+            this.ngOnInit()
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      }
+    }
+  }
+
+  changeOderBy(value) {
+    this.orderBy = value
+  }
+
+  searchByTypeAd(item) {
+    if (item === 'sale') {
+      this.selectTypeAd = 'Comprar'
+    } else if (item === 'rent') {
+      this.selectTypeAd = 'Alugar'
+    }
   }
 
   filterTypeProperty(value) {
     this.TypeProperty = value
   }
-  searchByCity(item) {
-    this.selectCity = item
-  }
+
 
   searchByBadRoom(item) {
     // SELECT BADROOMS
@@ -349,127 +359,6 @@ export class SearchMapComponent implements OnInit {
     } else if (item === '5') {
       this.selectVacancies = '+5  Vagas'
     }
-  }
-
-
-
-
-
-
-
-
-
-  announcementSelected(value) {
-    let teste: any = localStorage.getItem('recentlySeen');
-    this.recentlySeenList = JSON.parse(teste);
-
-
-    let verify = { _id: value };
-
-    let list: any = this.recentlySeenList;
-
-    if (list === null) {
-      list = [];
-    }
-
-    if (this.recentlySeenList !== null) {
-      for (let i = 0; i < list.length; i++) {
-        if (list[i]._id === value) {
-          return
-        }
-      }
-    }
-
-    list.push(verify);
-
-    this.recentlySeenList = list;
-
-
-    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList))
-    this.router.navigate([`announcement/detail/${value}`])
-  }
-
-  list() {
-    this.announcementService.listAnnouncement().subscribe(
-      response => {
-        this.propertyproducts = response
-        this.responseAnnouncement = response;
-        if (localStorage.getItem('user') !== null) {
-          this.announcementService.listLikes().subscribe(
-            success => {
-              for (let i = 0; i < success.length; i++) {
-                for (let x = 0; x < this.responseAnnouncement.length; x++) {
-                  if (success[i].announcement._id === this.responseAnnouncement[x]._id) {
-                    Object.assign(this.responseAnnouncement[x], { liked: true });
-                  }
-                }
-                this.listLikes.push(success[i].announcement)
-              }
-            }
-          )
-        }
-      },
-      error => { console.log(error, 'data not collected') }
-    );
-  }
-  changeOderBy(value) {
-    this.orderBy = value;
-
-  }
-  searchByTypeAd(item) {
-    if (item === 'sale') {
-      this.selectTypeAd = 'Venda'
-    } else if (item === 'rent') {
-      this.selectTypeAd = 'Alugar'
-    }
-  }
-
-  likeHeart(value, condition) {
-
-    let request = {
-      announcementId: value
-    }
-
-    if (localStorage.getItem('user') === null) {
-      this.modalService.open(ModalLoginComponent, { centered: true });
-      return
-    }
-
-    if (this.listLikes.length === 0) {
-      this.announcementService.registerLike(request).subscribe(
-        success => {
-          this.list()
-          return
-        },
-        error => {
-          console.log(error)
-        }
-      )
-    } else {
-      if (condition === true) {
-        this.announcementService.registerUnlike(request).subscribe(
-          success => {
-            this.list()
-          },
-          error => {
-            console.log(error)
-          }
-        )
-      } else if (condition === undefined) {
-        this.announcementService.registerLike(request).subscribe(
-          success => {
-            this.list()
-          },
-          error => {
-            console.log(error)
-          }
-        )
-      }
-
-    }
-
-
-
   }
 
   filtrar() {
@@ -533,6 +422,7 @@ export class SearchMapComponent implements OnInit {
         // 3-4° filtro
         let filter4: AnnouncementGetResponseDto[] = [];
         if (this.TypeProperty !== 'Tipo do Imóvel') {
+
           filter4 = filter3.filter(elemento => elemento.goal === this.TypeProperty)
           if (filter4.length === 0) {
             console.log(filter4,)
@@ -546,18 +436,12 @@ export class SearchMapComponent implements OnInit {
         let filter5: AnnouncementGetResponseDto[] = [];
         let valueMin: number = 0;
         let maxValue: number = 0;
-
-        if (this.modalFilterOpen === false) {
-          if (this.form.controls['typeMinPrice'].value !== '') {
-            valueMin = this.form.controls['typeMinPrice'].value;
-          }
-
-          if (this.form.controls['typeMaxPrice'].value !== '') {
-            maxValue = this.form.controls['typeMaxPrice'].value;
-          }
-
+        if (this.form.controls['typeMinPrice'].value !== '') {
+          valueMin = this.form.controls['typeMinPrice'].value;
         }
-
+        if (this.form.controls['typeMaxPrice'].value !== '') {
+          maxValue = this.form.controls['typeMaxPrice'].value;
+        }
         if (valueMin !== 0 && maxValue !== 0) {
           if (this.selectTypeAd === 'Comprar') {
             filter5 = filter4.filter(elemento => parseInt(elemento.saleValue) <= maxValue && parseInt(elemento.saleValue) >= valueMin)
@@ -617,16 +501,14 @@ export class SearchMapComponent implements OnInit {
         let areaMax: number = 0;
         let minArea: number = 0;
 
-        if (this.modalFilterOpen === false) {
-          if (this.form.controls['typefootagemin'].value !== '') {
-            minArea = this.form.controls['typefootagemin'].value;
-          }
-
-          if (this.form.controls['typefootagemax'].value !== '') {
-            areaMax = this.form.controls['typefootagemax'].value;
-          }
-
+        if (this.form.controls['typefootagemin'].value !== '') {
+          minArea = this.form.controls['typefootagemin'].value;
         }
+
+        if (this.form.controls['typefootagemax'].value !== '') {
+          areaMax = this.form.controls['typefootagemax'].value;
+        }
+
 
 
         if (minArea !== 0 && areaMax !== 0) {
@@ -660,6 +542,9 @@ export class SearchMapComponent implements OnInit {
     );
   }
 
+  searchByStyleProperty(value) {
+    this.stylePropertyTitle = value
+  }
   public removerAcento(text) {
     text = text.toLowerCase();
     text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
@@ -669,5 +554,19 @@ export class SearchMapComponent implements OnInit {
     text = text.replace(new RegExp('[ÚÙÛ]', 'gi'), 'u');
     text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
     return text.toLocaleLowerCase();
+  }
+  getEstados(value) {
+    let valor = value.target.value;
+    console.log(valor);
+    this.listAllCity = [];
+    for (let i = 0; i < estados.estados.length; i++) {
+      if (valor === estados.estados[i].nome) {
+        for (let x = 0; x < estados.estados[i].cidades.length; x++) {
+          this.listAllCity.push({ name: estados.estados[i].cidades[x] })
+          this.stateSelected = estados.estados[i].sigla
+        }
+      }
+    }
+    console.log(this.listAllCity, 'lista');
   }
 }
