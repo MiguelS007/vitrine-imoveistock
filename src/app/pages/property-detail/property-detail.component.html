@@ -665,7 +665,7 @@
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" (click)="closePause(videomedia)" class="close" data-dismiss="modal" aria-label="Close">
             <span class="text-light font-size-55" aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -687,7 +687,7 @@
                   <vg-volume></vg-volume>
                   <vg-fullscreen></vg-fullscreen>
                 </vg-controls>
-                <video [vgMedia]="$any(media)" poster="../../../assets/img/preview1.png" #media id="singleVideo"
+                <video [vgMedia]="$any(videomedia)" poster="../../../assets/img/preview1.png" #videomedia id="singleVideo"
                   preload="auto" crossorigin>
                   <source src="../../../assets/vid/test.mp4" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
