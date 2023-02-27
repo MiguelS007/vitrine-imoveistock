@@ -232,7 +232,6 @@ export class SearchPageComponent implements OnInit {
 
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
-      this.searchByCity(this.filtroSelected?.city || 'Local');
       this.filterTypeProperty(this.filtroSelected?.goal || 'Tipo do Imóvel');
       this.searchByBadRoom(this.filtroSelected?.badRoomsQnt)
       if (this.filtroSelected.styleProperty !== '') {
@@ -297,8 +296,6 @@ export class SearchPageComponent implements OnInit {
         console.log(this.listAllCity);
       }
     })
-
-
   }
 
   selectEvent(item) {
@@ -482,9 +479,6 @@ export class SearchPageComponent implements OnInit {
     this.TypeProperty = value
   }
 
-  searchByCity(item) {
-    this.selectCity = item
-  }
 
   filtrar() {
     // this.listForFilterOnClick();
