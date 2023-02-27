@@ -58,6 +58,7 @@ export class SearchMapComponent implements OnInit {
   valuePrices: 0;
   stateSelected = 'Escolha o Estado'
   TypeProperty = 'Tipo de Imóvel';
+  listOfPrices: any = [];
   keyword = 'name'
   stylePropertyTitle: string = 'O que está buscando?';
   listAllCity: any = [
@@ -99,14 +100,17 @@ export class SearchMapComponent implements OnInit {
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
       this.filterResult = JSON.parse(resultadoVerify);
-      console.log(this.filterResult, 'segundo')
+      // list-price-orderBy
+      for (let i = 0; i < this.filterResult.length; i++) {
+        this.listOfPrices.push(this.filterResult[i].saleValue);
+      }
+      // console.log(this.listOfPrices);
       if (this.filterResult.length === 0) {
         this.messageNotSearch = true;
       }
     } else {
       this.filterResult = [];
     }
-
     let filtro = localStorage.getItem('filtro');
     this.filtroSelected = JSON.parse(filtro);
 
@@ -217,7 +221,7 @@ export class SearchMapComponent implements OnInit {
         this.propertyproducts = data
         this.response = data;
         this.ngxSpinnerService.hide();
-        console.log(this.listAllCity);
+        // console.log(this.listAllCity);
       }
     })
   }
@@ -557,7 +561,7 @@ export class SearchMapComponent implements OnInit {
   }
   getEstados(value) {
     let valor = value.target.value;
-    console.log(valor);
+    // console.log(valor);
     this.listAllCity = [];
     for (let i = 0; i < estados.estados.length; i++) {
       if (valor === estados.estados[i].nome) {
@@ -567,6 +571,11 @@ export class SearchMapComponent implements OnInit {
         }
       }
     }
-    console.log(this.listAllCity, 'lista');
+    // console.log(this.listAllCity, 'lista');
+  }
+  sortPriceList(value: string) {
+    this.listOfPrices = this.filterResult;
+    if (value === 'minor>major') this.listOfPrices.sort((a, b) => a.saleValue < b.saleValue ? -1 : 0);
+    else if (value === 'major>minor') this.listOfPrices.sort((a, b) => a.saleValue > b.saleValue ? -1 : 0);
   }
 }

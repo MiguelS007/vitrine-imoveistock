@@ -276,10 +276,9 @@
                                     {{orderBy}}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" (click)="changeOderBy('Relevante')">Relevante</a>
-                                    <a class="dropdown-item" (click)="changeOderBy('Maiorpreço')">Maior
-                                        preço</a>
-                                    <a class="dropdown-item" (click)="changeOderBy('Menor preço')">Menor preço</a>
+                                    <a class="dropdown-item" (click)="sortPriceList('Relevante')">Relevante</a>
+                                    <a class="dropdown-item" (click)="sortPriceList('major>minor')">Maior preço</a>
+                                    <a class="dropdown-item" (click)="sortPriceList('minor>major')">Menor preço</a>
                                 </div>
                             </div>
                         </div>

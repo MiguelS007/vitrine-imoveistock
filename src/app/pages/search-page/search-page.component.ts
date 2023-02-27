@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
@@ -100,6 +100,7 @@ export class SearchPageComponent implements OnInit {
   keyword = 'name'
   getSelectedCity: string;
   estados: any;
+  listOfPrices: any = [];
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -160,20 +161,16 @@ export class SearchPageComponent implements OnInit {
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
       this.filterResult = JSON.parse(resultadoVerify);
+      // list-price-orderBy
+      for (let i = 0; i < this.filterResult.length; i++) {
+        this.listOfPrices.push(this.filterResult[i].saleValue);
+      }
+      // console.log(this.listOfPrices);
       if (this.filterResult.length === 0) {
         this.messageNotSearch = true;
       }
     } else {
       this.filterResult = [];
-    }
-
-    if (this.recentlySeenIdsList !== null) {
-      for (let i = 0; i < this.recentlySeenIdsList.length; i++) {
-        this.announcementService.announcementGetById(this.recentlySeenIdsList[i]._id).subscribe(
-          success => this.recentlySeenList.push(success),
-          error => console.log(error)
-        )
-      }
     }
 
     let filtro = localStorage.getItem('filtro');
@@ -290,7 +287,7 @@ export class SearchPageComponent implements OnInit {
         this.propertyproducts = data
         this.response = data;
         this.ngxSpinnerService.hide();
-        console.log(this.listAllCity);
+        // console.log(this.listAllCity);
       }
     })
   }
@@ -398,9 +395,6 @@ export class SearchPageComponent implements OnInit {
     this.router.navigate([`announcement/detail/${value}`])
   }
 
-  changeOderBy(value) {
-    this.orderBy = value
-  }
 
   searchByTypeAd(item) {
     if (item === 'sale') {
@@ -472,7 +466,7 @@ export class SearchPageComponent implements OnInit {
     this.announcementService.listAnnouncement().subscribe(
       success => {
         this.listAllForFilter = success;
-        console.log(this.listAllForFilter)
+        // console.log(this.listAllForFilter)
         if (localStorage.getItem('user') !== null) {
           this.announcementService.listLikes().subscribe(
             success => {
@@ -485,7 +479,7 @@ export class SearchPageComponent implements OnInit {
                 this.listLikesForFilter.push(success[i].announcement)
               }
             }
-          ) 
+          )
         }
 
         // 1° filtro
@@ -519,7 +513,7 @@ export class SearchPageComponent implements OnInit {
           filter3 = filter2.filter(elemento => elemento.cityAddress === this.getSelectedCity)
           console.log('cidade selecionada', this.getSelectedCity)
           if (filter3.length === 0) {
-            console.log(this.getSelectedCity,'filtro 3 zerado')
+            console.log(this.getSelectedCity, 'filtro 3 zerado')
           }
         } else {
           filter3 = filter2;
@@ -531,7 +525,7 @@ export class SearchPageComponent implements OnInit {
 
           filter4 = filter3.filter(elemento => elemento.goal === this.TypeProperty)
           if (filter4.length === 0) {
-            console.log(filter4, )
+            console.log(filter4,)
             console.log('caiu no filtro 4, zerado')
           }
         } else {
@@ -673,7 +667,7 @@ export class SearchPageComponent implements OnInit {
         this.ngxSpinnerService.hide();
       },
     );
-    
+
   }
 
   openFilter(content) {
@@ -705,7 +699,7 @@ export class SearchPageComponent implements OnInit {
 
   getEstados(value) {
     let valor = value.target.value;
-    console.log(valor);
+    // console.log(valor);
     this.listAllCity = [];
     for (let i = 0; i < estados.estados.length; i++) {
       if (valor === estados.estados[i].nome) {
@@ -715,7 +709,12 @@ export class SearchPageComponent implements OnInit {
         }
       }
     }
-    console.log(this.listAllCity, 'lista');
+    // console.log(this.listAllCity, 'lista');
+  }
+  sortPriceList(value: string) {
+    this.listOfPrices = this.filterResult;
+    if (value === 'minor>major') this.listOfPrices.sort((a, b) => a.saleValue < b.saleValue ? -1 : 0);
+    else if (value === 'major>minor') this.listOfPrices.sort((a, b) => a.saleValue > b.saleValue ? -1 : 0);
   }
 
 }
