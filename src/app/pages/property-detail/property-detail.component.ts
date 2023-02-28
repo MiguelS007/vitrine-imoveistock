@@ -18,67 +18,29 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
   styleUrls: ['./property-detail.component.scss']
 })
 export class PropertyDetailComponent implements OnInit {
-  infopay = true;
-  infopaymobile = false;
 
-  @HostListener('window:scroll')
-  checkScroll() {
-    const scrollPosition = window.pageYOffset;
-    const widthWindow = window.innerWidth;
-    let interdistance = Math.trunc(scrollPosition);
-    // INFO-PAY-MOBILE
-    if (interdistance >= 270) {
-      this.infopay = false;
-      this.infopaymobile = true;
-    } else {
-      this.infopay = true;
-      this.infopaymobile = false;
-    }
-    // STATIC-INFO-PAY-IN-SCROLL-PAGE
-    const infopaydesk = document.querySelector(
-      '#infopaydesk'
+  @HostListener('window:scroll', ['$event'])
+  checkScroll(event: any) {
+    const scrollTop = window.pageYOffset;
+    let interdistance = Math.trunc(scrollTop);
+    const schedulevisit = document.querySelector(
+      '.schedule-visit'
     ) as HTMLElement;
-    const colinfopay = document.querySelector(
-      '#colinfopay'
+    const paymentmobile = document.querySelector(
+      '.payment-mobile'
     ) as HTMLElement;
-    
-
-
-    if (interdistance >= 1460) {
-      if (widthWindow <= 1922) {
-        colinfopay.style.alignSelf = 'self-end'
-        infopaydesk.style.position = 'relative';
-        infopaydesk.style.top = '0px';
-        infopaydesk.style.maxWidth = '415px';
-        infopaydesk.style.zIndex = '20';
-      }else{
-        colinfopay.style.alignSelf = 'self-end'
-        infopaydesk.style.position = 'relative';
-        infopaydesk.style.top = '0px';
-        infopaydesk.style.maxWidth = '626px';
-        infopaydesk.style.zIndex = '20';
-      }
+    if (interdistance >= 600) {
+       window.scroll({
+        top: 600,
+      });
+      schedulevisit.style.display = 'block';
+      paymentmobile.style.display = 'none';
     } else {
-      if (interdistance >= 511) {
-        if (widthWindow <= 1922) {
-          infopaydesk.style.position = 'fixed';
-          infopaydesk.style.maxWidth = '415px';
-          infopaydesk.style.top = '96px';
-          infopaydesk.style.zIndex = '20';
-        } else {
-          infopaydesk.style.position = 'fixed';
-          infopaydesk.style.maxWidth = '626px';
-          infopaydesk.style.top = '96px';
-          infopaydesk.style.zIndex = '20';
-        }
-      } else {
-        infopaydesk.style.position = 'relative';
-        infopaydesk.style.top = '0px';
-        colinfopay.style.alignSelf = 'auto'
-      }
+   
+      schedulevisit.style.display = 'none';
+      paymentmobile.style.display = 'block';
     }
 
-    // console.log(interdistance, window.innerWidth)
 
   }
 
@@ -222,7 +184,7 @@ export class PropertyDetailComponent implements OnInit {
     }
   }
 
-  closePause(videomedia: HTMLVideoElement){
+  closePause(videomedia: HTMLVideoElement) {
     videomedia.pause();
   }
 
