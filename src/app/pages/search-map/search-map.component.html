@@ -206,8 +206,7 @@
                                     [(ngModel)]="stateSelected" id="state" aria-label="Default select example">
                                     <option [value]="stateSelected" disabled selected value>
                                         {{stateSelected}}</option>
-                                    <option *ngFor="let item of estados.estados" [value]="item.sigla">{{item.nome}}
-                                    </option>
+                                    <option *ngFor="let item of estados.estados" [value]="item.nome">{{item.nome}}</option>
                                 </select>
                             </div>
                         </div>
