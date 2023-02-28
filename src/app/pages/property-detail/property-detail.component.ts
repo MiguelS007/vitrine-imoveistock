@@ -168,7 +168,6 @@ export class PropertyDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.ngxSpinnerService.show()
     this.onlyimg = this.datamokservice.onlypreview;
     this.previewimg = this.datamokservice.imagespreview;
