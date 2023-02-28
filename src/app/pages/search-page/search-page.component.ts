@@ -434,9 +434,7 @@ export class SearchPageComponent implements OnInit {
   }
   searchByVacancies(item) {
     // SELECT VACANCES
-    if (item === '0') {
-      this.selectVacancies = 'Tanto faz'
-    } else if (item === '1') {
+    if (item === '1') {
       this.selectVacancies = '+1  Vagas'
     } else if (item === '2') {
       this.selectVacancies = '+2  Vagas'

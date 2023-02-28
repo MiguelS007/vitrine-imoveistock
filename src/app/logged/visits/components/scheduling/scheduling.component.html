@@ -62,37 +62,34 @@
             </div>
             <div class="w-100 bg-white border-radius-10 p-4 h-auto">
                 <p class="w-100 fw-400 font-size-16 line-20 color-black">
-                    <i class="bi font-size-20 mr-2 bi-calendar"></i>{{selectedScheduling?.visitDate | date: 'EEEE'||
-                    '-'}}, {{selectedScheduling.visitDate | date: 'dd' }} de {{selectedScheduling.visitDate | date:
-                    'LLLL' }} às {{selectedScheduling.visitDate | date: 'HH:mm' || '-'}}
+                    <i class="bi font-size-20 mr-2 bi-calendar"></i>{{selectedScheduling?.visitDate | date: 'EEEE'|| '-'}}, {{selectedScheduling.visitDate | date: 'dd' }} de {{selectedScheduling.visitDate | date: 'LLLL' }} às {{selectedScheduling.visitDate | date: 'HH:mm' || '-'}}
                 </p>
                 <p class="fw-400 py-2 font-size-16 line-20 color-black">
                     <i class="bi font-size-20 color-black mr-2 bi-geo-alt"></i>
                     {{selectedScheduling.announcement?.districtAddress || '-'}},
                     {{selectedScheduling.announcement?.cityAddress || '-'}} -
-                    {{selectedScheduling.announcement?.ufAddress ||
-                    '-'}}
+                    {{selectedScheduling.announcement?.ufAddress || '-'}}
                 </p>
-                <p class="fw-400 font-size-16 line-20 color-black">
+                <!-- <p class="fw-400 font-size-16 line-20 color-black">
                     <i class="bi font-size-20 color-black mr-2 bi-person-vcard"></i>
                     Leve seu documento de identificação original com foto
                 </p>
-                <div class="">
-                    <p class="fw-700 font-size-16 mt-4 line-20 color-black">A visita é acompanhada por esse corretor: {{selectedScheduling}}
-                </p>
-                <div class="w-100 d-flex">
-                    <i class="bi color-black mr-2 font-size-20 bi-person"></i>
-                    <p class="d-grid">
-                        <span class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.announcement?.ownerName || '-'}}</span>
-                        <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
-                        <span class="fw-400 font-size-14 line-18 color-black">11 9 1234-1234</span>
+                <div *ngIf="situationStatus != ''">
+                    <p class="fw-700 font-size-16 mt-4 line-20 color-black">A visita é acompanhada por esse corretor:
                     </p>
-                    <span class="fw-400 font-size-14 line-18 color-black">
-                        Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
-                    </span>
-                </div> 
-                </div>
-               
+                    <div class="w-100 d-flex">
+                        <i class="bi color-black mr-2 font-size-20 bi-person"></i>
+                        <p class="d-grid">
+                            <span class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.announcement?.ownerName || '-'}}</span>
+                            <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
+                            <span class="fw-400 font-size-14 line-18 color-black">11 9 1234-1234</span>
+                        </p>
+                        <span class="fw-400 font-size-14 line-18 color-black">
+                            Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
+                        </span>
+                    </div>
+                </div> -->
+
             </div>
             <div class="w-100 bg-white mt-4 border-radius-10 h-auto">
                 <div class="h-100 product-announcement p-2 mx-3 border-radius-10 bg-white">

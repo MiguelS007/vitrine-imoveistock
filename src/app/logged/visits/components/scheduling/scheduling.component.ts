@@ -42,6 +42,7 @@ export class SchedulingComponent implements OnInit {
     cancellationReason: '',
     visitDate: new Date,
   };
+  situationStatus: any;
 
 
   constructor(
@@ -65,8 +66,12 @@ export class SchedulingComponent implements OnInit {
       success => {
         this.response = success
         if (success.length > 0) {
+          console.log(this.response)
           this.selectedScheduling = success[0];
-       
+          for (let i = 0; i < this.response.length; i++) {
+            console.log(this.response[i].status)
+            
+          }
           setTimeout(() => {
             let teste = document.getElementById(success[0]._id);
             teste.classList.add('scheduling-visit-selected');
@@ -140,7 +145,7 @@ export class SchedulingComponent implements OnInit {
           console.error(error)
         }
       )
-    } else if (this.selectedScheduling.announcement.liked === false || this.selectedScheduling.announcement.liked === undefined) {
+    } else if (this.selectedScheduling.announcement.liked === false) {
       this.announcementService.registerLike(request).subscribe(
         success => {
           this.selectedScheduling.announcement.liked = true
@@ -158,9 +163,22 @@ export class SchedulingComponent implements OnInit {
     this.selectedScheduling = item;
     this.verifyLike();
     let checkOld;
-
     let teste: any = localStorage.getItem('announcementChecked');
-
+    this.scheduleService.getListVisists().subscribe(
+      success => {
+        this.response = success
+        if (success.length > 0) {
+          for (let i = 0; i < this.response.length; i++) {
+           if(item._id === this.response[i]._id) {
+             this.situationStatus = this.response[i].status;
+           } 
+          }
+        }
+      },
+      error => {
+        console.error(error);
+      }
+    )
     if (window.screen.width < 992) {
       localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling))
       const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
