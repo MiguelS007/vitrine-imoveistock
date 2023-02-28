@@ -52,15 +52,18 @@
             <div class="options-img d-flex align-items-center">
               <div (click)="likeHeartMain(response._id, response.liked)"
                 class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' " class="bi icon-button-property-detail-shared text-light"></i>
+                <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' "
+                  class="bi icon-button-property-detail-shared text-light"></i>
               </div>
               <div (click)="btninteractionimg('share')"
                 class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bi icon-button-property-detail-shared text-light"></i>
+                <i [class]="iconshare ?'bi-share-fill':'bi-share' "
+                  class="bi icon-button-property-detail-shared text-light"></i>
               </div>
               <div (click)="btninteractionimg('print')"
                 class="button-property-detail-shared mx-1 mt-2 bg-transparent-white cursor-pointer heart-like border-radius-10 pt-2 pb-1 px-3">
-                <i [class]="iconprint?'bi-printer-fill':'bi-printer' " class="bi icon-button-property-detail-shared text-light"></i>
+                <i [class]="iconprint?'bi-printer-fill':'bi-printer' "
+                  class="bi icon-button-property-detail-shared text-light"></i>
               </div>
             </div>
           </div>
@@ -151,10 +154,10 @@
                        border-radius-10 bg-purple-light py-4 px-4 mr-3
                        ">Metragem:&nbsp;{{response.usefulArea | currency: ' '}}m²</h1>
             </div>
-            <div class="w-100 my-4 px-5 pt-3 pb-4
+            <div class="w-100 mt-4 px-5 pt-3 pb-4
                     border-bottom-gray">
               <span class="fw-700 font-size-18 line-24
-                       color-black">Detalhes do Imóvel</span>
+                       color-black">Descrição do Imóvel</span>
               <br />
               <br />
               <p class="fw-400 font-size-18 line-24 py-3
@@ -165,119 +168,67 @@
 
             <div class="w-100 py-4 border-bottom-gray px-5">
               <div class="w-100 d-flex align-items-center justify-content-between">
-                <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Detalhes do Imóvel</p>
+                <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Detalhes do Imóvel</p>
                 <img *ngIf="!arrowpff" src="../../../assets/icon/arrow-down-blue.png" width="20"
                   style="cursor: pointer;" class="animate__animated" (click)="openarrow(24)">
                 <img *ngIf="arrowpff" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated" width="18"
                   style="cursor: pointer;" (click)="openarrow(24)">
               </div>
-              <table *ngIf="arrowpff" class="w-100 animate__animated">
+              <table *ngIf="arrowpff" class="table table-borderless pt-4">
                 <tbody>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Identificador:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;HZ227</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Ano da
-                        contrução:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.yearOfConstruction || '-'}}</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Tipo do
-                        imóvel:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.propertyType || '-'}}</span>
-                    </td>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Identificador:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;HZ227</td>
                   </tr>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Preço:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.saleValue | currency: 'R$ ' || '-'}}</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Quartos:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.bedrooms || '-'}}</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Disponibilidade:</span>
-                      <span *ngIf="response.typeOfAd === 'sale'"
-                        class="fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Venda</span>
-                      <span *ngIf="response.typeOfAd === 'rent'"
-                        class="fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Aluguel</span>
-                    </td>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Ano da contrução</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.yearOfConstruction || '-'}}</td>
                   </tr>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Valor do
-                        Condomínio:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.condominiumValue | currency: 'R$ ' ||
-                        '-'}}</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Banheiro:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.bathrooms || '-'}}</span>
-                    </td>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Tipo do imóvel:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.propertyType || '-'}}</td>
                   </tr>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Metragem:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.usefulArea |currency: ' '}}m²</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Vagas:</span>
-                      <span class="fw-700 
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.vacancyNumber || '-'}}</span>
-                    </td>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Preço:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.saleValue | currency: 'R$ ' || '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Quartos:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.bedrooms || '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Disponibilidade:</td>
+                    <td *ngIf="response.typeOfAd === 'sale'" class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Venda</td>
+                    <td *ngIf="response.typeOfAd === 'rent'" class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Locação</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Valor do Condomínio:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.condominiumValue | currency: 'R$ ' || '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Banheiro:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.bathrooms || '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Metragem:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.usefulArea ||  '-'}}m²</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Vagas:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.vacancyNumber  || '-'}}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div class="w-100 py-4 border-bottom-gray px-5">
               <div class="w-100 d-flex align-items-center justify-content-between">
-                <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Informações Adicionais</p>
+                <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Informações Adicionais</p>
                 <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20"
                   style="cursor: pointer;" class="animate__animated" (click)="openarrow(42)">
                 <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated"
                   width="18" style="cursor: pointer;" (click)="openarrow(42)">
               </div>
-              <table *ngIf="arrowinfo" class="w-100 animate__animated">
+              <table *ngIf="arrowinfo" class="w-100 animate__animated pt-4">
                 <tbody>
                   <tr class="h-51">
                     <td>
@@ -568,8 +519,7 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
-                    '-'}}</span>
+                  <span class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||'-'}}</span>
                 </div>
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">Condomínio
@@ -595,7 +545,7 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-700 font-size-18 line-24 color-black">{{finalValue | currency: 'R$ ' || '-'}}</span>
+                  <span class="fw-700 font-size-18 line-24 color-black">{{finalValue || finalValue2 | currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -613,12 +563,13 @@
 
 
 
-  
+
   <!-- FLOAT BTN SCHEDULE -->
-  <div *ngIf="infopaymobile" class="schedule-visit d-none bg-white border-top-gray py-3 d-flex-desk justify-content-center cursor-pointer position-fixed z-1000 w-100">
+  <div *ngIf="infopaymobile"
+    class="schedule-visit d-none bg-white border-top-gray py-3 d-flex-desk justify-content-center cursor-pointer position-fixed z-1000 w-100">
     <div class="w-100 max-w-800 padding-x schedule-visit-modal">
       <div class="w-100">
-        <h3>{{finalValue | currency: 'R$ ' || '-'}}</h3>
+        <h3>{{finalValue || finalValue2 | currency: 'R$ ' || '-'}}</h3>
       </div>
       <div class="row">
         <div class="col-6">
@@ -666,7 +617,8 @@
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
         <div class="modal-header d-flex justify-content-end mt-3">
-          <button type="button" (click)="closePause(videomedia)" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+          <button type="button" (click)="closePause(videomedia)" class="btn btn-close-announcement-detail"
+            data-dismiss="modal" aria-label="Close">
             <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>

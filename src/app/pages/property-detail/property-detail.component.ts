@@ -121,6 +121,8 @@ export class PropertyDetailComponent implements OnInit {
   tourvirtual = false;
   propertyvideo = true;
   finalValue;
+  finalValue2;
+
 
   filterResult: AnnouncementGetResponseDto[] = [];
   listLikes: AnnouncementGetResponseDto[] = [];
@@ -180,6 +182,8 @@ export class PropertyDetailComponent implements OnInit {
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
     this.finalValue = (parseInt(this.response.valueOfIptu) + parseInt(this.response.condominiumValue) + this.response.saleValue);
+    this.finalValue2 = (parseInt(this.response.valueOfIptu)  + this.response.saleValue);
+
 
     console.log(this.user?._id, this.response._id, this.finalValue);
 

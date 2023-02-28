@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalSignupComponent } from 'src/app/auth/modal-signup/modal-signup.component';
 import { UserService } from 'src/app/service/user.service';
-import { ModalSignupComponent } from '../modal-signup/modal-signup.component';
 
 @Component({
-  selector: 'app-terms',
-  templateUrl: './terms.component.html',
-  styleUrls: ['./terms.component.scss']
+  selector: 'app-terms-signup',
+  templateUrl: './terms-signup.component.html',
+  styleUrls: ['./terms-signup.component.scss']
 })
-export class TermsComponent implements OnInit {
+export class TermsSignupComponent implements OnInit {
   changeValue?: string
 
   constructor(
@@ -23,7 +23,7 @@ export class TermsComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    this.changeValue = this.userService.termsOrPolitic
+    this.changeValue = this.userService.termsOrPoliticSignUp
   }
 
 }

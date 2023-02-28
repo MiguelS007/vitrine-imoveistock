@@ -7,7 +7,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NgModule } from '@angular/core';
 import { SearchMapComponent } from './pages/search-map/search-map.component';
 import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.resolver';
-import { CookiePolicyComponent } from './pages/cookie-policy/cookie-policy.component';
+import { CookiePolicyComponent } from './shared/cookie-policy/cookie-policy.component';
 
 export const routes: Routes = [
 

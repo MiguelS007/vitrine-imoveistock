@@ -66,6 +66,7 @@ export class SchedulingComponent implements OnInit {
         this.response = success
         if (success.length > 0) {
           this.selectedScheduling = success[0];
+       
           setTimeout(() => {
             let teste = document.getElementById(success[0]._id);
             teste.classList.add('scheduling-visit-selected');
