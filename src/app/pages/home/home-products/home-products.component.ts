@@ -53,7 +53,7 @@ export class HomeProductsComponent implements OnInit {
   }
 
   list() {
-    this.announcementService.listExclusive().subscribe(
+    this.announcementService.listAnnouncement().subscribe(
       response => {
         this.response = response;
         if (localStorage.getItem('user') !== null) {

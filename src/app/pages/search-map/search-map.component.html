@@ -74,8 +74,7 @@
                     </div>
                     <div class="col-lg-6 px-1 col-cards-products"
                         *ngFor="let item of filterResult | paginate: { itemsPerPage: 2, currentPage: paginationProduct }; let i= index">
-                        <div
-                            class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
+                        <div class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
                             <div class="border-radius-10 position-relative">
                                 <img (click)="announcementSelected(item._id)"
                                     src="../../../assets/img/img-announcement-default.jpg"
@@ -207,7 +206,7 @@
                                     [(ngModel)]="stateSelected" id="state" aria-label="Default select example">
                                     <option [value]="stateSelected" disabled selected value>
                                         {{stateSelected}}</option>
-                                    <option *ngFor="let item of estados.estados" [value]="item.nome">{{item.nome}}
+                                    <option *ngFor="let item of estados.estados" [value]="item.sigla">{{item.nome}}
                                     </option>
                                 </select>
                             </div>
@@ -295,7 +294,6 @@
                                 role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" readonly>
                             <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                                <a class="dropdown-item" (click)="searchByVacancies('0')">Tanto faz</a>
                                 <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
                                 <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
                                 <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
