@@ -1,23 +1,23 @@
 <footer [class]="handlerLoggedLinks(router.url)" class="w-100 h-100 px-5p bg-purple d-flex justify-content-center">
     <div class="max-w-1918 mt-5 mx-0 w-100 row h-auto">
-        <div class="col-4 px-0 padding-x pt-4 d-flex justify-content-center h-auto col-footer">
+        <div class="col-lg-4 col-md-6">
             <div class="w-100">
                 <p class="fw-700 mb-3 font-size-18 line-24 text-light">
                     <img src="../../../assets/logo/white-logo.png" class="w-50" />
                 </p>
-                <div class="col-12 pt-4 px-0  h-auto col-footer">
+                <div class="col-12 pt-4 px-0 h-auto col-footer">
                     <p class="fw-700 mb-3 font-size-18 line-24 text-light">
                         Siga nossas redes
                     </p>
-                    <div class="d-flex block-important w-50 justify-content-between mb-0">
+                    <div class="d-flex block-important w-100 pb-3 pb-sm-5">
                         <a href="https://www.facebook.com/imoveistock">
-                            <img class="h-29" src="../../../assets/icon/facebook-light.svg" />
+                            <img class="h-29 mr-3" src="../../../assets/icon/facebook-light.svg" />
                         </a>
                         <a href="https://www.instagram.com/imoveistock/">
-                            <img class="h-29" src="../../../assets/icon/instagram-light.svg" />
+                            <img class="h-29 mr-3" src="../../../assets/icon/instagram-light.svg" />
                         </a>
                         <a href="https://www.linkedin.com/company/imoveistock/">
-                            <img class="h-29" src="../../../assets/icon/linkedin-light.svg" />
+                            <img class="h-29 mr-3" src="../../../assets/icon/linkedin-light.svg" />
                         </a>
                         <a href="https://www.youtube.com/@imoveistock5198">
                             <img class="h-29" src="../../../assets/icon/youtube-light.svg" />
@@ -26,12 +26,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-3 pt-4 px-0 padding-x  d-flex justify-content-center h-auto col-footer">
+
+        <div class="col-lg-3 col-md-6">
             <div class="w-100">
                 <p class="fw-700 mb-3  font-size-18 line-24 text-light">
                     Fale com a gente
                 </p>
-                <p class="fw-700 d-grid pb-5 pt-3 font-size-18 line-24 text-light">
+                <p class="fw-700 d-grid pb-3 pb-sm-5 font-size-18 line-24 text-light">
                     <span class="fw-400 py-1 font-size-14 line-20 text-light">Hotmilk PUC/PR</span>
                     <span class="fw-400 py-1 font-size-14 line-20 text-light">Rua Imaculada Conceição 1430</span>
                     <span class="fw-400 py-1 font-size-14 line-20 text-light">Prado Velho - Curitiba - PR</span>
@@ -40,20 +41,25 @@
                
             </div>
         </div>
-        <div class="col-3 pt-4 px-0 padding-x  d-flex justify-content-center h-auto col-footer">
+
+        <div class="col-lg-3 col-md-6">
             <div class="w-100">
-                <p class="fw-700 mb-3  font-size-18 line-24 text-light">
+                <p class="fw-700 mb-3 text-white">
                     Trabalhe com a gente
                 </p>
-                <p class="fw-700 d-grid pb-5 pt-3 font-size-18 line-24 text-light">
+                <p class="fw-700 d-grid pb-3 pb-sm-5 font-size-18 line-24 text-light">
                     <a href="https://landingpage-corretor.vercel.app/" class="fw-400 py-1 font-size-14 line-20 text-light">Corretagem</a>
                     <a href="https://landingpage-fotografo.vercel.app/" class="fw-400 py-1 font-size-14 line-20 text-light">Fotografia</a>
                     <a href="https://landingpage-vistoriador.vercel.app/" class="fw-400 py-1 font-size-14 line-20 text-light">Vistorias</a>
                 </p>
             </div>
         </div>
-        <div class="col-2 pt-4 px-0 padding-x  h-auto col-footer fw-700 d-grid pb-5 font-size-14 line-20 text-light">
-            Telefone
+
+        <div class="col-lg-2 col-md-6">
+            <p class="fw-700 mb-3 text-white">
+                Telefone
+            </p>
+           
             <p class="fw-400 d-flex p-0 m-0 align-items-center line-20 text-light">
                 <i class="bi pr-2 text-success bi-telephone"></i>
                 4003-7764
@@ -64,20 +70,20 @@
             </p>
         </div>
         
-        <div class="col-12 justify-content-between my-5 px-0 padding-x d-block-mobile d-flex"> 
-            <div class="w-auto d-grid-mobile pt-3 d-flex">
-                <a class="fw-700 font-size-14 line-20 color-muted pr-3">CRECI PR J:5588</a>
+        <div class="col-12 my-5 grid-important d-flex"> 
+            <div class="w-75 col-full col-w-100 grid-important d-flex">
+                <a class="fw-700 font-size-14 line-20 color-muted mb-3 mb-sm-0">CRECI PR J:5588</a>
                 <a (click)="openTermsModal('politica')"
-                    class="fw-400 cursor-pointer hover-white font-size-14 line-20 color-muted px-3">Política de
+                    class="fw-400 cursor-pointer hover-white font-size-14 line-20 color-muted mb-3 mb-sm-0">Política de
                     privacidade</a>
                 <a (click)="openTermsModal('termos')"
-                    class="fw-400 cursor-pointer hover-white font-size-14 line-20 color-muted px-3">Termos de uso</a>
+                    class="fw-400 cursor-pointer hover-white font-size-14 line-20 color-muted mb-3 mb-sm-0">Termos de uso</a>
                 <a [routerLink]="['/cookie-policy']" [routerLinkActive]="['text-light']"
-                    class="fw-400 cursor-pointer hover-white font-size-14 line-20 color-muted px-3">Política de
+                    class="fw-400 cursor-pointer hover-white font-size-14 line-20 color-muted">Política de
                     coockies</a>
             </div>
-            <div class="w-auto pt-3 justify-content-center d-flex">
-                <p class="mb-0 year fw-400 font-size-14 line-20 color-muted">
+            <div class="w-100 col-full col-w-100 justify-content-center justify-content-md-end d-flex">
+                <p class="mb-0 year fw-400 font-size-14 line-20 color-muted mt-3 mt-sm-0">
                     {{year}} - imoveistock Tecnologia e Negócios LTDA.
                 </p>
             </div>
