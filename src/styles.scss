@@ -74,10 +74,11 @@ app-nav-bar {
     height: 51px !important;
 }
 
-::placeholder{
+::placeholder {
     color: black;
 }
- #search-cityes-test > .autocomplete-container > .input-container > input {
+
+#search-cityes-test>.autocomplete-container>.input-container>input {
     font-size: 14px;
     box-sizing: border-box;
     border: 1px solid #dee2e6 !important;
@@ -92,7 +93,8 @@ app-nav-bar {
     border-radius: 10px;
     height: 74px !important;
 }
-#search-cityes-test > .autocomplete-container{
+
+#search-cityes-test>.autocomplete-container {
     box-shadow: none !important;
 }
 
@@ -2386,6 +2388,11 @@ vg-overlay-play .vg-overlay-play {
         display: block !important;
     }
 
+    .d-block-mobile {
+        display: block !important;
+        ;
+    }
+
     .btn-indicate {
         width: 100% !important;
     }
@@ -2537,6 +2544,13 @@ vg-overlay-play .vg-overlay-play {
 
 
 @media (max-width: 540px) {
+    .d-grid-mobile {
+        display: grid !important;
+    }
+
+    .d-grid-mobile a {
+        padding: 0 !important;
+    }
 
     .col-12-mobile {
         flex: 0 0 100% !important;
