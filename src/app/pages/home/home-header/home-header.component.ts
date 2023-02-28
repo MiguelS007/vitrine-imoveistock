@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { AnnouncementService } from '../../../service/announcement.service';
-import  estados  from '../../../../assets/json/estados-cidades.json';
+import estados from '../../../../assets/json/estados-cidades.json';
 
 @Component({
   selector: 'app-home-header',
@@ -24,7 +24,7 @@ export class HomeHeaderComponent implements OnInit {
   selectedResidencial = 'residencial'
   selectedRural = 'rural'
   selectedComercial = 'comercial'
-  stateSelected = 'Primeiro escolha um estado'
+  stateSelected = ''
   citySelected = 'Escolha uma cidade'
   cities: any[];
   states: any[] = [
@@ -120,7 +120,7 @@ export class HomeHeaderComponent implements OnInit {
       uf: 'RR',
       ufLirycs: 'Roraima'
     },
-       {
+    {
       uf: 'SC',
       ufLirycs: 'Santa Catarina	'
     },
@@ -128,15 +128,15 @@ export class HomeHeaderComponent implements OnInit {
       uf: 'SP',
       ufLirycs: 'São Paulo	'
     },
-       {
+    {
       uf: 'SE',
       ufLirycs: 'Sergipe'
     },
-       {
+    {
       uf: 'TO',
       ufLirycs: 'Tocantins	'
     },
-    
+
   ];
   valueUntilSaleArray: any[] = [100000, 200000, 300000, 400000, 500000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000, 10000000, 20000000,];
   valueUntilRentArray: any[] = [100, 200, 300, 400, 500, 800, 1000, 2000, 3000, 4000, 5000, 10000, 20000];
@@ -245,7 +245,7 @@ export class HomeHeaderComponent implements OnInit {
   listAllCity: any = [];
   keyword = 'name'
   getSelectedCity: string;
-  estados: any;
+  estados: { estados: { sigla: string, nome: string, cidades: string[] }[] };
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -268,7 +268,7 @@ export class HomeHeaderComponent implements OnInit {
 
 
   ngAfterViewInit(): void {
-    
+
   }
 
 
@@ -602,8 +602,7 @@ export class HomeHeaderComponent implements OnInit {
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
-
-
+    console.log(filter)
     // ---------------------------
     let announcementTypeAdGroup: AnnouncementGetResponseDto[] = [];
     if (filter.typeAd !== '') {
@@ -768,10 +767,9 @@ export class HomeHeaderComponent implements OnInit {
 
     this.resultType = announcementValueUntilRentGroup;
 
-
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
-    this.router.navigate(['/search']);
+    // this.router.navigate(['/search']);
 
   }
 
@@ -785,14 +783,21 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
 
-  getEstados(value){
+  getStateNameByTag(sigla: string) {
+    if (sigla)
+      return this.estados.estados.find(estado => estado.sigla === sigla).nome || ''
+      return 'Primeiro escolha um estado'
+  }
+
+
+  getEstados(value) {
     let valor = value.target.value;
     this.listAllCity = [];
     for (let i = 0; i < estados.estados.length; i++) {
-      if(valor === estados.estados[i].nome){
+      if (valor === estados.estados[i].nome) {
         for (let x = 0; x < estados.estados[i].cidades.length; x++) {
-          this.listAllCity.push({name: estados.estados[i].cidades[x]})
-          this.stateSelected = estados.estados[i].sigla
+          this.listAllCity.push({ name: estados.estados[i].cidades[x] })
+          this.stateSelected = estados.estados[i].nome
         }
       }
     }

@@ -450,6 +450,7 @@ export class ExpressProposalComponent implements OnInit {
         this.sendProposal(this.request)
       }
     }
+    this.router.navigate(['logged/visits']);
   }
 
 
