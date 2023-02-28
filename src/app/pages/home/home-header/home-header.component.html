@@ -314,8 +314,8 @@
                                                 [(ngModel)]="stateSelected" id="state"
                                                 aria-label="Default select example">
                                                 <option [value]="stateSelected" disabled selected value>
-                                                    {{stateSelected}}</option>
-                                                <option *ngFor="let item of estados.estados" [value]="item.nome">{{item.nome}}</option>
+                                                    {{getStateNameByTag(stateSelected)}}</option>
+                                                <option *ngFor="let item of estados.estados" [value]="item.sigla">{{item.nome}}</option>
                                             </select> 
                                         </div>
                                     </div>
@@ -388,7 +388,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="d-flex col-12 px-0 justify-content-end">
                                         <button (click)="confirm()"
                                             class="btn w-100 btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5"
