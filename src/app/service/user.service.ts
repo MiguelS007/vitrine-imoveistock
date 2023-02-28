@@ -16,6 +16,8 @@ export class UserService extends BaseService {
 
     url: string = `${environment.apis.imoveistock}app/`;
     termsOrPolitic?: string ;
+    termsOrPoliticSignUp?: string ;
+
     constructor(
         private httpClient: HttpClient,
     ) {

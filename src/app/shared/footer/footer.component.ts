@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TermsComponent } from 'src/app/auth/terms/terms.component';
+import { TermsComponent } from 'src/app/shared/terms/terms.component';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({

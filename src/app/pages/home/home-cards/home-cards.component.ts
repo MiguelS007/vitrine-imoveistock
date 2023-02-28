@@ -14,7 +14,7 @@ export class HomeCardsComponent implements OnInit {
 
   constructor(
     private datamokservice: DatamokService,
-  ) { 
+  ) {
     this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
       this.modallogin = false;
     });
@@ -23,12 +23,8 @@ export class HomeCardsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openLogin(){
-    if(localStorage.getItem('user') === null) {
-      this.datamokservice.opModalLogin();
-    } else {
-      window.open('https://imoveistock-app.vercel.app/logged/home', '_blank');
-    }
+  openLanding() {
+    window.open('https://landing-page-indicacao-n75g.vercel.app/', '_blank');
   }
 
 }

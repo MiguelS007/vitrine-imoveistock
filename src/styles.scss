@@ -1792,6 +1792,12 @@ vg-overlay-play .vg-overlay-play {
     }
 
 }
+@media (min-width: 1918px) {
+
+    .text-cards-little > span{
+        font-size: 28px !important;
+    }
+}
 
 @media (max-width: 1240px) {
 
@@ -2550,7 +2556,6 @@ vg-overlay-play .vg-overlay-play {
     }
 }
 
-
 @media (max-width: 540px) {
     .d-grid-mobile {
         display: grid !important;
@@ -2691,7 +2696,6 @@ vg-overlay-play .vg-overlay-play {
         overflow-y: none !important;
     }
 }
-
 
 @media (max-width: 995px) {
     .block-important {

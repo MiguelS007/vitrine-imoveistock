@@ -5,8 +5,9 @@ import { UserRegisterRequestDto } from 'src/app/dtos/user-register-request.dto';
 import { UserService } from 'src/app/service/user.service';
 import { ProfileClientEnum } from '../../../app/dtos/enum/profile-client.enum';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TermsComponent } from '../terms/terms.component';
+import { TermsComponent } from '../../shared/terms/terms.component';
 import { ModalTelComponent } from '../modal-tel/modal-tel.component';
+import { TermsSignupComponent } from 'src/app/shared/terms-signup/terms-signup.component';
 
 @Component({
   selector: 'app-modal-signup',
@@ -47,8 +48,8 @@ export class ModalSignupComponent implements OnInit {
   }
 
   openTermsModal(value: string) {
-    this.userService.termsOrPolitic = value;
-    this.modalService.open(TermsComponent, { size: "lg" })
+    this.userService.termsOrPoliticSignUp = value;
+    this.modalService.open(TermsSignupComponent, { size: "lg" })
   }
 
   confirm() {
