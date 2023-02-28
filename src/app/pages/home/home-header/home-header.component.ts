@@ -641,6 +641,7 @@ export class HomeHeaderComponent implements OnInit {
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
+    console.log(filter);
 
 
     // ---------------------------
@@ -829,7 +830,7 @@ export class HomeHeaderComponent implements OnInit {
     for (let i = 0; i < estados.estados.length; i++) {
       if(valor === estados.estados[i].nome){
         for (let x = 0; x < estados.estados[i].cidades.length; x++) {
-          this.listAllCity.push({name: estados.estados[i].cidades[x]})
+          this.listAllCity.push({name: estados.estados[i].cidades[x], sigla: estados.estados[i].sigla})
           this.stateSelected = estados.estados[i].sigla
         }
       }

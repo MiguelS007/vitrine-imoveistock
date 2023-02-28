@@ -150,7 +150,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.home = false;
       this.about = false;
       this.contact = false;
-    } 
+    }
     else if (value === 'ownerRegistration') {
       if (localStorage.getItem('user') !== null) {
         // window.open('https://imoveistock-app.vercel.app/logged/owner-registration', '_blank');
