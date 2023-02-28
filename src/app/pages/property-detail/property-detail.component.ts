@@ -20,7 +20,6 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
 export class PropertyDetailComponent implements OnInit {
   infopay = true;
   infopaymobile = false;
-
   // @HostListener('window:scroll')
   // checkScroll() {
   //   const scrollPosition = window.pageYOffset;
