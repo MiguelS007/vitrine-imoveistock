@@ -51,16 +51,16 @@
             <!-- HEART, SHARE ETC...BTNS -->
             <div class="options-img d-flex align-items-center">
               <div (click)="likeHeartMain(response._id, response.liked)"
-                class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' " class="bi font-size-24 text-light"></i>
+                class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
+                <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' " class="bi icon-button-property-detail-shared text-light"></i>
               </div>
               <div (click)="btninteractionimg('share')"
-                class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bi font-size-24 text-light"></i>
+                class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
+                <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bi icon-button-property-detail-shared text-light"></i>
               </div>
               <div (click)="btninteractionimg('print')"
-                class="h-51 mx-1 mt-2 bg-transparent-white cursor-pointer heart-like border-radius-10 pt-2 pb-1 px-3">
-                <i [class]="iconprint?'bi-printer-fill':'bi-printer' " class="bi font-size-24 text-light"></i>
+                class="button-property-detail-shared mx-1 mt-2 bg-transparent-white cursor-pointer heart-like border-radius-10 pt-2 pb-1 px-3">
+                <i [class]="iconprint?'bi-printer-fill':'bi-printer' " class="bi icon-button-property-detail-shared text-light"></i>
               </div>
             </div>
           </div>
@@ -639,8 +639,8 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close p-0" data-dismiss="modal" aria-label="Close">
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
             <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
@@ -662,9 +662,9 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" (click)="closePause(videomedia)" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" (click)="closePause(videomedia)" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
         <div class="anima-body h-100 d-flex justify-content-center align-items-center">
@@ -704,9 +704,9 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
         <div class="w-100 d-flex align-items-center justify-content-center h-100">
@@ -720,9 +720,9 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
 
