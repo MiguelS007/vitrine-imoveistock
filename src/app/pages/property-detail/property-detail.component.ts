@@ -20,68 +20,58 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
 export class PropertyDetailComponent implements OnInit {
   infopay = true;
   infopaymobile = false;
-  // @HostListener('window:scroll')
-  // checkScroll() {
-  //   const scrollPosition = window.pageYOffset;
-  //   const widthWindow = window.innerWidth;
-  //   let interdistance = Math.trunc(scrollPosition);
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition = window.pageYOffset;
+    const widthWindow = window.innerWidth;
+    let interdistance = Math.trunc(scrollPosition);
+
+    // STATIC-INFO-PAY-IN-SCROLL-PAGE
+    const infopaydesk = document.querySelector(
+      '#infopaydesk'
+    ) as HTMLElement;
+    const colinfopay = document.querySelector(
+      '#colinfopay'
+    ) as HTMLElement;
 
 
-  //   // INFO-PAY-MOBILE
-  //   if (interdistance >= 270) {
-  //     this.infopay = false;
-  //     this.infopaymobile = true;
-  //   } else {
-  //     this.infopay = true;
-  //     this.infopaymobile = false;
-  //   }
+    if (interdistance >= 1460) {
+      if (widthWindow <= 1922) {
+        colinfopay.style.alignSelf = 'self-end'
+        infopaydesk.style.position = 'relative';
+        infopaydesk.style.top = '0px';
+        infopaydesk.style.maxWidth = '415px';
+        infopaydesk.style.zIndex = '20';
+      }else{
+        colinfopay.style.alignSelf = 'self-end'
+        infopaydesk.style.position = 'relative';
+        infopaydesk.style.top = '0px';
+        infopaydesk.style.maxWidth = '626px';
+        infopaydesk.style.zIndex = '20';
+      }
+    } else {
+      if (interdistance >= 511) {
+        if (widthWindow <= 1922) {
+          infopaydesk.style.position = 'fixed';
+          infopaydesk.style.maxWidth = '415px';
+          infopaydesk.style.top = '96px';
+          infopaydesk.style.zIndex = '20';
+        } else {
+          infopaydesk.style.position = 'fixed';
+          infopaydesk.style.maxWidth = '626px';
+          infopaydesk.style.top = '96px';
+          infopaydesk.style.zIndex = '20';
+        }
+      } else {
+        infopaydesk.style.position = 'relative';
+        infopaydesk.style.top = '0px';
+        colinfopay.style.alignSelf = 'auto'
+      }
+    }
 
-  //   // STATIC-INFO-PAY-IN-SCROLL-PAGE
-  //   const infopaydesk = document.querySelector(
-  //     '#infopaydesk'
-  //   ) as HTMLElement;
-  //   const colinfopay = document.querySelector(
-  //     '#colinfopay'
-  //   ) as HTMLElement;
+    // console.log(interdistance, window.innerWidth)
 
-
-  //   if (interdistance >= 1460) {
-  //     if (widthWindow <= 1922) {
-  //       colinfopay.style.alignSelf = 'self-end'
-  //       infopaydesk.style.position = 'relative';
-  //       infopaydesk.style.top = '0px';
-  //       infopaydesk.style.maxWidth = '415px';
-  //       infopaydesk.style.zIndex = '20';
-  //     }else{
-  //       colinfopay.style.alignSelf = 'self-end'
-  //       infopaydesk.style.position = 'relative';
-  //       infopaydesk.style.top = '0px';
-  //       infopaydesk.style.maxWidth = '626px';
-  //       infopaydesk.style.zIndex = '20';
-  //     }
-  //   } else {
-  //     if (interdistance >= 511) {
-  //       if (widthWindow <= 1922) {
-  //         infopaydesk.style.position = 'fixed';
-  //         infopaydesk.style.maxWidth = '415px';
-  //         infopaydesk.style.top = '96px';
-  //         infopaydesk.style.zIndex = '20';
-  //       } else {
-  //         infopaydesk.style.position = 'fixed';
-  //         infopaydesk.style.maxWidth = '626px';
-  //         infopaydesk.style.top = '96px';
-  //         infopaydesk.style.zIndex = '20';
-  //       }
-  //     } else {
-  //       infopaydesk.style.position = 'relative';
-  //       infopaydesk.style.top = '0px';
-  //       colinfopay.style.alignSelf = 'auto'
-  //     }
-  //   }
-
-  //   // console.log(interdistance, window.innerWidth)
-
-  // }
+  }
 
   scroller: Subscription;
 
