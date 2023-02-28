@@ -903,7 +903,13 @@ input:focus {
     margin-right: 1rem !important;
 }
 
+.button-property-detail-shared {
+    height: 51px !important;
+}
 
+.icon-button-property-detail-shared {
+    font-size: 24px !important;
+}
 
 // HOME-HEADER
 .bg-home-header {
@@ -1063,14 +1069,14 @@ input:focus {
 
 // HEADER-GALLERY
 .bg-city-01 {
-    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city1.jpg);
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city1.png);
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
 }
 
 .bg-city-02 {
-    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city2.jpg);
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city2.png);
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
@@ -1084,7 +1090,7 @@ input:focus {
 }
 
 .bg-city-04 {
-    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city4.jpg);
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city4.png);
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
@@ -1093,28 +1099,28 @@ input:focus {
 // OTHER CARROUSSEL
 
 .bg-city-05 {
-    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city5.jpg);
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city5.png);
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
 }
 
 .bg-city-06 {
-    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city6.jpg);
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city6.png);
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
 }
 
 .bg-city-07 {
-    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city7.jpg);
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city7.png);
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
 }
 
 .bg-city-08 {
-    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city8.jpg);
+    background-image: url(./assets/img/gradientgallery.png), url(./assets/img/city8.png);
     background-position: center top;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
@@ -1741,19 +1747,9 @@ vg-overlay-play .vg-overlay-play {
     padding-right: 0px !important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.btn-close-announcement-detail {
+    background-color: transparent !important;
+}
 
 
 // MEDIA
@@ -1969,8 +1965,7 @@ vg-overlay-play .vg-overlay-play {
         height: var(--swiper-navigation-size);
         margin-top: calc(0px - var(--swiper-navigation-size) / 2);
         z-index: 10;
-        background: var(--greenlight) !important;
-        ;
+        background: transparent !important;
         padding: 29px;
         cursor: pointer;
         display: flex;
@@ -2341,6 +2336,19 @@ vg-overlay-play .vg-overlay-play {
     .scheduling-visit-selected {
         border: none;
         box-shadow: none;
+    }
+
+    .button-property-detail-shared {
+        height: 38px !important;
+        width: 38px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0px !important;
+    } 
+    
+    .icon-button-property-detail-shared {
+        font-size: 16px !important;
     }
 
     .btn-filter-mobile {

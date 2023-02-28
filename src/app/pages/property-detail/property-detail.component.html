@@ -51,16 +51,16 @@
             <!-- HEART, SHARE ETC...BTNS -->
             <div class="options-img d-flex align-items-center">
               <div (click)="likeHeartMain(response._id, response.liked)"
-                class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' " class="bi font-size-24 text-light"></i>
+                class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
+                <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' " class="bi icon-button-property-detail-shared text-light"></i>
               </div>
               <div (click)="btninteractionimg('share')"
-                class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bi font-size-24 text-light"></i>
+                class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
+                <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bi icon-button-property-detail-shared text-light"></i>
               </div>
               <div (click)="btninteractionimg('print')"
-                class="h-51 mx-1 mt-2 bg-transparent-white cursor-pointer heart-like border-radius-10 pt-2 pb-1 px-3">
-                <i [class]="iconprint?'bi-printer-fill':'bi-printer' " class="bi font-size-24 text-light"></i>
+                class="button-property-detail-shared mx-1 mt-2 bg-transparent-white cursor-pointer heart-like border-radius-10 pt-2 pb-1 px-3">
+                <i [class]="iconprint?'bi-printer-fill':'bi-printer' " class="bi icon-button-property-detail-shared text-light"></i>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@
               <hr class="hr" />
               <div class="row">
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
-                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
@@ -112,7 +112,7 @@
                   <h6 class="my-4 w-100 bg-whitelight" style="height:1px;"></h6>
                 </div>
                 <div class="col-12 d-flex py-4 align-items-center justify-content-between">
-                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
@@ -168,9 +168,8 @@
                 <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Detalhes do Imóvel</p>
                 <img *ngIf="!arrowpff" src="../../../assets/icon/arrow-down-blue.png" width="20"
                   style="cursor: pointer;" class="animate__animated" (click)="openarrow(24)">
-                <img *ngIf="arrowpff" src="../../../assets/icon/arrow-top-blue.png"
-                  class="animate__animated" width="18" style="cursor: pointer;"
-                  (click)="openarrow(24)">
+                <img *ngIf="arrowpff" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated" width="18"
+                  style="cursor: pointer;" (click)="openarrow(24)">
               </div>
               <table *ngIf="arrowpff" class="w-100 animate__animated">
                 <tbody>
@@ -275,9 +274,8 @@
                 <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Informações Adicionais</p>
                 <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20"
                   style="cursor: pointer;" class="animate__animated" (click)="openarrow(42)">
-                <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png"
-                  class="animate__animated" width="18" style="cursor: pointer;"
-                  (click)="openarrow(42)">
+                <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated"
+                  width="18" style="cursor: pointer;" (click)="openarrow(42)">
               </div>
               <table *ngIf="arrowinfo" class="w-100 animate__animated">
                 <tbody>
@@ -326,13 +324,13 @@
           </div>
           <!-- INFO CARDS -->
 
-          <div class="w-100 border-radius-10 mt-4 info-cards-property px-5 pt-4 pb-3  bg-white">
+          <div class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
               <img *ngIf="!arrow1" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
                 class="animate__animated" (click)="openarrow(1)">
-              <img *ngIf="arrow1" src="../../../assets/icon/arrow-top-blue.png"
-                class="animate__animated" width="18" style="cursor: pointer;" (click)="openarrow(1)">
+              <img *ngIf="arrow1" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated" width="18"
+                style="cursor: pointer;" (click)="openarrow(1)">
             </div>
             <table *ngIf="arrow1" class="w-100 animate__animated">
               <tbody>
@@ -437,7 +435,7 @@
               </tbody>
             </table>
           </div>
-          <div class="w-100 border-radius-10 mt-4 info-cards-property px-5 pt-4 pb-3  bg-white">
+          <div class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 d-flex pb-3 justify-content-between align-items-center">
               <p class="w-100 d-grid pr-1 align-items-center mb-0">
                 <span class="color-black fw-700 font-size-16 line-20">
@@ -447,21 +445,21 @@
               </p>
               <img *ngIf="!arrow2" src="../../../assets/icon/arrow-down-blue.png" width="20"
                 class="cursor-pointer animate__animated" (click)="openarrow(2)">
-              <img *ngIf="arrow2" src="../../../assets/icon/arrow-top-blue.png"
-                class="cursor-pointer animate__animated" width="18" (click)="openarrow(2)">
+              <img *ngIf="arrow2" src="../../../assets/icon/arrow-top-blue.png" class="cursor-pointer animate__animated"
+                width="18" (click)="openarrow(2)">
             </div>
             <iframe *ngIf="arrow2"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7205.665528434405!2d-49.26210139554594!3d-25.443854055282333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1669903101993!5m2!1spt-BR!2sbr"
-              class="w-100 h-600 animate__animated" style="border:0;" allowfullscreen=""
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              class="w-100 h-600 animate__animated" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-          <div id="previewplant" class="w-100 border-radius-10 info-cards-property mt-4 px-5 pt-4 pb-3  bg-white">
+          <div id="previewplant" class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Planta baixa</p>
               <img *ngIf="!arrow3" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
                 class="animate__animated" (click)="openarrow(3)">
-              <img *ngIf="arrow3" src="../../../assets/icon/arrow-top-blue.png"
-                class="animate__animated" width="18" style="cursor: pointer;" (click)="openarrow(3)">
+              <img *ngIf="arrow3" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated" width="18"
+                style="cursor: pointer;" (click)="openarrow(3)">
             </div>
             <div *ngIf="arrow3" class="w-100 animate__animated">
               <div class="w-100 my-4 d-flex block-important
@@ -504,7 +502,7 @@
               </p>
             </div>
           </div>
-          <div class="w-100 mt-4 border-radius-10 info-cards-property bg-white">
+          <div class="w-100 mt-4 border-radius-10 bg-white">
             <div class="w-100 px-5 space-segment pt-5 mb-4
                     d-flex align-items-center
                     border-bottom-gray">
@@ -564,7 +562,7 @@
               <hr class="hr" />
               <div class="row">
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
-                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
@@ -591,7 +589,7 @@
                   <h6 class="my-4 w-100 bg-graylight" style="height: 1px;"></h6>
                 </div>
                 <div class="col-12 d-flex py-4 align-items-center justify-content-between">
-                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
@@ -640,9 +638,9 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
         <div class="anima-body h-100 d-flex justify-content-center align-items-center">
@@ -663,14 +661,15 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" (click)="closePause(videomedia)" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" (click)="closePause(videomedia)" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
         <div class="anima-body h-100 d-flex justify-content-center align-items-center">
           <div class="w-100 max-w-1918 position-relative pt-4 pb-5">
-            <div class="bg-img-preview video-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
+            <div
+              class="bg-img-preview video-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
               <vg-player class="h-fit video-play max-w-1227 w-100">
                 <vg-overlay-play></vg-overlay-play>
                 <vg-buffering></vg-buffering>
@@ -686,8 +685,8 @@
                   <vg-volume></vg-volume>
                   <vg-fullscreen></vg-fullscreen>
                 </vg-controls>
-                <video [vgMedia]="$any(videomedia)" poster="../../../assets/img/preview1.png" #videomedia id="singleVideo"
-                  preload="auto" crossorigin>
+                <video [vgMedia]="$any(videomedia)" poster="../../../assets/img/preview1.png" #videomedia
+                  id="singleVideo" preload="auto" crossorigin>
                   <source src="../../../assets/vid/test.mp4" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
                 </video>
@@ -700,12 +699,13 @@
     </div>
   </div>
   <!-- Modal VIEW PLANT -->
-  <div class="modal px-0 fade" id="viewplant" tabindex="-1" role="dialog" aria-labelledby="viewplantTitle"aria-hidden="true">
+  <div class="modal px-0 fade" id="viewplant" tabindex="-1" role="dialog" aria-labelledby="viewplantTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
         <div class="w-100 d-flex align-items-center justify-content-center h-100">
@@ -714,21 +714,23 @@
       </div>
     </div>
   </div>
-   <!-- Modal PLAY VIDEO360 -->
-   <div class="modal px-0 fade" id="view360video" tabindex="-1" role="dialog" aria-labelledby="view360videoTitle"aria-hidden="true">
+  <!-- Modal PLAY VIDEO360 -->
+  <div class="modal px-0 fade" id="view360video" tabindex="-1" role="dialog" aria-labelledby="view360videoTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
-    
+
         <div class="w-100 d-grid align-items-center justify-content-center h-100">
-            <div class="d-block h-auto align-items-center justify-content-center w-100">
-              <p class="fw-500 py-3 w-100 font-size-20 text-center line-26 text-light">Este anúncio ainda não <br/> possui Visita em 360°</p>
-          <img src="../../../assets/img/360video.svg" class="h-fit img-notvideo-360 max-w-1227 w-100" />
-        </div>
+          <div class="d-block h-auto align-items-center justify-content-center w-100">
+            <p class="fw-500 py-3 w-100 font-size-20 text-center line-26 text-light">Este anúncio ainda não <br />
+              possui Visita em 360°</p>
+            <img src="../../../assets/img/360video.svg" class="h-fit img-notvideo-360 max-w-1227 w-100" />
+          </div>
         </div>
       </div>
     </div>
