@@ -124,7 +124,6 @@ export class ProposalComponent implements OnInit {
       announcementId: value
     }
 
-
     if (this.selectedProposal.announcement.liked === true) {
       this.announcementService.registerUnlike(request).subscribe(
         success => {
@@ -134,7 +133,7 @@ export class ProposalComponent implements OnInit {
           console.error(error)
         }
       )
-    } else if (this.selectedProposal.announcement.liked === false) {
+    } else if (this.selectedProposal.announcement.liked === false || this.selectedProposal.announcement.liked === undefined) {
       this.announcementService.registerLike(request).subscribe(
         success => {
           this.selectedProposal.announcement.liked = true
