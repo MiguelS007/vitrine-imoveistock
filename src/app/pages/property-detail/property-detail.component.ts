@@ -163,10 +163,6 @@ export class PropertyDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.scroller = fromEvent(window, 'scroll')
-      .pipe(debounceTime(100))
-      .subscribe(() => this.dealWithScroll(window.scrollY));
-
     this.ngxSpinnerService.show()
     this.onlyimg = this.datamokservice.onlypreview;
     this.previewimg = this.datamokservice.imagespreview;
@@ -194,16 +190,6 @@ export class PropertyDetailComponent implements OnInit {
           }
         }
       )
-    }
-  }
-
-  dealWithScroll(y: number) {
-    if (y >= 900) {
-      this.infopay = false;
-      this.infopaymobile = true;
-    } else {
-      this.infopay = true;
-      this.infopaymobile = false;
     }
   }
 
