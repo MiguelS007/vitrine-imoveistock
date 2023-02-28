@@ -140,7 +140,7 @@ export class SchedulingComponent implements OnInit {
           console.error(error)
         }
       )
-    } else if (this.selectedScheduling.announcement.liked === false) {
+    } else if (this.selectedScheduling.announcement.liked === false || this.selectedScheduling.announcement.liked === undefined) {
       this.announcementService.registerLike(request).subscribe(
         success => {
           this.selectedScheduling.announcement.liked = true
