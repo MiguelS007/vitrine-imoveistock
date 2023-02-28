@@ -18,14 +18,19 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
   styleUrls: ['./property-detail.component.scss']
 })
 export class PropertyDetailComponent implements OnInit {
-  infopay = true;
   infopaymobile = false;
-  @HostListener('window:scroll')
+
+
+  @HostListener('window:scroll', [])
   checkScroll() {
     const scrollPosition = window.pageYOffset;
     const widthWindow = window.innerWidth;
     let interdistance = Math.trunc(scrollPosition);
-
+    if (interdistance > 950) {
+      this.infopaymobile = true;
+    } else {
+      this.infopaymobile = false;
+    }
     // STATIC-INFO-PAY-IN-SCROLL-PAGE
     const infopaydesk = document.querySelector(
       '#infopaydesk'
@@ -192,7 +197,6 @@ export class PropertyDetailComponent implements OnInit {
       )
     }
   }
-
 
 
   btninteractionimg(value: string) {
