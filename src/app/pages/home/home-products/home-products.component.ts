@@ -83,16 +83,13 @@ export class HomeProductsComponent implements OnInit {
 
 
   likeHeart(value, condition) {
-
     let request = {
       announcementId: value
     }
-
     if (localStorage.getItem('user') === null) {
       this.modalService.open(ModalLoginComponent, { centered: true });
       return
     }
-
     if (this.listLikes.length === 0) {
       this.announcementService.registerLike(request).subscribe(
         success => {
@@ -123,11 +120,7 @@ export class HomeProductsComponent implements OnInit {
           }
         )
       }
-
     }
-
-
-
   }
 
 

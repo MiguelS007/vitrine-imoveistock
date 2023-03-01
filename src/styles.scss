@@ -1799,11 +1799,11 @@ vg-overlay-play .vg-overlay-play {
     }
     .icon-cards{
         padding: 20% 0;
-        width: 100px;
+        width: 107px;
     }
     .icon-cards-1{
         padding: 16% 0;
-        width: 100px;
+        width: 107px;
     }
 }
 
@@ -2283,7 +2283,7 @@ vg-overlay-play .vg-overlay-play {
     // HEADER
     .row-of-home {
         position: relative;
-        top: 20rem;
+        top: 25rem;
         z-index: 4;
     }
 
@@ -2296,8 +2296,8 @@ vg-overlay-play .vg-overlay-play {
         background-position: center center;
         background-repeat: no-repeat no-repeat;
         background-size: cover contain;
-        width: 100% !important;
-        height: 800px;
+        height: 500px !important;
+    top: -49px !important;
         max-height: 100%;
 
     }
@@ -2428,9 +2428,10 @@ vg-overlay-play .vg-overlay-play {
         height: 219px;
     }
 
-
-    // HOME-HEADER
-
+    // HEADER
+    .open-doors-title {
+        font-size: 31px !important;
+    }
     .d-none-mobile {
         display: none !important;
     }
@@ -2632,10 +2633,7 @@ vg-overlay-play .vg-overlay-play {
         font-size: 28px;
     }
 
-    // HEADER
-    .open-doors-title {
-        font-size: 31px !important;
-    }
+
 
     .form-header {
         margin: 0% !important;
