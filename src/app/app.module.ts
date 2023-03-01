@@ -52,7 +52,7 @@ registerLocaleData(ptBr);
 
 const cookieConfig:NgcCookieConsentConfig = {
   cookie: {
-    domain: 'imoveistock.com.br'
+    domain: window.location.hostname
   },
   palette: {
     popup: {
