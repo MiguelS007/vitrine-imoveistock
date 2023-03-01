@@ -30,6 +30,7 @@ export class ModalCodeComponent implements OnInit {
   codigo2: string;
   codigo3: string;
   codigo4: string;
+  resendcodetext = 'Código enviado';
 
   counterdown: any;
   notsendcodemsg = false;
@@ -65,6 +66,7 @@ export class ModalCodeComponent implements OnInit {
 
 
   timer(minute, value) {
+    
     this.codereceivedSms = 'Reenviar código via SMS';
     this.codereceivedEmail = 'Reenviar código via E-mail';
     this.resendcode = false;
@@ -84,7 +86,7 @@ export class ModalCodeComponent implements OnInit {
       if (seconds == 0) {
         this.resendcode = true;
         this.msgkeepcalm = false;
-        clearInterval(timer);
+        clearInterval(timer);this.resendcodetext = 'Código reenviado'
       }
     }, 1000);
 

@@ -28,7 +28,7 @@ export class AppComponent {
     
     this.popupOpenSubscription = this.ngCookieService.popupOpen$.subscribe(
       () => {
-        this.ngCookieService.init(this.ngCookieService.getConfig())
+        this.ngCookieService.init(this.ngCookieService.getConfig());
       });
 
     this.popupCloseSubscription = this.ngCookieService.popupClose$.subscribe(

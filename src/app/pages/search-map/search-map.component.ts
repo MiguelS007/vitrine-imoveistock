@@ -52,11 +52,11 @@ export class SearchMapComponent implements OnInit {
   selectTypeAd = 'Selecione';
   selectBathrooms = 'Banheiros';
   selectBadRooms = 'Dormitórios';
-  selectCity: string = 'Local';
+  stateSelected = 'Escolha o Estado'
+  citySelected = 'Selecione uma ciadade'
   selectVacancies = 'Vagas';
   getSelectedCity: string;
   valuePrices: 0;
-  stateSelected = 'Escolha o Estado'
   TypeProperty = 'Tipo de Imóvel';
   listOfPrices: any = [];
   keyword = 'name'
@@ -81,7 +81,7 @@ export class SearchMapComponent implements OnInit {
       propertyType: [''],
       typeproperty: [''],
       typePropertyState: [''],
-      localproperty: [''],
+      typePropertyCity: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
       typeBathRoom: [''],
@@ -107,13 +107,14 @@ export class SearchMapComponent implements OnInit {
       // console.log(this.listOfPrices);
       if (this.filterResult.length === 0) {
         this.messageNotSearch = true;
+      } else {
+        this.messageNotSearch = false;
       }
     } else {
       this.filterResult = [];
     }
     let filtro = localStorage.getItem('filtro');
     this.filtroSelected = JSON.parse(filtro);
-
     let typeAdTranslate: string = ''
 
     if (this.filtroSelected?.typeAd === 'rent') {
@@ -155,11 +156,12 @@ export class SearchMapComponent implements OnInit {
         this.filtroSelected?.propertylajecorporativa ||
         this.filtroSelected?.propertyprediointeiro
     }
+    console.log(this.filtroSelected)
     if (filtro !== null) {
       this.form.patchValue({
         typeMaxPrice: this.filtroResultDisplay.untilValueSale,
-        localproperty: this.filtroResultDisplay.city,
-        typeOfProperty: this.filtroSelected?.typeOfProperty
+        typeOfProperty: this.filtroSelected?.typeOfProperty,
+        typePropertyCity: this.filtroResultDisplay?.city,
       })
       this.searchByTypeAd(this.filtroSelected?.typeAd);
       this.filterTypeProperty(this.filtroSelected?.goal || 'Tipo do Imóvel');
@@ -217,11 +219,9 @@ export class SearchMapComponent implements OnInit {
           removeRepets.push(data[i].cityAddress)
         }
         teste = new Set(removeRepets)
-        // this.listAllCity = teste;
         this.propertyproducts = data
         this.response = data;
         this.ngxSpinnerService.hide();
-        // console.log(this.listAllCity);
       }
     })
   }
@@ -229,6 +229,11 @@ export class SearchMapComponent implements OnInit {
   selectEvent(item) {
     this.getSelectedCity = item.name;
   }
+  onChangeSearch(search: string) {
+  }
+  onFocused(e) {
+  }
+
 
   announcementSelected(value) {
     let teste: any = localStorage.getItem('recentlySeen');
@@ -366,11 +371,26 @@ export class SearchMapComponent implements OnInit {
   }
 
   filtrar() {
+    // this.listForFilterOnClick();
+    // let listAll:  AnnouncementGetResponseDto[] = [];
+    // let listLikesFilter: AnnouncementGetResponseDto[] = [];
+    if (this.stateSelected === 'Escolha o Estado') this.form.controls['typePropertyState'].setValue('')
+    if (this.stateSelected === 'Acre') { this.form.controls['typePropertyState'].setValue('AC') } else if (this.stateSelected === 'Alagoas') { this.form.controls['typePropertyState'].setValue('AL') } else if (this.stateSelected === 'Amapá') { this.form.controls['typePropertyState'].setValue('AP') } else if (this.stateSelected === 'Amazonas') { this.form.controls['typePropertyState'].setValue('AM') } else if (this.stateSelected === 'Bahia') { this.form.controls['typePropertyState'].setValue('BA') } else if (this.stateSelected === 'Ceara') { this.form.controls['typePropertyState'].setValue('CE') } else if (this.stateSelected === 'Distrito Federal') { this.form.controls['typePropertyState'].setValue('DF') } else if (this.stateSelected === 'Espírito Santo') { this.form.controls['typePropertyState'].setValue('ES') } else if (this.stateSelected === 'Goiás') { this.form.controls['typePropertyState'].setValue('GO') } else if (this.stateSelected === 'Maranhão') { this.form.controls['typePropertyState'].setValue('MA') } else if (this.stateSelected === 'Mato Grosso') { this.form.controls['typePropertyState'].setValue('MT') } else if (this.stateSelected === 'Mato Grosso do Sul') { this.form.controls['typePropertyState'].setValue('MS') } else if (this.stateSelected === 'Minas Gerais') { this.form.controls['typePropertyState'].setValue('MG') } else if (this.stateSelected === 'Pará') { this.form.controls['typePropertyState'].setValue('PA') } else if (this.stateSelected === 'Paraíba') { this.form.controls['typePropertyState'].setValue('PB') } else if (this.stateSelected === 'Paraná') { this.form.controls['typePropertyState'].setValue('PR') } else if (this.stateSelected === 'Pernambuco') { this.form.controls['typePropertyState'].setValue('PE') } else if (this.stateSelected === 'Piauí') { this.form.controls['typePropertyState'].setValue('PI') } else if (this.stateSelected === 'Rio de Janeiro') { this.form.controls['typePropertyState'].setValue('RJ') } else if (this.stateSelected === 'Rio Grande do Norte') { this.form.controls['typePropertyState'].setValue('RN') } else if (this.stateSelected === 'Rio Grande do Sul') { this.form.controls['typePropertyState'].setValue('RS') } else if (this.stateSelected === 'Rondônia') { this.form.controls['typePropertyState'].setValue('RO') } else if (this.stateSelected === 'Roraima') { this.form.controls['typePropertyState'].setValue('RR') } else if (this.stateSelected === 'Santa Catarina') { this.form.controls['typePropertyState'].setValue('SC') } else if (this.stateSelected === 'São Paulo') { this.form.controls['typePropertyState'].setValue('SP') } else if (this.stateSelected === 'Sergipe') { this.form.controls['typePropertyState'].setValue('SE') } else if (this.stateSelected === 'Tocantins') { this.form.controls['typePropertyState'].setValue('TO') }
+
+
+    let filter: any = {
+      state: this.form.controls['typePropertyState'].value,
+      city: this.getSelectedCity,
+      goal: this.TypeProperty, //residencial , comercial
+      styleProperty: this.removerAcento(this.stylePropertyTitle), // EDIFICIL, TERRENO
+    };
+
+
     this.ngxSpinnerService.show();
     this.announcementService.listAnnouncement().subscribe(
       success => {
         this.listAllForFilter = success;
-        console.log(this.listAllForFilter)
+        // console.log(this.listAllForFilter)
         if (localStorage.getItem('user') !== null) {
           this.announcementService.listLikes().subscribe(
             success => {
@@ -385,12 +405,11 @@ export class SearchMapComponent implements OnInit {
             }
           )
         }
-
         // 1° filtro
         let filter1: AnnouncementGetResponseDto[] = [];
         if (this.stylePropertyTitle !== 'O que está buscando') {
           console.log('filtro um é', this.stylePropertyTitle)
-          filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === this.removerAcento(this.stylePropertyTitle))
+          filter1 = this.listAllForFilter.filter(elemento => elemento.propertyCharacteristics === filter?.styleProperty)
         } else {
           filter1 = this.listAllForFilter;
         }
@@ -413,39 +432,54 @@ export class SearchMapComponent implements OnInit {
 
         // 2° filtro
         let filter3: AnnouncementGetResponseDto[] = [];
-        if (this.selectCity !== 'Local') {
-          filter3 = filter2.filter(elemento => elemento.cityAddress === this.getSelectedCity)
-          console.log('cidade selecionada', this.getSelectedCity)
+        if (this.citySelected !== 'Selecione uma ciadade') {
+          filter3 = filter2.filter(elemento => elemento.cityAddress === filter?.city)
+          console.log('cidade selecionada', filter?.city)
           if (filter3.length === 0) {
-            console.log(this.getSelectedCity, 'filtro 3 zerado')
+            console.log(filter?.city, 'filtro 3 zerado')
           }
         } else {
           filter3 = filter2;
+        }
+        // 2° filtro
+        let filterestado: AnnouncementGetResponseDto[] = [];
+        if (this.stateSelected !== 'Escolha o Estado') {
+          filterestado = filter3.filter(elemento => elemento.ufAddress === filter.state)
+          console.log('estados selecionado', filter.state)
+          if (filterestado.length === 0) {
+            console.log(filter.state, 'filtro estado zerado')
+          }
+        } else {
+          filterestado = filter3;
         }
 
         // 3-4° filtro
         let filter4: AnnouncementGetResponseDto[] = [];
         if (this.TypeProperty !== 'Tipo do Imóvel') {
 
-          filter4 = filter3.filter(elemento => elemento.goal === this.TypeProperty)
+          filter4 = filterestado.filter(elemento => elemento.goal === filter.goal)
           if (filter4.length === 0) {
             console.log(filter4,)
             console.log('caiu no filtro 4, zerado')
           }
         } else {
-          filter4 = filter3
+          filter4 = filterestado
         }
 
         // 4-5° filtro
         let filter5: AnnouncementGetResponseDto[] = [];
         let valueMin: number = 0;
         let maxValue: number = 0;
+
         if (this.form.controls['typeMinPrice'].value !== '') {
           valueMin = this.form.controls['typeMinPrice'].value;
         }
+
         if (this.form.controls['typeMaxPrice'].value !== '') {
           maxValue = this.form.controls['typeMaxPrice'].value;
         }
+
+
         if (valueMin !== 0 && maxValue !== 0) {
           if (this.selectTypeAd === 'Comprar') {
             filter5 = filter4.filter(elemento => parseInt(elemento.saleValue) <= maxValue && parseInt(elemento.saleValue) >= valueMin)
@@ -522,13 +556,14 @@ export class SearchMapComponent implements OnInit {
         }
 
         this.filterResult = filter10;
-        console.log(this.filterResult)
 
-        if (filter10.length === 0) {
+
+        if (this.filterResult.length === 0) {
           this.messageNotSearch = true;
           this.filterResult = this.listAllForFilter;
+        } else {
+          this.messageNotSearch = false;
         }
-
         this.filtroResultDisplay = {
           state: '',
           city: '',
@@ -544,6 +579,7 @@ export class SearchMapComponent implements OnInit {
         this.ngxSpinnerService.hide();
       },
     );
+
   }
 
   searchByStyleProperty(value) {
@@ -567,11 +603,10 @@ export class SearchMapComponent implements OnInit {
       if (valor === estados.estados[i].nome) {
         for (let x = 0; x < estados.estados[i].cidades.length; x++) {
           this.listAllCity.push({ name: estados.estados[i].cidades[x] })
-          this.stateSelected = estados.estados[i].sigla
+          this.stateSelected = estados.estados[i].nome
         }
       }
     }
-    // console.log(this.listAllCity, 'lista');
   }
   sortPriceList(value: string) {
     this.listOfPrices = this.filterResult;

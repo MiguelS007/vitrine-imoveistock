@@ -283,108 +283,26 @@
               <img *ngIf="arrow1" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated" width="18"
                 style="cursor: pointer;" (click)="openarrow(1)">
             </div>
-            <table *ngIf="arrow1" class="w-100 animate__animated">
-              <tbody>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Ar
-                      Condicionado</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Sauna</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Tv
-                      a cabo</span>
-                  </td>
-                </tr>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Churrasqueira</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Área
-                      Comum</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Mobiliada</span>
-                  </td>
-                </tr>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Academia</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Piscina</span>
-                  </td>
-                </tr>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Lavanderia</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Elevador</span>
-                  </td>
-                </tr>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Banheiro
-                      Externo</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Wi-fi</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div  *ngIf="arrow1" class="row">
+              <div *ngFor="let item of dadosmockados | slice:0:6" class="col-sm-6">
+                <div class="row">
+                  <div  class="col-12 my-2">
+                    <p class="align-items-center fw-400 mb-0  font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp;{{item.caracteristica}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div *ngFor="let item of dadosmockados | slice:6:12" class="col-sm-6">
+                <div class="row">
+                  <div  class="col-12 my-2">
+                    <p class="align-items-center fw-400 mb-0  font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp;{{item.caracteristica}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 d-flex pb-3 justify-content-between align-items-center">
