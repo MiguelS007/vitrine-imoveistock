@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { AnnouncementService } from '../../../service/announcement.service';
-import  estados  from '../../../../assets/json/estados-cidades.json';
+import estados from '../../../../assets/json/estados-cidades.json';
 
 @Component({
   selector: 'app-home-header',
@@ -27,117 +27,7 @@ export class HomeHeaderComponent implements OnInit {
   stateSelected = 'Primeiro escolha um estado'
   citySelected = 'Escolha uma cidade'
   cities: any[];
-  states: any[] = [
-    {
-      uf: 'AC',
-      ufLirycs: 'Acre'
-    },
-    {
-      uf: 'AL',
-      ufLirycs: 'Alagoas'
-    },
-    {
-      uf: 'AP',
-      ufLirycs: 'Amapá'
-    },
-    {
-      uf: 'AM',
-      ufLirycs: 'Amazonas'
-    },
-    {
-      uf: 'BA',
-      ufLirycs: 'Bahia'
-    },
-    {
-      uf: 'CE',
-      ufLirycs: 'Ceara'
-    },
-    {
-      uf: 'DF',
-      ufLirycs: 'Distrito Federal'
-    },
-    {
-      uf: 'ES',
-      ufLirycs: 'Espírito Santo	'
-    },
-    {
-      uf: 'GO',
-      ufLirycs: 'Goiás'
-    },
-    {
-      uf: 'MA',
-      ufLirycs: 'Maranhão'
-    },
-    {
-      uf: 'MT',
-      ufLirycs: 'Mato Grosso'
-    },
-    {
-      uf: 'MS',
-      ufLirycs: 'Mato Grosso do Sul'
-    },
-    {
-      uf: 'MG',
-      ufLirycs: 'Minas Gerais'
-    },
-    {
-      uf: 'PA',
-      ufLirycs: 'Pará'
-    },
-    {
-      uf: 'PB',
-      ufLirycs: 'Paraíba'
-    },
-    {
-      uf: 'PR',
-      ufLirycs: 'Paraná'
-    },
-    {
-      uf: 'PE',
-      ufLirycs: 'Pernambuco'
-    },
-    {
-      uf: 'PI',
-      ufLirycs: 'Piauí'
-    },
-    {
-      uf: 'RJ',
-      ufLirycs: 'Rio de Janeiro	'
-    },
-    {
-      uf: 'RN',
-      ufLirycs: 'Rio Grande do Norte	'
-    },
-    {
-      uf: 'RS',
-      ufLirycs: 'Rio Grande do Sul	'
-    },
-    {
-      uf: 'RO',
-      ufLirycs: 'Rondônia'
-    },
-    {
-      uf: 'RR',
-      ufLirycs: 'Roraima'
-    },
-       {
-      uf: 'SC',
-      ufLirycs: 'Santa Catarina	'
-    },
-    {
-      uf: 'SP',
-      ufLirycs: 'São Paulo	'
-    },
-       {
-      uf: 'SE',
-      ufLirycs: 'Sergipe'
-    },
-       {
-      uf: 'TO',
-      ufLirycs: 'Tocantins	'
-    },
-    
-  ];
+
   valueUntilSaleArray: any[] = [100000, 200000, 300000, 400000, 500000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000, 10000000, 20000000,];
   valueUntilRentArray: any[] = [100, 200, 300, 400, 500, 800, 1000, 2000, 3000, 4000, 5000, 10000, 20000];
   badroomsArray: any[] = [1, 2, 3, 4, 5];
@@ -246,6 +136,7 @@ export class HomeHeaderComponent implements OnInit {
   keyword = 'name'
   getSelectedCity: string;
   estados: any;
+  extensiveState: any;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -265,13 +156,6 @@ export class HomeHeaderComponent implements OnInit {
     });
     this.estados = estados;
   }
-
-
-  ngAfterViewInit(): void {
-    
-  }
-
-
   ngOnInit() {
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro')
@@ -286,39 +170,16 @@ export class HomeHeaderComponent implements OnInit {
 
   selectEvent(item) {
     this.getSelectedCity = item.name;
-    // do something with selected item
   }
-
   onChangeSearch(search: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
   }
-
   onFocused(e) {
-    // do something
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   typePropertyCharacteristics(typeOf: string, item: string, value: string) {
-    this.checkedAll = false;
+    // this.checkedAll = false;
     this.goal = typeOf;
     this.stylePropertys = item;
-
-   
+    console.log(value);
     // residencial
     if (value === 'apartamento') {
       this.checkedAllResidencial = false;
@@ -384,82 +245,66 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
     }
     if (value === 'todosresidencial') {
-        this.AllResidencial = false;
-        this.AllResidencial2 = true;
-        this.checkedAllResidencial = false;
-        this.checkedAllResidencial2 = true;
+      this.AllResidencial = false;
+      this.AllResidencial2 = true;
+      this.checkedAllResidencial = false;
+      this.checkedAllResidencial2 = true;
 
-        this.checkedapartamento = true;
-        this.checkedapartamento ? this.propertyapartamento = 'apartamento' : this.propertyapartamento = '';
-        this.checkedstudio = true;
-        this.checkedstudio ? this.propertystudio = 'studio' : this.propertystudio = '';
-        this.checkedkitnet = true;
-        this.checkedkitnet ? this.propertykitnet = 'kitnet' : this.propertykitnet = '';
-        this.checkedcasa = true;
-        this.checkedcasa ? this.propertycasa = 'casa' : this.propertycasa = '';
-        this.checkedcobertura = true;
-        this.checkedcobertura ? this.propertycobertura = 'cobertura' : this.propertycobertura = '';
-        this.checkedcasacondominio = true;
-        this.checkedcasacondominio ? this.propertycasacondominio = 'casacondominio' : this.propertycasacondominio = '';
-        this.checkedcasadevila = true;
-        this.checkedcasadevila ? this.propertycasadevila = 'casadevila' : this.propertycasadevila = '';
-        this.checkedloft = true;
-        this.checkedloft ? this.propertyloft = 'loft' : this.propertyloft = '';
-        this.checkedflat = true;
-        this.checkedflat ? this.propertyflat = 'flat' : this.propertyflat = '';
-        this.checkedterreno = true;
-        this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
-        this.checkedchacara = true;
-        this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
+      this.checkedapartamento = true;
+      this.checkedapartamento ? this.propertyapartamento = 'apartamento' : this.propertyapartamento = '';
+      this.checkedstudio = true;
+      this.checkedstudio ? this.propertystudio = 'studio' : this.propertystudio = '';
+      this.checkedkitnet = true;
+      this.checkedkitnet ? this.propertykitnet = 'kitnet' : this.propertykitnet = '';
+      this.checkedcasa = true;
+      this.checkedcasa ? this.propertycasa = 'casa' : this.propertycasa = '';
+      this.checkedcobertura = true;
+      this.checkedcobertura ? this.propertycobertura = 'cobertura' : this.propertycobertura = '';
+      this.checkedcasacondominio = true;
+      this.checkedcasacondominio ? this.propertycasacondominio = 'casacondominio' : this.propertycasacondominio = '';
+      this.checkedcasadevila = true;
+      this.checkedcasadevila ? this.propertycasadevila = 'casadevila' : this.propertycasadevila = '';
+      this.checkedloft = true;
+      this.checkedloft ? this.propertyloft = 'loft' : this.propertyloft = '';
+      this.checkedflat = true;
+      this.checkedflat ? this.propertyflat = 'flat' : this.propertyflat = '';
+      this.checkedterreno = true;
+      this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
+      this.checkedchacara = true;
+      this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
 
     }
     if (value === 'todosresidencial2') {
-        this.AllResidencial = true;
-        this.AllResidencial2 = false;
-        this.checkedAllResidencial = false;
-        this.checkedAllResidencial2 = false;
+      this.AllResidencial = true;
+      this.AllResidencial2 = false;
+      this.checkedAllResidencial = false;
+      this.checkedAllResidencial2 = false;
 
 
-        this.checkedapartamento = !this.checkedapartamento;
-        this.checkedapartamento ? this.propertyapartamento = 'apartamento' : this.propertyapartamento = '';
-        this.checkedstudio = !this.checkedstudio;
-        this.checkedstudio ? this.propertystudio = 'studio' : this.propertystudio = '';
-        this.checkedkitnet = !this.checkedkitnet;
-        this.checkedkitnet ? this.propertykitnet = 'kitnet' : this.propertykitnet = '';
-        this.checkedcobertura = !this.checkedcobertura;
-        this.checkedcobertura ? this.propertycobertura = 'cobertura' : this.propertycobertura = '';
-        this.checkedcasa = !this.checkedcasa;
-        this.checkedcasa ? this.propertycasa = 'casa' : this.propertycasa = '';
-        this.checkedcasacondominio = !this.checkedcasacondominio;
-        this.checkedcasacondominio ? this.propertycasacondominio = 'casacondominio' : this.propertycasacondominio = '';
-        this.checkedcasadevila = !this.checkedcasadevila;
-        this.checkedcasadevila ? this.propertycasadevila = 'casadevila' : this.propertycasadevila = '';
-        this.checkedloft = !this.checkedloft;
-        this.checkedloft ? this.propertyloft = 'loft' : this.propertyloft = '';
-        this.checkedflat = !this.checkedflat;
-        this.checkedflat ? this.propertyflat = 'flat' : this.propertyflat = '';
-        this.checkedterreno = !this.checkedterreno;
-        this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
-        this.checkedchacara = !this.checkedchacara;
-        this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
+      this.checkedapartamento = !this.checkedapartamento;
+      this.checkedapartamento ? this.propertyapartamento = 'apartamento' : this.propertyapartamento = '';
+      this.checkedstudio = !this.checkedstudio;
+      this.checkedstudio ? this.propertystudio = 'studio' : this.propertystudio = '';
+      this.checkedkitnet = !this.checkedkitnet;
+      this.checkedkitnet ? this.propertykitnet = 'kitnet' : this.propertykitnet = '';
+      this.checkedcobertura = !this.checkedcobertura;
+      this.checkedcobertura ? this.propertycobertura = 'cobertura' : this.propertycobertura = '';
+      this.checkedcasa = !this.checkedcasa;
+      this.checkedcasa ? this.propertycasa = 'casa' : this.propertycasa = '';
+      this.checkedcasacondominio = !this.checkedcasacondominio;
+      this.checkedcasacondominio ? this.propertycasacondominio = 'casacondominio' : this.propertycasacondominio = '';
+      this.checkedcasadevila = !this.checkedcasadevila;
+      this.checkedcasadevila ? this.propertycasadevila = 'casadevila' : this.propertycasadevila = '';
+      this.checkedloft = !this.checkedloft;
+      this.checkedloft ? this.propertyloft = 'loft' : this.propertyloft = '';
+      this.checkedflat = !this.checkedflat;
+      this.checkedflat ? this.propertyflat = 'flat' : this.propertyflat = '';
+      this.checkedterreno = !this.checkedterreno;
+      this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
+      this.checkedchacara = !this.checkedchacara;
+      this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
 
     }
-
-    // if(value){
-    //   if(this.checkedAllResidencial2 === false && this.checkedAllResidencial === true){
-    //     this.checkedapartamento = false;
-    //     this.checkedstudio = false;
-    //     this.checkedkitnet = false;
-    //     this.checkedcasa = false;
-    //     this.checkedcobertura = false;
-    //     this.checkedcasacondominio = false;
-    //     this.checkedcasadevila = false;
-    //     this.checkedloft = false;
-    //     this.checkedflat = false;
-    //     this.checkedterreno = false;
-    //     this.checkedchacara = false;
-    //   }
-    // }
 
     // Comercial
     if (value === 'loja') {
@@ -600,12 +445,9 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
     }
   }
-
-
-
   confirm() {
-
     if (this.stateSelected === 'Primeiro escolha um estado') this.form.controls['typePropertyState'].setValue('')
+    if (this.stateSelected === 'Acre') { this.form.controls['typePropertyState'].setValue('AC') } else if (this.stateSelected === 'Alagoas') { this.form.controls['typePropertyState'].setValue('AL') } else if (this.stateSelected === 'Amapá') { this.form.controls['typePropertyState'].setValue('AP') } else if (this.stateSelected === 'Amazonas') { this.form.controls['typePropertyState'].setValue('AM') } else if (this.stateSelected === 'Bahia') { this.form.controls['typePropertyState'].setValue('BA') } else if (this.stateSelected === 'Ceara') { this.form.controls['typePropertyState'].setValue('CE') } else if (this.stateSelected === 'Distrito Federal') { this.form.controls['typePropertyState'].setValue('DF') } else if (this.stateSelected === 'Espírito Santo') { this.form.controls['typePropertyState'].setValue('ES') } else if (this.stateSelected === 'Goiás') { this.form.controls['typePropertyState'].setValue('GO') } else if (this.stateSelected === 'Maranhão') { this.form.controls['typePropertyState'].setValue('MA') } else if (this.stateSelected === 'Mato Grosso') { this.form.controls['typePropertyState'].setValue('MT') } else if (this.stateSelected === 'Mato Grosso do Sul') { this.form.controls['typePropertyState'].setValue('MS') } else if (this.stateSelected === 'Minas Gerais') { this.form.controls['typePropertyState'].setValue('MG') } else if (this.stateSelected === 'Pará') { this.form.controls['typePropertyState'].setValue('PA') } else if (this.stateSelected === 'Paraíba') { this.form.controls['typePropertyState'].setValue('PB') } else if (this.stateSelected === 'Paraná') { this.form.controls['typePropertyState'].setValue('PR') } else if (this.stateSelected === 'Pernambuco') { this.form.controls['typePropertyState'].setValue('PE') } else if (this.stateSelected === 'Piauí') { this.form.controls['typePropertyState'].setValue('PI') } else if (this.stateSelected === 'Rio de Janeiro') { this.form.controls['typePropertyState'].setValue('RJ') } else if (this.stateSelected === 'Rio Grande do Norte') { this.form.controls['typePropertyState'].setValue('RN') } else if (this.stateSelected === 'Rio Grande do Sul') { this.form.controls['typePropertyState'].setValue('RS') } else if (this.stateSelected === 'Rondônia') { this.form.controls['typePropertyState'].setValue('RO') } else if (this.stateSelected === 'Roraima') { this.form.controls['typePropertyState'].setValue('RR') } else if (this.stateSelected === 'Santa Catarina') { this.form.controls['typePropertyState'].setValue('SC') } else if (this.stateSelected === 'São Paulo') { this.form.controls['typePropertyState'].setValue('SP') } else if (this.stateSelected === 'Sergipe') { this.form.controls['typePropertyState'].setValue('SE') } else if (this.stateSelected === 'Tocantins') { this.form.controls['typePropertyState'].setValue('TO') }
     let filter: any = {
       typeAd: this.typeAd,
       state: this.form.controls['typePropertyState'].value,
@@ -652,7 +494,8 @@ export class HomeHeaderComponent implements OnInit {
           announcementTypeAdGroup.push(this.response[i]);
         }
       }
-    } else {
+    }
+    else {
       announcementTypeAdGroup = this.response;
     }
     // ---------------------------
@@ -811,7 +654,7 @@ export class HomeHeaderComponent implements OnInit {
 
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
-    this.router.navigate(['/search']);
+    // this.router.navigate(['/search']);
   }
 
 
@@ -824,14 +667,15 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
 
-  getEstados(value){
+  getEstados(value) {
     let valor = value.target.value;
     this.listAllCity = [];
+    this.stateSelected = valor;
     for (let i = 0; i < estados.estados.length; i++) {
       if(valor === estados.estados[i].nome){
         for (let x = 0; x < estados.estados[i].cidades.length; x++) {
-          this.listAllCity.push({name: estados.estados[i].cidades[x], sigla: estados.estados[i].sigla})
-          this.stateSelected = estados.estados[i].sigla
+          this.listAllCity.push({name: estados.estados[i].cidades[x]})
+          this.stateSelected = estados.estados[i].nome
         }
       }
     }

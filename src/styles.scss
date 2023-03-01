@@ -600,6 +600,10 @@ input:focus {
     max-height: 400px;
 }
 
+.max-h-130 {
+    max-height: 130px;
+}
+
 .w-90 {
     width: 90%;
 }
@@ -963,7 +967,7 @@ input:focus {
     height: 0;
     width: 0;
     position: absolute;
-    left: 44%;
+    left: 41%;
     border-color: transparent;
     z-index: 1;
     rotate: 90deg;
@@ -1193,34 +1197,46 @@ input:focus {
 
 @media (max-width: 1920px) {
     .arrow-box-buy:after {
-        left: 40%;
+        left: 35%;
     }
 }
-
-@media (max-width: 1600px) {
+@media (max-width: 1083px) {
     .arrow-box-buy:after {
-        left: 40%;
+        left: 32%;
     }
 }
 
 @media (max-width: 1000px) {
     .arrow-box-buy:after {
+        left: 43%;
+    }
+}
+
+@media (max-width: 860px) {
+    .arrow-box-buy:after {
+        left: 40%;
+    }
+}
+@media (max-width: 640px) {
+    .arrow-box-buy:after {
         left: 37%;
     }
 }
-
-@media (max-width: 800px) {
+@media (max-width: 509px) {
     .arrow-box-buy:after {
-        left: 29%;
+        left: 32%;
     }
 }
-
 @media (max-width: 400px) {
     .arrow-box-buy:after {
         left: 22%;
     }
 }
-
+@media (max-width: 323px) {
+    .arrow-box-buy:after {
+        left: 18%;
+    }
+}
 // RENT
 
 @media (max-width: 1920px) {
@@ -1769,6 +1785,7 @@ vg-overlay-play .vg-overlay-play {
         height: 281px;
     }
 
+
 }
 
 @media (max-width: 1918px) {
@@ -1776,6 +1793,10 @@ vg-overlay-play .vg-overlay-play {
     // HEADER HOME
     .max-w-1918 {
         max-width: 1242px !important;
+    }
+
+    .text-smaller>span {
+        font-size: 18px !important;
     }
 
     .swiper-desk {
@@ -1792,16 +1813,19 @@ vg-overlay-play .vg-overlay-play {
     }
 
 }
+
 @media (min-width: 1918px) {
 
-    .text-cards-little > span{
+    .text-cards-little>span {
         font-size: 25px !important;
     }
-    .icon-cards{
+
+    .icon-cards {
         padding: 20% 0;
         width: 107px;
     }
-    .icon-cards-1{
+
+    .icon-cards-1 {
         padding: 16% 0;
         width: 107px;
     }
@@ -2297,7 +2321,7 @@ vg-overlay-play .vg-overlay-play {
         background-repeat: no-repeat no-repeat;
         background-size: cover contain;
         height: 500px !important;
-    top: -49px !important;
+        top: -49px !important;
         max-height: 100%;
 
     }
@@ -2359,8 +2383,8 @@ vg-overlay-play .vg-overlay-play {
         justify-content: center !important;
         align-items: center !important;
         padding: 0px !important;
-    } 
-    
+    }
+
     .icon-button-property-detail-shared {
         font-size: 16px !important;
     }
@@ -2432,6 +2456,7 @@ vg-overlay-play .vg-overlay-play {
     .open-doors-title {
         font-size: 31px !important;
     }
+
     .d-none-mobile {
         display: none !important;
     }

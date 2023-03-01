@@ -47,7 +47,7 @@ export class PropertyDetailComponent implements OnInit {
         infopaydesk.style.top = '0px';
         infopaydesk.style.maxWidth = '415px';
         infopaydesk.style.zIndex = '20';
-      }else{
+      } else {
         colinfopay.style.alignSelf = 'self-end'
         infopaydesk.style.position = 'relative';
         infopaydesk.style.top = '0px';
@@ -129,7 +129,46 @@ export class PropertyDetailComponent implements OnInit {
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
+  dadosmockados: any[] = [
+    {
+      caracteristica: 'Ar condicionado'
+    },
+    {
+      caracteristica: 'Sauna'
+    },
+    {
+      caracteristica: 'Tv'
+    },
+    {
+      caracteristica: 'Churrasqueira'
+    },
+    {
+      caracteristica: 'Área Comum'
+    },
+    {
+      caracteristica: 'Mobiliada'
+    },
+    {
+      caracteristica: 'Academia'
+    },
+    {
+      caracteristica: 'Piscina'
+    },
+    {
+      caracteristica: 'Lavanderia'
+    },
+    {
+      caracteristica: 'Elevador'
+    },
+    {
+      caracteristica: 'Banheiro'
+    },
+    {
+      caracteristica: 'Wi-fi'
+    },
 
+
+  ];
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -182,7 +221,7 @@ export class PropertyDetailComponent implements OnInit {
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
     this.finalValue = (parseInt(this.response.valueOfIptu) + parseInt(this.response.condominiumValue) + this.response.saleValue);
-    this.finalValue2 = (parseInt(this.response.valueOfIptu)  + this.response.saleValue);
+    this.finalValue2 = (parseInt(this.response.valueOfIptu) + this.response.saleValue);
 
 
     console.log(this.user?._id, this.response._id, this.finalValue);
