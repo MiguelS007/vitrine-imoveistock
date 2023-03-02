@@ -293,9 +293,6 @@ export class SearchPageComponent implements OnInit {
   }
   onChangeSearch(search: string) {
   }
-  onFocused(e) {
-  }
-
 
   limpaValoresRepetidos(array) {
     for (let i in array) {

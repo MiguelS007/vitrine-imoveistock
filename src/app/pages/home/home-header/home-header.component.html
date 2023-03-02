@@ -28,14 +28,18 @@
                             <div class="w-100 painel-browser h-auto max-w-1918">
                                 <div class="row px-0 mx-0 d-flex content-painel align-items-center">
                                     <div class="dropdown mb-3 px-0 col-12">
-                                        <input type="text" readonly [value]="typePropertyAllTitle"
-                                            class="btn w-100 border text-left px-3 input-property border-radius-0 color-black h-51 fw-400 bg-white font-size-14 line-20 color-dark dropdown-toggle"
-                                            id="dropdownforhome" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false"/>
+
+                                        <button type="button" readonly
+                                            class="btn w-100 overflow-x-scroll border text-left px-3 input-property border-radius-0 color-black h-51 fw-400 bg-white font-size-14 line-20 color-dark dropdown-toggle"
+                                            id="dropdownforhome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{typePropertyAllTitle}}
+                                        </button>
                                         <div class="dropdown-menu border-radius-10 py-4 max-h-400 overflow-x-scroll w-100"
                                             aria-labelledby="dropdownforhome">
                                             <div class="form-check d-none px-5">
-                                                <input  (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE,'nothing')" *ngIf="AllResidencial" class="form-check px-5 mb-3"
+                                                <input
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE,'nothing')"
+                                                    *ngIf="AllResidencial" class="form-check px-5 mb-3"
                                                     [checked]="checkedAll" class="form-check-input cursor-pointer"
                                                     type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label cursor-pointer" for="chooseFilter">
@@ -45,9 +49,9 @@
                                             <div class="w-100 px-3 pt-4 pb-2">
                                                 <h3 class="fw-700 font-size-14 line-20 color-black">Residencial</h3>
                                             </div>
-                                            <div  (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE,'todosresidencial')" *ngIf="AllResidencial" class="form-check px-5 mb-3">
-                                                <input
-                                                    class="form-check-input cursor-pointer"
+                                            <div (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE,'todosresidencial')"
+                                                *ngIf="AllResidencial" class="form-check px-5 mb-3">
+                                                <input class="form-check-input cursor-pointer"
                                                     [checked]="checkedAllResidencial" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label cursor-pointer" for="chooseFilter">
                                                     Todos os imóveis em Residencial
@@ -55,28 +59,26 @@
                                             </div>
                                             <div *ngIf="AllResidencial2" class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE,'todosresidencial2')" 
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE,'todosresidencial2')"
                                                     class="form-check-input cursor-pointer"
                                                     [checked]="checkedAllResidencial2" type="checkbox"
                                                     id="chooseFilter">
                                                 <label class="form-check-label cursor-pointer" for="chooseFilter">
-                                                    Todos os imóveis em Residencial 
+                                                    Todos os imóveis em Residencial
                                                 </label>
                                             </div>
-                                            <div (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'apartamento')" class="form-check px-5  mb-3">
-                                                <input
-                                                    
-                                                    class="form-check-input cursor-pointer"
+                                            <div (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'apartamento')"
+                                                class="form-check px-5  mb-3">
+                                                <input class="form-check-input cursor-pointer"
                                                     [checked]="checkedapartamento" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
                                                     for="chooseFilter">
                                                     Apartamento
                                                 </label>
                                             </div>
-                                            <div (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'studio')" class="form-check px-5  mb-3">
-                                                <input
-                                                    
-                                                    class="form-check-input cursor-pointer" [checked]="checkedstudio"
+                                            <div (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'studio')"
+                                                class="form-check px-5  mb-3">
+                                                <input class="form-check-input cursor-pointer" [checked]="checkedstudio"
                                                     type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
                                                     for="chooseFilter">
@@ -85,7 +87,7 @@
                                             </div>
                                             <div class="form-check px-5  mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'kitnet')" 
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'kitnet')"
                                                     class="form-check-input cursor-pointer" [checked]="checkedkitnet"
                                                     type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -95,7 +97,7 @@
                                             </div>
                                             <div class="form-check px-5  mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'casacondominio')" 
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'casacondominio')"
                                                     class="form-check-input cursor-pointer"
                                                     [checked]="checkedcasacondominio" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -105,7 +107,7 @@
                                             </div>
                                             <div class="form-check px-5  mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'casadevila')" 
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'casadevila')"
                                                     class="form-check-input cursor-pointer"
                                                     [checked]="checkedcasadevila" type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -115,7 +117,7 @@
                                             </div>
                                             <div class="form-check px-5  mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'cobertura')" 
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'cobertura')"
                                                     class="form-check-input cursor-pointer" [checked]="checkedcobertura"
                                                     type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -125,7 +127,7 @@
                                             </div>
                                             <div class="form-check px-5  mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'loft')" 
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'loft')"
                                                     class="form-check-input cursor-pointer" [checked]="checkedloft"
                                                     type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -135,7 +137,7 @@
                                             </div>
                                             <div class="form-check px-5  mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'flat')" 
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'flat')"
                                                     class="form-check-input cursor-pointer" [checked]="checkedflat"
                                                     type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -145,7 +147,7 @@
                                             </div>
                                             <div class="form-check px-5  mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'terreno')" 
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'terreno')"
                                                     class="form-check-input cursor-pointer" [checked]="checkedterreno"
                                                     type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -155,7 +157,7 @@
                                             </div>
                                             <div class="form-check px-5  mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'chacara')" 
+                                                    (click)="typePropertyCharacteristics(selectedResidencial, styleforPropertyE, 'chacara')"
                                                     class="form-check-input cursor-pointer" [checked]="checkedchacara"
                                                     type="checkbox" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -172,7 +174,7 @@
                                             </div>
                                             <div *ngIf="AllComercial" class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'todoscomercial')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'todoscomercial')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedAllComercial" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -182,18 +184,18 @@
                                             </div>
                                             <div *ngIf="AllComercial2" class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'todoscomercial2')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'todoscomercial2')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedAllComercial2" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
                                                     for="chooseFilter">
-                                                    Todos os imóveis em Comercial 
+                                                    Todos os imóveis em Comercial
                                                 </label>
                                             </div>
 
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'loja')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'loja')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedloja" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -203,7 +205,7 @@
                                             </div>
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'salao')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'salao')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedsalao" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -213,17 +215,7 @@
                                             </div>
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'sala')" 
-                                                    class="form-check-input cursor-pointer" type="checkbox"
-                                                    [checked]="checkedsala" id="chooseFilter">
-                                                <label class="form-check-label text-capitalize cursor-pointer"
-                                                    for="chooseFilter">
-                                                    sala
-                                                </label>
-                                            </div>
-                                            <div class="form-check px-5 mb-3">
-                                                <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyE, 'galpao')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyE, 'galpao')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedgalpao" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -233,7 +225,7 @@
                                             </div>
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'conjuntocomercial')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'conjuntocomercial')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedconjuntocomercial" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -243,7 +235,7 @@
                                             </div>
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'casacomercial')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'casacomercial')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedcasacomercial" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -253,7 +245,7 @@
                                             </div>
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'hotel')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'hotel')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedhotel" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -263,7 +255,7 @@
                                             </div>
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'motel')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'motel')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedmotel" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -273,7 +265,7 @@
                                             </div>
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'pousada')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'pousada')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedpousada" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -283,7 +275,7 @@
                                             </div>
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'lajecorporativa')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'lajecorporativa')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedlajecorporativa" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -293,7 +285,7 @@
                                             </div>
                                             <div class="form-check px-5 mb-3">
                                                 <input
-                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'prediointeiro')" 
+                                                    (click)="typePropertyCharacteristics(selectedComercial, styleforPropertyT, 'prediointeiro')"
                                                     class="form-check-input cursor-pointer" type="checkbox"
                                                     [checked]="checkedprediointeiro" id="chooseFilter">
                                                 <label class="form-check-label text-capitalize cursor-pointer"
@@ -310,16 +302,17 @@
                                                 class="w-100 px-3 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black"
                                                 [(ngModel)]="stateSelected" id="state"
                                                 aria-label="Default select example">
-                                                <option [value]="stateSelected" disabled selected value>{{stateSelected}}</option>
-                                                <option *ngFor="let item of estados.estados" [value]="item.nome">{{item.nome}}</option>
-                                            </select> 
+                                                <option [value]="stateSelected" disabled selected value>
+                                                    {{stateSelected}}</option>
+                                                <option *ngFor="let item of estados.estados" [value]="item.nome">
+                                                    {{item.nome}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-12 px-0 mb-4 ">
                                         <ng-autocomplete [data]="listAllCity" [searchKeyword]="keyword"
                                             placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
-                                            (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
-                                            historyIdentifier="listAllCity" [itemTemplate]="itemTemplate"
+                                            (inputChanged)='onChangeSearch($event)' [itemTemplate]="itemTemplate"
                                             [notFoundTemplate]="notFoundTemplate">
                                         </ng-autocomplete>
 
