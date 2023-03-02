@@ -1,7 +1,7 @@
 <div class="w-100 d-flex justify-content-center anima-body position-relative pt-4 pb-5">
     <div class="row w-100 d-flex max-w-1227">
         <div *ngIf="response.length > 0" class="col-lg-5 mt-4">
-            <div *ngFor="let item of response" [id]="item._id" (click)="selectVisit(item, item._id)" class="w-100  cursor-pointer h-auto bg-white box-shadow border-radius-10 mb-4 p-4">
+            <div *ngFor="let item of response" [id]="item._id" (click)="selectVisit(item, item.status, item._id)" class="w-100  cursor-pointer h-auto bg-white box-shadow border-radius-10 mb-4 p-4">
                 <div [class]="confirmcancel ? 'd-none':'d-flex'" class="w-100">
                     <span
                         class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{item.visitDate
@@ -69,25 +69,25 @@
                     {{selectedScheduling.announcement?.cityAddress || '-'}} -
                     {{selectedScheduling.announcement?.ufAddress || '-'}}
                 </p>
-                <!-- <p class="fw-400 font-size-16 line-20 color-black">
+                <p class="fw-400 font-size-16 line-20 color-black">
                     <i class="bi font-size-20 color-black mr-2 bi-person-vcard"></i>
                     Leve seu documento de identificação original com foto
                 </p>
-                <div *ngIf="situationStatus != ''">
+                <div *ngIf="selectedSchedulingStatus != 'pending'">
                     <p class="fw-700 font-size-16 mt-4 line-20 color-black">A visita é acompanhada por esse corretor:
                     </p>
                     <div class="w-100 d-flex">
                         <i class="bi color-black mr-2 font-size-20 bi-person"></i>
                         <p class="d-grid">
-                            <span class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.announcement?.ownerName || '-'}}</span>
+                            <span class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.user?.name || '-'}}</span>
                             <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
-                            <span class="fw-400 font-size-14 line-18 color-black">11 9 1234-1234</span>
+                            <span class="fw-400 font-size-14 line-18 color-black">{{selectedScheduling.user?.phone || '-'}}</span>
                         </p>
-                        <span class="fw-400 font-size-14 line-18 color-black">
+                        <!-- <span class="fw-400 font-size-14 line-18 color-black">
                             Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
-                        </span>
+                        </span> -->
                     </div>
-                </div> -->
+                </div>
 
             </div>
             <div class="w-100 bg-white mt-4 border-radius-10 h-auto">
