@@ -920,7 +920,7 @@ input:focus {
     background-image: url(./assets/img/gradient.png), url(./assets/img/family.png);
     background-position: center 45%;
     background-repeat: no-repeat no-repeat;
-    background-size: cover;
+    background-size: cover;    top: -2px;
     max-height: 900px;
     height: 90vh;
     width: 100% !important;
@@ -1174,8 +1174,8 @@ input:focus {
 }
 
 .scheduling-visit-selected {
-    border: 1px solid var(--greenlight);
-    box-shadow: 1px 1px 19px var(--greenlight);
+    border: 1px solid var(--greenlight) !important;
+    box-shadow: 1px 1px 19px var(--greenlight) !important;
 }
 
 .photo-announcement-card {
@@ -1595,7 +1595,7 @@ vg-overlay-play .vg-overlay-play {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 50vh !important;
+    height: 50vh !important; margin-top: -2px !important;
     width: 100vw !important;
     z-index: -5 !important;
 }
@@ -1664,7 +1664,7 @@ vg-overlay-play .vg-overlay-play {
 }
 
 .logo-navbar-desktop-preta-visits {
-    height: 100px !important;
+    height: 99px !important;
     cursor: pointer;
     display: block !important;
 }

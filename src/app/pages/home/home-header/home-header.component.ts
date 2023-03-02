@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component,OnInit, } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -79,7 +79,6 @@ export class HomeHeaderComponent implements OnInit {
 
   checkedloja = false;
   checkedsalao = false;
-  checkedsala = false;
   checkedgalpao = false;
   checkedconjuntocomercial = false;
   checkedcasacomercial = false;
@@ -90,7 +89,6 @@ export class HomeHeaderComponent implements OnInit {
   checkedprediointeiro = false;
   propertyloja: string;
   propertysalao: string;
-  propertysala: string;
   propertygalpao: string;
   propertyconjuntocomercial: string;
   propertycasacomercial: string;
@@ -556,7 +554,7 @@ export class HomeHeaderComponent implements OnInit {
         this.typePropertyAllTitle.replace('Tipo do imóvel', '')
       }
       if (this.typePropertyAllTitle.includes(value)) {
-        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Tipo do imóvel', 'odos os Imóveis Residenciais');
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Tipo do imóvel', 'Todos os Imóveis Residenciais');
       } else {
         this.typePropertyAllTitle += 'Tipo do imóvel';
       }
@@ -564,81 +562,276 @@ export class HomeHeaderComponent implements OnInit {
 
     // Comercial
     if (value === 'loja') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedloja = !this.checkedloja;
       this.checkedloja ? this.propertyloja = 'loja' : this.propertyloja = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      }
       console.log(this.propertyloja, this.checkedloja);
     }
     if (value === 'salao') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedsalao = !this.checkedsalao;
       this.checkedsalao ? this.propertysalao = 'salao' : this.propertysalao = '';
-      console.log(this.propertysalao, this.checkedsalao);
-    }
-    if (value === 'sala') {
-      this.checkedAllComercial2 = false;
-      this.checkedAllComercial = false;
-      this.checkedsala = !this.checkedsala;
-      this.checkedsala ? this.propertysala = 'sala' : this.propertysala = '';
-      console.log(this.propertysala, this.checkedsala);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      } 
+      console.log(this.propertysalao, this.checkedsalao)
+
     }
     if (value === 'galpao') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedgalpao = !this.checkedgalpao;
       this.checkedgalpao ? this.propertygalpao = 'galpao' : this.propertygalpao = '';
-      console.log(this.propertygalpao, this.checkedgalpao);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      } console.log(this.propertygalpao, this.checkedgalpao);
     }
     if (value === 'conjuntocomercial') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedconjuntocomercial = !this.checkedconjuntocomercial;
       this.checkedconjuntocomercial ? this.propertyconjuntocomercial = 'conjuntocomercial' : this.propertyconjuntocomercial = '';
-      console.log(this.propertyconjuntocomercial, this.checkedconjuntocomercial);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      } console.log(this.propertyconjuntocomercial, this.checkedconjuntocomercial);
     }
     if (value === 'casacomercial') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedcasacomercial = !this.checkedcasacomercial;
       this.checkedcasacomercial ? this.propertycasacomercial = 'casacomercial' : this.propertycasacomercial = '';
-      console.log(this.propertycasacomercial, this.checkedcasacomercial);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      } console.log(this.propertycasacomercial, this.checkedcasacomercial);
     }
     if (value === 'hotel') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedhotel = !this.checkedhotel;
       this.checkedhotel ? this.propertyhotel = 'hotel' : this.propertyhotel = '';
-      console.log(this.propertyhotel, this.checkedhotel);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      } console.log(this.propertyhotel, this.checkedhotel);
     }
     if (value === 'motel') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedmotel = !this.checkedmotel;
       this.checkedmotel ? this.propertymotel = 'motel' : this.propertymotel = '';
-      console.log(this.propertymotel, this.checkedmotel);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      } console.log(this.propertymotel, this.checkedmotel);
     }
     if (value === 'pousada') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedpousada = !this.checkedpousada;
       this.checkedpousada ? this.propertypousada = 'pousada' : this.propertypousada = '';
-      console.log(this.propertypousada, this.checkedpousada);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      } console.log(this.propertypousada, this.checkedpousada);
     }
     if (value === 'lajecorporativa') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedlajecorporativa = !this.checkedlajecorporativa;
       this.checkedlajecorporativa ? this.propertylajecorporativa = 'lajecorporativa' : this.propertylajecorporativa = '';
-      console.log(this.propertylajecorporativa, this.checkedlajecorporativa);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      } console.log(this.propertylajecorporativa, this.checkedlajecorporativa);
     }
     if (value === 'prediointeiro') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
       this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedprediointeiro = !this.checkedprediointeiro;
       this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
-      console.log(this.propertyprediointeiro, this.checkedprediointeiro);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace(value, '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace(value, '');
+      } else {
+        this.typePropertyAllTitle += value + ' ';
+      } console.log(this.propertyprediointeiro, this.checkedprediointeiro);
     }
 
     if (value === 'todoscomercial') {
@@ -651,8 +844,6 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedloja ? this.propertyloja = 'loja' : this.propertyloja = '';
       this.checkedsalao = true;
       this.checkedsalao ? this.propertysalao = 'salao' : this.propertysalao = '';
-      this.checkedsala = true;
-      this.checkedsala ? this.propertysala = 'sala' : this.propertysala = '';
       this.checkedgalpao = true;
       this.checkedgalpao ? this.propertygalpao = 'galpao' : this.propertygalpao = '';
       this.checkedconjuntocomercial = true;
@@ -669,6 +860,15 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedlajecorporativa ? this.propertylajecorporativa = 'lajecorporativa' : this.propertylajecorporativa = '';
       this.checkedprediointeiro = true;
       this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
+      if (this.typePropertyAllTitle) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Todos os Imóveis Comerciais', '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Todos os Imóveis Comerciais', 'Tipo do imóvel');
+      } else {
+        this.typePropertyAllTitle += 'Todos os Imóveis Comerciais';
+      }
     }
 
     if (value === 'todoscomercial2') {
@@ -681,8 +881,6 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedloja ? this.propertyloja = 'loja' : this.propertyloja = '';
       this.checkedsalao = !this.checkedsalao;
       this.checkedsalao ? this.propertysalao = 'salao' : this.propertysalao = '';
-      this.checkedsala = !this.checkedsala;
-      this.checkedsala ? this.propertysala = 'sala' : this.propertysala = '';
       this.checkedgalpao = !this.checkedgalpao;
       this.checkedgalpao ? this.propertygalpao = 'galpao' : this.propertygalpao = '';
       this.checkedconjuntocomercial = !this.checkedconjuntocomercial;
@@ -699,6 +897,15 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedlajecorporativa ? this.propertylajecorporativa = 'lajecorporativa' : this.propertylajecorporativa = '';
       this.checkedprediointeiro = !this.checkedprediointeiro;
       this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
+      if (this.typePropertyAllTitle) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Tipo do imóvel', '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Tipo do imóvel', 'Todos os Imóveis Comerciais');
+      } else {
+        this.typePropertyAllTitle += 'Tipo do imóvel';
+      }
     }
     if (this.typePropertyAllTitle === ' ' || this.typePropertyAllTitle === '  ' || this.typePropertyAllTitle === '   ' || this.typePropertyAllTitle === '     ' || this.typePropertyAllTitle === '      ' || this.typePropertyAllTitle === '       ' || this.typePropertyAllTitle === '        ' || this.typePropertyAllTitle === '         ' || this.typePropertyAllTitle === '          ' || this.typePropertyAllTitle === '           ')
       this.typePropertyAllTitle = 'Tipo do imóvel';
@@ -729,7 +936,6 @@ export class HomeHeaderComponent implements OnInit {
       // comercial
       propertyloja: this.propertyloja,
       propertysalao: this.propertysalao,
-      propertysala: this.propertysala,
       propertygalpao: this.propertygalpao,
       propertyconjuntocomercial: this.propertyconjuntocomercial,
       propertycasacomercial: this.propertycasacomercial,
@@ -939,5 +1145,3 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
 }
-
-
