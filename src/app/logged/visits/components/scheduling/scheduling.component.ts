@@ -42,7 +42,7 @@ export class SchedulingComponent implements OnInit {
     visitDate: new Date,
   };
   situationStatus: any;
-  selectedSchedulingID: any;
+  selectedSchedulingStatus: any;
 
 
   constructor(
@@ -137,17 +137,18 @@ export class SchedulingComponent implements OnInit {
 
   }
 
-  selectVisit(item, itemId) {
+  selectVisit(item, status, itemId) {
     document.querySelectorAll(".scheduling-visit-selected").forEach(element => {
       element.classList.remove("scheduling-visit-selected");
     });
     document.getElementById(itemId)!.classList.add("scheduling-visit-selected");
     this.selectedScheduling = item;
-    this.selectedSchedulingID = itemId;
+    this.selectedSchedulingStatus = status;
+    localStorage.setItem('announcementStatus', this.selectedSchedulingStatus);
     this.verifyLike();
     let teste: any = localStorage.getItem('announcementChecked');
     if (window.screen.width < 992) {
-      localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling))
+      localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling, this.selectedSchedulingStatus))
       const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
       modalRef.result.then(data => {
       }, error => {
@@ -168,7 +169,9 @@ export class SchedulingComponent implements OnInit {
       success => {
         this.response = success
         if (success.length > 0) {
-          console.log(this.response)
+          let scheduleStatus: any = localStorage.getItem('announcementStatus');
+         this.selectedSchedulingStatus = scheduleStatus
+          // console.log(this.response, 'chamadas', scheduleStatus)
           this.selectedScheduling = success[0];
           setTimeout(() => {
             localStorage.setItem('announcementChecked', success[0]._id)
