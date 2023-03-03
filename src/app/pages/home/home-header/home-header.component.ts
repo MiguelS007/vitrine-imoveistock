@@ -869,7 +869,6 @@ export class HomeHeaderComponent implements OnInit {
         this.typePropertyAllTitle += 'Todos os Imóveis Comerciais';
       }
     }
-
     if (value === 'todoscomercial2') {
       this.AllComercial = true;
       this.AllComercial2 = false;
