@@ -102,12 +102,11 @@
                       toNumber(response.leaseValue) + toNumber(response.condominiumValue) |
                       currency: 'R$'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.condominiumValue !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">Condomínio
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ ' ||
-                    '-'}}</span>
+                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ ' ||'-'}}</span>
                 </div>
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
@@ -126,13 +125,8 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span *ngIf="response.typeOfAd === 'sale'"
-                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
-                    '-'}}</span>
-                  <span *ngIf="response.typeOfAd === 'rent'"
-                    class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 +
-                      toNumber(response.leaseValue) + toNumber(response.condominiumValue) |
-                      currency: 'R$'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{finalValueSale | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -295,7 +289,6 @@
             </div>
           </div>
           <!-- INFO CARDS -->
-
           <div class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
@@ -305,12 +298,13 @@
                 style="cursor: pointer;" (click)="openarrow(1)">
             </div>
             <div *ngIf="arrow1" class="row">
-              <div *ngFor="let item of dadosmockados | slice:0:6" class="col-sm-6">
+              <div class="col-sm-6">
                 <div class="row">
                   <div class="col-12 my-2">
-                    <p class="align-items-center fw-400 mb-0  font-size-16 line-20 color-black">
-                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp;{{item.caracteristica}}
-                    </p>
+                    <!-- <p class="align-items-center fw-400 mb-0  font-size-16 line-20 color-black">
+                      faça isso com todoas as caracteristica...putz
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp;{{response.characteristicInfrastructureOfTheCondominium?.arCondicionadoCentral}}
+                    </p> -->
                   </div>
                 </div>
               </div>
@@ -466,7 +460,7 @@
                       toNumber(response.leaseValue) + toNumber(response.condominiumValue) |
                       currency: 'R$'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.condominiumValue !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">Condomínio
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
@@ -490,13 +484,8 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span *ngIf="response.typeOfAd === 'sale'"
-                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
-                    '-'}}</span>
-                  <span *ngIf="response.typeOfAd === 'rent'"
-                    class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 +
-                      toNumber(response.leaseValue) + toNumber(response.condominiumValue) |
-                      currency: 'R$'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{finalValueSale | currency: 'R$ ' ||'-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -520,7 +509,8 @@
     class="schedule-visit d-none bg-white border-top-gray py-3 d-flex-desk justify-content-center cursor-pointer position-fixed z-1000 w-100">
     <div class="w-100 max-w-800 padding-x schedule-visit-modal">
       <div class="w-100">
-        <h3>{{finalValue || finalValue2 | currency: 'R$ ' || '-'}}</h3>
+        <h3 *ngIf="response.typeOfAd === 'sale'">{{finalValueSale | currency: 'R$ ' || '-'}}</h3>
+        <h3 *ngIf="response.typeOfAd === 'rent'">{{finalValueRent | currency: 'R$ ' || '-'}}</h3>
       </div>
       <div class="row">
         <div class="col-6">

@@ -122,7 +122,7 @@ export abstract class AnnouncementGetResponseDto {
 
     advertiserId: string;
 
-    characteristicInfrastructureOfTheCondominium?: CharacteristicInfrastructureOfTheCondominiumModel;
+    characteristicInfrastructureOfTheCondominium?: CharacteristicInfrastructureOfTheCondominiumModel[];
 
     featureConveniences?: FeatureConveniencesModel;
 
@@ -136,6 +136,9 @@ export abstract class AnnouncementGetResponseDto {
 }
 
 class CharacteristicInfrastructureOfTheCondominiumModel {
+
+
+
     acessibilidade: boolean;
 
     automacaoPredial: boolean;
@@ -162,7 +165,7 @@ class CharacteristicInfrastructureOfTheCondominiumModel {
 
     gerador: boolean;
 
-    arCondicionadoCentral: boolean;
+    arCondicionadoCentral?: boolean;
 }
 
 class FeatureConveniencesModel {
