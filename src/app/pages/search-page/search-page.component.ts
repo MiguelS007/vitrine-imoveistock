@@ -282,7 +282,12 @@ export class SearchPageComponent implements OnInit {
           removeRepets.push(data[i].cityAddress)
         }
         teste = new Set(removeRepets)
-        this.propertyproducts = data
+        for (let i = 0; i < data.length; i++) {
+          if(data[i].exclusivity) {
+            this.propertyproducts.push(data[i])
+          }
+          
+        }
         this.response = data;
         this.ngxSpinnerService.hide();
       }

@@ -951,174 +951,174 @@ export class HomeHeaderComponent implements OnInit {
 
 
     // ---------------------------
-    let announcementTypeAdGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.typeAd !== '') {
-      for (let i = 0; i < this.response.length; i++) {
-        if (this.response[i].typeOfAd === filter.typeAd) {
-          announcementTypeAdGroup.push(this.response[i]);
-        }
-      }
-    }
-    else {
-      announcementTypeAdGroup = this.response;
-    }
-    // ---------------------------
+    // let announcementTypeAdGroup: AnnouncementGetResponseDto[] = [];
+    // if (filter.typeAd !== '') {
+    //   for (let i = 0; i < this.response.length; i++) {
+    //     if (this.response[i].typeOfAd === filter.typeAd) {
+    //       announcementTypeAdGroup.push(this.response[i]);
+    //     }
+    //   }
+    // }
+    // else {
+    //   announcementTypeAdGroup = this.response;
+    // }
+    // // ---------------------------
 
-    let announcementStateGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.state !== '') {
-      for (let i = 0; i < announcementTypeAdGroup.length; i++) {
-        if (announcementTypeAdGroup[i].ufAddress === filter.state) {
-          announcementStateGroup.push(announcementTypeAdGroup[i]);
-        }
-      }
-    } else {
-      announcementStateGroup = announcementTypeAdGroup;
-    }
-    // ---------------------------
+    // let announcementStateGroup: AnnouncementGetResponseDto[] = [];
+    // if (filter.state !== '') {
+    //   for (let i = 0; i < announcementTypeAdGroup.length; i++) {
+    //     if (announcementTypeAdGroup[i].ufAddress === filter.state) {
+    //       announcementStateGroup.push(announcementTypeAdGroup[i]);
+    //     }
+    //   }
+    // } else {
+    //   announcementStateGroup = announcementTypeAdGroup;
+    // }
+    // // ---------------------------
 
-    let announcementCityGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.city !== undefined) {
-      for (let i = 0; i < announcementStateGroup.length; i++) {
-        if (announcementStateGroup[i].cityAddress === filter.city) {
-          announcementCityGroup.push(announcementStateGroup[i]);
-        }
-      }
-    } else {
-      announcementCityGroup = announcementStateGroup;
-    }
-    // ---------------------------
+    // let announcementCityGroup: AnnouncementGetResponseDto[] = [];
+    // if (filter.city !== undefined) {
+    //   for (let i = 0; i < announcementStateGroup.length; i++) {
+    //     if (announcementStateGroup[i].cityAddress === filter.city) {
+    //       announcementCityGroup.push(announcementStateGroup[i]);
+    //     }
+    //   }
+    // } else {
+    //   announcementCityGroup = announcementStateGroup;
+    // }
+    // // ---------------------------
 
-    let announcementGoalGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.goal !== undefined) {
-      for (let i = 0; i < announcementCityGroup.length; i++) {
-        if (announcementCityGroup[i].goal === filter.goal) {
-          announcementGoalGroup.push(announcementCityGroup[i]);
-        }
-      }
-    } else {
-      announcementGoalGroup = announcementCityGroup
-    }
-    // ---------------------------
-
-
-
-    let announcementTypeofPropertyGroup: AnnouncementGetResponseDto[] = [];
-    if (
-      // residencial
-      filter.propertyapartamento !== undefined ||
-      filter.propertystudio !== undefined ||
-      filter.propertykitnet !== undefined ||
-      filter.propertycasa !== undefined ||
-      filter.propertycasacondominio !== undefined ||
-      filter.propertycasadevila !== undefined ||
-      filter.propertycobertura !== undefined ||
-      filter.propertyloft !== undefined ||
-      filter.propertyflat !== undefined ||
-      filter.propertyterreno !== undefined ||
-      filter.propertychacara !== undefined ||
-      // comercial
-      filter.propertyloja !== undefined ||
-      filter.propertysalao !== undefined ||
-      filter.propertysala !== undefined ||
-      filter.propertygalpao !== undefined ||
-      filter.propertyconjuntocomercial !== undefined ||
-      filter.propertycasacomercial !== undefined ||
-      filter.propertypousada !== undefined ||
-      filter.propertyhotel !== undefined ||
-      filter.propertymotel !== undefined ||
-      filter.propertylajecorporativa !== undefined ||
-      filter.propertyprediointeiro !== undefined
-    ) {
-      for (let i = 0; i < announcementGoalGroup.length; i++) {
-        if (
-          // residencial
-          announcementGoalGroup[i].propertyType === filter.propertyapartamento ||
-          announcementGoalGroup[i].propertyType === filter.propertystudio ||
-          announcementGoalGroup[i].propertyType === filter.propertykitnet ||
-          announcementGoalGroup[i].propertyType === filter.propertycasa ||
-          announcementGoalGroup[i].propertyType === filter.propertycasacondominio ||
-          announcementGoalGroup[i].propertyType === filter.propertycasadevila ||
-          announcementGoalGroup[i].propertyType === filter.propertycobertura ||
-          announcementGoalGroup[i].propertyType === filter.propertyloft ||
-          announcementGoalGroup[i].propertyType === filter.propertyflat ||
-          announcementGoalGroup[i].propertyType === filter.propertyterreno ||
-          announcementGoalGroup[i].propertyType === filter.propertychacara ||
-          // comercial
-          announcementGoalGroup[i].propertyType === filter.propertyloja ||
-          announcementGoalGroup[i].propertyType === filter.propertysalao ||
-          announcementGoalGroup[i].propertyType === filter.propertysala ||
-          announcementGoalGroup[i].propertyType === filter.propertygalpao ||
-          announcementGoalGroup[i].propertyType === filter.propertyconjuntocomercial ||
-          announcementGoalGroup[i].propertyType === filter.propertycasacomercial ||
-          announcementGoalGroup[i].propertyType === filter.propertypousada ||
-          announcementGoalGroup[i].propertyType === filter.propertyhotel ||
-          announcementGoalGroup[i].propertyType === filter.propertymotel ||
-          announcementGoalGroup[i].propertyType === filter.propertylajecorporativa ||
-          announcementGoalGroup[i].propertyType === filter.propertyprediointeiro
-        ) {
-          announcementTypeofPropertyGroup.push(announcementGoalGroup[i]);
-        }
-      }
-    } else {
-      announcementTypeofPropertyGroup = announcementGoalGroup
-    }
-    // ---------------------------
-
-    let announcementStylePropertyGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.styleProperty !== undefined) {
-      for (let i = 0; i < announcementTypeofPropertyGroup.length; i++) {
-        if (announcementTypeofPropertyGroup[i].propertyCharacteristics === filter.styleProperty) {
-          announcementStylePropertyGroup.push(announcementTypeofPropertyGroup[i]);
-        }
-      }
-    } else {
-      announcementStylePropertyGroup = announcementTypeofPropertyGroup
-    }
-    // ---------------------------
-
-    let announcementBadRoomsGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.badRoomsQnt !== '') {
-      for (let i = 0; i < announcementStylePropertyGroup.length; i++) {
-        if (announcementStylePropertyGroup[i].bedrooms >= filter.badRoomsQnt) {
-          announcementBadRoomsGroup.push(announcementStylePropertyGroup[i]);
-        }
-      }
-    } else {
-      announcementBadRoomsGroup = announcementStylePropertyGroup
-    }
-    // ---------------------------
-
-    let announcementValueUntilSaleGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.untilValueSale !== '') {
-      for (let i = 0; i < announcementBadRoomsGroup.length; i++) {
-        if (announcementBadRoomsGroup[i].saleValue >= filter.untilValueSale) {
-          announcementValueUntilSaleGroup.push(announcementBadRoomsGroup[i]);
-        }
-      }
-    } else {
-      announcementValueUntilSaleGroup = announcementBadRoomsGroup
-    }
-    // ---------------------------
-
-    let announcementValueUntilRentGroup: AnnouncementGetResponseDto[] = [];
-    if (filter.untilValueRent !== '') {
-      for (let i = 0; i < announcementValueUntilSaleGroup.length; i++) {
-        if (announcementValueUntilSaleGroup[i].leaseValue >= filter.untilValueRent) {
-          announcementValueUntilRentGroup.push(announcementValueUntilSaleGroup[i]);
-        }
-      }
-    } else {
-      announcementValueUntilRentGroup = announcementValueUntilSaleGroup
-    }
+    // let announcementGoalGroup: AnnouncementGetResponseDto[] = [];
+    // if (filter.goal !== undefined) {
+    //   for (let i = 0; i < announcementCityGroup.length; i++) {
+    //     if (announcementCityGroup[i].goal === filter.goal) {
+    //       announcementGoalGroup.push(announcementCityGroup[i]);
+    //     }
+    //   }
+    // } else {
+    //   announcementGoalGroup = announcementCityGroup
+    // }
+    // // ---------------------------
 
 
 
-    this.resultType = announcementValueUntilRentGroup;
+    // let announcementTypeofPropertyGroup: AnnouncementGetResponseDto[] = [];
+    // if (
+    //   // residencial
+    //   filter.propertyapartamento !== undefined ||
+    //   filter.propertystudio !== undefined ||
+    //   filter.propertykitnet !== undefined ||
+    //   filter.propertycasa !== undefined ||
+    //   filter.propertycasacondominio !== undefined ||
+    //   filter.propertycasadevila !== undefined ||
+    //   filter.propertycobertura !== undefined ||
+    //   filter.propertyloft !== undefined ||
+    //   filter.propertyflat !== undefined ||
+    //   filter.propertyterreno !== undefined ||
+    //   filter.propertychacara !== undefined ||
+    //   // comercial
+    //   filter.propertyloja !== undefined ||
+    //   filter.propertysalao !== undefined ||
+    //   filter.propertysala !== undefined ||
+    //   filter.propertygalpao !== undefined ||
+    //   filter.propertyconjuntocomercial !== undefined ||
+    //   filter.propertycasacomercial !== undefined ||
+    //   filter.propertypousada !== undefined ||
+    //   filter.propertyhotel !== undefined ||
+    //   filter.propertymotel !== undefined ||
+    //   filter.propertylajecorporativa !== undefined ||
+    //   filter.propertyprediointeiro !== undefined
+    // ) {
+    //   for (let i = 0; i < announcementGoalGroup.length; i++) {
+    //     if (
+    //       // residencial
+    //       announcementGoalGroup[i].propertyType === filter.propertyapartamento ||
+    //       announcementGoalGroup[i].propertyType === filter.propertystudio ||
+    //       announcementGoalGroup[i].propertyType === filter.propertykitnet ||
+    //       announcementGoalGroup[i].propertyType === filter.propertycasa ||
+    //       announcementGoalGroup[i].propertyType === filter.propertycasacondominio ||
+    //       announcementGoalGroup[i].propertyType === filter.propertycasadevila ||
+    //       announcementGoalGroup[i].propertyType === filter.propertycobertura ||
+    //       announcementGoalGroup[i].propertyType === filter.propertyloft ||
+    //       announcementGoalGroup[i].propertyType === filter.propertyflat ||
+    //       announcementGoalGroup[i].propertyType === filter.propertyterreno ||
+    //       announcementGoalGroup[i].propertyType === filter.propertychacara ||
+    //       // comercial
+    //       announcementGoalGroup[i].propertyType === filter.propertyloja ||
+    //       announcementGoalGroup[i].propertyType === filter.propertysalao ||
+    //       announcementGoalGroup[i].propertyType === filter.propertysala ||
+    //       announcementGoalGroup[i].propertyType === filter.propertygalpao ||
+    //       announcementGoalGroup[i].propertyType === filter.propertyconjuntocomercial ||
+    //       announcementGoalGroup[i].propertyType === filter.propertycasacomercial ||
+    //       announcementGoalGroup[i].propertyType === filter.propertypousada ||
+    //       announcementGoalGroup[i].propertyType === filter.propertyhotel ||
+    //       announcementGoalGroup[i].propertyType === filter.propertymotel ||
+    //       announcementGoalGroup[i].propertyType === filter.propertylajecorporativa ||
+    //       announcementGoalGroup[i].propertyType === filter.propertyprediointeiro
+    //     ) {
+    //       announcementTypeofPropertyGroup.push(announcementGoalGroup[i]);
+    //     }
+    //   }
+    // } else {
+    //   announcementTypeofPropertyGroup = announcementGoalGroup
+    // }
+    // // ---------------------------
+
+    // let announcementStylePropertyGroup: AnnouncementGetResponseDto[] = [];
+    // if (filter.styleProperty !== undefined) {
+    //   for (let i = 0; i < announcementTypeofPropertyGroup.length; i++) {
+    //     if (announcementTypeofPropertyGroup[i].propertyCharacteristics === filter.styleProperty) {
+    //       announcementStylePropertyGroup.push(announcementTypeofPropertyGroup[i]);
+    //     }
+    //   }
+    // } else {
+    //   announcementStylePropertyGroup = announcementTypeofPropertyGroup
+    // }
+    // // ---------------------------
+
+    // let announcementBadRoomsGroup: AnnouncementGetResponseDto[] = [];
+    // if (filter.badRoomsQnt !== '') {
+    //   for (let i = 0; i < announcementStylePropertyGroup.length; i++) {
+    //     if (announcementStylePropertyGroup[i].bedrooms >= filter.badRoomsQnt) {
+    //       announcementBadRoomsGroup.push(announcementStylePropertyGroup[i]);
+    //     }
+    //   }
+    // } else {
+    //   announcementBadRoomsGroup = announcementStylePropertyGroup
+    // }
+    // // ---------------------------
+
+    // let announcementValueUntilSaleGroup: AnnouncementGetResponseDto[] = [];
+    // if (filter.untilValueSale !== '') {
+    //   for (let i = 0; i < announcementBadRoomsGroup.length; i++) {
+    //     if (announcementBadRoomsGroup[i].saleValue >= filter.untilValueSale) {
+    //       announcementValueUntilSaleGroup.push(announcementBadRoomsGroup[i]);
+    //     }
+    //   }
+    // } else {
+    //   announcementValueUntilSaleGroup = announcementBadRoomsGroup
+    // }
+    // // ---------------------------
+
+    // let announcementValueUntilRentGroup: AnnouncementGetResponseDto[] = [];
+    // if (filter.untilValueRent !== '') {
+    //   for (let i = 0; i < announcementValueUntilSaleGroup.length; i++) {
+    //     if (announcementValueUntilSaleGroup[i].leaseValue >= filter.untilValueRent) {
+    //       announcementValueUntilRentGroup.push(announcementValueUntilSaleGroup[i]);
+    //     }
+    //   }
+    // } else {
+    //   announcementValueUntilRentGroup = announcementValueUntilSaleGroup
+    // }
 
 
-    localStorage.setItem('filtro', JSON.stringify(filter))
-    localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
-    this.router.navigate(['/search']);
+
+    // this.resultType = announcementValueUntilRentGroup;
+
+
+    // localStorage.setItem('filtro', JSON.stringify(filter))
+    // localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
+    // this.router.navigate(['/search']);
   }
 
 
