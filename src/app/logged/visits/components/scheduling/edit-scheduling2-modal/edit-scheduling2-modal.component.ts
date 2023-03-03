@@ -49,8 +49,15 @@ export class EditScheduling2ModalComponent implements OnInit {
 
   registerSuccess(success) {
     let confirmed = 'true';
-    localStorage.setItem('rescheduling-success', confirmed);
-    this.modalService.dismissAll();
+    localStorage.setItem('rescheduling-success2', confirmed);
+    this.exit();
+    const modalRef = this.modalService.open(EditScheduling3ModalComponent, { centered: true });
+    modalRef.result.then(data => {
+    }, error => {
+      localStorage.removeItem('rescheduling-success1');
+      localStorage.removeItem('rescheduling-success2');
+      localStorage.removeItem('dateScheduling');
+    });
   }
 
 }
