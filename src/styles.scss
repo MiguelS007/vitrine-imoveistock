@@ -1206,15 +1206,24 @@ input:focus {
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 996px) {
     .arrow-box-buy:after {
         left: 43%;
     }
 }
-
+@media (max-width: 882px) {
+    .arrow-box-buy:after {
+        left: 42%;
+    }
+}
 @media (max-width: 860px) {
     .arrow-box-buy:after {
-        left: 40%;
+        left: 41%;
+    }
+}
+@media (max-width: 700px) {
+    .arrow-box-buy:after {
+        left: 39%;
     }
 }
 @media (max-width: 640px) {
@@ -1222,9 +1231,14 @@ input:focus {
         left: 37%;
     }
 }
-@media (max-width: 509px) {
+@media (max-width: 514px) {
     .arrow-box-buy:after {
-        left: 32%;
+        left: 34%;
+    }
+}
+@media (max-width: 478px) {
+    .arrow-box-buy:after {
+        left: 27%;
     }
 }
 @media (max-width: 400px) {
