@@ -3,7 +3,7 @@
         <div *ngIf="response.length > 0" class="col-lg-5 mt-4">
             <div #announcements *ngFor="let item of response" [id]="item._id"
                 class="w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4">
-                <div [class]="confirmcancel ? 'd-none':'d-flex'" class="w-100">
+                <div *ngIf="item.status !== 'cancel'" class="w-100 d-flex">
                     <span
                         class="fw-400 font-size-14 line-19 color-black py-1 px-3 mb-0 border-black border-radius-100 mr-2">{{item.visitDate
                         | date: 'HH:mm'
@@ -22,9 +22,9 @@
                 <div class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex">
                     <div class="col-3 col-visits p-0">
                         <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 "
-                            (click)="selecionarVisita(item._id)" />
+                            (click)="selecionarVisita(item)" />
                     </div>
-                    <div (click)="selecionarVisita(item._id)" class="col-9 px-2 col-visits">
+                    <div (click)="selecionarVisita(item)" class="col-9 px-2 col-visits">
                         <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
                             style="max-width: 150px;">{{item.announcement?.description}}</h5>
                         <div class="w-100 d-inline-block mb-0">
@@ -38,20 +38,25 @@
                     </div>
                 </div>
                 <div class="w-100 d-flex mt-3">
-                    <button type="button" (click)="goExpress(item.announcement?._id)"
+                    <button *ngIf="item.status !== 'cancel'" type="button" (click)="goExpress(item.announcement?._id)"
                         class="btn border-radius-10 bg-purple text-light mx-1 mt-2 h-74 fw-700 font-size-18 line-24 w-100">
                         Fazer proposta
                     </button>
-                    <button type="submit" type="button" data-toggle="modal"
-                        (click)="openCancelVisitModal(selectedScheduling)" data-target="#cancelvisits"
+                    <button *ngIf="item.status !== 'cancel'" type="submit" type="button" data-toggle="modal"
+                        (click)="openCancelVisitModal(item)" data-target="#cancelvisits"
                         class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
                         Cancelar
+                    </button>
+                    <button *ngIf="item.status === 'cancel'" 
+                        (click)="removeVisit(item)"
+                        class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
+                        Remover
                     </button>
                 </div>
             </div>
         </div>
-        <div *ngIf="response.length > 0" class="col-lg-7 mt-4 model-desktop-announcement-selected">
-            <div [class]="selectedScheduling.cancellationReason ? 'd-grid':'d-none'"
+        <div *ngIf="response.length !== 0" class="col-lg-7 mt-4 model-desktop-announcement-selected">
+            <div *ngIf="selectedScheduling.status === 'cancel'"
                 class="w-100 mb-4 bg-white border-pink border-radius-10 p-4 h-auto">
                 <p class="fw-700 font-size-18 line-24 color-pink mb-0 py-3">
                     Visita Cancelada
@@ -60,9 +65,11 @@
                     Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
                 </span>
             </div>
-            <div class="w-100 bg-white border-radius-10 p-4 h-auto">
+            <div *ngIf="selectedScheduling.status !== 'cancel'" class="w-100 bg-white border-radius-10 p-4 h-auto">
                 <p class="w-100 fw-400 font-size-16 line-20 color-black">
-                    <i class="bi font-size-20 mr-2 bi-calendar"></i>{{selectedScheduling?.visitDate | date: 'EEEE'|| '-'}}, {{selectedScheduling.visitDate | date: 'dd' }} de {{selectedScheduling.visitDate | date: 'LLLL' }} às {{selectedScheduling.visitDate | date: 'HH:mm' || '-'}}
+                    <i class="bi font-size-20 mr-2 bi-calendar"></i>{{selectedScheduling?.visitDate | date: 'EEEE'||
+                    '-'}}, {{selectedScheduling.visitDate | date: 'dd' }} de {{selectedScheduling.visitDate | date:
+                    'LLLL' }} às {{selectedScheduling.visitDate | date: 'HH:mm' || '-'}}
                 </p>
                 <p class="fw-400 py-2 font-size-16 line-20 color-black">
                     <i class="bi font-size-20 color-black mr-2 bi-geo-alt"></i>
@@ -222,7 +229,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
+            <div *ngIf="selectedScheduling.status !== 'cancel'" class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
                 <p class="fw-700 font-size-18 line-24 color-black">
                     Editar visita
                 </p>

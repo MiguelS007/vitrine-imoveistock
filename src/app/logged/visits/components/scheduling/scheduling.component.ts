@@ -11,6 +11,8 @@ import { VisitCancelRequestDto } from 'src/app/dtos/visit-cancel-request.dto';
 import { EditSchedulingModalComponent } from './edit-scheduling-modal/edit-scheduling-modal.component';
 import { EditScheduling2ModalComponent } from './edit-scheduling2-modal/edit-scheduling2-modal.component';
 import { EditScheduling3ModalComponent } from './edit-scheduling3-modal/edit-scheduling3-modal.component';
+import { SchedulingStep1Component } from '../../../../pages/property-detail/components/scheduling-step1/scheduling-step1.component';
+import { ModalLoginComponent } from '../../../../auth/modal-login/modal-login.component';
 
 @Component({
   selector: 'app-scheduling',
@@ -69,10 +71,11 @@ export class SchedulingComponent implements OnInit {
         if (success.length > 0) {
           this.selectedScheduling = success[0];
           setTimeout(() => {
-            this.selecionarVisita(this.selectedScheduling._id);
+            this.selecionarVisita(this.selectedScheduling);
           }, 100);
         }
         this.verifyLike()
+        console.log(success)
       },
       error => {
         console.error(error);
@@ -82,14 +85,28 @@ export class SchedulingComponent implements OnInit {
 
   selecionarVisita(item) {
     this.announcementList.map(results => {
-      if (results.nativeElement?.id === item) {
+      if (results.nativeElement?.id === item._id) {
         results.nativeElement.className = 'scheduling-visit-selected w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4';
         localStorage.setItem('announcementChecked', item._id)
-        console.log(item)
+        this.selectedScheduling = item;
       } else {
         results.nativeElement.className = 'w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4';
       }
     });
+  }
+
+  removeVisit(item) {
+    let request = {
+      status: 'remove',
+    }
+    this.scheduleService.removeVisit(item._id, request).subscribe({
+      next: data => {
+        this.schedulesList();
+      },
+      error: error => {
+        console.error(error)
+      }
+    })
   }
 
   verifyLike() {
@@ -166,6 +183,7 @@ export class SchedulingComponent implements OnInit {
 
   selectVisit(item) {
     this.selectedScheduling = item;
+    console.log(this.selectedScheduling)
     this.verifyLike();
     let checkOld;
     let teste: any = localStorage.getItem('announcementChecked');
@@ -242,12 +260,17 @@ export class SchedulingComponent implements OnInit {
   }
 
   editScheduling(selectedScheduling) {
-    localStorage.setItem('announcementSelected', JSON.stringify(selectedScheduling));
-    const modalRef = this.modalService.open(EditSchedulingModalComponent, { centered: true });
-    modalRef.result.then(data => {
-    }, error => {
-      this.editScheduling2();
-    });
+    if (selectedScheduling.status !== 'cancel') {
+      localStorage.setItem('announcementSelected', JSON.stringify(selectedScheduling));
+      const modalRef = this.modalService.open(EditSchedulingModalComponent, { centered: true });
+      modalRef.result.then(data => {
+      }, error => {
+        this.editScheduling2();
+      });
+    } else if (selectedScheduling.status === 'cancel') {
+      localStorage.setItem('announcementOfScheduling', JSON.stringify(selectedScheduling.announcement))
+      this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
+    }
   }
 
   editScheduling2() {
