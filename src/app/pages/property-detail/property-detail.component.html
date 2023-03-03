@@ -51,16 +51,19 @@
             <!-- HEART, SHARE ETC...BTNS -->
             <div class="options-img d-flex align-items-center">
               <div (click)="likeHeartMain(response._id, response.liked)"
-                class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' " class="bi font-size-24 text-light"></i>
+                class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
+                <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' "
+                  class="bi icon-button-property-detail-shared text-light"></i>
               </div>
               <div (click)="btninteractionimg('share')"
-                class="h-51 mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="iconshare ?'bi-share-fill':'bi-share' " class="bi font-size-24 text-light"></i>
+                class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
+                <i [class]="iconshare ?'bi-share-fill':'bi-share' "
+                  class="bi icon-button-property-detail-shared text-light"></i>
               </div>
               <div (click)="btninteractionimg('print')"
-                class="h-51 mx-1 mt-2 bg-transparent-white cursor-pointer heart-like border-radius-10 pt-2 pb-1 px-3">
-                <i [class]="iconprint?'bi-printer-fill':'bi-printer' " class="bi font-size-24 text-light"></i>
+                class="button-property-detail-shared mx-1 mt-2 bg-transparent-white cursor-pointer heart-like border-radius-10 pt-2 pb-1 px-3">
+                <i [class]="iconprint?'bi-printer-fill':'bi-printer' "
+                  class="bi icon-button-property-detail-shared text-light"></i>
               </div>
             </div>
           </div>
@@ -71,7 +74,7 @@
     <div class="col-12 bg-graylight mt-mobile px-5p d-flex justify-content-center">
       <div class="row max-w-1918 px-0 w-100 row-body-details-property">
         <!-- PAYMENT METHOD MOBILE -->
-        <div *ngIf="infopay" class="col-12 d-none d-block-desk col-body-details-property">
+        <div class="col-12 d-none payment-mobile d-block-desk col-body-details-property">
           <div class="w-100 mt-4 border-radius-10">
             <div class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
 
@@ -85,40 +88,47 @@
               <hr class="hr" />
               <div class="row">
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
-                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
-                    '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{finalValueSale | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.condominiumValue !== '0'"
+                  class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">Condomínio
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ ' ||
-                    '-'}}</span>
+                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ '
+                    ||'-'}}</span>
                 </div>
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-400 font-size-18 line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' ||
+                  <span *ngIf="response.typeOfAd === 'sale'"
+                    class="fw-400 font-size-18 line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 | currency:
+                    'R$ ' ||
                     '-'}}</span>
                 </div>
                 <div class="col-12">
                   <h6 class="my-4 w-100 bg-whitelight" style="height:1px;"></h6>
                 </div>
                 <div class="col-12 d-flex py-4 align-items-center justify-content-between">
-                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-700 font-size-18 line-24 color-black">{{finalValue | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{finalValueSale | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -151,10 +161,10 @@
                        border-radius-10 bg-purple-light py-4 px-4 mr-3
                        ">Metragem:&nbsp;{{response.usefulArea | currency: ' '}}m²</h1>
             </div>
-            <div class="w-100 my-4 px-5 pt-3 pb-4
+            <div class="w-100 mt-4 px-5 pt-3 pb-4
                     border-bottom-gray">
               <span class="fw-700 font-size-18 line-24
-                       color-black">Detalhes do Imóvel</span>
+                       color-black">Descrição do Imóvel</span>
               <br />
               <br />
               <p class="fw-400 font-size-18 line-24 py-3
@@ -165,121 +175,77 @@
 
             <div class="w-100 py-4 border-bottom-gray px-5">
               <div class="w-100 d-flex align-items-center justify-content-between">
-                <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Detalhes do Imóvel</p>
+                <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Detalhes do Imóvel</p>
                 <img *ngIf="!arrowpff" src="../../../assets/icon/arrow-down-blue.png" width="20"
                   style="cursor: pointer;" class="animate__animated" (click)="openarrow(24)">
-                <img *ngIf="arrowpff" src="../../../assets/icon/arrow-top-blue.png"
-                  class="animate__animated" width="18" style="cursor: pointer;"
-                  (click)="openarrow(24)">
+                <img *ngIf="arrowpff" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated" width="18"
+                  style="cursor: pointer;" (click)="openarrow(24)">
               </div>
-              <table *ngIf="arrowpff" class="w-100 animate__animated">
+              <table *ngIf="arrowpff" class="table table-borderless pt-4">
                 <tbody>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Identificador:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;HZ227</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Ano da
-                        contrução:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.yearOfConstruction || '-'}}</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Tipo do
-                        imóvel:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.propertyType || '-'}}</span>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Identificador:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;HZ227</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Ano da contrução</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.yearOfConstruction
+                      || '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Tipo do imóvel:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.propertyType ||
+                      '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Preço:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.saleValue |
+                      currency: 'R$ ' || '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Quartos:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.bedrooms || '-'}}
                     </td>
                   </tr>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Preço:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.saleValue | currency: 'R$ ' || '-'}}</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Quartos:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.bedrooms || '-'}}</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Disponibilidade:</span>
-                      <span *ngIf="response.typeOfAd === 'sale'"
-                        class="fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Venda</span>
-                      <span *ngIf="response.typeOfAd === 'rent'"
-                        class="fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Aluguel</span>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Disponibilidade:</td>
+                    <td *ngIf="response.typeOfAd === 'sale'" class="pl-0 fw-700 font-size-16 line-20 color-black">
+                      &nbsp;&nbsp;Venda</td>
+                    <td *ngIf="response.typeOfAd === 'rent'" class="pl-0 fw-700 font-size-16 line-20 color-black">
+                      &nbsp;&nbsp;Locação</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Valor do Condomínio:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.condominiumValue |
+                      currency: 'R$ ' || '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Banheiro:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.bathrooms || '-'}}
                     </td>
                   </tr>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Valor do
-                        Condomínio:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.condominiumValue | currency: 'R$ ' ||
-                        '-'}}</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Banheiro:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.bathrooms || '-'}}</span>
-                    </td>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Metragem:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.usefulArea ||
+                      '-'}}m²</td>
                   </tr>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Metragem:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.usefulArea |currency: ' '}}m²</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Vagas:</span>
-                      <span class="fw-700 
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;{{response.vacancyNumber || '-'}}</span>
-                    </td>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Vagas:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.vacancyNumber ||
+                      '-'}}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div class="w-100 py-4 border-bottom-gray px-5">
               <div class="w-100 d-flex align-items-center justify-content-between">
-                <p class="w-100 color-black fw-700 font-size-18 line-24 pb-3">Informações Adicionais</p>
+                <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Informações Adicionais</p>
                 <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20"
                   style="cursor: pointer;" class="animate__animated" (click)="openarrow(42)">
-                <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png"
-                  class="animate__animated" width="18" style="cursor: pointer;"
-                  (click)="openarrow(42)">
+                <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated"
+                  width="18" style="cursor: pointer;" (click)="openarrow(42)">
               </div>
-              <table *ngIf="arrowinfo" class="w-100 animate__animated">
+              <table *ngIf="arrowinfo" class="w-100 animate__animated pt-4">
                 <tbody>
                   <tr class="h-51">
                     <td>
@@ -325,119 +291,311 @@
             </div>
           </div>
           <!-- INFO CARDS -->
-
-          <div class="w-100 border-radius-10 mt-4 info-cards-property px-5 pt-4 pb-3  bg-white">
+          <div class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
               <img *ngIf="!arrow1" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
                 class="animate__animated" (click)="openarrow(1)">
-              <img *ngIf="arrow1" src="../../../assets/icon/arrow-top-blue.png"
-                class="animate__animated" width="18" style="cursor: pointer;" (click)="openarrow(1)">
+              <img *ngIf="arrow1" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated" width="18"
+                style="cursor: pointer;" (click)="openarrow(1)">
             </div>
-            <table *ngIf="arrow1" class="w-100 animate__animated">
-              <tbody>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Ar
-                      Condicionado</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Sauna</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Tv
-                      a cabo</span>
-                  </td>
-                </tr>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Churrasqueira</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Área
-                      Comum</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Mobiliada</span>
-                  </td>
-                </tr>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Academia</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Piscina</span>
-                  </td>
-                </tr>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Lavanderia</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Elevador</span>
-                  </td>
-                </tr>
-                <tr class="h-51">
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Banheiro
-                      Externo</span>
-                  </td>
-                  <td class="align-items-center">
-                    <i class="bi color-pink
-                                font-size-20 bi-check2"></i>
-                    <span class="fw-400 mb-0
-                                font-size-16 line-20
-                                color-black">&nbsp;&nbsp;Wi-fi</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div *ngIf="arrow1" class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-12">
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Aquecedor
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.economizadoresDeAgua != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Economizador de Água
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.reaproveitamentoDeAgua != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Reaproveitador de Água
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Aquecedor solar
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.gasCentral != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Gás Central
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.gerador != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Gerador
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.arCondicionadoCentral != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Ar condicionado
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.porteCochere != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Porte-cochère
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.coletaSeletiva != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Coleta seletiva
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.acessoAsfaltado != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Acesso asfaltado
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Próximo ao metrô
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.acessibilidade != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Acessibilidade
+                    </p>
+                    <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.automacaoPredial != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Automação Predial
+                    </p>
+                    <p *ngIf="response.featureConveniences?.acessoParaDeficientes != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Acesso para deficientes
+                    </p>
+                    <p *ngIf="response.featureConveniences?.bicicletario != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Bicicletário
+                    </p>
+                    <p *ngIf="response.featureConveniences?.casaDeCaseiro != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Casa de caseiro
+                    </p>
+                    <p *ngIf="response.featureConveniences?.centralDeEntregas != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Central de entregas
+                    </p>
+                    <p *ngIf="response.featureConveniences?.centralDeLimpezaEGovernanca != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Central de limpeza
+                    </p>
+                    <p *ngIf="response.featureConveniences?.elevador != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Elevador
+                    </p>
+                    <p *ngIf="response.featureConveniences?.elevadorDeServico != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Elevador de servico
+                    </p>
+                    <p *ngIf="response.featureConveniences?.heliponto != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Heliponto
+                    </p>
+                    <p *ngIf="response.featureConveniences?.lavanderia != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Lavanderia
+                    </p>
+                    <p *ngIf="response.featureConveniences?.petCare != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Automação
+                    </p>
+                    <p *ngIf="response.featureConveniences?.petCare != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Pet center
+                    </p>
+                    <p *ngIf="response.featureConveniences?.vagasDeVisitantes != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Vagas de visitantes
+                    </p>
+                    <p *ngIf="response.featureConveniences?.proximoAoMetro != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Próximo ao metrõ
+                    </p>
+                    <p *ngIf="response.securityFeature?.acessoEletronico != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Acesso eletrônico
+                    </p>
+                    <p *ngIf="response.securityFeature?.camerasDeSeguranca != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Câmeras de segurança
+                    </p>
+                    <p *ngIf="response.securityFeature?.cercaEletrica != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Cerca elétrica
+                    </p>
+                    <p *ngIf="response.securityFeature?.circuitoTvInterno != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Tv a cabo
+                    </p>
+                    <p *ngIf="response.securityFeature?.guaritaBlindada != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Guarita blindada
+                    </p>
+                    <p *ngIf="response.securityFeature?.interfone != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Interfone
+                    </p>
+                    <p *ngIf="response.securityFeature?.portaoEletronico != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Portão eletrônico
+                    </p>
+                    <p *ngIf="response.securityFeature?.portariaNoturna != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Portaria noturna
+                    </p>
+                    <p *ngIf="response.securityFeature?.portaria24h != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Portaria 24h
+                    </p>
+                    <p *ngIf="response.securityFeature?.rondaVigilancia != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Ronda de vigilância
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-12 my-2">
+                    <p *ngIf="response.featureLeisure?.barNaPiscina != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Bar na piscina
+                    </p>
+                    <p *ngIf="response.featureLeisure?.bosque != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Bosque
+                    </p>
+                    <p *ngIf="response.featureLeisure?.churrasqueira != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Churrasqueira
+                    </p>
+                    <p *ngIf="response.featureLeisure?.salaoDeFestas != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Salão de festas
+                    </p>
+                    <p *ngIf="response.featureLeisure?.piscina != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Piscina
+                    </p>
+                    <p *ngIf="response.featureLeisure?.cinema != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Cinema
+                    </p>
+                    <p *ngIf="response.featureLeisure?.coworking != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Coworking
+                    </p>
+                    <p *ngIf="response.featureLeisure?.espacoDeLeituras != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Espaço de leituras
+                    </p>
+                    <p *ngIf="response.featureLeisure?.espacoGourmet != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Espaco gourmet
+                    </p>
+                    <p *ngIf="response.featureLeisure?.espacoPet != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Espaço pet
+                    </p>
+                    <p *ngIf="response.featureLeisure?.espacoZen != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Espaço de lazer
+                    </p>
+                    <p *ngIf="response.featureLeisure?.fornoDePizza != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; forno de pizza
+                    </p>
+                    <p *ngIf="response.featureLeisure?.garageBandDanceteria != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Garage band
+                    </p>
+                    <p *ngIf="response.featureLeisure?.miniGolf != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Mini golf
+                    </p>
+                    <p *ngIf="response.featureLeisure?.ofuro != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Ofurô
+                    </p>
+                    <p *ngIf="response.featureLeisure?.praca != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; praça
+                    </p>
+                    <p *ngIf="response.featureLeisure?.redario != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Redário
+                    </p>
+                    <p *ngIf="response.featureSport?.fitnessAoArLivre != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; fitness ao Ar livre
+                    </p>
+                    <p *ngIf="response.featureSport?.salaDeGinastica != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Sala de ginástica
+                    </p>
+                    <p *ngIf="response.featureSport?.muroEscalada != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Muro escalada
+                    </p>
+                    <p *ngIf="response.featureSport?.pistaDeCaminhada != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Pista de caminhada
+                    </p>
+                    <p *ngIf="response.featureSport?.quadraDeFutebolDeSalao != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Quadra de futebol de salão
+                    </p>
+                    <p *ngIf="response.featureSport?.quadraDeSquash != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Quadra de squash
+                    </p>
+                    <p *ngIf="response.featureSport?.quadraDeTenis != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Quadra se tênis
+                    </p>
+                    <p *ngIf="response.featureSport?.quadraPoliesportiva != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Quadra Poliesportiva
+                    </p>
+                    <p *ngIf="response.featureSport?.salaDeYoga != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Sala de yoga
+                    </p>
+                    <p *ngIf="response.featureSport?.studioDePilates != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Studio de pilates
+                    </p>
+                    <p *ngIf="response.featureSport?.vertuarios != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Vertuários
+                    </p>
+                    <p *ngIf="response.featureInfantile?.brinquedoteca != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Brinquedotéca
+                    </p>
+                    <p *ngIf="response.featureInfantile?.casaDaArvore != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Casa na árvore
+                    </p>
+                    <p *ngIf="response.featureInfantile?.casaDeBoneca != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Casa de boneca
+                    </p>
+                    <p *ngIf="response.featureInfantile?.piscinaInfantil != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Piscina infantil
+                    </p>
+                    <p *ngIf="response.featureInfantile?.pistaDeCaminhada != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Pista de caminhada
+                    </p>
+                    <p *ngIf="response.featureInfantile?.playground != false"
+                      class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                      <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Playground
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="w-100 border-radius-10 mt-4 info-cards-property px-5 pt-4 pb-3  bg-white">
+          <div class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 d-flex pb-3 justify-content-between align-items-center">
               <p class="w-100 d-grid pr-1 align-items-center mb-0">
                 <span class="color-black fw-700 font-size-16 line-20">
@@ -447,21 +605,21 @@
               </p>
               <img *ngIf="!arrow2" src="../../../assets/icon/arrow-down-blue.png" width="20"
                 class="cursor-pointer animate__animated" (click)="openarrow(2)">
-              <img *ngIf="arrow2" src="../../../assets/icon/arrow-top-blue.png"
-                class="cursor-pointer animate__animated" width="18" (click)="openarrow(2)">
+              <img *ngIf="arrow2" src="../../../assets/icon/arrow-top-blue.png" class="cursor-pointer animate__animated"
+                width="18" (click)="openarrow(2)">
             </div>
             <iframe *ngIf="arrow2"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7205.665528434405!2d-49.26210139554594!3d-25.443854055282333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1669903101993!5m2!1spt-BR!2sbr"
-              class="w-100 h-600 animate__animated" style="border:0;" allowfullscreen=""
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              class="w-100 h-600 animate__animated" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-          <div id="previewplant" class="w-100 border-radius-10 info-cards-property mt-4 px-5 pt-4 pb-3  bg-white">
+          <div id="previewplant" class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Planta baixa</p>
               <img *ngIf="!arrow3" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
                 class="animate__animated" (click)="openarrow(3)">
-              <img *ngIf="arrow3" src="../../../assets/icon/arrow-top-blue.png"
-                class="animate__animated" width="18" style="cursor: pointer;" (click)="openarrow(3)">
+              <img *ngIf="arrow3" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated" width="18"
+                style="cursor: pointer;" (click)="openarrow(3)">
             </div>
             <div *ngIf="arrow3" class="w-100 animate__animated">
               <div class="w-100 my-4 d-flex block-important
@@ -484,7 +642,10 @@
                           line-24 color-black d-inline-block">Banheiros:
                     34 m²
                   </h3>
-                  <h3 class="fw-400 px-4 my-2 font-size-18
+                  <h3 *ngIf="response.typeOfAd === 'sale'" class="fw-400 px-4 my-2 font-size-18
+                          line-24 color-black d-inline-block">Preço: {{response.leaseValue | currency: 'R$ ' || '-'}}
+                  </h3>
+                  <h3 *ngIf="response.typeOfAd === 'rent'" class="fw-400 px-4 my-2 font-size-18
                           line-24 color-black d-inline-block">Preço: {{response.saleValue | currency: 'R$ ' || '-'}}
                   </h3>
                 </div>
@@ -504,7 +665,7 @@
               </p>
             </div>
           </div>
-          <div class="w-100 mt-4 border-radius-10 info-cards-property bg-white">
+          <div class="w-100 mt-4 border-radius-10 bg-white">
             <div class="w-100 px-5 space-segment pt-5 mb-4
                     d-flex align-items-center
                     border-bottom-gray">
@@ -564,16 +725,21 @@
               <hr class="hr" />
               <div class="row">
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
-                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                  <span *ngIf="response.typeOfAd === 'sale'"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
                     '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.leaseValue) |
+                    currency: 'R$'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.condominiumValue !== '0'"
+                  class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">Condomínio
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
@@ -584,20 +750,27 @@
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-400 font-size-18 line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' ||
+                  <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 | currency:
+                    'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'"
+                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) | currency:
+                    'R$ ' ||
                     '-'}}</span>
                 </div>
                 <div class="col-12">
                   <h6 class="my-4 w-100 bg-graylight" style="height: 1px;"></h6>
                 </div>
                 <div class="col-12 d-flex py-4 align-items-center justify-content-between">
-                  <span  *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-700 font-size-18 line-24 color-black">{{finalValue | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{finalValueSale | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -612,12 +785,17 @@
       </div>
     </div>
   </div>
+
+
+
+
   <!-- FLOAT BTN SCHEDULE -->
   <div *ngIf="infopaymobile"
     class="schedule-visit d-none bg-white border-top-gray py-3 d-flex-desk justify-content-center cursor-pointer position-fixed z-1000 w-100">
     <div class="w-100 max-w-800 padding-x schedule-visit-modal">
       <div class="w-100">
-        <h3>{{finalValue | currency: 'R$ ' || '-'}}</h3>
+        <h3 *ngIf="response.typeOfAd === 'sale'">{{finalValueSale | currency: 'R$ ' || '-'}}</h3>
+        <h3 *ngIf="response.typeOfAd === 'rent'">{{finalValueRent | currency: 'R$ ' || '-'}}</h3>
       </div>
       <div class="row">
         <div class="col-6">
@@ -641,9 +819,9 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
         <div class="anima-body h-100 d-flex justify-content-center align-items-center">
@@ -664,14 +842,16 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" (click)="closePause(videomedia)" class="btn btn-close-announcement-detail"
+            data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
         <div class="anima-body h-100 d-flex justify-content-center align-items-center">
           <div class="w-100 max-w-1918 position-relative pt-4 pb-5">
-            <div class="bg-img-preview video-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
+            <div
+              class="bg-img-preview video-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
               <vg-player class="h-fit video-play max-w-1227 w-100">
                 <vg-overlay-play></vg-overlay-play>
                 <vg-buffering></vg-buffering>
@@ -687,8 +867,8 @@
                   <vg-volume></vg-volume>
                   <vg-fullscreen></vg-fullscreen>
                 </vg-controls>
-                <video [vgMedia]="$any(media)" poster="../../../assets/img/preview1.png" #media id="singleVideo"
-                  preload="auto" crossorigin>
+                <video [vgMedia]="$any(videomedia)" poster="../../../assets/img/preview1.png" #videomedia
+                  id="singleVideo" preload="auto" crossorigin>
                   <source src="../../../assets/vid/test.mp4" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
                 </video>
@@ -701,12 +881,13 @@
     </div>
   </div>
   <!-- Modal VIEW PLANT -->
-  <div class="modal px-0 fade" id="viewplant" tabindex="-1" role="dialog" aria-labelledby="viewplantTitle"aria-hidden="true">
+  <div class="modal px-0 fade" id="viewplant" tabindex="-1" role="dialog" aria-labelledby="viewplantTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
         <div class="w-100 d-flex align-items-center justify-content-center h-100">
@@ -715,24 +896,25 @@
       </div>
     </div>
   </div>
-   <!-- Modal PLAY VIDEO360 -->
-   <div class="modal px-0 fade" id="view360video" tabindex="-1" role="dialog" aria-labelledby="view360videoTitle"aria-hidden="true">
+  <!-- Modal PLAY VIDEO360 -->
+  <div class="modal px-0 fade" id="view360video" tabindex="-1" role="dialog" aria-labelledby="view360videoTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-light font-size-55" aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/icon/x.png" alt="">
           </button>
         </div>
-    
+
         <div class="w-100 d-grid align-items-center justify-content-center h-100">
-            <div class="d-block h-auto align-items-center justify-content-center w-100">
-              <p class="fw-500 py-3 w-100 font-size-20 text-center line-26 text-light">Este anúncio ainda não <br/> possui Visita em 360°</p>
-          <img src="../../../assets/img/360video.svg" class="h-fit img-notvideo-360 max-w-1227 w-100" />
-        </div>
+          <div class="d-block h-auto align-items-center justify-content-center w-100">
+            <p class="fw-500 py-3 w-100 font-size-20 text-center line-26 text-light">Este anúncio ainda não <br />
+              possui Visita em 360°</p>
+            <img src="../../../assets/img/360video.svg" class="h-fit img-notvideo-360 max-w-1227 w-100" />
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 </main>

@@ -1,15 +1,18 @@
 <main class="bg-graylight d-flex justify-content-center position-relative w-100 py-5 px-5p">
     <div class="padding-x w-100 max-w-1918 mb-5">
         <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto">
-            <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
-                <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">Página Inicial /
+            <div class="col-12 d-none-desk mt-5 pt-5" *ngIf="filtroResultDisplay.typeAd">
+                <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
+                    <span [routerLink]="['/']" class="fw-700 font-size-16 line-19 color-black">Página Inicial /</span>
                     <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
+
                 </p>
                 <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                     <b>
                         <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                        <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}},</span>
+                        <span *ngIf="filtroResultDisplay.styleProperty"> {{filtroResultDisplay.styleProperty}},</span>
+                        <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}}+...</span>
                         <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
                         <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
                         <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
@@ -42,11 +45,10 @@
                             <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
                         </div>
                     </div>
-
                     <div class="dropdown px-0 mb-3 ">
                         <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                             <select formControlName="typePropertyState" (change)="getEstados($event)"
-                                class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-74 bg-white fw-400 font-size-14 line-20 color-black"
+                                class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-74 bg-light fw-400 font-size-14 line-20 color-black"
                                 [(ngModel)]="stateSelected" id="state"
                                 aria-label="Default select example">
                                 <option [value]="stateSelected" disabled selected value>
@@ -56,11 +58,9 @@
                         </div>
                     </div>
                     <div class="dropdown px-0 mb-4 ">
-                        <ng-autocomplete id="search-cityes-test" [data]="listAllCity" [searchKeyword]="keyword"
-                            placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
-                            (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
-                            historyIdentifier="listAllCity" [itemTemplate]="itemTemplate"
-                            [notFoundTemplate]="notFoundTemplate">
+                        <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity" [searchKeyword]="keyword"
+                        (inputChanged)='onChangeSearch($event)' placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
+                        [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
                         </ng-autocomplete>
 
                         <ng-template #itemTemplate let-item>
@@ -72,9 +72,9 @@
                         </ng-template>
 
                     </div>
-                    <div class="dropdown">
+                    <div class="dropdown" style="margin-top: 3.5rem;">
                         <button
-                            class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                            class="btn pl-3 border border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
                             type="button" id="dropdownforhome" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             {{TypeProperty}}
@@ -138,12 +138,10 @@
                             role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
                         <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                            <a class="dropdown-item" (click)="searchByVacancies('0')">Tanto faz</a>
                             <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
                             <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
                             <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
                             <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
-                            <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                             <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                         </div>
                     </div>
@@ -177,10 +175,10 @@
                                 <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
                                     <h4 class="bg-purple h-fit px-4 py-2 mb-0
                              border-radius-5 fw-400 font-size-18 line-24
-                             text-light" *ngIf="item.typeOfAd === 'rent'">Alugar</h4>
+                             text-light" *ngIf="item.typeOfAd === 'rent'">Locação</h4>
                                     <h4 class="bg-purple h-fit px-4 py-2 mb-0
                              border-radius-5 fw-400 font-size-18 line-24
-                             text-light" *ngIf="item.typeOfAd === 'sale'">Vender</h4>
+                             text-light" *ngIf="item.typeOfAd === 'sale'">Venda</h4>
                                     <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
                              border-radius-5 fw-400 font-size-18 line-24
                              text-dark">Exclusivo</h4>
@@ -232,26 +230,25 @@
                 </div>
             </div>
             <div class="col-8 col-body-products px-0 pt-5 mt-5">
-                <div class="col-12 d-block-desk d-none mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
-                    <p class="d-flex fw-700 font-size-16 line-19 color-black
-                     align-items-center">Página Inicial /
-                        <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;
-                            Resultado de busca
-                        </span>
+                <div class="col-12 d-block-desk d-none " *ngIf="filtroResultDisplay.typeAd">
+                    <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
+                        <span [routerLink]="['/']" class="fw-700 font-size-16 line-19 color-black">Página Inicial /</span>
+                        <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
+    
                     </p>
                     <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                         <b>
-                            <span class="text-capitalize" *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
-                            <span class="text-capitalize" *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                            <span class="text-capitalize" *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
-                            <span class="text-capitalize" *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
+                            <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
+                            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
                             <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}},</span>
-                            <span class="d-flex flex-wrap text-capitalize" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
-                            <span class="text-capitalize" *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
+                            <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
+                            <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
+                            <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
+                            <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
                         </b>
                     </p>
                 </div>
-                <div class="col-12 space-see-maps-area-search">
+                <div class="col-12 px-0 space-see-maps-area-search">
                     <a [routerLink]="['/search-map']" class="btn-ver-no-mapa py-4">
                         <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
                         <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
@@ -277,14 +274,13 @@
                                     {{orderBy}}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" (click)="changeOderBy('Relevante')">Relevante</a>
-                                    <a class="dropdown-item" (click)="changeOderBy('Maiorpreço')">Maior
-                                        preço</a>
-                                    <a class="dropdown-item" (click)="changeOderBy('Menor preço')">Menor preço</a>
+                                    <a class="dropdown-item" (click)="sortPriceList('Relevante')">Relevante</a>
+                                    <a class="dropdown-item" (click)="sortPriceList('major>minor')">Maior preço</a>
+                                    <a class="dropdown-item" (click)="sortPriceList('minor>major')">Menor preço</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 <div class="row pr-0">
                     <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch">
@@ -451,7 +447,7 @@
         <div class="dropdown px-0 mb-3 ">
             <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                 <select formControlName="typePropertyState" (change)="getEstados($event)"
-                    class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-74 bg-white fw-400 font-size-14 line-20 color-black"
+                    class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-74 bg-light fw-400 font-size-14 line-20 color-black"
                     [(ngModel)]="stateSelected" id="state"
                     aria-label="Default select example">
                     <option [value]="stateSelected" disabled selected value>
@@ -461,10 +457,10 @@
             </div>
         </div>
         <div class="dropdown px-0 mb-4 ">
-            <ng-autocomplete id="search-cityes-test" [data]="listAllCity" [searchKeyword]="keyword"
+            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity" [searchKeyword]="keyword"
+            (inputChanged)='onChangeSearch($event)'
                 placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
-                (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
-                historyIdentifier="listAllCity" [itemTemplate]="itemTemplate"
+                [itemTemplate]="itemTemplate"
                 [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
 
@@ -477,9 +473,9 @@
             </ng-template>
 
         </div>
-        <div class="dropdown">
+        <div class="dropdown"  style="margin-top: 3.5rem;">
             <button
-                class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                class="btn pl-3 border  border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
                 type="button" id="dropdownforhome" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 {{TypeProperty}}
@@ -543,12 +539,10 @@
                 role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false" readonly>
             <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                <a class="dropdown-item" (click)="searchByVacancies('0')">Tanto faz</a>
                 <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
                 <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
                 <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
                 <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
-                <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                 <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
             </div>
         </div>

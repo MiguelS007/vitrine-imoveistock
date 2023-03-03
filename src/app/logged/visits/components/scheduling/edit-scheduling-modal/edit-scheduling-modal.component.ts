@@ -66,12 +66,19 @@ export class EditSchedulingModalComponent implements OnInit {
     dateFormat.setMinutes(0);
     const result = this.isValidDate(dateFormat)
     if (result === true) {
+      localStorage.setItem('rescheduling-success1', 'true');
       localStorage.setItem('dateScheduling', JSON.stringify(dateFormat));
-      this.modalService.dismissAll()
+      this.exit();
+      const modalRef = this.modalService.open(EditScheduling2ModalComponent, { centered: true });
+      modalRef.result.then(data => {
+      }, error => {
+        localStorage.removeItem('rescheduling-success1');
+      });
     } else {
       this.toastrService.error('Selecione uma data valida', '', { progressBar: true })
     }
   }
+
   isValidDate(d) {
     return d instanceof Date && !isNaN(d.getTime());
   }

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Subscription } from 'rxjs';
+import { debounceTime, fromEvent, Subscription } from 'rxjs';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
@@ -18,20 +18,19 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
   styleUrls: ['./property-detail.component.scss']
 })
 export class PropertyDetailComponent implements OnInit {
-  infopay = true;
   infopaymobile = false;
+  finalValueSale: number;
+  finalValueRent: number;
 
-  @HostListener('window:scroll')
+
+  @HostListener('window:scroll', [])
   checkScroll() {
     const scrollPosition = window.pageYOffset;
     const widthWindow = window.innerWidth;
     let interdistance = Math.trunc(scrollPosition);
-    // INFO-PAY-MOBILE
-    if (interdistance >= 270) {
-      this.infopay = false;
+    if (interdistance > 950) {
       this.infopaymobile = true;
     } else {
-      this.infopay = true;
       this.infopaymobile = false;
     }
     // STATIC-INFO-PAY-IN-SCROLL-PAGE
@@ -41,7 +40,6 @@ export class PropertyDetailComponent implements OnInit {
     const colinfopay = document.querySelector(
       '#colinfopay'
     ) as HTMLElement;
-    
 
 
     if (interdistance >= 1460) {
@@ -51,7 +49,7 @@ export class PropertyDetailComponent implements OnInit {
         infopaydesk.style.top = '0px';
         infopaydesk.style.maxWidth = '415px';
         infopaydesk.style.zIndex = '20';
-      }else{
+      } else {
         colinfopay.style.alignSelf = 'self-end'
         infopaydesk.style.position = 'relative';
         infopaydesk.style.top = '0px';
@@ -81,6 +79,8 @@ export class PropertyDetailComponent implements OnInit {
     // console.log(interdistance, window.innerWidth)
 
   }
+
+  scroller: Subscription;
 
 
   form: FormGroup;
@@ -122,15 +122,53 @@ export class PropertyDetailComponent implements OnInit {
   paginationProduct = 1;
   tourvirtual = false;
   propertyvideo = true;
-  finalValue;
+
 
   filterResult: AnnouncementGetResponseDto[] = [];
   listLikes: AnnouncementGetResponseDto[] = [];
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
+  dadosmockados: any[] = [
+    {
+      caracteristica: 'Ar condicionado'
+    },
+    {
+      caracteristica: 'Sauna'
+    },
+    {
+      caracteristica: 'Tv'
+    },
+    {
+      caracteristica: 'Churrasqueira'
+    },
+    {
+      caracteristica: 'Área Comum'
+    },
+    {
+      caracteristica: 'Mobiliada'
+    },
+    {
+      caracteristica: 'Academia'
+    },
+    {
+      caracteristica: 'Piscina'
+    },
+    {
+      caracteristica: 'Lavanderia'
+    },
+    {
+      caracteristica: 'Elevador'
+    },
+    {
+      caracteristica: 'Banheiro'
+    },
+    {
+      caracteristica: 'Wi-fi'
+    },
 
 
+  ];
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -170,20 +208,24 @@ export class PropertyDetailComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.ngxSpinnerService.show()
     this.onlyimg = this.datamokservice.onlypreview;
     this.previewimg = this.datamokservice.imagespreview;
     this.products = this.datamokservice.resultSearch;
-    this.user = JSON.parse(localStorage.getItem('userDto'));
+
 
     this.response = this.route.snapshot.data['resolve'];
-    this.ngxSpinnerService.hide()
+    this.ngxSpinnerService.hide();
+    console.log(this.response)
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
-    this.finalValue = (parseInt(this.response.valueOfIptu) + parseInt(this.response.condominiumValue) + this.response.saleValue);
+    let valueIptu = parseInt(this.response.valueOfIptu) / 12;
+    this.finalValueSale = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.saleValue);
+    this.finalValueRent = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.leaseValue);
 
-    console.log(this.user?._id, this.response._id, this.finalValue);
+    console.log( this.response._id, this.finalValueSale);
 
 
     if (localStorage.getItem('user') !== null) {
@@ -200,6 +242,9 @@ export class PropertyDetailComponent implements OnInit {
     }
   }
 
+  public toNumber(paremetro1: string) {
+    return Number(paremetro1)
+  }
 
 
   btninteractionimg(value: string) {
@@ -221,6 +266,10 @@ export class PropertyDetailComponent implements OnInit {
       this.propertyvideo = false;
       this.tourvirtual = true;
     }
+  }
+
+  closePause(videomedia: HTMLVideoElement) {
+    videomedia.pause();
   }
 
 

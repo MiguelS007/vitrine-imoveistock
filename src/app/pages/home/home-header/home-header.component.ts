@@ -1,10 +1,10 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component,OnInit, } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { AnnouncementService } from '../../../service/announcement.service';
-import  estados  from '../../../../assets/json/estados-cidades.json';
+import estados from '../../../../assets/json/estados-cidades.json';
 
 @Component({
   selector: 'app-home-header',
@@ -12,11 +12,7 @@ import  estados  from '../../../../assets/json/estados-cidades.json';
   styleUrls: ['./home-header.component.scss']
 })
 export class HomeHeaderComponent implements OnInit {
-  @Input() fieldvalue = '';
   form: FormGroup;
-  @ViewChild('searchresult') targetElement: ElementRef;
-
-
   response: AnnouncementGetResponseDto[] = [];
   filterResponse: AnnouncementGetResponseDto[] = [];
   isChecked = false;
@@ -27,117 +23,7 @@ export class HomeHeaderComponent implements OnInit {
   stateSelected = 'Primeiro escolha um estado'
   citySelected = 'Escolha uma cidade'
   cities: any[];
-  states: any[] = [
-    {
-      uf: 'AC',
-      ufLirycs: 'Acre'
-    },
-    {
-      uf: 'AL',
-      ufLirycs: 'Alagoas'
-    },
-    {
-      uf: 'AP',
-      ufLirycs: 'Amapá'
-    },
-    {
-      uf: 'AM',
-      ufLirycs: 'Amazonas'
-    },
-    {
-      uf: 'BA',
-      ufLirycs: 'Bahia'
-    },
-    {
-      uf: 'CE',
-      ufLirycs: 'Ceara'
-    },
-    {
-      uf: 'DF',
-      ufLirycs: 'Distrito Federal'
-    },
-    {
-      uf: 'ES',
-      ufLirycs: 'Espírito Santo	'
-    },
-    {
-      uf: 'GO',
-      ufLirycs: 'Goiás'
-    },
-    {
-      uf: 'MA',
-      ufLirycs: 'Maranhão'
-    },
-    {
-      uf: 'MT',
-      ufLirycs: 'Mato Grosso'
-    },
-    {
-      uf: 'MS',
-      ufLirycs: 'Mato Grosso do Sul'
-    },
-    {
-      uf: 'MG',
-      ufLirycs: 'Minas Gerais'
-    },
-    {
-      uf: 'PA',
-      ufLirycs: 'Pará'
-    },
-    {
-      uf: 'PB',
-      ufLirycs: 'Paraíba'
-    },
-    {
-      uf: 'PR',
-      ufLirycs: 'Paraná'
-    },
-    {
-      uf: 'PE',
-      ufLirycs: 'Pernambuco'
-    },
-    {
-      uf: 'PI',
-      ufLirycs: 'Piauí'
-    },
-    {
-      uf: 'RJ',
-      ufLirycs: 'Rio de Janeiro	'
-    },
-    {
-      uf: 'RN',
-      ufLirycs: 'Rio Grande do Norte	'
-    },
-    {
-      uf: 'RS',
-      ufLirycs: 'Rio Grande do Sul	'
-    },
-    {
-      uf: 'RO',
-      ufLirycs: 'Rondônia'
-    },
-    {
-      uf: 'RR',
-      ufLirycs: 'Roraima'
-    },
-       {
-      uf: 'SC',
-      ufLirycs: 'Santa Catarina	'
-    },
-    {
-      uf: 'SP',
-      ufLirycs: 'São Paulo	'
-    },
-       {
-      uf: 'SE',
-      ufLirycs: 'Sergipe'
-    },
-       {
-      uf: 'TO',
-      ufLirycs: 'Tocantins	'
-    },
-    
-  ];
+
   valueUntilSaleArray: any[] = [100000, 200000, 300000, 400000, 500000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000, 10000000, 20000000,];
   valueUntilRentArray: any[] = [100, 200, 300, 400, 500, 800, 1000, 2000, 3000, 4000, 5000, 10000, 20000];
   badroomsArray: any[] = [1, 2, 3, 4, 5];
@@ -147,7 +33,7 @@ export class HomeHeaderComponent implements OnInit {
   stylePropertys: string;
 
 
-  typePropertyAllTitle: string = 'Tipo do imóvel';
+  typePropertyAllTitle = "Tipo do imóvel";
   typeAd: string = 'sale';
   typeofProperty: string;
   typepropertyfull: string;
@@ -193,7 +79,6 @@ export class HomeHeaderComponent implements OnInit {
 
   checkedloja = false;
   checkedsalao = false;
-  checkedsala = false;
   checkedgalpao = false;
   checkedconjuntocomercial = false;
   checkedcasacomercial = false;
@@ -204,7 +89,6 @@ export class HomeHeaderComponent implements OnInit {
   checkedprediointeiro = false;
   propertyloja: string;
   propertysalao: string;
-  propertysala: string;
   propertygalpao: string;
   propertyconjuntocomercial: string;
   propertycasacomercial: string;
@@ -216,15 +100,12 @@ export class HomeHeaderComponent implements OnInit {
 
 
 
-  resultsearchfor: any = [];
   collapsed = false;
   typepropertydiv = false;
   typeoffResidential = false;
   typeoffRural = false;
   typeoffCommercial = false;
-  searchresult: any;
   filtersearch = false;
-  liresultsearch: any = [];
   selectedcities: string;
   searchfilterTypeProperty: string;
   searchfilterType: string;
@@ -246,6 +127,7 @@ export class HomeHeaderComponent implements OnInit {
   keyword = 'name'
   getSelectedCity: string;
   estados: any;
+  extensiveState: any;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -265,13 +147,6 @@ export class HomeHeaderComponent implements OnInit {
     });
     this.estados = estados;
   }
-
-
-  ngAfterViewInit(): void {
-    
-  }
-
-
   ngOnInit() {
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro')
@@ -286,93 +161,328 @@ export class HomeHeaderComponent implements OnInit {
 
   selectEvent(item) {
     this.getSelectedCity = item.name;
-    // do something with selected item
   }
-
   onChangeSearch(search: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
   }
-
-  onFocused(e) {
-    // do something
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  typePropertyCharacteristics(typeOf: string, item: string, value: string) {
-    this.checkedAll = false;
+  typePropertyCharacteristics(typeOf: string, item: string, value: string): void {
+    // this.checkedAll = false;
     this.goal = typeOf;
     this.stylePropertys = item;
-
+    console.log(value);
     // residencial
     if (value === 'apartamento') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
       this.checkedAllResidencial = false;
+      this.checkedAllResidencial2 = false;
+
       this.checkedapartamento = !this.checkedapartamento;
       this.checkedapartamento ? this.propertyapartamento = 'apartamento' : this.propertyapartamento = '';
-      console.log(this.propertyapartamento, this.checkedapartamento);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Apartamento, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Apartamento, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Apartamento, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Apartamento, ' + ' ';
+      }
     }
+
     if (value === 'studio') {
-      this.checkedAllResidencial = false;
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      } this.checkedAllResidencial = false;
+      this.checkedAllResidencial2 = false;
       this.checkedstudio = !this.checkedstudio;
       this.checkedstudio ? this.propertystudio = 'studio' : this.propertystudio = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Studio, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Studio')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Studio, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Studio, ' + ' ';
+      }
+
       console.log(this.propertystudio, this.checkedstudio);
 
     }
     if (value === 'kitnet') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
+      this.checkedAllResidencial2 = false;
       this.checkedAllResidencial = false;
       this.checkedkitnet = !this.checkedkitnet;
       this.checkedkitnet ? this.propertykitnet = 'kitnet' : this.propertykitnet = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Kitnet, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Kitnet, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Kitnet, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Kitnet, ' + ' ';
+      }
     }
     if (value === 'casa') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
+      this.checkedAllResidencial2 = false;
       this.checkedAllResidencial = false;
       this.checkedcasa = !this.checkedcasa;
       this.checkedcasa ? this.propertycasa = 'casa' : this.propertycasa = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Casa, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Casa, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Casa, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Casa, ' + ' ';
+      }
     }
     if (value === 'casacondominio') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
+      this.checkedAllResidencial2 = false;
       this.checkedAllResidencial = false;
       this.checkedcasacondominio = !this.checkedcasacondominio;
       this.checkedcasacondominio ? this.propertycasacondominio = 'casacondominio' : this.propertycasacondominio = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Casa Condominio, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Casa Condominio, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Casa Condominio, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Casa Condominio, ' + ' ';
+      }
     }
     if (value === 'casadevila') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
+      this.checkedAllResidencial2 = false;
       this.checkedAllResidencial = false;
       this.checkedcasadevila = !this.checkedcasadevila;
       this.checkedcasadevila ? this.propertycasadevila = 'casadevila' : this.propertycasadevila = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Casa de Vila, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Casa de Vila, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Casa de Vila, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Casa de Vila, ' + ' ';
+      }
     }
     if (value === 'loft') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
+      this.checkedAllResidencial2 = false;
       this.checkedAllResidencial = false;
       this.checkedloft = !this.checkedloft;
       this.checkedloft ? this.propertyloft = 'loft' : this.propertyloft = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Loft, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Loft, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Loft, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Loft, ' + ' ';
+      }
     }
     if (value === 'flat') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
+      this.checkedAllResidencial2 = false;
       this.checkedAllResidencial = false;
       this.checkedflat = !this.checkedflat;
       this.checkedflat ? this.propertyflat = 'flat' : this.propertyflat = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Flat, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Flat, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Flat, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Flat, ' + ' ';
+      }
     }
     if (value === 'terreno') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
+      this.checkedAllResidencial2 = false;
       this.checkedAllResidencial = false;
       this.checkedterreno = !this.checkedterreno;
       this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Terreno, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Terreno, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Terreno, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Terreno, ' + ' ';
+      }
+    }
+    if (value === 'cobertura') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
+      this.checkedAllResidencial2 = false;
+      this.checkedAllResidencial = false;
+      this.checkedcobertura = !this.checkedcobertura;
+      this.checkedcobertura ? this.propertycobertura = 'cobertura' : this.propertycobertura = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Cobertura, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Cobertura, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Cobertura, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Cobertura, ' + ' ';
+      }
     }
     if (value === 'chacara') {
+      if (this.checkedAllResidencial2) {
+        this.checkedapartamento = false;
+        this.checkedstudio = false;
+        this.checkedkitnet = false;
+        this.checkedcasa = false;
+        this.checkedcobertura = false;
+        this.checkedcasacondominio = false;
+        this.checkedcasadevila = false;
+        this.checkedloft = false;
+        this.checkedflat = false;
+        this.checkedterreno = false;
+        this.checkedchacara = false;
+      }
+      this.checkedAllResidencial2 = false;
       this.checkedAllResidencial = false;
       this.checkedchacara = !this.checkedchacara;
       this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Residenciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Chacara, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Chacara, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Chacara, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Chacara, ' + ' ';
+      }
     }
-    if (value === 'todosesidencial') {
+    if (value === 'todosresidencial') {
       this.AllResidencial = false;
       this.AllResidencial2 = true;
       this.checkedAllResidencial = false;
@@ -400,12 +510,22 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
       this.checkedchacara = true;
       this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
+      if (this.typePropertyAllTitle) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Todos os Imóveis Residenciais', '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Todos os Imóveis Residenciais', 'Tipo do imóvel');
+      } else {
+        this.typePropertyAllTitle += 'Todos os Imóveis Residenciais';
+      }
     }
-    if (value === 'todosesidencial2') {
+    if (value === 'todosresidencial2') {
       this.AllResidencial = true;
       this.AllResidencial2 = false;
       this.checkedAllResidencial = false;
-      this.checkedAllResidencial2 = !this.checkedAllResidencial2;
+      this.checkedAllResidencial2 = false;
+
 
       this.checkedapartamento = !this.checkedapartamento;
       this.checkedapartamento ? this.propertyapartamento = 'apartamento' : this.propertyapartamento = '';
@@ -429,77 +549,290 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedterreno ? this.propertyterreno = 'terreno' : this.propertyterreno = '';
       this.checkedchacara = !this.checkedchacara;
       this.checkedchacara ? this.propertychacara = 'chacara' : this.propertychacara = '';
+      if (this.typePropertyAllTitle) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Tipo do imóvel', '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Tipo do imóvel', 'Todos os Imóveis Residenciais');
+      } else {
+        this.typePropertyAllTitle += 'Tipo do imóvel';
+      }
     }
-
 
     // Comercial
     if (value === 'loja') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedloja = !this.checkedloja;
       this.checkedloja ? this.propertyloja = 'loja' : this.propertyloja = '';
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Loja, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Loja, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Loja, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Loja, ' + ' ';
+      }
       console.log(this.propertyloja, this.checkedloja);
     }
     if (value === 'salao') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedsalao = !this.checkedsalao;
       this.checkedsalao ? this.propertysalao = 'salao' : this.propertysalao = '';
-      console.log(this.propertysalao, this.checkedsalao);
-    }
-    if (value === 'sala') {
-      this.checkedAllComercial = false;
-      this.checkedsala = !this.checkedsala;
-      this.checkedsala ? this.propertysala = 'sala' : this.propertysala = '';
-      console.log(this.propertysala, this.checkedsala);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Salâo, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Salâo, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Salâo, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Salâo, ' + ' ';
+      } 
+      console.log(this.propertysalao, this.checkedsalao)
+
     }
     if (value === 'galpao') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedgalpao = !this.checkedgalpao;
       this.checkedgalpao ? this.propertygalpao = 'galpao' : this.propertygalpao = '';
-      console.log(this.propertygalpao, this.checkedgalpao);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Galpão, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Galpão, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Galpão, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Galpão, ' + ' ';
+      } console.log(this.propertygalpao, this.checkedgalpao);
     }
     if (value === 'conjuntocomercial') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedconjuntocomercial = !this.checkedconjuntocomercial;
       this.checkedconjuntocomercial ? this.propertyconjuntocomercial = 'conjuntocomercial' : this.propertyconjuntocomercial = '';
-      console.log(this.propertyconjuntocomercial, this.checkedconjuntocomercial);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Conjunto Comercial, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Conjunto Comercial, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Conjunto Comercial, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Conjunto Comercial, ' + ' ';
+      } console.log(this.propertyconjuntocomercial, this.checkedconjuntocomercial);
     }
     if (value === 'casacomercial') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedcasacomercial = !this.checkedcasacomercial;
       this.checkedcasacomercial ? this.propertycasacomercial = 'casacomercial' : this.propertycasacomercial = '';
-      console.log(this.propertycasacomercial, this.checkedcasacomercial);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Casa Comercial, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Casa Comercial, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Casa Comercial, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Casa Comercial, ' + ' ';
+      } console.log(this.propertycasacomercial, this.checkedcasacomercial);
     }
     if (value === 'hotel') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedhotel = !this.checkedhotel;
       this.checkedhotel ? this.propertyhotel = 'hotel' : this.propertyhotel = '';
-      console.log(this.propertyhotel, this.checkedhotel);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Hotel, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Hotel, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Hotel, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Hotel, ' + ' ';
+      } console.log(this.propertyhotel, this.checkedhotel);
     }
     if (value === 'motel') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedmotel = !this.checkedmotel;
       this.checkedmotel ? this.propertymotel = 'motel' : this.propertymotel = '';
-      console.log(this.propertymotel, this.checkedmotel);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Motel, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Motel, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Motel, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Motel, ' + ' ';
+      } console.log(this.propertymotel, this.checkedmotel);
     }
     if (value === 'pousada') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedpousada = !this.checkedpousada;
       this.checkedpousada ? this.propertypousada = 'pousada' : this.propertypousada = '';
-      console.log(this.propertypousada, this.checkedpousada);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Pousada, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Pousada, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Pousada, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Pousada, ' + ' ';
+      } console.log(this.propertypousada, this.checkedpousada);
     }
     if (value === 'lajecorporativa') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedlajecorporativa = !this.checkedlajecorporativa;
       this.checkedlajecorporativa ? this.propertylajecorporativa = 'lajecorporativa' : this.propertylajecorporativa = '';
-      console.log(this.propertylajecorporativa, this.checkedlajecorporativa);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Laje Corporativa, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Laje Corporativa, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Laje Corporativa, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Laje Corporativa, ' + ' ';
+      } console.log(this.propertylajecorporativa, this.checkedlajecorporativa);
     }
     if (value === 'prediointeiro') {
+      if (this.checkedAllComercial2) {
+        this.checkedloja = false;
+        this.checkedsalao = false;
+        this.checkedgalpao = false;
+        this.checkedconjuntocomercial = false;
+        this.checkedcasacomercial = false;
+        this.checkedhotel = false;
+        this.checkedmotel = false;
+        this.checkedpousada = false;
+        this.checkedlajecorporativa = false;
+        this.checkedprediointeiro = false;
+      }
+      this.checkedAllComercial2 = false;
       this.checkedAllComercial = false;
       this.checkedprediointeiro = !this.checkedprediointeiro;
       this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
-      console.log(this.propertyprediointeiro, this.checkedprediointeiro);
+      if (this.typePropertyAllTitle.includes('Tipo do imóvel') || this.typePropertyAllTitle.includes('Todos os Imóveis Comerciais')) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Prédio Inteiro, ', '')
+      }
+      if (this.typePropertyAllTitle.includes('Prédio Inteiro, ')) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Prédio Inteiro, ', '');
+      } else {
+        this.typePropertyAllTitle += 'Prédio Inteiro, ' + ' ';
+      } console.log(this.propertyprediointeiro, this.checkedprediointeiro);
     }
-
     if (value === 'todoscomercial') {
       this.AllComercial = false;
       this.AllComercial2 = true;
@@ -510,8 +843,6 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedloja ? this.propertyloja = 'loja' : this.propertyloja = '';
       this.checkedsalao = true;
       this.checkedsalao ? this.propertysalao = 'salao' : this.propertysalao = '';
-      this.checkedsala = true;
-      this.checkedsala ? this.propertysala = 'sala' : this.propertysala = '';
       this.checkedgalpao = true;
       this.checkedgalpao ? this.propertygalpao = 'galpao' : this.propertygalpao = '';
       this.checkedconjuntocomercial = true;
@@ -528,8 +859,16 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedlajecorporativa ? this.propertylajecorporativa = 'lajecorporativa' : this.propertylajecorporativa = '';
       this.checkedprediointeiro = true;
       this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
+      if (this.typePropertyAllTitle) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Todos os Imóveis Comerciais', '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Todos os Imóveis Comerciais', 'Tipo do imóvel');
+      } else {
+        this.typePropertyAllTitle += 'Todos os Imóveis Comerciais';
+      }
     }
-
     if (value === 'todoscomercial2') {
       this.AllComercial = true;
       this.AllComercial2 = false;
@@ -540,8 +879,6 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedloja ? this.propertyloja = 'loja' : this.propertyloja = '';
       this.checkedsalao = !this.checkedsalao;
       this.checkedsalao ? this.propertysalao = 'salao' : this.propertysalao = '';
-      this.checkedsala = !this.checkedsala;
-      this.checkedsala ? this.propertysala = 'sala' : this.propertysala = '';
       this.checkedgalpao = !this.checkedgalpao;
       this.checkedgalpao ? this.propertygalpao = 'galpao' : this.propertygalpao = '';
       this.checkedconjuntocomercial = !this.checkedconjuntocomercial;
@@ -558,15 +895,22 @@ export class HomeHeaderComponent implements OnInit {
       this.checkedlajecorporativa ? this.propertylajecorporativa = 'lajecorporativa' : this.propertylajecorporativa = '';
       this.checkedprediointeiro = !this.checkedprediointeiro;
       this.checkedprediointeiro ? this.propertyprediointeiro = 'prediointeiro' : this.propertyprediointeiro = '';
+      if (this.typePropertyAllTitle) {
+        this.typePropertyAllTitle = '';
+        this.typePropertyAllTitle.replace('Tipo do imóvel', '')
+      }
+      if (this.typePropertyAllTitle.includes(value)) {
+        this.typePropertyAllTitle = this.typePropertyAllTitle.replace('Tipo do imóvel', 'Todos os Imóveis Comerciais');
+      } else {
+        this.typePropertyAllTitle += 'Tipo do imóvel';
+      }
     }
-
+    if (this.typePropertyAllTitle === ' ' || this.typePropertyAllTitle === '  ' || this.typePropertyAllTitle === '   ' || this.typePropertyAllTitle === '     ' || this.typePropertyAllTitle === '      ' || this.typePropertyAllTitle === '       ' || this.typePropertyAllTitle === '        ' || this.typePropertyAllTitle === '         ' || this.typePropertyAllTitle === '          ' || this.typePropertyAllTitle === '           ')
+      this.typePropertyAllTitle = 'Tipo do imóvel';
   }
-
-
-
   confirm() {
-
     if (this.stateSelected === 'Primeiro escolha um estado') this.form.controls['typePropertyState'].setValue('')
+    if (this.stateSelected === 'Acre') { this.form.controls['typePropertyState'].setValue('AC') } else if (this.stateSelected === 'Alagoas') { this.form.controls['typePropertyState'].setValue('AL') } else if (this.stateSelected === 'Amapá') { this.form.controls['typePropertyState'].setValue('AP') } else if (this.stateSelected === 'Amazonas') { this.form.controls['typePropertyState'].setValue('AM') } else if (this.stateSelected === 'Bahia') { this.form.controls['typePropertyState'].setValue('BA') } else if (this.stateSelected === 'Ceara') { this.form.controls['typePropertyState'].setValue('CE') } else if (this.stateSelected === 'Distrito Federal') { this.form.controls['typePropertyState'].setValue('DF') } else if (this.stateSelected === 'Espírito Santo') { this.form.controls['typePropertyState'].setValue('ES') } else if (this.stateSelected === 'Goiás') { this.form.controls['typePropertyState'].setValue('GO') } else if (this.stateSelected === 'Maranhão') { this.form.controls['typePropertyState'].setValue('MA') } else if (this.stateSelected === 'Mato Grosso') { this.form.controls['typePropertyState'].setValue('MT') } else if (this.stateSelected === 'Mato Grosso do Sul') { this.form.controls['typePropertyState'].setValue('MS') } else if (this.stateSelected === 'Minas Gerais') { this.form.controls['typePropertyState'].setValue('MG') } else if (this.stateSelected === 'Pará') { this.form.controls['typePropertyState'].setValue('PA') } else if (this.stateSelected === 'Paraíba') { this.form.controls['typePropertyState'].setValue('PB') } else if (this.stateSelected === 'Paraná') { this.form.controls['typePropertyState'].setValue('PR') } else if (this.stateSelected === 'Pernambuco') { this.form.controls['typePropertyState'].setValue('PE') } else if (this.stateSelected === 'Piauí') { this.form.controls['typePropertyState'].setValue('PI') } else if (this.stateSelected === 'Rio de Janeiro') { this.form.controls['typePropertyState'].setValue('RJ') } else if (this.stateSelected === 'Rio Grande do Norte') { this.form.controls['typePropertyState'].setValue('RN') } else if (this.stateSelected === 'Rio Grande do Sul') { this.form.controls['typePropertyState'].setValue('RS') } else if (this.stateSelected === 'Rondônia') { this.form.controls['typePropertyState'].setValue('RO') } else if (this.stateSelected === 'Roraima') { this.form.controls['typePropertyState'].setValue('RR') } else if (this.stateSelected === 'Santa Catarina') { this.form.controls['typePropertyState'].setValue('SC') } else if (this.stateSelected === 'São Paulo') { this.form.controls['typePropertyState'].setValue('SP') } else if (this.stateSelected === 'Sergipe') { this.form.controls['typePropertyState'].setValue('SE') } else if (this.stateSelected === 'Tocantins') { this.form.controls['typePropertyState'].setValue('TO') }
     let filter: any = {
       typeAd: this.typeAd,
       state: this.form.controls['typePropertyState'].value,
@@ -590,7 +934,6 @@ export class HomeHeaderComponent implements OnInit {
       // comercial
       propertyloja: this.propertyloja,
       propertysalao: this.propertysalao,
-      propertysala: this.propertysala,
       propertygalpao: this.propertygalpao,
       propertyconjuntocomercial: this.propertyconjuntocomercial,
       propertycasacomercial: this.propertycasacomercial,
@@ -602,6 +945,7 @@ export class HomeHeaderComponent implements OnInit {
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: this.form.controls['typePropertyBadrooms'].value
     };
+    console.log(filter);
 
 
     // ---------------------------
@@ -612,7 +956,8 @@ export class HomeHeaderComponent implements OnInit {
           announcementTypeAdGroup.push(this.response[i]);
         }
       }
-    } else {
+    }
+    else {
       announcementTypeAdGroup = this.response;
     }
     // ---------------------------
@@ -772,7 +1117,6 @@ export class HomeHeaderComponent implements OnInit {
     localStorage.setItem('filtro', JSON.stringify(filter))
     localStorage.setItem('resultSearch', JSON.stringify(this.resultType));
     this.router.navigate(['/search']);
-
   }
 
 
@@ -785,18 +1129,17 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
 
-  getEstados(value){
+  getEstados(value) {
     let valor = value.target.value;
     this.listAllCity = [];
+    this.stateSelected = valor;
     for (let i = 0; i < estados.estados.length; i++) {
-      if(valor === estados.estados[i].nome){
+      if (valor === estados.estados[i].nome) {
         for (let x = 0; x < estados.estados[i].cidades.length; x++) {
-          this.listAllCity.push({name: estados.estados[i].cidades[x]})
-          this.stateSelected = estados.estados[i].sigla
+          this.listAllCity.push({ name: estados.estados[i].cidades[x] })
+          this.stateSelected = estados.estados[i].nome
         }
       }
     }
   }
 }
-
-

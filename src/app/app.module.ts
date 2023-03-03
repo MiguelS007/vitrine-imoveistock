@@ -42,16 +42,18 @@ import { SchedulingStep1Component } from './pages/property-detail/components/sch
 import { SchedulingStep2Component } from './pages/property-detail/components/scheduling-step2/scheduling-step2.component';
 import { SchedulingStep3Component } from './pages/property-detail/components/scheduling-step3/scheduling-step3.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { TermsComponent } from './auth/terms/terms.component';
-import { CookiePolicyComponent } from './pages/cookie-policy/cookie-policy.component';
+import { TermsComponent } from './shared/terms/terms.component';
+import { CookiePolicyComponent } from './shared/cookie-policy/cookie-policy.component';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from "ngx-cookieconsent";
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { TermsSignupComponent } from './shared/terms-signup/terms-signup.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 registerLocaleData(ptBr);
 
 const cookieConfig:NgcCookieConsentConfig = {
   cookie: {
-    domain: 'imoveistock.com.br'
+    domain: window.location.hostname
   },
   palette: {
     popup: {
@@ -97,6 +99,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     SchedulingStep3Component,
     TermsComponent,
     CookiePolicyComponent,
+    TermsSignupComponent,
   ],
 
   imports: [
@@ -105,6 +108,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     NgbModule,
     AppRoutingModule,
     RouterModule,
+    GoogleMapsModule,
     FormsModule,
     SwiperModule,
     FormsModule,

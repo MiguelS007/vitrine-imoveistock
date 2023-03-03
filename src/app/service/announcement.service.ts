@@ -49,4 +49,10 @@ export class AnnouncementService extends BaseService {
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
+    listExclusive(): Observable<AnnouncementGetResponseDto[]> {
+        return this.httpClient
+            .get(`${this.url}/list-exclusive-showcase`, this.anonymousHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
 }

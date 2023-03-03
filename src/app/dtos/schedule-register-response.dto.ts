@@ -5,6 +5,7 @@ export class ScheduleRegisterResponseDto {
     _id: string;
     visitDate: Date;
     cancellationReason: string;
+    status?: string;
     user?: UserGetResponseDto;
     announcement?: AnnouncementGetResponseDto;
 }
