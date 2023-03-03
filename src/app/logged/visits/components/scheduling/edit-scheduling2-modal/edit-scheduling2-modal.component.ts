@@ -48,6 +48,8 @@ export class EditScheduling2ModalComponent implements OnInit {
   }
 
   registerSuccess(success) {
+    let confirmed = 'true';
+    localStorage.setItem('rescheduling-success', confirmed);
     this.modalService.dismissAll();
   }
 

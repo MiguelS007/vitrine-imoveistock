@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScheduleRegisterResponseDto } from 'src/app/dtos/schedule-register-response.dto';
 import { AnnouncementService } from 'src/app/service/announcement.service';
@@ -18,6 +18,7 @@ import { EditScheduling3ModalComponent } from './edit-scheduling3-modal/edit-sch
   styleUrls: ['./scheduling.component.scss']
 })
 export class SchedulingComponent implements OnInit {
+  @ViewChildren('announcements') announcementList: QueryList<any>;
 
   response: any[] = [];
   responseSchedules: ScheduleRegisterResponseDto[] = [];
@@ -66,25 +67,29 @@ export class SchedulingComponent implements OnInit {
       success => {
         this.response = success
         if (success.length > 0) {
-          console.log(this.response)
           this.selectedScheduling = success[0];
-          for (let i = 0; i < this.response.length; i++) {
-            console.log(this.response[i].status)
-            
-          }
           setTimeout(() => {
-            let teste = document.getElementById(success[0]._id);
-            teste.classList.add('scheduling-visit-selected');
-            localStorage.setItem('announcementChecked', success[0]._id)
-          }, 200);
+            this.selecionarVisita(this.selectedScheduling._id);
+          }, 100);
         }
         this.verifyLike()
-
       },
       error => {
         console.error(error);
       }
     )
+  }
+
+  selecionarVisita(item) {
+    this.announcementList.map(results => {
+      if (results.nativeElement?.id === item) {
+        results.nativeElement.className = 'scheduling-visit-selected w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4';
+        localStorage.setItem('announcementChecked', item._id)
+        console.log(item)
+      } else {
+        results.nativeElement.className = 'w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4';
+      }
+    });
   }
 
   verifyLike() {
@@ -169,9 +174,9 @@ export class SchedulingComponent implements OnInit {
         this.response = success
         if (success.length > 0) {
           for (let i = 0; i < this.response.length; i++) {
-           if(item._id === this.response[i]._id) {
-             this.situationStatus = this.response[i].status;
-           } 
+            if (item._id === this.response[i]._id) {
+              this.situationStatus = this.response[i].status;
+            }
           }
         }
       },
@@ -239,17 +244,19 @@ export class SchedulingComponent implements OnInit {
   editScheduling(selectedScheduling) {
     localStorage.setItem('announcementSelected', JSON.stringify(selectedScheduling));
     const modalRef = this.modalService.open(EditSchedulingModalComponent, { centered: true });
-      modalRef.result.then(data => {
-      }, error => {
-        this.editScheduling2();
-      });
+    modalRef.result.then(data => {
+    }, error => {
+      this.editScheduling2();
+    });
   }
 
   editScheduling2() {
     const modalRef = this.modalService.open(EditScheduling2ModalComponent, { centered: true });
     modalRef.result.then(data => {
     }, error => {
-      this.editScheduling3();
+      if (localStorage.getItem('rescheduling-success') !== null) {
+        this.editScheduling3();
+      }
     });
   }
 
@@ -257,6 +264,7 @@ export class SchedulingComponent implements OnInit {
     const modalRef = this.modalService.open(EditScheduling3ModalComponent, { centered: true });
     modalRef.result.then(data => {
     }, error => {
+      localStorage.removeItem('rescheduling-success');
       localStorage.removeItem('announcementSelected');
       localStorage.removeItem('dateScheduling');
       this.schedulesList();
