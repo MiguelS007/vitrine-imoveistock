@@ -136,6 +136,7 @@ export abstract class AnnouncementGetResponseDto {
 }
 
 class CharacteristicInfrastructureOfTheCondominiumModel {
+
     acessibilidade: boolean;
 
     automacaoPredial: boolean;
@@ -162,7 +163,7 @@ class CharacteristicInfrastructureOfTheCondominiumModel {
 
     gerador: boolean;
 
-    arCondicionadoCentral: boolean;
+    arCondicionadoCentral?: boolean;
 }
 
 class FeatureConveniencesModel {
@@ -194,7 +195,7 @@ class FeatureConveniencesModel {
 class SecurityFeatureModel {
     acessoEletronico: boolean;
 
-    camerasDeSegurança: boolean;
+    camerasDeSeguranca: boolean;
 
     cercaEletrica: boolean;
 

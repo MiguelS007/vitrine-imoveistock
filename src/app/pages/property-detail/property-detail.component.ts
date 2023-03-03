@@ -19,6 +19,8 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
 })
 export class PropertyDetailComponent implements OnInit {
   infopaymobile = false;
+  finalValueSale: number;
+  finalValueRent: number;
 
 
   @HostListener('window:scroll', [])
@@ -120,8 +122,6 @@ export class PropertyDetailComponent implements OnInit {
   paginationProduct = 1;
   tourvirtual = false;
   propertyvideo = true;
-  finalValue;
-  finalValue2;
 
 
   filterResult: AnnouncementGetResponseDto[] = [];
@@ -213,20 +213,19 @@ export class PropertyDetailComponent implements OnInit {
     this.onlyimg = this.datamokservice.onlypreview;
     this.previewimg = this.datamokservice.imagespreview;
     this.products = this.datamokservice.resultSearch;
-    this.user = JSON.parse(localStorage.getItem('userDto'));
+
 
     this.response = this.route.snapshot.data['resolve'];
     this.ngxSpinnerService.hide();
-
     console.log(this.response)
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
-    this.finalValue = (parseInt(this.response.valueOfIptu) + parseInt(this.response.condominiumValue) + this.response.saleValue);
-    this.finalValue2 = (parseInt(this.response.valueOfIptu) + this.response.saleValue);
+    let valueIptu = parseInt(this.response.valueOfIptu) / 12;
+    this.finalValueSale = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.saleValue);
+    this.finalValueRent = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.leaseValue);
 
-
-    console.log(this.user?._id, this.response._id, this.finalValue);
+    console.log( this.response._id, this.finalValueSale);
 
 
     if (localStorage.getItem('user') !== null) {
