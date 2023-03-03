@@ -231,8 +231,6 @@ export class SearchMapComponent implements OnInit {
   }
   onChangeSearch(search: string) {
   }
-  onFocused(e) {
-  }
 
 
   announcementSelected(value) {

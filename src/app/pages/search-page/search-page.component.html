@@ -58,10 +58,8 @@
                     </div>
                     <div class="dropdown px-0 mb-4 ">
                         <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity" [searchKeyword]="keyword"
-                        (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
-                            placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
-                            historyIdentifier="listAllCity" [itemTemplate]="itemTemplate"
-                            [notFoundTemplate]="notFoundTemplate">
+                        (inputChanged)='onChangeSearch($event)' placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
+                        [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
                         </ng-autocomplete>
 
                         <ng-template #itemTemplate let-item>
@@ -143,7 +141,6 @@
                             <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
                             <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
                             <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
-                            <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                             <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                         </div>
                     </div>
@@ -460,9 +457,9 @@
         </div>
         <div class="dropdown px-0 mb-4 ">
             <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity" [searchKeyword]="keyword"
-            (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+            (inputChanged)='onChangeSearch($event)'
                 placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
-                historyIdentifier="listAllCity" [itemTemplate]="itemTemplate"
+                [itemTemplate]="itemTemplate"
                 [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
 
@@ -545,7 +542,6 @@
                 <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
                 <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
                 <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
-                <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
                 <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
             </div>
         </div>

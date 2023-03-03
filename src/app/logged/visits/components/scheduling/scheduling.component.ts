@@ -4,7 +4,6 @@ import { ScheduleRegisterResponseDto } from 'src/app/dtos/schedule-register-resp
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AnnouncementGetResponseDto } from '../../../../dtos/announcement-get-response.dto';
 import { SchedulingSelectedModalComponent } from './scheduling-selected-modal/scheduling-selected-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VisitCancelRequestDto } from 'src/app/dtos/visit-cancel-request.dto';
@@ -46,6 +45,7 @@ export class SchedulingComponent implements OnInit {
     visitDate: new Date,
   };
   situationStatus: any;
+  selectedSchedulingStatus: any;
 
 
   constructor(
@@ -181,11 +181,14 @@ export class SchedulingComponent implements OnInit {
 
   }
 
-  selectVisit(item) {
+  selectVisit(item, status, itemId) {
+    document.querySelectorAll(".scheduling-visit-selected").forEach(element => {
+      element.classList.remove("scheduling-visit-selected");
+    });
+    document.getElementById(itemId)!.classList.add("scheduling-visit-selected");
     this.selectedScheduling = item;
     console.log(this.selectedScheduling)
     this.verifyLike();
-    let checkOld;
     let teste: any = localStorage.getItem('announcementChecked');
     this.scheduleService.getListVisists().subscribe(
       success => {
@@ -203,29 +206,43 @@ export class SchedulingComponent implements OnInit {
       }
     )
     if (window.screen.width < 992) {
-      localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling))
+      localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling, this.selectedSchedulingStatus))
       const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
       modalRef.result.then(data => {
       }, error => {
         localStorage.removeItem('announcementChecked');
-        this.schedulesList();
+        this.schedulesList()
       });
     } else if (teste === item._id) {
       return
     } else {
       setTimeout(() => {
-        checkOld = localStorage.getItem('announcementChecked');
-      }, 100);
-      let teste = document.getElementById(item._id);
-      teste.classList.add('scheduling-visit-selected');
-      setTimeout(() => {
         localStorage.setItem('announcementChecked', item._id)
-        let removeOld = document.getElementById(checkOld);
-        removeOld.classList.remove('scheduling-visit-selected')
       }, 110);
     }
-
   }
+
+  // schedulesList() {
+  //   this.scheduleService.getListVisists().subscribe(
+  //     success => {
+  //       this.response = success
+  //       if (success.length > 0) {
+  //         let scheduleStatus: any = localStorage.getItem('announcementStatus');
+  //        this.selectedSchedulingStatus = scheduleStatus
+  //         // console.log(this.response, 'chamadas', scheduleStatus)
+  //         this.selectedScheduling = success[0];
+  //         setTimeout(() => {
+  //           localStorage.setItem('announcementChecked', success[0]._id)
+  //         }, 200);
+  //       }
+  //       this.verifyLike()
+
+  //     },
+  //     error => {
+  //       console.error(error);
+  //     }
+  //   )
+  // }
 
   announcementSelected(value) {
     localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
