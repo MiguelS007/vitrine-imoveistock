@@ -122,7 +122,7 @@ export abstract class AnnouncementGetResponseDto {
 
     advertiserId: string;
 
-    characteristicInfrastructureOfTheCondominium?: CharacteristicInfrastructureOfTheCondominiumModel[];
+    characteristicInfrastructureOfTheCondominium?: CharacteristicInfrastructureOfTheCondominiumModel;
 
     featureConveniences?: FeatureConveniencesModel;
 
