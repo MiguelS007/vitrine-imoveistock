@@ -47,11 +47,6 @@ export class SearchMapComponent implements OnInit {
 
   markers: google.maps.Marker[] | undefined;
 
-
-
-
-
-
   response: AnnouncementGetResponseDto[] = [];
   user: UserGetResponseDto;
   form: FormGroup;

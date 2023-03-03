@@ -1,7 +1,7 @@
 <main class="bg-graylight d-flex justify-content-center position-relative w-100 py-5 px-5p">
     <div class="padding-x w-100 max-w-1918 mb-5">
         <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto">
-            <div class="col-12 d-none-desk mt-5 pt-5" *ngIf="filtroResultDisplay.typeAd">
+            <div class="col-12 d-none-desk mt-5 pt-5" *ngIf="filtroResultDisplay.typeOfAdd">
                 <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
                     <span [routerLink]="['/']" class="fw-700 font-size-16 line-19 color-black">Página Inicial /</span>
                     <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
@@ -9,13 +9,13 @@
                 </p>
                 <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                     <b>
-                        <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
+                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Venda,</span>
+                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Aluguel,</span>
+                        <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
+                        <span *ngIf="filtroResultDisplay.ufAddress"> {{filtroResultDisplay.ufAddress}},</span>
+                        <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
+                        <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos,</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                        <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}},</span>
-                        <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
-                        <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
-                        <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
-                        <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
                     </b>
                 </p>
             </div>
@@ -229,7 +229,7 @@
                 </div>
             </div>
             <div class="col-8 col-body-products px-0 pt-5 mt-5">
-                <div class="col-12 d-block-desk d-none " *ngIf="filtroResultDisplay.typeAd">
+                <div class="col-12 d-block-desk d-none " *ngIf="filtroResultDisplay.typeOfAdd">
                     <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
                         <span [routerLink]="['/']" class="fw-700 font-size-16 line-19 color-black">Página Inicial /</span>
                         <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
@@ -237,13 +237,13 @@
                     </p>
                     <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                         <b>
-                            <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
+                            <span *ngIf="filtroResultDisplay.typeOfAdd">{{filtroResultDisplay.typeOfAdd}},</span>
                             <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                            <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}},</span>
-                            <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
-                            <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
-                            <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
-                            <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
+                            <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
+                            <span *ngIf="filtroResultDisplay.ufAddress"> {{filtroResultDisplay.ufAddress}},</span>
+                            <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
+                            <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos</span>
+                            <!-- <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span> -->
                         </b>
                     </p>
                 </div>

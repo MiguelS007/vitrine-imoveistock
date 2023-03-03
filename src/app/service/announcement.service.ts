@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AnnouncementFilterListResponseDto } from '../dtos/announcement-filter-list-response.dto';
 import { AnnouncementGetResponseDto } from '../dtos/announcement-get-response.dto';
 import { AnnouncementLikeRequestDto } from '../dtos/announcement-like-request.dto';
 import { BaseService } from './base.service';
@@ -54,5 +55,64 @@ export class AnnouncementService extends BaseService {
             .get(`${this.url}/list-exclusive-showcase`, this.anonymousHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
+
+    listFilter(dto: AnnouncementFilterListResponseDto): Observable<AnnouncementGetResponseDto[]> {
+        let queryParams = `typeOfAdd=${dto.typeOfAdd}`;
+        
+        if(dto.propertyType && dto.propertyType.length > 0) {
+            dto.propertyType.forEach(element => {
+                queryParams += `&propertyType=${element}`;       
+            });
+        }
+
+        if(dto.ufAddress) {
+            queryParams += `&ufAddress=${dto.ufAddress}`
+        }
+
+        if(dto.cityAddress) {
+            queryParams += `&cityAddress=${dto.cityAddress}`
+        }
+
+        if(dto.initialValue && dto.initialValue > 1) {
+            queryParams += `&initialValue=${dto.initialValue}`
+        }
+
+        if(dto.finalValue && dto.finalValue > 0 ) {
+            queryParams += `&finalValue=${dto.finalValue}`
+        }
+
+        if(dto.bedrooms) {
+            queryParams += `&bedrooms=${dto.bedrooms}`
+        }
+
+        if(dto.goal) {
+            queryParams += `&goal=${dto.goal}`
+        }
+
+        if(dto.bathrooms) {
+            queryParams += `&bathrooms=${dto.bathrooms}`
+        }
+
+        if(dto.parkingSpaces) {
+            queryParams += `&parkingSpaces=${dto.parkingSpaces}`
+        }
+
+        if(dto.yearOfConstruction) {
+            queryParams += `&yearOfConstruction=${dto.yearOfConstruction}`
+        }
+
+        if(dto.initialUsefulArea) {
+            queryParams += `&initialUsefulArea=${dto.initialUsefulArea}`
+        }
+
+        if(dto.finalUsefulArea) {
+            queryParams += `&finalUsefulArea=${dto.finalUsefulArea}`
+        }
+
+        return this.httpClient
+            .get(`${this.url}/list-filter?${queryParams}`, this.anonymousHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+    
 
 }
