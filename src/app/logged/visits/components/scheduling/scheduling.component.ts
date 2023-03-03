@@ -291,13 +291,15 @@ export class SchedulingComponent implements OnInit {
   }
 
   editScheduling2() {
-    const modalRef = this.modalService.open(EditScheduling2ModalComponent, { centered: true });
-    modalRef.result.then(data => {
-    }, error => {
-      if (localStorage.getItem('rescheduling-success') !== null) {
-        this.editScheduling3();
-      }
-    });
+    if(localStorage.getItem('rescheduling-success1') !== null) {
+      const modalRef = this.modalService.open(EditScheduling2ModalComponent, { centered: true });
+      modalRef.result.then(data => {
+      }, error => {
+        if (localStorage.getItem('rescheduling-success') !== null) {
+          this.editScheduling3();
+        }
+      });
+    } 
   }
 
   editScheduling3() {
