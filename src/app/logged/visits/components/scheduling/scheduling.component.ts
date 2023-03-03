@@ -70,11 +70,14 @@ export class SchedulingComponent implements OnInit {
         this.response = success
         if (success.length > 0) {
           this.selectedScheduling = success[0];
+          this.selectedSchedulingStatus = success[0].status;
+          console.log(this.selectedSchedulingStatus)
           setTimeout(() => {
-            this.selecionarVisita(this.selectedScheduling);
+            this.selecionarVisita(this.selectedScheduling, this.selectedSchedulingStatus);
           }, 100);
         }
         this.verifyLike()
+        console.log(this.response)
       },
       error => {
         console.error(error);
@@ -82,12 +85,14 @@ export class SchedulingComponent implements OnInit {
     )
   }
 
-  selecionarVisita(item) {
+  selecionarVisita(item, status) {
     this.announcementList.map(results => {
       if (results.nativeElement?.id === item._id) {
         results.nativeElement.className = 'scheduling-visit-selected w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4';
         localStorage.setItem('announcementChecked', item._id)
+        localStorage.setItem('announcementStatus', status)
         this.selectedScheduling = item;
+        this.selectedSchedulingStatus = status;
       } else {
         results.nativeElement.className = 'w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4';
       }
@@ -180,12 +185,13 @@ export class SchedulingComponent implements OnInit {
 
   }
 
-  selectVisit(item, status, itemId) {
+  selectVisit(item, itemId) {
     document.querySelectorAll(".scheduling-visit-selected").forEach(element => {
       element.classList.remove("scheduling-visit-selected");
     });
     document.getElementById(itemId)!.classList.add("scheduling-visit-selected");
     this.selectedScheduling = item;
+    this.selectedSchedulingStatus = status;
     this.verifyLike();
     let teste: any = localStorage.getItem('announcementChecked');
     this.scheduleService.getListVisists().subscribe(
@@ -203,6 +209,7 @@ export class SchedulingComponent implements OnInit {
         console.error(error);
       }
     )
+    console.log(this.selectedSchedulingStatus,  'status')
     if (window.screen.width < 992) {
       localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling, this.selectedSchedulingStatus))
       const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });

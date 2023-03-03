@@ -225,7 +225,7 @@ export class PropertyDetailComponent implements OnInit {
     this.finalValueSale = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.saleValue);
     this.finalValueRent = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.leaseValue);
 
-    console.log( this.response._id, this.finalValueSale,  this.response.characteristicInfrastructureOfTheCondominium);
+    console.log( this.response._id, this.finalValueSale);
 
 
     if (localStorage.getItem('user') !== null) {
