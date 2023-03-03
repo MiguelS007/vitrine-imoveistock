@@ -19,12 +19,12 @@
                         class="fw-400 font-size-14 line-19 color-pink py-1 px-3 mb-0 border-pink border-radius-100 mr-2">Visita
                         cancelada</span>
                 </div>
-                <div class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex">
+                <div class="row block-important cursor-pointer mx-0 border-radius-10 border mt-5 p-3 d-flex">
                     <div class="col-3 col-visits p-0">
                         <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 "
-                            (click)="selecionarVisita(item)" />
+                            (click)="selecionarVisita(item, item.status)" />
                     </div>
-                    <div (click)="selecionarVisita(item)" class="col-9 px-2 col-visits">
+                    <div (click)="selecionarVisita(item, item.status)" class="col-9 px-2 col-visits">
                         <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
                             style="max-width: 150px;">{{item.announcement?.description}}</h5>
                         <div class="w-100 d-inline-block mb-0">
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="response.length !== 0" class="col-lg-7 mt-4 model-desktop-announcement-selected">
+        <div *ngIf="response.length !== 0" class="col-lg-7 cursor-pointer mt-4 model-desktop-announcement-selected">
             <div *ngIf="selectedScheduling.status === 'cancel'"
                 class="w-100 mb-4 bg-white border-pink border-radius-10 p-4 h-auto">
                 <p class="fw-700 font-size-18 line-24 color-pink mb-0 py-3">
@@ -91,9 +91,9 @@
                             <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
                             <span class="fw-400 font-size-14 line-18 color-black">{{selectedScheduling.user?.phone || '-'}}</span>
                         </p>
-                        <!-- <span class="fw-400 font-size-14 line-18 color-black">
+                        <span *ngIf="selectedScheduling.status === 'cancel'" class="fw-400 font-size-14 line-18 color-black">
                             Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
-                        </span> -->
+                        </span>
                     </div>
                 </div>
 
@@ -130,49 +130,6 @@
                                     'bi-heart-fill':'bi-heart'" class="bi bi-heart-fill font-size-16 text-light"></i>
                             </div>
                         </div>
-                        <!-- <div class="w-100 h-50 d-flex">
-                            <h4 *ngIf="selectedScheduling.announcement?.typeOfAd === 'rent'"
-                                [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
-                                                py-2 mb-0
-                                                border-radius-5 fw-400
-                                                font-size-14 line-15
-                                                text-light">Locação</h4>
-                            <h4 *ngIf="selectedScheduling.announcement?.typeOfAd === 'sale'"
-                                [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
-                                                py-2 mb-0
-                                                border-radius-5 fw-400
-                                                font-size-14 line-15
-                                                text-light">Venda</h4>
-                            <h4 *ngIf="selectedScheduling.announcement?.exclusivity === true" class="bg-greenlight h-fit
-                                                ml-2 px-3 py-2
-                                                mb-0 border-radius-5 fw-400
-                                                font-size-14
-                                                line-15 color-black">Exclusivo</h4>
-                        </div> -->
-
-                        <!-- <div class="w-100 d-flex h-50
-                                            align-items-end
-                                            justify-content-between">
-                            <p *ngIf="selectedScheduling.announcement?.typeOfAd === 'sale'" class="fw-700 mb-0
-                                                font-size-22 h-fit line-32
-                                                text-light">{{selectedScheduling.announcement?.saleValue | currency:
-                                'R$'}}</p>
-                            <p *ngIf="selectedScheduling.announcement?.typeOfAd === 'rent'" class="fw-700 mb-0
-                                                font-size-22 h-fit line-32
-                                                text-light">{{selectedScheduling.announcement?.leaseValue | currency:
-                                'R$'}}</p>
-                            <div (click)="likeHeart(selectedScheduling.announcement?._id)" class="h-fit
-                                                bg-transparent-white
-                                                cursor-pointer
-                                                border-radius-10
-                                                pt-2 pb-1 px-3">
-                                <i [class]="selectedScheduling.announcement?.liked ?
-                                                    'bi-heart-fill':'bi-heart'
-                                                    " class="bi
-                                                    font-size-16
-                                                    text-light"></i>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="w-100 mx-3 text-align-left
                                         pt-3" (click)="announcementSelected(selectedScheduling.announcement?._id)"
