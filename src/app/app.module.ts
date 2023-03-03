@@ -47,6 +47,7 @@ import { CookiePolicyComponent } from './shared/cookie-policy/cookie-policy.comp
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from "ngx-cookieconsent";
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { TermsSignupComponent } from './shared/terms-signup/terms-signup.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 registerLocaleData(ptBr);
 
@@ -107,6 +108,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     NgbModule,
     AppRoutingModule,
     RouterModule,
+    GoogleMapsModule,
     FormsModule,
     SwiperModule,
     FormsModule,
