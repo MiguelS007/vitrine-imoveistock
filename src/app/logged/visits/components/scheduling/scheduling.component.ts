@@ -63,7 +63,7 @@ export class SchedulingComponent implements OnInit {
   ngOnInit(): void {
     this.schedulesList();
   }
-
+  
   schedulesList() {
     this.scheduleService.getListVisists().subscribe(
       success => {
@@ -75,7 +75,6 @@ export class SchedulingComponent implements OnInit {
           }, 100);
         }
         this.verifyLike()
-        console.log(success)
       },
       error => {
         console.error(error);
@@ -142,7 +141,7 @@ export class SchedulingComponent implements OnInit {
         this.form.reset();
       },
       error: error => {
-        console.log(error)
+        console.error(error)
       }
     })
   }
@@ -187,7 +186,6 @@ export class SchedulingComponent implements OnInit {
     });
     document.getElementById(itemId)!.classList.add("scheduling-visit-selected");
     this.selectedScheduling = item;
-    console.log(this.selectedScheduling)
     this.verifyLike();
     let teste: any = localStorage.getItem('announcementChecked');
     this.scheduleService.getListVisists().subscribe(
@@ -221,28 +219,6 @@ export class SchedulingComponent implements OnInit {
       }, 110);
     }
   }
-
-  // schedulesList() {
-  //   this.scheduleService.getListVisists().subscribe(
-  //     success => {
-  //       this.response = success
-  //       if (success.length > 0) {
-  //         let scheduleStatus: any = localStorage.getItem('announcementStatus');
-  //        this.selectedSchedulingStatus = scheduleStatus
-  //         // console.log(this.response, 'chamadas', scheduleStatus)
-  //         this.selectedScheduling = success[0];
-  //         setTimeout(() => {
-  //           localStorage.setItem('announcementChecked', success[0]._id)
-  //         }, 200);
-  //       }
-  //       this.verifyLike()
-
-  //     },
-  //     error => {
-  //       console.error(error);
-  //     }
-  //   )
-  // }
 
   announcementSelected(value) {
     localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
@@ -282,36 +258,14 @@ export class SchedulingComponent implements OnInit {
       const modalRef = this.modalService.open(EditSchedulingModalComponent, { centered: true });
       modalRef.result.then(data => {
       }, error => {
-        this.editScheduling2();
+        setTimeout(() => {
+          this.schedulesList();
+        }, 9999);
       });
     } else if (selectedScheduling.status === 'cancel') {
       localStorage.setItem('announcementOfScheduling', JSON.stringify(selectedScheduling.announcement))
       this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
     }
   }
-
-  editScheduling2() {
-    if(localStorage.getItem('rescheduling-success1') !== null) {
-      const modalRef = this.modalService.open(EditScheduling2ModalComponent, { centered: true });
-      modalRef.result.then(data => {
-      }, error => {
-        if (localStorage.getItem('rescheduling-success') !== null) {
-          this.editScheduling3();
-        }
-      });
-    } 
-  }
-
-  editScheduling3() {
-    const modalRef = this.modalService.open(EditScheduling3ModalComponent, { centered: true });
-    modalRef.result.then(data => {
-    }, error => {
-      localStorage.removeItem('rescheduling-success');
-      localStorage.removeItem('announcementSelected');
-      localStorage.removeItem('dateScheduling');
-      this.schedulesList();
-    });
-  }
-
 
 }
