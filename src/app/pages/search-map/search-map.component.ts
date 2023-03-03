@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,6 +8,9 @@ import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-respon
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import estados from '../../../assets/json/estados-cidades.json';
+import { Loader } from "@googlemaps/js-api-loader";
+import { environment } from '../../../environments/environment';
+import { GoogleMap } from '@angular/google-maps';
 
 @Component({
   selector: 'app-search-map',
@@ -15,6 +18,40 @@ import estados from '../../../assets/json/estados-cidades.json';
   styleUrls: ['./search-map.component.scss']
 })
 export class SearchMapComponent implements OnInit {
+
+  loaderApi: Loader = new Loader({
+    apiKey: environment.google.apiKey,
+  });
+
+  google: typeof google | undefined;
+
+  @ViewChild(GoogleMap) public map: GoogleMap | undefined;
+
+  geolib: any;
+  geocoder: google.maps.Geocoder | undefined;
+
+  center: google.maps.LatLngLiteral | undefined;
+  zoom: number = 15;
+
+  selectedCity: string | undefined;
+  selectedNeighborhood: string | undefined;
+
+  mapOptions: google.maps.MapOptions = {
+    disableDoubleClickZoom: true,
+    fullscreenControl: false,
+    keyboardShortcuts: false,
+    streetViewControl: false,
+    maxZoom: 15,
+    minZoom: 12,
+  };
+
+  markers: google.maps.Marker[] | undefined;
+
+
+
+
+
+
   response: AnnouncementGetResponseDto[] = [];
   user: UserGetResponseDto;
   form: FormGroup;
@@ -76,6 +113,15 @@ export class SearchMapComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal
   ) {
+
+    this.geolib = require('geolib');
+
+    this.loaderApi.load().then((google) => {
+      this.google = google;
+      this.geocoder = new google.maps.Geocoder();
+      console.log('google maps loaded!');
+    });
+
     this.form = this.formBuilder.group({
       searchwords: [''],
       propertyType: [''],
@@ -94,9 +140,23 @@ export class SearchMapComponent implements OnInit {
     });
     this.estados = estados;
   }
+
   ngOnInit(): void {
 
     this.ngxSpinnerService.show();
+
+    navigator.geolocation.getCurrentPosition((position) => {
+
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+
+      this.mapOptions.center = this.center;
+
+      this._getAddress();
+    });
+
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
       this.filterResult = JSON.parse(resultadoVerify);
@@ -610,5 +670,97 @@ export class SearchMapComponent implements OnInit {
     this.listOfPrices = this.filterResult;
     if (value === 'minor>major') this.listOfPrices.sort((a, b) => a.saleValue < b.saleValue ? -1 : 0);
     else if (value === 'major>minor') this.listOfPrices.sort((a, b) => a.saleValue > b.saleValue ? -1 : 0);
+  }
+
+  private _getAddress() {
+
+    this.geocoder!.geocode({ location: this.center }, (results, status) => {
+
+      if (status == google.maps.GeocoderStatus.OK) {
+
+        if (results![1]) {
+          var country = null, countryCode = null, city = null, state = null, neighborhood = null;
+          var c, lc, component;
+          for (var r = 0, rl = results!.length; r < rl; r += 1) {
+            var result = results![r];
+
+            if (!city && result.types[0] === 'locality') {
+              for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
+                component = result.address_components[c];
+
+                if (component.types[0] === 'locality') {
+                  city = component.long_name;
+                  break;
+                }
+              }
+            }
+            else if (!neighborhood && result.types[2] === 'sublocality_level_1') {
+              for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
+                component = result.address_components[c];
+
+                if (component.types[2] === 'sublocality_level_1') {
+                  neighborhood = component.long_name;
+                }
+              }
+            }
+            else if (!state && result.types[0] === 'administrative_area_level_1') {
+              for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
+                component = result.address_components[c];
+
+                if (component.types[0] === 'administrative_area_level_1') {
+                  state = component.short_name;
+                  break;
+                }
+              }
+            } else if (!country && result.types[0] === 'country') {
+              country = result.address_components[0].long_name;
+              countryCode = result.address_components[0].short_name;
+            }
+
+            if (city && country) {
+              break;
+            }
+          }
+        }
+      }
+
+      console.log(` ${country}| ${neighborhood} | ${city} | ${state}`);
+
+      if (city && city !== this.selectedCity) {
+
+        this.selectedCity = city;
+
+        this.form.patchValue({
+          typePropertyCity: this.selectedCity,
+        });
+
+        this._updateAnouncementList();
+      }
+
+    });
+  }
+
+  private _updateAnouncementList() {
+
+  }
+
+  moveMap() {
+
+    const center = this.map?.getCenter();
+
+    if (center) {
+
+      this.center = {
+        lat: center.lat(),
+        lng: center.lng(),
+      };
+
+      this._getAddress();
+    }
+
+  }
+
+  changeZoom() {
+
   }
 }

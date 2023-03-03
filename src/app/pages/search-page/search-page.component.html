@@ -11,7 +11,8 @@
                     <b>
                         <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                        <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}},</span>
+                        <span *ngIf="filtroResultDisplay.styleProperty"> {{filtroResultDisplay.styleProperty}},</span>
+                        <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}}+...</span>
                         <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
                         <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
                         <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.badRoomsQnt"> +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>

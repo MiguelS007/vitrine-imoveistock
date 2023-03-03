@@ -188,7 +188,7 @@ export class SearchPageComponent implements OnInit {
       styleProperty: this.filtroSelected?.styleProperty,
       typeAd: typeAdTranslate,
       goal: this.filtroSelected?.goal,
-      typeOfProperty:
+      typeOfProperty:[
         this.filtroSelected?.propertyapartamento ||
         this.filtroSelected?.propertystudio ||
         this.filtroSelected?.propertykitnet ||
@@ -211,6 +211,7 @@ export class SearchPageComponent implements OnInit {
         this.filtroSelected?.propertymotel ||
         this.filtroSelected?.propertylajecorporativa ||
         this.filtroSelected?.propertyprediointeiro
+      ]
     }
     console.log(this.filtroSelected, 'dados do storage')
 
@@ -282,7 +283,12 @@ export class SearchPageComponent implements OnInit {
           removeRepets.push(data[i].cityAddress)
         }
         teste = new Set(removeRepets)
-        this.propertyproducts = data
+        for (let i = 0; i < data.length; i++) {
+          if(data[i].exclusivity) {
+            this.propertyproducts.push(data[i])
+          }
+          
+        }
         this.response = data;
         this.ngxSpinnerService.hide();
       }

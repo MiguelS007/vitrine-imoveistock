@@ -7,9 +7,11 @@ export const environment = {
   payloadKey: '57b0e476-142c-4762-8547-140b65cb1e9c',
   apis: {
     // imoveistock: 'https://market-inkluziva.mustblockchain.com/imoveistock/',
-    imoveistock: 'http://localhost:5000/',
+    imoveistock: 'http://ec2-100-26-202-160.compute-1.amazonaws.com:5000/',
   },
-
+  google: {
+    apiKey: 'AIzaSyBzwijvQ13DZALYBwC-uKdWWELaf0r9Xzs',
+  }
 };
 
 
