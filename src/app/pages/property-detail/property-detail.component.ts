@@ -216,7 +216,9 @@ export class PropertyDetailComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('userDto'));
 
     this.response = this.route.snapshot.data['resolve'];
-    this.ngxSpinnerService.hide()
+    this.ngxSpinnerService.hide();
+
+    console.log(this.response)
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
@@ -239,6 +241,10 @@ export class PropertyDetailComponent implements OnInit {
         }
       )
     }
+  }
+
+  public toNumber(paremetro1: string) {
+    return Number(paremetro1)
   }
 
 

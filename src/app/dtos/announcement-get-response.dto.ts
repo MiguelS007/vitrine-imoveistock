@@ -121,7 +121,178 @@ export abstract class AnnouncementGetResponseDto {
     whatIsTheBestTimePhotographer?: string;
 
     advertiserId: string;
+
+    characteristicInfrastructureOfTheCondominium?: CharacteristicInfrastructureOfTheCondominiumModel;
+
+    featureConveniences?: FeatureConveniencesModel;
+
+    securityFeature?: SecurityFeatureModel;
+
+    featureLeisure?: FeatureLeisureModel;
+
+    featureSport?: FeatureSportModel;
+
+    featureInfantile?: FeatureInfantileModel;
 }
+
+class CharacteristicInfrastructureOfTheCondominiumModel {
+    acessibilidade: boolean;
+
+    automacaoPredial: boolean;
+
+    proximoAoMetro: boolean;
+
+    acessoAsfaltado: boolean;
+
+    coletaSeletiva: boolean;
+
+    gestaoDeResiduos: boolean;
+
+    aquecimentoCentral: boolean;
+
+    economizadoresDeAgua: boolean;
+
+    porteCochere: boolean;
+
+    reaproveitamentoDeAgua: boolean;
+
+    aquecimentoSolar: boolean;
+
+    gasCentral: boolean;
+
+    gerador: boolean;
+
+    arCondicionadoCentral: boolean;
+}
+
+class FeatureConveniencesModel {
+    acessoParaDeficientes: boolean;
+
+    bicicletario: boolean;
+
+    casaDeCaseiro: boolean;
+
+    centralDeEntregas: boolean;
+
+    centralDeLimpezaEGovernanca: boolean;
+
+    elevador: boolean;
+
+    elevadorDeServico: boolean;
+
+    heliponto: boolean;
+
+    lavanderia: boolean;
+
+    petCare: boolean;
+
+    vagasDeVisitantes: boolean;
+
+    proximoAoMetro: boolean;
+}
+
+class SecurityFeatureModel {
+    acessoEletronico: boolean;
+
+    camerasDeSegurança: boolean;
+
+    cercaEletrica: boolean;
+
+    circuitoTvInterno: boolean;
+
+    guaritaBlindada: boolean;
+
+    interfone: boolean;
+
+    portaoEletronico: boolean;
+
+    portariaNoturna: boolean;
+
+    portaria24h: boolean;
+
+    rondaVigilancia: boolean;
+}
+
+class FeatureLeisureModel {
+    barNaPiscina: boolean;
+
+    bosque: boolean;
+
+    churrasqueira: boolean;
+
+    salaoDeFestas: boolean;
+
+    piscina: boolean;
+
+    cinema: boolean;
+
+    coworking: boolean;
+
+    espacoDeLeituras: boolean;
+
+    espacoGourmet: boolean;
+
+    espacoPet: boolean;
+
+    espacoZen: boolean;
+
+    fornoDePizza: boolean;
+
+    garageBandDanceteria: boolean;
+
+    miniGolf: boolean;
+
+    ofuro: boolean;
+
+    praca: boolean;
+
+    redario: boolean;
+}
+
+class FeatureSportModel {
+    bicicletario: boolean;
+
+    fitnessAoArLivre: boolean;
+
+    salaDeGinastica: boolean;
+
+    muroEscalada: boolean;
+
+    pistaDeCaminhada: boolean;
+
+    gestaoDeResiduos: boolean;
+
+    quadraDeFutebolDeSalao: boolean;
+
+    quadraDeSquash: boolean;
+
+    quadraDeTenis: boolean;
+
+    quadraPoliesportiva: boolean;
+
+    salaDeYoga: boolean;
+
+    studioDePilates: boolean;
+
+    vertuarios: boolean;
+
+    reaproveitamentoDeAgua: boolean;
+}
+
+class FeatureInfantileModel {
+    brinquedoteca: boolean;
+
+    casaDaArvore: boolean;
+
+    casaDeBoneca: boolean;
+
+    piscinaInfantil: boolean;
+
+    pistaDeCaminhada: boolean;
+
+    playground: boolean;
+}
+
 
 class WhatWasRenovated {
     retired?: string;

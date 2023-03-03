@@ -8,6 +8,7 @@ import { ScheduleRegisterRequestDto } from '../dtos/schedule-register-request.dt
 import { ScheduleRegisterResponseDto } from '../dtos/schedule-register-response.dto';
 import { VisitCancelRequestDto } from '../dtos/visit-cancel-request.dto';
 import { VisitRescheduleRegisterDto } from '../dtos/visit-reschedule-request.dto';
+import { AnnouncementVisitRemoveRequestDto } from '../dtos/announcement-visit-remove-request.dto';
 
 @Injectable({
     providedIn: 'root'
@@ -45,5 +46,11 @@ export class ScheduleService extends BaseService {
             .patch(`${this.url}app/announcement-visit/cancel-visit/${visitId}`, dto, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
+
+    removeVisit(visitId: string, dto: AnnouncementVisitRemoveRequestDto) {
+        return this.httpClient
+            .patch(`${this.url}app/announcement-visit/update-status/${visitId}`, dto, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    } 
 
 }
