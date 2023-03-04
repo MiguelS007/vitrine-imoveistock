@@ -44,7 +44,7 @@ export class SearchMapComponent implements OnInit {
     keyboardShortcuts: false,
     streetViewControl: false,
     maxZoom: 15,
-    minZoom: 1,
+    minZoom: 12,
   };
 
   markers: google.maps.Marker[] | undefined;
@@ -786,11 +786,8 @@ export class SearchMapComponent implements OnInit {
   }
 
   _clickCluster(cluster: any) {
-    console.log('cluster click')
 
     if (this.map?.getZoom() === 15) {
-
-      console.log('if zoom', this.zoom)
 
       this.selectedAnouncements = [];
 
