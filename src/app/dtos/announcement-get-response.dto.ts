@@ -133,6 +133,10 @@ export abstract class AnnouncementGetResponseDto {
     featureSport?: FeatureSportModel;
 
     featureInfantile?: FeatureInfantileModel;
+
+    latitude: string;
+    
+    longitude: string;
 }
 
 class CharacteristicInfrastructureOfTheCondominiumModel {

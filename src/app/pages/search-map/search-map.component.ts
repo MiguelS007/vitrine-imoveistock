@@ -11,6 +11,8 @@ import estados from '../../../assets/json/estados-cidades.json';
 import { Loader } from "@googlemaps/js-api-loader";
 import { environment } from '../../../environments/environment';
 import { GoogleMap } from '@angular/google-maps';
+import { MarkerClusterer } from '@googlemaps/markerclusterer';
+import { GeocodeService } from '../../service/geocode.service';
 
 @Component({
   selector: 'app-search-map',
@@ -23,12 +25,12 @@ export class SearchMapComponent implements OnInit {
     apiKey: environment.google.apiKey,
   });
 
-  google: typeof google | undefined;
+  // google: typeof google | undefined;
 
   @ViewChild(GoogleMap) public map: GoogleMap | undefined;
 
   geolib: any;
-  geocoder: google.maps.Geocoder | undefined;
+  geocoder: google.maps.Geocoder = new google.maps.Geocoder();
 
   center: google.maps.LatLngLiteral | undefined;
   zoom: number = 15;
@@ -42,12 +44,14 @@ export class SearchMapComponent implements OnInit {
     keyboardShortcuts: false,
     streetViewControl: false,
     maxZoom: 15,
-    minZoom: 12,
+    minZoom: 1,
   };
 
   markers: google.maps.Marker[] | undefined;
 
   response: AnnouncementGetResponseDto[] = [];
+  selectedAnouncements: AnnouncementGetResponseDto[] = [];
+
   user: UserGetResponseDto;
   form: FormGroup;
   paginationProduct: number = 1;
@@ -106,16 +110,17 @@ export class SearchMapComponent implements OnInit {
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private _geocodeService: GeocodeService,
   ) {
 
     this.geolib = require('geolib');
 
-    this.loaderApi.load().then((google) => {
-      this.google = google;
-      this.geocoder = new google.maps.Geocoder();
-      console.log('google maps loaded!');
-    });
+    // this.loaderApi.load().then((google) => {
+    //   this.google = google;
+    //   this.geocoder = new google.maps.Geocoder();
+    //   console.log('google maps loaded!');
+    // });
 
     this.form = this.formBuilder.group({
       searchwords: [''],
@@ -139,6 +144,12 @@ export class SearchMapComponent implements OnInit {
   ngOnInit(): void {
 
     this.ngxSpinnerService.show();
+
+    this.response = JSON.parse(localStorage.getItem('filterResult'));
+
+    console.log('response', this.response);
+
+    this._updateAnouncementList();
 
     navigator.geolocation.getCurrentPosition((position) => {
 
@@ -288,12 +299,15 @@ export class SearchMapComponent implements OnInit {
   }
 
 
-  announcementSelected(value) {
+  announcementSelected(_id:string) {
+
+    console.log('selected')
+
     let teste: any = localStorage.getItem('recentlySeen');
     this.recentlySeenList = JSON.parse(teste);
 
 
-    let verify = { _id: value };
+    let verify = { _id: _id };
 
     let list: any = this.recentlySeenList;
 
@@ -303,7 +317,7 @@ export class SearchMapComponent implements OnInit {
 
     if (this.recentlySeenList !== null) {
       for (let i = 0; i < list.length; i++) {
-        if (list[i]._id !== value) {
+        if (list[i]._id !== _id) {
           list.push(verify);
         }
       }
@@ -314,7 +328,7 @@ export class SearchMapComponent implements OnInit {
 
 
     localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList))
-    this.router.navigate([`announcement/detail/${value}`])
+    this.router.navigate([`announcement/detail/${_id}`])
   }
 
   likeHeart(value, condition) {
@@ -736,7 +750,77 @@ export class SearchMapComponent implements OnInit {
   }
 
   private _updateAnouncementList() {
+    this._updateMarkers();
+  }
 
+  private _updateMarkers() {
+    console.log('updateMarkers')
+
+    this.markers = [];
+
+    this.response.map((anouncement) => {
+      const marker = new google.maps.Marker({
+        draggable: false,
+        position: {
+          lat: +(anouncement.latitude),
+          lng: +(anouncement.longitude),
+        },
+      });
+
+      marker.addListener('click', () => {
+        this.announcementSelected(anouncement._id);
+      });
+
+      this.markers?.push(marker);
+    });
+
+    if (this.markers && this.markers.length > 0) {
+      new MarkerClusterer({
+        map: this.map?.googleMap,
+        markers: this.markers,
+        onClusterClick: (cluster) => {
+          this._clickCluster(cluster);
+        }
+      });
+    }
+  }
+
+  _clickCluster(cluster: any) {
+    console.log('cluster click')
+
+    if (this.map?.getZoom() === 15) {
+
+      console.log('if zoom', this.zoom)
+
+      this.selectedAnouncements = [];
+
+      this.center = {
+        lat: cluster.latLng?.lat()!,
+        lng: cluster.latLng?.lng()!,
+      };
+
+      this.response.forEach((item) => {
+        const distanceInKm = this._geocodeService.getDistanceInKm(
+          { lat: this.center?.lat!, lng: this.center?.lng! },
+          {
+            lat: +(item.latitude),
+            lng: +(item.longitude),
+          }
+        );
+
+        if (distanceInKm <= 0.1)
+          this.selectedAnouncements.push(item);
+      });
+
+    } else {
+
+      this.center = {
+        lat: cluster.latLng?.lat()!,
+        lng: cluster.latLng?.lng()!,
+      };
+
+      this.zoom++;
+    }
   }
 
   moveMap() {
