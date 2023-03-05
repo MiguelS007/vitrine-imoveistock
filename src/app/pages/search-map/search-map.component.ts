@@ -145,7 +145,7 @@ export class SearchMapComponent implements OnInit {
 
     this.ngxSpinnerService.show();
 
-    this.response = JSON.parse(localStorage.getItem('filterResult'));
+    this.response = JSON.parse(localStorage.getItem('resultSearch'));
 
     console.log('response', this.response);
 

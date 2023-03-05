@@ -139,6 +139,13 @@ export class SearchPageComponent implements OnInit {
     this.ngxSpinnerService.show();
     this.products = this.datamokservice.resultSearch;
 
+    console.log(this.form.value);
+
+    // this.form.patchValue({
+    //   propertyType: this.filtroResultDisplay.propertyType,
+    //   searchwords
+    // })
+
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
@@ -444,13 +451,14 @@ export class SearchPageComponent implements OnInit {
 
 
     console.log(request);
+    console.log(this.form.value);
 
     this.announcementService.listFilter(request).subscribe({
       next: data => {
         this.filterResult = data;
         if (data.length > 0) {
-          localStorage.setItem('filterResult', JSON.stringify(data));
-          localStorage.setItem('filterRequest', JSON.stringify(request));
+          localStorage.setItem('resultSearch', JSON.stringify(data));
+          localStorage.setItem('filtro', JSON.stringify(request));
         }
       },
       error: error => {
