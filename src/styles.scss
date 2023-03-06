@@ -1186,6 +1186,7 @@ input:focus {
     top: 0px !important;
     left: 0px !important;
     z-index: 1;
+    border-radius: 10px !important;
 }
 
 
@@ -1825,13 +1826,13 @@ vg-overlay-play .vg-overlay-play {
     color: white !important;
 }
 
-.multiselect-item-checkbox input[type=checkbox]:checked + div:before {
+.multiselect-item-checkbox input[type=checkbox]:checked+div:before {
     -webkit-animation: .2s ease-in borderscale;
     animation: .2s ease-in borderscale;
     background: #01FF5F !important;
 }
 
-.multiselect-item-checkbox input[type=checkbox] + div:before {
+.multiselect-item-checkbox input[type=checkbox]+div:before {
     box-sizing: content-box;
     content: "";
     color: #01FF5F !important;
@@ -1861,6 +1862,7 @@ vg-overlay-play .vg-overlay-play {
         top: 0px !important;
         left: 0px !important;
         z-index: 1;
+        border-radius: 10px !important;
     }
 
     .product-announcement-card {
