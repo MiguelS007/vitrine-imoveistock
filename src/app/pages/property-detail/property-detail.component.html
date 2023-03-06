@@ -1,21 +1,21 @@
-<main class="bg-graylight position-relative h-100 pb-5 w-100">
+<main class="bg-graylight position-relative h-100 w-100 bg-property-details">
   <div class="row form-search h-100 m-0-auto">
     <div class="col-12 px-0 h-100">
       <div class="row h-100 mx-0">
         <!-- VERSION DESK -->
         <div class="col-6 d-none-tablet px-0 col-preview-img">
-          <div *ngFor="let item of onlyimg" style="background-image: url({{item.preview}})"
+          <div *ngFor="let item of response.photos | slice:0:1" style="background-image: url({{item.key}})"
             class="bg-property-view w-100 h-600"></div>
         </div>
         <div class="col-6 d-none-tablet px-0 col-preview-img">
-          <div *ngFor="let item of previewimg" style="background-image: url({{item.previews}})"
+          <div *ngFor="let item of response.photos | slice:2:6" style="background-image: url({{item.key}})"
             class="bg-property-view d-inline-block w-50 h-300"></div>
         </div>
         <!-- VERSION MOBILE -->
         <swiper class="d-block-tablet col-12 slide" style="display: none;" [navigation]="true" [slidesPerView]="1"
           [pagination]="{ clickable: true }" [scrollbar]="true">
-          <ng-template *ngFor="let item of previewimg" class="w-100" swiperSlide>
-            <div style="background-image: url({{item.previews}})" class="bg-property-view w-100 h-600"></div>
+          <ng-template *ngFor="let item of response.photos" class="w-100" swiperSlide>
+            <div style="background-image: url({{item.key}})" class="bg-property-view w-100 h-600"></div>
           </ng-template>
         </swiper>
         <div
@@ -819,17 +819,17 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
       <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header d-flex justify-content-end mt-3">
+        <div class="modal-header position-absolute align-items-end z-10 d-flex justify-content-end mt-3 right-0">
           <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
-            <img src="../../../assets/icon/x.png" alt="">
+            <i class="bi font-size-48 text-light bi-x"></i>
           </button>
         </div>
         <div class="anima-body h-100 d-flex justify-content-center align-items-center">
-          <swiper class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
-            <ng-template class="w-100" *ngFor="let item of previewimg" swiperSlide>
+          <swiper  class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
+            <ng-template class="w-100" *ngFor="let item of response.photos" swiperSlide>
               <div
                 class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
-                <img src="{{item.previews}}" class="w-100 h-auto preview-img-property" />
+                <img [src]="item.key" class="w-100 h-auto preview-img-property" />
               </div>
             </ng-template>
           </swiper>
@@ -845,7 +845,7 @@
         <div class="modal-header d-flex justify-content-end mt-3">
           <button type="button" (click)="closePause(videomedia)" class="btn btn-close-announcement-detail"
             data-dismiss="modal" aria-label="Close">
-            <img src="../../../assets/icon/x.png" alt="">
+            <i class="bi font-size-48 text-light bi-x"></i>
           </button>
         </div>
         <div class="anima-body h-100 d-flex justify-content-center align-items-center">
@@ -887,7 +887,7 @@
       <div class="modal-content h-100 modal-content-preview">
         <div class="modal-header d-flex justify-content-end mt-3">
           <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
-            <img src="../../../assets/icon/x.png" alt="">
+            <i class="bi font-size-48 text-light bi-x"></i>
           </button>
         </div>
         <div class="w-100 d-flex align-items-center justify-content-center h-100">
@@ -903,7 +903,7 @@
       <div class="modal-content h-100 modal-content-preview">
         <div class="modal-header d-flex justify-content-end mt-3">
           <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
-            <img src="../../../assets/icon/x.png" alt="">
+            <i class="bi font-size-48 text-light bi-x"></i>
           </button>
         </div>
 
