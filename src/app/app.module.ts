@@ -129,7 +129,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     CurrencyMaskModule,
     AutocompleteLibModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
-    NgMultiSelectDropDownModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     {

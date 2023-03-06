@@ -45,7 +45,10 @@
     margin: 0rem !important;
     pointer-events: none;
 }
-
+.preview-img-property{
+    max-width: 800px;
+    max-height: 800px;
+}
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 100% !important;

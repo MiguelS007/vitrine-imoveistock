@@ -21,7 +21,8 @@ export class PropertyDetailComponent implements OnInit {
   infopaymobile = false;
   finalValueSale: number;
   finalValueRent: number;
-  previewImg: Date;
+  previewImg: any;
+  imagePreviewAnnouncement: any = [];
 
 
   @HostListener('window:scroll', [])
@@ -130,7 +131,7 @@ export class PropertyDetailComponent implements OnInit {
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
- 
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -176,10 +177,12 @@ export class PropertyDetailComponent implements OnInit {
     this.previewimg = this.datamokservice.imagespreview;
     this.products = this.datamokservice.resultSearch;
 
+    // while(window.innerWidth > 400){
+    //   console.log('mostar')
+    // }
 
     this.response = this.route.snapshot.data['resolve'];
     this.ngxSpinnerService.hide();
-    console.log(this.response)
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
@@ -187,7 +190,7 @@ export class PropertyDetailComponent implements OnInit {
     this.finalValueSale = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.saleValue);
     this.finalValueRent = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.leaseValue);
 
-    console.log( this.response._id, this.finalValueSale);
+    console.log(this.response._id, this.finalValueSale);
 
 
     if (localStorage.getItem('user') !== null) {
@@ -298,9 +301,8 @@ export class PropertyDetailComponent implements OnInit {
       response => {
         this.propertyproducts = response
         this.responseAnnouncement = response;
-        for (let i = 0; i < this.propertyproducts.length; i++) {
-          this.previewImg = this.propertyproducts[i].bestDayPhotos
-          
+        for (let i = 0; i < response.length; i++) {
+          this.previewImg = this.propertyproducts[i].photos;
         }
         console.log(this.previewImg)
         if (localStorage.getItem('user') !== null) {
