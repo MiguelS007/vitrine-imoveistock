@@ -21,6 +21,7 @@ export class PropertyDetailComponent implements OnInit {
   infopaymobile = false;
   finalValueSale: number;
   finalValueRent: number;
+  previewImg: Date;
 
 
   @HostListener('window:scroll', [])
@@ -129,46 +130,7 @@ export class PropertyDetailComponent implements OnInit {
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
-  dadosmockados: any[] = [
-    {
-      caracteristica: 'Ar condicionado'
-    },
-    {
-      caracteristica: 'Sauna'
-    },
-    {
-      caracteristica: 'Tv'
-    },
-    {
-      caracteristica: 'Churrasqueira'
-    },
-    {
-      caracteristica: 'Área Comum'
-    },
-    {
-      caracteristica: 'Mobiliada'
-    },
-    {
-      caracteristica: 'Academia'
-    },
-    {
-      caracteristica: 'Piscina'
-    },
-    {
-      caracteristica: 'Lavanderia'
-    },
-    {
-      caracteristica: 'Elevador'
-    },
-    {
-      caracteristica: 'Banheiro'
-    },
-    {
-      caracteristica: 'Wi-fi'
-    },
-
-
-  ];
+ 
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -336,6 +298,11 @@ export class PropertyDetailComponent implements OnInit {
       response => {
         this.propertyproducts = response
         this.responseAnnouncement = response;
+        for (let i = 0; i < this.propertyproducts.length; i++) {
+          this.previewImg = this.propertyproducts[i].bestDayPhotos
+          
+        }
+        console.log(this.previewImg)
         if (localStorage.getItem('user') !== null) {
           this.announcementService.listLikes().subscribe(
             success => {
