@@ -11,7 +11,7 @@
                     <b>
                         <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
                         <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
-                        <span *ngFor="let item of filtroSelected.propertyTypeList"> {{item.item_text}},</span>
+                            <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
                         <span *ngIf="filtroResultDisplay.ufAddress"> {{stateSelected}},</span>
                         <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
                         <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos,</span>
@@ -21,20 +21,15 @@
             </div>
             <div class="col-4 col-body-products mt-5 pt-5 pl-0">
                 <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
+
+                    <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'"
+                        [settings]="dropdownSettings" formControlName="propertyType" [data]="dropdownList"
+                        [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                        (onSelectAll)="onSelectAll($event)">
+                    </ng-multiselect-dropdown>
+
                     <div class="dropdown">
-                        <button style="min-width: 162.23px !important;"
-                            class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                            type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            {{stylePropertyTitle}}
-                        </button>
-                        <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" (click)="searchByStyleProperty('Edifício')">Edifício</a>
-                            <a class="dropdown-item" (click)="searchByStyleProperty('Terreno')">Terreno</a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                        <a class="btn px-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
                             role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             {{selectTypeAd}}
@@ -47,10 +42,10 @@
                     <div class="dropdown px-0 mb-3 ">
                         <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                             <select formControlName="typePropertyState" (change)="getEstados($event)"
-                                class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-74 bg-light fw-400 font-size-14 line-20 color-black"
+                                class="w-100 border text-left select-property border-radius-10 mt-3  h-51 bg-light fw-400 font-size-14 line-20 color-black"
                                 [(ngModel)]="stateSelected" id="state" aria-label="Default select example">
                                 <option [value]="stateSelected" disabled selected value>
-                                    {{stateSelected}}</option>
+                                    {{stateSelected || 'Escolha o Estado'}}</option>
                                 <option *ngFor="let item of estados.estados" [value]="item.nome">{{item.nome}}</option>
                             </select>
                         </div>
@@ -71,19 +66,7 @@
                         </ng-template>
 
                     </div>
-                    <div class="dropdown" style="margin-top: 3.5rem;">
-                        <button
-                            class="btn pl-3 border border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                            type="button" id="dropdownforhome" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            {{TypeProperty}}
-                        </button>
-                        <div class="dropdown-menu border-radius-10 w-100" aria-labelledby="dropdownforhome">
-                            <a class="dropdown-item" (click)="filterTypeProperty('residencial')">Residencial</a>
-                            <a class="dropdown-item" (click)="filterTypeProperty('rural')">Rural</a>
-                            <a class="dropdown-item" (click)="filterTypeProperty('comercial')">Comercial</a>
-                        </div>
-                    </div>
+
                     <div class="row mt-4 px-0">
                         <div class="col-12">
                             <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor</p>
@@ -92,21 +75,21 @@
                             <label for="typeMinPrice">De</label>
                             <input formControlName="typeMinPrice" type="text" currencyMask
                                 [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
-                                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
                                 maxlength="15" />
                         </div>
                         <div class="col-6">
                             <label for="typeMaxPrice">Até</label>
                             <input formControlName="typeMaxPrice" type="text" currencyMask
                                 [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
-                                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
                                 maxlength="20" />
                         </div>
                     </div>
                     <div class="dropdown">
                         <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms"
                             [placeholder]="selectBadRooms"
-                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
                             role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
                         <div class="dropdown-menu" aria-labelledby="resultRooms">
@@ -120,7 +103,7 @@
                     <div class="dropdown">
                         <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms"
                             [placeholder]="selectBathrooms"
-                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
                             role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
                         <div class="dropdown-menu" aria-labelledby="resultbathroom">
@@ -134,7 +117,7 @@
                     <div class="dropdown">
                         <input type="text" formControlName="typevacancies" [value]="selectVacancies"
                             [placeholder]="selectVacancies"
-                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
                             role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
                         <div class="dropdown-menu" aria-labelledby="resultVacancies">
@@ -147,17 +130,17 @@
                     </div>
                     <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
                     text-left font-size-16 line-20 pl-3 color-black w-100
-                    h-74" mask="0000" />
+                    h-51" mask="0000" />
                     <div class="w-100 d-flex align-items-center">
                         <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
                        mr-1 text-left font-size-16 line-20 pl-3 color-black
-                       w-100 h-74" mask="0000" />
+                       w-100 h-51" mask="0000" />
                         <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
                        ml-1 text-left font-size-16 line-20 pl-3 color-black
-                       w-100 h-74" mask="0000" />
+                       w-100 h-51" mask="0000" />
                     </div>
                     <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
-                    line-24 border-radius-10 h-74 w-100" (click)="filtrar()" type="submit">
+                    line-24 border-radius-10 h-51 w-100" (click)="filtrar()" type="submit">
                         Encontrar
                     </button>
                 </div>
@@ -241,7 +224,7 @@
                         <b>
                             <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
                             <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
-                            <span *ngFor="let item of filtroSelected.propertyTypeList"> {{item.item_text}},</span>
+                            <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
                             <span *ngIf="filtroResultDisplay.ufAddress"> {{stateSelected}},</span>
                             <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
                             <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
@@ -424,19 +407,12 @@
         </div>
     </div>
     <form [formGroup]="formModal" class="w-100 d-block-desk border-radius-10 bg-white p-5">
+        <ng-multiselect-dropdown class="customClass" [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
+            formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
+            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
         <div class="dropdown">
-            <button style="min-width: 162.23px !important;"
-                class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{stylePropertyTitle}}
-            </button>
-            <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" (click)="searchByStyleProperty('Edifício')">Edifício</a>
-                <a class="dropdown-item" (click)="searchByStyleProperty('Terreno')">Terreno</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+            <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
                 role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{selectTypeAd}}
             </a>
@@ -449,7 +425,7 @@
         <div class="dropdown px-0 mb-3 ">
             <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                 <select formControlName="typePropertyState" (change)="getEstados($event)"
-                    class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-74 bg-light fw-400 font-size-14 line-20 color-black"
+                    class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-51 bg-light fw-400 font-size-14 line-20 color-black"
                     [(ngModel)]="stateSelected" id="state" aria-label="Default select example">
                     <option [value]="stateSelected" disabled selected value>
                         {{stateSelected}}</option>
@@ -472,18 +448,6 @@
             </ng-template>
 
         </div>
-        <div class="dropdown" style="margin-top: 3.5rem;">
-            <button
-                class="btn pl-3 border  border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                type="button" id="dropdownforhome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{TypeProperty}}
-            </button>
-            <div class="dropdown-menu border-radius-10 w-100" aria-labelledby="dropdownforhome">
-                <a class="dropdown-item" (click)="filterTypeProperty('residencial')">Residencial</a>
-                <a class="dropdown-item" (click)="filterTypeProperty('rural')">Rural</a>
-                <a class="dropdown-item" (click)="filterTypeProperty('comercial')">Comercial</a>
-            </div>
-        </div>
         <div class="row mt-4 px-0">
             <div class="col-12">
                 <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor</p>
@@ -492,20 +456,20 @@
                 <label for="typeMinPrice">De</label>
                 <input formControlName="typeMinPrice" type="text" currencyMask
                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
-                    class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                    class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
                     maxlength="15" />
             </div>
             <div class="col-6">
                 <label for="typeMaxPrice">Até</label>
                 <input formControlName="typeMaxPrice" type="text" currencyMask
                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
-                    class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-74"
+                    class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
                     maxlength="20" />
             </div>
         </div>
         <div class="dropdown">
             <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
-                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
                 role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 readonly>
             <div class="dropdown-menu" aria-labelledby="resultRooms">
@@ -518,7 +482,7 @@
         </div>
         <div class="dropdown">
             <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms" [placeholder]="selectBathrooms"
-                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
                 role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 readonly>
             <div class="dropdown-menu" aria-labelledby="resultbathroom">
@@ -531,7 +495,7 @@
         </div>
         <div class="dropdown">
             <input type="text" formControlName="typevacancies" [value]="selectVacancies" [placeholder]="selectVacancies"
-                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
+                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
                 role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 readonly>
             <div class="dropdown-menu" aria-labelledby="resultVacancies">
@@ -544,17 +508,17 @@
         </div>
         <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
         text-left font-size-16 line-20 pl-3 color-black w-100
-        h-74" mask="0000" />
+        h-51" mask="0000" />
         <div class="w-100 d-flex align-items-center">
             <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
            mr-1 text-left font-size-16 line-20 pl-3 color-black
-           w-100 h-74" mask="0000" />
+           w-100 h-51" mask="0000" />
             <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
            ml-1 text-left font-size-16 line-20 pl-3 color-black
-           w-100 h-74" mask="0000" />
+           w-100 h-51" mask="0000" />
         </div>
         <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
-        line-24 border-radius-10 h-74 w-100" (click)="filtrar()" type="submit">
+        line-24 border-radius-10 h-51 w-100" (click)="filtrar()" type="submit">
             Encontrar
         </button>
     </form>

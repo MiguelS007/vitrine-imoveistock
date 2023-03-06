@@ -58,6 +58,8 @@ export abstract class AnnouncementGetResponseDto {
 
     whichFloorOfTheProperty?: number;
 
+    mainPhoto?: string;
+
     numberOfTowers?: number;
 
     howManyFloors?: number;

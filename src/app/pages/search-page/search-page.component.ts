@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import estados from '../../../assets/json/estados-cidades.json';
 import { AnnouncementFilterListResponseDto } from '../../dtos/announcement-filter-list-response.dto';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
@@ -19,6 +20,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   styleUrls: ['./search-page.component.scss']
 })
 export class SearchPageComponent implements OnInit {
+
   form: FormGroup;
   formfilter: FormGroup;
   iconlikeheart = false;
@@ -41,8 +43,6 @@ export class SearchPageComponent implements OnInit {
   urlsimg: any = [];
 
   filterResult: AnnouncementGetResponseDto[] = [];
-
-  filtroSelected: AnnouncementFilterListResponseDto;
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
 
@@ -91,6 +91,20 @@ export class SearchPageComponent implements OnInit {
   getSelectedCity: string;
   estados: any;
   listOfPrices: any = [];
+
+  dropdownList: any = [];
+  selectedItems: any = [];
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Selecionar todos',
+    unSelectAllText: 'Desmarcar todos',
+    itemsShowLimit: 1,
+    searchPlaceholderText: 'Procurar',
+    allowSearchFilter: true
+  };
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -103,7 +117,6 @@ export class SearchPageComponent implements OnInit {
     this.form = this.formBuilder.group({
       searchwords: [''],
       propertyType: [''],
-      typeproperty: [''],
       typePropertyState: [''],
       typePropertyCity: [''],
       typeMaxPrice: [''],
@@ -119,7 +132,6 @@ export class SearchPageComponent implements OnInit {
     this.formModal = this.formBuilder.group({
       searchwords: [''],
       propertyType: [''],
-      typeproperty: [''],
       typePropertyState: [''],
       typePropertyCity: [''],
       typeMaxPrice: [''],
@@ -157,19 +169,71 @@ export class SearchPageComponent implements OnInit {
 
       this.form.patchValue({
         typePropertyCity: filtro.cityAddress,
-        typeMaxPrice: filtro.finalValue
+        typeMaxPrice: filtro.finalValue,
       });
+
+      for (let i = 0; i < filtro.propertyTypeList.length; i++) {
+        this.selectedItems.push(filtro.propertyTypeList[i])
+      }
 
       this.formModal.patchValue({
         typePropertyCity: filtro.cityAddress,
-        typeMaxPrice: filtro.finalValue
+        typeMaxPrice: filtro.finalValue,
       });
 
       this.searchByBadRoom(filtro.bedrooms)
 
+      this.filtroResultDisplay = {
+        ufAddress: filtro?.ufAddress,
+        cityAddress: filtro?.cityAddress,
+        initialValue: filtro?.initialValue,
+        finalValue: filtro?.finalValue,
+        bedrooms: filtro?.bedrooms,
+        propertyType: filtro?.propertyType,
+        typeOfAdd: filtro?.typeOfAdd,
+        bathrooms: filtro?.bathrooms,
+        finalUsefulArea: filtro?.finalUsefulArea,
+        goal: filtro?.goal,
+        initialUsefulArea: filtro?.initialUsefulArea,
+        parkingSpaces: filtro?.parkingSpaces,
+        yearOfConstruction: filtro?.yearOfConstruction,
+        propertyTypeList: filtro?.propertyTypeList
+      }
+
+
+    } else {
+      this.filtroResultDisplay = {
+        typeOfAdd: null,
+      }
     }
 
-
+    this.dropdownList = [
+      { item_id: 'apartamento', item_text: 'Apartamento' },
+      { item_id: 'casadecondominio', item_text: 'Casa de Condominio' },
+      { item_id: 'casadevila', item_text: 'Casa de vila' },
+      { item_id: 'studio', item_text: 'Studio' },
+      { item_id: 'kitnet', item_text: 'Kitnet' },
+      { item_id: 'cobertura', item_text: 'Cobertura' },
+      { item_id: 'flat', item_text: 'Flat' },
+      { item_id: 'loft', item_text: 'Loft' },
+      { item_id: 'terreno', item_text: 'Terreno' },
+      { item_id: 'comercial', item_text: 'Comercial' },
+      { item_id: 'chacara', item_text: 'Chácara' },
+      { item_id: 'casacomercial', item_text: 'Casa comercial' },
+      { item_id: 'garagem', item_text: 'Garagem' },
+      { item_id: 'pontocomercial', item_text: 'Ponto comercial' },
+      { item_id: 'conjuntocomercial', item_text: 'Conjunto comercial' },
+      { item_id: 'loja', item_text: 'Loja' },
+      { item_id: 'salao', item_text: 'Salão' },
+      { item_id: 'galpao', item_text: 'Galpão' },
+      { item_id: 'deposito', item_text: 'Depósito' },
+      { item_id: 'armazem', item_text: 'Armazem' },
+      { item_id: 'hotel', item_text: 'Hotel' },
+      { item_id: 'motel', item_text: 'Motel' },
+      { item_id: 'pousada', item_text: 'Pousada' },
+      { item_id: 'lajecorporativa', item_text: 'Laje Corporativa' },
+      { item_id: 'prediointeiro', item_text: 'Predio Inteiro' },
+    ];
 
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
@@ -192,34 +256,6 @@ export class SearchPageComponent implements OnInit {
       this.filterResult = [];
     }
 
-    let filtro = localStorage.getItem('filtro');
-    this.filtroSelected = JSON.parse(filtro);
-    let typeAdTranslate: string = ''
-
-    if (this.filtroSelected?.typeOfAdd === 'rent') {
-      typeAdTranslate = 'Alugar'
-    } else if (this.filtroSelected?.typeOfAdd === 'sale') {
-      typeAdTranslate = 'Comprar'
-    }
-
-    this.filtroResultDisplay = {
-      ufAddress: this.filtroSelected?.ufAddress,
-      cityAddress: this.filtroSelected?.cityAddress,
-      initialValue: this.filtroSelected?.initialValue,
-      finalValue: this.filtroSelected?.finalValue,
-      bedrooms: this.filtroSelected?.bedrooms,
-      propertyType: this.filtroSelected?.propertyType,
-      typeOfAdd: this.filtroSelected?.typeOfAdd,
-      bathrooms: this.filtroSelected?.bathrooms,
-      finalUsefulArea: this.filtroSelected?.finalUsefulArea,
-      goal: this.filtroSelected?.goal,
-      initialUsefulArea: this.filtroSelected?.initialUsefulArea,
-      parkingSpaces: this.filtroSelected?.parkingSpaces,
-      yearOfConstruction: this.filtroSelected?.yearOfConstruction,
-    }
-
-
-    console.log(this.filtroSelected, 'dados do storage')
 
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
@@ -274,10 +310,19 @@ export class SearchPageComponent implements OnInit {
 
     this.announcementService.listExclusive().subscribe({
       next: data => {
-        this.propertyproducts = data; 
+        this.propertyproducts = data;
       }
     })
+
   }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
   selectEvent(item) {
     this.getSelectedCity = item.name;
   }
@@ -434,9 +479,6 @@ export class SearchPageComponent implements OnInit {
     if (this.stateSelected === 'Acre') { this.form.controls['typePropertyState'].setValue('AC') } else if (this.stateSelected === 'Alagoas') { this.form.controls['typePropertyState'].setValue('AL') } else if (this.stateSelected === 'Amapá') { this.form.controls['typePropertyState'].setValue('AP') } else if (this.stateSelected === 'Amazonas') { this.form.controls['typePropertyState'].setValue('AM') } else if (this.stateSelected === 'Bahia') { this.form.controls['typePropertyState'].setValue('BA') } else if (this.stateSelected === 'Ceara') { this.form.controls['typePropertyState'].setValue('CE') } else if (this.stateSelected === 'Distrito Federal') { this.form.controls['typePropertyState'].setValue('DF') } else if (this.stateSelected === 'Espírito Santo') { this.form.controls['typePropertyState'].setValue('ES') } else if (this.stateSelected === 'Goiás') { this.form.controls['typePropertyState'].setValue('GO') } else if (this.stateSelected === 'Maranhão') { this.form.controls['typePropertyState'].setValue('MA') } else if (this.stateSelected === 'Mato Grosso') { this.form.controls['typePropertyState'].setValue('MT') } else if (this.stateSelected === 'Mato Grosso do Sul') { this.form.controls['typePropertyState'].setValue('MS') } else if (this.stateSelected === 'Minas Gerais') { this.form.controls['typePropertyState'].setValue('MG') } else if (this.stateSelected === 'Pará') { this.form.controls['typePropertyState'].setValue('PA') } else if (this.stateSelected === 'Paraíba') { this.form.controls['typePropertyState'].setValue('PB') } else if (this.stateSelected === 'Paraná') { this.form.controls['typePropertyState'].setValue('PR') } else if (this.stateSelected === 'Pernambuco') { this.form.controls['typePropertyState'].setValue('PE') } else if (this.stateSelected === 'Piauí') { this.form.controls['typePropertyState'].setValue('PI') } else if (this.stateSelected === 'Rio de Janeiro') { this.form.controls['typePropertyState'].setValue('RJ') } else if (this.stateSelected === 'Rio Grande do Norte') { this.form.controls['typePropertyState'].setValue('RN') } else if (this.stateSelected === 'Rio Grande do Sul') { this.form.controls['typePropertyState'].setValue('RS') } else if (this.stateSelected === 'Rondônia') { this.form.controls['typePropertyState'].setValue('RO') } else if (this.stateSelected === 'Roraima') { this.form.controls['typePropertyState'].setValue('RR') } else if (this.stateSelected === 'Santa Catarina') { this.form.controls['typePropertyState'].setValue('SC') } else if (this.stateSelected === 'São Paulo') { this.form.controls['typePropertyState'].setValue('SP') } else if (this.stateSelected === 'Sergipe') { this.form.controls['typePropertyState'].setValue('SE') } else if (this.stateSelected === 'Tocantins') { this.form.controls['typePropertyState'].setValue('TO') }
     if (this.stateSelected === 'Acre') { this.formModal.controls['typePropertyState'].setValue('AC') } else if (this.stateSelected === 'Alagoas') { this.formModal.controls['typePropertyState'].setValue('AL') } else if (this.stateSelected === 'Amapá') { this.formModal.controls['typePropertyState'].setValue('AP') } else if (this.stateSelected === 'Amazonas') { this.formModal.controls['typePropertyState'].setValue('AM') } else if (this.stateSelected === 'Bahia') { this.formModal.controls['typePropertyState'].setValue('BA') } else if (this.stateSelected === 'Ceara') { this.formModal.controls['typePropertyState'].setValue('CE') } else if (this.stateSelected === 'Distrito Federal') { this.formModal.controls['typePropertyState'].setValue('DF') } else if (this.stateSelected === 'Espírito Santo') { this.formModal.controls['typePropertyState'].setValue('ES') } else if (this.stateSelected === 'Goiás') { this.formModal.controls['typePropertyState'].setValue('GO') } else if (this.stateSelected === 'Maranhão') { this.formModal.controls['typePropertyState'].setValue('MA') } else if (this.stateSelected === 'Mato Grosso') { this.formModal.controls['typePropertyState'].setValue('MT') } else if (this.stateSelected === 'Mato Grosso do Sul') { this.formModal.controls['typePropertyState'].setValue('MS') } else if (this.stateSelected === 'Minas Gerais') { this.formModal.controls['typePropertyState'].setValue('MG') } else if (this.stateSelected === 'Pará') { this.formModal.controls['typePropertyState'].setValue('PA') } else if (this.stateSelected === 'Paraíba') { this.formModal.controls['typePropertyState'].setValue('PB') } else if (this.stateSelected === 'Paraná') { this.formModal.controls['typePropertyState'].setValue('PR') } else if (this.stateSelected === 'Pernambuco') { this.formModal.controls['typePropertyState'].setValue('PE') } else if (this.stateSelected === 'Piauí') { this.formModal.controls['typePropertyState'].setValue('PI') } else if (this.stateSelected === 'Rio de Janeiro') { this.formModal.controls['typePropertyState'].setValue('RJ') } else if (this.stateSelected === 'Rio Grande do Norte') { this.formModal.controls['typePropertyState'].setValue('RN') } else if (this.stateSelected === 'Rio Grande do Sul') { this.formModal.controls['typePropertyState'].setValue('RS') } else if (this.stateSelected === 'Rondônia') { this.formModal.controls['typePropertyState'].setValue('RO') } else if (this.stateSelected === 'Roraima') { this.formModal.controls['typePropertyState'].setValue('RR') } else if (this.stateSelected === 'Santa Catarina') { this.formModal.controls['typePropertyState'].setValue('SC') } else if (this.stateSelected === 'São Paulo') { this.formModal.controls['typePropertyState'].setValue('SP') } else if (this.stateSelected === 'Sergipe') { this.formModal.controls['typePropertyState'].setValue('SE') } else if (this.stateSelected === 'Tocantins') { this.formModal.controls['typePropertyState'].setValue('TO') }
 
-    console.log(this.getSelectedCity, 'cidade atual')
-    console.log(this.form.controls['typePropertyState'].value, 'estado atual')
-
     let filter: any = {
       state: this.form.controls['typePropertyState'].value,
       stateModal: this.formModal.controls['typePropertyState'].value,
@@ -450,27 +492,44 @@ export class SearchPageComponent implements OnInit {
       city = filter.city;
     }
 
+    let propertyTypeList = [];
+
+
+    for (let i = 0; i < this.form.controls['propertyType'].value.length; i++) {
+      propertyTypeList.push(this.form.controls['propertyType'].value[i].item_id)
+    }
+
+    if(this.selectTypeAd === 'Selecione') {
+      this.selectFilterOfAd = 'sale'
+    }
+
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
       cityAddress: city,
-      ufAddress: this.form.controls['typePropertyState'].value,
-      bedrooms: this.form.controls['typeBadrooms'].value,
-      bathrooms: this.form.controls['typeBathRoom'].value,
-      initialValue: this.form.controls['typeMaxPrice'].value,
-      finalValue: this.form.controls['typeMinPrice'].value,
-      finalUsefulArea: this.form.controls['typefootagemax'].value,
-      initialUsefulArea: this.form.controls['typefootagemin'].value,
-      parkingSpaces: this.form.controls['typevacancies'].value,
-      yearOfConstruction: this.form.controls['typeconstruction'].value,
-      propertyType: [],
+      ufAddress: this.form.controls['typePropertyState'].value || this.formModal.controls['typePropertyState'].value,
+      bedrooms: this.form.controls['typeBadrooms'].value || this.formModal.controls['typeBadrooms'].value,
+      bathrooms: this.form.controls['typeBathRoom'].value || this.formModal.controls['typeBathRoom'].value,
+      initialValue: this.form.controls['typeMaxPrice'].value || this.formModal.controls['typeMaxPrice'].value,
+      finalValue: this.form.controls['typeMinPrice'].value || this.formModal.controls['typeMinPrice'].value,
+      finalUsefulArea: this.form.controls['typefootagemax'].value || this.formModal.controls['typefootagemax'].value,
+      initialUsefulArea: this.form.controls['typefootagemin'].value || this.formModal.controls['typefootagemin'].value,
+      parkingSpaces: this.form.controls['typevacancies'].value || this.formModal.controls['typevacancies'].value,
+      yearOfConstruction: this.form.controls['typeconstruction'].value || this.formModal.controls['typeconstruction'].value,
+      propertyType: propertyTypeList.filter(item => item),
+      propertyTypeList: this.form.controls['propertyType'].value || this.formModal.controls['propertyType'].value,
       goal: ''
     }
+
+    console.log(request)
 
 
     this.announcementService.listFilter(request).subscribe({
       next: data => {
         this.filterResult = data;
+        this.filtroResultDisplay = request;
+        console.log(this.filtroResultDisplay)
         if (data.length > 0) {
+          this.messageNotSearch = false;
           localStorage.setItem('resultSearch', JSON.stringify(data));
           localStorage.setItem('filtro', JSON.stringify(request));
         }
@@ -485,6 +544,9 @@ export class SearchPageComponent implements OnInit {
             }
           );
         }
+        if (this.modalFilterOpen === true) {
+          this.exit()
+        }
       },
       error: error => {
         console.log(error)
@@ -493,13 +555,11 @@ export class SearchPageComponent implements OnInit {
   }
 
   openFilter(content) {
-
     this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(data => {
     }, error => {
       this.modalFilterOpen = false;
-
     });
   }
 
