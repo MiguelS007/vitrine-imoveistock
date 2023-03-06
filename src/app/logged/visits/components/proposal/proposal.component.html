@@ -5,7 +5,12 @@
                 class="w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4">
                 <div class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex">
                     <div class="col-3 col-visits p-0">
-                        <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 " (click)="selectProposal(item)" />
+                        <!-- <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 "
+                            (click)="selectProposal(item)" /> -->
+                        <img *ngIf="!item.announcement?.mainPhoto" src="../../../../assets/img/ap.png" class="photo-announcement-card"
+                            (click)="selectProposal(item)">
+                        <img *ngIf="item.announcement?.mainPhoto" [src]="item.announcement?.mainPhoto" class="photo-announcement-card"
+                            (click)="selectProposal(item)">
                     </div>
                     <div (click)="selectProposal(item)" class="col-9 px-2 col-visits">
                         <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
@@ -272,8 +277,7 @@
                 <p class="fw-400 font-size-18 line-24 color-black">
                     Após agendar uma proposta seu histórico de proposta aparecerá aqui
                 </p>
-                <button style="max-width: 345px;" [routerLink]="['/search']"
-                    class="btn btn-search-property"
+                <button style="max-width: 345px;" [routerLink]="['/search']" class="btn btn-search-property"
                     type="button">Procurar imóveis</button>
             </div>
         </div>
