@@ -78,14 +78,14 @@
           <div class="w-100 mt-4 border-radius-10">
             <div class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
 
-              <p class="d-grid w-100">
+              <!-- <p class="d-grid w-100">
                 <span class="fw-700 font-size-18 line-24
                        color-black">Alta procura</span>
                 <span class="fw-400 font-size-14 line-19
                        color-black">226 pessoas viram esse
                   imóvel recentemente</span>
-              </p>
-              <hr class="hr" />
+              </p> -->
+              <!-- <hr class="hr" /> -->
               <div class="row">
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
@@ -291,7 +291,7 @@
             </div>
           </div>
           <!-- INFO CARDS -->
-          <div class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
+          <div *ngIf="response.characteristicInfrastructureOfTheCondominium" class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
               <img *ngIf="!arrow1" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
@@ -711,14 +711,14 @@
           <div class="w-100 mt-4 border-radius-10">
             <div id="infopaydesk" class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
 
-              <p class="d-grid w-100">
+              <!-- <p class="d-grid w-100">
                 <span class="fw-700 font-size-18 line-24
                        color-black">Alta procura</span>
                 <span class="fw-400 font-size-14 line-19
                        color-black">226 pessoas viram esse
                   imóvel recentemente</span>
-              </p>
-              <hr class="hr" />
+              </p> -->
+              <!-- <hr class="hr" /> -->
               <div class="row">
                 <div class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Aluguel
