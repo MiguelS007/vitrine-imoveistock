@@ -2842,3 +2842,16 @@ vg-overlay-play .vg-overlay-play {
         max-width: 100% !important;
     }
 }
+
+
+#clicavel{
+  cursor: pointer;
+}
+
+#clicavel:hover{
+  color: #01FF5F;
+}
+
+#clicavel:active{
+  color: blue;
+}
