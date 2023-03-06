@@ -111,11 +111,6 @@
                         <img *ngIf="selectedScheduling.announcement?.mainPhoto" [src]="selectedScheduling.announcement?.mainPhoto"
                             class="photo-announcement-card"
                             (click)="announcementSelected(selectedScheduling.announcement?._id)">
-
-                        <!-- <img *ngIf="!item.announcement?.mainPhoto" src="../../../../assets/img/ap.png"
-                            class="photo-announcement-card" (click)="selectProposal(item)">
-                        <img *ngIf="item.announcement?.mainPhoto" [src]="item.announcement?.mainPhoto"
-                            class="photo-announcement-card" (click)="selectProposal(item)"> -->
                         <div class="space-sale-exclusive">
                             <h4 *ngIf="selectedScheduling.announcement?.typeOfAd === 'sale'"
                                 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">

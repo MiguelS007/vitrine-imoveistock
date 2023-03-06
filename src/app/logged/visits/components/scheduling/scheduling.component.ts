@@ -63,7 +63,7 @@ export class SchedulingComponent implements OnInit {
   ngOnInit(): void {
     this.schedulesList();
   }
-  
+
   schedulesList() {
     this.scheduleService.getListVisists().subscribe(
       success => {
@@ -73,7 +73,9 @@ export class SchedulingComponent implements OnInit {
           this.selectedSchedulingStatus = success[0].status;
           console.log(this.selectedSchedulingStatus)
           setTimeout(() => {
-            this.selecionarVisita(this.selectedScheduling, this.selectedSchedulingStatus);
+            if (window.screen.width > 992) {
+              this.selecionarVisita(this.selectedScheduling, this.selectedSchedulingStatus);
+            }
           }, 100);
         }
         this.verifyLike()
@@ -89,8 +91,15 @@ export class SchedulingComponent implements OnInit {
     this.announcementList.map(results => {
       if (results.nativeElement?.id === item._id) {
         results.nativeElement.className = 'scheduling-visit-selected w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4';
-        localStorage.setItem('announcementChecked', item._id)
-        localStorage.setItem('announcementStatus', status)
+        localStorage.setItem('announcementChecked', JSON.stringify(item))
+        localStorage.setItem('announcementStatus', status);
+        if (window.screen.width < 992) {
+          const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
+          modalRef.result.then(data => {
+          }, error => {
+            this.schedulesList()
+          });
+        }
         this.selectedScheduling = item;
         this.selectedSchedulingStatus = status;
       } else {
@@ -185,47 +194,47 @@ export class SchedulingComponent implements OnInit {
 
   }
 
-  selectVisit(item, itemId) {
-    document.querySelectorAll(".scheduling-visit-selected").forEach(element => {
-      element.classList.remove("scheduling-visit-selected");
-    });
-    document.getElementById(itemId)!.classList.add("scheduling-visit-selected");
-    this.selectedScheduling = item;
-    this.selectedSchedulingStatus = status;
-    this.verifyLike();
-    let teste: any = localStorage.getItem('announcementChecked');
-    this.scheduleService.getListVisists().subscribe(
-      success => {
-        this.response = success
-        if (success.length > 0) {
-          for (let i = 0; i < this.response.length; i++) {
-            if (item._id === this.response[i]._id) {
-              this.situationStatus = this.response[i].status;
-            }
-          }
-        }
-      },
-      error => {
-        console.error(error);
-      }
-    )
-    console.log(this.selectedSchedulingStatus,  'status')
-    if (window.screen.width < 992) {
-      localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling, this.selectedSchedulingStatus))
-      const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
-      modalRef.result.then(data => {
-      }, error => {
-        localStorage.removeItem('announcementChecked');
-        this.schedulesList()
-      });
-    } else if (teste === item._id) {
-      return
-    } else {
-      setTimeout(() => {
-        localStorage.setItem('announcementChecked', item._id)
-      }, 110);
-    }
-  }
+  // selectVisit(item, itemId) {
+  //   document.querySelectorAll(".scheduling-visit-selected").forEach(element => {
+  //     element.classList.remove("scheduling-visit-selected");
+  //   });
+  //   document.getElementById(itemId)!.classList.add("scheduling-visit-selected");
+  //   this.selectedScheduling = item;
+  //   this.selectedSchedulingStatus = status;
+  //   this.verifyLike();
+  //   let teste: any = localStorage.getItem('announcementChecked');
+  //   this.scheduleService.getListVisists().subscribe(
+  //     success => {
+  //       this.response = success
+  //       if (success.length > 0) {
+  //         for (let i = 0; i < this.response.length; i++) {
+  //           if (item._id === this.response[i]._id) {
+  //             this.situationStatus = this.response[i].status;
+  //           }
+  //         }
+  //       }
+  //     },
+  //     error => {
+  //       console.error(error);
+  //     }
+  //   )
+  //   console.log(this.selectedSchedulingStatus, 'status')
+  //   if (window.screen.width < 992) {
+  //     localStorage.setItem('announcementChecked', JSON.stringify(this.selectedScheduling, this.selectedSchedulingStatus))
+  //     const modalRef = this.modalService.open(SchedulingSelectedModalComponent, { centered: true });
+  //     modalRef.result.then(data => {
+  //     }, error => {
+  //       localStorage.removeItem('announcementChecked');
+  //       this.schedulesList()
+  //     });
+  //   } else if (teste === item._id) {
+  //     return
+  //   } else {
+  //     setTimeout(() => {
+  //       localStorage.setItem('announcementChecked', item._id)
+  //     }, 110);
+  //   }
+  // }
 
   announcementSelected(value) {
     localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
