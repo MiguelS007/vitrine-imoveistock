@@ -7,17 +7,26 @@
             <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">Agendar visita</p>
             <div class="row border-radius-10 border p-3 d-flex">
                 <div class="col-3 p-0">
-                    <img src="../../../assets/img/ap.png" class="w-100 border-radius-10" />
+                    <img *ngIf="!response.announcement?.mainPhoto" src="../../../assets/img/ap.png"
+                        class="w-100 border-radius-10" />
+                    <img *ngIf="response.announcement?.mainPhoto" [src]="response.announcement?.mainPhoto"
+                        class="w-100 border-radius-10" />
                 </div>
                 <div class="col-9">
                     <h5 class="fw-700 font-size-18 line-24 color-black d-inline-block text-truncate"
                         style="max-width: 150px;">{{response.announcement?.description || '-'}}</h5>
                     <p class="w-100 mb-0 d-grid">
-                        <span class="fw-400 font-size-14 line-19 color-black">Quartos:&nbsp;{{response.announcement?.bedrooms ||
+                        <span
+                            class="fw-400 font-size-14 line-19 color-black">Quartos:&nbsp;{{response.announcement?.bedrooms
+                            ||
                             '-'}}</span>
-                        <span class="fw-400 font-size-14 line-19 color-black">Banheiros:&nbsp;{{response.announcement?.bathrooms ||
+                        <span
+                            class="fw-400 font-size-14 line-19 color-black">Banheiros:&nbsp;{{response.announcement?.bathrooms
+                            ||
                             '-'}}</span>
-                        <span class="fw-400 font-size-14 line-19 color-black">Metragem:&nbsp;{{response.announcement?.usefulArea ||
+                        <span
+                            class="fw-400 font-size-14 line-19 color-black">Metragem:&nbsp;{{response.announcement?.usefulArea
+                            ||
                             '-'}}m²</span>
                     </p>
                 </div>
@@ -89,55 +98,54 @@
                         </ng-template>
                         <ng-template class="w-auto d-flex" swiperSlide>
                             <div
-                            class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="13:00" formControlName="time" value="13h" name="time"
-                                class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
-                                (change)="selectTime('13h')">
-                            <label for="13:00"
-                                class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">13:00</label>
-                        </div>
+                                class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                                <input type="radio" id="13:00" formControlName="time" value="13h" name="time"
+                                    class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
+                                    (change)="selectTime('13h')">
+                                <label for="13:00"
+                                    class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">13:00</label>
+                            </div>
 
-                        <div
-                            class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="14:00" formControlName="time" value="14h" name="time"
-                                class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
-                                (change)="selectTime('14h')">
-                            <label for="14:00"
-                                class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">14:00</label>
-                        </div>
+                            <div
+                                class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                                <input type="radio" id="14:00" formControlName="time" value="14h" name="time"
+                                    class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
+                                    (change)="selectTime('14h')">
+                                <label for="14:00"
+                                    class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">14:00</label>
+                            </div>
 
-                        <div
-                            class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="15:00" formControlName="time" value="15h" name="time"
-                                class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
-                                (change)="selectTime('15h')">
-                            <label for="15:00"
-                                class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">15:00</label>
-                        </div>
+                            <div
+                                class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                                <input type="radio" id="15:00" formControlName="time" value="15h" name="time"
+                                    class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
+                                    (change)="selectTime('15h')">
+                                <label for="15:00"
+                                    class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">15:00</label>
+                            </div>
 
-                        <div
-                            class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="16:00" formControlName="time" value="16h" name="time"
-                                class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
-                                (change)="selectTime('16h')">
-                            <label for="16:00"
-                                class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">16:00</label>
-                        </div>
-                        
-                        <div
-                            class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
-                            <input type="radio" id="17:00" formControlName="time" value="17h" name="time"
-                                class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
-                                (change)="selectTime('17h')">
-                            <label for="17:00"
-                                class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">17:00</label>
-                        </div>
+                            <div
+                                class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                                <input type="radio" id="16:00" formControlName="time" value="16h" name="time"
+                                    class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
+                                    (change)="selectTime('16h')">
+                                <label for="16:00"
+                                    class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">16:00</label>
+                            </div>
+
+                            <div
+                                class="seletor-item mx-1 d-flex h-fit cursor-pointer position-relative justify-content-center align-items-center">
+                                <input type="radio" id="17:00" formControlName="time" value="17h" name="time"
+                                    class="selector-item_radio  cursor-pointer  border-radius-05  w-100 h-100  text-center  position-relative"
+                                    (change)="selectTime('17h')">
+                                <label for="17:00"
+                                    class="selector-item_label  cursor-pointer  border-radius-100  fw-400  font-size-14  line-19 color-black border-black">17:00</label>
+                            </div>
                         </ng-template>
 
                     </swiper>
                 </div>
-                <button type="button" [disabled]="this.form.controls['time'].value == ''"
-                    (click)="confirm()"
+                <button type="button" [disabled]="this.form.controls['time'].value == ''" (click)="confirm()"
                     class="btn pb-2 bg-purple fw-700 font-size-18 line-24 text-light  border-radius-10 h-74 w-100">Continuar</button>
             </div>
         </div>
