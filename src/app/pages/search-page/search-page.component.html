@@ -11,7 +11,7 @@
                     <b>
                         <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
                         <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
-                            <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
+                        <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
                         <span *ngIf="filtroResultDisplay.ufAddress"> {{stateSelected}},</span>
                         <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
                         <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos,</span>
@@ -22,10 +22,9 @@
             <div class="col-4 col-body-products mt-5 pt-5 pl-0">
                 <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
 
-                    <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'"
-                        [settings]="dropdownSettings" formControlName="propertyType" [data]="dropdownList"
-                        [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
-                        (onSelectAll)="onSelectAll($event)">
+                    <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
+                        formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
+                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                     </ng-multiselect-dropdown>
 
                     <div class="dropdown">
@@ -151,10 +150,10 @@
                     <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }"
                         [scrollbar]="true">
                         <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
-                            <div style="background-image:
-                       url(../../../assets/img/gradient.png),
-                       url(../../../assets/img/img-announcement-default.jpg);" class="bg-img-property w-100 py-2 px-3
-                       border-radius-10" (click)="announcementSelected(item._id)">
+                            <div class="bg-img-property w-100 py-2 px-3" (click)="announcementSelected(item._id)">
+                                <img *ngIf="item.mainPhoto" [src]="item.mainPhoto" class="img-exclusivity-space-search">
+                                <img *ngIf="!item.mainPhoto" src="../../../assets/img/img-announcement-default.jpg"
+                                    alt="" class="img-exclusivity-space-search">
                                 <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
                                     <h4 class="bg-purple h-fit px-4 py-2 mb-0
                              border-radius-5 fw-400 font-size-18 line-24
@@ -281,9 +280,11 @@
                         <div
                             class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
                             <div class="border-radius-10 position-relative">
-                                <img (click)="announcementSelected(item._id)"
+                                <img *ngIf="!item.mainPhoto" (click)="announcementSelected(item._id)"
                                     src="../../../assets/img/img-announcement-default.jpg"
                                     class="img-search-announcement-main">
+                                <img *ngIf="item.mainPhoto" (click)="announcementSelected(item._id)"
+                                    [src]="item.mainPhoto" class="img-search-announcement-main">
                                 <div class="space-sale-or-rent-search-announcement">
                                     <h4 *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
                                 border-radius-5 fw-400 font-size-14 line-15
@@ -363,10 +364,10 @@
                     <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }"
                         [scrollbar]="true">
                         <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
-                            <div style="background-image:
-                       url(../../../assets/img/gradient.png),
-                       url(../../../assets/img/img-announcement-default.jpg);" class="bg-img-property w-100 py-2 px-3
-                       border-radius-10" (click)="announcementSelected(item._id)">
+                            <div class="bg-img-property w-100 py-2 px-3" (click)="announcementSelected(item._id)">
+                                <img *ngIf="item.mainPhoto" [src]="item.mainPhoto" class="img-exclusivity-space-search">
+                                <img *ngIf="!item.mainPhoto" src="../../../assets/img/img-announcement-default.jpg"
+                                    alt="" class="img-exclusivity-space-search">
                                 <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
                                     <h4 class="bg-purple h-fit px-4 py-2 mb-0
                              border-radius-5 fw-400 font-size-18 line-24

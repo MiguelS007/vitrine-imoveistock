@@ -1342,12 +1342,23 @@ input:focus {
 }
 
 .bg-img-property {
-
+    background-image: url(./assets/img/gradient.png);
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
-    Width: 416px;
-    Height: 309px
+    width: 416px;
+    height: 309px;
+}
+
+.img-exclusivity-space-search {
+    width: 416px;
+    height: 309px;
+    left: 0px !important;
+    top: 0px !important;
+    position: absolute;
+    z-index: -1;
+    background-position: center !important;
+    background-size: cover !important;
 }
 
 .bg-img-result {
@@ -1923,6 +1934,7 @@ vg-overlay-play .vg-overlay-play {
 
     .space-exclusivos-mobile-search-page {
         display: block !important;
+        max-width: 455px !important;
     }
 
     .margin-header-title-custom {
