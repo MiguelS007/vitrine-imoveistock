@@ -3,7 +3,7 @@
         <div class="px-0 w-100 mb-5">
             <div class="row row-of-home mx-0">
                 <div class="col-5 col-12-mobile">
-                    <form [formGroup]="form" 
+                    <form [formGroup]="form"
                         class="row mx-0 w3-white p-4 border-radius-10 justify-content-center form-header">
                         <div class="col-12">
                             <p class="fw-700 open-doors-title font-size-48 color-black">Abrindo novas portas</p>
@@ -22,12 +22,12 @@
                                     class="btn h-51 btn-home-sale-rent border-radius-0  w-111 fw-400 font-size-16 line-20">
                                     Alugar
                                 </button>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-12 px-0 d-flex justify-content-center">
                             <div class="w-100 painel-browser h-auto max-w-1918">
                                 <div class="row px-0 mx-0 d-flex content-painel align-items-center">
-                                    <div class="dropdown mb-3 px-0 col-12">
+                                    <!-- <div class="dropdown mb-3 px-0 col-12">
 
                                         <button type="button" readonly
                                             class="btn w-100 overflow-x-scroll border text-left px-3 input-property border-radius-0 color-black h-51 fw-400 bg-white font-size-14 line-20 color-dark dropdown-toggle"
@@ -163,9 +163,8 @@
                                                 </label>
                                             </div>
 
+                                            
 
-
-                                            <!-- ------------- COMERCIAL ----------------->
                                             <div class="w-100 px-3 pt-4 pb-2">
                                                 <h3 class="fw-700 font-size-14 line-20 color-black">Comercial</h3>
                                             </div>
@@ -292,7 +291,16 @@
                                             </div>
 
                                         </div>
+                                    </div> -->
+
+                                    <div class="col-12 px-0 pb-3">
+                                        <ng-multiselect-dropdown class="customClass" [placeholder]="'Tipo do imóvel'"
+                                            [settings]="dropdownSettings" formControlName="propertyType" [data]="dropdownList"
+                                            [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)">
+                                        </ng-multiselect-dropdown>
                                     </div>
+
                                     <div class="col-12 px-0 mb-3 ">
                                         <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                                             <select formControlName="typePropertyState" (change)="getEstados($event)"

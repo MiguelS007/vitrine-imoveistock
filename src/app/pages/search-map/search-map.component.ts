@@ -13,6 +13,7 @@ import { environment } from '../../../environments/environment';
 import { GoogleMap } from '@angular/google-maps';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import { GeocodeService } from '../../service/geocode.service';
+import { AnnouncementFilterListResponseDto } from '../../dtos/announcement-filter-list-response.dto';
 
 @Component({
   selector: 'app-search-map',
@@ -71,18 +72,7 @@ export class SearchMapComponent implements OnInit {
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
 
 
-  filtroResultDisplay: {
-    state: string,
-    city: string,
-    untilValueSale: string,
-    untilValueRent: string,
-    badRoomsQnt: number,
-    propertiesType: string,
-    typeAd: string,
-    goal: string,
-    styleProperty: string,
-    typeOfProperty: any[];
-  }
+  filtroResultDisplay: AnnouncementFilterListResponseDto;
 
 
   selectTypeAd = 'Selecione';
@@ -163,79 +153,48 @@ export class SearchMapComponent implements OnInit {
       this._getAddress();
     });
 
-    let resultadoVerify = localStorage.getItem('resultSearch');
-    if (resultadoVerify !== null) {
-      this.filterResult = JSON.parse(resultadoVerify);
-      // list-price-orderBy
-      for (let i = 0; i < this.filterResult.length; i++) {
-        this.listOfPrices.push(this.filterResult[i].saleValue);
-      }
-      // console.log(this.listOfPrices);
-      if (this.filterResult.length === 0) {
-        this.messageNotSearch = true;
-      } else {
-        this.messageNotSearch = false;
-      }
-    } else {
-      this.filterResult = [];
-    }
-    let filtro = localStorage.getItem('filtro');
-    this.filtroSelected = JSON.parse(filtro);
-    let typeAdTranslate: string = ''
+    if (localStorage.getItem('filtro') !== null) {
+      let filtro: any = localStorage.getItem('filtro');
+      filtro = JSON.parse(filtro);
 
-    if (this.filtroSelected?.typeAd === 'rent') {
-      typeAdTranslate = 'Alugar'
-    } else if (this.filtroSelected?.typeAd === 'sale') {
-      typeAdTranslate = 'Comprar'
-    }
-    this.filtroResultDisplay = {
-      state: this.filtroSelected?.state,
-      city: this.filtroSelected?.city,
-      untilValueSale: this.filtroSelected?.untilValueSale,
-      untilValueRent: this.filtroSelected?.untilValueRent,
-      badRoomsQnt: this.filtroSelected?.badRoomsQnt,
-      propertiesType: this.filtroSelected?.propertiesType,
-      styleProperty: this.filtroSelected?.styleProperty,
-      typeAd: typeAdTranslate,
-      goal: this.filtroSelected?.goal,
-      typeOfProperty:
-        this.filtroSelected?.propertyapartamento ||
-        this.filtroSelected?.propertystudio ||
-        this.filtroSelected?.propertykitnet ||
-        this.filtroSelected?.propertycasa ||
-        this.filtroSelected?.propertycasacondominio ||
-        this.filtroSelected?.propertycasadevila ||
-        this.filtroSelected?.propertycobertura ||
-        this.filtroSelected?.propertyloft ||
-        this.filtroSelected?.propertyflat ||
-        this.filtroSelected?.propertyterreno ||
-        this.filtroSelected?.propertychacara ||
-        this.filtroSelected?.propertyloja ||
-        this.filtroSelected?.propertysalao ||
-        this.filtroSelected?.propertysala ||
-        this.filtroSelected?.propertygalpao ||
-        this.filtroSelected?.propertyconjuntocomercial ||
-        this.filtroSelected?.propertycasacomercial ||
-        this.filtroSelected?.propertypousada ||
-        this.filtroSelected?.propertyhotel ||
-        this.filtroSelected?.propertymotel ||
-        this.filtroSelected?.propertylajecorporativa ||
-        this.filtroSelected?.propertyprediointeiro
-    }
-    console.log(this.filtroSelected)
-    if (filtro !== null) {
-      this.form.patchValue({
-        typeMaxPrice: this.filtroResultDisplay.untilValueSale,
-        typeOfProperty: this.filtroSelected?.typeOfProperty,
-        typePropertyCity: this.filtroResultDisplay?.city,
-      })
-      this.searchByTypeAd(this.filtroSelected?.typeAd);
-      this.filterTypeProperty(this.filtroSelected?.goal || 'Tipo do Imóvel');
-      this.searchByBadRoom(this.filtroSelected?.badRoomsQnt)
-      if (this.filtroSelected.styleProperty !== '') {
-        this.searchByStyleProperty(this.filtroSelected.styleProperty || 'O que está buscando')
+      this.searchByTypeAd(filtro.typeOfAdd);
+
+      this.citySelected = filtro.cityAddress;
+
+      for (let i = 0; i < estados.estados.length; i++) {
+        if (filtro.ufAddress === estados.estados[i].sigla) {
+          for (let x = 0; x < estados.estados[i].cidades.length; x++) {
+            this.stateSelected = estados.estados[i].nome
+          }
+        }
       }
+
+      this.form.patchValue({
+        typePropertyCity: filtro.cityAddress,
+        typeMaxPrice: filtro.finalValue
+      });
+
+      this.searchByBadRoom(filtro.bedrooms);
+
+      this.filtroResultDisplay = {
+        ufAddress: filtro?.ufAddress,
+        cityAddress: filtro?.cityAddress,
+        initialValue: filtro?.initialValue,
+        finalValue: filtro?.finalValue,
+        bedrooms: filtro?.bedrooms,
+        propertyType: filtro?.propertyType,
+        typeOfAdd: filtro.typeOfAdd,
+        bathrooms: filtro?.bathrooms,
+        finalUsefulArea: filtro?.finalUsefulArea,
+        goal: filtro?.goal,
+        initialUsefulArea: filtro?.initialUsefulArea,
+        parkingSpaces: filtro?.parkingSpaces,
+        yearOfConstruction: filtro?.yearOfConstruction,
+        propertyTypeList: []
+      }
+
     }
+
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.announcementService.listAnnouncement().subscribe(
@@ -632,16 +591,7 @@ export class SearchMapComponent implements OnInit {
           this.messageNotSearch = false;
         }
         this.filtroResultDisplay = {
-          state: '',
-          city: '',
-          untilValueSale: '',
-          untilValueRent: '',
-          badRoomsQnt: 0,
-          propertiesType: '',
-          typeAd: '',
-          goal: '',
-          styleProperty: '',
-          typeOfProperty: []
+          typeOfAdd: ''
         }
         this.ngxSpinnerService.hide();
       },

@@ -137,14 +137,39 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.ngxSpinnerService.show();
-    this.products = this.datamokservice.resultSearch;
-
     console.log(this.form.value);
 
-    // this.form.patchValue({
-    //   propertyType: this.filtroResultDisplay.propertyType,
-    //   searchwords
-    // })
+    if (localStorage.getItem('filtro') !== null) {
+      let filtro: any = localStorage.getItem('filtro');
+      filtro = JSON.parse(filtro);
+
+      this.searchByTypeAd(filtro.typeOfAdd);
+
+      this.citySelected = filtro.cityAddress;
+
+      for (let i = 0; i < estados.estados.length; i++) {
+        if (filtro.ufAddress === estados.estados[i].sigla) {
+          for (let x = 0; x < estados.estados[i].cidades.length; x++) {
+            this.stateSelected = estados.estados[i].nome
+          }
+        }
+      }
+
+      this.form.patchValue({
+        typePropertyCity: filtro.cityAddress,
+        typeMaxPrice: filtro.finalValue
+      });
+
+      this.formModal.patchValue({
+        typePropertyCity: filtro.cityAddress,
+        typeMaxPrice: filtro.finalValue
+      });
+
+      this.searchByBadRoom(filtro.bedrooms)
+
+    }
+
+
 
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
@@ -191,12 +216,10 @@ export class SearchPageComponent implements OnInit {
       initialUsefulArea: this.filtroSelected?.initialUsefulArea,
       parkingSpaces: this.filtroSelected?.parkingSpaces,
       yearOfConstruction: this.filtroSelected?.yearOfConstruction,
-
     }
+
+
     console.log(this.filtroSelected, 'dados do storage')
-
-
-
 
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
@@ -220,21 +243,19 @@ export class SearchPageComponent implements OnInit {
           this.ngxSpinnerService.hide();
         },
       )
-    } else {
-      if (localStorage.getItem('user') !== null) {
-        this.announcementService.listLikes().subscribe(
-          success => {
-            for (let i = 0; i < success.length; i++) {
-              for (let x = 0; x < this.filterResult.length; x++) {
-                if (success[i].announcement._id === this.filterResult[x]._id) {
-                  Object.assign(this.filterResult[x], { liked: true });
-                }
+    } else if (localStorage.getItem('user') !== null) {
+      this.announcementService.listLikes().subscribe(
+        success => {
+          for (let i = 0; i < success.length; i++) {
+            for (let x = 0; x < this.filterResult.length; x++) {
+              if (success[i].announcement._id === this.filterResult[x]._id) {
+                Object.assign(this.filterResult[x], { liked: true });
               }
-              this.listLikes.push(success[i].announcement)
             }
+            this.listLikes.push(success[i].announcement)
           }
-        )
-      }
+        }
+      )
     }
     // GET-CITIES
     let teste: any = [];
@@ -246,14 +267,14 @@ export class SearchPageComponent implements OnInit {
           removeRepets.push(data[i].cityAddress)
         }
         teste = new Set(removeRepets)
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].exclusivity) {
-            this.propertyproducts.push(data[i])
-          }
-
-        }
         this.response = data;
         this.ngxSpinnerService.hide();
+      }
+    })
+
+    this.announcementService.listExclusive().subscribe({
+      next: data => {
+        this.propertyproducts = data; 
       }
     })
   }
@@ -407,9 +428,6 @@ export class SearchPageComponent implements OnInit {
 
 
   filtrar() {
-    // this.listForFilterOnClick();
-    // let listAll:  AnnouncementGetResponseDto[] = [];
-    // let listLikesFilter: AnnouncementGetResponseDto[] = [];
 
     if (this.stateSelected === 'Escolha o Estado') this.form.controls['typePropertyState'].setValue('')
     if (this.stateSelected === 'Escolha o Estado') this.formModal.controls['typePropertyState'].setValue('')
@@ -449,16 +467,23 @@ export class SearchPageComponent implements OnInit {
     }
 
 
-
-    console.log(request);
-    console.log(this.form.value);
-
     this.announcementService.listFilter(request).subscribe({
       next: data => {
         this.filterResult = data;
         if (data.length > 0) {
           localStorage.setItem('resultSearch', JSON.stringify(data));
           localStorage.setItem('filtro', JSON.stringify(request));
+        }
+        if (this.filterResult.length === 0) {
+          this.messageNotSearch = true;
+          this.announcementService.listAnnouncement().subscribe(
+            success => {
+              this.filterResult = success;
+            },
+            error => {
+              console.error(error)
+            }
+          );
         }
       },
       error: error => {
@@ -507,6 +532,9 @@ export class SearchPageComponent implements OnInit {
       }
     }
   }
+
+
+
   sortPriceList(value: string) {
     this.listOfPrices = this.filterResult;
     if (value === 'minor>major') this.listOfPrices.sort((a, b) => a.saleValue < b.saleValue ? -1 : 0);

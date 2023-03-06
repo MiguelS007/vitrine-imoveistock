@@ -24,4 +24,11 @@ export abstract class AnnouncementFilterListResponseDto {
     initialUsefulArea?: number;
 
     finalUsefulArea?: number;
+
+    propertyTypeList?: ListDisplay[];
+}
+
+class ListDisplay {
+    item_id: string;
+    item_text: string;
 }

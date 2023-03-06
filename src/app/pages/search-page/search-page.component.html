@@ -9,12 +9,12 @@
                 </p>
                 <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                     <b>
-                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Venda,</span>
-                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Aluguel,</span>
-                        <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
-                        <span *ngIf="filtroResultDisplay.ufAddress"> {{filtroResultDisplay.ufAddress}},</span>
+                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
+                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
+                        <span *ngFor="let item of filtroSelected.propertyTypeList"> {{item.item_text}},</span>
+                        <span *ngIf="filtroResultDisplay.ufAddress"> {{stateSelected}},</span>
                         <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
-                        <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos,</span>
+                        <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos,</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
                     </b>
                 </p>
@@ -48,18 +48,18 @@
                         <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                             <select formControlName="typePropertyState" (change)="getEstados($event)"
                                 class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-74 bg-light fw-400 font-size-14 line-20 color-black"
-                                [(ngModel)]="stateSelected" id="state"
-                                aria-label="Default select example">
+                                [(ngModel)]="stateSelected" id="state" aria-label="Default select example">
                                 <option [value]="stateSelected" disabled selected value>
                                     {{stateSelected}}</option>
                                 <option *ngFor="let item of estados.estados" [value]="item.nome">{{item.nome}}</option>
-                            </select> 
+                            </select>
                         </div>
                     </div>
                     <div class="dropdown px-0 mb-4 ">
-                        <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity" [searchKeyword]="keyword"
-                        (inputChanged)='onChangeSearch($event)' placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
-                        [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                        <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity"
+                            [searchKeyword]="keyword" (inputChanged)='onChangeSearch($event)'
+                            placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
+                            [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
                         </ng-autocomplete>
 
                         <ng-template #itemTemplate let-item>
@@ -104,7 +104,8 @@
                         </div>
                     </div>
                     <div class="dropdown">
-                        <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
+                        <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms"
+                            [placeholder]="selectBadRooms"
                             class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
                             role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" readonly>
@@ -231,19 +232,21 @@
             <div class="col-8 col-body-products px-0 pt-5 mt-5">
                 <div class="col-12 d-block-desk d-none " *ngIf="filtroResultDisplay.typeOfAdd">
                     <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
-                        <span [routerLink]="['/']" class="fw-700 font-size-16 line-19 color-black">Página Inicial /</span>
+                        <span [routerLink]="['/']" class="fw-700 font-size-16 line-19 color-black">Página Inicial
+                            /</span>
                         <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
-    
+
                     </p>
                     <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                         <b>
-                            <span *ngIf="filtroResultDisplay.typeOfAdd">{{filtroResultDisplay.typeOfAdd}},</span>
-                            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                            <span *ngIf="filtroResultDisplay.propertyType"> {{filtroResultDisplay.propertyType}},</span>
-                            <span *ngIf="filtroResultDisplay.ufAddress"> {{filtroResultDisplay.ufAddress}},</span>
+                            <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
+                            <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
+                            <span *ngFor="let item of filtroSelected.propertyTypeList"> {{item.item_text}},</span>
+                            <span *ngIf="filtroResultDisplay.ufAddress"> {{stateSelected}},</span>
                             <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
-                            <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos</span>
-                            <!-- <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span> -->
+                            <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
+                                Quartos,</span>
+                            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
                         </b>
                     </p>
                 </div>
@@ -279,19 +282,21 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="row pr-0">
                     <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch">
                         <img src="../../../assets/img/not-search-announcement.svg" height="80">
                         <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
-                        <p class="text-center mb-0">explore outros filtros e confira os imoveis abaixo que podem te atender no momento</p>
+                        <p class="text-center mb-0">explore outros filtros e confira os imoveis abaixo que podem te
+                            atender no momento</p>
                         <span class="text-center">:(</span>
                     </div>
                     <div class="col-lg-6 px-3 col-cards-products" *ngFor="let item of filterResult | paginate: {
                     itemsPerPage: 6, currentPage: paginationProduct }; let
                     i= index">
-                        <div class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
+                        <div
+                            class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
                             <div class="border-radius-10 position-relative">
                                 <img (click)="announcementSelected(item._id)"
                                     src="../../../assets/img/img-announcement-default.jpg"
@@ -422,8 +427,7 @@
         <div class="dropdown">
             <button style="min-width: 162.23px !important;"
                 class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{stylePropertyTitle}}
             </button>
             <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
@@ -433,8 +437,7 @@
         </div>
         <div class="dropdown">
             <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+                role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{selectTypeAd}}
             </a>
             <div class="dropdown-menu w-100" aria-labelledby="resultSituation">
@@ -447,20 +450,17 @@
             <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                 <select formControlName="typePropertyState" (change)="getEstados($event)"
                     class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-74 bg-light fw-400 font-size-14 line-20 color-black"
-                    [(ngModel)]="stateSelected" id="state"
-                    aria-label="Default select example">
+                    [(ngModel)]="stateSelected" id="state" aria-label="Default select example">
                     <option [value]="stateSelected" disabled selected value>
                         {{stateSelected}}</option>
                     <option *ngFor="let item of estados.estados" [value]="item.nome">{{item.nome}}</option>
-                </select> 
+                </select>
             </div>
         </div>
         <div class="dropdown px-0 mb-4 ">
-            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity" [searchKeyword]="keyword"
-            (inputChanged)='onChangeSearch($event)'
-                placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
-                [itemTemplate]="itemTemplate"
-                [notFoundTemplate]="notFoundTemplate">
+            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity"
+                [searchKeyword]="keyword" (inputChanged)='onChangeSearch($event)' placeholder="Escolha uma cidade"
+                (selected)='selectEvent($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
 
             <ng-template #itemTemplate let-item>
@@ -472,11 +472,10 @@
             </ng-template>
 
         </div>
-        <div class="dropdown"  style="margin-top: 3.5rem;">
+        <div class="dropdown" style="margin-top: 3.5rem;">
             <button
                 class="btn pl-3 border  border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                type="button" id="dropdownforhome" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+                type="button" id="dropdownforhome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{TypeProperty}}
             </button>
             <div class="dropdown-menu border-radius-10 w-100" aria-labelledby="dropdownforhome">
@@ -507,8 +506,8 @@
         <div class="dropdown">
             <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
                 class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false" readonly>
+                role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                readonly>
             <div class="dropdown-menu" aria-labelledby="resultRooms">
                 <a class="dropdown-item" (click)="searchByBadRoom('1')">1+</a>
                 <a class="dropdown-item" (click)="searchByBadRoom('2')">2+</a>
@@ -518,11 +517,10 @@
             </div>
         </div>
         <div class="dropdown">
-            <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms"
-                [placeholder]="selectBathrooms"
+            <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms" [placeholder]="selectBathrooms"
                 class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false" readonly>
+                role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                readonly>
             <div class="dropdown-menu" aria-labelledby="resultbathroom">
                 <a class="dropdown-item" (click)="searchByBathRoom('1')">1+</a>
                 <a class="dropdown-item" (click)="searchByBathRoom('2')">2+</a>
@@ -532,11 +530,10 @@
             </div>
         </div>
         <div class="dropdown">
-            <input type="text" formControlName="typevacancies" [value]="selectVacancies"
-                [placeholder]="selectVacancies"
+            <input type="text" formControlName="typevacancies" [value]="selectVacancies" [placeholder]="selectVacancies"
                 class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-74 d-flex justify-content-between align-items-center dropdown-toggle"
-                role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false" readonly>
+                role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                readonly>
             <div class="dropdown-menu" aria-labelledby="resultVacancies">
                 <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
                 <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
