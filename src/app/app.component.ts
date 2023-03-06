@@ -1,9 +1,11 @@
 import { Component} from '@angular/core';
+import { Loader } from '@googlemaps/js-api-loader';
 import {  NgcCookieConsentService,
   NgcInitializationErrorEvent,
   NgcInitializingEvent, NgcNoCookieLawEvent,
   NgcStatusChangeEvent} from "ngx-cookieconsent";
 import { Subscription } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'imoveistock Indicação';
+  
   private popupOpenSubscription!: Subscription;
   private popupCloseSubscription!: Subscription;
   private initializingSubscription!: Subscription;
@@ -20,9 +24,19 @@ export class AppComponent {
   private statusChangeSubscription!: Subscription;
   private revokeChoiceSubscription!: Subscription;
   private noCookieLawSubscription!: Subscription;
+  
+  loaderApi: Loader = new Loader({
+    apiKey: environment.google.apiKey,
+  });
+  
   constructor(private ngCookieService: NgcCookieConsentService,
   ) {
+
+    this.loaderApi.load().then((google) => {
+      console.log('google maps loaded!');
+    });
   }
+
   ngOnInit(){
     // subscribe to cookieconsent observables to react to main events
     

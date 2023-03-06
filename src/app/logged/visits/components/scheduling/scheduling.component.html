@@ -21,8 +21,10 @@
                 </div>
                 <div class="row block-important cursor-pointer mx-0 border-radius-10 border mt-5 p-3 d-flex">
                     <div class="col-3 col-visits p-0">
-                        <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 "
-                            (click)="selecionarVisita(item, item.status)" />
+                        <img *ngIf="!item.announcement?.mainPhoto" src="../../../assets/img/ap.png"
+                            class="w-100 h-100 border-radius-10 " (click)="selecionarVisita(item, item.status)" />
+                        <img *ngIf="item.announcement?.mainPhoto" [src]="item.announcement?.mainPhoto"
+                            class="w-100 h-100 border-radius-10 " (click)="selecionarVisita(item, item.status)" />
                     </div>
                     <div (click)="selecionarVisita(item, item.status)" class="col-9 px-2 col-visits">
                         <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
@@ -47,8 +49,7 @@
                         class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
                         Cancelar
                     </button>
-                    <button *ngIf="item.status === 'cancel'" 
-                        (click)="removeVisit(item)"
+                    <button *ngIf="item.status === 'cancel'" (click)="removeVisit(item)"
                         class="btn border-radius-10 bg-white mt-2 mx-1 border-purple color-purple h-74 fw-700 font-size-18 line-24 w-100">
                         Remover
                     </button>
@@ -87,11 +88,14 @@
                     <div class="w-100 d-flex">
                         <i class="bi color-black mr-2 font-size-20 bi-person"></i>
                         <p class="d-grid">
-                            <span class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.user?.name || '-'}}</span>
+                            <span class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.user?.name ||
+                                '-'}}</span>
                             <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
-                            <span class="fw-400 font-size-14 line-18 color-black">{{selectedScheduling.user?.phone || '-'}}</span>
+                            <span class="fw-400 font-size-14 line-18 color-black">{{selectedScheduling.user?.phone ||
+                                '-'}}</span>
                         </p>
-                        <span *ngIf="selectedScheduling.status === 'cancel'" class="fw-400 font-size-14 line-18 color-black">
+                        <span *ngIf="selectedScheduling.status === 'cancel'"
+                            class="fw-400 font-size-14 line-18 color-black">
                             Essa visita foi cancelada. Você pode remarcar ou visitar novos imóveis
                         </span>
                     </div>
@@ -101,8 +105,17 @@
             <div class="w-100 bg-white mt-4 border-radius-10 h-auto">
                 <div class="h-100 product-announcement p-2 mx-3 border-radius-10 bg-white">
                     <div class="py-2 px-3 product-announcement-card position-relative">
-                        <img src="../../../../assets/img/ap.png" class="photo-announcement-card"
+                        <img *ngIf="!selectedScheduling.announcement?.mainPhoto" src="../../../../assets/img/ap.png"
+                            class="photo-announcement-card"
                             (click)="announcementSelected(selectedScheduling.announcement?._id)">
+                        <img *ngIf="selectedScheduling.announcement?.mainPhoto" [src]="selectedScheduling.announcement?.mainPhoto"
+                            class="photo-announcement-card"
+                            (click)="announcementSelected(selectedScheduling.announcement?._id)">
+
+                        <!-- <img *ngIf="!item.announcement?.mainPhoto" src="../../../../assets/img/ap.png"
+                            class="photo-announcement-card" (click)="selectProposal(item)">
+                        <img *ngIf="item.announcement?.mainPhoto" [src]="item.announcement?.mainPhoto"
+                            class="photo-announcement-card" (click)="selectProposal(item)"> -->
                         <div class="space-sale-exclusive">
                             <h4 *ngIf="selectedScheduling.announcement?.typeOfAd === 'sale'"
                                 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">

@@ -91,7 +91,7 @@ app-nav-bar {
     margin-bottom: 1rem;
     line-height: 40px;
     border-radius: 10px;
-    height: 74px !important;
+    height: 51px !important;
 }
 
 #search-cityes-test>.autocomplete-container {
@@ -1186,6 +1186,7 @@ input:focus {
     top: 0px !important;
     left: 0px !important;
     z-index: 1;
+    border-radius: 10px !important;
 }
 
 
@@ -1793,6 +1794,62 @@ vg-overlay-play .vg-overlay-play {
     background-color: transparent !important;
 }
 
+// ng-multiselect-dropdown div.multiselect-dropdown {
+//     background-color: red !important;
+//     height: 51px !important;
+//     border: none !important;
+// }
+
+.multiselect-dropdown .dropdown-btn {
+    display: inline-block;
+    border: 1px solid #dee2e6 !important;
+    width: 100%;
+    padding: 15px 12px !important;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20;
+    text-align: left;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border-radius: 0px !important;
+}
+
+.multiselect-dropdown .dropdown-btn .dropdown-multiselect__caret {
+    padding-top: 25px !important;
+}
+
+.multiselect-dropdown .dropdown-btn .selected-item {
+    background: #542FDF !important;
+    border: none !important;
+    color: white !important;
+}
+
+.multiselect-item-checkbox input[type=checkbox]:checked+div:before {
+    -webkit-animation: .2s ease-in borderscale;
+    animation: .2s ease-in borderscale;
+    background: #01FF5F !important;
+}
+
+.multiselect-item-checkbox input[type=checkbox]+div:before {
+    box-sizing: content-box;
+    content: "";
+    color: #01FF5F !important;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    margin-top: -9px;
+    border: 2px solid #01FF5F !important;
+    text-align: center;
+    transition: .4s;
+}
+
+.map-container {
+    width: 100% !important;
+}
 
 // MEDIA
 @media (min-width: 1918px) {
@@ -1805,6 +1862,7 @@ vg-overlay-play .vg-overlay-play {
         top: 0px !important;
         left: 0px !important;
         z-index: 1;
+        border-radius: 10px !important;
     }
 
     .product-announcement-card {

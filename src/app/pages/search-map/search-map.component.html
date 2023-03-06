@@ -1,7 +1,7 @@
 <main class="bg-graylight position-relative w-100 px-5p justify-content-center d-flex">
     <form [formGroup]="form" class="row max-w-1918 w-100 px-0 form-search h-100 m-0-aut0">
         <div class="col-12 col-map mt-5 pt-5">
-            <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeAd">
+            <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeOfAdd">
                 <p class="d-flex fw-700 font-size-12 line-19 color-black
                  align-items-center">Página Inicial /
                     <span class="fw-400 font-size-12 line-20 color-muted"> &nbsp;
@@ -10,20 +10,21 @@
                 </p>
                 <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
                     <b>
-                        <span *ngIf="filtroResultDisplay.typeAd">{{filtroResultDisplay.typeAd}},</span>
+                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
+                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
+                        <span *ngIf="filtroResultDisplay.propertyTypeList.length > 0">
+                            <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
+                        </span>
+                        <span *ngIf="filtroResultDisplay.ufAddress"> {{stateSelected}},</span>
+                        <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
+                        <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos,</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                        <span *ngIf="filtroResultDisplay.typeOfProperty"> {{filtroResultDisplay.typeOfProperty}},</span>
-                        <span *ngIf="filtroResultDisplay.state"> {{filtroResultDisplay.state}},</span>
-                        <span *ngIf="filtroResultDisplay.city"> {{filtroResultDisplay.city}},</span>
-                        <span class="flex-wrap d-flex" *ngIf="filtroResultDisplay.badRoomsQnt">
-                            +{{filtroResultDisplay.badRoomsQnt}} Quartos,</span>
-                        <span *ngIf="filtroResultDisplay.propertiesType"> {{filtroResultDisplay.propertiesType}},</span>
                     </b>
                 </p>
             </div>
         </div>
-        <div class="row mb-5 mx-0 block-important w-100">
-            <div class="col-md-7">
+        <div class="row mb-5">
+            <div class="col-lg-7">
                 <div class="row">
                     <div class="col-2 col-search-map">
                         <div style="width: 100px;" data-toggle="modal" data-target="#filtersearch"
@@ -64,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row d-none-desk col-cards-products px-0">
+                <div class="row col-cards-products px-0">
                     <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch">
                         <img src="../../../assets/img/not-search-announcement.svg" height="80">
                         <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
@@ -72,7 +73,7 @@
                             momento</p>
                         <span class="text-center">:(</span>
                     </div>
-                    <div class="col-lg-6 px-1 col-cards-products"
+                    <div class="col-lg-6 col-md-6 px-1 col-cards-products"
                         *ngFor="let item of filterResult | paginate: { itemsPerPage: 2, currentPage: paginationProduct }; let i= index">
                         <div class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
                             <div class="border-radius-10 position-relative">
@@ -151,14 +152,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 mt-2">
-                <div *ngIf="center" class="col-12 px-0 col-full" >
+            <div class="col-lg-5 m-0 mt-2">
+                <div *ngIf="center" class="col-12 px-0 col-map-search-map" >
+                    <div class="col-search-map-custom"></div>
                     <!-- <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230483.17971440213!2d-49.42988400298687!3d-25.495050065287735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1674742868033!5m2!1spt-BR!2sbr"
                         class="w-100 min-h-700 h-100" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe> -->
 
-                        <google-map height="500px" width="750px" [center]="center" [zoom]="zoom" [options]="mapOptions" (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map>
+                        <google-map [center]="center" [zoom]="zoom" [options]="mapOptions" (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map>
                         </google-map>
                 </div>
             </div>

@@ -48,6 +48,7 @@ import {NgcCookieConsentConfig, NgcCookieConsentModule} from "ngx-cookieconsent"
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { TermsSignupComponent } from './shared/terms-signup/terms-signup.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 registerLocaleData(ptBr);
 
@@ -128,7 +129,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     CurrencyMaskModule,
     AutocompleteLibModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
-
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [
     {
