@@ -7,5 +7,11 @@ export const environment = {
   },
   google: {
     apiKey: 'AIzaSyBzwijvQ13DZALYBwC-uKdWWELaf0r9Xzs',
+    map: {
+      center: {
+        lat: -25.4945583,
+        lng: -49.5604267,
+      }
+    }
   }
 };

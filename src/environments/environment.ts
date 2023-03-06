@@ -11,6 +11,22 @@ export const environment = {
   },
   google: {
     apiKey: 'AIzaSyBzwijvQ13DZALYBwC-uKdWWELaf0r9Xzs',
+    map: {
+      center: {
+
+        //Curitiba
+        // lat: -25.4945583,
+        // lng: -49.5604267,
+
+        //são Paulo
+        // lat:-23.6813532,
+        // lng: -47.1697154,
+
+        //Brasilia
+        lat: -15.7929188,
+        lng: -47.8970312,
+      }
+    }
   }
 };
 
