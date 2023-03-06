@@ -58,6 +58,8 @@ export abstract class AnnouncementGetResponseDto {
 
     whichFloorOfTheProperty?: number;
 
+    mainPhoto?: string;
+
     numberOfTowers?: number;
 
     howManyFloors?: number;
@@ -133,6 +135,10 @@ export abstract class AnnouncementGetResponseDto {
     featureSport?: FeatureSportModel;
 
     featureInfantile?: FeatureInfantileModel;
+
+    latitude: string;
+    
+    longitude: string;
 }
 
 class CharacteristicInfrastructureOfTheCondominiumModel {

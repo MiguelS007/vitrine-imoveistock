@@ -1,0 +1,22 @@
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0px 12px !important;
+}
+
+.multiselect-dropdown .dropdown-btn {
+    display: inline-block;
+    border: 1px solid #dee2e6 !important;
+    width: 100%;
+    padding: 15px 12px !important;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20;
+    text-align: left;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border-radius: 10px !important;
+}
