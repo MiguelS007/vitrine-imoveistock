@@ -484,4 +484,8 @@ export class ExpressProposalComponent implements OnInit {
     })
   }
 
+  announcementSelected(value) {
+    this.router.navigate([`announcement/detail/${value}`]);
+  }
+
 }
