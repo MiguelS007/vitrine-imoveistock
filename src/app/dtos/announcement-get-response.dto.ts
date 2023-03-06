@@ -137,8 +137,18 @@ export abstract class AnnouncementGetResponseDto {
     featureInfantile?: FeatureInfantileModel;
 
     latitude: string;
-    
+
     longitude: string;
+
+    photos?: Photos[];
+}
+
+class Photos {
+    key: string;
+    main: boolean;
+    notShow: boolean;
+    updatedAt
+    _id
 }
 
 class CharacteristicInfrastructureOfTheCondominiumModel {
