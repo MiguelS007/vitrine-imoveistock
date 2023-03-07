@@ -112,10 +112,8 @@
             <div class="h-100 product-announcement p-2 mx-3 border-radius-10 bg-white">
                 <div class="py-2 px-3 product-announcement-card position-relative">
                     <img *ngIf="!response?.mainPhoto" src="../../../../assets/img/ap.png"
-                        class="photo-announcement-card"
-                        (click)="announcementSelected(response?._id)">
-                    <img *ngIf="response?.mainPhoto"
-                        [src]="response?.mainPhoto" class="photo-announcement-card"
+                        class="photo-announcement-card" (click)="announcementSelected(response?._id)">
+                    <img *ngIf="response?.mainPhoto" [src]="response?.mainPhoto" class="photo-announcement-card"
                         (click)="announcementSelected(response?._id)">
                     <div class="space-sale-exclusive">
                         <h4 *ngIf="response?.typeOfAd === 'sale'"
@@ -138,7 +136,7 @@
                             {{response?.leaseValue | currency:
                             'R$'}}
                         </p>
-                       <!-- <div (click)="likeHeart(response?._id)"
+                        <!-- <div (click)="likeHeart(response?._id)"
                             class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
                             <i [class]="response?.liked ?
                                 'bi-heart-fill':'bi-heart'" class="bi bi-heart-fill font-size-16 text-light"></i>
@@ -146,10 +144,8 @@
                     </div>
                 </div>
                 <div class="w-100 mx-3 text-align-left
-                                    pt-3" (click)="announcementSelected(response?._id)"
-                    style="cursor: pointer;">
-                    <span
-                        class="fw-400 font-size-14
+                                    pt-3" (click)="announcementSelected(response?._id)" style="cursor: pointer;">
+                    <span class="fw-400 font-size-14
                                         line-20
                                         color-black">{{response?.propertyCharacteristics}}</span>
                     <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate" style="max-width: 90%;">
@@ -159,8 +155,7 @@
                         <i class="bi font-size-20 mr-2
                                             color-black
                                             bi-geo-alt"></i>
-                        <span
-                            class="fw-400 font-size-14 line-20 color-black">{{response?.publicPlaceAddress}},
+                        <span class="fw-400 font-size-14 line-20 color-black">{{response?.publicPlaceAddress}},
                             {{response?.cityAddress}} -
                             {{response?.ufAddress}}</span>
                     </p>
@@ -299,7 +294,8 @@
                     <div class="w-100">
                         <div class="w-100 border-bottom-gray d-flex align-items-center justify-content-between">
                             <h5 class="fw-700 font-size-18 line-24 color-black">Retirada</h5>
-                            <i class="bi cursor-pointer font-size-30 color-black bi-three-dots-vertical"></i>
+                            <i (click)="removeMudanca('removeItem')"
+                                class="bi cursor-pointer font-size-36 color-black bi-x"></i>
                         </div>
                     </div>
                     <div class="w-100 pt-4 d-flex align-items-center">
@@ -321,7 +317,8 @@
                     <div class="w-100">
                         <div class="w-100 border-bottom-gray d-flex align-items-center justify-content-between">
                             <h5 class="fw-700 font-size-18 line-24 color-black">Adicionar</h5>
-                            <i class="bi cursor-pointer font-size-30 color-black bi-three-dots-vertical"></i>
+                            <i (click)="removeMudanca('addItem')"
+                                class="bi cursor-pointer font-size-36 color-black bi-x"></i>
                         </div>
                     </div>
                     <div class="w-100 pt-4 d-flex align-items-center">
@@ -344,7 +341,8 @@
                     <div class="w-100">
                         <div class="w-100 border-bottom-gray d-flex align-items-center justify-content-between">
                             <h5 class="fw-700 font-size-18 line-24 color-black">Alterar</h5>
-                            <i class="bi cursor-pointer font-size-30 color-black bi-three-dots-vertical"></i>
+                            <i (click)="removeMudanca('modifyOrReplaceItem')"
+                            class="bi cursor-pointer font-size-36 color-black bi-x"></i>
                         </div>
                     </div>
                     <div class="w-100 pt-4 d-flex align-items-center">
@@ -426,7 +424,7 @@
                         </p>
                         <input type="text" formControlName="faqChange"
                             class="w-100 py-2 border-none border-bottom-gray bg-white color-blue fw-400 font-size-14 line-18"
-                            maxlength="200" placeholder="descreva o que deseja retirar" id="faqChange" />
+                            maxlength="200" placeholder="descreva o que deseja alterar" id="faqChange" />
                         <div class="d-flex align-items-center justify-content-between">
                             <p class="fw-400 m-0 font-size-12 line-15 color-black">
                                 ex: a cama e o colchão da suíte principal
@@ -518,7 +516,7 @@
                         </p>
                         <input type="text" formControlName="faqAdded"
                             class="w-100 py-2 border-none border-bottom-gray bg-white color-blue fw-400 font-size-14 line-18"
-                            maxlength="200" placeholder="descreva o que deseja retirar" id="faqAdded" />
+                            maxlength="200" placeholder="descreva o que deseja adicionar" id="faqAdded" />
                         <div class="d-flex align-items-center justify-content-between">
                             <p class="fw-400 m-0 font-size-12 line-15 color-black">
                                 ex: a cama e o colchão da suíte principal
@@ -866,8 +864,8 @@
 
                                 <p class="fw-400 px-3 font-size-18 line-24 color-black">
                                     Você pode aproveitar esse espaço para explicar o motivo do seu
-                                    desconto ao proprietário. <a [routerLink]="['#']"
-                                        class="fw-400 font-size-18 line-24">Saiba mais</a>
+                                    desconto ao proprietário. <!--<a [routerLink]="['#']"
+                                        class="fw-400 font-size-18 line-24">Saiba mais</a>-->
                                 </p>
                             </div>
                             <div class="col-12 justify-content-end d-flex py-3">
