@@ -49,6 +49,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { TermsSignupComponent } from './shared/terms-signup/terms-signup.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CepService } from './service/cep.service';
 
 registerLocaleData(ptBr);
 
@@ -139,7 +140,8 @@ const cookieConfig:NgcCookieConsentConfig = {
     },
     AnnouncementGetByIdResolve,
     { provide: LOCALE_ID, useValue: 'pt' },
-    AnnouncementService
+    AnnouncementService,
+    CepService,
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

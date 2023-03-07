@@ -52,7 +52,7 @@ app-nav-bar {
     background-color: white !important;
 }
 
-// 
+//
 
 .x i,
 .heading {
@@ -301,7 +301,7 @@ input:focus {
 
 
 :root {
-    --green: #1DAD1A;
+    --green: #1dad1a;
     --greenlight: #01FF5F;
     --bluepool: #04A6A7;
     --purple: #542FDF;
@@ -2879,4 +2879,17 @@ vg-overlay-play .vg-overlay-play {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
+}
+
+
+#clicavel{
+  cursor: pointer;
+}
+
+#clicavel:hover{
+  color: #01FF5F;
+}
+
+#clicavel:active{
+  color: blue;
 }

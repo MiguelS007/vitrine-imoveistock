@@ -3,6 +3,19 @@
     margin-left: 0 !important;
 }
 
-.col-search-map-custom {
-    padding-top: 100px !important;
-}
+// .col-search-map-custom {
+//     padding-top: 100px !important;
+// }
+@media only screen and (max-width: 600px) {
+   .hide{
+    display: none ;
+   
+   }
+  }
+
+  @media only screen and (min-width: 600px) {
+    .maps{
+     display: none ;
+    
+    }
+   }
