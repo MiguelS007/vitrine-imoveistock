@@ -1,4 +1,4 @@
-import { forwardRef, NgModule, LOCALE_ID } from '@angular/core';
+import { forwardRef, NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 import { AppRoutingModule } from "./app-routing.module";
@@ -48,6 +48,7 @@ import {NgcCookieConsentConfig, NgcCookieConsentModule} from "ngx-cookieconsent"
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { TermsSignupComponent } from './shared/terms-signup/terms-signup.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 registerLocaleData(ptBr);
 
@@ -128,7 +129,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     CurrencyMaskModule,
     AutocompleteLibModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
-
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     {
@@ -140,6 +141,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     { provide: LOCALE_ID, useValue: 'pt' },
     AnnouncementService
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

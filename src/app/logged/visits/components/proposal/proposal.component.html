@@ -5,7 +5,12 @@
                 class="w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4">
                 <div class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex">
                     <div class="col-3 col-visits p-0">
-                        <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 " (click)="selectProposal(item)" />
+                        <!-- <img src="../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 "
+                            (click)="selectProposal(item)" /> -->
+                        <img *ngIf="!item.announcement?.mainPhoto" src="../../../../assets/img/ap.png" class="w-100 h-100 border-radius-10 "
+                            (click)="selectProposal(item)">
+                        <img *ngIf="item.announcement?.mainPhoto" [src]="item.announcement?.mainPhoto" class="w-100 h-100 border-radius-10 "
+                            (click)="selectProposal(item)">
                     </div>
                     <div (click)="selectProposal(item)" class="col-9 px-2 col-visits">
                         <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
@@ -33,109 +38,64 @@
             </div>
         </div>
         <div *ngIf="response.length > 0" class="col-lg-7 mt-4 model-desktop-announcement-selected">
-            <div class="w-100 bg-white border-radius-10 h-auto">
-                <div class="w-100
-                                    d-inline-blocks 
-                                    p-3 
-                                    border-radius-10 bg-white">
-                    <div style='background-image:
-                                        url(../../../../../assets/img/img-announcement-default.jpg);' class="bg-img-result py-2 px-3
-                                        border-radius-10">
-                        <div class="w-100 h-50 d-flex">
-                            <h4 *ngIf="selectedProposal.announcement?.typeOfAd === 'rent'"
-                                [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
-                                                py-2 mb-0
-                                                border-radius-5 fw-400
-                                                font-size-14 line-15
-                                                text-light">Locação</h4>
-                            <h4 *ngIf="selectedProposal.announcement?.typeOfAd === 'sale'"
-                                [class]="location ? 'w3-black':'bg-purple'" class="h-fit px-4
-                                                py-2 mb-0
-                                                border-radius-5 fw-400
-                                                font-size-14 line-15
-                                                text-light">Venda</h4>
-                            <h4 *ngIf="selectedProposal.announcement?.exclusivity === true" class="bg-greenlight h-fit
-                                                ml-2 px-3 py-2
-                                                mb-0 border-radius-5 fw-400
-                                                font-size-14
-                                                line-15 color-black">Exclusivo</h4>
-                        </div>
-                        <div class="w-100 d-flex h-50
-                                            align-items-end
-                                            justify-content-between">
-                            <p *ngIf="selectedProposal.announcement?.typeOfAd === 'sale'" class="fw-700 mb-0
-                                                font-size-22 h-fit line-32
-                                                text-light">{{selectedProposal.announcement?.saleValue | currency:
-                                'R$'}}</p>
-                            <p *ngIf="selectedProposal.announcement?.typeOfAd === 'rent'" class="fw-700 mb-0
-                                                font-size-22 h-fit line-32
-                                                text-light">{{selectedProposal.announcement?.leaseValue | currency:
-                                'R$'}}</p>
-                            <div (click)="likeHeart(selectedProposal.announcement?._id)" class="h-fit
-                                                bg-transparent-white
-                                                cursor-pointer
-                                                border-radius-10
-                                                pt-2 pb-1 px-3">
-                                <i [class]="selectedProposal.announcement?.liked ?
-                                                    'bi-heart-fill':'bi-heart'
-                                                    " class="bi
-                                                    font-size-16
-                                                    text-light"></i>
-                            </div>
-                        </div>
+            <div class="product-announcement border-radius-10 bg-white p-4">
+                <div class=" product-announcement-card position-relative">
+                    <img *ngIf="!selectedProposal.announcement?.mainPhoto" src="../../../../assets/img/ap.png"
+                        class="photo-announcement-card"
+                        (click)="announcementSelected(selectedProposal.announcement?._id)">
+                    <img *ngIf="selectedProposal.announcement?.mainPhoto" [src]="selectedProposal.announcement?.mainPhoto"
+                        class="photo-announcement-card"
+                        (click)="announcementSelected(selectedProposal.announcement?._id)">
+                    <div class="space-sale-exclusive">
+                        <h4 *ngIf="selectedProposal.announcement?.typeOfAd === 'sale'"
+                            class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                            Venda</h4>
+                        <h4 *ngIf="selectedProposal.announcement?.typeOfAd === 'rent'"
+                            class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                            Locação</h4>
+                        <h4 *ngIf="selectedProposal.announcement?.exclusivity === true"
+                            class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
+                            Exclusivo</h4>
                     </div>
-                    <div class="w-100 mx-3 text-align-left
-                                        pt-3" (click)="announcementSelected(selectedProposal.announcement?._id)"
-                        style="cursor: pointer;">
-                        <span
-                            class="fw-400 font-size-14
-                                            line-20
-                                            color-black text-capitalize">{{selectedProposal.announcement?.propertyCharacteristics}}</span>
-                        <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate" style="max-width: 90%;">
-                            {{selectedProposal.announcement?.description}}</p>
-                        <p class="d-flex
-                                            align-items-center">
-                            <i class="bi font-size-20 mr-2
-                                                color-black
-                                                bi-geo-alt"></i>
-                            <span
-                                class="fw-400 font-size-14 line-20 color-black">{{selectedProposal.announcement?.publicPlaceAddress}},
-                                {{selectedProposal.announcement?.cityAddress}} -
-                                {{selectedProposal.announcement?.ufAddress}}</span>
+                    <div class="space-value-announcement ">
+                        <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
+                            *ngIf="selectedProposal.announcement?.typeOfAd === 'sale'">
+                            {{selectedProposal.announcement?.saleValue | currency:
+                            'R$'}}</p>
+                        <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
+                            *ngIf="selectedProposal.announcement?.typeOfAd === 'rent'">
+                            {{selectedProposal.announcement?.leaseValue | currency:
+                            'R$'}}
                         </p>
+                        <div (click)="likeHeart(selectedProposal.announcement?._id)"
+                            class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
+                            <i [class]="selectedProposal.announcement?.liked ?
+                                'bi-heart-fill':'bi-heart'" class="bi bi-heart-fill font-size-16 text-light"></i>
+                        </div>
                     </div>
-                    <div class="row mx-3 my-3 d-flex">
-                        <div class="col justify-content-left
-                                            px-0 d-flex
-                                            align-items-center
-                                            justify-content-left">
-                            <img src="../../../assets/icon/bed.png" class="pr-2" />
-                            <p class="fw-400 mb-0
-                                                font-size-14 line-20
-                                                color-black">{{selectedProposal.announcement?.bedrooms}}
-                                Quartos</p>
-                        </div>
-                        <div class="col justify-content-left px-0
-                                            d-flex
-                                            align-items-center
-                                            justify-content-left">
-                            <img src="../../../assets/icon/car.png" class="pr-2" />
-                            <p class="fw-400 mb-0
-                                                font-size-14 line-20
-                                                color-black">{{selectedProposal.announcement?.vacancyNumber}}
-                                Vagas</p>
-                        </div>
-                        <div class="col justify-content-left
-                                            px-0 d-flex
-                                            align-items-center
-                                            justify-content-left">
-                            <img src="../../../assets/icon/rule.png" class="pr-2" />
-                            <p class="fw-400 mb-0
-                                                font-size-14 line-20
-                                                color-black">{{selectedProposal.announcement?.usefulArea |
-                                currency: ' '}} m2
-                                m2</p>
-                        </div>
+                </div>
+                <div class="w-100 mx-3 text-align-left pt-3" (click)="announcementSelected(selectedProposal.announcement?._id)" style="cursor: pointer;">
+                    <span class="fw-400 font-size-14 line-20 color-black">{{selectedProposal.announcement?.propertyCharacteristics}}</span>
+                    <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate" style="max-width: 90%;">
+                        {{selectedProposal.announcement?.description}}</p>
+                    <p class="d-flex align-items-center">
+                        <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                        <span class="fw-400 font-size-14 line-20 color-black">{{selectedProposal.announcement?.publicPlaceAddress}},
+                            {{selectedProposal.announcement?.cityAddress}} - {{selectedProposal.announcement?.ufAddress}}</span>
+                    </p>
+                </div>
+                <div class="row mx-3 my-3 d-flex">
+                    <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                        <img src="../../../assets/icon/bed.png" class="pr-2" />
+                        <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{selectedProposal.announcement?.bedrooms}} Quartos</p>
+                    </div>
+                    <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                        <img src="../../../assets/icon/car.png" class="pr-2" />
+                        <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{selectedProposal.announcement?.vacancyNumber}} Vagas</p>
+                    </div>
+                    <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
+                        <img src="../../../assets/icon/rule.png" class="pr-2" />
+                        <p class="fw-400 mb-0 font-size-14 line-20 color-black">{{selectedProposal.announcement?.usefulArea |currency: ' '}} m2</p>
                     </div>
                 </div>
             </div>
@@ -272,8 +232,7 @@
                 <p class="fw-400 font-size-18 line-24 color-black">
                     Após agendar uma proposta seu histórico de proposta aparecerá aqui
                 </p>
-                <button style="max-width: 345px;" [routerLink]="['/search']"
-                    class="btn btn-search-property"
+                <button style="max-width: 345px;" [routerLink]="['/search']" class="btn btn-search-property"
                     type="button">Procurar imóveis</button>
             </div>
         </div>

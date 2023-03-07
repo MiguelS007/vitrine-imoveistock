@@ -110,9 +110,6 @@ export class ExpressProposalComponent implements OnInit {
       suggestedSaleAmount: this.response.saleValue
     });
 
-
-    console.log(localStorage.getItem('counter-proposal'))
-
     for (let i = 0; i < this.response.paymentMethods.length; i++) {
       if (this.response.paymentMethods[i].type === 'property') {
         this.acceptProperty = true;
@@ -281,6 +278,56 @@ export class ExpressProposalComponent implements OnInit {
     }
   }
 
+  removeMudanca(tipo: string) {
+    this.changesRequest.forEach((value, index) => {
+      if (value.type == tipo) {
+        this.changesRequest.splice(index, 1);
+        if (tipo == 'addItem') {
+          this.addedItem('close')
+          setTimeout(() => {
+            this.titleexpress = false;
+            this.cardproduct = false;
+            this.cardinfotwo = false;
+            this.cardinfoone = false;
+            this.btnsend = false;
+            this.detailfinalvalueAdd = false;
+          }, 100);
+          this.spaceCustomizeProposalChangesOptions = true
+          this.spaceCustomizeProposalChanges = false
+          this.spaceAddedItem = false;
+        }
+        if (tipo == 'removeItem') {
+          this.removeItem('close');
+          setTimeout(() => {
+            this.titleexpress = false;
+            this.cardproduct = false;
+            this.cardinfotwo = false;
+            this.cardinfoone = false;
+            this.btnsend = false;
+            this.detailfinalvalue = false;
+          }, 100);
+          this.spaceCustomizeProposalChangesOptions = true
+          this.spaceCustomizeProposalChanges = false
+          this.spaceRemoveitem = false;
+        }
+        if (tipo == 'modifyOrReplaceItem') {
+          this.changeItem('close');
+          setTimeout(() => {
+            this.titleexpress = false;
+            this.cardproduct = false;
+            this.cardinfotwo = false;
+            this.cardinfoone = false;
+            this.btnsend = false;
+            this.detailfinalvalueChange = false;
+          }, 100);
+          this.spaceCustomizeProposalChangesOptions = true
+          this.spaceCustomizeProposalChanges = false
+          this.spaceChangeItem = false;
+         
+        }
+      };
+    });
+  }
   removeItem(value: string) {
     if (value === 'open') {
       this.spaceCustomizeProposalChangesOptions = false
@@ -296,7 +343,6 @@ export class ExpressProposalComponent implements OnInit {
         type: 'removeItem',
         description: this.form.controls['faqremove'].value
       };
-
 
       this.changesRequest.push(requestRemove)
 
@@ -482,6 +528,10 @@ export class ExpressProposalComponent implements OnInit {
         console.log(error)
       }
     })
+  }
+
+  announcementSelected(value) {
+    this.router.navigate([`announcement/detail/${value}`]);
   }
 
 }

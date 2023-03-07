@@ -6,11 +6,26 @@ export const environment = {
   production: false,
   payloadKey: '57b0e476-142c-4762-8547-140b65cb1e9c',
   apis: {
-    // imoveistock: 'https://market-inkluziva.mustblockchain.com/imoveistock/',
     imoveistock: 'https://imoveistockapi.tgtdigital.io/',
   },
   google: {
     apiKey: 'AIzaSyBzwijvQ13DZALYBwC-uKdWWELaf0r9Xzs',
+    map: {
+      center: {
+
+        //Curitiba
+        // lat: -25.4945583,
+        // lng: -49.5604267,
+
+        //são Paulo
+        // lat:-23.6813532,
+        // lng: -47.1697154,
+
+        //Brasilia
+        lat: -15.7929188,
+        lng: -47.8970312,
+      }
+    }
   }
 };
 

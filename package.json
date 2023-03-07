@@ -36,6 +36,7 @@
     "force": "^0.0.3",
     "geolib": "^3.3.3",
     "jwt-decode": "^3.1.2",
+    "ng-multiselect-dropdown": "0.3.9",
     "jwt-payload": "^1.0.7",
     "ng2-currency-mask": "^13.0.3",
     "ngx-checkbox-list": "^2.0.2",
