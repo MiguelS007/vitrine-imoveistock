@@ -21,7 +21,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   geocoder: google.maps.Geocoder = new google.maps.Geocoder();
 
   center: google.maps.LatLngLiteral | undefined;
-  zoom: number = 15;
+  zoom: number = 12;
 
   mapOptions: google.maps.MapOptions = {
     disableDoubleClickZoom: true,
@@ -169,8 +169,6 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         { lat: markerLat, lng: markerLng }
       );
 
-      console.log('distance', distance)
-
       if (distance <= 100)
         idList.push(_id);
 
@@ -179,43 +177,19 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         lng: clusterLng,
       };
 
-      if (mapZoom < 16)
+      if (mapZoom <= 12) {
+        this.zoom = mapZoom + 3;
+        this.map.googleMap.setZoom(mapZoom + 3);
+      }
+      else if (mapZoom < 16) {
         this.zoom = mapZoom + 1;
+        this.map.googleMap.setZoom(mapZoom + 1);
+      }
 
-      this._filterAnnouncementLst(idList);
+      console.log('new zoom', this.zoom)
     });
 
-    // if (this.map?.getZoom() === 15) {
-
-    //   this.selectedAnouncements = [];
-
-    //   this.center = {
-    //     lat: cluster.latLng?.lat()!,
-    //     lng: cluster.latLng?.lng()!,
-    //   };
-
-    //   this.response.map((item) => {
-    //     const distanceInKm = this._geocodeService.getDistanceInKm(
-    //       { lat: this.center?.lat!, lng: this.center?.lng! },
-    //       {
-    //         lat: +(item.latitude),
-    //         lng: +(item.longitude),
-    //       }
-    //     );
-
-    //     if (distanceInKm <= 0.1)
-    //       this.selectedAnouncements.push(item);
-    //   });
-
-    // } else {
-
-    //   this.center = {
-    //     lat: cluster.latLng?.lat()!,
-    //     lng: cluster.latLng?.lng()!,
-    //   };
-
-    //   this.zoom++;
-    // }
+    this._filterAnnouncementLst(idList);
   }
 
   _filterAnnouncementLst(_ids?: string[]) {
