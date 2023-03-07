@@ -23,9 +23,15 @@
                 </p>
             </div>
         </div>
-
+        <div class="col-2 col-search-map">
+            <div style="width: 100px;" [routerLink]="['/search']"
+                class="px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex justify-content-center bg-purple align-items-center border-radius-10">
+                <i class="bi bi-list thinks-small text-light pr-2"></i>
+                <span class="fw-700 font-size-12 thinks-small line-24 text-light">Ver&nbsp;Lista</span>
+            </div>
+        </div>
         <div class="row mb-5">
-            <div class="col-lg-7">
+            <div class="col-lg-7 hide">
                 <div class="row px-0">
                     <div class="col-12 mt-4 d-flex justify-content-center"
                         *ngIf="response && response.length <= 0">
@@ -35,7 +41,7 @@
                             momento</p>
                         <span class="text-center">:(</span>
                     </div>
-                    <div class="col-lg-5 col-md-5 px-1 col-cards-products"
+                    <div class="col-lg-5 col-md-5 px-1 col-cards-products "
                         *ngFor="let item of response | paginate: { itemsPerPage: 2, currentPage: pagination }; let i= index">
                         <div
                             class="w-100 cursor-pointer mt-5 p-3 border-radius-10 bg-white">
@@ -108,22 +114,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 my-5 py-5 justify-content-center">
-                        <div *ngIf="response.length > 2" class="d-flex flex-fill
-                           justify-content-center">
-                            <pagination-controls (pageChange)="pagination=$event;">
-                            </pagination-controls>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
-            <div class="col-lg-5 mt-5">
+            <div class="col-lg-5 mt-5" style="margin-left: -150px; ">
                 <div *ngIf="center" class="card-product-result-search">
-                    <google-map [center]="center" [zoom]="zoom" [options]="mapOptions" (mapDragend)="moveMap()"
+                    <google-map [center]="center" [zoom]="zoom" [width]="450" [options]="mapOptions" (mapDragend)="moveMap()"
                         (zoomChanged)="changeZoom()" #map>
                     </google-map>
                 </div>
             </div>
-        </div>
+        
     </div>
+   
+    
+    <div class="row hide">
+            <div class="col-12 my-5 py-5 justify-content-center">
+                <div *ngIf="response.length > 2" class="d-flex flex-fill
+                   justify-content-center">
+                    <pagination-controls (pageChange)="pagination=$event;">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+
+    
 </main>
+
+    <google-map [center]="center" class="maps" [zoom]="zoom" [width]="450" [height]="550" [options]="mapOptions" (mapDragend)="moveMap()"
+    (zoomChanged)="changeZoom()" #map>
+    <br/>
+    </google-map>
+
+    
