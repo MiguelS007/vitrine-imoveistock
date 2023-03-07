@@ -604,10 +604,9 @@
               <img *ngIf="arrow2" src="../../../assets/icon/arrow-top-blue.png" class="cursor-pointer animate__animated"
                 width="18" (click)="openarrow(2)">
             </div>
-            <iframe *ngIf="arrow2"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7205.665528434405!2d-49.26210139554594!3d-25.443854055282333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1669903101993!5m2!1spt-BR!2sbr"
-              class="w-100 h-600 animate__animated" style="border:0;" allowfullscreen="" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            <img *ngIf="arrow2 && mapImgLink" [src]="mapImgLink" style="width: 100%;">
+            
           </div>
           <div id="previewplant" class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
