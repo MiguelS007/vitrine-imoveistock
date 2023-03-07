@@ -23,7 +23,7 @@ export class PropertyDetailComponent implements OnInit {
   finalValueRent: number;
   previewImg: any;
   imagePreviewAnnouncement: any = [];
-
+  distanceFromEnd: number;
 
   @HostListener('window:scroll', [])
   checkScroll() {
@@ -42,9 +42,7 @@ export class PropertyDetailComponent implements OnInit {
     const colinfopay = document.querySelector(
       '#colinfopay'
     ) as HTMLElement;
-
-
-    if (interdistance >= 1460) {
+    if (this.distanceFromEnd <= 59) {
       if (widthWindow <= 1922) {
         colinfopay.style.alignSelf = 'self-end'
         infopaydesk.style.position = 'relative';
@@ -58,8 +56,9 @@ export class PropertyDetailComponent implements OnInit {
         infopaydesk.style.maxWidth = '626px';
         infopaydesk.style.zIndex = '20';
       }
-    } else {
-      if (interdistance >= 511) {
+    }
+    else {
+      if (interdistance >= 613) {
         if (widthWindow <= 1922) {
           infopaydesk.style.position = 'fixed';
           infopaydesk.style.maxWidth = '415px';
@@ -77,10 +76,8 @@ export class PropertyDetailComponent implements OnInit {
         colinfopay.style.alignSelf = 'auto'
       }
     }
-
-    // console.log(interdistance, window.innerWidth)
-
   }
+
 
   scroller: Subscription;
 
@@ -160,6 +157,10 @@ export class PropertyDetailComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.calculateDistanceFromEnd.bind(this));
+  }
+
   ngAfterViewInit(): void {
     for (let i = 1; i < 6; i++) {
       let hoje = new Date();
@@ -167,20 +168,13 @@ export class PropertyDetailComponent implements OnInit {
       this.arrayDeDatas.push(hoje)
     }
     this.list();
+    window.addEventListener('scroll', this.calculateDistanceFromEnd.bind(this));
   }
 
 
   ngOnInit(): void {
 
     this.ngxSpinnerService.show()
-    this.onlyimg = this.datamokservice.onlypreview;
-    this.previewimg = this.datamokservice.imagespreview;
-    this.products = this.datamokservice.resultSearch;
-
-    // while(window.innerWidth > 400){
-    //   console.log('mostar')
-    // }
-
     this.response = this.route.snapshot.data['resolve'];
     this.ngxSpinnerService.hide();
 
@@ -191,7 +185,7 @@ export class PropertyDetailComponent implements OnInit {
     this.finalValueRent = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.leaseValue);
 
     console.log(this.response._id, this.finalValueSale);
-
+    this.calculateDistanceFromEnd();
 
     if (localStorage.getItem('user') !== null) {
       this.announcementService.listLikes().subscribe(
@@ -211,6 +205,12 @@ export class PropertyDetailComponent implements OnInit {
     return Number(paremetro1)
   }
 
+  calculateDistanceFromEnd() {
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.distanceFromEnd = docHeight - (windowHeight + scrollTop);
+  }
 
   btninteractionimg(value: string) {
     if (value === 'share') {

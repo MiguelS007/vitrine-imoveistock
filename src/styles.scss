@@ -786,7 +786,7 @@ input:focus {
     left: 0;
 }
 
-.right-0{
+.right-0 {
     right: 0;
 }
 
@@ -1066,6 +1066,9 @@ input:focus {
 .product-announcement-card {
     height: 219px;
 }
+.product-announcement-card-express {
+    height: 319px;
+}
 
 .heart-like {
     padding: 0.8rem 1.1rem;
@@ -1190,6 +1193,15 @@ input:focus {
 .photo-announcement-card {
     position: absolute;
     height: 219px !important;
+    width: 100% !important;
+    top: 0px !important;
+    left: 0px !important;
+    z-index: 1;
+    border-radius: 10px !important;
+}
+.photo-announcement-card-express{
+    position: absolute;
+    height: 319px !important;
     width: 100% !important;
     top: 0px !important;
     left: 0px !important;
@@ -1711,7 +1723,7 @@ vg-overlay-play .vg-overlay-play {
 }
 
 .logo-navbar-desktop-preta-visits {
-    height: 99px !important;
+    height: 98px !important;
     cursor: pointer;
     display: block !important;
 }
@@ -1876,6 +1888,15 @@ vg-overlay-play .vg-overlay-play {
 
     // HEADER -CARD
     .photo-announcement-card {
+        position: absolute;
+        height: 279px !important;
+        width: 100% !important;
+        top: 0px !important;
+        left: 0px !important;
+        z-index: 1;
+        border-radius: 10px !important;
+    }
+    .photo-announcement-card-express {
         position: absolute;
         height: 279px !important;
         width: 100% !important;
@@ -2092,6 +2113,7 @@ vg-overlay-play .vg-overlay-play {
     .bg-property-details {
         margin-top: 0px !important;
     }
+
     .col-btns-preview-img {
         display: block !important;
         top: 1058px;
@@ -2762,7 +2784,19 @@ vg-overlay-play .vg-overlay-play {
         font-size: 28px;
     }
 
-
+    .photo-announcement-card-express {
+        position: absolute;
+        height: 219px !important;
+        width: 100% !important;
+        top: 0px !important;
+        left: 0px !important;
+        z-index: 1;
+        border-radius: 10px !important;
+    }
+    .product-announcement-card-express {
+        height: 219px;
+        padding-left: 3px !important;
+    }
 
     .form-header {
         margin: 0% !important;
@@ -2818,6 +2852,10 @@ vg-overlay-play .vg-overlay-play {
 
     .main-search {
         padding: 3rem 0rem !important;
+    }
+
+    .dblock-mobile {
+        display: block !important;
     }
 
 }
