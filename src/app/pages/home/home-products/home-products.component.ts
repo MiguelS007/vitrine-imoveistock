@@ -43,6 +43,7 @@ export class HomeProductsComponent implements OnInit {
   ngOnInit(): void {
     this.list();
 
+
     this.authenticationService.logged.subscribe({
       next: value => {
         if (value === true) {
@@ -51,7 +52,6 @@ export class HomeProductsComponent implements OnInit {
       }
     })
   }
-
   list() {
     this.announcementService.listAnnouncement().subscribe(
       response => {
@@ -76,10 +76,13 @@ export class HomeProductsComponent implements OnInit {
             }
           )
         }
+        console.log(this.response)
       },
       error => { console.log(error, 'data not collected') }
     );
   }
+
+
 
 
   likeHeart(value, condition) {

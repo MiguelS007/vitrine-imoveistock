@@ -10,6 +10,9 @@ import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-reque
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { DatamokService } from 'src/app/service/datamok.service';
+import { environment } from '../../../environments/environment';
+import { Cep } from '../../dtos/cep';
+import { CepService } from '../../service/cep.service';
 import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
 
 @Component({
@@ -18,10 +21,15 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
   styleUrls: ['./property-detail.component.scss']
 })
 export class PropertyDetailComponent implements OnInit {
+
   infopaymobile = false;
   finalValueSale: number;
   finalValueRent: number;
+  previewImg: any;
+  imagePreviewAnnouncement: any = [];
 
+  completeAddress: string;
+  mapImgLink: string;
 
   @HostListener('window:scroll', [])
   checkScroll() {
@@ -76,8 +84,6 @@ export class PropertyDetailComponent implements OnInit {
       }
     }
 
-    // console.log(interdistance, window.innerWidth)
-
   }
 
   scroller: Subscription;
@@ -129,46 +135,7 @@ export class PropertyDetailComponent implements OnInit {
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
-  dadosmockados: any[] = [
-    {
-      caracteristica: 'Ar condicionado'
-    },
-    {
-      caracteristica: 'Sauna'
-    },
-    {
-      caracteristica: 'Tv'
-    },
-    {
-      caracteristica: 'Churrasqueira'
-    },
-    {
-      caracteristica: 'Área Comum'
-    },
-    {
-      caracteristica: 'Mobiliada'
-    },
-    {
-      caracteristica: 'Academia'
-    },
-    {
-      caracteristica: 'Piscina'
-    },
-    {
-      caracteristica: 'Lavanderia'
-    },
-    {
-      caracteristica: 'Elevador'
-    },
-    {
-      caracteristica: 'Banheiro'
-    },
-    {
-      caracteristica: 'Wi-fi'
-    },
 
-
-  ];
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -176,7 +143,8 @@ export class PropertyDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private _cepService: CepService,
 
   ) {
     this.formproperty = this.formBuilder.group({
@@ -214,18 +182,14 @@ export class PropertyDetailComponent implements OnInit {
     this.previewimg = this.datamokservice.imagespreview;
     this.products = this.datamokservice.resultSearch;
 
-
     this.response = this.route.snapshot.data['resolve'];
     this.ngxSpinnerService.hide();
-    console.log(this.response)
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
     let valueIptu = parseInt(this.response.valueOfIptu) / 12;
     this.finalValueSale = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.saleValue);
     this.finalValueRent = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.leaseValue);
-
-    console.log( this.response._id, this.finalValueSale);
 
 
     if (localStorage.getItem('user') !== null) {
@@ -240,6 +204,8 @@ export class PropertyDetailComponent implements OnInit {
         }
       )
     }
+
+    this._getCompleteAddress();
   }
 
   public toNumber(paremetro1: string) {
@@ -336,6 +302,10 @@ export class PropertyDetailComponent implements OnInit {
       response => {
         this.propertyproducts = response
         this.responseAnnouncement = response;
+        for (let i = 0; i < response.length; i++) {
+          this.previewImg = this.propertyproducts[i].photos;
+        }
+
         if (localStorage.getItem('user') !== null) {
           this.announcementService.listLikes().subscribe(
             success => {
@@ -454,5 +424,30 @@ export class PropertyDetailComponent implements OnInit {
     this.recentlySeenList = JSON.parse(teste);
   }
 
+  _getCompleteAddress() {
 
+    if (this.response.numberAddress && this.response.publicPlaceAddress && this.response.districtAddress && this.response.cityAddress && this.response.ufAddress) {
+      this.completeAddress = `${this.response.numberAddress} ${this.response.publicPlaceAddress}, ${this.response.districtAddress}, ${this.response.cityAddress}, ${this.response.ufAddress}`;
+      this._updateMap();
+    }
+    else if (this.response.cepAddress && this.response.numberAddress)
+      this._cepService.buscarCep(this.response.cepAddress).then((cep: Cep) => {
+        if (cep.logradouro) {
+          this.completeAddress = `${this.response.numberAddress} ${cep.logradouro},${cep.bairro},${cep.cidade},${cep.uf}`;
+          this._updateMap();
+        }
+      });
+    else if (this.response.cepAddress) {
+      this._cepService.buscarCep(this.response.cepAddress).then((cep: Cep) => {
+        if (cep.logradouro) {
+          this.completeAddress = `${cep.logradouro},${cep.bairro},${cep.cidade},${cep.uf}`;
+          this._updateMap();
+        }
+      });
+    }
+  }
+
+  private _updateMap() {
+    this.mapImgLink = `https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x400&markers=color:red|${this.completeAddress}&key=${environment.google.apiKey}`;
+  }
 }
