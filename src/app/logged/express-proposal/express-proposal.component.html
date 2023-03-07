@@ -3,7 +3,7 @@
         max-w-800">
         <div *ngIf="titleexpress" class="col-12 mx-2">
             <p class="d-flex fw-700 font-size-24 line-24 color-black ">
-                Escolha sua proposta <i class="bi px-2 font-size-18 text-primary bi-question-circle"></i>
+                Escolha sua proposta <!--<i class="bi px-2 font-size-18 text-primary bi-question-circle"></i>-->
             </p>
             <span class="fw-400 font-size-18 line-20 color-black ">
                 Se você concorda com as condições do anúncio, envie essa proposta express. Caso contrário, crie uma
@@ -138,11 +138,11 @@
                             {{response?.leaseValue | currency:
                             'R$'}}
                         </p>
-                        <div (click)="likeHeart(response?._id)"
+                       <!-- <div (click)="likeHeart(response?._id)"
                             class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
                             <i [class]="response?.liked ?
                                 'bi-heart-fill':'bi-heart'" class="bi bi-heart-fill font-size-16 text-light"></i>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="w-100 mx-3 text-align-left
@@ -206,10 +206,10 @@
                     Para ser aprovado na avaliação de crédito, você precisa ter bom perfil de crédito, e renda mínima
                     acima de R$ 9.715. Até 4 pessoas podem compor renda no contrato.
                 </p>
-                <a [routerLink]="['/']" class="d-flex fw-400 font-size-16 line-20 ">
+                <!--<a [routerLink]="['/']" class="d-flex fw-400 font-size-16 line-20 ">
                     Saiba mais como ser aprovado na avaliação
                     <img src="../../../assets/icon/share.png" class="ml-2" height="20" width="18" />
-                </a>
+                </a>-->
             </div>
         </div>
         <div *ngIf="cardinfotwo && response.typeOfAd === 'rent'" class="col-12">
