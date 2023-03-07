@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
@@ -13,7 +13,7 @@ import { AnnouncementFilterListResponseDto } from '../../dtos/announcement-filte
   templateUrl: './search-map.component.html',
   styleUrls: ['./search-map.component.scss']
 })
-export class SearchMapComponent implements OnInit {
+export class SearchMapComponent implements OnInit, AfterViewInit {
 
   @ViewChild(GoogleMap) public map: GoogleMap | undefined;
 
@@ -52,6 +52,10 @@ export class SearchMapComponent implements OnInit {
     this.geolib = require('geolib');
   }
 
+  ngAfterViewInit(): void {
+    this._updateMarkers();
+  }
+
   ngOnInit(): void {
 
     this.ngxSpinnerService.show();
@@ -59,8 +63,6 @@ export class SearchMapComponent implements OnInit {
     this.response = JSON.parse(localStorage.getItem('resultSearch'));
 
     this.filtroResultDisplay = JSON.parse(localStorage.getItem('filtro'));
-
-    this._updateMarkers();
 
     this.center = {
       lat: environment.google.map.center.lat,

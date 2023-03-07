@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="col-lg-5 mt-5" style="margin-left: -150px; ">
-                <div *ngIf="center" class="card-product-result-search">
+                <div class="card-product-result-search">
                     <google-map [center]="center" [zoom]="zoom" [width]="450" [options]="mapOptions" (mapDragend)="moveMap()"
                         (zoomChanged)="changeZoom()" #map>
                     </google-map>
