@@ -34,7 +34,7 @@
             <div class="col-lg-7 hide">
                 <div class="row px-0">
                     <div class="col-12 mt-4 d-flex justify-content-center"
-                        *ngIf="response && response.length <= 0">
+                        *ngIf="selectedAnouncements && selectedAnouncements.length <= 0">
                         <img src="../../../assets/img/not-search-announcement.svg" height="80">
                         <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
                         <p class="text-center mb-0">explore outros filtros e confira os imoveis que podem te atender no
@@ -42,14 +42,13 @@
                         <span class="text-center">:(</span>
                     </div>
                     <div class="col-lg-5 col-md-5 px-1 col-cards-products "
-                        *ngFor="let item of response | paginate: { itemsPerPage: 2, currentPage: pagination }; let i= index">
-                        <div
-                            class="w-100 cursor-pointer mt-5 p-3 border-radius-10 bg-white">
+                        *ngFor="let item of selectedAnouncements | paginate: { itemsPerPage: 2, currentPage: pagination }; let i= index">
+                        <div class="w-100 cursor-pointer mt-5 p-3 border-radius-10 bg-white">
                             <div class="border-radius-10 position-relative">
-                                <img *ngIf="!item.mainPhoto" (click)="announcementSelected(item._id)"
+                                <img *ngIf="!item.mainPhoto" (click)="selectAnnouncement(item._id)"
                                     src="../../../assets/img/img-announcement-default.jpg"
                                     class="img-search-announcement-main">
-                                <img *ngIf="item.mainPhoto" (click)="announcementSelected(item._id)"
+                                <img *ngIf="item.mainPhoto" (click)="selectAnnouncement(item._id)"
                                     [src]="item.mainPhoto" class="img-search-announcement-main">
                                 <div class="space-sale-or-rent-search-announcement">
                                     <h4 *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
@@ -76,7 +75,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div (click)="announcementSelected(item._id)" class="col-12 px-0">
+                            <div (click)="selectAnnouncement(item._id)" class="col-12 px-0">
                                 <div class="w-100 mx-2 text-align-left pt-3">
                                     <span class="fw-400 font-size-14 line-20
                                     color-black text-capitalize">{{item.propertyCharacteristics}}</span>
@@ -114,23 +113,23 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="col-lg-5 mt-5" style="margin-left: -150px; ">
                 <div class="card-product-result-search">
-                    <google-map [center]="center" [zoom]="zoom" [width]="450" [options]="mapOptions" (mapDragend)="moveMap()"
-                        (zoomChanged)="changeZoom()" #map>
+                    <google-map [center]="center" [zoom]="zoom" [width]="450" [options]="mapOptions"
+                        (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map>
                     </google-map>
                 </div>
             </div>
-        
-    </div>
-   
-    
-    <div class="row hide">
+
+        </div>
+
+
+        <div class="row hide">
             <div class="col-12 my-5 py-5 justify-content-center">
-                <div *ngIf="response.length > 2" class="d-flex flex-fill
+                <div *ngIf="selectedAnouncements.length > 2" class="d-flex flex-fill
                    justify-content-center">
                     <pagination-controls (pageChange)="pagination=$event;">
                     </pagination-controls>
@@ -138,15 +137,13 @@
             </div>
         </div>
 
-    
+
     </div>
 
-    
+
 </main>
 
-    <google-map [center]="center" class="maps" [zoom]="zoom" [width]="450" [height]="550" [options]="mapOptions" (mapDragend)="moveMap()"
-    (zoomChanged)="changeZoom()" #map>
-    <br/>
-    </google-map>
-
-    
+<google-map [center]="center" class="maps" [zoom]="zoom" [width]="450" [height]="550" [options]="mapOptions"
+    (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map>
+    <br />
+</google-map>

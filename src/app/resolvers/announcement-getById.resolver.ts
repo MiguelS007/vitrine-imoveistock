@@ -10,6 +10,8 @@ export class AnnouncementGetByIdResolve implements Resolve<any> {
     ) { }
 
     resolve(route: ActivatedRouteSnapshot) {
-        return this.announcementService.announcementGetById(route.params['_id']);
+        const result = this.announcementService.announcementGetById(route.params['_id']);
+        console.log('result', result)
+        return result;
     }
 }
