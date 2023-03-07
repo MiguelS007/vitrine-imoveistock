@@ -52,7 +52,7 @@ app-nav-bar {
     background-color: white !important;
 }
 
-// 
+//
 
 .x i,
 .heading {
@@ -301,7 +301,7 @@ input:focus {
 
 
 :root {
-    --green: #1DAD1A;
+    --green: #1dad1a;
     --greenlight: #01FF5F;
     --bluepool: #04A6A7;
     --purple: #542FDF;
@@ -786,6 +786,10 @@ input:focus {
     left: 0;
 }
 
+.right-0{
+    right: 0;
+}
+
 .mt-3rem {
     margin-top: 3.2rem;
 }
@@ -997,6 +1001,10 @@ input:focus {
     background-image: url(./assets/icon/local.png);
     background-repeat: no-repeat;
     background-position: 97% 50%;
+}
+
+.bg-property-details {
+    margin-top: 97px;
 }
 
 // SCROLL DOWN ANIMATION
@@ -1470,6 +1478,7 @@ input:focus {
 }
 
 // PROPERTY-DETAILS
+
 
 .schedule-visit {
     bottom: 0%;
@@ -2080,6 +2089,9 @@ vg-overlay-play .vg-overlay-play {
     }
 
     // DETAIL-PROPERTY
+    .bg-property-details {
+        margin-top: 0px !important;
+    }
     .col-btns-preview-img {
         display: block !important;
         top: 1058px;
@@ -2829,4 +2841,17 @@ vg-overlay-play .vg-overlay-play {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
+}
+
+
+#clicavel{
+  cursor: pointer;
+}
+
+#clicavel:hover{
+  color: #01FF5F;
+}
+
+#clicavel:active{
+  color: blue;
 }

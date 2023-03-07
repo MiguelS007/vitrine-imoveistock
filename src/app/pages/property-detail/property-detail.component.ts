@@ -21,6 +21,8 @@ export class PropertyDetailComponent implements OnInit {
   infopaymobile = false;
   finalValueSale: number;
   finalValueRent: number;
+  previewImg: any;
+  imagePreviewAnnouncement: any = [];
 
 
   @HostListener('window:scroll', [])
@@ -129,46 +131,7 @@ export class PropertyDetailComponent implements OnInit {
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
-  dadosmockados: any[] = [
-    {
-      caracteristica: 'Ar condicionado'
-    },
-    {
-      caracteristica: 'Sauna'
-    },
-    {
-      caracteristica: 'Tv'
-    },
-    {
-      caracteristica: 'Churrasqueira'
-    },
-    {
-      caracteristica: 'Área Comum'
-    },
-    {
-      caracteristica: 'Mobiliada'
-    },
-    {
-      caracteristica: 'Academia'
-    },
-    {
-      caracteristica: 'Piscina'
-    },
-    {
-      caracteristica: 'Lavanderia'
-    },
-    {
-      caracteristica: 'Elevador'
-    },
-    {
-      caracteristica: 'Banheiro'
-    },
-    {
-      caracteristica: 'Wi-fi'
-    },
 
-
-  ];
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -214,10 +177,12 @@ export class PropertyDetailComponent implements OnInit {
     this.previewimg = this.datamokservice.imagespreview;
     this.products = this.datamokservice.resultSearch;
 
+    // while(window.innerWidth > 400){
+    //   console.log('mostar')
+    // }
 
     this.response = this.route.snapshot.data['resolve'];
     this.ngxSpinnerService.hide();
-    console.log(this.response)
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
@@ -225,7 +190,7 @@ export class PropertyDetailComponent implements OnInit {
     this.finalValueSale = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.saleValue);
     this.finalValueRent = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.leaseValue);
 
-    console.log( this.response._id, this.finalValueSale);
+    console.log(this.response._id, this.finalValueSale);
 
 
     if (localStorage.getItem('user') !== null) {
@@ -336,6 +301,10 @@ export class PropertyDetailComponent implements OnInit {
       response => {
         this.propertyproducts = response
         this.responseAnnouncement = response;
+        for (let i = 0; i < response.length; i++) {
+          this.previewImg = this.propertyproducts[i].photos;
+        }
+        console.log(this.previewImg)
         if (localStorage.getItem('user') !== null) {
           this.announcementService.listLikes().subscribe(
             success => {
