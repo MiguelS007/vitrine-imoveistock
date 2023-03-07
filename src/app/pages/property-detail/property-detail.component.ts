@@ -183,6 +183,7 @@ export class PropertyDetailComponent implements OnInit {
     this.products = this.datamokservice.resultSearch;
 
     this.response = this.route.snapshot.data['resolve'];
+    console.log('response page',this.response);
     this.ngxSpinnerService.hide();
 
     let resultadoVerify = localStorage.getItem('resultSearch');
