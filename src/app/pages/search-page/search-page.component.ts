@@ -149,7 +149,6 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.ngxSpinnerService.show();
-    console.log(this.form.value);
 
     if (localStorage.getItem('filtro') !== null) {
       let filtro: any = localStorage.getItem('filtro');
@@ -246,7 +245,7 @@ export class SearchPageComponent implements OnInit {
       for (let i = 0; i < this.filterResult.length; i++) {
         this.listOfPrices.push(this.filterResult[i].saleValue);
       }
-      // console.log(this.listOfPrices);
+
       if (this.filterResult.length === 0) {
         this.messageNotSearch = true;
       } else {
@@ -313,6 +312,8 @@ export class SearchPageComponent implements OnInit {
         this.propertyproducts = data;
       }
     })
+
+console.log('listAllCity',this.listAllCity)
 
   }
 
@@ -499,7 +500,7 @@ export class SearchPageComponent implements OnInit {
       propertyTypeList.push(this.form.controls['propertyType'].value[i].item_id)
     }
 
-    if(this.selectTypeAd === 'Selecione') {
+    if (this.selectTypeAd === 'Selecione') {
       this.selectFilterOfAd = 'sale'
     }
 
@@ -520,19 +521,16 @@ export class SearchPageComponent implements OnInit {
       goal: ''
     }
 
-    console.log(request)
-
 
     this.announcementService.listFilter(request).subscribe({
       next: data => {
         this.filterResult = data;
         this.filtroResultDisplay = request;
-        console.log(this.filtroResultDisplay)
-        if (data.length > 0) {
-          this.messageNotSearch = false;
-          localStorage.setItem('resultSearch', JSON.stringify(data));
-          localStorage.setItem('filtro', JSON.stringify(request));
-        }
+
+        this.messageNotSearch = false;
+        localStorage.setItem('resultSearch', JSON.stringify(data));
+        localStorage.setItem('filtro', JSON.stringify(request));
+
         if (this.filterResult.length === 0) {
           this.messageNotSearch = true;
           this.announcementService.listAnnouncement().subscribe(
@@ -599,6 +597,10 @@ export class SearchPageComponent implements OnInit {
     this.listOfPrices = this.filterResult;
     if (value === 'minor>major') this.listOfPrices.sort((a, b) => a.saleValue < b.saleValue ? -1 : 0);
     else if (value === 'major>minor') this.listOfPrices.sort((a, b) => a.saleValue > b.saleValue ? -1 : 0);
+  }
+
+  redirectToMap() {
+    this.router.navigate(['/search-map']);
   }
 
 }

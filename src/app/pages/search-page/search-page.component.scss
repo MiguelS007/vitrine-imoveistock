@@ -21,4 +21,7 @@ select {
     border-radius: 10px !important;
 }
 
-
+button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
