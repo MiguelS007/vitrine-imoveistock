@@ -126,6 +126,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
           lat: +(anouncement.latitude),
           lng: +(anouncement.longitude),
         },
+        icon:'../../../assets/icon/custom-marker.svg'
       });
 
       marker.set('_id', anouncement._id);
