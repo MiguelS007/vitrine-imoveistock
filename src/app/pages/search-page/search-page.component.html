@@ -233,10 +233,10 @@
                     </p>
                 </div>
                 <div class="col-12 px-0 space-see-maps-area-search">
-                    <a [routerLink]="['/search-map']" class="btn-ver-no-mapa py-4">
+                    <button type="button" class="btn-ver-no-mapa py-4" (click)="redirectToMap()" [disabled]="messageNotSearch">
                         <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
                         <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
-                    </a>
+                    </button>
                     <div class="btn-ver-no-filter py-4 px-2 d-block-desk btn-filter-mobile"
                         [class]="filterbtn ? 'd-none':'d-block'" (click)="openFilter(content)">
                         <img src="../../../assets/icon/filter.png" height="23" class="mx-3" />
