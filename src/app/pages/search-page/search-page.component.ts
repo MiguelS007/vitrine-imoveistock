@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
@@ -114,11 +114,13 @@ export class SearchPageComponent implements OnInit {
     private modalService: NgbModal
 
   ) {
+
     this.form = this.formBuilder.group({
+      typeStatus: ['', [Validators.required]],
       searchwords: [''],
       propertyType: [''],
-      typePropertyState: [''],
-      typePropertyCity: [''],
+      typePropertyState: ['', [Validators.required]],
+      typePropertyCity: ['', [Validators.required]],
       typeMaxPrice: [''],
       typeMinPrice: [''],
       typeBathRoom: [''],
@@ -129,6 +131,7 @@ export class SearchPageComponent implements OnInit {
       typefootagemin: [''],
       orderby: [''],
     });
+
     this.formModal = this.formBuilder.group({
       searchwords: [''],
       propertyType: [''],
@@ -151,7 +154,9 @@ export class SearchPageComponent implements OnInit {
     this.ngxSpinnerService.show();
 
     if (localStorage.getItem('filtro') !== null) {
+
       let filtro: any = localStorage.getItem('filtro');
+
       filtro = JSON.parse(filtro);
 
       this.searchByTypeAd(filtro.typeOfAdd);
@@ -167,6 +172,7 @@ export class SearchPageComponent implements OnInit {
       }
 
       this.form.patchValue({
+        typeStatus: filtro.typeOfAdd,
         typePropertyCity: filtro.cityAddress,
         typeMaxPrice: filtro.finalValue,
       });
@@ -313,7 +319,7 @@ export class SearchPageComponent implements OnInit {
       }
     })
 
-console.log('listAllCity',this.listAllCity)
+    console.log('listAllCity', this.listAllCity)
 
   }
 
@@ -419,6 +425,10 @@ console.log('listAllCity',this.listAllCity)
       this.selectTypeAd = 'Alugar'
     }
     this.selectFilterOfAd = item;
+
+    this.form.patchValue({
+      typeStatus: item,
+    });
   }
 
   searchByBadRoom(item) {

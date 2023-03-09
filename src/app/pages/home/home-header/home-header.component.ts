@@ -13,6 +13,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrls: ['./home-header.component.scss']
 })
 export class HomeHeaderComponent implements OnInit {
+
   form: FormGroup;
   response: AnnouncementGetResponseDto[] = [];
   filterResponse: AnnouncementGetResponseDto[] = [];
@@ -74,11 +75,11 @@ export class HomeHeaderComponent implements OnInit {
     this.form = this.formBuilder.group({
       search: [''],
       propertyType: [''],
-      typeStatus: ['', [Validators.required]],
+      typeStatus: ['sale', [Validators.required]],
       typeProperty: [''],
       typepropertyTeste: [''],
-      typePropertyCity: [''],
-      typePropertyState: [''],
+      typePropertyCity: ['', [Validators.required]],
+      typePropertyState: ['', [Validators.required]],
       typePropertyValueRent: [''],
       typePropertyValueSale: [''],
       typePropertyBadrooms: [''],
@@ -136,6 +137,9 @@ export class HomeHeaderComponent implements OnInit {
 
   selectEvent(item) {
     this.getSelectedCity = item.name;
+    this.form.patchValue({
+      typePropertyCity: this.getSelectedCity,
+    });
   }
   onChangeSearch(search: string) {
   }
@@ -226,6 +230,9 @@ export class HomeHeaderComponent implements OnInit {
         for (let x = 0; x < estados.estados[i].cidades.length; x++) {
           this.listAllCity.push({ name: estados.estados[i].cidades[x] })
           this.stateSelected = estados.estados[i].nome
+          this.form.patchValue({
+            typePropertyState: this.stateSelected,
+          });
         }
       }
     }
