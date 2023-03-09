@@ -3,5 +3,6 @@ export abstract class UserRegisterRequestDto {
     email: string;
     name: string;
     cpf: string;
-    profilesIds: string[]; 
+    profilesIds: string[];
+    addressZipCode: string;
 }

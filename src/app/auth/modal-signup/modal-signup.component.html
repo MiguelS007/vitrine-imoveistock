@@ -1,6 +1,6 @@
 <form [formGroup]="form" class="auth-form px-3 pb-5 anima-body">
     <div class="py-3 max-w-800">
-        <div  (click)="exit()" class="w-100 pb-4 px-3 d-flex justify-content-end">
+        <div (click)="exit()" class="w-100 pb-4 px-3 d-flex justify-content-end">
             <img src="../../../assets/icon/x.png" />
         </div>
         <p class="fw-700 pt-3 font-size-24 line-32 color-black w-100 text-center">
@@ -16,6 +16,9 @@
             <input type="tel" mask="(00) 00000-0000" formControlName="phone"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="Celular" />
+            <input type="addressZipCode" mask="00000-000" formControlName="addressZipCode"
+                class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
+                placeholder="CEP" />
             <input type="tel" mask="000.000.000-00" formControlName="cpf"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="CPF" />
@@ -28,8 +31,10 @@
                 id="checksignup">
             <label class="form-check-label ml-2 fw-400 font-size-14 line-18 color-black" for="checksignup">
                 Estou de acordo com os
-                <a (click)="openTermsModal('termos')" class="fw-700 font-size-14 line-18 text-primary">Termos de Uso</a> e ciente da
-                <a (click)="openTermsModal('politica')" class="fw-700 font-size-14 line-18 text-primary">Política de Privacidade</a> da
+                <a (click)="openTermsModal('termos')" class="fw-700 font-size-14 line-18 text-primary">Termos de Uso</a>
+                e ciente da
+                <a (click)="openTermsModal('politica')" class="fw-700 font-size-14 line-18 text-primary">Política de
+                    Privacidade</a> da
                 Imoveistock
             </label>
         </div>
