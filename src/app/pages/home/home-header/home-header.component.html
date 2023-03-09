@@ -9,12 +9,14 @@
                             <p class="fw-700 open-doors-title font-size-48 color-black">Abrindo novas portas</p>
                         </div>
                         <div class="position-relative w-100 d-flex border-bottom-purple justify-content-center d-flex">
+                          <div class="position-relative">
                             <button type="button" formControlName="typeStatus" ngDefaultControl value="sale"
                                 [class]="collapsed! ? 'bg-white color-black' : 'bg-purple text-light arrow-box-buy'"
                                 (click)="buyOption('sale')"
                                 class="btn h-51 btn-home-sale-rent border-radius-0 w-111 fw-400 font-size-16 line-20 ">
                                 Comprar
                             </button>
+                          </div>
                             <div class="position-relative">
                                 <button type="button" formControlName="typeStatus" ngDefaultControl value="rent"
                                     [class]="collapsed ? 'bg-purple text-light arrow-box-rent' : 'bg-white color-black '"

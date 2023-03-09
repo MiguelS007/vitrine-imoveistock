@@ -66,7 +66,7 @@ export class ModalCodeComponent implements OnInit {
 
 
   timer(minute, value) {
-    
+
     this.codereceivedSms = 'Reenviar código via SMS';
     this.codereceivedEmail = 'Reenviar código via E-mail';
     this.resendcode = false;
@@ -183,6 +183,23 @@ export class ModalCodeComponent implements OnInit {
       this.codigo4 = digito;
       var nextInput = document.getElementById('btn-send-code');
       nextInput.focus();
+    }
+  }
+
+  move(e: any, p: any, c: any, n: any) {
+
+
+    var length = c.value.length;
+    var maxlength = c.getAttribute('maxlength');
+    if (length == maxlength) {
+      if (n != "") {
+        n.focus();
+      }
+    }
+    if (e.key === 'Backspace') {
+      if (p != "") {
+        p.focus();
+      }
     }
   }
 
