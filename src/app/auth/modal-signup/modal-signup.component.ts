@@ -35,7 +35,8 @@ export class ModalSignupComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required]],
       cpf: ['', [Validators.required]],
-      termsAndPolicy: [false, [Validators.requiredTrue]]
+      termsAndPolicy: [false, [Validators.requiredTrue]],
+      addressZipCode: ['', [Validators.required]]
     })
   }
 
@@ -62,7 +63,8 @@ export class ModalSignupComponent implements OnInit {
       email: this.form.controls['email'].value,
       cpf: cpf,
       name: this.form.controls['name'].value,
-      profilesIds: [ProfileClientEnum.indicacao, ProfileClientEnum.proprietario]
+      profilesIds: [ProfileClientEnum.indicacao, ProfileClientEnum.proprietario],
+      addressZipCode: this.form.controls['addressZipCode'].value
     }
 
     console.log(this.request)
