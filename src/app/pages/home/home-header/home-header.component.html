@@ -3,20 +3,20 @@
         <div class="px-0 w-100 mb-5">
             <div class="row row-of-home mx-0">
                 <div class="col-5 col-12-mobile">
-                    <form [formGroup]="form"
+                    <form [formGroup]="form" (ngSubmit)="confirm()"
                         class="row mx-0 w3-white p-4 border-radius-10 justify-content-center form-header">
                         <div class="col-12">
                             <p class="fw-700 open-doors-title font-size-48 color-black">Abrindo novas portas</p>
                         </div>
                         <div class="position-relative w-100 d-flex border-bottom-purple justify-content-center d-flex">
-                          <div class="position-relative">
-                            <button type="button" formControlName="typeStatus" ngDefaultControl value="sale"
-                                [class]="collapsed! ? 'bg-white color-black' : 'bg-purple text-light arrow-box-buy'"
-                                (click)="buyOption('sale')"
-                                class="btn h-51 btn-home-sale-rent border-radius-0 w-111 fw-400 font-size-16 line-20 ">
-                                Comprar
-                            </button>
-                          </div>
+                            <div class="position-relative">
+                                <button type="button" formControlName="typeStatus" ngDefaultControl value="sale"
+                                    [class]="collapsed! ? 'bg-white color-black' : 'bg-purple text-light arrow-box-buy'"
+                                    (click)="buyOption('sale')"
+                                    class="btn h-51 btn-home-sale-rent border-radius-0 w-111 fw-400 font-size-16 line-20 ">
+                                    Comprar
+                                </button>
+                            </div>
                             <div class="position-relative">
                                 <button type="button" formControlName="typeStatus" ngDefaultControl value="rent"
                                     [class]="collapsed ? 'bg-purple text-light arrow-box-rent' : 'bg-white color-black '"
@@ -31,9 +31,9 @@
                                 <div class="row px-0 mx-0 d-flex content-painel align-items-center">
                                     <div class="col-12 px-0 pb-3">
                                         <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'"
-                                            [settings]="dropdownSettings" formControlName="propertyType" [data]="dropdownList"
-                                            [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
-                                            (onSelectAll)="onSelectAll($event)">
+                                            [settings]="dropdownSettings" formControlName="propertyType"
+                                            [data]="dropdownList" [(ngModel)]="selectedItems"
+                                            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
 
@@ -120,9 +120,12 @@
                                     </div>
 
                                     <div class="d-flex col-12 px-0 justify-content-end">
-                                        <button (click)="confirm()"
+                                        <button
                                             class="btn w-100 btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5"
-                                            type="submit">Procurar imóveis</button>
+                                            type="submit" [disabled]="form.invalid">
+                                            Procurar imóveis
+
+                                        </button>
                                     </div>
                                 </div>
                             </div>
