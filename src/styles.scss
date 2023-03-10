@@ -1354,12 +1354,12 @@ input:focus {
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 416px;
+    width: 100% !important;
     height: 309px;
 }
 
 .img-exclusivity-space-search {
-    width: 416px;
+    width: 100% !important;
     height: 309px;
     left: 0px !important;
     top: 0px !important;
