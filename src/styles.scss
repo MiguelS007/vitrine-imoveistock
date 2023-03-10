@@ -1752,6 +1752,8 @@ vg-overlay-play .vg-overlay-play {
     display: flex !important;
     align-items: center !important;
     margin-right: 16px !important;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-ver-no-filter {
@@ -2527,6 +2529,8 @@ vg-overlay-play .vg-overlay-play {
         margin-bottom: 16px !important;
         width: fit-content !important;
         margin-right: 0 !important;
+        border: none;
+        cursor: pointer;
     }
 
     .btn-ver-no-filter {
@@ -2838,6 +2842,8 @@ vg-overlay-play .vg-overlay-play {
         margin-bottom: 16px !important;
         width: 100% !important;
         margin-right: 0 !important;
+        border: none;
+        cursor: pointer;
     }
 
     .btn-ver-no-filter {

@@ -184,6 +184,7 @@ export class PropertyDetailComponent implements OnInit {
 
     this.ngxSpinnerService.show()
     this.response = this.route.snapshot.data['resolve'];
+    console.log('response page',this.response);
     this.ngxSpinnerService.hide();
 
     let resultadoVerify = localStorage.getItem('resultSearch');
