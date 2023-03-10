@@ -14,7 +14,8 @@ export abstract class ProposalRequestDto {
     saleDirectInstallmentAsPaymentAmount?: number;
     saleFinancingAsPaymentAmount?: number;
     changes?: ProposalChangesRegisterRequestDto[];
-    announcementId?: string
+    announcementId?: string;
+    parentProposalId?: string;
 }
 
 class ProposalChangesRegisterRequestDto {

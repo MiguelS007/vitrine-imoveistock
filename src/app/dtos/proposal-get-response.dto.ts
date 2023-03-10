@@ -37,6 +37,7 @@ export abstract class ProposalGetResponseDto {
     announcement?: AnnouncementGetResponseDto;
 
     user?: UserGetResponseDto;
+
 }
 
 class ProposalStatusEnum {

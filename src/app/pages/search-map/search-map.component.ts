@@ -68,42 +68,23 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
     this.filtroResultDisplay = JSON.parse(localStorage.getItem('filtro'));
 
-    console.log('ufAddress', this.filtroResultDisplay.ufAddress)
-    console.log('cityAddress', this.filtroResultDisplay.cityAddress)
+    this.geocoder.geocode({ address: `${this.filtroResultDisplay.cityAddress}, ${this.filtroResultDisplay.ufAddress}` }, (results, status) => {
 
-    if (this.filtroResultDisplay.ufAddress || this.filtroResultDisplay.cityAddress) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var lat = results[0].geometry.location.lat();
+        var lng = results[0].geometry.location.lng();
 
-      console.log('busca por cidade')
-
-      this.geocoder.geocode({ address: `${this.filtroResultDisplay.cityAddress}, ${this.filtroResultDisplay.ufAddress}` }, (results, status) => {
-
-        console.log('geocode', results)
-        console.log('geocode', status)
-
-        if (status == google.maps.GeocoderStatus.OK) {
-          var lat = results[0].geometry.location.lat();
-          var lng = results[0].geometry.location.lng();
-
-          console.log('geocode lat', lat)
-          console.log('geocode lng', lng)
-
-          this.center = {
-            lat,
-            lng,
-          };
-        } else {
-          this.center = {
-            lat: environment.google.map.center.lat,
-            lng: environment.google.map.center.lng,
-          };
-        }
-      });
-    }
-    else
-      this.center = {
-        lat: environment.google.map.center.lat,
-        lng: environment.google.map.center.lng,
-      };
+        this.center = {
+          lat,
+          lng,
+        };
+      } else {
+        this.center = {
+          lat: environment.google.map.center.lat,
+          lng: environment.google.map.center.lng,
+        };
+      }
+    });
 
     this.mapOptions.center = this.center;
 
