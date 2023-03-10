@@ -76,7 +76,6 @@ export class HomeProductsComponent implements OnInit {
             }
           )
         }
-        console.log(this.response)
       },
       error => { console.log(error, 'data not collected') }
     );
