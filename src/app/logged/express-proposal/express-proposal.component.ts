@@ -510,7 +510,7 @@ export class ExpressProposalComponent implements OnInit {
         announcementId: this.response._id
       }
 
-      if (this.sendRescheduling) {
+      if (this.proposalResponse.counterProposal) {
         this.sendCounterProposal(this.request)
       } else {
         this.sendProposal(this.request)
@@ -533,7 +533,7 @@ export class ExpressProposalComponent implements OnInit {
   }
 
   sendCounterProposal(request) {
-    Object.assign(this.request, { parentProposalId: this.proposalResponse.proposal._id })
+    Object.assign(this.request, { parentProposalId: this.proposalResponse.counterProposal._id })
     this.proposalService.counterProposal(this.request).subscribe({
       next: data => {
         this.toastrService.success('Contra proposta enviada!', '', { progressBar: true });
