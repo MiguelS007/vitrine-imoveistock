@@ -633,8 +633,8 @@
                                         <td class="d-tavle-cell
                                                     text-align-right">
                                             <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18
-                                                    line-24 color-black">{{toNumber(response.valueOfIptu) / 12 +
-                                                toNumber(response.leaseValue) + toNumber(response.condominiumValue) |
+                                                    line-24 color-black">{{
+                                                toNumber(response.leaseValue) + toNumber(response.condominiumValue) + toNumber(response.valueOfIptu) / 12 |
                                                 currency: 'R$'}}</span>
                                             <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18
                                                     line-24 color-black">{{toNumber(response.saleValue) |

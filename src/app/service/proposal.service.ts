@@ -22,7 +22,7 @@ export class ProposalService extends BaseService {
 
     register(dto: ProposalRequestDto): Observable<any> {
         return this.httpClient
-            .post(`${this.url}`, dto, this.authorizedHeader())
+            .post(`${this.url}/proposal`, dto, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
@@ -40,7 +40,7 @@ export class ProposalService extends BaseService {
 
     list(): Observable<any> {
         return this.httpClient
-            .get(`${this.url}/user`, this.authorizedHeader())
+            .get(`${this.url}/proposal/user`, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 

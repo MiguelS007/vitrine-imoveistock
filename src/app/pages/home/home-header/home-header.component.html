@@ -40,7 +40,7 @@
                                     <div class="col-12 px-0 mb-3 ">
                                         <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                                             <select formControlName="typePropertyState" (change)="getEstados($event)"
-                                                class="w-100 px-3 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black"
+                                                class="w-100 px-3 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
                                                 [(ngModel)]="stateSelected" id="state"
                                                 aria-label="Default select example">
                                                 <option [value]="stateSelected" disabled selected value>
@@ -78,7 +78,7 @@
                                                     </div>
                                                     <select formControlName="typePropertyValueSale"
                                                         style="border-left: 0px !important;"
-                                                        class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black"
+                                                        class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
                                                         id="state" aria-label="Default select example">
                                                         <option *ngFor="let item of valueUntilSaleArray" [value]="item">
                                                             &nbsp;{{item | currency:'R$':'symbol':'1.0'}}</option>
@@ -93,7 +93,7 @@
                                                     </div>
                                                     <select formControlName="typePropertyValueRent"
                                                         style="border-left: 0px !important;"
-                                                        class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black"
+                                                        class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
                                                         id="state" aria-label="Default select example">
                                                         <option *ngFor="let item of valueUntilRentArray" [value]="item">
                                                             &nbsp;{{item | currency:'R$':'symbol':'1.0'}}</option>
@@ -109,7 +109,7 @@
                                                     </div>
                                                     <select formControlName="typePropertyBadrooms"
                                                         style="border-left: 0px !important;"
-                                                        class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black"
+                                                        class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
                                                         id="state" aria-label="Default select example">
                                                         <option *ngFor="let item of badroomsArray" [value]="item">&nbsp;
                                                             {{item}} +</option>
