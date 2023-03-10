@@ -6,6 +6,7 @@ import { ProposalRequestDto } from "../dtos/proposal-request-dto";
 import { Observable, map, catchError } from 'rxjs';
 import { ProposalGetResponseDto } from "../dtos/proposal-get-response.dto";
 import { ProposalCancelRequestDto } from "../dtos/proposal-cancel-request.dto";
+import { ProposalGetByIdResponseDto } from "../dtos/proposal-get-by-id-response.dto";
 
 @Injectable({
     providedIn: 'root'
@@ -41,6 +42,18 @@ export class ProposalService extends BaseService {
     list(): Observable<any> {
         return this.httpClient
             .get(`${this.url}/proposal/user`, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
+    getById(proposalId): Observable<ProposalGetByIdResponseDto> {
+        return this.httpClient
+            .get(`${this.url}/id/${proposalId}`, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
+    getByAnnouncement(announcementId): Observable<ProposalGetResponseDto[]> {
+        return this.httpClient
+            .get(`${this.url}/annoucement/${announcementId}`, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 

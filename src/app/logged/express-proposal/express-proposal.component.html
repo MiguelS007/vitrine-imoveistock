@@ -359,19 +359,21 @@
                 </div>
             </div>
 
-            <div *ngIf="spaceCustomizeProposalChanges" class="w-100 bg-white border-radius-10 p-5">
-                <p class="fw-700 font-size-18 line-18 color-black">Mudanças do imóvel</p>
-                <hr class="bg-whitelight" />
-                <p class="fw-400 font-size-16 mb-2 line-20 color-black">
-                    Você precisa negociar algum reparo, inclusão ou retirada com o proprietário?
-                </p>
-                <p class="border-orange bg-orangelight p-3 mb-2 border-radius-10">
-                    Solicitações prolongam sua negociação. Adicione somente se for imprescindível.
-                </p>
-                <button (click)="propertyChange('open')" type="button"
-                    class="btn mt-3 text-truncate border-dotted bg-white border-radius-10 h-74 w-100 fw-700 font-size-18 line-24 color-black">
-                    Adicionar solicitação
-                </button>
+            <div *ngIf="proposalResponse?.proposal?.announcement?.typeOfAd === 'rent'">
+                <div *ngIf="spaceCustomizeProposalChanges" class="w-100 bg-white border-radius-10 p-5">
+                    <p class="fw-700 font-size-18 line-18 color-black">Mudanças do imóvel</p>
+                    <hr class="bg-whitelight" />
+                    <p class="fw-400 font-size-16 mb-2 line-20 color-black">
+                        Você precisa negociar algum reparo, inclusão ou retirada com o proprietário?
+                    </p>
+                    <p class="border-orange bg-orangelight p-3 mb-2 border-radius-10">
+                        Solicitações prolongam sua negociação. Adicione somente se for imprescindível.
+                    </p>
+                    <button (click)="propertyChange('open')" type="button"
+                        class="btn mt-3 text-truncate border-dotted bg-white border-radius-10 h-74 w-100 fw-700 font-size-18 line-24 color-black">
+                        Adicionar solicitação
+                    </button>
+                </div>
             </div>
 
             <div *ngIf="spaceCustomizeProposalChangesOptions"

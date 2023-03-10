@@ -38,6 +38,10 @@ export abstract class ProposalGetResponseDto {
 
     user?: UserGetResponseDto;
 
+    parentProposal?: ProposalGetResponseDto;
+
+    hasChild: boolean;
+
 }
 
 class ProposalStatusEnum {
