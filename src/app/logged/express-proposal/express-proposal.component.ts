@@ -6,6 +6,7 @@ import { ProposalRequestDto } from 'src/app/dtos/proposal-request-dto';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { ProposalService } from 'src/app/service/proposal.service';
 import { AnnouncementGetResponseDto } from '../../dtos/announcement-get-response.dto';
+import { ProposalGetResponseDto } from '../../dtos/proposal-get-response.dto';
 import { AnnouncementService } from '../../service/announcement.service';
 
 @Component({
@@ -33,6 +34,8 @@ export class ExpressProposalComponent implements OnInit {
   paginationProduct: number = 1;
 
   response: AnnouncementGetResponseDto;
+
+  proposalResponse: ProposalGetResponseDto;
 
   listLikes: AnnouncementGetResponseDto[] = [];
 
@@ -146,6 +149,7 @@ export class ExpressProposalComponent implements OnInit {
           for (let i = 0; i < data.length; i++) {
             if (data[i].announcement._id === this.response._id) {
               this.sendRescheduling = true;
+              this.proposalResponse = data[i];
             }
           }
         }
@@ -323,7 +327,7 @@ export class ExpressProposalComponent implements OnInit {
           this.spaceCustomizeProposalChangesOptions = true
           this.spaceCustomizeProposalChanges = false
           this.spaceChangeItem = false;
-         
+
         }
       };
     });
@@ -513,6 +517,7 @@ export class ExpressProposalComponent implements OnInit {
   }
 
   sendCounterProposal(request) {
+    Object.assign(this.request, { parentProposalId: this.proposalResponse._id })
     this.proposalService.counterProposal(this.request).subscribe({
       next: data => {
         this.toastrService.success('Contra proposta enviada!', '', { progressBar: true });
