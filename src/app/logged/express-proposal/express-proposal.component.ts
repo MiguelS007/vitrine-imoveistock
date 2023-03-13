@@ -328,6 +328,7 @@ export class ExpressProposalComponent implements OnInit {
       };
     });
   }
+
   removeItem(value: string) {
     if (value === 'open') {
       this.spaceCustomizeProposalChangesOptions = false
@@ -460,8 +461,8 @@ export class ExpressProposalComponent implements OnInit {
         saleAmount: this.toNumber(this.response.saleValue),
         suggestedSaleAmount: this.formCustomizeProposal.controls['suggestedSaleAmount'].value,
         saleAmountTotal: this.toNumber(this.formCustomizeProposal.controls['suggestedSaleAmount'].value) + this.valueProperty + this.valueVehicle + this.valueFinancing + this.valueInstallment,
-        saleCarAsPaymentAmount: this.valueProperty,
-        salePropertyAsPaymentAmount: this.valueVehicle,
+        saleCarAsPaymentAmount:  this.valueVehicle,
+        salePropertyAsPaymentAmount: this.valueProperty,
         saleDirectInstallmentAsPaymentAmount: this.valueInstallment,
         saleFinancingAsPaymentAmount: this.valueFinancing,
         changes: this.changesRequest,
