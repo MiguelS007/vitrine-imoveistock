@@ -37,6 +37,11 @@ export abstract class ProposalGetResponseDto {
     announcement?: AnnouncementGetResponseDto;
 
     user?: UserGetResponseDto;
+
+    parentProposal?: ProposalGetResponseDto;
+
+    hasChild: boolean;
+
 }
 
 class ProposalStatusEnum {

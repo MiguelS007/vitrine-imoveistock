@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ProposalGetByIdResponseDto } from 'src/app/dtos/proposal-get-by-id-response.dto';
 import { ProposalRequestDto } from 'src/app/dtos/proposal-request-dto';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { ProposalService } from 'src/app/service/proposal.service';
 import { AnnouncementGetResponseDto } from '../../dtos/announcement-get-response.dto';
+import { ProposalGetResponseDto } from '../../dtos/proposal-get-response.dto';
 import { AnnouncementService } from '../../service/announcement.service';
 
 @Component({
@@ -33,6 +35,8 @@ export class ExpressProposalComponent implements OnInit {
   paginationProduct: number = 1;
 
   response: AnnouncementGetResponseDto;
+
+  proposalResponse: ProposalGetByIdResponseDto;
 
   listLikes: AnnouncementGetResponseDto[] = [];
 
@@ -140,17 +144,33 @@ export class ExpressProposalComponent implements OnInit {
       }
     }
 
-    this.proposalService.list().subscribe({
-      next: data => {
-        if (data.length > 0) {
-          for (let i = 0; i < data.length; i++) {
-            if (data[i].announcement._id === this.response._id) {
-              this.sendRescheduling = true;
-            }
-          }
+
+
+    // this.proposalService.getByAnnouncement(this.response._id).subscribe({
+    //   next: data => {
+    //     if (data.length > 0) {
+    //       console.log(data[0], 'teste teste 6')
+    //       this.proposalResponse = data[0];
+
+    //       console.log(this.proposalResponse)
+    //       // for (let i = 0; i < data.length; i++) {
+    //       //   if (data[i].announcement._id === this.response._id) {
+    //       //     this.sendRescheduling = true;
+    //       //     this.proposalResponse = data[i];
+    //       //     console.log(this.proposalResponse, 'proposal response')
+    //       //   }
+    //       // }
+    //     }
+    //   }
+    // })
+
+    if(localStorage.getItem('counterProposalInProposal') !== null) {
+      this.proposalService.getById(localStorage.getItem('counterProposalInProposal')).subscribe({
+        next: data => {
+          this.proposalResponse = data;
         }
-      }
-    })
+      })
+    }
 
   }
 
@@ -323,7 +343,7 @@ export class ExpressProposalComponent implements OnInit {
           this.spaceCustomizeProposalChangesOptions = true
           this.spaceCustomizeProposalChanges = false
           this.spaceChangeItem = false;
-         
+
         }
       };
     });
@@ -491,7 +511,7 @@ export class ExpressProposalComponent implements OnInit {
         announcementId: this.response._id
       }
 
-      if (this.sendRescheduling) {
+      if (this.proposalResponse.counterProposal) {
         this.sendCounterProposal(this.request)
       } else {
         this.sendProposal(this.request)
@@ -514,6 +534,7 @@ export class ExpressProposalComponent implements OnInit {
   }
 
   sendCounterProposal(request) {
+    Object.assign(this.request, { parentProposalId: this.proposalResponse.counterProposal._id })
     this.proposalService.counterProposal(this.request).subscribe({
       next: data => {
         this.toastrService.success('Contra proposta enviada!', '', { progressBar: true });

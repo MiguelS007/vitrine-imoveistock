@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   payloadKey: '57b0e476-142c-4762-8547-140b65cb1e9c',
   apis: {
-    imoveistock: 'https://imoveistockapi.tgtdigital.io/',
+    // imoveistock: 'https://imoveistockapi.tgtdigital.io/',
+    imoveistock: 'http://localhost:5000/',
   },
   google: {
     apiKey: 'AIzaSyBzwijvQ13DZALYBwC-uKdWWELaf0r9Xzs',
@@ -14,16 +15,16 @@ export const environment = {
       center: {
 
         //Curitiba
-        // lat: -25.4945583,
-        // lng: -49.5604267,
+        lat: -25.439192,
+        lng: -49.274468,
 
         //são Paulo
         // lat:-23.6813532,
         // lng: -47.1697154,
 
         //Brasilia
-        lat: -15.7929188,
-        lng: -47.8970312,
+        // lat: -15.7929188,
+        // lng: -47.8970312,
       }
     }
   }

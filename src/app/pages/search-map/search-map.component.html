@@ -1,10 +1,10 @@
-<main class="bg-graylight position-relative w-100 px-5p justify-content-center d-flex">
-    <div class="row max-w-1918 w-100 px-0 form-search h-100 m-0-aut0">
-        <div class="col-12 mt-5 pt-5">
-            <div class="col-12 d-none-desk mt-5 pt-3" *ngIf="filtroResultDisplay.typeOfAdd">
-                <p class="d-flex fw-700 font-size-12 line-19 color-black
-                 align-items-center">Página Inicial /
-                    <span class="fw-400 font-size-12 line-20 color-muted"> &nbsp;
+<main class="bg-graylight d-flex justify-content-center position-relative w-100 py-5 px-5p">
+    <div class="padding-x w-100 max-w-1918 mb-5 hide">
+        <div class="row form-search mt-5 h-100 m-0-auto">
+            <div class="col-12 mt-5 pt-5" *ngIf="filtroResultDisplay.typeOfAdd">
+                <p class="fw-700 font-size-16  color-black
+                 mt-5">Página Inicial /
+                    <span class="fw-400 font-size-12 color-muted"> &nbsp;
                         Resultado de busca
                     </span>
                 </p>
@@ -21,132 +21,131 @@
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
                     </b>
                 </p>
+                <div style="width: 100px;" [routerLink]="['/search']"
+                    class="px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex justify-content-center bg-purple align-items-center border-radius-10">
+                    <i class="bi bi-list thinks-small text-light pr-2"></i>
+                    <span class="fw-700 font-size-12 thinks-small line-24 text-light">Ver&nbsp;Lista</span>
+                </div>
             </div>
-        </div>
-        <div class="col-2 col-search-map">
-            <div style="width: 100px;" [routerLink]="['/search']"
-                class="px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex justify-content-center bg-purple align-items-center border-radius-10">
-                <i class="bi bi-list thinks-small text-light pr-2"></i>
-                <span class="fw-700 font-size-12 thinks-small line-24 text-light">Ver&nbsp;Lista</span>
-            </div>
-        </div>
-        <div class="row mb-5">
-            <div class="col-lg-7 hide">
-                <div class="row px-0">
-                    <div class="col-12 mt-4 d-flex justify-content-center"
-                        *ngIf="response && response.length <= 0">
-                        <img src="../../../assets/img/not-search-announcement.svg" height="80">
-                        <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
-                        <p class="text-center mb-0">explore outros filtros e confira os imoveis que podem te atender no
-                            momento</p>
-                        <span class="text-center">:(</span>
-                    </div>
-                    <div class="col-lg-5 col-md-5 px-1 col-cards-products "
-                        *ngFor="let item of response | paginate: { itemsPerPage: 2, currentPage: pagination }; let i= index">
-                        <div
-                            class="w-100 cursor-pointer mt-5 p-3 border-radius-10 bg-white">
-                            <div class="border-radius-10 position-relative">
-                                <img *ngIf="!item.mainPhoto" (click)="announcementSelected(item._id)"
-                                    src="../../../assets/img/img-announcement-default.jpg"
-                                    class="img-search-announcement-main">
-                                <img *ngIf="item.mainPhoto" (click)="announcementSelected(item._id)"
-                                    [src]="item.mainPhoto" class="img-search-announcement-main">
-                                <div class="space-sale-or-rent-search-announcement">
-                                    <h4 *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
-                                    border-radius-5 fw-400 font-size-14 line-15
-                                    text-light">Venda</h4>
-                                    <h4 *ngIf="item.typeOfAd === 'rent'" class="bg-purple h-fit px-4 py-2 mb-0
-                                    border-radius-5 fw-400 font-size-14 line-15
-                                    text-light">Aluguel</h4>
-                                    <h4 *ngIf="item.exclusivity === true" class="bg-greenlight h-fit ml-2 px-3 py-2
-                                    mb-0 border-radius-5 fw-400 font-size-14
-                                    line-15 color-black">Exclusivo</h4>
-                                </div>
-                                <div class="space-value-announcement">
-                                    <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mb-0 font-size-22 h-fit line-32
-                                    text-light">{{item.saleValue | currency: 'R$'}}</p>
-                                    <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mb-0 font-size-22 h-fit line-32
-                                    text-light">{{item.leaseValue | currency: 'R$'}}</p>
-                                    <div (click)="likeHeart(item._id, item.liked)" class="h-fit heart-like
-                                    bg-transparent-white cursor-pointer border-radius-10
-                                    pt-2 pb-1">
-                                        <i [class]="item.liked ?
-                                       'bi-heart-fill':'bi-heart' " class="bi
-                                       font-size-16 text-light"></i>
+            <div class="col-lg-7">
+                <div class="col-12 mt-4 d-flex flex-column justify-content-center"
+                    *ngIf="selectedAnouncements && selectedAnouncements.length <= 0">
+                    <img src="../../../assets/img/not-search-announcement.svg" height="80">
+                    <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
+                    <p class="text-center mb-0">explore outros filtros e confira os imoveis que podem te atender no
+                        momento</p>
+                    <span class="text-center">:(</span>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-6 pl-lg-0"
+                            *ngFor="let item of selectedAnouncements | paginate: { itemsPerPage: 2, currentPage: pagination }; let i= index">
+                            <div class="w-100 cursor-pointer mt-5 p-3 border-radius-10 bg-white">
+                                <div class="border-radius-10 position-relative">
+                                    <img *ngIf="!item.mainPhoto" (click)="selectAnnouncement(item._id)"
+                                        src="../../../assets/img/img-announcement-default.jpg"
+                                        class="img-search-announcement-main">
+                                    <img *ngIf="item.mainPhoto" (click)="selectAnnouncement(item._id)"
+                                        [src]="item.mainPhoto" class="img-search-announcement-main">
+                                    <div class="space-sale-or-rent-search-announcement">
+                                        <h4 *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
+                                            border-radius-5 fw-400 font-size-14 line-15
+                                            text-light">Venda</h4>
+                                        <h4 *ngIf="item.typeOfAd === 'rent'" class="bg-purple h-fit px-4 py-2 mb-0
+                                            border-radius-5 fw-400 font-size-14 line-15
+                                            text-light">Aluguel</h4>
+                                        <h4 *ngIf="item.exclusivity === true" class="bg-greenlight h-fit ml-2 px-3 py-2
+                                            mb-0 border-radius-5 fw-400 font-size-14
+                                            line-15 color-black">Exclusivo</h4>
+                                    </div>
+                                    <div class="space-value-announcement">
+                                        <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mb-0 font-size-22 h-fit line-32
+                                            text-light">{{item.saleValue | currency: 'R$'}}</p>
+                                        <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mb-0 font-size-22 h-fit line-32
+                                            text-light">{{item.leaseValue | currency: 'R$'}}</p>
+                                        <div (click)="likeHeart(item._id, item.liked)" class="h-fit heart-like
+                                            bg-transparent-white cursor-pointer border-radius-10
+                                            pt-2 pb-1">
+                                            <i [class]="item.liked ?
+                                               'bi-heart-fill':'bi-heart' " class="bi
+                                               font-size-16 text-light"></i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div (click)="announcementSelected(item._id)" class="col-12 px-0">
-                                <div class="w-100 mx-2 text-align-left pt-3">
-                                    <span class="fw-400 font-size-14 line-20
-                                    color-black text-capitalize">{{item.propertyCharacteristics}}</span>
-                                    <p class="fw-700 my-2 font-size-16 line-20 mb-0
-                                    color-black text-truncate" style="max-width: 90%;">{{item.description || '-' }}</p>
-                                    <p class="d-flex align-items-center  text-left">
-                                        <i class="bi font-size-20 mr-2 color-black
-                                       bi-geo-alt"></i>
+                                <div (click)="selectAnnouncement(item._id)" class="col-12 px-0">
+                                    <div class="w-100 mx-2 text-align-left pt-3">
                                         <span class="fw-400 font-size-14 line-20
-                                       color-black">{{item.publicPlaceAddress}},
-                                            {{item.cityAddress}} - {{item.ufAddress}}</span>
-                                    </p>
-                                </div>
-                                <div class="row px-4 my-3 pb-3
-                                 d-flex">
-                                    <div class="col justify-content-left px-0 d-flex 
-                                    align-items-center justify-content-left">
-                                        <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                       color-black">{{item.bedrooms}} Quartos</p>
+                                            color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                                        <p class="fw-700 my-2 font-size-16 line-20 mb-0
+                                            color-black text-truncate" style="max-width: 90%;">{{item.description ||
+                                            '-' }}
+                                        </p>
+                                        <p class="d-flex align-items-center  text-left">
+                                            <i class="bi font-size-20 mr-2 color-black
+                                               bi-geo-alt"></i>
+                                            <span class="fw-400 font-size-14 line-20
+                                               color-black">{{item.publicPlaceAddress}},
+                                                {{item.cityAddress}} - {{item.ufAddress}}</span>
+                                        </p>
                                     </div>
-                                    <div class="col justify-content-center px-0 d-flex 
-                                    align-items-center justify-content-left">
-                                        <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                       color-black">{{item.vacancyNumber}} Vagas</p>
-                                    </div>
-                                    <div class="col justify-content-end px-0 d-flex 
-                                    align-items-center justify-content-left">
-                                        <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                       color-black text-truncate">{{item.usefulArea | currency: ' '}} m²</p>
+                                    <div class="row px-4 my-3 pb-3
+                                         d-flex">
+                                        <div class="col justify-content-left px-0 d-flex 
+                                            align-items-center justify-content-left">
+                                            <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
+                                            <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                               color-black">{{item.bedrooms}} Quartos</p>
+                                        </div>
+                                        <div class="col justify-content-center px-0 d-flex 
+                                            align-items-center justify-content-left">
+                                            <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
+                                            <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                               color-black">{{item.vacancyNumber}} Vagas</p>
+                                        </div>
+                                        <div class="col justify-content-end px-0 d-flex 
+                                            align-items-center justify-content-left">
+                                            <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
+                                            <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                               color-black text-truncate">{{item.usefulArea | currency: ' '}} m²</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="row hide">
+                        <div class="col-12 my-5 py-5 justify-content-center">
+                            <div *ngIf="selectedAnouncements.length > 2" class="d-flex flex-fill
+                               justify-content-center">
+                                <pagination-controls (pageChange)="pagination=$event;">
+                                </pagination-controls>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-5 mt-5" style="margin-left: -150px; ">
-                <div class="card-product-result-search">
-                    <google-map [center]="center" [zoom]="zoom" [width]="450" [options]="mapOptions" (mapDragend)="moveMap()"
-                        (zoomChanged)="changeZoom()" #map>
-                    </google-map>
-                </div>
-            </div>
-        
-    </div>
-   
-    
-    <div class="row hide">
-            <div class="col-12 my-5 py-5 justify-content-center">
-                <div *ngIf="response.length > 2" class="d-flex flex-fill
-                   justify-content-center">
-                    <pagination-controls (pageChange)="pagination=$event;">
-                    </pagination-controls>
-                </div>
+            <div class="col-lg-5 pt-5">
+                <google-map [center]="center" [zoom]="zoom" [width]="450" [options]="mapOptions"
+                    (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map>
+                </google-map>
             </div>
         </div>
-
-    
     </div>
-
-    
 </main>
-
-    <google-map [center]="center" class="maps" [zoom]="zoom" [width]="450" [height]="550" [options]="mapOptions" (mapDragend)="moveMap()"
-    (zoomChanged)="changeZoom()" #map>
-    <br/>
-    </google-map>
-
-    
+<section class="container maps">
+    <div class="row mt-5 pt-5">
+        <div class="col-12 mt-5">
+            <button [routerLink]="['/search']" type="button"
+                class="btn w-100 px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex bg-purple align-items-center border-radius-10">
+                <i class="bi bi-list thinks-small text-light pr-2"></i>
+                <span class="fw-700 font-size-12 thinks-small line-24 text-light">Ver&nbsp;Lista</span>
+            </button>
+        </div>
+        <div class="col-12 mt-4">
+            <google-map [center]="center" [zoom]="zoom" [width]="450" [height]="550" [options]="mapOptions"
+                (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map>
+                <br />
+            </google-map>
+        </div>
+    </div>
+</section>

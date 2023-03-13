@@ -1,6 +1,6 @@
 <main class="bg-graylight d-flex justify-content-center position-relative w-100 py-5 px-5p">
     <div class="padding-x w-100 max-w-1918 mb-5">
-        <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto">
+        <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto" (ngSubmit)="filtrar()">
             <div class="col-12 d-none-desk mt-5 pt-5" *ngIf="filtroResultDisplay.typeOfAdd">
                 <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
                     <span [routerLink]="['/']" id="clicavel" class="fw-700 font-size-16 line-19 color-black">Página Inicial /</span>
@@ -19,7 +19,7 @@
                     </b>
                 </p>
             </div>
-            <div class="col-4 col-body-products mt-5 pt-5 pl-0">
+            <div class="col-4 col-body-products d-none-desk mt-5 pt-5 pl-0">
                 <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
 
                     <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
@@ -139,7 +139,7 @@
                        w-100 h-51" mask="0000" />
                     </div>
                     <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
-                    line-24 border-radius-10 h-51 w-100" (click)="filtrar()" type="submit">
+                    line-24 border-radius-10 h-51 w-100" type="submit" [disabled]="form.invalid">
                         Encontrar
                     </button>
                 </div>
@@ -147,7 +147,7 @@
                     <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
                         exclusivos
                     </p>
-                    <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }"
+                    <swiper class="h-350" [slidesPerView]="1" [pagination]="{ clickable: true }"
                         [scrollbar]="true">
                         <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
                             <div class="bg-img-property w-100 py-2 px-3" (click)="announcementSelected(item._id)">
@@ -233,10 +233,10 @@
                     </p>
                 </div>
                 <div class="col-12 px-0 space-see-maps-area-search">
-                    <a [routerLink]="['/search-map']" class="btn-ver-no-mapa py-4">
+                    <button type="button" class="btn-ver-no-mapa py-4" (click)="redirectToMap()" [disabled]="messageNotSearch">
                         <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
                         <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
-                    </a>
+                    </button>
                     <div class="btn-ver-no-filter py-4 px-2 d-block-desk btn-filter-mobile"
                         [class]="filterbtn ? 'd-none':'d-block'" (click)="openFilter(content)">
                         <img src="../../../assets/icon/filter.png" height="23" class="mx-3" />
