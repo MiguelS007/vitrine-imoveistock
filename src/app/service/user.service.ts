@@ -18,6 +18,8 @@ export class UserService extends BaseService {
     termsOrPolitic?: string ;
     termsOrPoliticSignUp?: string ;
 
+    modalRegisterForm: UserRegisterRequestDto;
+
     constructor(
         private httpClient: HttpClient,
     ) {

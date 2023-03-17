@@ -41,16 +41,46 @@ export class ModalSignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.userService.modalRegisterForm){
+      this.form.patchValue({
+        phone: this.userService.modalRegisterForm.phone,
+        email: this.userService.modalRegisterForm.email,
+        cpf: this.userService.modalRegisterForm.cpf,
+        name: this.userService.modalRegisterForm.name,
+        addressZipCode: this.userService.modalRegisterForm.addressZipCode,
+      })
+    }
 
   }
 
   exit() {
     this.modalService.dismissAll()
+    this.userService.modalRegisterForm = null;
   }
 
   openTermsModal(value: string) {
+
     this.userService.termsOrPoliticSignUp = value;
-    this.modalService.open(TermsSignupComponent, { size: "lg" })
+   this.userService.modalRegisterForm = {
+      phone: this.form.controls['phone'].value,
+      email: this.form.controls['email'].value,
+      cpf: this.form.controls['cpf'].value,
+      name: this.form.controls['name'].value,
+      profilesIds: [ProfileClientEnum.indicacao, ProfileClientEnum.proprietario],
+      addressZipCode: this.form.controls['addressZipCode'].value
+    }
+    const modalRef = this.modalService.open(TermsSignupComponent, { size: "lg" })
+    modalRef.result.then(data => {
+    }, error => {
+      this.form.patchValue({
+        phone: this.userService.modalRegisterForm.phone,
+        email: this.userService.modalRegisterForm.email,
+        cpf: this.userService.modalRegisterForm.cpf,
+        name: this.userService.modalRegisterForm.name,
+        addressZipCode: this.userService.modalRegisterForm.addressZipCode,
+      })
+
+    });
   }
 
   confirm() {
@@ -72,6 +102,7 @@ export class ModalSignupComponent implements OnInit {
     if (this.form.controls['termsAndPolicy'].value === true) {
       this.userService.register(this.request).subscribe(
         success => {
+          this.userService.modalRegisterForm = null;
           this.toastrService.success('Cadastrado com sucesso!', '', { progressBar: true });
           this.modalService.dismissAll();
           this.modalService.open(ModalTelComponent, { centered: true })
