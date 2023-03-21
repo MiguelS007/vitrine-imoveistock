@@ -19,6 +19,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
+
 export class SearchPageComponent implements OnInit {
 
   form: FormGroup;
@@ -568,22 +569,6 @@ export class SearchPageComponent implements OnInit {
     text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
     return text.toLocaleLowerCase();
   }
-
-  // getEstados(value) {
-  //   let valor = value.target.value;
-  //   this.listAllCity = [];
-  //   this.stateSelected = valor;
-  //   for (let i = 0; i < estados.estados.length; i++) {
-  //     if (valor === estados.estados[i].nome) {
-  //       for (let x = 0; x < estados.estados[i].cidades.length; x++) {
-  //         this.listAllCity.push({ name: estados.estados[i].cidades[x] })
-  //         this.stateSelected = estados.estados[i].nome
-  //       }
-  //     }
-  //   }
-  // }
-
-
 
   sortPriceList(value: string) {
     this.listOfPrices = this.filterResult;
