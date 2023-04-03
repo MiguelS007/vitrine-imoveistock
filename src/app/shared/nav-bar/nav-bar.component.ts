@@ -129,6 +129,20 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     }
   }
 
+  openIndication() {
+    if (this.user) {
+      let teste = localStorage.getItem('user')
+      
+      
+      window.open(`http://localhost:4201/${teste}`, '_blank')
+
+      console.log(`http://localhost:4201/${teste}`, '_blank')
+
+    } else {
+      window.open('http://localhost:4201', '_blank')
+    }
+  }
+
   changePage(value) {
     if (value === 'home') {
       this.home = true;
