@@ -131,15 +131,33 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   openIndication() {
     if (this.user) {
-      let teste = localStorage.getItem('user')
-      
-      
-      window.open(`http://localhost:4201/${teste}`, '_blank')
-
-      console.log(`http://localhost:4201/${teste}`, '_blank')
-
+      window.open(`https://imoveistock-kjeth28zd-tgt.vercel.app/logged/home`, '_blank')
     } else {
-      window.open('http://localhost:4201', '_blank')
+      window.open('https://indike.imoveistock.com.br/', '_blank')
+    }
+  }
+
+  openOwner() {
+    if (this.user) {
+      window.open(`https://imoveistock-kjeth28zd-tgt.vercel.app/logged/owner-registration`, '_blank')
+    } else {
+      window.open('https://proprietarios.imoveistock.com.br/', '_blank')
+    }
+  }
+
+  openRealEstate() {
+    if (this.user) {
+      window.open(`https://imoveistock-kjeth28zd-tgt.vercel.app/logged/home`, '_blank')
+    } else {
+      window.open('https://imobiliarias.imoveistock.com.br/', '_blank')
+    }
+  }
+
+  openBrokers() {
+    if (this.user) {
+      window.open(`https://imoveistock-kjeth28zd-tgt.vercel.app/logged/home`, '_blank')
+    } else {
+      window.open('https://imobiliarias.imoveistock.com.br/', '_blank')
     }
   }
 
@@ -205,7 +223,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   }
 
-  goDeashboard() {
+  goDashboard() {
     this.router.navigate(['logged/visits']);
     this.home = false;
     this.about = false;
