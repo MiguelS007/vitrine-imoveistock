@@ -117,6 +117,20 @@
                         </div>
                     </div>
                     <div class="dropdown">
+                        <input type="text" formControlName="typeSuites" [value]="selectSuites"
+                            [placeholder]="selectSuites"
+                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+                            role="button" id="resultSuites" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" readonly>
+                        <div class="dropdown-menu" aria-labelledby="resultSuites">
+                            <a class="dropdown-item" (click)="searchBySuites('1')">1+</a>
+                            <a class="dropdown-item" (click)="searchBySuites('2')">2+</a>
+                            <a class="dropdown-item" (click)="searchBySuites('3')">3+</a>
+                            <a class="dropdown-item" (click)="searchBySuites('4')">4+</a>
+                            <a class="dropdown-item" (click)="searchBySuites('5')">5+</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
                         <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms"
                             [placeholder]="selectBathrooms"
                             class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"

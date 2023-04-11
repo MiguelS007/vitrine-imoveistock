@@ -61,6 +61,7 @@ export class SearchPageComponent implements OnInit {
   selectTypeAd = 'Selecione';
   selectBathrooms = 'Banheiros';
   selectBadRooms = 'Dormitórios';
+  selectSuites = 'Suítes';
   selectVacancies = 'Vagas';
   valuePrices: 0;
 
@@ -156,6 +157,7 @@ export class SearchPageComponent implements OnInit {
       typeMinPrice: [''],
       typeBathRoom: [''],
       typeBadrooms: [''],
+      typeSuites: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
@@ -172,6 +174,7 @@ export class SearchPageComponent implements OnInit {
       typeMinPrice: [''],
       typeBathRoom: [''],
       typeBadrooms: [''],
+      typeSuites: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
@@ -196,7 +199,7 @@ export class SearchPageComponent implements OnInit {
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
 
     let filtro: any = localStorage.getItem('filtro');
-    
+
     if (filtro !== null) {
 
       filtro = JSON.parse(filtro);
@@ -330,7 +333,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   onItemSelect(item: any) {}
-  
+
   onSelectAll(items: any) {}
 
   selectEvent(item) {
@@ -445,6 +448,15 @@ export class SearchPageComponent implements OnInit {
       this.selectBadRooms = '+1 Quarto'
     }else if(!!item){
       this.selectBadRooms = `+${item} Quartos`
+    }
+  }
+
+  searchBySuites(item) {
+    // SELECT SUITES
+    if(item === '1'){
+      this.selectSuites = '+1 Suíte'
+    }else if(!!item){
+      this.selectSuites = `+${item} Suítes`
     }
   }
   searchByBathRoom(item) {
