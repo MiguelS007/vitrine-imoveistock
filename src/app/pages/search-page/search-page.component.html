@@ -3,7 +3,8 @@
         <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto" (ngSubmit)="filtrar()">
             <div class="col-12 d-none-desk mt-5 pt-5" *ngIf="filtroResultDisplay.typeOfAdd">
                 <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
-                    <span [routerLink]="['/']" id="clicavel" class="fw-700 font-size-16 line-19 color-black">Página Inicial /</span>
+                    <span [routerLink]="['/']" id="clicavel" class="fw-700 font-size-16 line-19 color-black">Página
+                        Inicial /</span>
                     <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
 
                 </p>
@@ -12,14 +13,14 @@
                         <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
                         <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
                         <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
-                        <span *ngIf="filtroResultDisplay.ufAddress"> {{stateSelected}},</span>
+                        <span *ngIf="filtroResultDisplay.ufAddress"> {{filtroResultDisplay.ufAddress}},</span>
                         <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
                         <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos,</span>
                         <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
                     </b>
                 </p>
             </div>
-            <div class="col-4 col-body-products mt-5 pt-5 pl-0">
+            <div class="col-4 col-body-products d-none-desk mt-5 pt-5 pl-0">
                 <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
 
                     <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
@@ -38,7 +39,7 @@
                             <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
                         </div>
                     </div>
-                    <div class="dropdown px-0 mb-3 ">
+                    <!-- <div class="dropdown px-0 mb-3 ">
                         <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                             <select formControlName="typePropertyState" (change)="getEstados($event)"
                                 class="w-100 border text-left select-property border-radius-10 mt-3  h-51 bg-light fw-400 font-size-14 line-20 color-black"
@@ -64,6 +65,22 @@
                             <div [innerHTML]="notFound"></div>
                         </ng-template>
 
+                    </div> -->
+
+                    <div class="dropdown px-0 my-4 ">
+                        <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listEveryCity" [isLoading]="listEveryCity.length == 0"
+                            [searchKeyword]="'render'" placeholder="Escolha uma cidade" [minQueryLength]="2"
+                            (selected)='selectEvent($event)' [itemTemplate]="itemcityTemplate"
+                            [notFoundTemplate]="notFoundTemplate">
+                        </ng-autocomplete>
+
+                        <ng-template #itemcityTemplate let-item>
+                            <a [innerHTML]="item.cidade+' , '+item.estado"></a>
+                        </ng-template>
+
+                        <ng-template #notFoundTemplate let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                        </ng-template>
                     </div>
 
                     <div class="row mt-4 px-0">
@@ -147,8 +164,7 @@
                     <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
                         exclusivos
                     </p>
-                    <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }"
-                        [scrollbar]="true">
+                    <swiper class="h-350" [slidesPerView]="1" [pagination]="{ clickable: true }" [scrollbar]="true">
                         <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
                             <div class="bg-img-property w-100 py-2 px-3" (click)="announcementSelected(item._id)">
                                 <img *ngIf="item.mainPhoto" [src]="item.mainPhoto" class="img-exclusivity-space-search">
@@ -224,7 +240,7 @@
                             <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
                             <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
                             <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
-                            <span *ngIf="filtroResultDisplay.ufAddress"> {{stateSelected}},</span>
+                            <span *ngIf="filtroResultDisplay.ufAddress"> {{filtroResultDisplay.ufAddress}},</span>
                             <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
                             <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
                                 Quartos,</span>
@@ -233,7 +249,8 @@
                     </p>
                 </div>
                 <div class="col-12 px-0 space-see-maps-area-search">
-                    <button type="button" class="btn-ver-no-mapa py-4" (click)="redirectToMap()" [disabled]="messageNotSearch">
+                    <button type="button" class="btn-ver-no-mapa py-4" (click)="redirectToMap()"
+                        [disabled]="messageNotSearch">
                         <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
                         <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
                     </button>
@@ -272,7 +289,7 @@
                         <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
                         <p class="text-center mb-0">explore outros filtros e confira os imoveis abaixo que podem te
                             atender no momento</p>
-                        <span class="text-center">:(</span>
+                        <span class="text-center">{{':('}}</span>
                     </div>
                     <div class="col-lg-6 px-3 col-cards-products" *ngFor="let item of filterResult | paginate: {
                     itemsPerPage: 6, currentPage: paginationProduct }; let
@@ -336,7 +353,7 @@
                                 align-items-center justify-content-left">
                                         <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
                                         <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                   color-black">{{item.vacancyNumber}} Vagas</p>
+                                   color-black">{{item.parkingSpaces}} Vagas</p>
                                     </div>
                                     <div class="col justify-content-end px-0 d-flex
                                 align-items-center justify-content-left">
@@ -423,7 +440,23 @@
             </div>
         </div>
 
-        <div class="dropdown px-0 mb-3 ">
+        <div class="dropdown px-0 my-4 ">
+            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listEveryCity" [isLoading]="listEveryCity.length == 0"
+                [searchKeyword]="'render'" placeholder="Escolha uma cidade" [minQueryLength]="2"
+                (selected)='selectEvent($event)' [itemTemplate]="itemModalTemplate"
+                [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+
+            <ng-template #itemModalTemplate let-item>
+                <a [innerHTML]="item.cidade+' , '+item.estado"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+            </ng-template>
+        </div>
+
+        <!-- <div class="dropdown px-0 mb-3 ">
             <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                 <select formControlName="typePropertyState" (change)="getEstados($event)"
                     class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-51 bg-light fw-400 font-size-14 line-20 color-black"
@@ -448,7 +481,7 @@
                 <div [innerHTML]="notFound"></div>
             </ng-template>
 
-        </div>
+        </div> -->
         <div class="row mt-4 px-0">
             <div class="col-12">
                 <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor</p>

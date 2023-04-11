@@ -231,7 +231,7 @@
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Vagas:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.vacancyNumber ||
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.parkingSpaces ||
                       '-'}}</td>
                   </tr>
                 </tbody>
@@ -606,7 +606,7 @@
             </div>
 
             <img *ngIf="arrow2 && mapImgLink" [src]="mapImgLink" style="width: 100%;">
-            
+
           </div>
           <div id="previewplant" class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
@@ -617,50 +617,50 @@
                 style="cursor: pointer;" (click)="openarrow(3)">
             </div>
             <div *ngIf="arrow3" class="w-100 animate__animated">
-              <div class="w-100 my-4 d-flex block-important
-                    border border-radius-10
-                    justify-content-between p-4">
-                <div class="w-auto d-inline-block">
-                  <h3 class="fw-400 px-4 my-2 font-size-18
-                          line-24 color-black ">Primeiro piso</h3>
-                </div>
-                <div class="w-auto d-inline-block">
-                  <h3 class="fw-400 px-4 my-2 font-size-18
-                          line-24 color-black d-inline-block">Tamanho:
-                    267 m²
-                  </h3>
-                  <h3 class="fw-400 px-4 my-2 font-size-18
-                          line-24 color-black d-inline-block">Quartos:
-                    87 m²
-                  </h3>
-                  <h3 class="fw-400 px-4 my-2 font-size-18
-                          line-24 color-black d-inline-block">Banheiros:
-                    34 m²
-                  </h3>
-                  <h3 *ngIf="response.typeOfAd === 'sale'" class="fw-400 px-4 my-2 font-size-18
-                          line-24 color-black d-inline-block">Preço: {{response.leaseValue | currency: 'R$ ' || '-'}}
-                  </h3>
-                  <h3 *ngIf="response.typeOfAd === 'rent'" class="fw-400 px-4 my-2 font-size-18
-                          line-24 color-black d-inline-block">Preço: {{response.saleValue | currency: 'R$ ' || '-'}}
-                  </h3>
-                </div>
-              </div>
+<!--              <div class="w-100 my-4 d-flex block-important-->
+<!--                    border border-radius-10-->
+<!--                    justify-content-between p-4">-->
+<!--                <div class="w-auto d-inline-block">-->
+<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+<!--                          line-24 color-black ">Primeiro piso</h3>-->
+<!--                </div>-->
+<!--                <div class="w-auto d-inline-block">-->
+<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+<!--                          line-24 color-black d-inline-block">Tamanho:-->
+<!--                    267 m²-->
+<!--                  </h3>-->
+<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+<!--                          line-24 color-black d-inline-block">Quartos:-->
+<!--                    87 m²-->
+<!--                  </h3>-->
+<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+<!--                          line-24 color-black d-inline-block">Banheiros:-->
+<!--                    34 m²-->
+<!--                  </h3>-->
+<!--                  <h3 *ngIf="response.typeOfAd === 'sale'" class="fw-400 px-4 my-2 font-size-18-->
+<!--                          line-24 color-black d-inline-block">Preço: {{response.leaseValue | currency: 'R$ ' || '-'}}-->
+<!--                  </h3>-->
+<!--                  <h3 *ngIf="response.typeOfAd === 'rent'" class="fw-400 px-4 my-2 font-size-18-->
+<!--                          line-24 color-black d-inline-block">Preço: {{response.saleValue | currency: 'R$ ' || '-'}}-->
+<!--                  </h3>-->
+<!--                </div>-->
+<!--              </div>-->
               <img src="../../../assets/img/plant.png" class="w-100 p-4" />
-              <p class="fw-400 font-size-14 line-20
-                    color-black w-100 text-center py-5">
-                Plan description. Lorem ipsum dolor sit
-                amet, consectetuer adipiscing elit, sed diam
-                nonummy nibh
-                euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad minim
-                veniam, quis
-                nostrud exerci tation ullamcorper suscipit
-                lobortis nisl ut aliquip ex ea commodo
-                consequat.
-              </p>
+<!--              <p class="fw-400 font-size-14 line-20-->
+<!--                    color-black w-100 text-center py-5">-->
+<!--                Plan description. Lorem ipsum dolor sit-->
+<!--                amet, consectetuer adipiscing elit, sed diam-->
+<!--                nonummy nibh-->
+<!--                euismod tincidunt ut laoreet dolore magna-->
+<!--                aliquam erat volutpat. Ut wisi enim ad minim-->
+<!--                veniam, quis-->
+<!--                nostrud exerci tation ullamcorper suscipit-->
+<!--                lobortis nisl ut aliquip ex ea commodo-->
+<!--                consequat.-->
+<!--              </p>-->
             </div>
           </div>
-          <div class="w-100 mt-4 border-radius-10 bg-white">
+          <div class="w-100 my-4 border-radius-10 bg-white">
             <div class="w-100 px-5 space-segment pt-5 mb-4
                     d-flex align-items-center
                     border-bottom-gray">

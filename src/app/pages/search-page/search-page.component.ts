@@ -19,6 +19,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
+
 export class SearchPageComponent implements OnInit {
 
   form: FormGroup;
@@ -89,10 +90,40 @@ export class SearchPageComponent implements OnInit {
 
   keyword = 'name'
   getSelectedCity: string;
-  estados: any;
+
+  estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
+  listEveryCity: { cidade: string; estado: string , render:string}[] = [];
+
   listOfPrices: any = [];
 
-  dropdownList: any = [];
+  dropdownList = [
+    { item_id: 'apartamento', item_text: 'Apartamento' },
+    { item_id: 'casadecondominio', item_text: 'Casa de Condominio' },
+    { item_id: 'casadevila', item_text: 'Casa de vila' },
+    { item_id: 'studio', item_text: 'Studio' },
+    { item_id: 'kitnet', item_text: 'Kitnet' },
+    { item_id: 'cobertura', item_text: 'Cobertura' },
+    { item_id: 'flat', item_text: 'Flat' },
+    { item_id: 'loft', item_text: 'Loft' },
+    { item_id: 'terreno', item_text: 'Terreno' },
+    { item_id: 'comercial', item_text: 'Comercial' },
+    { item_id: 'chacara', item_text: 'Chácara' },
+    { item_id: 'casacomercial', item_text: 'Casa comercial' },
+    { item_id: 'garagem', item_text: 'Garagem' },
+    { item_id: 'pontocomercial', item_text: 'Ponto comercial' },
+    { item_id: 'conjuntocomercial', item_text: 'Conjunto comercial' },
+    { item_id: 'loja', item_text: 'Loja' },
+    { item_id: 'salao', item_text: 'Salão' },
+    { item_id: 'galpao', item_text: 'Galpão' },
+    { item_id: 'deposito', item_text: 'Depósito' },
+    { item_id: 'armazem', item_text: 'Armazem' },
+    { item_id: 'hotel', item_text: 'Hotel' },
+    { item_id: 'motel', item_text: 'Motel' },
+    { item_id: 'pousada', item_text: 'Pousada' },
+    { item_id: 'lajecorporativa', item_text: 'Laje Corporativa' },
+    { item_id: 'prediointeiro', item_text: 'Predio Inteiro' },
+  ];
+
   selectedItems: any = [];
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
@@ -153,36 +184,43 @@ export class SearchPageComponent implements OnInit {
   ngOnInit(): void {
     this.ngxSpinnerService.show();
 
-    if (localStorage.getItem('filtro') !== null) {
+    for (let i = 0; i < this.estados.estados.length; i++) {
+      for (let j = 0; j < this.estados.estados[i].cidades.length; j++) {
+        this.listEveryCity.push({
+          cidade: this.estados.estados[i].cidades[j],
+          estado: this.estados.estados[i].sigla,
+          render: this.estados.estados[i].cidades[j] + ' , ' + this.estados.estados[i].sigla
+        });
+      }
+    }
+    this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
 
-      let filtro: any = localStorage.getItem('filtro');
+    let filtro: any = localStorage.getItem('filtro');
+    
+    if (filtro !== null) {
 
       filtro = JSON.parse(filtro);
 
       this.searchByTypeAd(filtro.typeOfAdd);
 
       this.citySelected = filtro.cityAddress;
+      this.getSelectedCity = filtro.cityAddress;
 
-      for (let i = 0; i < estados.estados.length; i++) {
-        if (filtro.ufAddress === estados.estados[i].sigla) {
-          for (let x = 0; x < estados.estados[i].cidades.length; x++) {
-            this.stateSelected = estados.estados[i].nome
-          }
-        }
-      }
+      if(!!filtro.ufAddress) this.stateSelected = filtro.ufAddress;
 
       this.form.patchValue({
         typeStatus: filtro.typeOfAdd,
-        typePropertyCity: filtro.cityAddress,
+        typePropertyCity: filtro.cityAddress+' , '+this.stateSelected,
+        typePropertyState: filtro.ufAddress,
         typeMaxPrice: filtro.finalValue,
       });
 
-      for (let i = 0; i < filtro.propertyTypeList.length; i++) {
-        this.selectedItems.push(filtro.propertyTypeList[i])
-      }
+      if(filtro.propertyTypeList.length > 0)
+        this.selectedItems = [...filtro.propertyTypeList]
 
       this.formModal.patchValue({
-        typePropertyCity: filtro.cityAddress,
+        typePropertyCity: filtro.cityAddress+' , '+this.stateSelected,
+        typePropertyState: filtro.ufAddress,
         typeMaxPrice: filtro.finalValue,
       });
 
@@ -211,35 +249,6 @@ export class SearchPageComponent implements OnInit {
         typeOfAdd: null,
       }
     }
-
-    this.dropdownList = [
-      { item_id: 'apartamento', item_text: 'Apartamento' },
-      { item_id: 'casadecondominio', item_text: 'Casa de Condominio' },
-      { item_id: 'casadevila', item_text: 'Casa de vila' },
-      { item_id: 'studio', item_text: 'Studio' },
-      { item_id: 'kitnet', item_text: 'Kitnet' },
-      { item_id: 'cobertura', item_text: 'Cobertura' },
-      { item_id: 'flat', item_text: 'Flat' },
-      { item_id: 'loft', item_text: 'Loft' },
-      { item_id: 'terreno', item_text: 'Terreno' },
-      { item_id: 'comercial', item_text: 'Comercial' },
-      { item_id: 'chacara', item_text: 'Chácara' },
-      { item_id: 'casacomercial', item_text: 'Casa comercial' },
-      { item_id: 'garagem', item_text: 'Garagem' },
-      { item_id: 'pontocomercial', item_text: 'Ponto comercial' },
-      { item_id: 'conjuntocomercial', item_text: 'Conjunto comercial' },
-      { item_id: 'loja', item_text: 'Loja' },
-      { item_id: 'salao', item_text: 'Salão' },
-      { item_id: 'galpao', item_text: 'Galpão' },
-      { item_id: 'deposito', item_text: 'Depósito' },
-      { item_id: 'armazem', item_text: 'Armazem' },
-      { item_id: 'hotel', item_text: 'Hotel' },
-      { item_id: 'motel', item_text: 'Motel' },
-      { item_id: 'pousada', item_text: 'Pousada' },
-      { item_id: 'lajecorporativa', item_text: 'Laje Corporativa' },
-      { item_id: 'prediointeiro', item_text: 'Predio Inteiro' },
-    ];
-
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
@@ -318,20 +327,19 @@ export class SearchPageComponent implements OnInit {
         this.propertyproducts = data;
       }
     })
-
-    console.log('listAllCity', this.listAllCity)
-
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
+  onItemSelect(item: any) {}
+  
+  onSelectAll(items: any) {}
 
   selectEvent(item) {
-    this.getSelectedCity = item.name;
+    this.getSelectedCity = item.cidade;
+    this.stateSelected = item.estado;
+    this.form.patchValue({
+      typePropertyCity: item.render,
+      typePropertyState: item.estado,
+    });
   }
   onChangeSearch(search: string) {
   }
@@ -433,44 +441,26 @@ export class SearchPageComponent implements OnInit {
 
   searchByBadRoom(item) {
     // SELECT BADROOMS
-    if (item === '1') {
+    if(item === '1'){
       this.selectBadRooms = '+1 Quarto'
-    } else if (item === '2') {
-      this.selectBadRooms = '+2  Quartos'
-    } else if (item === '3') {
-      this.selectBadRooms = '+3  Quartos'
-    } else if (item === '4') {
-      this.selectBadRooms = '+4  Quartos'
-    } else if (item === '5') {
-      this.selectBadRooms = '+5  Quartos'
+    }else if(!!item){
+      this.selectBadRooms = `+${item} Quartos`
     }
   }
   searchByBathRoom(item) {
     // SELECT BATHROOMS
-    if (item === '1') {
-      this.selectBathrooms = '+1  Banheiro'
-    } else if (item === '2') {
-      this.selectBathrooms = '+2  Banheiros'
-    } else if (item === '3') {
-      this.selectBathrooms = '+3  Banheiros'
-    } else if (item === '4') {
-      this.selectBathrooms = '+4  Banheiros'
-    } else if (item === '5') {
-      this.selectBathrooms = '+5  Banheiros'
+    if(item === '1'){
+      this.selectBathrooms = '+1 Banheiro'
+    }else if(!!item){
+      this.selectBathrooms = `+${item} Banheiros`
     }
   }
   searchByVacancies(item) {
     // SELECT VACANCES
-    if (item === '1') {
-      this.selectVacancies = '+1  Vagas'
-    } else if (item === '2') {
-      this.selectVacancies = '+2  Vagas'
-    } else if (item === '3') {
-      this.selectVacancies = '+3  Vagas'
-    } else if (item === '4') {
-      this.selectVacancies = '+4  Vagas'
-    } else if (item === '5') {
-      this.selectVacancies = '+5  Vagas'
+    if(item === '1'){
+      this.selectVacancies = '+1 Vaga'
+    }else if(!!item){
+      this.selectVacancies = `+${item} Vagas`
     }
   }
 
@@ -484,11 +474,9 @@ export class SearchPageComponent implements OnInit {
 
 
   filtrar() {
+    this.form.controls['typePropertyState'].setValue(this.stateSelected)
 
     if (this.stateSelected === 'Escolha o Estado') this.form.controls['typePropertyState'].setValue('')
-    if (this.stateSelected === 'Escolha o Estado') this.formModal.controls['typePropertyState'].setValue('')
-    if (this.stateSelected === 'Acre') { this.form.controls['typePropertyState'].setValue('AC') } else if (this.stateSelected === 'Alagoas') { this.form.controls['typePropertyState'].setValue('AL') } else if (this.stateSelected === 'Amapá') { this.form.controls['typePropertyState'].setValue('AP') } else if (this.stateSelected === 'Amazonas') { this.form.controls['typePropertyState'].setValue('AM') } else if (this.stateSelected === 'Bahia') { this.form.controls['typePropertyState'].setValue('BA') } else if (this.stateSelected === 'Ceara') { this.form.controls['typePropertyState'].setValue('CE') } else if (this.stateSelected === 'Distrito Federal') { this.form.controls['typePropertyState'].setValue('DF') } else if (this.stateSelected === 'Espírito Santo') { this.form.controls['typePropertyState'].setValue('ES') } else if (this.stateSelected === 'Goiás') { this.form.controls['typePropertyState'].setValue('GO') } else if (this.stateSelected === 'Maranhão') { this.form.controls['typePropertyState'].setValue('MA') } else if (this.stateSelected === 'Mato Grosso') { this.form.controls['typePropertyState'].setValue('MT') } else if (this.stateSelected === 'Mato Grosso do Sul') { this.form.controls['typePropertyState'].setValue('MS') } else if (this.stateSelected === 'Minas Gerais') { this.form.controls['typePropertyState'].setValue('MG') } else if (this.stateSelected === 'Pará') { this.form.controls['typePropertyState'].setValue('PA') } else if (this.stateSelected === 'Paraíba') { this.form.controls['typePropertyState'].setValue('PB') } else if (this.stateSelected === 'Paraná') { this.form.controls['typePropertyState'].setValue('PR') } else if (this.stateSelected === 'Pernambuco') { this.form.controls['typePropertyState'].setValue('PE') } else if (this.stateSelected === 'Piauí') { this.form.controls['typePropertyState'].setValue('PI') } else if (this.stateSelected === 'Rio de Janeiro') { this.form.controls['typePropertyState'].setValue('RJ') } else if (this.stateSelected === 'Rio Grande do Norte') { this.form.controls['typePropertyState'].setValue('RN') } else if (this.stateSelected === 'Rio Grande do Sul') { this.form.controls['typePropertyState'].setValue('RS') } else if (this.stateSelected === 'Rondônia') { this.form.controls['typePropertyState'].setValue('RO') } else if (this.stateSelected === 'Roraima') { this.form.controls['typePropertyState'].setValue('RR') } else if (this.stateSelected === 'Santa Catarina') { this.form.controls['typePropertyState'].setValue('SC') } else if (this.stateSelected === 'São Paulo') { this.form.controls['typePropertyState'].setValue('SP') } else if (this.stateSelected === 'Sergipe') { this.form.controls['typePropertyState'].setValue('SE') } else if (this.stateSelected === 'Tocantins') { this.form.controls['typePropertyState'].setValue('TO') }
-    if (this.stateSelected === 'Acre') { this.formModal.controls['typePropertyState'].setValue('AC') } else if (this.stateSelected === 'Alagoas') { this.formModal.controls['typePropertyState'].setValue('AL') } else if (this.stateSelected === 'Amapá') { this.formModal.controls['typePropertyState'].setValue('AP') } else if (this.stateSelected === 'Amazonas') { this.formModal.controls['typePropertyState'].setValue('AM') } else if (this.stateSelected === 'Bahia') { this.formModal.controls['typePropertyState'].setValue('BA') } else if (this.stateSelected === 'Ceara') { this.formModal.controls['typePropertyState'].setValue('CE') } else if (this.stateSelected === 'Distrito Federal') { this.formModal.controls['typePropertyState'].setValue('DF') } else if (this.stateSelected === 'Espírito Santo') { this.formModal.controls['typePropertyState'].setValue('ES') } else if (this.stateSelected === 'Goiás') { this.formModal.controls['typePropertyState'].setValue('GO') } else if (this.stateSelected === 'Maranhão') { this.formModal.controls['typePropertyState'].setValue('MA') } else if (this.stateSelected === 'Mato Grosso') { this.formModal.controls['typePropertyState'].setValue('MT') } else if (this.stateSelected === 'Mato Grosso do Sul') { this.formModal.controls['typePropertyState'].setValue('MS') } else if (this.stateSelected === 'Minas Gerais') { this.formModal.controls['typePropertyState'].setValue('MG') } else if (this.stateSelected === 'Pará') { this.formModal.controls['typePropertyState'].setValue('PA') } else if (this.stateSelected === 'Paraíba') { this.formModal.controls['typePropertyState'].setValue('PB') } else if (this.stateSelected === 'Paraná') { this.formModal.controls['typePropertyState'].setValue('PR') } else if (this.stateSelected === 'Pernambuco') { this.formModal.controls['typePropertyState'].setValue('PE') } else if (this.stateSelected === 'Piauí') { this.formModal.controls['typePropertyState'].setValue('PI') } else if (this.stateSelected === 'Rio de Janeiro') { this.formModal.controls['typePropertyState'].setValue('RJ') } else if (this.stateSelected === 'Rio Grande do Norte') { this.formModal.controls['typePropertyState'].setValue('RN') } else if (this.stateSelected === 'Rio Grande do Sul') { this.formModal.controls['typePropertyState'].setValue('RS') } else if (this.stateSelected === 'Rondônia') { this.formModal.controls['typePropertyState'].setValue('RO') } else if (this.stateSelected === 'Roraima') { this.formModal.controls['typePropertyState'].setValue('RR') } else if (this.stateSelected === 'Santa Catarina') { this.formModal.controls['typePropertyState'].setValue('SC') } else if (this.stateSelected === 'São Paulo') { this.formModal.controls['typePropertyState'].setValue('SP') } else if (this.stateSelected === 'Sergipe') { this.formModal.controls['typePropertyState'].setValue('SE') } else if (this.stateSelected === 'Tocantins') { this.formModal.controls['typePropertyState'].setValue('TO') }
 
     let filter: any = {
       state: this.form.controls['typePropertyState'].value,
@@ -498,17 +486,11 @@ export class SearchPageComponent implements OnInit {
       styleProperty: this.removerAcento(this.stylePropertyTitle), // EDIFICIL, TERRENO
     };
 
-    let city = '';
-    if (filter.city !== undefined) {
-      city = filter.city;
-    }
+    let city = filter.city !== undefined? filter.city : '';
 
-    let propertyTypeList = [];
-
-
-    for (let i = 0; i < this.form.controls['propertyType'].value.length; i++) {
-      propertyTypeList.push(this.form.controls['propertyType'].value[i].item_id)
-    }
+    let propertyTypeList = this.form.controls['propertyType'].value?.map(
+      (item: any) => item.item_id
+    );
 
     if (this.selectTypeAd === 'Selecione') {
       this.selectFilterOfAd = 'sale'
@@ -526,11 +508,12 @@ export class SearchPageComponent implements OnInit {
       initialUsefulArea: this.form.controls['typefootagemin'].value || this.formModal.controls['typefootagemin'].value,
       parkingSpaces: this.form.controls['typevacancies'].value || this.formModal.controls['typevacancies'].value,
       yearOfConstruction: this.form.controls['typeconstruction'].value || this.formModal.controls['typeconstruction'].value,
-      propertyType: propertyTypeList.filter(item => item),
+      propertyType: !!propertyTypeList ? propertyTypeList : [],
       propertyTypeList: this.form.controls['propertyType'].value || this.formModal.controls['propertyType'].value,
       goal: ''
     }
 
+    console.log(request)
 
     this.announcementService.listFilter(request).subscribe({
       next: data => {
@@ -586,22 +569,6 @@ export class SearchPageComponent implements OnInit {
     text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
     return text.toLocaleLowerCase();
   }
-
-  getEstados(value) {
-    let valor = value.target.value;
-    this.listAllCity = [];
-    this.stateSelected = valor;
-    for (let i = 0; i < estados.estados.length; i++) {
-      if (valor === estados.estados[i].nome) {
-        for (let x = 0; x < estados.estados[i].cidades.length; x++) {
-          this.listAllCity.push({ name: estados.estados[i].cidades[x] })
-          this.stateSelected = estados.estados[i].nome
-        }
-      }
-    }
-  }
-
-
 
   sortPriceList(value: string) {
     this.listOfPrices = this.filterResult;

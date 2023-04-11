@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ProposalGetByIdResponseDto } from 'src/app/dtos/proposal-get-by-id-response.dto';
 import { ProposalRequestDto } from 'src/app/dtos/proposal-request-dto';
 import { DatamokService } from 'src/app/service/datamok.service';
 import { ProposalService } from 'src/app/service/proposal.service';
@@ -35,7 +36,7 @@ export class ExpressProposalComponent implements OnInit {
 
   response: AnnouncementGetResponseDto;
 
-  proposalResponse: ProposalGetResponseDto;
+  proposalResponse: ProposalGetByIdResponseDto;
 
   listLikes: AnnouncementGetResponseDto[] = [];
 
@@ -143,18 +144,33 @@ export class ExpressProposalComponent implements OnInit {
       }
     }
 
-    this.proposalService.list().subscribe({
-      next: data => {
-        if (data.length > 0) {
-          for (let i = 0; i < data.length; i++) {
-            if (data[i].announcement._id === this.response._id) {
-              this.sendRescheduling = true;
-              this.proposalResponse = data[i];
-            }
-          }
+
+
+    // this.proposalService.getByAnnouncement(this.response._id).subscribe({
+    //   next: data => {
+    //     if (data.length > 0) {
+    //       console.log(data[0], 'teste teste 6')
+    //       this.proposalResponse = data[0];
+
+    //       console.log(this.proposalResponse)
+    //       // for (let i = 0; i < data.length; i++) {
+    //       //   if (data[i].announcement._id === this.response._id) {
+    //       //     this.sendRescheduling = true;
+    //       //     this.proposalResponse = data[i];
+    //       //     console.log(this.proposalResponse, 'proposal response')
+    //       //   }
+    //       // }
+    //     }
+    //   }
+    // })
+
+    if(localStorage.getItem('counterProposalInProposal') !== null) {
+      this.proposalService.getById(localStorage.getItem('counterProposalInProposal')).subscribe({
+        next: data => {
+          this.proposalResponse = data;
         }
-      }
-    })
+      })
+    }
 
   }
 
@@ -332,6 +348,7 @@ export class ExpressProposalComponent implements OnInit {
       };
     });
   }
+
   removeItem(value: string) {
     if (value === 'open') {
       this.spaceCustomizeProposalChangesOptions = false
@@ -464,8 +481,8 @@ export class ExpressProposalComponent implements OnInit {
         saleAmount: this.toNumber(this.response.saleValue),
         suggestedSaleAmount: this.formCustomizeProposal.controls['suggestedSaleAmount'].value,
         saleAmountTotal: this.toNumber(this.formCustomizeProposal.controls['suggestedSaleAmount'].value) + this.valueProperty + this.valueVehicle + this.valueFinancing + this.valueInstallment,
-        saleCarAsPaymentAmount: this.valueProperty,
-        salePropertyAsPaymentAmount: this.valueVehicle,
+        saleCarAsPaymentAmount:  this.valueVehicle,
+        salePropertyAsPaymentAmount: this.valueProperty,
         saleDirectInstallmentAsPaymentAmount: this.valueInstallment,
         saleFinancingAsPaymentAmount: this.valueFinancing,
         changes: this.changesRequest,
@@ -494,7 +511,7 @@ export class ExpressProposalComponent implements OnInit {
         announcementId: this.response._id
       }
 
-      if (this.sendRescheduling) {
+      if (this.proposalResponse.counterProposal) {
         this.sendCounterProposal(this.request)
       } else {
         this.sendProposal(this.request)
@@ -517,7 +534,7 @@ export class ExpressProposalComponent implements OnInit {
   }
 
   sendCounterProposal(request) {
-    Object.assign(this.request, { parentProposalId: this.proposalResponse._id })
+    Object.assign(this.request, { parentProposalId: this.proposalResponse.counterProposal._id })
     this.proposalService.counterProposal(this.request).subscribe({
       next: data => {
         this.toastrService.success('Contra proposta enviada!', '', { progressBar: true });

@@ -129,6 +129,38 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     }
   }
 
+  openIndication() {
+    if (this.user) {
+      window.open(`https://imoveistock-kjeth28zd-tgt.vercel.app/logged/home`, '_blank')
+    } else {
+      window.open('https://indike.imoveistock.com.br/', '_blank')
+    }
+  }
+
+  openOwner() {
+    if (this.user) {
+      window.open(`https://imoveistock-kjeth28zd-tgt.vercel.app/logged/owner-registration`, '_blank')
+    } else {
+      window.open('https://proprietarios.imoveistock.com.br/', '_blank')
+    }
+  }
+
+  openRealEstate() {
+    if (this.user) {
+      window.open(`https://imoveistock-kjeth28zd-tgt.vercel.app/logged/home`, '_blank')
+    } else {
+      window.open('https://imobiliarias.imoveistock.com.br/', '_blank')
+    }
+  }
+
+  openBrokers() {
+    if (this.user) {
+      window.open(`https://imoveistock-kjeth28zd-tgt.vercel.app/logged/home`, '_blank')
+    } else {
+      window.open('https://imobiliarias.imoveistock.com.br/', '_blank')
+    }
+  }
+
   changePage(value) {
     if (value === 'home') {
       this.home = true;
@@ -191,7 +223,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   }
 
-  goDeashboard() {
+  goDashboard() {
     this.router.navigate(['logged/visits']);
     this.home = false;
     this.about = false;
