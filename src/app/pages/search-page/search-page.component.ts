@@ -125,7 +125,7 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'prediointeiro', item_text: 'Predio Inteiro' },
   ];
 
-  selectedItems: any = [];
+  selectedItems: any[] = [];
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: 'item_id',
@@ -235,6 +235,7 @@ export class SearchPageComponent implements OnInit {
         initialValue: filtro?.initialValue,
         finalValue: filtro?.finalValue,
         bedrooms: filtro?.bedrooms,
+        suites: filtro?.suites,
         propertyType: filtro?.propertyType,
         typeOfAdd: filtro?.typeOfAdd,
         bathrooms: filtro?.bathrooms,
@@ -484,6 +485,10 @@ export class SearchPageComponent implements OnInit {
     this.TypeProperty = value
   }
 
+  removeTag(index:number){
+    this.filtroResultDisplay.propertyTypeList.splice(index, 1);
+  }
+
 
   filtrar() {
     this.form.controls['typePropertyState'].setValue(this.stateSelected)
@@ -513,6 +518,7 @@ export class SearchPageComponent implements OnInit {
       cityAddress: city,
       ufAddress: this.form.controls['typePropertyState'].value || this.formModal.controls['typePropertyState'].value,
       bedrooms: this.form.controls['typeBadrooms'].value || this.formModal.controls['typeBadrooms'].value,
+      suites: this.form.controls['typeSuites'].value || this.formModal.controls['typeSuites'].value,
       bathrooms: this.form.controls['typeBathRoom'].value || this.formModal.controls['typeBathRoom'].value,
       initialValue: this.form.controls['typeMaxPrice'].value || this.formModal.controls['typeMaxPrice'].value,
       finalValue: this.form.controls['typeMinPrice'].value || this.formModal.controls['typeMinPrice'].value,
