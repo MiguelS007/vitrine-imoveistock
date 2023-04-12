@@ -490,6 +490,7 @@ export class SearchPageComponent implements OnInit {
 
   removeTag(index:number){
     this.filtroResultDisplay.propertyTypeList.splice(index, 1);
+    this.filtrar();
   }
 
 
@@ -533,8 +534,6 @@ export class SearchPageComponent implements OnInit {
       propertyTypeList: this.form.controls['propertyType'].value || this.formModal.controls['propertyType'].value,
       goal: ''
     }
-
-    console.log(request)
 
     this.announcementService.listFilter(request).subscribe({
       next: data => {
