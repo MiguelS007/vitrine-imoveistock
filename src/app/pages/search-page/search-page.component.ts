@@ -61,6 +61,7 @@ export class SearchPageComponent implements OnInit {
   selectTypeAd = 'Selecione';
   selectBathrooms = 'Banheiros';
   selectBadRooms = 'Dormitórios';
+  selectSuites = 'Suítes';
   selectVacancies = 'Vagas';
   valuePrices: 0;
 
@@ -98,6 +99,9 @@ export class SearchPageComponent implements OnInit {
 
   dropdownList = [
     { item_id: 'apartamento', item_text: 'Apartamento' },
+    { item_id: 'casa', item_text: 'Casa' },
+    { item_id: 'sobrado', item_text: 'Sobrado' },
+    { item_id: 'sobradoemcondominio', item_text: 'Sobrado em condomínio' },
     { item_id: 'casadecondominio', item_text: 'Casa de Condominio' },
     { item_id: 'casadevila', item_text: 'Casa de vila' },
     { item_id: 'studio', item_text: 'Studio' },
@@ -124,7 +128,7 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'prediointeiro', item_text: 'Predio Inteiro' },
   ];
 
-  selectedItems: any = [];
+  selectedItems: any[] = [];
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: 'item_id',
@@ -156,6 +160,7 @@ export class SearchPageComponent implements OnInit {
       typeMinPrice: [''],
       typeBathRoom: [''],
       typeBadrooms: [''],
+      typeSuites: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
@@ -172,6 +177,7 @@ export class SearchPageComponent implements OnInit {
       typeMinPrice: [''],
       typeBathRoom: [''],
       typeBadrooms: [''],
+      typeSuites: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
@@ -196,7 +202,7 @@ export class SearchPageComponent implements OnInit {
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
 
     let filtro: any = localStorage.getItem('filtro');
-    
+
     if (filtro !== null) {
 
       filtro = JSON.parse(filtro);
@@ -232,6 +238,7 @@ export class SearchPageComponent implements OnInit {
         initialValue: filtro?.initialValue,
         finalValue: filtro?.finalValue,
         bedrooms: filtro?.bedrooms,
+        suites: filtro?.suites,
         propertyType: filtro?.propertyType,
         typeOfAdd: filtro?.typeOfAdd,
         bathrooms: filtro?.bathrooms,
@@ -330,7 +337,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   onItemSelect(item: any) {}
-  
+
   onSelectAll(items: any) {}
 
   selectEvent(item) {
@@ -447,6 +454,15 @@ export class SearchPageComponent implements OnInit {
       this.selectBadRooms = `+${item} Quartos`
     }
   }
+
+  searchBySuites(item) {
+    // SELECT SUITES
+    if(item === '1'){
+      this.selectSuites = '+1 Suíte'
+    }else if(!!item){
+      this.selectSuites = `+${item} Suítes`
+    }
+  }
   searchByBathRoom(item) {
     // SELECT BATHROOMS
     if(item === '1'){
@@ -470,6 +486,10 @@ export class SearchPageComponent implements OnInit {
 
   filterTypeProperty(value) {
     this.TypeProperty = value
+  }
+
+  removeTag(index:number){
+    this.filtroResultDisplay.propertyTypeList.splice(index, 1);
   }
 
 
@@ -501,6 +521,7 @@ export class SearchPageComponent implements OnInit {
       cityAddress: city,
       ufAddress: this.form.controls['typePropertyState'].value || this.formModal.controls['typePropertyState'].value,
       bedrooms: this.form.controls['typeBadrooms'].value || this.formModal.controls['typeBadrooms'].value,
+      suites: this.form.controls['typeSuites'].value || this.formModal.controls['typeSuites'].value,
       bathrooms: this.form.controls['typeBathRoom'].value || this.formModal.controls['typeBathRoom'].value,
       initialValue: this.form.controls['typeMaxPrice'].value || this.formModal.controls['typeMaxPrice'].value,
       finalValue: this.form.controls['typeMinPrice'].value || this.formModal.controls['typeMinPrice'].value,

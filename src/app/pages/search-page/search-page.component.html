@@ -1,45 +1,51 @@
 <main class="bg-graylight d-flex justify-content-center position-relative w-100 py-5 px-5p">
-    <div class="padding-x w-100 max-w-1918 mb-5">
-        <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto" (ngSubmit)="filtrar()">
-            <div class="col-12 d-none-desk mt-5 pt-5" *ngIf="filtroResultDisplay.typeOfAdd">
-                <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
-                    <span [routerLink]="['/']" id="clicavel" class="fw-700 font-size-16 line-19 color-black">Página
-                        Inicial /</span>
-                    <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
+  <div class="padding-x w-100 max-w-1918 mb-5">
+    <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto" (ngSubmit)="filtrar()">
+      <div class="col-12 d-none-desk mt-5 pt-5" *ngIf="filtroResultDisplay.typeOfAdd">
+        <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
+          <span [routerLink]="['/']" id="clicavel" class="fw-700 font-size-16 line-19 color-black">Página
+            Inicial /</span>
+          <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
 
-                </p>
-                <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
-                    <b>
-                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
-                        <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
-                        <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
-                        <span *ngIf="filtroResultDisplay.ufAddress"> {{filtroResultDisplay.ufAddress}},</span>
-                        <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
-                        <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}} Quartos,</span>
-                        <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                    </b>
-                </p>
+        </p>
+        <p class="fw-700 font-size-24 line-40 color-black">Resultado da sua busca por
+          <span class="font-size-14 row d-flex justify-content-evenly">
+            <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar</span>
+            <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar</span>
+            <span class="result-filter"
+              *ngFor="let item of filtroResultDisplay.propertyTypeList | slice:0:5; let i = index">
+              <span *ngIf="i <=3">{{item.item_text}} <b><a class="cursor-pointer" (click)="removeTag(i)">X</a></b></span>
+              <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay.propertyTypeList.length - 4)}}</span>
+            </span>
+            <span class="result-filter" *ngIf="filtroResultDisplay.ufAddress && filtroResultDisplay.cityAddress">
+              {{filtroResultDisplay.cityAddress+", "+filtroResultDisplay.ufAddress}}</span>
+            <!-- <span class="result-filter" *ngIf="filtroResultDisplay.cityAddress">
+              {{filtroResultDisplay.cityAddress}}</span> -->
+            <span class="result-filter" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
+              Quartos<b><a class="cursor-pointer" (click)="filtroResultDisplay.bedrooms = 0">X</a></b></span>
+            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}}</span>
+          </span>
+        </p>
+      </div>
+      <div class="col-4 col-body-products d-none-desk mt-5 pt-5 pl-0">
+        <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
+
+          <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
+            formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
+            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
+
+          <div class="dropdown">
+            <a class="btn px-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+              role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{selectTypeAd}}
+            </a>
+            <div class="dropdown-menu w-100" aria-labelledby="resultSituation">
+              <a class="dropdown-item" (click)="searchByTypeAd('sale')">Comprar</a>
+              <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
             </div>
-            <div class="col-4 col-body-products d-none-desk mt-5 pt-5 pl-0">
-                <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
-
-                    <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
-                        formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
-                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                    </ng-multiselect-dropdown>
-
-                    <div class="dropdown">
-                        <a class="btn px-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
-                            role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            {{selectTypeAd}}
-                        </a>
-                        <div class="dropdown-menu w-100" aria-labelledby="resultSituation">
-                            <a class="dropdown-item" (click)="searchByTypeAd('sale')">Comprar</a>
-                            <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
-                        </div>
-                    </div>
-                    <!-- <div class="dropdown px-0 mb-3 ">
+          </div>
+          <!-- <div class="dropdown px-0 mb-3 ">
                         <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                             <select formControlName="typePropertyState" (change)="getEstados($event)"
                                 class="w-100 border text-left select-property border-radius-10 mt-3  h-51 bg-light fw-400 font-size-14 line-20 color-black"
@@ -67,396 +73,412 @@
 
                     </div> -->
 
-                    <div class="dropdown px-0 my-4 ">
-                        <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listEveryCity" [isLoading]="listEveryCity.length == 0"
-                            [searchKeyword]="'render'" placeholder="Escolha uma cidade" [minQueryLength]="2"
-                            (selected)='selectEvent($event)' [itemTemplate]="itemcityTemplate"
-                            [notFoundTemplate]="notFoundTemplate">
-                        </ng-autocomplete>
-
-                        <ng-template #itemcityTemplate let-item>
-                            <a [innerHTML]="item.cidade+' , '+item.estado"></a>
-                        </ng-template>
-
-                        <ng-template #notFoundTemplate let-notFound>
-                            <div [innerHTML]="notFound"></div>
-                        </ng-template>
-                    </div>
-
-                    <div class="row mt-4 px-0">
-                        <div class="col-12">
-                            <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor</p>
-                        </div>
-                        <div class="col-6">
-                            <label for="typeMinPrice">De</label>
-                            <input formControlName="typeMinPrice" type="text" currencyMask
-                                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
-                                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
-                                maxlength="15" />
-                        </div>
-                        <div class="col-6">
-                            <label for="typeMaxPrice">Até</label>
-                            <input formControlName="typeMaxPrice" type="text" currencyMask
-                                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
-                                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
-                                maxlength="20" />
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms"
-                            [placeholder]="selectBadRooms"
-                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
-                            role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" readonly>
-                        <div class="dropdown-menu" aria-labelledby="resultRooms">
-                            <a class="dropdown-item" (click)="searchByBadRoom('1')">1+</a>
-                            <a class="dropdown-item" (click)="searchByBadRoom('2')">2+</a>
-                            <a class="dropdown-item" (click)="searchByBadRoom('3')">3+</a>
-                            <a class="dropdown-item" (click)="searchByBadRoom('4')">4+</a>
-                            <a class="dropdown-item" (click)="searchByBadRoom('5')">5+</a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms"
-                            [placeholder]="selectBathrooms"
-                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
-                            role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" readonly>
-                        <div class="dropdown-menu" aria-labelledby="resultbathroom">
-                            <a class="dropdown-item" (click)="searchByBathRoom('1')">1+</a>
-                            <a class="dropdown-item" (click)="searchByBathRoom('2')">2+</a>
-                            <a class="dropdown-item" (click)="searchByBathRoom('3')">3+</a>
-                            <a class="dropdown-item" (click)="searchByBathRoom('4')">4+</a>
-                            <a class="dropdown-item" (click)="searchByBathRoom('5')">5+</a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <input type="text" formControlName="typevacancies" [value]="selectVacancies"
-                            [placeholder]="selectVacancies"
-                            class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
-                            role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" readonly>
-                        <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                            <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
-                            <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
-                            <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
-                            <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
-                            <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
-                        </div>
-                    </div>
-                    <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
-                    text-left font-size-16 line-20 pl-3 color-black w-100
-                    h-51" mask="0000" />
-                    <div class="w-100 d-flex align-items-center">
-                        <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
-                       mr-1 text-left font-size-16 line-20 pl-3 color-black
-                       w-100 h-51" mask="0000" />
-                        <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
-                       ml-1 text-left font-size-16 line-20 pl-3 color-black
-                       w-100 h-51" mask="0000" />
-                    </div>
-                    <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
-                    line-24 border-radius-10 h-51 w-100" type="submit" [disabled]="form.invalid">
-                        Encontrar
-                    </button>
-                </div>
-                <div class="w-100 mt-4 border-radius-10 bg-white p-4 space-exclusivos-desktop-search-page">
-                    <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
-                        exclusivos
-                    </p>
-                    <swiper class="h-350" [slidesPerView]="1" [pagination]="{ clickable: true }" [scrollbar]="true">
-                        <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
-                            <div class="bg-img-property w-100 py-2 px-3" (click)="announcementSelected(item._id)">
-                                <img *ngIf="item.mainPhoto" [src]="item.mainPhoto" class="img-exclusivity-space-search">
-                                <img *ngIf="!item.mainPhoto" src="../../../assets/img/img-announcement-default.jpg"
-                                    alt="" class="img-exclusivity-space-search">
-                                <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
-                                    <h4 class="bg-purple h-fit px-4 py-2 mb-0
-                             border-radius-5 fw-400 font-size-18 line-24
-                             text-light" *ngIf="item.typeOfAd === 'rent'">Locação</h4>
-                                    <h4 class="bg-purple h-fit px-4 py-2 mb-0
-                             border-radius-5 fw-400 font-size-18 line-24
-                             text-light" *ngIf="item.typeOfAd === 'sale'">Venda</h4>
-                                    <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
-                             border-radius-5 fw-400 font-size-18 line-24
-                             text-dark">Exclusivo</h4>
-                                </div>
-                                <div class="w-100 details-card-swiper d-grid h-50 pt-5
-                          align-items-end">
-                                    <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.leaseValue | currency: 'R$'}}
-                                        <span class="fw-400 font-size-14 line-20
-                                text-light">/ mês</span>
-                                    </p>
-                                    <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$'}}
-                                    </p>
-                                    <span class="fw-700 font-size-14 line-20
-                             text-light">{{item.description | slice: 0:28 }}</span>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </swiper>
-                </div>
-                <div *ngIf="recentlySeenList.length > 0" class="w-100 border-radius-10 my-4 bg-white p-4">
-                    <p class="fw-700 pb-4 font-size-20 line-24 color-black">Visualizados recentemente
-                    </p>
-                    <div *ngFor="let item of recentlySeenList | slice:0:3" class="row mb-4"
-                        (click)="announcementSelected(item._id)">
-                        <div class="col-3 col-img-types-property p-0">
-                            <img src="../../../assets/img/ap.png" class="border-radius-10 h-111 w-100" />
-                        </div>
-                        <div class="col-9 col-img-types-property">
-                            <p class="d-grid title-property-product mb-0 h-75">
-                                <span class="fw-700 font-size-18 line-24
-                          color-black">{{item.description}}</span>
-                                <span *ngIf="item.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24
-                          color-black">{{item.saleValue | currency: 'R$'}}</span>
-                                <span *ngIf="item.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24
-                          color-black">{{item.leaseValue | currency: 'R$'}}</span>
-                            </p>
-                            <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
-                                <span class="fw-400 font-size-14 line-20
-                          color-black">Quartos: {{item.bedrooms}}</span>
-                                <span class="fw-400 font-size-14 line-20
-                          color-black">Banheiros: {{item.bathrooms}}</span>
-                                <span class="fw-400 font-size-14 line-20
-                          color-black">Metragem: {{item.usefulArea}} m²</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8 col-body-products px-0 pt-5 mt-5">
-                <div class="col-12 d-block-desk d-none " *ngIf="filtroResultDisplay.typeOfAdd">
-                    <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
-                        <span [routerLink]="['/']" class="fw-700 font-size-16 line-19 color-black">Página Inicial
-                            /</span>
-                        <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
-
-                    </p>
-                    <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
-                        <b>
-                            <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
-                            <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
-                            <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
-                            <span *ngIf="filtroResultDisplay.ufAddress"> {{filtroResultDisplay.ufAddress}},</span>
-                            <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
-                            <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
-                                Quartos,</span>
-                            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-                        </b>
-                    </p>
-                </div>
-                <div class="col-12 px-0 space-see-maps-area-search">
-                    <button type="button" class="btn-ver-no-mapa py-4" (click)="redirectToMap()"
-                        [disabled]="messageNotSearch">
-                        <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
-                        <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
-                    </button>
-                    <div class="btn-ver-no-filter py-4 px-2 d-block-desk btn-filter-mobile"
-                        [class]="filterbtn ? 'd-none':'d-block'" (click)="openFilter(content)">
-                        <img src="../../../assets/icon/filter.png" height="23" class="mx-3" />
-                        <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Filtrar</span>
-                    </div>
-                    <div
-                        class="w-100 d-flex d-none-desk align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
-                        <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
-                            <span *ngIf="!messageNotSearch">{{filterResult?.length}}</span>
-                            <span *ngIf="messageNotSearch">0</span>
-                            <span class="px-1">Resultados</span>
-                        </p>
-                        <div class="d-flex align-items-center">
-                            <p class="fw-700 mb-0 font-size-14 line-20 color-black">Ordenar por:</p>
-                            <div class="dropdown">
-                                <button class="btn dropdown-orderby-custom dropdown-toggle" type="button"
-                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    {{orderBy}}
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" (click)="sortPriceList('Relevante')">Relevante</a>
-                                    <a class="dropdown-item" (click)="sortPriceList('major>minor')">Maior preço</a>
-                                    <a class="dropdown-item" (click)="sortPriceList('minor>major')">Menor preço</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row pr-0">
-                    <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch">
-                        <img src="../../../assets/img/not-search-announcement.svg" height="80">
-                        <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
-                        <p class="text-center mb-0">explore outros filtros e confira os imoveis abaixo que podem te
-                            atender no momento</p>
-                        <span class="text-center">{{':('}}</span>
-                    </div>
-                    <div class="col-lg-6 px-3 col-cards-products" *ngFor="let item of filterResult | paginate: {
-                    itemsPerPage: 6, currentPage: paginationProduct }; let
-                    i= index">
-                        <div
-                            class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
-                            <div class="border-radius-10 position-relative">
-                                <img *ngIf="!item.mainPhoto" (click)="announcementSelected(item._id)"
-                                    src="../../../assets/img/img-announcement-default.jpg"
-                                    class="img-search-announcement-main">
-                                <img *ngIf="item.mainPhoto" (click)="announcementSelected(item._id)"
-                                    [src]="item.mainPhoto" class="img-search-announcement-main">
-                                <div class="space-sale-or-rent-search-announcement">
-                                    <h4 *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
-                                border-radius-5 fw-400 font-size-14 line-15
-                                text-light">Venda</h4>
-                                    <h4 *ngIf="item.typeOfAd === 'rent'" class="bg-purple h-fit px-4 py-2 mb-0
-                                border-radius-5 fw-400 font-size-14 line-15
-                                text-light">Aluguel</h4>
-                                    <h4 *ngIf="item.exclusivity === true" class="bg-greenlight h-fit ml-2 px-3 py-2
-                                mb-0 border-radius-5 fw-400 font-size-14
-                                line-15 color-black">Exclusivo</h4>
-                                </div>
-                                <div class="space-value-announcement">
-                                    <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mb-0 font-size-22 h-fit line-32
-                                text-light">{{item.saleValue | currency: 'R$'}}</p>
-                                    <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mb-0 font-size-22 h-fit line-32
-                                text-light">{{item.leaseValue | currency: 'R$'}}</p>
-                                    <div (click)="likeHeart(item._id, item.liked)" class="h-fit heart-like
-                                bg-transparent-white cursor-pointer border-radius-10
-                                pt-2 pb-1">
-                                        <i [class]="item.liked ?
-                                   'bi-heart-fill':'bi-heart' " class="bi
-                                   font-size-16 text-light"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div (click)="announcementSelected(item._id)" class="col-12 px-0">
-                                <div class="w-100 mx-2 text-align-left pt-3">
-                                    <span class="fw-400 font-size-14 line-20
-                                color-black text-capitalize">{{item.propertyCharacteristics}}</span>
-                                    <p class="fw-700 my-2 font-size-16 line-20 mb-0
-                                color-black text-truncate" style="max-width: 90%;">{{item.description}}</p>
-                                    <p class="d-flex align-items-center text-left" style="height: 40px;">
-                                        <i class="bi font-size-20 mr-2 color-black
-                                   bi-geo-alt"></i>
-                                        <span class="fw-400 font-size-14 line-20
-                                   color-black">{{item.publicPlaceAddress}},
-                                            {{item.cityAddress}} - {{item.ufAddress}}</span>
-                                    </p>
-                                </div>
-                                <div class="row px-4 my-3 pb-3
-                             d-flex">
-                                    <div class="col justify-content-left px-0 d-flex
-                                align-items-center justify-content-left">
-                                        <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                   color-black">{{item.bedrooms}} Quartos</p>
-                                    </div>
-                                    <div class="col justify-content-center px-0 d-flex
-                                align-items-center justify-content-left">
-                                        <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                   color-black">{{item.parkingSpaces}} Vagas</p>
-                                    </div>
-                                    <div class="col justify-content-end px-0 d-flex
-                                align-items-center justify-content-left">
-                                        <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                   color-black text-truncate">{{item.usefulArea | currency: ' '}} m²</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 my-5 py-5 justify-content-center">
-                        <div *ngIf="filterResult.length > 6" class="d-flex flex-fill
-                       justify-content-center">
-                            <pagination-controls (pageChange)="paginationProduct=
-                          $event;">
-                            </pagination-controls>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-100 mt-4 border-radius-10 bg-white p-4 space-exclusivos-mobile-search-page">
-                    <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
-                        exclusivos
-                    </p>
-                    <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }"
-                        [scrollbar]="true">
-                        <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
-                            <div class="bg-img-property w-100 py-2 px-3" (click)="announcementSelected(item._id)">
-                                <img *ngIf="item.mainPhoto" [src]="item.mainPhoto" class="img-exclusivity-space-search">
-                                <img *ngIf="!item.mainPhoto" src="../../../assets/img/img-announcement-default.jpg"
-                                    alt="" class="img-exclusivity-space-search">
-                                <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
-                                    <h4 class="bg-purple h-fit px-4 py-2 mb-0
-                             border-radius-5 fw-400 font-size-18 line-24
-                             text-light" *ngIf="item.typeOfAd === 'rent'">Alugar</h4>
-                                    <h4 class="bg-purple h-fit px-4 py-2 mb-0
-                             border-radius-5 fw-400 font-size-18 line-24
-                             text-light" *ngIf="item.typeOfAd === 'sale'">Vender</h4>
-                                    <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
-                             border-radius-5 fw-400 font-size-18 line-24
-                             text-dark">Exclusivo</h4>
-                                </div>
-                                <div class="w-100 details-card-swiper d-grid h-50 pt-5
-                          align-items-end">
-                                    <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.leaseValue | currency: 'R$'}}
-                                        <span class="fw-400 font-size-14 line-20
-                                text-light">/ mês</span>
-                                    </p>
-                                    <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$'}}
-                                    </p>
-                                    <span class="fw-700 font-size-14 line-20
-                             text-light">{{item.description | slice: 0:28 }}</span>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </swiper>
-                </div>
-            </div>
-        </form>
-    </div>
-</main>
-<!-- modal -->
-<ng-template class="container-fluid" #content let-modal>
-    <div class="d-flex justify-content-end">
-        <div (click)="exit()" class="w-100 py-4 px-3 d-flex justify-content-end">
-            <img src="../../../assets/icon/x.png" />
-        </div>
-    </div>
-    <form [formGroup]="formModal" class="w-100 d-block-desk border-radius-10 bg-white p-5">
-        <ng-multiselect-dropdown class="customClass" [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
-            formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
-            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-        </ng-multiselect-dropdown>
-        <div class="dropdown">
-            <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
-                role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{selectTypeAd}}
-            </a>
-            <div class="dropdown-menu w-100" aria-labelledby="resultSituation">
-                <a class="dropdown-item" (click)="searchByTypeAd('sale')">Comprar</a>
-                <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
-            </div>
-        </div>
-
-        <div class="dropdown px-0 my-4 ">
-            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listEveryCity" [isLoading]="listEveryCity.length == 0"
-                [searchKeyword]="'render'" placeholder="Escolha uma cidade" [minQueryLength]="2"
-                (selected)='selectEvent($event)' [itemTemplate]="itemModalTemplate"
-                [notFoundTemplate]="notFoundTemplate">
+          <div class="dropdown px-0 my-4 ">
+            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listEveryCity"
+              [isLoading]="listEveryCity.length == 0" [searchKeyword]="'render'" placeholder="Escolha uma cidade"
+              [minQueryLength]="2" (selected)='selectEvent($event)' [itemTemplate]="itemcityTemplate"
+              [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
 
-            <ng-template #itemModalTemplate let-item>
-                <a [innerHTML]="item.cidade+' , '+item.estado"></a>
+            <ng-template #itemcityTemplate let-item>
+              <a [innerHTML]="item.cidade+' , '+item.estado"></a>
             </ng-template>
 
             <ng-template #notFoundTemplate let-notFound>
-                <div [innerHTML]="notFound"></div>
+              <div [innerHTML]="notFound"></div>
             </ng-template>
-        </div>
+          </div>
 
-        <!-- <div class="dropdown px-0 mb-3 ">
+          <div class="row mt-4 px-0">
+            <div class="col-12">
+              <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor</p>
+            </div>
+            <div class="col-6">
+              <label for="typeMinPrice">De</label>
+              <input formControlName="typeMinPrice" type="text" currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
+                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
+                maxlength="15" />
+            </div>
+            <div class="col-6">
+              <label for="typeMaxPrice">Até</label>
+              <input formControlName="typeMaxPrice" type="text" currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
+                class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
+                maxlength="20" />
+            </div>
+          </div>
+          <div class="dropdown">
+            <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
+              class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+              role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly>
+            <div class="dropdown-menu" aria-labelledby="resultRooms">
+              <a class="dropdown-item" (click)="searchByBadRoom('1')">1+</a>
+              <a class="dropdown-item" (click)="searchByBadRoom('2')">2+</a>
+              <a class="dropdown-item" (click)="searchByBadRoom('3')">3+</a>
+              <a class="dropdown-item" (click)="searchByBadRoom('4')">4+</a>
+              <a class="dropdown-item" (click)="searchByBadRoom('5')">5+</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <input type="text" formControlName="typeSuites" [value]="selectSuites" [placeholder]="selectSuites"
+              class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+              role="button" id="resultSuites" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              readonly>
+            <div class="dropdown-menu" aria-labelledby="resultSuites">
+              <a class="dropdown-item" (click)="searchBySuites('1')">1+</a>
+              <a class="dropdown-item" (click)="searchBySuites('2')">2+</a>
+              <a class="dropdown-item" (click)="searchBySuites('3')">3+</a>
+              <a class="dropdown-item" (click)="searchBySuites('4')">4+</a>
+              <a class="dropdown-item" (click)="searchBySuites('5')">5+</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms" [placeholder]="selectBathrooms"
+              class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+              role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              readonly>
+            <div class="dropdown-menu" aria-labelledby="resultbathroom">
+              <a class="dropdown-item" (click)="searchByBathRoom('1')">1+</a>
+              <a class="dropdown-item" (click)="searchByBathRoom('2')">2+</a>
+              <a class="dropdown-item" (click)="searchByBathRoom('3')">3+</a>
+              <a class="dropdown-item" (click)="searchByBathRoom('4')">4+</a>
+              <a class="dropdown-item" (click)="searchByBathRoom('5')">5+</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <input type="text" formControlName="typevacancies" [value]="selectVacancies" [placeholder]="selectVacancies"
+              class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+              role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              readonly>
+            <div class="dropdown-menu" aria-labelledby="resultVacancies">
+              <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
+              <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
+              <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
+              <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
+              <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
+            </div>
+          </div>
+          <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
+                    text-left font-size-16 line-20 pl-3 color-black w-100
+                    h-51" mask="0000" />
+          <div class="w-100 d-flex align-items-center">
+            <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
+                       mr-1 text-left font-size-16 line-20 pl-3 color-black
+                       w-100 h-51" mask="0000" />
+            <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
+                       ml-1 text-left font-size-16 line-20 pl-3 color-black
+                       w-100 h-51" mask="0000" />
+          </div>
+          <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
+                    line-24 border-radius-10 h-51 w-100" type="submit" [disabled]="form.invalid">
+            Encontrar
+          </button>
+        </div>
+        <div class="w-100 mt-4 border-radius-10 bg-white p-4 space-exclusivos-desktop-search-page">
+          <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
+            exclusivos
+          </p>
+          <swiper class="h-350" [slidesPerView]="1" [pagination]="{ clickable: true }" [scrollbar]="true">
+            <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
+              <div class="bg-img-property w-100 py-2 px-3" (click)="announcementSelected(item._id)">
+                <img *ngIf="item.mainPhoto" [src]="item.mainPhoto" class="img-exclusivity-space-search">
+                <img *ngIf="!item.mainPhoto" src="../../../assets/img/img-announcement-default.jpg" alt=""
+                  class="img-exclusivity-space-search">
+                <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
+                  <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-light" *ngIf="item.typeOfAd === 'rent'">Locação</h4>
+                  <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-light" *ngIf="item.typeOfAd === 'sale'">Venda</h4>
+                  <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-dark">Exclusivo</h4>
+                </div>
+                <div class="w-100 details-card-swiper d-grid h-50 pt-5
+                          align-items-end">
+                  <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                             line-32 text-light">{{item.leaseValue | currency: 'R$'}}
+                    <span class="fw-400 font-size-14 line-20
+                                text-light">/ mês</span>
+                  </p>
+                  <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                             line-32 text-light">{{item.saleValue | currency: 'R$'}}
+                  </p>
+                  <span class="fw-700 font-size-14 line-20
+                             text-light">{{item.description | slice: 0:28 }}</span>
+                </div>
+              </div>
+            </ng-template>
+          </swiper>
+        </div>
+        <div *ngIf="recentlySeenList.length > 0" class="w-100 border-radius-10 my-4 bg-white p-4">
+          <p class="fw-700 pb-4 font-size-20 line-24 color-black">Visualizados recentemente
+          </p>
+          <div *ngFor="let item of recentlySeenList | slice:0:3" class="row mb-4"
+            (click)="announcementSelected(item._id)">
+            <div class="col-3 col-img-types-property p-0">
+              <img src="../../../assets/img/ap.png" class="border-radius-10 h-111 w-100" />
+            </div>
+            <div class="col-9 col-img-types-property">
+              <p class="d-grid title-property-product mb-0 h-75">
+                <span class="fw-700 font-size-18 line-24
+                          color-black">{{item.description}}</span>
+                <span *ngIf="item.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24
+                          color-black">{{item.saleValue | currency: 'R$'}}</span>
+                <span *ngIf="item.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24
+                          color-black">{{item.leaseValue | currency: 'R$'}}</span>
+              </p>
+              <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
+                <span class="fw-400 font-size-14 line-20
+                          color-black">Quartos: {{item.bedrooms}}</span>
+                <span class="fw-400 font-size-14 line-20
+                          color-black">Banheiros: {{item.bathrooms}}</span>
+                <span class="fw-400 font-size-14 line-20
+                          color-black">Metragem: {{item.usefulArea}} m²</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-8 col-body-products px-0 pt-5 mt-5">
+        <div class="col-12 d-block-desk d-none " *ngIf="filtroResultDisplay.typeOfAdd">
+          <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
+            <span [routerLink]="['/']" class="fw-700 font-size-16 line-19 color-black">Página Inicial
+              /</span>
+            <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
+
+          </p>
+       <p class="fw-700 font-size-24 line-40 color-black">Resultado da sua busca por
+          <span class="font-size-14 row d-flex justify-content-evenly">
+            <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar</span>
+            <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar</span>
+            <span class="result-filter"
+              *ngFor="let item of filtroResultDisplay.propertyTypeList | slice:0:5; let i = index">
+              <span *ngIf="i <=3">{{item.item_text}} <b><a class="cursor-pointer" (click)="removeTag(i)">X</a></b></span>
+              <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay.propertyTypeList.length - 4)}}</span>
+            </span>
+            <span class="result-filter" *ngIf="filtroResultDisplay.ufAddress && filtroResultDisplay.cityAddress">
+              {{filtroResultDisplay.cityAddress+", "+filtroResultDisplay.ufAddress}}</span>
+            <!-- <span class="result-filter" *ngIf="filtroResultDisplay.cityAddress">
+              {{filtroResultDisplay.cityAddress}}</span> -->
+            <span class="result-filter" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
+              Quartos<b><a class="cursor-pointer" (click)="filtroResultDisplay.bedrooms = 0">X</a></b></span>
+            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}}</span>
+          </span>
+        </p>
+        </div>
+        <div class="col-12 px-0 space-see-maps-area-search">
+          <button type="button" class="btn-ver-no-mapa py-4" (click)="redirectToMap()" [disabled]="messageNotSearch">
+            <img src="../../../assets/icon/map.png" height="23" class="mx-3" />
+            <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Ver mapa</span>
+          </button>
+          <div class="btn-ver-no-filter py-4 px-2 d-block-desk btn-filter-mobile"
+            [class]="filterbtn ? 'd-none':'d-block'" (click)="openFilter(content)">
+            <img src="../../../assets/icon/filter.png" height="23" class="mx-3" />
+            <span class="fw-700 font-size-18 line-24 text-light text-nowrap mr-3">Filtrar</span>
+          </div>
+          <div
+            class="w-100 d-flex d-none-desk align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
+            <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
+              <span *ngIf="!messageNotSearch">{{filterResult?.length}}</span>
+              <span *ngIf="messageNotSearch">0</span>
+              <span class="px-1">Resultados</span>
+            </p>
+            <div class="d-flex align-items-center">
+              <p class="fw-700 mb-0 font-size-14 line-20 color-black">Ordenar por:</p>
+              <div class="dropdown">
+                <button class="btn dropdown-orderby-custom dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{orderBy}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" (click)="sortPriceList('Relevante')">Relevante</a>
+                  <a class="dropdown-item" (click)="sortPriceList('major>minor')">Maior preço</a>
+                  <a class="dropdown-item" (click)="sortPriceList('minor>major')">Menor preço</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pr-0">
+          <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch">
+            <img src="../../../assets/img/not-search-announcement.svg" height="80">
+            <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
+            <p class="text-center mb-0">explore outros filtros e confira os imoveis abaixo que podem te
+              atender no momento</p>
+            <span class="text-center">{{':('}}</span>
+          </div>
+          <div class="col-lg-6 px-3 col-cards-products" *ngFor="let item of filterResult | paginate: {
+                    itemsPerPage: 6, currentPage: paginationProduct }; let
+                    i= index">
+            <div
+              class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
+              <div class="border-radius-10 position-relative">
+                <img *ngIf="!item.mainPhoto" (click)="announcementSelected(item._id)"
+                  src="../../../assets/img/img-announcement-default.jpg" class="img-search-announcement-main">
+                <img *ngIf="item.mainPhoto" (click)="announcementSelected(item._id)" [src]="item.mainPhoto"
+                  class="img-search-announcement-main">
+                <div class="space-sale-or-rent-search-announcement">
+                  <h4 *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
+                                border-radius-5 fw-400 font-size-14 line-15
+                                text-light">Venda</h4>
+                  <h4 *ngIf="item.typeOfAd === 'rent'" class="bg-purple h-fit px-4 py-2 mb-0
+                                border-radius-5 fw-400 font-size-14 line-15
+                                text-light">Aluguel</h4>
+                  <h4 *ngIf="item.exclusivity === true" class="bg-greenlight h-fit ml-2 px-3 py-2
+                                mb-0 border-radius-5 fw-400 font-size-14
+                                line-15 color-black">Exclusivo</h4>
+                </div>
+                <div class="space-value-announcement">
+                  <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mb-0 font-size-22 h-fit line-32
+                                text-light">{{item.saleValue | currency: 'R$'}}</p>
+                  <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mb-0 font-size-22 h-fit line-32
+                                text-light">{{item.leaseValue | currency: 'R$'}}</p>
+                  <div (click)="likeHeart(item._id, item.liked)" class="h-fit heart-like
+                                bg-transparent-white cursor-pointer border-radius-10
+                                pt-2 pb-1">
+                    <i [class]="item.liked ?
+                                   'bi-heart-fill':'bi-heart' " class="bi
+                                   font-size-16 text-light"></i>
+                  </div>
+                </div>
+              </div>
+              <div (click)="announcementSelected(item._id)" class="col-12 px-0">
+                <div class="w-100 mx-2 text-align-left pt-3">
+                  <span class="fw-400 font-size-14 line-20
+                                color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                  <p class="fw-700 my-2 font-size-16 line-20 mb-0
+                                color-black text-truncate" style="max-width: 90%;">{{item.description}}</p>
+                  <p class="d-flex align-items-center text-left" style="height: 40px;">
+                    <i class="bi font-size-20 mr-2 color-black
+                                   bi-geo-alt"></i>
+                    <span class="fw-400 font-size-14 line-20
+                                   color-black">{{item.publicPlaceAddress}},
+                      {{item.cityAddress}} - {{item.ufAddress}}</span>
+                  </p>
+                </div>
+                <div class="row px-4 my-3 pb-3
+                             d-flex">
+                  <div class="col justify-content-left px-0 d-flex
+                                align-items-center justify-content-left">
+                    <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
+                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                   color-black">{{item.bedrooms}} Quartos</p>
+                  </div>
+                  <div class="col justify-content-center px-0 d-flex
+                                align-items-center justify-content-left">
+                    <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
+                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                   color-black">{{item.parkingSpaces}} Vagas</p>
+                  </div>
+                  <div class="col justify-content-end px-0 d-flex
+                                align-items-center justify-content-left">
+                    <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
+                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                   color-black text-truncate">{{item.usefulArea | currency: ' '}} m²</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-left align-items-center ml-2">
+                  <img src="../../../assets/icon/icon-banheira.svg" width="27px" class="pr-2 mobile-w" />
+                  <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                   color-black">{{item.suites || 0}} Suítes</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 my-5 py-5 justify-content-center">
+            <div *ngIf="filterResult.length > 6" class="d-flex flex-fill
+                       justify-content-center">
+              <pagination-controls (pageChange)="paginationProduct=
+                          $event;">
+              </pagination-controls>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 mt-4 border-radius-10 bg-white p-4 space-exclusivos-mobile-search-page">
+          <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
+            exclusivos
+          </p>
+          <swiper class="h-350 max-w-1227" [slidesPerView]="1" [pagination]="{ clickable: true }" [scrollbar]="true">
+            <ng-template *ngFor="let item of propertyproducts | slice: 0:5" swiperSlide>
+              <div class="bg-img-property w-100 py-2 px-3" (click)="announcementSelected(item._id)">
+                <img *ngIf="item.mainPhoto" [src]="item.mainPhoto" class="img-exclusivity-space-search">
+                <img *ngIf="!item.mainPhoto" src="../../../assets/img/img-announcement-default.jpg" alt=""
+                  class="img-exclusivity-space-search">
+                <div class="w-100 details-card-swiper h-50 pt-2 d-flex">
+                  <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-light" *ngIf="item.typeOfAd === 'rent'">Alugar</h4>
+                  <h4 class="bg-purple h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-light" *ngIf="item.typeOfAd === 'sale'">Vender</h4>
+                  <h4 *ngIf="item.exclusivity === true" class="ml-2 bg-greenlight h-fit px-4 py-2 mb-0
+                             border-radius-5 fw-400 font-size-18 line-24
+                             text-dark">Exclusivo</h4>
+                </div>
+                <div class="w-100 details-card-swiper d-grid h-50 pt-5
+                          align-items-end">
+                  <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                             line-32 text-light">{{item.leaseValue | currency: 'R$'}}
+                    <span class="fw-400 font-size-14 line-20
+                                text-light">/ mês</span>
+                  </p>
+                  <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
+                             line-32 text-light">{{item.saleValue | currency: 'R$'}}
+                  </p>
+                  <span class="fw-700 font-size-14 line-20
+                             text-light">{{item.description | slice: 0:28 }}</span>
+                </div>
+              </div>
+            </ng-template>
+          </swiper>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
+<!-- modal -->
+<ng-template class="container-fluid" #content let-modal>
+  <div class="d-flex justify-content-end">
+    <div (click)="exit()" class="w-100 py-4 px-3 d-flex justify-content-end">
+      <img src="../../../assets/icon/x.png" />
+    </div>
+  </div>
+  <form [formGroup]="formModal" class="w-100 d-block-desk border-radius-10 bg-white p-5">
+    <ng-multiselect-dropdown class="customClass" [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
+      formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+      (onSelectAll)="onSelectAll($event)">
+    </ng-multiselect-dropdown>
+    <div class="dropdown">
+      <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+        role="button" id="resultSituation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{selectTypeAd}}
+      </a>
+      <div class="dropdown-menu w-100" aria-labelledby="resultSituation">
+        <a class="dropdown-item" (click)="searchByTypeAd('sale')">Comprar</a>
+        <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
+      </div>
+    </div>
+
+    <div class="dropdown px-0 my-4 ">
+      <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listEveryCity"
+        [isLoading]="listEveryCity.length == 0" [searchKeyword]="'render'" placeholder="Escolha uma cidade"
+        [minQueryLength]="2" (selected)='selectEvent($event)' [itemTemplate]="itemModalTemplate"
+        [notFoundTemplate]="notFoundTemplate">
+      </ng-autocomplete>
+
+      <ng-template #itemModalTemplate let-item>
+        <a [innerHTML]="item.cidade+' , '+item.estado"></a>
+      </ng-template>
+
+      <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+      </ng-template>
+    </div>
+
+    <!-- <div class="dropdown px-0 mb-3 ">
             <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
                 <select formControlName="typePropertyState" (change)="getEstados($event)"
                     class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-51 bg-light fw-400 font-size-14 line-20 color-black"
@@ -482,78 +504,88 @@
             </ng-template>
 
         </div> -->
-        <div class="row mt-4 px-0">
-            <div class="col-12">
-                <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor</p>
-            </div>
-            <div class="col-6">
-                <label for="typeMinPrice">De</label>
-                <input formControlName="typeMinPrice" type="text" currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
-                    class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
-                    maxlength="15" />
-            </div>
-            <div class="col-6">
-                <label for="typeMaxPrice">Até</label>
-                <input formControlName="typeMaxPrice" type="text" currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
-                    class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
-                    maxlength="20" />
-            </div>
-        </div>
-        <div class="dropdown">
-            <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
-                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
-                role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                readonly>
-            <div class="dropdown-menu" aria-labelledby="resultRooms">
-                <a class="dropdown-item" (click)="searchByBadRoom('1')">1+</a>
-                <a class="dropdown-item" (click)="searchByBadRoom('2')">2+</a>
-                <a class="dropdown-item" (click)="searchByBadRoom('3')">3+</a>
-                <a class="dropdown-item" (click)="searchByBadRoom('4')">4+</a>
-                <a class="dropdown-item" (click)="searchByBadRoom('5')">5+</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms" [placeholder]="selectBathrooms"
-                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
-                role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                readonly>
-            <div class="dropdown-menu" aria-labelledby="resultbathroom">
-                <a class="dropdown-item" (click)="searchByBathRoom('1')">1+</a>
-                <a class="dropdown-item" (click)="searchByBathRoom('2')">2+</a>
-                <a class="dropdown-item" (click)="searchByBathRoom('3')">3+</a>
-                <a class="dropdown-item" (click)="searchByBathRoom('4')">4+</a>
-                <a class="dropdown-item" (click)="searchByBathRoom('5')">5+</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <input type="text" formControlName="typevacancies" [value]="selectVacancies" [placeholder]="selectVacancies"
-                class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
-                role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                readonly>
-            <div class="dropdown-menu" aria-labelledby="resultVacancies">
-                <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
-                <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
-                <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
-                <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
-                <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
-            </div>
-        </div>
-        <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
+    <div class="row mt-4 px-0">
+      <div class="col-12">
+        <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor</p>
+      </div>
+      <div class="col-6">
+        <label for="typeMinPrice">De</label>
+        <input formControlName="typeMinPrice" type="text" currencyMask
+          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
+          class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
+          maxlength="15" />
+      </div>
+      <div class="col-6">
+        <label for="typeMaxPrice">Até</label>
+        <input formControlName="typeMaxPrice" type="text" currencyMask
+          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
+          class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
+          maxlength="20" />
+      </div>
+    </div>
+    <div class="dropdown">
+      <input type="text" formControlName="typeBadrooms" [value]="selectBadRooms" [placeholder]="selectBadRooms"
+        class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+        role="button" id="resultRooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly>
+      <div class="dropdown-menu" aria-labelledby="resultRooms">
+        <a class="dropdown-item" (click)="searchByBadRoom('1')">1+</a>
+        <a class="dropdown-item" (click)="searchByBadRoom('2')">2+</a>
+        <a class="dropdown-item" (click)="searchByBadRoom('3')">3+</a>
+        <a class="dropdown-item" (click)="searchByBadRoom('4')">4+</a>
+        <a class="dropdown-item" (click)="searchByBadRoom('5')">5+</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <input type="text" formControlName="typeSuites" [value]="selectSuites" [placeholder]="selectSuites"
+        class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+        role="button" id="resultSuites" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        readonly>
+      <div class="dropdown-menu" aria-labelledby="resultSuites">
+        <a class="dropdown-item" (click)="searchBySuites('1')">1+</a>
+        <a class="dropdown-item" (click)="searchBySuites('2')">2+</a>
+        <a class="dropdown-item" (click)="searchBySuites('3')">3+</a>
+        <a class="dropdown-item" (click)="searchBySuites('4')">4+</a>
+        <a class="dropdown-item" (click)="searchBySuites('5')">5+</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <input type="text" formControlName="typeBathRoom" [value]="selectBathrooms" [placeholder]="selectBathrooms"
+        class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+        role="button" id="resultbathroom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly>
+      <div class="dropdown-menu" aria-labelledby="resultbathroom">
+        <a class="dropdown-item" (click)="searchByBathRoom('1')">1+</a>
+        <a class="dropdown-item" (click)="searchByBathRoom('2')">2+</a>
+        <a class="dropdown-item" (click)="searchByBathRoom('3')">3+</a>
+        <a class="dropdown-item" (click)="searchByBathRoom('4')">4+</a>
+        <a class="dropdown-item" (click)="searchByBathRoom('5')">5+</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <input type="text" formControlName="typevacancies" [value]="selectVacancies" [placeholder]="selectVacancies"
+        class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+        role="button" id="resultVacancies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly>
+      <div class="dropdown-menu" aria-labelledby="resultVacancies">
+        <a class="dropdown-item" (click)="searchByVacancies('1')">1+</a>
+        <a class="dropdown-item" (click)="searchByVacancies('2')">2+</a>
+        <a class="dropdown-item" (click)="searchByVacancies('3')">3+</a>
+        <a class="dropdown-item" (click)="searchByVacancies('4')">4+</a>
+        <a class="dropdown-item" (click)="searchByVacancies('5')">5+</a>
+      </div>
+    </div>
+    <input formControlName="typeconstruction" type="text" placeholder="Ano de construção" class="btn border border-radius-10 bg-light fw-400 mt-4
         text-left font-size-16 line-20 pl-3 color-black w-100
         h-51" mask="0000" />
-        <div class="w-100 d-flex align-items-center">
-            <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
+    <div class="w-100 d-flex align-items-center">
+      <input formControlName="typefootagemin" type="text" placeholder="Metragem Mínima" class="btn border border-radius-10 bg-light fw-400 mt-4
            mr-1 text-left font-size-16 line-20 pl-3 color-black
            w-100 h-51" mask="0000" />
-            <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
+      <input formControlName="typefootagemax" type="text" placeholder="Metragem Máxima" class="btn border border-radius-10 bg-light fw-400 mt-4
            ml-1 text-left font-size-16 line-20 pl-3 color-black
            w-100 h-51" mask="0000" />
-        </div>
-        <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
+    </div>
+    <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
         line-24 border-radius-10 h-51 w-100" (click)="filtrar()" type="submit">
-            Encontrar
-        </button>
-    </form>
+      Encontrar
+    </button>
+  </form>
 </ng-template>
