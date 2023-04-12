@@ -58,7 +58,10 @@ export class HomeHeaderComponent implements OnInit {
 
   dropdownList = [
     { item_id: 'apartamento', item_text: 'Apartamento' },
-    { item_id: 'casadecondominio', item_text: 'Casa de Condominio' },
+    { item_id: 'casa', item_text: 'Casa' },
+    { item_id: 'sobrado', item_text: 'Sobrado' },
+    { item_id: 'sobradoemcondominio', item_text: 'Sobrado em condomínio' },
+    { item_id: 'casadecondominio', item_text: 'Casa de condomínio' },
     { item_id: 'casadevila', item_text: 'Casa de vila' },
     { item_id: 'studio', item_text: 'Studio' },
     { item_id: 'kitnet', item_text: 'Kitnet' },
@@ -76,12 +79,12 @@ export class HomeHeaderComponent implements OnInit {
     { item_id: 'salao', item_text: 'Salão' },
     { item_id: 'galpao', item_text: 'Galpão' },
     { item_id: 'deposito', item_text: 'Depósito' },
-    { item_id: 'armazem', item_text: 'Armazem' },
+    { item_id: 'armazem', item_text: 'Armazém' },
     { item_id: 'hotel', item_text: 'Hotel' },
     { item_id: 'motel', item_text: 'Motel' },
     { item_id: 'pousada', item_text: 'Pousada' },
-    { item_id: 'lajecorporativa', item_text: 'Laje Corporativa' },
-    { item_id: 'prediointeiro', item_text: 'Predio Inteiro' },
+    { item_id: 'lajecorporativa', item_text: 'Laje corporativa' },
+    { item_id: 'prediointeiro', item_text: 'Prédio inteiro' },
   ];
 
   selectedItems: any = [];

@@ -99,6 +99,9 @@ export class SearchPageComponent implements OnInit {
 
   dropdownList = [
     { item_id: 'apartamento', item_text: 'Apartamento' },
+    { item_id: 'casa', item_text: 'Casa' },
+    { item_id: 'sobrado', item_text: 'Sobrado' },
+    { item_id: 'sobradoemcondominio', item_text: 'Sobrado em condomínio' },
     { item_id: 'casadecondominio', item_text: 'Casa de Condominio' },
     { item_id: 'casadevila', item_text: 'Casa de vila' },
     { item_id: 'studio', item_text: 'Studio' },

@@ -22,7 +22,7 @@
             <!-- <span class="result-filter" *ngIf="filtroResultDisplay.cityAddress">
               {{filtroResultDisplay.cityAddress}}</span> -->
             <span class="result-filter" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
-              Quartos<b><a class="cursor-pointer" (click)="filtroResultDisplay.bedrooms =0">X</a></b></span>
+              Quartos<b><a class="cursor-pointer" (click)="filtroResultDisplay.bedrooms = 0">X</a></b></span>
             <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}}</span>
           </span>
         </p>
@@ -250,18 +250,24 @@
             <span class="fw-400 font-size-16 line-20 color-muted"> &nbsp;Resultado de busca</span>
 
           </p>
-          <p class="fw-700 font-size-32 line-40 color-black">Resultado da sua busca por
-            <b>
-              <span *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar,</span>
-              <span *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar,</span>
-              <span *ngFor="let item of filtroResultDisplay.propertyTypeList"> {{item.item_text}},</span>
-              <span *ngIf="filtroResultDisplay.ufAddress"> {{filtroResultDisplay.ufAddress}},</span>
-              <span *ngIf="filtroResultDisplay.cityAddress"> {{filtroResultDisplay.cityAddress}},</span>
-              <span *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
-                Quartos,</span>
-              <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}},</span>
-            </b>
-          </p>
+       <p class="fw-700 font-size-24 line-40 color-black">Resultado da sua busca por
+          <span class="font-size-14 row d-flex justify-content-evenly">
+            <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar</span>
+            <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar</span>
+            <span class="result-filter"
+              *ngFor="let item of filtroResultDisplay.propertyTypeList | slice:0:5; let i = index">
+              <span *ngIf="i <=3">{{item.item_text}} <b><a class="cursor-pointer" (click)="removeTag(i)">X</a></b></span>
+              <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay.propertyTypeList.length - 4)}}</span>
+            </span>
+            <span class="result-filter" *ngIf="filtroResultDisplay.ufAddress && filtroResultDisplay.cityAddress">
+              {{filtroResultDisplay.cityAddress+", "+filtroResultDisplay.ufAddress}}</span>
+            <!-- <span class="result-filter" *ngIf="filtroResultDisplay.cityAddress">
+              {{filtroResultDisplay.cityAddress}}</span> -->
+            <span class="result-filter" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
+              Quartos<b><a class="cursor-pointer" (click)="filtroResultDisplay.bedrooms = 0">X</a></b></span>
+            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}}</span>
+          </span>
+        </p>
         </div>
         <div class="col-12 px-0 space-see-maps-area-search">
           <button type="button" class="btn-ver-no-mapa py-4" (click)="redirectToMap()" [disabled]="messageNotSearch">
@@ -527,6 +533,19 @@
         <a class="dropdown-item" (click)="searchByBadRoom('3')">3+</a>
         <a class="dropdown-item" (click)="searchByBadRoom('4')">4+</a>
         <a class="dropdown-item" (click)="searchByBadRoom('5')">5+</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <input type="text" formControlName="typeSuites" [value]="selectSuites" [placeholder]="selectSuites"
+        class="pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
+        role="button" id="resultSuites" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        readonly>
+      <div class="dropdown-menu" aria-labelledby="resultSuites">
+        <a class="dropdown-item" (click)="searchBySuites('1')">1+</a>
+        <a class="dropdown-item" (click)="searchBySuites('2')">2+</a>
+        <a class="dropdown-item" (click)="searchBySuites('3')">3+</a>
+        <a class="dropdown-item" (click)="searchBySuites('4')">4+</a>
+        <a class="dropdown-item" (click)="searchBySuites('5')">5+</a>
       </div>
     </div>
     <div class="dropdown">
