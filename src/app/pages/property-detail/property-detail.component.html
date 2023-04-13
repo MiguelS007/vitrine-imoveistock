@@ -25,7 +25,7 @@
             <div class="row mx-0">
               <div class="col-12 px-0 col-btns-announcements">
                 <div class="d-flex overflow-y-scroll w-auto spc-btns-property align-items-center">
-                  <button type="button" data-toggle="modal" data-target="#previewimage"
+                  <button type="button" data-toggle="modal" data-target="#previewimage" (click)="openImagePreview()"
                     class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
                     <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
                     <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
@@ -94,8 +94,11 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' || '-'}}</span>
-                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
                 <div *ngIf="response.condominiumValue !== '0'"
                   class="col-12 d-flex py-2 align-items-center justify-content-between">
@@ -127,8 +130,11 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' || '-'}}</span>
-                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -291,7 +297,8 @@
             </div>
           </div>
           <!-- INFO CARDS -->
-          <div *ngIf="response.characteristicInfrastructureOfTheCondominium" class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
+          <div *ngIf="response.characteristicInfrastructureOfTheCondominium"
+            class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
               <img *ngIf="!arrow1" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
@@ -617,47 +624,47 @@
                 style="cursor: pointer;" (click)="openarrow(3)">
             </div>
             <div *ngIf="arrow3" class="w-100 animate__animated">
-<!--              <div class="w-100 my-4 d-flex block-important-->
-<!--                    border border-radius-10-->
-<!--                    justify-content-between p-4">-->
-<!--                <div class="w-auto d-inline-block">-->
-<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black ">Primeiro piso</h3>-->
-<!--                </div>-->
-<!--                <div class="w-auto d-inline-block">-->
-<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Tamanho:-->
-<!--                    267 m²-->
-<!--                  </h3>-->
-<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Quartos:-->
-<!--                    87 m²-->
-<!--                  </h3>-->
-<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Banheiros:-->
-<!--                    34 m²-->
-<!--                  </h3>-->
-<!--                  <h3 *ngIf="response.typeOfAd === 'sale'" class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Preço: {{response.leaseValue | currency: 'R$ ' || '-'}}-->
-<!--                  </h3>-->
-<!--                  <h3 *ngIf="response.typeOfAd === 'rent'" class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Preço: {{response.saleValue | currency: 'R$ ' || '-'}}-->
-<!--                  </h3>-->
-<!--                </div>-->
-<!--              </div>-->
+              <!--              <div class="w-100 my-4 d-flex block-important-->
+              <!--                    border border-radius-10-->
+              <!--                    justify-content-between p-4">-->
+              <!--                <div class="w-auto d-inline-block">-->
+              <!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black ">Primeiro piso</h3>-->
+              <!--                </div>-->
+              <!--                <div class="w-auto d-inline-block">-->
+              <!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Tamanho:-->
+              <!--                    267 m²-->
+              <!--                  </h3>-->
+              <!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Quartos:-->
+              <!--                    87 m²-->
+              <!--                  </h3>-->
+              <!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Banheiros:-->
+              <!--                    34 m²-->
+              <!--                  </h3>-->
+              <!--                  <h3 *ngIf="response.typeOfAd === 'sale'" class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Preço: {{response.leaseValue | currency: 'R$ ' || '-'}}-->
+              <!--                  </h3>-->
+              <!--                  <h3 *ngIf="response.typeOfAd === 'rent'" class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Preço: {{response.saleValue | currency: 'R$ ' || '-'}}-->
+              <!--                  </h3>-->
+              <!--                </div>-->
+              <!--              </div>-->
               <img src="../../../assets/img/plant.png" class="w-100 p-4" />
-<!--              <p class="fw-400 font-size-14 line-20-->
-<!--                    color-black w-100 text-center py-5">-->
-<!--                Plan description. Lorem ipsum dolor sit-->
-<!--                amet, consectetuer adipiscing elit, sed diam-->
-<!--                nonummy nibh-->
-<!--                euismod tincidunt ut laoreet dolore magna-->
-<!--                aliquam erat volutpat. Ut wisi enim ad minim-->
-<!--                veniam, quis-->
-<!--                nostrud exerci tation ullamcorper suscipit-->
-<!--                lobortis nisl ut aliquip ex ea commodo-->
-<!--                consequat.-->
-<!--              </p>-->
+              <!--              <p class="fw-400 font-size-14 line-20-->
+              <!--                    color-black w-100 text-center py-5">-->
+              <!--                Plan description. Lorem ipsum dolor sit-->
+              <!--                amet, consectetuer adipiscing elit, sed diam-->
+              <!--                nonummy nibh-->
+              <!--                euismod tincidunt ut laoreet dolore magna-->
+              <!--                aliquam erat volutpat. Ut wisi enim ad minim-->
+              <!--                veniam, quis-->
+              <!--                nostrud exerci tation ullamcorper suscipit-->
+              <!--                lobortis nisl ut aliquip ex ea commodo-->
+              <!--                consequat.-->
+              <!--              </p>-->
             </div>
           </div>
           <div class="w-100 my-4 border-radius-10 bg-white">
@@ -764,8 +771,11 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' || '-'}}</span>
-                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -812,22 +822,27 @@
   <!-- Modal VIEW IMAGES -->
   <div class="modal px-0 fade" id="previewimage" tabindex="-1" role="dialog" aria-labelledby="previewimageTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
-      <div class="modal-content h-100 modal-content-preview">
+    <div class="modal-dialog modal-lg-preview modal-dialog-centered" role="document">
+      <div class="modal-content modal-content-preview">
         <div class="modal-header position-absolute align-items-end z-10 d-flex justify-content-end mt-3 right-0">
           <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
             <i class="bi font-size-48 text-light bi-x"></i>
           </button>
         </div>
-        <div class="anima-body h-100 d-flex justify-content-center align-items-center">
-          <swiper  class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
+        <div class="anima-body d-flex flex-column justify-content-center align-items-center">
+          <swiper #mySwiper class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
             <ng-template class="w-100" *ngFor="let item of response.photos" swiperSlide>
               <div
-                class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
+                class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 pt-2 border-radius-10 px-5">
                 <img [src]="item.key" class="w-100 h-auto preview-img-property" />
               </div>
             </ng-template>
           </swiper>
+          <div class="content-thumb-images mt-2">
+            <div class="ml-2" *ngFor="let item of response.photos; let i = index" #thumbPhotosArr [id]="item.key">
+              <img [src]="item.key" height="100" width="100" (click)="onThumbClick(i)">
+            </div>
+          </div>
         </div>
       </div>
     </div>

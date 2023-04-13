@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +21,8 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
   styleUrls: ['./property-detail.component.scss']
 })
 export class PropertyDetailComponent implements OnInit {
+
+  @ViewChild('imageEvidence', { static: true }) imageRef!: ElementRef;
 
   infopaymobile = false;
   finalValueSale: number;
@@ -136,6 +138,13 @@ export class PropertyDetailComponent implements OnInit {
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
 
+  @ViewChild('mySwiper') swiperRef!: any;
+
+
+  imageEvidence: string;
+
+  @ViewChildren('thumbPhotosArr') thumbPhotosArrList: QueryList<any>;
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -172,8 +181,33 @@ export class PropertyDetailComponent implements OnInit {
       this.arrayDeDatas.push(hoje)
     }
     this.list();
+
+    this.imageEvidence = this.response.photos[0].key;
   }
 
+  openImagePreview() {
+    this.thumbPhotosArrList.map(results => {
+      if (results.nativeElement?.id === this.imageEvidence) {
+        results.nativeElement.className = 'active-thumb-photo';
+      } else {
+        results.nativeElement.className = 'disable-thumb-photo ml-2';
+      }
+    });
+    setTimeout(() => {
+      this.swiperRef.swiperRef.on('slideChange', () => {
+        const activeIndex = this.swiperRef.swiperRef.activeIndex;
+        this.imageEvidence = this.response.photos[activeIndex].key
+        const activeImage = this.response.photos[activeIndex].key;
+        this.thumbPhotosArrList.map(results => {
+          if (results.nativeElement?.id === this.imageEvidence) {
+            results.nativeElement.className = 'active-thumb-photo';
+          } else {
+            results.nativeElement.className = 'disable-thumb-photo ml-2';
+          }
+        });
+      });
+    }, 100);
+  }
 
   ngOnInit(): void {
 
@@ -183,7 +217,7 @@ export class PropertyDetailComponent implements OnInit {
     this.products = this.datamokservice.resultSearch;
 
     this.response = this.route.snapshot.data['resolve'];
-    console.log('response page',this.response);
+    console.log('response page', this.response);
     this.ngxSpinnerService.hide();
 
     let resultadoVerify = localStorage.getItem('resultSearch');
@@ -207,6 +241,17 @@ export class PropertyDetailComponent implements OnInit {
     }
 
     this._getCompleteAddress();
+
+
+  }
+
+  onThumbClick(index: number): void {
+    console.log(index)
+    if (this.swiperRef) {
+      console.log(this.swiperRef);
+      
+      this.swiperRef.swiperRef.slideTo(index);
+    }
   }
 
   public toNumber(paremetro1: string) {
@@ -238,7 +283,6 @@ export class PropertyDetailComponent implements OnInit {
   closePause(videomedia: HTMLVideoElement) {
     videomedia.pause();
   }
-
 
   selectDate(value) {
     this.dataSelecionada = value
