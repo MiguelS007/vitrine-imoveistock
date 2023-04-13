@@ -246,10 +246,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   onThumbClick(index: number): void {
-    console.log(index)
     if (this.swiperRef) {
-      console.log(this.swiperRef);
-      
       this.swiperRef.swiperRef.slideTo(index);
     }
   }
@@ -435,7 +432,7 @@ export class PropertyDetailComponent implements OnInit {
           return
         },
         error => {
-          console.log(error)
+          console.error(error)
         }
       )
     }
@@ -447,7 +444,7 @@ export class PropertyDetailComponent implements OnInit {
             this.list()
           },
           error => {
-            console.log(error)
+            console.error(error)
           }
         )
       } else if (this.listLikes[i]._id !== value) {
@@ -456,7 +453,7 @@ export class PropertyDetailComponent implements OnInit {
             this.list();
           },
           error => {
-            console.log(error)
+            console.error(error)
           }
         )
       }
