@@ -141,7 +141,9 @@ export class PropertyDetailComponent implements OnInit {
   @ViewChild('mySwiper') swiperRef!: any;
 
 
-  imageEvidence: string;
+  imageEvidence: any;
+
+  indexTeste: number;
 
   @ViewChildren('thumbPhotosArr') thumbPhotosArrList: QueryList<any>;
 
@@ -182,12 +184,13 @@ export class PropertyDetailComponent implements OnInit {
     }
     this.list();
 
-    this.imageEvidence = this.response.photos[0].key;
+
   }
 
   openImagePreview() {
+    this.indexTeste = 1
     this.thumbPhotosArrList.map(results => {
-      if (results.nativeElement?.id === this.imageEvidence) {
+      if (results.nativeElement?.id === this.imageEvidence.key) {
         results.nativeElement.className = 'active-thumb-photo';
       } else {
         results.nativeElement.className = 'disable-thumb-photo ml-2';
@@ -196,11 +199,13 @@ export class PropertyDetailComponent implements OnInit {
     setTimeout(() => {
       this.swiperRef.swiperRef.on('slideChange', () => {
         const activeIndex = this.swiperRef.swiperRef.activeIndex;
-        this.imageEvidence = this.response.photos[activeIndex].key
+        this.imageEvidence = this.response.photos[activeIndex];
+        this.indexTeste = this.imageEvidence.index
         const activeImage = this.response.photos[activeIndex].key;
         this.thumbPhotosArrList.map(results => {
-          if (results.nativeElement?.id === this.imageEvidence) {
+          if (results.nativeElement?.id === this.imageEvidence.key) {
             results.nativeElement.className = 'active-thumb-photo';
+
           } else {
             results.nativeElement.className = 'disable-thumb-photo ml-2';
           }
@@ -242,6 +247,13 @@ export class PropertyDetailComponent implements OnInit {
 
     this._getCompleteAddress();
 
+    if (!this.response.photos[0].index) {
+      for (let i = 0; i < this.response.photos.length; i++) {
+        Object.assign(this.response.photos[i], { index: i + 1 })
+      }
+    }
+
+    this.imageEvidence = this.response.photos[0]
 
   }
 

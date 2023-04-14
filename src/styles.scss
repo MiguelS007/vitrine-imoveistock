@@ -127,7 +127,7 @@ app-nav-bar {
     position: absolute;
     top: 50%;
     width: calc(var(--swiper-navigation-size) / 44 * 27);
-    height: var(--swiper-navigation-size);
+    height: 22px !important;
     margin-top: calc(0px - var(--swiper-navigation-size) / 2);
     z-index: 10;
     cursor: pointer;
@@ -135,6 +135,20 @@ app-nav-bar {
     align-items: center;
     justify-content: center;
     color: var(--greenlight) !important;
+    border-radius: 50% !important;
+    background-color: #542FDF !important;
+    height: 50px !important;
+    width: 50px !important;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    font-family: swiper-icons;
+    font-size: 18px !important;
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
 }
 
 a {
@@ -786,7 +800,7 @@ input:focus {
     left: 0;
 }
 
-.right-0{
+.right-0 {
     right: 0;
 }
 
@@ -2094,6 +2108,7 @@ vg-overlay-play .vg-overlay-play {
     .bg-property-details {
         margin-top: 0px !important;
     }
+
     .col-btns-preview-img {
         display: block !important;
         top: 1058px;
@@ -2110,17 +2125,20 @@ vg-overlay-play .vg-overlay-play {
         position: absolute;
         top: 50%;
         width: calc(var(--swiper-navigation-size) / 44 * 27);
-        height: var(--swiper-navigation-size);
+        height: 22px !important;
         margin-top: calc(0px - var(--swiper-navigation-size) / 2);
         z-index: 10;
-        background: transparent !important;
-        padding: 29px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: black !important;
+        color: var(--greenlight) !important;
+        border-radius: 50% !important;
+        background-color: #542FDF !important;
+        height: 40px !important;
+        width: 40px !important;
     }
+
 
     .col-btns-announcements {
         padding-left: 15px !important;
@@ -2850,14 +2868,14 @@ vg-overlay-play .vg-overlay-play {
 }
 
 
-#clicavel{
-  cursor: pointer;
+#clicavel {
+    cursor: pointer;
 }
 
-#clicavel:hover{
-  color: #01FF5F;
+#clicavel:hover {
+    color: #01FF5F;
 }
 
-#clicavel:active{
-  color: blue;
+#clicavel:active {
+    color: blue;
 }

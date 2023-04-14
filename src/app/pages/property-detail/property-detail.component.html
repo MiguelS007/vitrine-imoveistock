@@ -824,6 +824,11 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered" role="document">
       <div class="modal-content modal-content-preview">
+        <div class="count-image-caroucel">
+          <h3 class="text-white">
+            {{indexTeste}}/{{response.photos.length}}
+          </h3>
+        </div>
         <div class="modal-header position-absolute align-items-end z-10 d-flex justify-content-end mt-3 right-0">
           <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
             <i class="bi font-size-48 text-light bi-x"></i>
@@ -838,9 +843,9 @@
               </div>
             </ng-template>
           </swiper>
-          <div class="content-thumb-images mt-2">
+          <div class="content-thumb-images my-3">
             <div class="ml-2" *ngFor="let item of response.photos; let i = index" #thumbPhotosArr [id]="item.key">
-              <img [src]="item.key" height="100" width="100" (click)="onThumbClick(i)">
+              <img [src]="item.key" height="100" width="100" (click)="onThumbClick(i)" [id]="i">
             </div>
           </div>
         </div>

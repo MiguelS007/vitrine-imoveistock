@@ -1,10 +1,10 @@
 ::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
+    width: 5px;
+    height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent !important;
+    background: #01FF5F !important;
 
 }
 
@@ -54,10 +54,17 @@
     max-width: 800px;
     max-height: 700px;
 }
-
 .content-thumb-images {
     display: flex !important;
+    width: 100% !important;
     overflow-x: auto !important;
+}
+
+.count-image-caroucel {
+    position: absolute !important;
+    left: 15px !important;
+    top: 15px !important;
+    z-index: 999 !important;
 }
 
 .active-thumb-photo {
