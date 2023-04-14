@@ -125,7 +125,7 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'motel', item_text: 'Motel' },
     { item_id: 'pousada', item_text: 'Pousada' },
     { item_id: 'lajecorporativa', item_text: 'Laje Corporativa' },
-    { item_id: 'prediointeiro', item_text: 'Predio Inteiro' },
+    { item_id: 'prediointeiro', item_text: 'Prédio Inteiro' },
   ];
 
   selectedItems: any[] = [];
