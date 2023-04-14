@@ -138,14 +138,18 @@ export class PropertyDetailComponent implements OnInit {
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
 
-  @ViewChild('mySwiper') swiperRef!: any;
-
+  @ViewChild('myCaroucel') swiperRef!: any;
 
   imageEvidence: any;
 
   indexTeste: number;
 
   @ViewChildren('thumbPhotosArr') thumbPhotosArrList: QueryList<any>;
+
+  currentIndex: any = -1;
+  showFlag: any = false;
+
+  imageSelectedFullScreen: any = [];
 
   constructor(
     private router: Router,
@@ -257,10 +261,22 @@ export class PropertyDetailComponent implements OnInit {
 
   }
 
+  closeEventHandler() {
+    this.showFlag = false;
+    this.currentIndex = -1;
+  }
+
   onThumbClick(index: number): void {
     if (this.swiperRef) {
       this.swiperRef.swiperRef.slideTo(index);
     }
+  }
+
+  openFullScreen() {
+    this.imageSelectedFullScreen = []
+    this.imageSelectedFullScreen.push({ image: this.imageEvidence.key });
+    this.currentIndex = this.imageEvidence.index;
+    this.showFlag = true;
   }
 
   public toNumber(paremetro1: string) {

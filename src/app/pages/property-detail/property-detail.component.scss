@@ -60,10 +60,22 @@
     overflow-x: auto !important;
 }
 
-.count-image-caroucel {
+.header-image-preview {
     position: absolute !important;
-    left: 15px !important;
-    top: 15px !important;
+    display: flex !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 12px 12px !important;
+    z-index: 999 !important;
+}
+
+.btn-expand-photo {
+    position: absolute !important;
+    right: 30px !important;
+    bottom: 150px !important;
+    background: var(--transparentwhite) !important;
+    color: white !important;
     z-index: 999 !important;
 }
 

@@ -824,26 +824,31 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg-preview modal-dialog-centered" role="document">
       <div class="modal-content modal-content-preview">
-        <div class="count-image-caroucel">
+        <div class="header-image-preview">
           <h3 class="text-white">
             {{indexTeste}}/{{response.photos.length}}
           </h3>
-        </div>
-        <div class="modal-header position-absolute align-items-end z-10 d-flex justify-content-end mt-3 right-0">
           <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
             <i class="bi font-size-48 text-light bi-x"></i>
           </button>
         </div>
         <div class="anima-body d-flex flex-column justify-content-center align-items-center">
-          <swiper #mySwiper class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
+          <swiper #myCaroucel class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
             <ng-template class="w-100" *ngFor="let item of response.photos" swiperSlide>
               <div
-                class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 pt-2 border-radius-10 px-5">
+                class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 pt-2 border-radius-10 px-5 position-relative">
                 <img [src]="item.key" class="w-100 h-auto preview-img-property" />
               </div>
             </ng-template>
           </swiper>
-          <div class="content-thumb-images my-3">
+          <button class="btn btn-expand-photo" (click)="openFullScreen()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
+            </svg>
+          </button>
+          <div class="content-thumb-images my-3" >
             <div class="ml-2" *ngFor="let item of response.photos; let i = index" #thumbPhotosArr [id]="item.key">
               <img [src]="item.key" height="100" width="100" (click)="onThumbClick(i)" [id]="i">
             </div>
@@ -851,6 +856,9 @@
         </div>
       </div>
     </div>
+    <ng-image-fullscreen-view [images]="imageSelectedFullScreen" [imageIndex]="currentIndex" [show]="showFlag"
+      (close)="closeEventHandler()">
+    </ng-image-fullscreen-view>
   </div>
   <!-- Modal PLAY VIDEO -->
   <div class="modal px-0 fade" id="playvideo" tabindex="-1" role="dialog" aria-labelledby="playvideoTitle"
