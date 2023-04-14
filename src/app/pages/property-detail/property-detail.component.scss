@@ -4,7 +4,7 @@
 }
 
 ::-webkit-scrollbar-track {
-    background: #01FF5F !important;
+    background: var(--transparentwhite) !important;
 
 }
 
@@ -89,6 +89,10 @@
     filter: blur(1px);
 }
 
+.count-text-image-preview {
+    color: white !important;
+}
+
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 100% !important;
@@ -106,6 +110,8 @@
         height: 100% !important;
         width: auto !important;
     }
+
+    
 }
 
 @media (max-width: 576px) {
@@ -117,6 +123,11 @@
     //     height: 100% !important;
     //     width: auto !important;
     // }
+
+    .count-text-image-preview {
+        color: white !important;
+        font-size: 18px !important;
+    }
 
 }
 
