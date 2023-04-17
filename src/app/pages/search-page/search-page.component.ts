@@ -93,7 +93,7 @@ export class SearchPageComponent implements OnInit {
   getSelectedCity: string;
 
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
-  listEveryCity: { cidade: string; estado: string , render:string}[] = [];
+  listEveryCity: { cidade: string; estado: string, render: string }[] = [];
 
   listOfPrices: any = [];
 
@@ -212,20 +212,20 @@ export class SearchPageComponent implements OnInit {
       this.citySelected = filtro.cityAddress;
       this.getSelectedCity = filtro.cityAddress;
 
-      if(!!filtro.ufAddress) this.stateSelected = filtro.ufAddress;
+      if (!!filtro.ufAddress) this.stateSelected = filtro.ufAddress;
 
       this.form.patchValue({
         typeStatus: filtro.typeOfAdd,
-        typePropertyCity: filtro.cityAddress+' , '+this.stateSelected,
+        typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
         typeMaxPrice: filtro.finalValue,
       });
 
-      if(filtro.propertyTypeList.length > 0)
+      if (filtro.propertyTypeList.length > 0)
         this.selectedItems = [...filtro.propertyTypeList]
 
       this.formModal.patchValue({
-        typePropertyCity: filtro.cityAddress+' , '+this.stateSelected,
+        typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
         typeMaxPrice: filtro.finalValue,
       });
@@ -334,11 +334,12 @@ export class SearchPageComponent implements OnInit {
         this.propertyproducts = data;
       }
     })
+
   }
 
-  onItemSelect(item: any) {}
+  onItemSelect(item: any) { }
 
-  onSelectAll(items: any) {}
+  onSelectAll(items: any) { }
 
   selectEvent(item) {
     this.getSelectedCity = item.cidade;
@@ -448,34 +449,34 @@ export class SearchPageComponent implements OnInit {
 
   searchByBadRoom(item) {
     // SELECT BADROOMS
-    if(item === '1'){
+    if (item === '1') {
       this.selectBadRooms = '+1 Quarto'
-    }else if(!!item){
+    } else if (!!item) {
       this.selectBadRooms = `+${item} Quartos`
     }
   }
 
   searchBySuites(item) {
     // SELECT SUITES
-    if(item === '1'){
+    if (item === '1') {
       this.selectSuites = '+1 Suíte'
-    }else if(!!item){
+    } else if (!!item) {
       this.selectSuites = `+${item} Suítes`
     }
   }
   searchByBathRoom(item) {
     // SELECT BATHROOMS
-    if(item === '1'){
+    if (item === '1') {
       this.selectBathrooms = '+1 Banheiro'
-    }else if(!!item){
+    } else if (!!item) {
       this.selectBathrooms = `+${item} Banheiros`
     }
   }
   searchByVacancies(item) {
     // SELECT VACANCES
-    if(item === '1'){
+    if (item === '1') {
       this.selectVacancies = '+1 Vaga'
-    }else if(!!item){
+    } else if (!!item) {
       this.selectVacancies = `+${item} Vagas`
     }
   }
@@ -488,7 +489,7 @@ export class SearchPageComponent implements OnInit {
     this.TypeProperty = value
   }
 
-  removeTag(index:number){
+  removeTag(index: number) {
     this.filtroResultDisplay.propertyTypeList.splice(index, 1);
     this.filtrar();
   }
@@ -507,7 +508,7 @@ export class SearchPageComponent implements OnInit {
       styleProperty: this.removerAcento(this.stylePropertyTitle), // EDIFICIL, TERRENO
     };
 
-    let city = filter.city !== undefined? filter.city : '';
+    let city = filter.city !== undefined ? filter.city : '';
 
     let propertyTypeList = this.form.controls['propertyType'].value?.map(
       (item: any) => item.item_id
