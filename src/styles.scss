@@ -1903,6 +1903,33 @@ vg-overlay-play .vg-overlay-play {
     width: 100% !important;
 }
 
+.btn-type-of-ad-select {
+    background-color: white !important;
+    border: none !important;
+    border-radius: 0px !important;
+    border-bottom: 2px solid #542FDF !important;
+    font-weight: bold !important;
+    box-shadow:none !important;
+    outline: none !important;
+}
+
+.btn-type-of-ad-disabled {
+    border: none !important;
+    box-shadow:none !important;
+    outline: none !important;
+}
+
+.btn-type-of-ad-disabled:focus {
+    box-shadow:none !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.btn-type-of-ad-select:focus {
+    box-shadow:none !important;
+    outline: none !important;
+}
+
 // MEDIA
 @media (min-width: 1918px) {
 

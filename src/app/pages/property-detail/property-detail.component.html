@@ -74,7 +74,8 @@
     <div class="col-12 bg-graylight mt-mobile px-5p d-flex justify-content-center">
       <div class="row max-w-1918 px-0 w-100 row-body-details-property">
         <!-- PAYMENT METHOD MOBILE -->
-        <div class="col-12 d-none payment-mobile d-block-desk col-body-details-property">
+        <div *ngIf="response.typeOfAd !== 'both'"
+          class="col-12 d-none payment-mobile d-block-desk col-body-details-property">
           <div class="w-100 mt-4 border-radius-10">
             <div class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
 
@@ -134,6 +135,84 @@
                     class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
                     '-'}}</span>
                   <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                </div>
+              </div>
+              <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
+                    fw-700 font-size-18 line-24 mt-3 text-light
+                    w-100" type="button">Agendar visita</button>
+              <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
+                    fw-700 font-size-18 line-24 mt-3 color-purple
+                    w-100" type="button">Fazer Proposta</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="response.typeOfAd === 'both'"
+          class="col-12 d-none payment-mobile d-block-desk col-body-details-property">
+          <div class="w-100 mt-4 border-radius-10">
+            <div class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
+              <div class="d-flex justify-content-center align-items-center">
+                <button [class]="valueViewSelectSale ? 'btn-type-of-ad-select' : 'btn-type-of-ad-disabled'" class="btn"
+                  (click)="changeValueViewSelectSale('sale')">Comprar</button>
+                <button [class]="!valueViewSelectSale ? 'btn-type-of-ad-select' : 'btn-type-of-ad-disabled'" class="btn"
+                  (click)="changeValueViewSelectSale('rent')">Alugar</button>
+              </div>
+              <!-- <p class="d-grid w-100">
+                <span class="fw-700 font-size-18 line-24
+                       color-black">Alta procura</span>
+                <span class="fw-400 font-size-14 line-19
+                       color-black">226 pessoas viram esse
+                  imóvel recentemente</span>
+              </p> -->
+              <!-- <hr class="hr" /> -->
+              <div class="row">
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Venda
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                </div>
+                <div *ngIf="response.condominiumValue !== '0'"
+                  class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-400 font-size-18 line-24 color-black">Condomínio
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ '
+                    ||'-'}}</span>
+                </div>
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-400 font-size-18 line-24 color-black">IPTU
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale"
+                    class="fw-400 font-size-18 line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale"
+                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 | currency:
+                    'R$ ' ||
+                    '-'}}</span>
+                </div>
+                <div class="col-12">
+                  <h6 class="my-4 w-100 bg-whitelight" style="height:1px;"></h6>
+                </div>
+                <div class="col-12 d-flex py-4 align-items-center justify-content-between">
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Venda
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale"
                     class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
@@ -215,9 +294,11 @@
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Disponibilidade:</td>
-                    <td *ngIf="response.typeOfAd === 'sale'" class="pl-0 fw-700 font-size-16 line-20 color-black">
+                    <td *ngIf="response.typeOfAd === 'sale'"
+                      class="pl-0 bg-danger fw-700 font-size-16 line-20 color-black">
                       &nbsp;&nbsp;Venda</td>
-                    <td *ngIf="response.typeOfAd === 'rent'" class="pl-0 fw-700 font-size-16 line-20 color-black">
+                    <td *ngIf="response.typeOfAd === 'rent'"
+                      class="pl-0 bg-danger fw-700 font-size-16 line-20 color-black">
                       &nbsp;&nbsp;Locação</td>
                   </tr>
                   <tr>
@@ -713,7 +794,7 @@
 
         </div>
         <!-- PAYMENT METHOD DESK-->
-        <div id="colinfopay" class="col-4  d-none-desk col-body-details-property">
+        <div id="colinfopay" *ngIf="response.typeOfAd !== 'both'" class="col-4  d-none-desk col-body-details-property">
           <div class="w-100 mt-4 border-radius-10">
             <div id="infopaydesk" class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
 
@@ -787,6 +868,77 @@
             </div>
           </div>
         </div>
+        <div id="colinfopay" *ngIf="response.typeOfAd === 'both'" class="col-4 d-none-desk col-body-details-property">
+          <div class="w-100 mt-4 border-radius-10">
+            <div id="infopaydesk" class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
+              <div class="row">
+                <div class="d-flex justify-content-center align-items-center">
+                  <button [class]="valueViewSelectSale ? 'btn-type-of-ad-select' : 'btn-type-of-ad-disabled'"
+                    class="btn" (click)="changeValueViewSelectSale('sale')">Comprar</button>
+                  <button [class]="!valueViewSelectSale ? 'btn-type-of-ad-select' : 'btn-type-of-ad-disabled'"
+                    class="btn" (click)="changeValueViewSelectSale('rent')">Alugar</button>
+                </div>
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Venda
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue
+                    | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale"
+                    class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.leaseValue) |
+                    currency: 'R$'}}</span>
+                </div>
+                <div *ngIf="response.condominiumValue !== '0'"
+                  class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-400 font-size-18 line-24 color-black">Condomínio
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                </div>
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-400 font-size-18 line-24 color-black">IPTU
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="!valueViewSelectSale"
+                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 | currency:
+                    'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="valueViewSelectSale"
+                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) | currency:
+                    'R$ ' ||
+                    '-'}}</span>
+                </div>
+                <div class="col-12">
+                  <h6 class="my-4 w-100 bg-graylight" style="height: 1px;"></h6>
+                </div>
+                <div class="col-12 d-flex py-4 align-items-center justify-content-between">
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Venda
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue
+                    | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent |
+                    currency: 'R$ ' || '-'}}</span>
+                </div>
+              </div>
+              <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
+                    fw-700 font-size-18 line-24 mt-3 text-light
+                    w-100" type="button">Agendar visita</button>
+              <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
+                    fw-700 font-size-18 line-24 mt-3 color-purple
+                    w-100" type="button">Fazer Proposta</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -800,6 +952,8 @@
     <div class="w-100 max-w-800 padding-x schedule-visit-modal">
       <div class="w-100">
         <h3 *ngIf="response.typeOfAd === 'sale'">{{finalValueSale | currency: 'R$ ' || '-'}}</h3>
+        <h3 *ngIf="response.typeOfAd === 'both' && valueViewSelectSale">{{finalValueSale | currency: 'R$ ' || '-'}}</h3>
+        <h3 *ngIf="response.typeOfAd === 'both' && !valueViewSelectSale">{{finalValueRent | currency: 'R$ ' || '-'}}</h3>
         <h3 *ngIf="response.typeOfAd === 'rent'">{{finalValueRent | currency: 'R$ ' || '-'}}</h3>
       </div>
       <div class="row">
@@ -848,7 +1002,7 @@
                 d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
             </svg>
           </button>
-          <div class="content-thumb-images my-3" >
+          <div class="content-thumb-images my-3">
             <div class="ml-2" *ngFor="let item of response.photos; let i = index" #thumbPhotosArr [id]="item.key">
               <img [src]="item.key" height="100" width="100" (click)="onThumbClick(i)" [id]="i">
             </div>

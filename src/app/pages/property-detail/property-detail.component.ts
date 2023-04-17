@@ -151,6 +151,8 @@ export class PropertyDetailComponent implements OnInit {
 
   imageSelectedFullScreen: any = [];
 
+  valueViewSelectSale: boolean = true;
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -259,6 +261,10 @@ export class PropertyDetailComponent implements OnInit {
 
     this.imageEvidence = this.response.photos[0]
 
+  }
+
+  changeValueViewSelectSale(valueView) {
+      this.valueViewSelectSale = !this.valueViewSelectSale 
   }
 
   closeEventHandler() {

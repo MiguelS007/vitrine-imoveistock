@@ -62,6 +62,14 @@
                         <h4 *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent'"
                             class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
                             Locação</h4>
+                        <div class="d-flex" *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'both'">
+                            <h4
+                                class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                                Venda</h4>
+                            <h4
+                                class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                                Locação</h4>
+                        </div>
                         <h4 *ngIf="selectedProposal?.proposal?.announcement?.exclusivity === true"
                             class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
                             Exclusivo</h4>
@@ -70,6 +78,11 @@
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                             *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale'">
                             {{selectedProposal?.proposal?.announcement?.saleValue | currency:
+                            'R$'}}</p>
+                        <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
+                            *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'both'">
+                            {{selectedProposal?.proposal?.announcement?.saleValue | currency:
+                            'R$'}} / {{selectedProposal?.proposal?.announcement?.leaseValue | currency:
                             'R$'}}</p>
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                             *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent'">
@@ -123,8 +136,13 @@
                     <h5 class="font-size-18 fw-700 color-dark line-24"
                         *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale'">Venda</h5>
                     <h5 class="font-size-18 fw-700 color-dark line-24"
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'both'">Venda / Aluguel</h5>
+                    <h5 class="font-size-18 fw-700 color-dark line-24"
                         *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent'">
                         {{selectedProposal?.proposal?.announcement?.leaseValue | currency: 'R$'}}</h5>
+                    <h5 class="font-size-18 fw-700 color-dark line-24"
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'both'">
+                        {{selectedProposal?.proposal?.announcement?.saleValue | currency: 'R$'}} / {{selectedProposal?.proposal?.announcement?.leaseValue | currency: 'R$'}}</h5>
                     <h5 class="font-size-18 fw-700 color-dark line-24"
                         *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale'">
                         {{selectedProposal?.proposal?.announcement?.saleValue | currency: 'R$'}}</h5>
