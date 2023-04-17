@@ -25,7 +25,7 @@
             <div class="row mx-0">
               <div class="col-12 px-0 col-btns-announcements">
                 <div class="d-flex overflow-y-scroll w-auto spc-btns-property align-items-center">
-                  <button type="button" data-toggle="modal" data-target="#previewimage"
+                  <button type="button" data-toggle="modal" data-target="#previewimage" (click)="openImagePreview()"
                     class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
                     <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
                     <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
@@ -74,7 +74,8 @@
     <div class="col-12 bg-graylight mt-mobile px-5p d-flex justify-content-center">
       <div class="row max-w-1918 px-0 w-100 row-body-details-property">
         <!-- PAYMENT METHOD MOBILE -->
-        <div class="col-12 d-none payment-mobile d-block-desk col-body-details-property">
+        <div *ngIf="response.typeOfAd !== 'both'"
+          class="col-12 d-none payment-mobile d-block-desk col-body-details-property">
           <div class="w-100 mt-4 border-radius-10">
             <div class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
 
@@ -94,8 +95,11 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' || '-'}}</span>
-                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
                 <div *ngIf="response.condominiumValue !== '0'"
                   class="col-12 d-flex py-2 align-items-center justify-content-between">
@@ -127,8 +131,89 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' || '-'}}</span>
-                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                </div>
+              </div>
+              <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
+                    fw-700 font-size-18 line-24 mt-3 text-light
+                    w-100" type="button">Agendar visita</button>
+              <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
+                    fw-700 font-size-18 line-24 mt-3 color-purple
+                    w-100" type="button">Fazer Proposta</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="response.typeOfAd === 'both'"
+          class="col-12 d-none payment-mobile d-block-desk col-body-details-property">
+          <div class="w-100 mt-4 border-radius-10">
+            <div class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
+              <div class="d-flex justify-content-center align-items-center">
+                <button [class]="valueViewSelectSale ? 'btn-type-of-ad-select' : 'btn-type-of-ad-disabled'" class="btn"
+                  (click)="changeValueViewSelectSale('sale')">Comprar</button>
+                <button [class]="!valueViewSelectSale ? 'btn-type-of-ad-select' : 'btn-type-of-ad-disabled'" class="btn"
+                  (click)="changeValueViewSelectSale('rent')">Alugar</button>
+              </div>
+              <!-- <p class="d-grid w-100">
+                <span class="fw-700 font-size-18 line-24
+                       color-black">Alta procura</span>
+                <span class="fw-400 font-size-14 line-19
+                       color-black">226 pessoas viram esse
+                  imóvel recentemente</span>
+              </p> -->
+              <!-- <hr class="hr" /> -->
+              <div class="row">
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Venda
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                </div>
+                <div *ngIf="response.condominiumValue !== '0'"
+                  class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-400 font-size-18 line-24 color-black">Condomínio
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ '
+                    ||'-'}}</span>
+                </div>
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-400 font-size-18 line-24 color-black">IPTU
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale"
+                    class="fw-400 font-size-18 line-24 color-black">{{response.valueOfIptu | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale"
+                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 | currency:
+                    'R$ ' ||
+                    '-'}}</span>
+                </div>
+                <div class="col-12">
+                  <h6 class="my-4 w-100 bg-whitelight" style="height:1px;"></h6>
+                </div>
+                <div class="col-12 d-flex py-4 align-items-center justify-content-between">
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Venda
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -209,9 +294,11 @@
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Disponibilidade:</td>
-                    <td *ngIf="response.typeOfAd === 'sale'" class="pl-0 fw-700 font-size-16 line-20 color-black">
+                    <td *ngIf="response.typeOfAd === 'sale'"
+                      class="pl-0 bg-danger fw-700 font-size-16 line-20 color-black">
                       &nbsp;&nbsp;Venda</td>
-                    <td *ngIf="response.typeOfAd === 'rent'" class="pl-0 fw-700 font-size-16 line-20 color-black">
+                    <td *ngIf="response.typeOfAd === 'rent'"
+                      class="pl-0 bg-danger fw-700 font-size-16 line-20 color-black">
                       &nbsp;&nbsp;Locação</td>
                   </tr>
                   <tr>
@@ -291,7 +378,8 @@
             </div>
           </div>
           <!-- INFO CARDS -->
-          <div *ngIf="response.characteristicInfrastructureOfTheCondominium" class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
+          <div *ngIf="response.characteristicInfrastructureOfTheCondominium"
+            class="w-100 border-radius-10 mt-4 px-5 pt-4 pb-3  bg-white">
             <div class="w-100 mb-3 align-items-center d-flex justify-content-between">
               <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">O que mais esse imóvel oferece</p>
               <img *ngIf="!arrow1" src="../../../assets/icon/arrow-down-blue.png" width="20" style="cursor: pointer;"
@@ -617,47 +705,47 @@
                 style="cursor: pointer;" (click)="openarrow(3)">
             </div>
             <div *ngIf="arrow3" class="w-100 animate__animated">
-<!--              <div class="w-100 my-4 d-flex block-important-->
-<!--                    border border-radius-10-->
-<!--                    justify-content-between p-4">-->
-<!--                <div class="w-auto d-inline-block">-->
-<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black ">Primeiro piso</h3>-->
-<!--                </div>-->
-<!--                <div class="w-auto d-inline-block">-->
-<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Tamanho:-->
-<!--                    267 m²-->
-<!--                  </h3>-->
-<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Quartos:-->
-<!--                    87 m²-->
-<!--                  </h3>-->
-<!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Banheiros:-->
-<!--                    34 m²-->
-<!--                  </h3>-->
-<!--                  <h3 *ngIf="response.typeOfAd === 'sale'" class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Preço: {{response.leaseValue | currency: 'R$ ' || '-'}}-->
-<!--                  </h3>-->
-<!--                  <h3 *ngIf="response.typeOfAd === 'rent'" class="fw-400 px-4 my-2 font-size-18-->
-<!--                          line-24 color-black d-inline-block">Preço: {{response.saleValue | currency: 'R$ ' || '-'}}-->
-<!--                  </h3>-->
-<!--                </div>-->
-<!--              </div>-->
+              <!--              <div class="w-100 my-4 d-flex block-important-->
+              <!--                    border border-radius-10-->
+              <!--                    justify-content-between p-4">-->
+              <!--                <div class="w-auto d-inline-block">-->
+              <!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black ">Primeiro piso</h3>-->
+              <!--                </div>-->
+              <!--                <div class="w-auto d-inline-block">-->
+              <!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Tamanho:-->
+              <!--                    267 m²-->
+              <!--                  </h3>-->
+              <!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Quartos:-->
+              <!--                    87 m²-->
+              <!--                  </h3>-->
+              <!--                  <h3 class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Banheiros:-->
+              <!--                    34 m²-->
+              <!--                  </h3>-->
+              <!--                  <h3 *ngIf="response.typeOfAd === 'sale'" class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Preço: {{response.leaseValue | currency: 'R$ ' || '-'}}-->
+              <!--                  </h3>-->
+              <!--                  <h3 *ngIf="response.typeOfAd === 'rent'" class="fw-400 px-4 my-2 font-size-18-->
+              <!--                          line-24 color-black d-inline-block">Preço: {{response.saleValue | currency: 'R$ ' || '-'}}-->
+              <!--                  </h3>-->
+              <!--                </div>-->
+              <!--              </div>-->
               <img src="../../../assets/img/plant.png" class="w-100 p-4" />
-<!--              <p class="fw-400 font-size-14 line-20-->
-<!--                    color-black w-100 text-center py-5">-->
-<!--                Plan description. Lorem ipsum dolor sit-->
-<!--                amet, consectetuer adipiscing elit, sed diam-->
-<!--                nonummy nibh-->
-<!--                euismod tincidunt ut laoreet dolore magna-->
-<!--                aliquam erat volutpat. Ut wisi enim ad minim-->
-<!--                veniam, quis-->
-<!--                nostrud exerci tation ullamcorper suscipit-->
-<!--                lobortis nisl ut aliquip ex ea commodo-->
-<!--                consequat.-->
-<!--              </p>-->
+              <!--              <p class="fw-400 font-size-14 line-20-->
+              <!--                    color-black w-100 text-center py-5">-->
+              <!--                Plan description. Lorem ipsum dolor sit-->
+              <!--                amet, consectetuer adipiscing elit, sed diam-->
+              <!--                nonummy nibh-->
+              <!--                euismod tincidunt ut laoreet dolore magna-->
+              <!--                aliquam erat volutpat. Ut wisi enim ad minim-->
+              <!--                veniam, quis-->
+              <!--                nostrud exerci tation ullamcorper suscipit-->
+              <!--                lobortis nisl ut aliquip ex ea commodo-->
+              <!--                consequat.-->
+              <!--              </p>-->
             </div>
           </div>
           <div class="w-100 my-4 border-radius-10 bg-white">
@@ -706,7 +794,7 @@
 
         </div>
         <!-- PAYMENT METHOD DESK-->
-        <div id="colinfopay" class="col-4  d-none-desk col-body-details-property">
+        <div id="colinfopay" *ngIf="response.typeOfAd !== 'both'" class="col-4  d-none-desk col-body-details-property">
           <div class="w-100 mt-4 border-radius-10">
             <div id="infopaydesk" class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
 
@@ -764,8 +852,82 @@
                   <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">Venda
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' || '-'}}</span>
-                  <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'sale'"
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="response.typeOfAd === 'rent'"
+                    class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ' || '-'}}</span>
+                </div>
+              </div>
+              <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
+                    fw-700 font-size-18 line-24 mt-3 text-light
+                    w-100" type="button">Agendar visita</button>
+              <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
+                    fw-700 font-size-18 line-24 mt-3 color-purple
+                    w-100" type="button">Fazer Proposta</button>
+            </div>
+          </div>
+        </div>
+        <div id="colinfopay" *ngIf="response.typeOfAd === 'both'" class="col-4 d-none-desk col-body-details-property">
+          <div class="w-100 mt-4 border-radius-10">
+            <div id="infopaydesk" class="w-100 mt-4 card-info-buy bg-white p-4 border-radius-10">
+              <div class="row">
+                <div class="d-flex justify-content-center align-items-center">
+                  <button [class]="valueViewSelectSale ? 'btn-type-of-ad-select' : 'btn-type-of-ad-disabled'"
+                    class="btn" (click)="changeValueViewSelectSale('sale')">Comprar</button>
+                  <button [class]="!valueViewSelectSale ? 'btn-type-of-ad-select' : 'btn-type-of-ad-disabled'"
+                    class="btn" (click)="changeValueViewSelectSale('rent')">Alugar</button>
+                </div>
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Venda
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue
+                    | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale"
+                    class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.leaseValue) |
+                    currency: 'R$'}}</span>
+                </div>
+                <div *ngIf="response.condominiumValue !== '0'"
+                  class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-400 font-size-18 line-24 color-black">Condomínio
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ ' ||
+                    '-'}}</span>
+                </div>
+                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                  <span class="fw-400 font-size-18 line-24 color-black">IPTU
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="!valueViewSelectSale"
+                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 | currency:
+                    'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="valueViewSelectSale"
+                    class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) | currency:
+                    'R$ ' ||
+                    '-'}}</span>
+                </div>
+                <div class="col-12">
+                  <h6 class="my-4 w-100 bg-graylight" style="height: 1px;"></h6>
+                </div>
+                <div class="col-12 d-flex py-4 align-items-center justify-content-between">
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Aluguel
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Venda
+                    <i class="bi font-size-14 color-muted bi-info-circle"></i>
+                  </span>
+                  <span *ngIf="valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">{{response.saleValue
+                    | currency: 'R$ ' ||
+                    '-'}}</span>
+                  <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent |
+                    currency: 'R$ ' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -790,6 +952,8 @@
     <div class="w-100 max-w-800 padding-x schedule-visit-modal">
       <div class="w-100">
         <h3 *ngIf="response.typeOfAd === 'sale'">{{finalValueSale | currency: 'R$ ' || '-'}}</h3>
+        <h3 *ngIf="response.typeOfAd === 'both' && valueViewSelectSale">{{finalValueSale | currency: 'R$ ' || '-'}}</h3>
+        <h3 *ngIf="response.typeOfAd === 'both' && !valueViewSelectSale">{{finalValueRent | currency: 'R$ ' || '-'}}</h3>
         <h3 *ngIf="response.typeOfAd === 'rent'">{{finalValueRent | currency: 'R$ ' || '-'}}</h3>
       </div>
       <div class="row">
@@ -812,25 +976,43 @@
   <!-- Modal VIEW IMAGES -->
   <div class="modal px-0 fade" id="previewimage" tabindex="-1" role="dialog" aria-labelledby="previewimageTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
-      <div class="modal-content h-100 modal-content-preview">
-        <div class="modal-header position-absolute align-items-end z-10 d-flex justify-content-end mt-3 right-0">
+    <div class="modal-dialog modal-lg-preview modal-dialog-centered" role="document">
+      <div class="modal-content modal-content-preview">
+        <div class="header-image-preview">
+          <h3 class="count-text-image-preview">
+            {{indexTeste}}/{{response.photos.length}}
+          </h3>
           <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
             <i class="bi font-size-48 text-light bi-x"></i>
           </button>
         </div>
-        <div class="anima-body h-100 d-flex justify-content-center align-items-center">
-          <swiper  class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
+        <div class="anima-body d-flex flex-column justify-content-center align-items-center">
+          <swiper #myCaroucel class="h-100 max-w-1918 w-100" [slidesPerView]="1" [navigation]="true" [scrollbar]="true">
             <ng-template class="w-100" *ngFor="let item of response.photos" swiperSlide>
               <div
-                class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 py-2 border-radius-10 px-5">
+                class="bg-img-preview d-flex justify-content-center align-items-center w-100 h-100 pt-2 border-radius-10 px-5 position-relative">
                 <img [src]="item.key" class="w-100 h-auto preview-img-property" />
               </div>
             </ng-template>
           </swiper>
+          <button class="btn btn-expand-photo" (click)="openFullScreen()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
+            </svg>
+          </button>
+          <div class="content-thumb-images my-3">
+            <div class="ml-2" *ngFor="let item of response.photos; let i = index" #thumbPhotosArr [id]="item.key">
+              <img [src]="item.key" height="100" width="100" (click)="onThumbClick(i)" [id]="i">
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <ng-image-fullscreen-view [images]="imageSelectedFullScreen" [imageIndex]="currentIndex" [show]="showFlag"
+      (close)="closeEventHandler()">
+    </ng-image-fullscreen-view>
   </div>
   <!-- Modal PLAY VIDEO -->
   <div class="modal px-0 fade" id="playvideo" tabindex="-1" role="dialog" aria-labelledby="playvideoTitle"

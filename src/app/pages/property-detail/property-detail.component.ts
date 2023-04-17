@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +21,8 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
   styleUrls: ['./property-detail.component.scss']
 })
 export class PropertyDetailComponent implements OnInit {
+
+  @ViewChild('imageEvidence', { static: true }) imageRef!: ElementRef;
 
   infopaymobile = false;
   finalValueSale: number;
@@ -136,6 +138,21 @@ export class PropertyDetailComponent implements OnInit {
   propertyproducts: AnnouncementGetResponseDto[] = [];
   recentlySeenList: AnnouncementGetResponseDto[] = [];
 
+  @ViewChild('myCaroucel') swiperRef!: any;
+
+  imageEvidence: any;
+
+  indexTeste: number;
+
+  @ViewChildren('thumbPhotosArr') thumbPhotosArrList: QueryList<any>;
+
+  currentIndex: any = -1;
+  showFlag: any = false;
+
+  imageSelectedFullScreen: any = [];
+
+  valueViewSelectSale: boolean = true;
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -172,8 +189,36 @@ export class PropertyDetailComponent implements OnInit {
       this.arrayDeDatas.push(hoje)
     }
     this.list();
+
+
   }
 
+  openImagePreview() {
+    this.indexTeste = 1
+    this.thumbPhotosArrList.map(results => {
+      if (results.nativeElement?.id === this.imageEvidence.key) {
+        results.nativeElement.className = 'active-thumb-photo';
+      } else {
+        results.nativeElement.className = 'disable-thumb-photo ml-2';
+      }
+    });
+    setTimeout(() => {
+      this.swiperRef.swiperRef.on('slideChange', () => {
+        const activeIndex = this.swiperRef.swiperRef.activeIndex;
+        this.imageEvidence = this.response.photos[activeIndex];
+        this.indexTeste = this.imageEvidence.index
+        const activeImage = this.response.photos[activeIndex].key;
+        this.thumbPhotosArrList.map(results => {
+          if (results.nativeElement?.id === this.imageEvidence.key) {
+            results.nativeElement.className = 'active-thumb-photo';
+
+          } else {
+            results.nativeElement.className = 'disable-thumb-photo ml-2';
+          }
+        });
+      });
+    }, 100);
+  }
 
   ngOnInit(): void {
 
@@ -183,7 +228,7 @@ export class PropertyDetailComponent implements OnInit {
     this.products = this.datamokservice.resultSearch;
 
     this.response = this.route.snapshot.data['resolve'];
-    console.log('response page',this.response);
+    console.log('response page', this.response);
     this.ngxSpinnerService.hide();
 
     let resultadoVerify = localStorage.getItem('resultSearch');
@@ -207,6 +252,37 @@ export class PropertyDetailComponent implements OnInit {
     }
 
     this._getCompleteAddress();
+
+    if (!this.response.photos[0].index) {
+      for (let i = 0; i < this.response.photos.length; i++) {
+        Object.assign(this.response.photos[i], { index: i + 1 })
+      }
+    }
+
+    this.imageEvidence = this.response.photos[0]
+
+  }
+
+  changeValueViewSelectSale(valueView) {
+      this.valueViewSelectSale = !this.valueViewSelectSale 
+  }
+
+  closeEventHandler() {
+    this.showFlag = false;
+    this.currentIndex = -1;
+  }
+
+  onThumbClick(index: number): void {
+    if (this.swiperRef) {
+      this.swiperRef.swiperRef.slideTo(index);
+    }
+  }
+
+  openFullScreen() {
+    this.imageSelectedFullScreen = []
+    this.imageSelectedFullScreen.push({ image: this.imageEvidence.key });
+    this.currentIndex = this.imageEvidence.index;
+    this.showFlag = true;
   }
 
   public toNumber(paremetro1: string) {
@@ -238,7 +314,6 @@ export class PropertyDetailComponent implements OnInit {
   closePause(videomedia: HTMLVideoElement) {
     videomedia.pause();
   }
-
 
   selectDate(value) {
     this.dataSelecionada = value
@@ -391,7 +466,7 @@ export class PropertyDetailComponent implements OnInit {
           return
         },
         error => {
-          console.log(error)
+          console.error(error)
         }
       )
     }
@@ -403,7 +478,7 @@ export class PropertyDetailComponent implements OnInit {
             this.list()
           },
           error => {
-            console.log(error)
+            console.error(error)
           }
         )
       } else if (this.listLikes[i]._id !== value) {
@@ -412,7 +487,7 @@ export class PropertyDetailComponent implements OnInit {
             this.list();
           },
           error => {
-            console.log(error)
+            console.error(error)
           }
         )
       }

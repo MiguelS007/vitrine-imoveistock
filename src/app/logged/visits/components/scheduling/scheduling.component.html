@@ -108,8 +108,8 @@
                         <img *ngIf="!selectedScheduling.announcement?.mainPhoto" src="../../../../assets/img/ap.png"
                             class="photo-announcement-card"
                             (click)="announcementSelected(selectedScheduling.announcement?._id)">
-                        <img *ngIf="selectedScheduling.announcement?.mainPhoto" [src]="selectedScheduling.announcement?.mainPhoto"
-                            class="photo-announcement-card"
+                        <img *ngIf="selectedScheduling.announcement?.mainPhoto"
+                            [src]="selectedScheduling.announcement?.mainPhoto" class="photo-announcement-card"
                             (click)="announcementSelected(selectedScheduling.announcement?._id)">
                         <div class="space-sale-exclusive">
                             <h4 *ngIf="selectedScheduling.announcement?.typeOfAd === 'sale'"
@@ -118,6 +118,14 @@
                             <h4 *ngIf="selectedScheduling.announcement?.typeOfAd === 'rent'"
                                 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
                                 Locação</h4>
+                            <div class="d-flex" *ngIf="selectedScheduling.announcement?.typeOfAd === 'both'">
+                                <h4
+                                    class="bg-purple h-fit px-4 py-2 mb-0 mr-2 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                                    Venda</h4>
+                                <h4
+                                    class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                                    Locação</h4>
+                            </div>
                             <h4 *ngIf="selectedScheduling.announcement?.exclusivity === true"
                                 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
                                 Exclusivo</h4>
@@ -125,6 +133,10 @@
                         <div class="space-value-announcement">
                             <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                 *ngIf="selectedScheduling.announcement?.typeOfAd === 'sale'">
+                                {{selectedScheduling.announcement?.saleValue | currency:
+                                'R$'}}</p>
+                            <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
+                                *ngIf="selectedScheduling.announcement?.typeOfAd === 'both'">
                                 {{selectedScheduling.announcement?.saleValue | currency:
                                 'R$'}}</p>
                             <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"

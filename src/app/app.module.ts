@@ -50,6 +50,7 @@ import { TermsSignupComponent } from './shared/terms-signup/terms-signup.compone
 import { GoogleMapsModule } from '@angular/google-maps';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CepService } from './service/cep.service';
+import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 
 registerLocaleData(ptBr);
 
@@ -130,7 +131,8 @@ const cookieConfig:NgcCookieConsentConfig = {
     CurrencyMaskModule,
     AutocompleteLibModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgImageFullscreenViewModule
   ],
   providers: [
     {
