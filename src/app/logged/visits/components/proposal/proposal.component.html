@@ -125,9 +125,11 @@
             <div class="w-100 bg-white border-radius-10 h-auto mt-4 p-4">
                 <div class="d-flex justify-content-between">
                     <h5 class="font-size-18 fw-700 color-dark line-24"
-                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'">Aluguel</h5>
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'">
+                        Aluguel</h5>
                     <h5 class="font-size-18 fw-700 color-dark line-24"
-                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'">Venda</h5>
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'">
+                        Venda</h5>
                     <h5 class="font-size-18 fw-700 color-dark line-24"
                         *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'">
                         {{selectedProposal?.proposal?.announcement?.leaseValue | currency: 'R$'}}</h5>
@@ -143,11 +145,15 @@
                                         color-muted
                                         bi-info-circle" alt="icons group" placement="end" ngbTooltip="Valor ofertado"
                             container="body"></i></span>
-                    <span *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'" class="fw-400 font-size-18
+                    <span
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'"
+                        class="fw-400 font-size-18
                                         line-24 color-black">{{selectedProposal?.proposal?.suggestedRentAmount |
                         currency: 'R$'}}
                     </span>
-                    <span *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'" class="fw-400 font-size-18
+                    <span
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'"
+                        class="fw-400 font-size-18
                                         line-24 color-black">{{selectedProposal?.proposal?.suggestedSaleAmount |
                         currency: 'R$'}}
                     </span>
@@ -224,25 +230,34 @@
                     </span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'" class="fw-400 font-size-18
+                    <span
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'"
+                        class="fw-400 font-size-18
                                     line-24 color-black">IPTU
                         <i class="bi font-size-14
                                         color-muted
                                         bi-info-circle" alt="icons group" placement="end"
                             ngbTooltip="Valor parcelado em 12x do IPTU" container="body"></i></span>
-                    <span *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'" class="fw-400 font-size-18
+                    <span
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'"
+                        class="fw-400 font-size-18
                                     line-24 color-black">IPTU
                         <i class="bi font-size-14
                                         color-muted
                                         bi-info-circle" alt="icons group" placement="end"
                             ngbTooltip="Valor total do IPTU" container="body"></i></span>
-                    <span *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'" class="fw-400 font-size-18
+                    <span
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'"
+                        class="fw-400 font-size-18
                                         line-24 color-black">{{selectedProposal?.proposal?.announcement?.valueOfIptu |
                         currency:
                         'R$'}}
                     </span>
-                    <span *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'" class="fw-400 font-size-18
-                                        line-24 color-black">{{toNumber(selectedProposal?.proposal?.announcement?.valueOfIptu) / 12 |
+                    <span
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'"
+                        class="fw-400 font-size-18
+                                        line-24 color-black">{{toNumber(selectedProposal?.proposal?.announcement?.valueOfIptu)
+                        / 12 |
                         currency:
                         'R$'}}
                     </span>
@@ -256,7 +271,14 @@
                             *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'">
                             {{selectedProposal?.counterProposal?.suggestedSaleAmount | currency: 'R$'}}</h5>
                         <h5 class="font-size-18 fw-700 color-dark line-24"
-                            *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'">Venda</h5>
+                            *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'">
+                            {{selectedProposal?.counterProposal?.suggestedRentAmount | currency: 'R$'}}</h5>
+                        <!-- <h5 class="font-size-18 fw-700 color-dark line-24"
+                            *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'">
+                            Venda</h5>
+                        <h5 class="font-size-18 fw-700 color-dark line-24"
+                            *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'">
+                            Aluguel</h5> -->
                     </div>
 
                     <div *ngIf="selectedProposal?.counterProposal?.saleCarAsPaymentAmount > 0"
@@ -306,9 +328,11 @@
 
                 <div class="d-flex justify-content-between">
                     <h5 class="font-size-18 fw-700 color-dark line-24"
-                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'">Total Aluguel</h5>
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'">
+                        Total Aluguel</h5>
                     <h5 class="font-size-18 fw-700 color-dark line-24"
-                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'">Total Venda</h5>
+                        *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'sale' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'sale'">
+                        Total Venda</h5>
                     <h5 class="font-size-18 fw-700 color-dark line-24"
                         *ngIf="selectedProposal?.proposal?.announcement?.typeOfAd === 'rent' || selectedProposal?.proposal?.announcement?.typeOfAd === 'both' && selectedProposal?.proposal?.type === 'rent'">
                         {{toNumber(selectedProposal?.proposal?.announcement?.valueOfIptu) / 12 +
