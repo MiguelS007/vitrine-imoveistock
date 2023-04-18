@@ -124,10 +124,10 @@
                             Locação</h4>
 
                         <div class="d-flex" *ngIf="response?.typeOfAd === 'both'">
-                            <h4
+                            <h4 *ngIf="bothSelectType === 'rent'"
                                 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light mr-3">
                                 Locação</h4>
-                            <h4
+                            <h4 *ngIf="bothSelectType === 'sale'"
                                 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
                                 Venda</h4>
                         </div>
@@ -147,8 +147,13 @@
                         </p>
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                             *ngIf="response?.typeOfAd === 'both'">
-                            {{response?.saleValue | currency:
-                            'R$'}}</p>
+                            <span *ngIf="bothSelectType === 'sale'">
+                                {{response?.saleValue | currency: 'R$'}}
+                            </span>
+                            <span *ngIf="bothSelectType === 'rent'">
+                                {{response?.leaseValue | currency: 'R$'}}
+                            </span>
+                        </p>
                         <!-- <div (click)="likeHeart(response?._id)"
                             class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
                             <i [class]="response?.liked ?
@@ -220,7 +225,8 @@
                 </a>-->
             </div>
         </div>
-        <div *ngIf="cardinfotwo && response.typeOfAd === 'rent'" class="col-12">
+        <div *ngIf="cardinfotwo && response.typeOfAd === 'rent' || cardinfotwo && response.typeOfAd === 'both' && bothSelectType === 'rent'"
+            class="col-12">
             <div class="w-100 my-4 p-5 border-radius-10 bg-white">
                 <span class="fw-700 font-size-16 line-20 color-black">Regras do Contrato</span>
                 <p class="fw-400 font-size-16 pt-3 line-20 color-black">
@@ -268,16 +274,30 @@
                         <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18
                             line-24 color-black">{{response.leaseValue | currency:
                             'R$'}}</span>
+                        <span *ngIf="response.typeOfAd === 'both'" class="fw-700 font-size-18
+                            line-24 color-black">
+                            <span *ngIf="bothSelectType === 'rent'">
+                                {{response.leaseValue | currency:'R$'}}
+                            </span>
+                            <span *ngIf="bothSelectType === 'sale'">
+                                {{response.saleValue | currency:'R$'}}
+                            </span>
+
+                        </span>
                     </div>
                     <div class="col-sm-6 mt-3">
-                        <span *ngIf="response.typeOfAd === 'rent'" class="fw-400 font-size-18
+                        <span
+                            *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
+                            class="fw-400 font-size-18
                                     line-24 color-black">Aluguel
                             <i class="bi font-size-14
                                         color-muted
                                         bi-info-circle" alt="icons group" placement="end"
                                 ngbTooltip="Valor definido para aluguel. Caso queira enviar uma proposta com outro valor clique em Propor novo valor"
                                 container="body"></i></span>
-                        <span *ngIf="response.typeOfAd === 'sale'" class="fw-400 font-size-18
+                        <span
+                            *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
+                            class="fw-400 font-size-18
                                         line-24 color-black">Venda
                             <i class="bi font-size-14
                                             color-muted
@@ -286,10 +306,14 @@
                                 container="body"></i></span>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-sm-end mt-3">
-                        <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18
+                        <span
+                            *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
+                            class="fw-700 font-size-18
                                 line-24 color-black">{{response.saleValue | currency:
                             'R$'}}</span>
-                        <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18
+                        <span
+                            *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
+                            class="fw-700 font-size-18
                                 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 +
                             toNumber(response.leaseValue) + toNumber(response.condominiumValue) |
                             currency: 'R$'}}</span>
@@ -372,7 +396,8 @@
                 </div>
             </div>
 
-            <div *ngIf="proposalResponse?.proposal?.announcement?.typeOfAd === 'rent'">
+            <div
+                *ngIf="proposalResponse?.proposal?.announcement?.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'sale'">
                 <div *ngIf="spaceCustomizeProposalChanges" class="w-100 bg-white border-radius-10 p-5">
                     <p class="fw-700 font-size-18 line-18 color-black">Mudanças do imóvel</p>
                     <hr class="bg-whitelight" />
@@ -582,13 +607,23 @@
                                                         line-24 color-black">Aluguel</span>
                                             <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18
                                                         line-24 color-black">Venda</span>
+
+                                            <span *ngIf="response.typeOfAd === 'both'" class="fw-700 font-size-18
+                                                        line-24 color-black">
+                                                <span *ngIf="bothSelectType === 'rent'">Aluguel</span>
+                                                <span *ngIf="bothSelectType === 'sale'">Venda</span>
+                                            </span>
                                         </td>
                                         <td class="d-tavle-cell
                                                     text-align-right">
-                                            <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
+                                                class="fw-700 font-size-18
                                                         line-24 color-black">{{response.leaseValue | currency:
                                                 'R$'}}</span>
-                                            <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
+                                                class="fw-700 font-size-18
                                                         line-24 color-black">{{response.saleValue | currency:
                                                 'R$'}}</span>
                                         </td>
@@ -611,13 +646,17 @@
                                     </tr>
                                     <tr class="h-40">
                                         <td>
-                                            <span *ngIf="response.typeOfAd === 'rent'" class="fw-400 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
+                                                class="fw-400 font-size-18
                                                         line-24 color-black">IPTU <i class="bi font-size-14
                                                             color-muted
                                                             bi-info-circle" alt="icons group" placement="end"
                                                     ngbTooltip="Valor parcelado em 12x do IPTU"
                                                     container="body"></i></span>
-                                            <span *ngIf="response.typeOfAd === 'sale'" class="fw-400 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
+                                                class="fw-400 font-size-18
                                                         line-24 color-black">IPTU <i class="bi font-size-14
                                                             color-muted
                                                             bi-info-circle" alt="icons group" placement="end"
@@ -625,10 +664,14 @@
                                         </td>
                                         <td class="d-tavle-cell
                                                     text-align-right">
-                                            <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
+                                                class="fw-700 font-size-18
                                                         line-24 color-black">{{toNumber(response.valueOfIptu) / 12 |
                                                 currency: 'R$'}}</span>
-                                            <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
+                                                class="fw-700 font-size-18
                                                         line-24 color-black">{{toNumber(response.valueOfIptu) |
                                                 currency: 'R$'}}</span>
                                         </td>
@@ -640,19 +683,27 @@
                                 <tbody>
                                     <tr class="h-40">
                                         <td>
-                                            <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
+                                                class="fw-700 font-size-18
                                                         line-24 color-black">Valor total mensal</span>
-                                            <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
+                                                class="fw-700 font-size-18
                                                         line-24 color-black">Venda</span>
                                         </td>
                                         <td class="d-tavle-cell
                                                     text-align-right">
-                                            <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
+                                                class="fw-700 font-size-18
                                                     line-24 color-black">{{
                                                 toNumber(response.leaseValue) + toNumber(response.condominiumValue) +
                                                 toNumber(response.valueOfIptu) / 12 |
                                                 currency: 'R$'}}</span>
-                                            <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18
+                                            <span
+                                                *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
+                                                class="fw-700 font-size-18
                                                     line-24 color-black">{{toNumber(response.saleValue) |
                                                 currency: 'R$'}}</span>
                                         </td>
@@ -695,11 +746,13 @@
                                         <span class="fw-400 font-size-18 line-24 text-light">Valor do anúncio</span>
                                     </div>
                                     <div class="col-sm-6 d-flex justify-content-sm-end">
-                                        <span *ngIf="response.typeOfAd === 'rent'"
+                                        <span
+                                            *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                             class="fw-400 font-size-18 line-24 text-light">{{response.leaseValue |
                                             currency:
                                             'R$'}}</span>
-                                        <span *ngIf="response.typeOfAd === 'sale'"
+                                        <span
+                                            *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                             class="fw-400 font-size-18 line-24 text-light">{{response.saleValue |
                                             currency:
                                             'R$'}}</span>
@@ -709,10 +762,12 @@
                             <div class="col-12 pb-3 border-radius-10">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <span *ngIf="response.typeOfAd === 'rent'"
+                                        <span
+                                            *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                             class="fw-400 font-size-18 line-24 text-light">Valor de proposta de
                                             aluguel</span>
-                                        <span *ngIf="response.typeOfAd === 'sale'"
+                                        <span
+                                            *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                             class="fw-400 font-size-18 line-24 text-light">Valor de proposta de
                                             venda</span>
                                     </div>
@@ -721,12 +776,14 @@
                                             class="fw-400 font-size-18 line-24 text-light">{{response.leaseValue |
                                             currency:
                                             'R$'}}</span> -->
-                                        <input *ngIf="response.typeOfAd === 'rent'" type="text"
-                                            formControlName="suggestedRentAmount"
+                                        <input
+                                            *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
+                                            type="text" formControlName="suggestedRentAmount"
                                             class="form-control input-custom-proposal" currencyMask
                                             [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
-                                        <input *ngIf="response.typeOfAd === 'sale'" type="text"
-                                            formControlName="suggestedSaleAmount"
+                                        <input
+                                            *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
+                                            type="text" formControlName="suggestedSaleAmount"
                                             class="form-control input-custom-proposal" currencyMask
                                             [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
                                     </div>
@@ -795,12 +852,14 @@
                                     <i class="bi color-muted px-2 font-size-30 bi-info-circle" alt="icons group"
                                         placement="end" ngbTooltip="Valor total do anúncio" container="body"></i>
                                 </p>
-                                <span *ngIf="response.typeOfAd === 'rent'"
+                                <span
+                                    *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                     class="fw-400 font-size-18 line-24 color-black">{{response.leaseValue |
                                     currency:
                                     'R$'}}</span>
 
-                                <span *ngIf="response.typeOfAd === 'sale'"
+                                <span
+                                    *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                     class="fw-400 font-size-18 line-24 color-black">{{response.saleValue |
                                     currency:
                                     'R$'}}</span>
@@ -815,23 +874,25 @@
                                             'R$'}}</span> -->
                             </div>
                             <div class="col-12 py-2 d-flex justify-content-between">
-                                <p *ngIf="response.typeOfAd === 'sale'"
+                                <p *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                     class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
                                     IPTU
                                     <i class="bi color-muted px-2 font-size-30 bi-info-circle" alt="icons group"
                                         placement="end" ngbTooltip="Valor total do IPTU" container="body"></i>
-                                <p *ngIf="response.typeOfAd === 'rent'"
+                                <p *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                     class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
                                     IPTU
                                     <i class="bi color-muted px-2 font-size-30 bi-info-circle" alt="icons group"
                                         placement="end" ngbTooltip="Valor parcelado em 12x do IPTU"
                                         container="body"></i>
                                 </p>
-                                <span *ngIf="response.typeOfAd === 'rent'"
+                                <span
+                                    *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                     class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) /
                                     12 | currency:
                                     'R$'}}</span>
-                                <span *ngIf="response.typeOfAd === 'sale'"
+                                <span
+                                    *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                     class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) |
                                     currency:
                                     'R$'}}</span>
@@ -863,12 +924,14 @@
                             <div class="col-12 py-3">
                                 <p class="w-100 pb-4 d-flex align-items-center justify-content-between">
                                     <span class="fw-700 font-size-18 line-24 color-black">Valor total</span>
-                                    <span *ngIf="response.typeOfAd === 'rent'"
+                                    <span
+                                        *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                         class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu)
                                         / 12 +
                                         toNumber(response.leaseValue) + toNumber(response.condominiumValue) |
                                         currency: 'R$'}}</span>
-                                    <span *ngIf="response.typeOfAd === 'sale'"
+                                    <span
+                                        *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                         class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.saleValue) |
                                         currency: 'R$'}}</span>
                                 </p>

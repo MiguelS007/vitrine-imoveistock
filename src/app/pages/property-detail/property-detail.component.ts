@@ -324,6 +324,13 @@ export class PropertyDetailComponent implements OnInit {
   }
   goExpress() {
     if (localStorage.getItem('user') !== null) {
+      if(this.response.typeOfAd === 'both') {
+        if(this.valueViewSelectSale) {
+          localStorage.setItem('bothProposalType', 'sale')
+        } else {
+          localStorage.setItem('bothProposalType', 'rent')
+        }
+      }
       this.router.navigate([`logged/express/${this.response._id}`]);
     } else {
       this.modalService.open(ModalLoginComponent, { centered: true })
