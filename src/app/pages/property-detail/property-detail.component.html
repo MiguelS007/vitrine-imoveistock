@@ -109,7 +109,7 @@
                   <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$ '
                     ||'-'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.condominiumValue !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
@@ -295,10 +295,10 @@
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Disponibilidade:</td>
                     <td *ngIf="response.typeOfAd === 'sale'"
-                      class="pl-0 bg-danger fw-700 font-size-16 line-20 color-black">
+                      class="pl-0 fw-700 font-size-16 line-20 color-black">
                       &nbsp;&nbsp;Venda</td>
                     <td *ngIf="response.typeOfAd === 'rent'"
-                      class="pl-0 bg-danger fw-700 font-size-16 line-20 color-black">
+                      class="pl-0 fw-700 font-size-16 line-20 color-black">
                       &nbsp;&nbsp;Locação</td>
                   </tr>
                   <tr>
