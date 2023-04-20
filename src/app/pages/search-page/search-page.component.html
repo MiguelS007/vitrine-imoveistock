@@ -15,7 +15,7 @@
             <span class="result-filter"
               *ngFor="let item of filtroResultDisplay.propertyTypeList | slice:0:5; let i = index">
               <span *ngIf="i <=3">{{item.item_text}} <b><a class="cursor-pointer"
-                    (click)="removeTag(i)">X</a></b></span>
+                    (click)="removeTag(item)">X</a></b></span>
               <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay.propertyTypeList.length - 4)}}</span>
             </span>
             <span class="result-filter" *ngIf="filtroResultDisplay.ufAddress && filtroResultDisplay.cityAddress">
@@ -86,7 +86,7 @@
             </ng-template>
 
             <ng-template #notFoundTemplate let-notFound>
-              <div [innerHTML]="notFound"></div>
+              <div>Não encontrado</div>
             </ng-template>
           </div>
 
@@ -535,8 +535,8 @@
       </ng-template>
 
       <ng-template #notFoundTemplate let-notFound>
-        <div [innerHTML]="notFound"></div>
-      </ng-template>
+        <div>Não encontrado</div>
+    </ng-template>
     </div>
 
     <!-- <div class="dropdown px-0 mb-3 ">
