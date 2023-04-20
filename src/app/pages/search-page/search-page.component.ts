@@ -489,8 +489,16 @@ export class SearchPageComponent implements OnInit {
     this.TypeProperty = value
   }
 
-  removeTag(index: number) {
-    this.filtroResultDisplay.propertyTypeList.splice(index, 1);
+  removeTag(index: any) {
+    let filterDisplay = this.filtroResultDisplay.propertyTypeList.indexOf(index);
+    this.filtroResultDisplay.propertyTypeList.splice(filterDisplay, 1);
+
+    this.selectedItems = [];
+
+    setTimeout(() => {
+      this.selectedItems = this.filtroResultDisplay.propertyTypeList
+    }, 100);
+
     this.filtrar();
   }
 
