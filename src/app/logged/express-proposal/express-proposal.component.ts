@@ -184,6 +184,10 @@ export class ExpressProposalComponent implements OnInit {
     if (localStorage.getItem('bothProposalType') !== null) {
       localStorage.removeItem('bothProposalType')
     }
+
+    if (localStorage.getItem('counterProposalInProposal') !== null) {
+      localStorage.removeItem('counterProposalInProposal')
+    }
   }
 
   listLike() {
@@ -546,6 +550,7 @@ export class ExpressProposalComponent implements OnInit {
         announcementId: this.response._id
       }
 
+
       if (this.proposalResponse.counterProposal) {
         this.sendCounterProposal(this.request)
       } else {
@@ -574,7 +579,7 @@ export class ExpressProposalComponent implements OnInit {
         } else {
           this.sendProposal(this.request)
         }
-      } else {
+      } else if (this.bothSelectType === 'rent') {
         let valueTotal = this.toNumber(this.response.valueOfIptu) / 12 + this.toNumber(this.response.condominiumValue) + this.toNumber(this.response.leaseValue)
 
         this.request = {
@@ -588,8 +593,9 @@ export class ExpressProposalComponent implements OnInit {
           comment: this.formCustomizeProposal.controls['comment'].value,
           announcementId: this.response._id
         }
+        console.log('teste', this.proposalResponse)
 
-        if (this.proposalResponse.counterProposal) {
+        if (this.proposalResponse) {
           this.sendCounterProposal(this.request)
         } else {
           this.sendProposal(this.request)

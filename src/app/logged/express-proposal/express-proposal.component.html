@@ -196,7 +196,7 @@
                         <img src="../../../assets/icon/car.png" class="pr-2" />
                         <p class="fw-400 mb-0
                                             font-size-14 line-20
-                                            color-black">{{response?.vacancyNumber}}
+                                            color-black">{{response?.parkingSpaces}}
                             Vagas</p>
                     </div>
                     <div class="col justify-content-left
@@ -397,7 +397,7 @@
             </div>
 
             <div
-                *ngIf="proposalResponse?.proposal?.announcement?.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'sale'">
+                *ngIf="proposalResponse?.proposal?.announcement?.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'">
                 <div *ngIf="spaceCustomizeProposalChanges" class="w-100 bg-white border-radius-10 p-5">
                     <p class="fw-700 font-size-18 line-18 color-black">Mudanças do imóvel</p>
                     <hr class="bg-whitelight" />
