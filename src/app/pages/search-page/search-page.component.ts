@@ -61,6 +61,7 @@ export class SearchPageComponent implements OnInit {
   selectTypeAd = 'Selecione';
   selectBathrooms = 'Banheiros';
   selectBadRooms = 'Dormitórios';
+  selectSuites = 'Suítes';
   selectVacancies = 'Vagas';
   valuePrices: 0;
 
@@ -92,14 +93,17 @@ export class SearchPageComponent implements OnInit {
   getSelectedCity: string;
 
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
-  listEveryCity: { cidade: string; estado: string , render:string}[] = [];
+  listEveryCity: { cidade: string; estado: string, render: string }[] = [];
 
   listOfPrices: any = [];
 
   dropdownList = [
     { item_id: 'apartamento', item_text: 'Apartamento' },
-    { item_id: 'casadecondominio', item_text: 'Casa de Condominio' },
-    { item_id: 'casadevila', item_text: 'Casa de vila' },
+    { item_id: 'casa', item_text: 'Casa' },
+    { item_id: 'sobrado', item_text: 'Sobrado' },
+    { item_id: 'sobradoemcondominio', item_text: 'Sobrado em Condomínio' },
+    { item_id: 'casadecondominio', item_text: 'Casa de Condomínio' },
+    { item_id: 'casadevila', item_text: 'Casa de Vila' },
     { item_id: 'studio', item_text: 'Studio' },
     { item_id: 'kitnet', item_text: 'Kitnet' },
     { item_id: 'cobertura', item_text: 'Cobertura' },
@@ -108,10 +112,10 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'terreno', item_text: 'Terreno' },
     { item_id: 'comercial', item_text: 'Comercial' },
     { item_id: 'chacara', item_text: 'Chácara' },
-    { item_id: 'casacomercial', item_text: 'Casa comercial' },
+    { item_id: 'casacomercial', item_text: 'Casa Comercial' },
     { item_id: 'garagem', item_text: 'Garagem' },
-    { item_id: 'pontocomercial', item_text: 'Ponto comercial' },
-    { item_id: 'conjuntocomercial', item_text: 'Conjunto comercial' },
+    { item_id: 'pontocomercial', item_text: 'Ponto Comercial' },
+    { item_id: 'conjuntocomercial', item_text: 'Conjunto Comercial' },
     { item_id: 'loja', item_text: 'Loja' },
     { item_id: 'salao', item_text: 'Salão' },
     { item_id: 'galpao', item_text: 'Galpão' },
@@ -121,10 +125,10 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'motel', item_text: 'Motel' },
     { item_id: 'pousada', item_text: 'Pousada' },
     { item_id: 'lajecorporativa', item_text: 'Laje Corporativa' },
-    { item_id: 'prediointeiro', item_text: 'Predio Inteiro' },
+    { item_id: 'prediointeiro', item_text: 'Prédio Inteiro' },
   ];
 
-  selectedItems: any = [];
+  selectedItems: any[] = [];
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: 'item_id',
@@ -156,6 +160,7 @@ export class SearchPageComponent implements OnInit {
       typeMinPrice: [''],
       typeBathRoom: [''],
       typeBadrooms: [''],
+      typeSuites: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
@@ -172,6 +177,7 @@ export class SearchPageComponent implements OnInit {
       typeMinPrice: [''],
       typeBathRoom: [''],
       typeBadrooms: [''],
+      typeSuites: [''],
       typevacancies: [''],
       typeconstruction: [''],
       typefootagemax: [''],
@@ -196,7 +202,7 @@ export class SearchPageComponent implements OnInit {
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
 
     let filtro: any = localStorage.getItem('filtro');
-    
+
     if (filtro !== null) {
 
       filtro = JSON.parse(filtro);
@@ -206,20 +212,20 @@ export class SearchPageComponent implements OnInit {
       this.citySelected = filtro.cityAddress;
       this.getSelectedCity = filtro.cityAddress;
 
-      if(!!filtro.ufAddress) this.stateSelected = filtro.ufAddress;
+      if (!!filtro.ufAddress) this.stateSelected = filtro.ufAddress;
 
       this.form.patchValue({
         typeStatus: filtro.typeOfAdd,
-        typePropertyCity: filtro.cityAddress+' , '+this.stateSelected,
+        typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
         typeMaxPrice: filtro.finalValue,
       });
 
-      if(filtro.propertyTypeList.length > 0)
+      if (filtro.propertyTypeList.length > 0)
         this.selectedItems = [...filtro.propertyTypeList]
 
       this.formModal.patchValue({
-        typePropertyCity: filtro.cityAddress+' , '+this.stateSelected,
+        typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
         typeMaxPrice: filtro.finalValue,
       });
@@ -232,6 +238,7 @@ export class SearchPageComponent implements OnInit {
         initialValue: filtro?.initialValue,
         finalValue: filtro?.finalValue,
         bedrooms: filtro?.bedrooms,
+        suites: filtro?.suites,
         propertyType: filtro?.propertyType,
         typeOfAdd: filtro?.typeOfAdd,
         bathrooms: filtro?.bathrooms,
@@ -327,11 +334,12 @@ export class SearchPageComponent implements OnInit {
         this.propertyproducts = data;
       }
     })
+
   }
 
-  onItemSelect(item: any) {}
-  
-  onSelectAll(items: any) {}
+  onItemSelect(item: any) { }
+
+  onSelectAll(items: any) { }
 
   selectEvent(item) {
     this.getSelectedCity = item.cidade;
@@ -441,25 +449,34 @@ export class SearchPageComponent implements OnInit {
 
   searchByBadRoom(item) {
     // SELECT BADROOMS
-    if(item === '1'){
+    if (item === '1') {
       this.selectBadRooms = '+1 Quarto'
-    }else if(!!item){
+    } else if (!!item) {
       this.selectBadRooms = `+${item} Quartos`
+    }
+  }
+
+  searchBySuites(item) {
+    // SELECT SUITES
+    if (item === '1') {
+      this.selectSuites = '+1 Suíte'
+    } else if (!!item) {
+      this.selectSuites = `+${item} Suítes`
     }
   }
   searchByBathRoom(item) {
     // SELECT BATHROOMS
-    if(item === '1'){
+    if (item === '1') {
       this.selectBathrooms = '+1 Banheiro'
-    }else if(!!item){
+    } else if (!!item) {
       this.selectBathrooms = `+${item} Banheiros`
     }
   }
   searchByVacancies(item) {
     // SELECT VACANCES
-    if(item === '1'){
+    if (item === '1') {
       this.selectVacancies = '+1 Vaga'
-    }else if(!!item){
+    } else if (!!item) {
       this.selectVacancies = `+${item} Vagas`
     }
   }
@@ -470,6 +487,19 @@ export class SearchPageComponent implements OnInit {
 
   filterTypeProperty(value) {
     this.TypeProperty = value
+  }
+
+  removeTag(index: any) {
+    let filterDisplay = this.filtroResultDisplay.propertyTypeList.indexOf(index);
+    this.filtroResultDisplay.propertyTypeList.splice(filterDisplay, 1);
+
+    this.selectedItems = [];
+
+    setTimeout(() => {
+      this.selectedItems = this.filtroResultDisplay.propertyTypeList
+    }, 100);
+
+    this.filtrar();
   }
 
 
@@ -486,7 +516,7 @@ export class SearchPageComponent implements OnInit {
       styleProperty: this.removerAcento(this.stylePropertyTitle), // EDIFICIL, TERRENO
     };
 
-    let city = filter.city !== undefined? filter.city : '';
+    let city = filter.city !== undefined ? filter.city : '';
 
     let propertyTypeList = this.form.controls['propertyType'].value?.map(
       (item: any) => item.item_id
@@ -501,6 +531,7 @@ export class SearchPageComponent implements OnInit {
       cityAddress: city,
       ufAddress: this.form.controls['typePropertyState'].value || this.formModal.controls['typePropertyState'].value,
       bedrooms: this.form.controls['typeBadrooms'].value || this.formModal.controls['typeBadrooms'].value,
+      suites: this.form.controls['typeSuites'].value || this.formModal.controls['typeSuites'].value,
       bathrooms: this.form.controls['typeBathRoom'].value || this.formModal.controls['typeBathRoom'].value,
       initialValue: this.form.controls['typeMaxPrice'].value || this.formModal.controls['typeMaxPrice'].value,
       finalValue: this.form.controls['typeMinPrice'].value || this.formModal.controls['typeMinPrice'].value,
@@ -512,8 +543,6 @@ export class SearchPageComponent implements OnInit {
       propertyTypeList: this.form.controls['propertyType'].value || this.formModal.controls['propertyType'].value,
       goal: ''
     }
-
-    console.log(request)
 
     this.announcementService.listFilter(request).subscribe({
       next: data => {

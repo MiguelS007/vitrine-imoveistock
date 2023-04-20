@@ -160,8 +160,8 @@ export class SchedulingComponent implements OnInit {
     })
   }
 
-  goExpress(announcementId) {
-    this.router.navigate([`logged/express/${announcementId}`]);
+  goExpress(announcement) {
+    this.router.navigate([`logged/express/${announcement._id}`]);
   }
 
   likeHeart(value) {
@@ -169,7 +169,6 @@ export class SchedulingComponent implements OnInit {
     let request = {
       announcementId: value
     }
-
 
     if (this.selectedScheduling.announcement.liked === true) {
       this.announcementService.registerUnlike(request).subscribe(

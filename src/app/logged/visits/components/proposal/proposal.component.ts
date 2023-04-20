@@ -27,6 +27,7 @@ export class ProposalComponent implements OnInit {
 
   location = false;
 
+  contador: number = 0;
 
   constructor(
     private proposalService: ProposalService,
@@ -61,6 +62,7 @@ export class ProposalComponent implements OnInit {
   }
 
   listProposal() {
+    this.contador = 0;
     this.ngxSpinnerService.show();
     this.proposalService.list().subscribe({
       next: data => {
@@ -199,20 +201,24 @@ export class ProposalComponent implements OnInit {
   goExpress(item) {
     localStorage.setItem('counterProposalInProposal', item._id)
     this.router.navigate([`logged/express/${item.announcement._id}`]);
-
+    
   }
 
   selecionarProposta(item) {
+    console.log('proposta', item.type)
     this.proposalsList.map(results => {
       if (results.nativeElement?.id === item._id) {
         results.nativeElement.className = 'scheduling-visit-selected w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4';
         localStorage.setItem('proposalChecked', JSON.stringify(item))
         if (window.screen.width < 992) {
-          const modalRef = this.modalService.open(ProposalSelectedModalComponent, { centered: true });
-          modalRef.result.then(data => {
-          }, error => {
-            this.listProposal()
-          });
+          this.contador++;
+          if (this.contador > 1) {
+            const modalRef = this.modalService.open(ProposalSelectedModalComponent, { centered: true });
+            modalRef.result.then(data => {
+            }, error => {
+              this.listProposal()
+            });
+          }
         }
         this.ngxSpinnerService.show()
 
@@ -220,7 +226,6 @@ export class ProposalComponent implements OnInit {
           next: success => {
             this.selectedProposal = success;
             this.ngxSpinnerService.hide()
-
           },
           error: error => {
             console.error(error)
