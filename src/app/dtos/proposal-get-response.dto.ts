@@ -4,7 +4,7 @@ import { UserGetResponseDto } from "./user-get-response.dtos";
 export abstract class ProposalGetResponseDto {
     _id: string;
 
-    type?: ProposalStatusEnum;
+    type?: string;
 
     rentAmount?: number;
 
@@ -43,15 +43,6 @@ export abstract class ProposalGetResponseDto {
     hasChild: boolean;
 
 }
-
-class ProposalStatusEnum {
-    inNegociation: string;
-    approved: string;
-    canceled: string;
-    counterProposal: string;
-    denied: string;
-}
-
 class ProposalChangesModel {
     type: string;
     description: string;

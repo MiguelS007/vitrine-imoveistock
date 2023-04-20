@@ -30,7 +30,7 @@
                             <div class="w-100 painel-browser h-auto max-w-1918">
                                 <div class="row px-0 mx-0 d-flex content-painel align-items-center">
                                     <div class="col-12 px-0 pb-3">
-                                        <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'"
+                                        <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'"
                                             [settings]="dropdownSettings" formControlName="propertyType"
                                             [data]="dropdownList" [(ngModel)]="selectedItems"
                                             (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
@@ -78,7 +78,7 @@
                                         </ng-template>
 
                                         <ng-template #notFoundTemplate let-notFound>
-                                            <div [innerHTML]="notFound"></div>
+                                            <div>Não encontrado</div>
                                         </ng-template>
 
                                     </div>

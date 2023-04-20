@@ -147,6 +147,7 @@ class Photos {
     key: string;
     main: boolean;
     notShow: boolean;
+    index: number
     updatedAt
     _id
 }

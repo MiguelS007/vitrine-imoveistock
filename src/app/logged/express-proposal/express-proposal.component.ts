@@ -76,6 +76,8 @@ export class ExpressProposalComponent implements OnInit {
 
   sendRescheduling: boolean = false;
 
+  bothSelectType: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private datamokservice: DatamokService,
@@ -144,8 +146,6 @@ export class ExpressProposalComponent implements OnInit {
       }
     }
 
-
-
     // this.proposalService.getByAnnouncement(this.response._id).subscribe({
     //   next: data => {
     //     if (data.length > 0) {
@@ -164,7 +164,7 @@ export class ExpressProposalComponent implements OnInit {
     //   }
     // })
 
-    if(localStorage.getItem('counterProposalInProposal') !== null) {
+    if (localStorage.getItem('counterProposalInProposal') !== null) {
       this.proposalService.getById(localStorage.getItem('counterProposalInProposal')).subscribe({
         next: data => {
           this.proposalResponse = data;
@@ -172,6 +172,22 @@ export class ExpressProposalComponent implements OnInit {
       })
     }
 
+    if (this.response.typeOfAd === 'both' && localStorage.getItem('bothProposalType') !== null) {
+      this.bothSelectType = localStorage.getItem('bothProposalType')
+    } else if (this.response.typeOfAd === 'both' && localStorage.getItem('bothProposalType') === null) {
+      this.bothSelectType = 'sale'
+    }
+
+  }
+
+  ngOnDestroy() {
+    if (localStorage.getItem('bothProposalType') !== null) {
+      localStorage.removeItem('bothProposalType')
+    }
+
+    if (localStorage.getItem('counterProposalInProposal') !== null) {
+      localStorage.removeItem('counterProposalInProposal')
+    }
   }
 
   listLike() {
@@ -264,7 +280,7 @@ export class ExpressProposalComponent implements OnInit {
           rentAmountTotal: parseFloat(valueTotal.toFixed(2)),
           announcementId: this.response._id
         }
-      } else {
+      } else if (this.response.typeOfAd === 'sale') {
         this.request = {
           type: this.response.typeOfAd,
           saleAmount: parseFloat(this.toNumber(this.response.saleValue).toFixed(2)),
@@ -272,7 +288,30 @@ export class ExpressProposalComponent implements OnInit {
           saleAmountTotal: parseFloat(this.toNumber(this.response.saleValue).toFixed(2)),
           announcementId: this.response._id
         }
+      } else if (this.response.typeOfAd === 'both') {
+        if (this.bothSelectType === 'sale') {
+          this.request = {
+            type: this.bothSelectType,
+            saleAmount: parseFloat(this.toNumber(this.response.saleValue).toFixed(2)),
+            suggestedSaleAmount: this.toNumber(this.response.saleValue),
+            saleAmountTotal: parseFloat(this.toNumber(this.response.saleValue).toFixed(2)),
+            announcementId: this.response._id
+          }
+        } else {
+          let valueTotal = this.toNumber(this.response.valueOfIptu) / 12 + this.toNumber(this.response.condominiumValue) + this.toNumber(this.response.leaseValue)
+
+          this.request = {
+            type: this.bothSelectType,
+            rentAmount: parseFloat(this.toNumber(this.response.leaseValue).toFixed(2)),
+            suggestedRentAmount: this.toNumber(this.response.leaseValue),
+            iptuAmount: this.toNumber(this.response.valueOfIptu),
+            condominiumAmount: this.toNumber(this.response.condominiumValue),
+            rentAmountTotal: parseFloat(valueTotal.toFixed(2)),
+            announcementId: this.response._id
+          }
+        }
       }
+      console.log(this.request)
       this.proposalService.register(this.request).subscribe({
         next: data => {
           this.toastrService.success('Proposta enviada!', '', { progressBar: true })
@@ -481,7 +520,7 @@ export class ExpressProposalComponent implements OnInit {
         saleAmount: this.toNumber(this.response.saleValue),
         suggestedSaleAmount: this.formCustomizeProposal.controls['suggestedSaleAmount'].value,
         saleAmountTotal: this.toNumber(this.formCustomizeProposal.controls['suggestedSaleAmount'].value) + this.valueProperty + this.valueVehicle + this.valueFinancing + this.valueInstallment,
-        saleCarAsPaymentAmount:  this.valueVehicle,
+        saleCarAsPaymentAmount: this.valueVehicle,
         salePropertyAsPaymentAmount: this.valueProperty,
         saleDirectInstallmentAsPaymentAmount: this.valueInstallment,
         saleFinancingAsPaymentAmount: this.valueFinancing,
@@ -500,7 +539,7 @@ export class ExpressProposalComponent implements OnInit {
       let valueTotal = this.toNumber(this.response.valueOfIptu) / 12 + this.toNumber(this.response.condominiumValue) + this.toNumber(this.response.leaseValue)
 
       this.request = {
-        type: 'sale',
+        type: 'rent',
         iptuAmount: this.toNumber(this.response.valueOfIptu),
         condominiumAmount: this.toNumber(this.response.condominiumValue),
         rentAmount: parseFloat(this.toNumber(this.response.leaseValue).toFixed(2)),
@@ -511,10 +550,56 @@ export class ExpressProposalComponent implements OnInit {
         announcementId: this.response._id
       }
 
+
       if (this.proposalResponse.counterProposal) {
         this.sendCounterProposal(this.request)
       } else {
         this.sendProposal(this.request)
+      }
+    } else if (this.response.typeOfAd === 'both') {
+      if (this.bothSelectType === 'sale') {
+        this.request = {
+          type: 'sale',
+          iptuAmount: this.toNumber(this.response.valueOfIptu),
+          condominiumAmount: this.toNumber(this.response.condominiumValue),
+          saleAmount: this.toNumber(this.response.saleValue),
+          suggestedSaleAmount: this.formCustomizeProposal.controls['suggestedSaleAmount'].value,
+          saleAmountTotal: this.toNumber(this.formCustomizeProposal.controls['suggestedSaleAmount'].value) + this.valueProperty + this.valueVehicle + this.valueFinancing + this.valueInstallment,
+          saleCarAsPaymentAmount: this.valueVehicle,
+          salePropertyAsPaymentAmount: this.valueProperty,
+          saleDirectInstallmentAsPaymentAmount: this.valueInstallment,
+          saleFinancingAsPaymentAmount: this.valueFinancing,
+          changes: this.changesRequest,
+          comment: this.formCustomizeProposal.controls['comment'].value,
+          announcementId: this.response._id
+        }
+
+        if (this.sendRescheduling) {
+          this.sendCounterProposal(this.request)
+        } else {
+          this.sendProposal(this.request)
+        }
+      } else if (this.bothSelectType === 'rent') {
+        let valueTotal = this.toNumber(this.response.valueOfIptu) / 12 + this.toNumber(this.response.condominiumValue) + this.toNumber(this.response.leaseValue)
+
+        this.request = {
+          type: 'rent',
+          iptuAmount: this.toNumber(this.response.valueOfIptu),
+          condominiumAmount: this.toNumber(this.response.condominiumValue),
+          rentAmount: parseFloat(this.toNumber(this.response.leaseValue).toFixed(2)),
+          suggestedRentAmount: this.toNumber(this.formCustomizeProposal.controls['suggestedRentAmount'].value),
+          rentAmountTotal: parseFloat(valueTotal.toFixed(2)),
+          changes: this.changesRequest,
+          comment: this.formCustomizeProposal.controls['comment'].value,
+          announcementId: this.response._id
+        }
+        console.log('teste', this.proposalResponse)
+
+        if (this.proposalResponse) {
+          this.sendCounterProposal(this.request)
+        } else {
+          this.sendProposal(this.request)
+        }
       }
     }
     this.router.navigate(['logged/visits']);

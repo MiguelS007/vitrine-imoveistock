@@ -15,12 +15,22 @@
                         <h4 *ngIf="item.typeOfAd === 'rent'"
                             class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
                             Locação</h4>
+                        <div class="d-flex" *ngIf="item.typeOfAd === 'both'">
+                            <h4
+                                class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light mr-2">
+                                Venda</h4>
+                            <h4
+                                class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                                Locação</h4>
+                        </div>
                         <h4 *ngIf="item.exclusivity"
                             class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
                             Exclusivo</h4>
                     </div>
                     <div class="space-value-announcement">
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'sale'">
+                            {{item.saleValue | currency: 'R$'}}</p>
+                        <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'both'">
                             {{item.saleValue | currency: 'R$'}}</p>
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'rent'">
                             {{item.leaseValue | currency: 'R$'}}
@@ -58,7 +68,7 @@
                             class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
                             <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
-                                {{item.vacancyNumber}} Vagas
+                                {{item.parkingSpaces}} Vagas
                             </p>
                         </div>
                         <div
