@@ -762,7 +762,7 @@
                 exclusivo</button>
             </div>
             <div *ngIf="propertyvideo" class="w-100 position-relative pt-4 pb-5">
-              <vg-player class="w-90 m-0-auto h-100 ">
+              <vg-player class="w-90 m-0-auto" style="max-height: 473px !important;">
                 <vg-overlay-play></vg-overlay-play>
                 <vg-buffering></vg-buffering>
                 <vg-scrub-bar>
@@ -778,8 +778,9 @@
                   <vg-fullscreen></vg-fullscreen>
                 </vg-controls>
                 <video [vgMedia]="$any(media)" poster="../../../assets/img/preview1.png" #media id="singleVideo"
-                  preload="auto" crossorigin>
-                  <source src="../../../assets/vid/test.mp4" type="video/mp4">
+                  preload="auto">
+                  <source *ngIf="!response.videos" src="../../../assets/vid/test.mp4" type="video/mp4">
+                  <source *ngIf="response.videos" [src]="response.videos[0].key" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
                 </video>
               </vg-player>
@@ -1004,7 +1005,7 @@
           </button>
           <div class="content-thumb-images my-3">
             <div class="ml-2" *ngFor="let item of response.photos; let i = index" #thumbPhotosArr [id]="item.key">
-              <img [src]="item.key" height="100" width="100" (click)="onThumbClick(i)" [id]="i">
+              <img [src]="item.key" height="50" width="50" (click)="onThumbClick(i)" [id]="i">
             </div>
           </div>
         </div>
@@ -1045,8 +1046,9 @@
                   <vg-fullscreen></vg-fullscreen>
                 </vg-controls>
                 <video [vgMedia]="$any(videomedia)" poster="../../../assets/img/preview1.png" #videomedia
-                  id="singleVideo" preload="auto" crossorigin>
-                  <source src="../../../assets/vid/test.mp4" type="video/mp4">
+                  id="singleVideo" preload="auto">
+                  <source *ngIf="!response.videos" src="../../../assets/vid/test.mp4" type="video/mp4">
+                  <source *ngIf="response.videos" [src]="response.videos[0].key" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
                 </video>
               </vg-player>
