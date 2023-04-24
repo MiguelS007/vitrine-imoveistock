@@ -1004,7 +1004,7 @@
           </button>
           <div class="content-thumb-images my-3">
             <div class="ml-2" *ngFor="let item of response.photos; let i = index" #thumbPhotosArr [id]="item.key">
-              <img [src]="item.key" height="100" width="100" (click)="onThumbClick(i)" [id]="i">
+              <img [src]="item.key" height="50" width="50" (click)="onThumbClick(i)" [id]="i">
             </div>
           </div>
         </div>
