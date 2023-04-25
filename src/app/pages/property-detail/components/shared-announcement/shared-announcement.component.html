@@ -1,0 +1,25 @@
+<section class="container-fluid p-4">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <h3>Compartilhe este anuncio</h3>
+        <img src="../../../../../assets/icon/x.png" alt="" (click)="exit()" class="cursor-pointer">
+    </div>
+
+    <div class="frame">
+        <a (click)="sharedIn('facebook')" class="btn" style="background: #3b5998;">
+            <img src="../../../../../assets/icon/facebook.svg" alt="" height="16" width="20">
+        </a>
+        <a (click)="sharedIn('twitter')" class="btn" style="background: #00acee;">
+            <img src="../../../../../assets/icon/twitter.svg" alt="" height="16" width="20">
+        </a>
+        <a (click)="sharedIn('whatsapp')" class="btn" style="background: #1AD03F;">
+            <img src="../../../../../assets/icon/wpp.svg" alt="" height="16" width="20">
+        </a>
+        <a (click)="sharedIn('linkedin')" class="btn" style="background:#0e76a8;">
+            <img src="../../../../../assets/icon/linkedin.svg" alt="" height="16" width="20">
+        </a>
+        <a (click)="sharedIn('copy')" class="btn" style="background: black;">
+            <img src="../../../../../assets/icon/copy.svg" alt="" height="16" width="20">
+        </a>
+    </div>
+</section>
