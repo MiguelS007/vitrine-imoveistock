@@ -1,63 +1,75 @@
 <nav class="navbar navbar-expand-lg navbar-dark px-5p justify-content-center navbar-custom">
   <div class="w-100 d-flex bg-white align-items-center justify-content-between max-w-1918" style="height: 98px;">
-    <img (click)="changePage('home')" src="../../../assets/logo/logo-preta.png"  style="margin-left: -1px !important;" class="logo-navbar-desktop-preta-visits">
-  <img (click)="changePage('home')" src="../../../assets/logo/logo-mobile.svg" class="logo-navbar-mobile">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentVisits"
-    aria-controls="navbarSupportedContentVisits" aria-expanded="false" aria-label="Toggle navigation">
-    <!-- <span class="navbar-toggler-icon"></span> -->
-    <i class="bi bi-list icon-menu-navbar-visits"></i>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContentVisits">
-    <ul class="navbar-nav flex-fill justify-content-end">
-      <li class="nav-item-visits">
-        <a (click)="changePage('home')" [class]="home ? 'item-navbar-selected' : 'item-navbar-disabled'"
-          class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20">Home</a>
-      </li>
-      <li class="nav-item-visits">
-        <a (click)="changePage('about')" [class]="about ? 'item-navbar-selected' : 'item-navbar-disabled'"
-          class="nav-link-visits cursor-pointer px-3 fw-400 font-size-14 line-20">Sobre</a>
-      </li>
-      <li class="nav-item-visits dropdown">
-        <a (click)="openIndication()"
-          class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Indicação</a>
-      </li>
-      <li class="nav-item-visits dropdown">
-        <a (click)="openOwner()"
-          class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Proprietários</a>
-      </li>
-      <li class="nav-item-visits dropdown">
-        <a (click)="openRealEstate()"
-          class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Imobiliárias </a>
-      </li>
-      <li class="nav-item-visits dropdown">
-        <a (click)="openBrokers()"
-          class="nav-link-visits cursor-pointer   px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para Corretores</a>
-      </li>
-      <li class="nav-item-visits">
-        <a class="nav-link-visits  cursor-pointer px-3 fw-400 font-size-14 line-20"
-          [class]="contact ? 'item-navbar-selected' : 'item-navbar-disabled'"
-          (click)="changePage('contact')">Contato</a>
-      </li>
-      <li class="nav-item-visits dropdown">
-        <a *ngIf="loginopt" (click)="openLogin()" 
-          class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">
-          Login
-        </a>
-        <a *ngIf="loggedname"
-          class="nav-link-visits cursor-pointer  pl-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled text-capitalize"
-          id="droplogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="bi font-size-20 bi-person"></i> {{userName}}
-          <img src="../../../assets/icon/arrow-black.svg" />
-        </a>
-        <div *ngIf="loggedopt" class="dropdown-menu arrow_box px-4 border-radius-10 dropdown-menu-right"
-          aria-labelledby="droplogin">
-          <a (click)="goDashboard()" class="dropdown-item cursor-pointer px-0  py-2 fw-400 font-size-14 line-20 color-black">Meus
-            Imóveis</a>
-          <h2 (click)="logOut()" class="dropdown-item cursor-pointer px-0  py-2 fw-400 font-size-14 line-20 color-black">Sair da
-            conta</h2>
-        </div>
-      </li>
-    </ul>
-  </div>
+    <img (click)="changePage('home')" src="../../../assets/logo/logo-preta.png" style="margin-left: -1px !important;"
+      class="logo-navbar-desktop-preta-visits">
+    <img (click)="changePage('home')" src="../../../assets/logo/logo-mobile.svg" class="logo-navbar-mobile">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentVisits"
+      aria-controls="navbarSupportedContentVisits" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- <span class="navbar-toggler-icon"></span> -->
+      <i class="bi bi-list icon-menu-navbar-visits"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContentVisits">
+      <ul class="navbar-nav flex-fill justify-content-end">
+        <li class="nav-item-visits">
+          <a (click)="changePage('home')" [class]="home ? 'item-navbar-selected' : 'item-navbar-disabled'"
+            class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20" data-toggle="collapse"
+            data-target="#navbarSupportedContentVisits" aria-controls="navbarSupportedContentVisits"
+            aria-expanded="false">Home</a>
+        </li>
+        <li class="nav-item-visits">
+          <a (click)="changePage('about')" [class]="about ? 'item-navbar-selected' : 'item-navbar-disabled'"
+            class="nav-link-visits cursor-pointer px-3 fw-400 font-size-14 line-20" data-toggle="collapse"
+            data-target="#navbarSupportedContentVisits" aria-controls="navbarSupportedContentVisits"
+            aria-expanded="false">Sobre</a>
+        </li>
+        <li class="nav-item-visits dropdown">
+          <a (click)="openIndication()"
+            class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para
+            Indicação</a>
+        </li>
+        <li class="nav-item-visits dropdown">
+          <a (click)="openOwner()"
+            class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para
+            Proprietários</a>
+        </li>
+        <li class="nav-item-visits dropdown">
+          <a (click)="openRealEstate()"
+            class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para
+            Imobiliárias </a>
+        </li>
+        <li class="nav-item-visits dropdown">
+          <a (click)="openBrokers()"
+            class="nav-link-visits cursor-pointer   px-3 fw-400 font-size-14 line-20 item-navbar-disabled">Para
+            Corretores</a>
+        </li>
+        <li class="nav-item-visits">
+          <a class="nav-link-visits  cursor-pointer px-3 fw-400 font-size-14 line-20"
+            [class]="contact ? 'item-navbar-selected' : 'item-navbar-disabled'" (click)="changePage('contact')"
+            data-toggle="collapse" data-target="#navbarSupportedContentVisits"
+            aria-controls="navbarSupportedContentVisits" aria-expanded="false">Contato</a>
+        </li>
+        <li class="nav-item-visits dropdown">
+          <a *ngIf="loginopt" (click)="openLogin()"
+            class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20 item-navbar-disabled">
+            Login
+          </a>
+          <a *ngIf="loggedname"
+            class="nav-link-visits cursor-pointer  pl-3 fw-400 font-size-14 line-20 dropdown-toggle item-navbar-disabled text-capitalize"
+            id="droplogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="bi font-size-20 bi-person"></i> {{userName}}
+            <img src="../../../assets/icon/arrow-black.svg" />
+          </a>
+          <div *ngIf="loggedopt" class="dropdown-menu arrow_box px-4 border-radius-10 dropdown-menu-right"
+            aria-labelledby="droplogin">
+            <a (click)="goDashboard()"
+              class="dropdown-item cursor-pointer px-0  py-2 fw-400 font-size-14 line-20 color-black">Meus
+              Imóveis</a>
+            <h2 (click)="logOut()"
+              class="dropdown-item cursor-pointer px-0  py-2 fw-400 font-size-14 line-20 color-black">Sair da
+              conta</h2>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
