@@ -7,6 +7,7 @@ import { GoogleMap } from '@angular/google-maps';
 import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markerclusterer';
 import { GeocodeService } from '../../service/geocode.service';
 import { AnnouncementFilterListResponseDto } from '../../dtos/announcement-filter-list-response.dto';
+import { propertyTypesConst } from 'src/app/utils/propertyTypes';
 
 @Component({
   selector: 'app-search-map',
@@ -228,5 +229,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
   changeZoom() {
     console.log(this.map.getZoom());
+  }
+
+  resolveProperty(text:string):string{
+    return propertyTypesConst.find(x => x.value === text).name || text || '-';
   }
 }
