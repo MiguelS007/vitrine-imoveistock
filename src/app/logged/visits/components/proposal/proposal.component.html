@@ -3,14 +3,14 @@
         <div *ngIf="response.length > 0" class="col-lg-5 mt-4">
             <div #proposals *ngFor="let item of response" [id]="item._id"
                 class="w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4">
-                <div class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex">
+                <div (click)="selecionarProposta(item)" class="row block-important  mx-0 border-radius-10 border mt-5 p-3 d-flex cursor-pointer">
                     <div class="col-3 col-visits p-0">
                         <img *ngIf="!item.announcement?.mainPhoto" src="../../../../assets/img/ap.png"
-                            class="w-100 h-100 border-radius-10 " (click)="selecionarProposta(item)">
+                            class="w-100 h-100 border-radius-10 ">
                         <img *ngIf="item.announcement?.mainPhoto" [src]="item.announcement?.mainPhoto"
-                            class="w-100 h-100 border-radius-10 " (click)="selecionarProposta(item)">
+                            class="w-100 h-100 border-radius-10 ">
                     </div>
-                    <div (click)="selecionarProposta(item)" class="col-9 px-2 col-visits">
+                    <div class="col-9 px-2 col-visits">
                         <h5 class="fw-700 mt-1 font-size-18 line-24 color-black d-inline-block text-truncate"
                             style="max-width: 150px;">{{item.announcement?.description}}</h5>
                         <div class="w-100 d-inline-block mb-0">
