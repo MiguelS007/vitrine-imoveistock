@@ -12,15 +12,20 @@
       <ul class="navbar-nav flex-fill justify-content-end">
         <li class="nav-item-visits">
           <a (click)="changePage('home')" [class]="home ? 'item-navbar-selected' : 'item-navbar-disabled'"
-            class="nav-link-visits cursor-pointer  px-3 fw-400 font-size-14 line-20" data-toggle="collapse"
-            data-target="#navbarSupportedContentVisits" aria-controls="navbarSupportedContentVisits"
-            aria-expanded="false">Home</a>
+            class="nav-link-visits mobile-link-navbar cursor-pointer  px-3 fw-400 font-size-14 line-20"
+            data-toggle="collapse" data-target="#navbarSupportedContentVisits"
+            aria-controls="navbarSupportedContentVisits" aria-expanded="false">Home</a>
+
+          <a (click)="changePage('home')" [class]="home ? 'item-navbar-selected' : 'item-navbar-disabled'"
+            class="nav-link-visits desktop-link-navbar cursor-pointer  px-3 fw-400 font-size-14 line-20">Home</a>
         </li>
         <li class="nav-item-visits">
           <a (click)="changePage('about')" [class]="about ? 'item-navbar-selected' : 'item-navbar-disabled'"
-            class="nav-link-visits cursor-pointer px-3 fw-400 font-size-14 line-20" data-toggle="collapse"
-            data-target="#navbarSupportedContentVisits" aria-controls="navbarSupportedContentVisits"
-            aria-expanded="false">Sobre</a>
+            class="nav-link-visits mobile-link-navbar cursor-pointer px-3 fw-400 font-size-14 line-20"
+            data-toggle="collapse" data-target="#navbarSupportedContentVisits"
+            aria-controls="navbarSupportedContentVisits" aria-expanded="false">Sobre</a>
+          <a (click)="changePage('about')" [class]="about ? 'item-navbar-selected' : 'item-navbar-disabled'"
+            class="nav-link-visits desktop-link-navbar cursor-pointer px-3 fw-400 font-size-14 line-20">Sobre</a>
         </li>
         <li class="nav-item-visits dropdown">
           <a (click)="openIndication()"
@@ -43,10 +48,13 @@
             Corretores</a>
         </li>
         <li class="nav-item-visits">
-          <a class="nav-link-visits  cursor-pointer px-3 fw-400 font-size-14 line-20"
+          <a class="nav-link-visits mobile-link-navbar cursor-pointer px-3 fw-400 font-size-14 line-20"
             [class]="contact ? 'item-navbar-selected' : 'item-navbar-disabled'" (click)="changePage('contact')"
             data-toggle="collapse" data-target="#navbarSupportedContentVisits"
             aria-controls="navbarSupportedContentVisits" aria-expanded="false">Contato</a>
+          <a class="nav-link-visits desktop-link-navbar cursor-pointer px-3 fw-400 font-size-14 line-20"
+            [class]="contact ? 'item-navbar-selected' : 'item-navbar-disabled'"
+            (click)="changePage('contact')">Contato</a>
         </li>
         <li class="nav-item-visits dropdown">
           <a *ngIf="loginopt" (click)="openLogin()"
