@@ -37,7 +37,7 @@
                     class="col pt-2 pb-3 left-important justify-content-end px-0 d-flex align-items-center justify-content-left">
                     <img src="../../../assets/icon/rule.png" class="pr-2" />
                     <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                        {{response.announcement?.usefulArea || '-'}} m2
+                        {{response.announcement?.usefulArea | currency: ' '}}m²
                     </p>
                 </div>
             </div>
