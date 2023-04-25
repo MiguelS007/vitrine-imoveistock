@@ -8,15 +8,14 @@
             Revise e confirme o seu agendamento
         </p>
         <div class="w-100">
-            <p class="fw-500 font-size-18 line-24 color-black">Resumo:
-                {{response.description || '(sem descrição) '}}
+            <p class="fw-500 font-size-18 line-24 color-black">Descrição:
+                {{response.description}}
             </p>
             <p>
                 <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
                 <span class="fw-400 font-size-16 line-20 color-black">
-                    {{response.complementAddress || '(sem endereço)'}}
-                    {{response.yearOfConstruction || '-'}},
-                    {{response.cityAddress || '(local não informado!)'}} - {{response.ufAddress || '-'}}
+                    {{response.publicPlaceAddress}}, {{response.districtAddress}},
+                    {{response.cityAddress}} - {{response.ufAddress}}
                 </span>
             </p>
             <div class="row block-important px-3  d-flex">
@@ -31,7 +30,7 @@
                     class="col pt-2 pb-3 left-important justify-content-center px-0 d-flex align-items-center justify-content-left">
                     <img src="../../../assets/icon/car.png" class="pr-2" />
                     <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                        {{response.parkingSpaces || '-'}} Vagas
+                        {{response.parkingSpaces || '0'}} Vagas
                     </p>
                 </div>
                 <div
@@ -42,8 +41,16 @@
                     </p>
                 </div>
             </div>
-            <p class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-                {{response.saleValue | currency: 'R$ ' || '-' }}
+            <p *ngIf="response.typeOfAd === 'sale'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
+                {{response.saleValue | currency: 'R$'}}
+            </p>
+            <p *ngIf="response.typeOfAd === 'rent'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
+                {{response.leaseValue | currency: 'R$'}}
+            </p>
+            <p *ngIf="response.typeOfAd === 'both'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
+                Comprar {{response.saleValue | currency: 'R$'}}
+                <br>
+                Alugar {{response.leaseValue | currency: 'R$'}}
             </p>
             <p class="w-100 fw-400 font-size-16  line-20 color-black">
                 <i class="bi font-size-20  mr-2 bi-calendar"></i>
