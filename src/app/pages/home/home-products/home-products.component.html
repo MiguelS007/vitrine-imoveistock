@@ -58,7 +58,7 @@
                                 <div class="col-12 px-0" (click)="announcementSelected(item._id)">
                                     <div class="w-100 mx-1 pt-3">
                                         <span
-                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{resolveProperty(item.propertyType)}}</span>
                                         <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
                                             style="max-width: 90%;">{{item.description}}</p>
                                         <p class="d-flex align-items-center">
@@ -82,7 +82,7 @@
                                             class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
                                             <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
-                                                {{item.parkingSpaces}} Vagas
+                                                {{item.parkingSpaces?item.parkingSpaces:0}} Vagas
                                             </p>
                                         </div>
                                         <div
@@ -153,7 +153,7 @@
                                 <div class="col-12 px-0" (click)="announcementSelected(item._id)">
                                     <div class="w-100 mx-1 pt-3">
                                         <span
-                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{resolveProperty(item.propertyType)}}</span>
                                         <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
                                             style="max-width: 90%;">{{item.description}}</p>
                                         <p class="d-flex align-items-center">
@@ -177,7 +177,7 @@
                                             class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
                                             <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
-                                                {{item.parkingSpaces}} Vagas
+                                                {{item.parkingSpaces || 0}} Vagas
                                             </p>
                                         </div>
                                         <div
@@ -248,7 +248,7 @@
                                 <div class="col-12 px-0" (click)="announcementSelected(item._id)">
                                     <div class="w-100 mx-1 pt-3">
                                         <span
-                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{resolveProperty(item.propertyType)}}</span>
                                         <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
                                             style="max-width: 90%;">{{item.description}}</p>
                                         <p class="d-flex align-items-center  text-left">

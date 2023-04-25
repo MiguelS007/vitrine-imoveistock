@@ -93,7 +93,7 @@
                                 <div (click)="selectAnnouncement(item._id)" class="col-12 px-0">
                                     <div class="w-100 mx-2 text-align-left pt-3">
                                         <span class="fw-400 font-size-14 line-20
-                                            color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                                            color-black text-capitalize">{{resolveProperty(item.propertyType)}}</span>
                                         <p class="fw-700 my-2 font-size-16 line-20 mb-0
                                             color-black text-truncate" style="max-width: 90%;">{{item.description ||
                                             '-' }}
