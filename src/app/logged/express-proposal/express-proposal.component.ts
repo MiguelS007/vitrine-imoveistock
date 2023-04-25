@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -16,6 +16,10 @@ import { AnnouncementService } from '../../service/announcement.service';
   styleUrls: ['./express-proposal.component.scss']
 })
 export class ExpressProposalComponent implements OnInit {
+  @ViewChild("inputRemove", { read: ElementRef }) inputRemove: ElementRef;
+  @ViewChild("inputChange", { read: ElementRef }) inputChange: ElementRef;
+  @ViewChild("inputAdd", { read: ElementRef }) inputAdd: ElementRef;
+
   form: FormGroup;
   iconlikeheart = false;
   modalcustomizedproposal = false;
@@ -77,6 +81,8 @@ export class ExpressProposalComponent implements OnInit {
   sendRescheduling: boolean = false;
 
   bothSelectType: string;
+
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -393,6 +399,9 @@ export class ExpressProposalComponent implements OnInit {
       this.spaceCustomizeProposalChangesOptions = false
       this.spaceCustomizeProposalChanges = false
       this.spaceRemoveitem = true;
+      setTimeout(() => {
+        this.inputRemove.nativeElement.focus()
+      }, 100);
     } else if (value === 'close') {
       this.spaceCustomizeProposalChangesOptions = true
       this.spaceCustomizeProposalChanges = false
@@ -423,7 +432,10 @@ export class ExpressProposalComponent implements OnInit {
   addedItem(value: string) {
     if (value === 'open') {
       this.spaceCustomizeProposalChangesOptions = false
-      this.spaceCustomizeProposalChanges = false
+      this.spaceCustomizeProposalChanges = false;
+      setTimeout(() => {
+        this.inputAdd.nativeElement.focus()
+      }, 100);
       this.spaceAddedItem = true;
     } else if (value === 'close') {
       this.spaceCustomizeProposalChangesOptions = true
@@ -455,7 +467,11 @@ export class ExpressProposalComponent implements OnInit {
   changeItem(value) {
     if (value === 'open') {
       this.spaceCustomizeProposalChangesOptions = false
-      this.spaceCustomizeProposalChanges = false
+      this.spaceCustomizeProposalChanges = false;
+
+      setTimeout(() => {
+        this.inputChange.nativeElement.focus()
+      }, 100);
       this.spaceChangeItem = true;
     } else if (value === 'close') {
       this.spaceCustomizeProposalChangesOptions = true
