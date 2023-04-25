@@ -44,9 +44,8 @@
             <p>
                 <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
                 <span class="fw-400 font-size-16 line-20 color-black">
-                    {{response.complementAddress || '(sem endereço)'}}
-                    {{response.yearOfConstruction || '-'}},
-                    {{response.cityAddress || '(local não informado!)'}} - {{response.ufAddress || '-'}}
+                    {{response.publicPlaceAddress}}, {{response.districtAddress}},
+                    {{response.cityAddress}} - {{response.ufAddress}}
                 </span>
             </p>
         </div>

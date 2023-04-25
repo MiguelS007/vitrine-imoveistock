@@ -11,7 +11,6 @@ export class AnnouncementGetByIdResolve implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot) {
         const result = this.announcementService.announcementGetById(route.params['_id']);
-        console.log('result', result)
         return result;
     }
 }

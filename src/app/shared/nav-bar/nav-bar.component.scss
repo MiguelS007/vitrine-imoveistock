@@ -36,3 +36,20 @@
 .dropdown-toggle::after {
     display: none !important;
 }
+
+.desktop-link-navbar {
+    display: block !important;
+}
+
+.mobile-link-navbar {
+    display: none !important;
+}
+
+@media (max-width: 998px) {
+    .desktop-link-navbar {
+        display: none !important;
+    }
+    .mobile-link-navbar {
+        display: block !important;
+    }
+}
