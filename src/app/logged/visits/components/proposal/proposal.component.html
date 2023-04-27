@@ -104,7 +104,7 @@
                             {{selectedProposal?.proposal?.announcement?.ufAddress}}</span>
                     </p>
                 </div>
-                <div class="row mx-3 my-3 d-flex">
+                <div class="row mx-3 mt-3 d-flex">
                     <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                         <img src="../../../assets/icon/bed.png" class="pr-2" />
                         <p class="fw-400 mb-0 font-size-14 line-20 color-black">
@@ -119,6 +119,15 @@
                         <img src="../../../assets/icon/rule.png" class="pr-2" />
                         <p class="fw-400 mb-0 font-size-14 line-20 color-black">
                             {{selectedProposal?.proposal?.announcement?.usefulArea |currency: ' '}} m2</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
+                            <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                             color-black">{{selectedProposal?.proposal?.announcement?.suites || 0}} Suítes</p>
+                        </div>
                     </div>
                 </div>
             </div>

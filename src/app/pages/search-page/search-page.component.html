@@ -406,7 +406,7 @@
                       {{item.cityAddress}} - {{item.ufAddress}}</span>
                   </p>
                 </div>
-                <div class="row px-4 my-3 pb-3
+                <div class="row px-4 mt-3
                              d-flex">
                   <div class="col justify-content-left px-0 d-flex
                                 align-items-center justify-content-left">
@@ -427,10 +427,14 @@
                                    color-black text-truncate">{{item.usefulArea | currency: ' '}} m²</p>
                   </div>
                 </div>
-                <div class="d-flex justify-content-left align-items-center ml-2">
-                  <img src="../../../assets/icon/suites.svg" width="33px" class="pr-2 mobile-w" />
-                  <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                   color-black">{{item.suites || 0}} Suítes</p>
+                <div class="row">
+                  <div class="col-4">
+                    <div class="d-flex justify-content-center align-items-center">
+                      <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
+                      <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                       color-black">{{item.suites || 0}} Suítes</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -536,7 +540,7 @@
 
       <ng-template #notFoundTemplate let-notFound>
         <div>Não encontrado</div>
-    </ng-template>
+      </ng-template>
     </div>
 
     <!-- <div class="dropdown px-0 mb-3 ">
