@@ -171,7 +171,7 @@
                                 {{selectedScheduling.announcement?.ufAddress}}</span>
                         </p>
                     </div>
-                    <div class="row mx-3 my-3 d-flex">
+                    <div class="row mx-3 mt-3 d-flex">
                         <div class="col justify-content-left
                                             px-0 d-flex
                                             align-items-center
@@ -201,6 +201,15 @@
                                                 font-size-14 line-20
                                                 color-black">{{selectedScheduling.announcement?.usefulArea |
                                 currency: ' '}} m2</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
+                                <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                 color-black">{{selectedScheduling.announcement?.suites || 0}} Suítes</p>
+                            </div>
                         </div>
                     </div>
                 </div>
