@@ -52,10 +52,11 @@
 
 .preview-img-property {
     max-width: 800px;
-    max-height: 700px;
+    max-height: 400px;
 }
 .content-thumb-images {
     display: flex !important;
+    justify-content: center !important;
     width: 100% !important;
     overflow-x: auto !important;
 }
@@ -87,6 +88,7 @@
 
 .disable-thumb-photo {
     filter: blur(1px);
+    cursor: pointer !important;
 }
 
 .count-text-image-preview {
@@ -159,7 +161,13 @@
 @media(max-width: 1030px) {
     .img-plant-property {
         max-width: 300px !important;
+    }
 
+    .content-thumb-images {
+        display: flex !important;
+        justify-content: start !important;
+        width: 100% !important;
+        overflow-x: auto !important;
     }
 }
 

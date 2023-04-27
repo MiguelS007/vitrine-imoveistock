@@ -6,11 +6,10 @@
     "vitrine-imoveistock": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "styles": [
-            "src/styles.scss",
-            "./node_modules/bootstrap/dist/css/bootstrap.min.css"
-          ]
+        "schematics": {
+          "@schematics/angular:component": {
+            "style": "scss"
+          }
         }
       },
       "root": "",

@@ -12,6 +12,7 @@ import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.compon
 import estados from '../../../assets/json/estados-cidades.json';
 import { AnnouncementFilterListResponseDto } from '../../dtos/announcement-filter-list-response.dto';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { propertyTypesConst } from 'src/app/utils/propertyTypes';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
@@ -607,6 +608,10 @@ export class SearchPageComponent implements OnInit {
 
   redirectToMap() {
     this.router.navigate(['/search-map']);
+  }
+
+  resolveProperty(text:string):string{
+    return propertyTypesConst.find(x => x.value === text).name || text || '-';
   }
 
 }

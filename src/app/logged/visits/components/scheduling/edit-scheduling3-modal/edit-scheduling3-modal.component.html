@@ -25,7 +25,7 @@
                 </div>
                 <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                     <img src="../../../assets/icon/car.png" class="pr-2" />
-                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.announcement?.parkingSpaces || '-'}} vagas
+                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.announcement?.parkingSpaces || '0'}} vagas
                     </p>
                 </div>
                 <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
@@ -44,9 +44,8 @@
             <p>
                 <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
                 <span class="fw-400 font-size-16 line-20 color-black">
-                    {{response.announcement?.complementAddress || '(sem endereço)'}}
-                    {{response.announcement?.yearOfConstruction || '-'}},
-                    {{response.announcement?.cityAddress || '(local não informado!)'}} - {{response.announcement?.ufAddress || '-'}}
+                    {{response.announcement?.publicPlaceAddress}}, {{response.announcement?.districtAddress}},
+                    {{response.announcement?.cityAddress}} - {{response.announcement?.ufAddress}}
                 </span>
             </p>
         </div>

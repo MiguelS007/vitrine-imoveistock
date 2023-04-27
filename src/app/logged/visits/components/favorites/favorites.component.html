@@ -54,7 +54,7 @@
                                 {{item.cityAddress}} - {{item.ufAddress}}</span>
                         </p>
                     </div>
-                    <div class="row mx-1 pb-2 d-flex">
+                    <div class="row mx-1 d-flex">
                         <div
                             class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
@@ -80,6 +80,15 @@
                                 currency: ' '}} m2</p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
+                                <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                 color-black">{{item.suites || 0}} Suítes</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,9 +97,9 @@
                 <p class="fw-700 mb-3 font-size-24 line-32 color-black">
                     Você não tem imóveis na sua lista de favoritos
                 </p>
-                <p class="fw-400 font-size-18 line-24 color-black">
+                <!-- <p class="fw-400 font-size-18 line-24 color-black">
                     Após visitar um imóvel seu histórico de favoritos aparecerá aqui
-                </p>
+                </p> -->
                 <button style="max-width: 345px;" [routerLink]="['/search']"
                     class="btn mt-3 d-inline-block border-radius-10 bg-purple text-light h-74 w-100 fw-700 font-size-18 line-24"
                     type="button">Procurar imóveis</button>

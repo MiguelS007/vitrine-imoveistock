@@ -171,7 +171,7 @@
                                 {{selectedScheduling.announcement?.ufAddress}}</span>
                         </p>
                     </div>
-                    <div class="row mx-3 my-3 d-flex">
+                    <div class="row mx-3 mt-3 d-flex">
                         <div class="col justify-content-left
                                             px-0 d-flex
                                             align-items-center
@@ -201,6 +201,15 @@
                                                 font-size-14 line-20
                                                 color-black">{{selectedScheduling.announcement?.usefulArea |
                                 currency: ' '}} m2</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
+                                <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                 color-black">{{selectedScheduling.announcement?.suites || 0}} Suítes</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -294,9 +303,9 @@
                 <p class="fw-700 mb-3 font-size-24 line-32 color-black">
                     Você não tem histórico de agendamento
                 </p>
-                <p class="fw-400 font-size-18 line-24 color-black">
+                <!-- <p class="fw-400 font-size-18 line-24 color-black">
                     Após agendar uma visita seu histórico de agendamento aparecerá aqui
-                </p>
+                </p> -->
                 <button style="max-width: 345px;" [routerLink]="['/search']" class="btn btn-search-property"
                     type="button">Procurar imóveis</button>
             </div>

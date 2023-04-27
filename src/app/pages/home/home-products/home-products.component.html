@@ -58,7 +58,7 @@
                                 <div class="col-12 px-0" (click)="announcementSelected(item._id)">
                                     <div class="w-100 mx-1 pt-3">
                                         <span
-                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{resolveProperty(item.propertyType)}}</span>
                                         <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
                                             style="max-width: 90%;">{{item.description}}</p>
                                         <p class="d-flex align-items-center">
@@ -68,7 +68,7 @@
                                                 {{item.cityAddress}} - {{item.ufAddress}}</span>
                                         </p>
                                     </div>
-                                    <div class="row mx-1 pb-2 d-flex">
+                                    <div class="row mx-1 d-flex">
                                         <div
                                             class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
@@ -82,7 +82,7 @@
                                             class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
                                             <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
-                                                {{item.parkingSpaces}} Vagas
+                                                {{item.parkingSpaces?item.parkingSpaces:0}} Vagas
                                             </p>
                                         </div>
                                         <div
@@ -94,10 +94,15 @@
                                                 currency: ' '}} m2</p>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-left align-items-center ml-1 mt-2">
-                                        <img src="../../../assets/icon/suites.svg" width="30px" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                                         color-black">{{item.suites || 0}} Suítes</p>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="../../../assets/icon/suites.svg" width="18px"
+                                                    class="pr-2 mobile-w" />
+                                                <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                                 color-black">{{item.suites || 0}} Suítes</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +158,7 @@
                                 <div class="col-12 px-0" (click)="announcementSelected(item._id)">
                                     <div class="w-100 mx-1 pt-3">
                                         <span
-                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{resolveProperty(item.propertyType)}}</span>
                                         <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
                                             style="max-width: 90%;">{{item.description}}</p>
                                         <p class="d-flex align-items-center">
@@ -163,7 +168,7 @@
                                                 {{item.cityAddress}} - {{item.ufAddress}}</span>
                                         </p>
                                     </div>
-                                    <div class="row mx-1 pb-2 d-flex">
+                                    <div class="row mx-1 d-flex">
                                         <div
                                             class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
@@ -177,7 +182,7 @@
                                             class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
                                             <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
-                                                {{item.parkingSpaces}} Vagas
+                                                {{item.parkingSpaces || 0}} Vagas
                                             </p>
                                         </div>
                                         <div
@@ -189,10 +194,15 @@
                                                 currency: ' '}} m2</p>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-left align-items-center ml-1 mt-2">
-                                        <img src="../../../assets/icon/suites.svg" width="30px" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                                         color-black">{{item.suites || 0}} Suítes</p>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="../../../assets/icon/suites.svg" width="18px"
+                                                    class="pr-2 mobile-w" />
+                                                <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                                 color-black">{{item.suites || 0}} Suítes</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +258,7 @@
                                 <div class="col-12 px-0" (click)="announcementSelected(item._id)">
                                     <div class="w-100 mx-1 pt-3">
                                         <span
-                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{item.propertyCharacteristics}}</span>
+                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{resolveProperty(item.propertyType)}}</span>
                                         <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
                                             style="max-width: 90%;">{{item.description}}</p>
                                         <p class="d-flex align-items-center  text-left">
@@ -258,7 +268,7 @@
                                                 {{item.cityAddress}} - {{item.ufAddress}}</span>
                                         </p>
                                     </div>
-                                    <div class="row mx-1 pb-2 d-flex">
+                                    <div class="row mx-1 d-flex">
                                         <div
                                             class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
@@ -283,10 +293,15 @@
                                                 currency: ' '}} m2</p>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-left align-items-center ml-1 mt-2">
-                                        <img src="../../../assets/icon/suites.svg" width="30px" class="pr-2 mobile-w" />
-                                        <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
-                                                         color-black">{{item.suites || 0}} Suítes</p>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="../../../assets/icon/suites.svg" width="18px"
+                                                    class="pr-2 mobile-w" />
+                                                <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                                 color-black">{{item.suites || 0}} Suítes</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 

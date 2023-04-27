@@ -14,6 +14,7 @@ import { environment } from '../../../environments/environment';
 import { Cep } from '../../dtos/cep';
 import { CepService } from '../../service/cep.service';
 import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
+import { SharedAnnouncementComponent } from './components/shared-announcement/shared-announcement.component';
 
 @Component({
   selector: 'app-property-detail',
@@ -264,7 +265,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   changeValueViewSelectSale(valueView) {
-      this.valueViewSelectSale = !this.valueViewSelectSale 
+    this.valueViewSelectSale = !this.valueViewSelectSale
   }
 
   closeEventHandler() {
@@ -292,7 +293,7 @@ export class PropertyDetailComponent implements OnInit {
 
   btninteractionimg(value: string) {
     if (value === 'share') {
-      this.iconshare = !this.iconshare;
+      this.modalService.open(SharedAnnouncementComponent, { centered: true })
     } else if (value === 'print') {
       this.iconprint = !this.iconprint;
     }
@@ -324,8 +325,8 @@ export class PropertyDetailComponent implements OnInit {
   }
   goExpress() {
     if (localStorage.getItem('user') !== null) {
-      if(this.response.typeOfAd === 'both') {
-        if(this.valueViewSelectSale) {
+      if (this.response.typeOfAd === 'both') {
+        if (this.valueViewSelectSale) {
           localStorage.setItem('bothProposalType', 'sale')
         } else {
           localStorage.setItem('bothProposalType', 'rent')
