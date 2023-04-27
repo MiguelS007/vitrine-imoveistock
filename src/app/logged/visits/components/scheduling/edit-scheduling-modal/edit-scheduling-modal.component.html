@@ -25,9 +25,7 @@
                             ||
                             '-'}}</span>
                         <span
-                            class="fw-400 font-size-14 line-19 color-black">Metragem:&nbsp;{{response.announcement?.usefulArea
-                            ||
-                            '-'}}m²</span>
+                            class="fw-400 font-size-14 line-19 color-black">Metragem:&nbsp;{{response.announcement?.usefulArea | currency: ' '}}m²</span>
                     </p>
                 </div>
             </div>

@@ -71,12 +71,16 @@ export class ContactComponent implements OnInit {
     )
   }
 
-  openLogin() {
-    if (localStorage.getItem('user') === null) {
-      this.datamokservice.opModalLogin();
-    } else {
-      window.open('https://imoveistock-app.vercel.app/logged/home', '_blank');
-    }
+  knowApp() {
+    window.open('https://imoveistock-app-tgt.vercel.app', '_blank')
   }
+
+  // openLogin() {
+  //   if (localStorage.getItem('user') === null) {
+  //     this.datamokservice.opModalLogin();
+  //   } else {
+  //     window.open('https://imoveistock-app.vercel.app/logged/home', '_blank');
+  //   }
+  // }
 
 }

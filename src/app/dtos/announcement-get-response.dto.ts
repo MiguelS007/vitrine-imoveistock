@@ -141,8 +141,18 @@ export abstract class AnnouncementGetResponseDto {
     longitude: string;
 
     photos?: Photos[];
+
+    videos: Videos[];
 }
 
+class Videos {
+    key: string;
+    main: boolean;
+    notShow: boolean;
+    index: number
+    updatedAt
+    _id
+}
 class Photos {
     key: string;
     main: boolean;

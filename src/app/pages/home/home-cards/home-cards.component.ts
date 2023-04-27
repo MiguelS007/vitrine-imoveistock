@@ -23,8 +23,8 @@ export class HomeCardsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openLanding() {
-    window.open('https://landing-page-indicacao-n75g.vercel.app/', '_blank');
+  knowApp() {
+    window.open('https://imoveistock-app-tgt.vercel.app', '_blank')
   }
 
 }

@@ -44,17 +44,18 @@ import { SchedulingStep3Component } from './pages/property-detail/components/sch
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { TermsComponent } from './shared/terms/terms.component';
 import { CookiePolicyComponent } from './shared/cookie-policy/cookie-policy.component';
-import {NgcCookieConsentConfig, NgcCookieConsentModule} from "ngx-cookieconsent";
+import { NgcCookieConsentConfig, NgcCookieConsentModule } from "ngx-cookieconsent";
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { TermsSignupComponent } from './shared/terms-signup/terms-signup.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CepService } from './service/cep.service';
 import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
+import { SharedAnnouncementComponent } from './pages/property-detail/components/shared-announcement/shared-announcement.component';
 
 registerLocaleData(ptBr);
 
-const cookieConfig:NgcCookieConsentConfig = {
+const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
     domain: window.location.hostname
   },
@@ -70,11 +71,11 @@ const cookieConfig:NgcCookieConsentConfig = {
   },
   theme: 'classic',
   type: 'info',
-  content:{
+  content: {
     message: 'Nossa plataforma utiliza cookies para otimizar e personalizar sua experiência. Ao continuar navegando, você automaticamente concorda com a nossa',
     link: 'Política de cookies',
     href: 'cookie-policy',
-    dismiss:'Aceitar cookies',
+    dismiss: 'Aceitar cookies',
   },
 };
 
@@ -103,6 +104,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     TermsComponent,
     CookiePolicyComponent,
     TermsSignupComponent,
+    SharedAnnouncementComponent
   ],
 
   imports: [
@@ -121,7 +123,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     NgxPaginationModule,
     VgCoreModule,
     VgControlsModule,
-    VgOverlayPlayModule, 
+    VgOverlayPlayModule,
     NgxMaskModule.forRoot(),
     VgBufferingModule,
     NgxPageScrollModule,
@@ -145,7 +147,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     AnnouncementService,
     CepService,
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

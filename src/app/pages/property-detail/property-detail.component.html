@@ -57,8 +57,8 @@
               </div>
               <div (click)="btninteractionimg('share')"
                 class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
-                <i [class]="iconshare ?'bi-share-fill':'bi-share' "
-                  class="bi icon-button-property-detail-shared text-light"></i>
+                <i 
+                  class="bi bi-share icon-button-property-detail-shared text-light"></i>
               </div>
               <div (click)="btninteractionimg('print')"
                 class="button-property-detail-shared mx-1 mt-2 bg-transparent-white cursor-pointer heart-like border-radius-10 pt-2 pb-1 px-3">
@@ -236,7 +236,7 @@
               <h1 class="fw-400 font-size-18 d-inline-block  small-text info-announcement
                        line-19 color-black bg-graylight text-nowrap
                        border-radius-10 bg-purple-light py-4 mr-3
-                       px-4">Quarto:&nbsp;{{response.bedrooms || '-'}}</h1>
+                       px-4">Quartos:&nbsp;{{response.bedrooms || '-'}}</h1>
               <h1 class="fw-400 font-size-18 small-text info-announcement
                        line-19 color-black bg-graylight d-inline-block text-nowrap
                        border-radius-10 bg-purple-light py-4 mr-3
@@ -307,7 +307,7 @@
                       currency: 'R$ ' || '-'}}</td>
                   </tr>
                   <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Banheiro:</td>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Banheiros:</td>
                     <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.bathrooms || '-'}}
                     </td>
                   </tr>
@@ -363,7 +363,7 @@
                                    color-black">&nbsp;&nbsp;Thá</span>
                     </td>
                   </tr>
-                  <tr class="h-51">
+                  <!-- <tr class="h-51">
                     <td>
                       <span class="fw-400
                                    font-size-16 line-20
@@ -372,7 +372,7 @@
                                    font-size-16 line-20
                                    color-black">&nbsp;&nbsp;4</span>
                     </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -762,7 +762,7 @@
                 exclusivo</button>
             </div>
             <div *ngIf="propertyvideo" class="w-100 position-relative pt-4 pb-5">
-              <vg-player class="w-90 m-0-auto h-100 ">
+              <vg-player class="w-90 m-0-auto" style="max-height: 473px !important;">
                 <vg-overlay-play></vg-overlay-play>
                 <vg-buffering></vg-buffering>
                 <vg-scrub-bar>
@@ -778,8 +778,9 @@
                   <vg-fullscreen></vg-fullscreen>
                 </vg-controls>
                 <video [vgMedia]="$any(media)" poster="../../../assets/img/preview1.png" #media id="singleVideo"
-                  preload="auto" crossorigin>
-                  <source src="../../../assets/vid/test.mp4" type="video/mp4">
+                  preload="auto">
+                  <source *ngIf="!response.videos" src="../../../assets/vid/test.mp4" type="video/mp4">
+                  <source *ngIf="response.videos" [src]="response?.videos[0]?.key" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
                 </video>
               </vg-player>
@@ -1004,7 +1005,7 @@
           </button>
           <div class="content-thumb-images my-3">
             <div class="ml-2" *ngFor="let item of response.photos; let i = index" #thumbPhotosArr [id]="item.key">
-              <img [src]="item.key" height="100" width="100" (click)="onThumbClick(i)" [id]="i">
+              <img [src]="item.key" height="50" width="50" (click)="onThumbClick(i)" [id]="i">
             </div>
           </div>
         </div>
@@ -1045,8 +1046,9 @@
                   <vg-fullscreen></vg-fullscreen>
                 </vg-controls>
                 <video [vgMedia]="$any(videomedia)" poster="../../../assets/img/preview1.png" #videomedia
-                  id="singleVideo" preload="auto" crossorigin>
-                  <source src="../../../assets/vid/test.mp4" type="video/mp4">
+                  id="singleVideo" preload="auto">
+                  <source *ngIf="!response.videos" src="../../../assets/vid/test.mp4" type="video/mp4">
+                  <source *ngIf="response.videos" [src]="response?.videos[0]?.key" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
                 </video>
               </vg-player>
