@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, ViewChildren, QueryList, Renderer2, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +15,8 @@ import { Cep } from '../../dtos/cep';
 import { CepService } from '../../service/cep.service';
 import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
 import { SharedAnnouncementComponent } from './components/shared-announcement/shared-announcement.component';
+import { PageScrollService } from 'ngx-page-scroll-core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-property-detail',
@@ -191,6 +193,7 @@ export class PropertyDetailComponent implements OnInit {
     }
     this.list();
 
+    window.scrollTo(0, 0);
 
   }
 
@@ -222,6 +225,8 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
 
     this.ngxSpinnerService.show()
 
