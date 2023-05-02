@@ -14,8 +14,7 @@
                       <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar</span>
                       <span class="result-filter"
                         *ngFor="let item of filtroResultDisplay.propertyTypeList | slice:0:5; let i = index">
-                        <span *ngIf="i <=3">{{item.item_text}} <b><a class="cursor-pointer"
-                            >X</a></b></span>
+                        <span *ngIf="i <=3">{{item.item_text}}<b></b></span>
                         <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay.propertyTypeList.length - 4)}}</span>
                       </span>
                       <span class="result-filter" *ngIf="filtroResultDisplay.ufAddress && filtroResultDisplay.cityAddress">

@@ -128,10 +128,6 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
       this.response.sort((a, b) => a.saleValue > b.saleValue ? -1 : 0);
   }
 
-  removeTag(index: number){
-    this.filtroResultDisplay.propertyTypeList.splice(index, 1);
-  }
-
   private _updateMarkers() {
 
     this.markers = [];
