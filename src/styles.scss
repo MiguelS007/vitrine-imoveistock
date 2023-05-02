@@ -1928,6 +1928,21 @@ vg-overlay-play .vg-overlay-play {
     outline: none !important;
 }
 
+// Resultado do filtro
+.result-filter {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #542FDF;
+    border-radius: 50px;
+    padding: 4px 12px;
+    gap: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 5px;
+  }
+
 // MEDIA
 @media (min-width: 1918px) {
 
