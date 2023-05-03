@@ -52,6 +52,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CepService } from './service/cep.service';
 import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 import { SharedAnnouncementComponent } from './pages/property-detail/components/shared-announcement/shared-announcement.component';
+import { GalleryModule } from 'ng-gallery';
+
 
 registerLocaleData(ptBr);
 
@@ -134,7 +136,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     AutocompleteLibModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
     NgMultiSelectDropDownModule.forRoot(),
-    NgImageFullscreenViewModule
+    NgImageFullscreenViewModule,
+    GalleryModule
   ],
   providers: [
     {

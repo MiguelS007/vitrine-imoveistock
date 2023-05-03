@@ -54,12 +54,6 @@
     max-width: 800px;
     max-height: 400px;
 }
-.content-thumb-images {
-    display: flex !important;
-    justify-content: center !important;
-    width: 100% !important;
-    overflow-x: auto !important;
-}
 
 .header-image-preview {
     position: absolute !important;
@@ -93,6 +87,15 @@
 
 .count-text-image-preview {
     color: white !important;
+}
+
+gallery {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: block;
+    height: 600px !important;
+    background-color: #000000ba !important;
 }
 
 @media (min-width: 576px) {

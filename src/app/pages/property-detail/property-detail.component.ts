@@ -17,6 +17,7 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
 import { SharedAnnouncementComponent } from './components/shared-announcement/shared-announcement.component';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { DOCUMENT } from '@angular/common';
+import { GalleryItem, ImageItem } from 'ng-gallery';
 
 @Component({
   selector: 'app-property-detail',
@@ -26,6 +27,9 @@ import { DOCUMENT } from '@angular/common';
 export class PropertyDetailComponent implements OnInit {
 
   @ViewChild('imageEvidence', { static: true }) imageRef!: ElementRef;
+
+
+  images: GalleryItem[] = [];
 
   infopaymobile = false;
   finalValueSale: number;
@@ -198,30 +202,32 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   openImagePreview() {
-    this.indexTeste = 1
-    this.thumbPhotosArrList.map(results => {
-      if (results.nativeElement?.id === this.imageEvidence.key) {
-        results.nativeElement.className = 'active-thumb-photo';
-      } else {
-        results.nativeElement.className = 'disable-thumb-photo ml-2';
-      }
-    });
-    setTimeout(() => {
-      this.swiperRef.swiperRef.on('slideChange', () => {
-        const activeIndex = this.swiperRef.swiperRef.activeIndex;
-        this.imageEvidence = this.response.photos[activeIndex];
-        this.indexTeste = this.imageEvidence.index
-        const activeImage = this.response.photos[activeIndex].key;
-        this.thumbPhotosArrList.map(results => {
-          if (results.nativeElement?.id === this.imageEvidence.key) {
-            results.nativeElement.className = 'active-thumb-photo';
+    // this.indexTeste = 1
+    // this.thumbPhotosArrList.map(results => {
+    //   if (results.nativeElement?.id === this.imageEvidence.key) {
+    //     results.nativeElement.className = 'active-thumb-photo';
+    //   } else {
+    //     results.nativeElement.className = 'disable-thumb-photo ml-2';
+    //   }
+    // });
+    // setTimeout(() => {
+    //   this.swiperRef.swiperRef.on('slideChange', () => {
+    //     const activeIndex = this.swiperRef.swiperRef.activeIndex;
+    //     this.imageEvidence = this.response.photos[activeIndex];
+    //     this.indexTeste = this.imageEvidence.index
+    //     const activeImage = this.response.photos[activeIndex].key;
+    //     this.thumbPhotosArrList.map(results => {
+    //       if (results.nativeElement?.id === this.imageEvidence.key) {
+    //         results.nativeElement.className = 'active-thumb-photo';
 
-          } else {
-            results.nativeElement.className = 'disable-thumb-photo ml-2';
-          }
-        });
-      });
-    }, 100);
+    //       } else {
+    //         results.nativeElement.className = 'disable-thumb-photo ml-2';
+    //       }
+    //     });
+    //   });
+    // }, 100);
+
+
   }
 
   ngOnInit(): void {
@@ -262,7 +268,13 @@ export class PropertyDetailComponent implements OnInit {
       }
     }
 
-    this.imageEvidence = this.response.photos[0]
+    this.imageEvidence = this.response.photos[0];
+
+    for (let i = 0; i < this.response.photos.length; i++) {
+      this.images.push(new ImageItem({ src: this.response.photos[i].key, thumb: this.response.photos[i].key }))
+    }
+
+    console.log(this.images)
 
   }
 

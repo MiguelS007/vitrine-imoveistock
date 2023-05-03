@@ -941,9 +941,6 @@
     <div class="modal-dialog modal-lg-preview modal-dialog-centered" role="document">
       <div class="modal-content modal-content-preview">
         <div class="header-image-preview">
-          <h3 class="count-text-image-preview">
-            {{indexTeste}}/{{response.photos.length}}
-          </h3>
           <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
             <i class="bi font-size-48 text-light bi-x"></i>
           </button>
@@ -958,6 +955,8 @@
             </ng-template>
           </swiper> -->
 
+          <gallery [items]="images" imageSize="contain" fluid></gallery>
+
           <button class="btn btn-expand-photo" (click)="openFullScreen()">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
@@ -965,11 +964,6 @@
                 d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
             </svg>
           </button>
-          <div class="content-thumb-images my-3">
-            <div class="ml-2" *ngFor="let item of response.photos; let i = index" #thumbPhotosArr [id]="item.key">
-              <img [src]="item.key" height="50" width="50" (click)="onThumbClick(i)" [id]="i">
-            </div>
-          </div>
         </div>
       </div>
     </div>
