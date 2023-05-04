@@ -17,7 +17,8 @@ import { SchedulingStep1Component } from './components/scheduling-step1/scheduli
 import { SharedAnnouncementComponent } from './components/shared-announcement/shared-announcement.component';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { DOCUMENT } from '@angular/common';
-import { GalleryItem, ImageItem } from 'ng-gallery';
+import { Gallery, GalleryItem, ImageItem } from 'ng-gallery';
+
 
 @Component({
   selector: 'app-property-detail',
@@ -169,7 +170,6 @@ export class PropertyDetailComponent implements OnInit {
     private announcementService: AnnouncementService,
     private modalService: NgbModal,
     private _cepService: CepService,
-
   ) {
     this.formproperty = this.formBuilder.group({
       searchwords: ['', [Validators.required]],
@@ -233,7 +233,6 @@ export class PropertyDetailComponent implements OnInit {
   ngOnInit(): void {
 
 
-
     this.ngxSpinnerService.show()
 
     this.response = this.route.snapshot.data['resolve'];
@@ -278,6 +277,10 @@ export class PropertyDetailComponent implements OnInit {
 
   }
 
+  handleImageChange(event) {
+    console.log(event)
+  }
+
   changeValueViewSelectSale(valueView) {
     this.valueViewSelectSale = !this.valueViewSelectSale
   }
@@ -293,10 +296,15 @@ export class PropertyDetailComponent implements OnInit {
     }
   }
 
+  updateimage(event) {
+    console.log(event)
+  }
+
   openFullScreen() {
     this.imageSelectedFullScreen = []
-    this.imageSelectedFullScreen.push({ image: this.imageEvidence.key });
-    this.currentIndex = this.imageEvidence.index;
+    for (let iterator of this.response.photos) {
+      this.imageSelectedFullScreen.push({ image: iterator.key });
+    }
     this.showFlag = true;
   }
 

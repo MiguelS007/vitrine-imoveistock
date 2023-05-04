@@ -95,7 +95,7 @@ gallery {
     overflow: hidden;
     display: block;
     height: 600px !important;
-    background-color: #000000ba !important;
+    background-color: transparent !important;
 }
 
 @media (min-width: 576px) {
@@ -116,7 +116,7 @@ gallery {
         width: auto !important;
     }
 
-    
+
 }
 
 @media (max-width: 576px) {
