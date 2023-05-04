@@ -2,6 +2,36 @@
     <div class="d-flex justify-content-end">
         <img src="../../../../../assets/icon/x.png" alt="" (click)="exit()" style="cursor: pointer;">
     </div>
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <img src="../../../../../assets/logo/simbolo-logo-preto.svg" alt="">
+        <h3 class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">Aqui você tem o melhor <br>
+            atendimento</h3>
+        <p class="fw-600 font-size-14 text-center">Aqui garantimos que você seja atendido com profissionalismo e
+            qualidade.
+            Digite o celular do seu corretor.</p>
+    </div>
+    <form [formGroup]="form">
+        <div class="w-100 d-flex">
+            <input type="tel" maxlength="2" formControlName="ddd" id="ddd" (keyup)="nextCode('ddd', $event)"
+                class="btn w-20 bg-whitelight border-radius-10 border p-3 fw-400 font-size-16 line-20 color-black"
+                placeholder="DDD" />
+            <input type="tel" mask="99999-9999" formControlName="phone" id="tel" (keyup)="nextCode('tel', $event)"
+                class="btn w-100 h-74 bg-whitelight text-left ml-3 border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
+                placeholder="Celular" />
+        </div>
+        <div class="d-flex flex-column">
+            <button type="button" class="btn bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100 mt-5">Continuar</button>
+            <button type="button" class="btn bg-white border-radius-10 border-purple color-purple h-74 fw-700 font-size-18 w-100 mt-3">Cancelar</button>
+        </div>
+    </form>
+</section>
+
+
+<!-- último step -->
+<!-- <section class="container-fluid p-4">
+    <div class="d-flex justify-content-end">
+        <img src="../../../../../assets/icon/x.png" alt="" (click)="exit()" style="cursor: pointer;">
+    </div>
 
     <div class="anima-body">
         <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
@@ -53,4 +83,4 @@
             class="btn pb-2 mt-3 border-purple bg-white fw-700 font-size-18 line-24 color-purple border-radius-10  h-74 w-100">Ver
             visitas</button>
     </div>
-</section>
+</section> -->

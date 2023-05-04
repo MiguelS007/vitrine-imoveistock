@@ -52,6 +52,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CepService } from './service/cep.service';
 import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 import { SharedAnnouncementComponent } from './pages/property-detail/components/shared-announcement/shared-announcement.component';
+import { SchedulingStep4Component } from './pages/property-detail/components/scheduling-step4/scheduling-step4.component';
 
 registerLocaleData(ptBr);
 
@@ -101,6 +102,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     SchedulingStep1Component,
     SchedulingStep2Component,
     SchedulingStep3Component,
+    SchedulingStep4Component,
     TermsComponent,
     CookiePolicyComponent,
     TermsSignupComponent,
