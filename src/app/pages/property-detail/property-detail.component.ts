@@ -15,7 +15,6 @@ import { Cep } from '../../dtos/cep';
 import { CepService } from '../../service/cep.service';
 import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
 import { SharedAnnouncementComponent } from './components/shared-announcement/shared-announcement.component';
-import { SchedulingStep4Component } from './components/scheduling-step4/scheduling-step4.component';
 
 @Component({
   selector: 'app-property-detail',
@@ -376,7 +375,7 @@ export class PropertyDetailComponent implements OnInit {
   scheduling(item) {
     if (localStorage.getItem('user') !== null) {
       localStorage.setItem('announcementOfScheduling', JSON.stringify(item))
-      this.modalService.open(SchedulingStep4Component, { centered: true, backdrop: 'static', keyboard: false })
+      this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
     } else {
       this.modalService.open(ModalLoginComponent, { centered: true })
     }

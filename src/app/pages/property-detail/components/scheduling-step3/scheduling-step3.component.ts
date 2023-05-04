@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnnouncementGetResponseDto } from '../../../../dtos/announcement-get-response.dto';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SchedulingStep4Component } from '../scheduling-step4/scheduling-step4.component';
 
 @Component({
   selector: 'app-scheduling-step3',
@@ -25,8 +26,8 @@ export class SchedulingStep3Component implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.form = this.formBuilder.group({
-      ddd: [''],
-      phone: ['']
+      ddd: ['', [Validators.required]],
+      phone: ['', [Validators.required]]
     })
    }
 
@@ -39,7 +40,12 @@ export class SchedulingStep3Component implements OnInit {
   }
 
   exit() {
-    this.modalService.dismissAll()
+    this.modalService.dismissAll();
+  }
+
+  confirm(){
+    this.modalService.dismissAll();
+    this.modalService.open(SchedulingStep4Component, { centered: true, backdrop: 'static', keyboard: false});
   }
 
   goToVisits() {

@@ -20,8 +20,12 @@
                 placeholder="Celular" />
         </div>
         <div class="d-flex flex-column">
-            <button type="button" class="btn bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100 mt-5">Continuar</button>
-            <button type="button" class="btn bg-white border-radius-10 border-purple color-purple h-74 fw-700 font-size-18 w-100 mt-3">Cancelar</button>
+            <button [disabled]="this.form.controls['ddd'].value == '' || this.form.controls['phone'].value == ''" type="button"
+                class="btn bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100 mt-5"
+                (click)="confirm()">Continuar</button>
+            <button type="button"
+                class="btn bg-white border-radius-10 border-purple color-purple h-74 fw-700 font-size-18 w-100 mt-3"
+                (click)="exit()">Cancelar</button>
         </div>
     </form>
 </section>
