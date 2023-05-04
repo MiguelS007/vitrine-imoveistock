@@ -98,6 +98,13 @@ gallery {
     background-color: transparent !important;
 }
 
+.content-property-details-icons {
+    display: flex !important;
+    justify-content: space-evenly !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+}
+
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 100% !important;
