@@ -30,10 +30,6 @@ export class SchedulingStep7Component implements OnInit {
 
     let announcementSelected = localStorage.getItem('announcementOfScheduling');
     this.response = JSON.parse(announcementSelected);
-
-    this.dateSend = {
-      visitDate: this.dateSelected
-    }
   }
 
   exit() {
@@ -41,13 +37,6 @@ export class SchedulingStep7Component implements OnInit {
   }
 
   goToVisits() {
-    this.scheduleService.registerSchedule(this.response._id, this.dateSend).subscribe(
-      success => this.registerSuccess(success),
-      error => console.error(error)
-    )
-  }
-
-  registerSuccess(success) {
     this.modalService.dismissAll();
     this.router.navigate(['logged/visits'])
   }

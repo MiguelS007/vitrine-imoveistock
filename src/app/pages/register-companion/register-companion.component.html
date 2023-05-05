@@ -1,0 +1,136 @@
+<section style="margin-top: 100px;" class="bg-clear">
+    <div class="container d-flex align-items-center justify-content-center">
+        <form [formGroup]="form">
+            <div class="bg-white border-radius-10 p-3 mt-5 mb-3">
+                <h3 class="fw-700 font-size-24">Acompanhantes</h3>
+                <p>Você foi convidado a acompanhar o Sr(a)<b>Rick Sanches</b> em uma visita. <br>
+                    Para confirmar sua presença, precisamos de alguns dados:</p>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control bg-whitelight border-radius-10 border p-2 color-black h-51"
+                        formControlName="name" placeholder="Nome">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control bg-whitelight border-radius-10 border p-2 color-black h-51"
+                        formControlName="kinship" placeholder="Grau de parentesco">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control bg-whitelight border-radius-10 border p-2 color-black h-51"
+                        mask="(00)00000-0000" formControlName="phone" placeholder="Telefone">
+                </div>
+                <button
+                    [disabled]="this.form.controls['name'].value == '' || this.form.controls['kinship'].value == '' || this.form.controls['phone'].value == ''"
+                    type="button"
+                    class="btn bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100 mt-2">Salvar</button>
+            </div>
+            <div class="bg-white border-radius-10 p-3 mb-3">
+                <div class="d-flex">
+                    <i class="bi bi-link-45deg"></i>
+                    <span class="ml-2"><b>Código da visita:</b> H0B7YH90</span>
+                </div>
+                <p class="color-muted font-size-12">Informe o código ao corretor durante a visita.</p>
+                <div class="w-100 bg-white border-radius-10 p-4 h-auto">
+                    <p class="w-100 fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-20 mr-2 bi-calendar"></i>Terça-feira, 29 de Junho às 08:00
+                    </p>
+                    <p class="fw-400 py-2 font-size-16 line-20 color-black">
+                        <i class="bi font-size-20 color-black mr-2 bi-geo-alt"></i>
+                        Rua Estados Unidos 1987, Curitiba - PR
+                    </p>
+                    <p class="fw-400 font-size-16 line-20 color-black">
+                        <i class="bi font-size-20 color-black mr-2 bi-person-vcard"></i>
+                        Leve seu documento de identificação original com foto
+                    </p>
+                    <div>
+                        <p class="fw-700 font-size-16 mt-4 line-20 color-black">A visita é acompanhada por esse
+                            corretor:
+                        </p>
+                        <div class="w-100 d-flex">
+                            <i class="bi color-black mr-2 font-size-20 bi-person"></i>
+                            <p class="d-grid">
+                                <span class="fw-500 font-size-14 line-18 color-black">Jussara Helias</span>
+                                <span class="color-muted font-size-12">Corretor</span>
+                                <span class="fw-400 font-size-14 line-18 color-black">11 9 1234-1234</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="w-100 bg-white mt-4 border-radius-10 h-auto mb-3">
+                <div class="h-100 product-announcement p-2 mx-3 border-radius-10 bg-white">
+                    <div class="py-2 px-3 product-announcement-card position-relative">
+                        <img src="../../../assets/img/city1.png" class="photo-announcement-card">
+                        <div class="space-sale-exclusive">
+                            <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                                Venda</h4>
+                            <h4 class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
+                                Exclusivo</h4>
+                        </div>
+                        <div class="space-value-announcement">
+                            <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" >
+                                2000 mil reais</p>
+                        </div>
+                    </div>
+                    <div class="w-100 mx-3 text-align-left pt-3" style="cursor: pointer;">
+                        <span
+                            class="fw-400 font-size-14
+                                            line-20
+                                            color-black">Apartamento</span>
+                        <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate" style="max-width: 90%;">
+                            Cobertura com uma vista incrível</p>
+                        <p class="d-flex
+                                            align-items-center">
+                            <i class="bi font-size-20 mr-2
+                                                color-black
+                                                bi-geo-alt"></i>
+                            <span
+                                class="fw-400 font-size-14 line-20 color-black">Rua Estados Unidos 1987, Curitiba - PR</span>
+                        </p>
+                    </div>
+                    <div class="row mx-3 mt-3 d-flex">
+                        <div class="col justify-content-left
+                                            px-0 d-flex
+                                            align-items-center
+                                            justify-content-left">
+                            <img src="../../../assets/icon/bed.png" class="pr-2" />
+                            <p class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">4
+                                Quartos</p>
+                        </div>
+                        <div class="col justify-content-left px-0
+                                            d-flex
+                                            align-items-center
+                                            justify-content-left">
+                            <img src="../../../assets/icon/car.png" class="pr-2" />
+                            <p class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">2
+                                Vagas</p>
+                        </div>
+                        <div class="col justify-content-left
+                                            px-0 d-flex
+                                            align-items-center
+                                            justify-content-left">
+                            <img src="../../../assets/icon/rule.png" class="pr-2" />
+                            <p class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">199 m2</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
+                                <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                 color-black">2 Suítes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</section>
