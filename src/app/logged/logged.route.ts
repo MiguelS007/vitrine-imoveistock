@@ -5,6 +5,7 @@ import { ExpressProposalComponent } from './express-proposal/express-proposal.co
 
 import { LoggedComponent } from './logged.component';
 import { VisitsComponent } from './visits/visits.component';
+import { RegisterCompanionComponent } from '../pages/register-companion/register-companion.component';
 
 const routes: Routes = [
   {

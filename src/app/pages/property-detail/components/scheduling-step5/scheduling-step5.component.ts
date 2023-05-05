@@ -16,6 +16,8 @@ export class SchedulingStep5Component implements OnInit {
 
   response: AnnouncementGetResponseDto;
 
+  typeOfAd = localStorage.getItem('typeOfAdSelect');
+
   dateSend: ScheduleRegisterRequestDto;
 
   constructor(
@@ -32,7 +34,8 @@ export class SchedulingStep5Component implements OnInit {
 
 
     this.dateSend = {
-      visitDate: this.dateSelected
+      visitDate: this.dateSelected,
+      visitTypeOfAd: localStorage.getItem('typeOfAdSelect')
     }
   }
 
@@ -41,6 +44,16 @@ export class SchedulingStep5Component implements OnInit {
   }
 
   confirm() {
+    this.scheduleService.registerSchedule(this.response._id, this.dateSend).subscribe(
+      success => this.registerSuccess(success),
+      error => console.error(error)
+    )
+  }
+
+  registerSuccess(success: any) {
+    console.log(success);
+    localStorage.setItem('companionLink', success.link);
+    
     this.modalService.dismissAll()
     this.modalService.open(SchedulingStep6Component, { centered: true, backdrop: 'static', keyboard: false });
   }

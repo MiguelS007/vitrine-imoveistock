@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ScheduleRegisterRequestDto } from '../../../../../dtos/schedule-register-request.dto';
 import { ScheduleRegisterResponseDto } from '../../../../../dtos/schedule-register-response.dto';
-import { SchedulingStep3Component } from '../../../../../pages/property-detail/components/scheduling-step3/scheduling-step3.component';
 import { ScheduleService } from '../../../../../service/schedule.service';
 import { EditScheduling3ModalComponent } from '../edit-scheduling3-modal/edit-scheduling3-modal.component';
 
@@ -30,10 +29,6 @@ export class EditScheduling2ModalComponent implements OnInit {
 
     let announcementSelected = localStorage.getItem('announcementSelected');
     this.response = JSON.parse(announcementSelected);
-
-    this.dateSend = {
-      visitDate: this.dateSelected
-    }
   }
 
   exit() {

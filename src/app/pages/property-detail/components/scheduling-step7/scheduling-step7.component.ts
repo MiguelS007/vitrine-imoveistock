@@ -21,19 +21,9 @@ export class SchedulingStep7Component implements OnInit {
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private scheduleService: ScheduleService
   ) { }
 
   ngOnInit(): void {
-    let dateSelected = localStorage.getItem('dateScheduling')
-    this.dateSelected = JSON.parse(dateSelected);
-
-    let announcementSelected = localStorage.getItem('announcementOfScheduling');
-    this.response = JSON.parse(announcementSelected);
-
-    this.dateSend = {
-      visitDate: this.dateSelected
-    }
   }
 
   exit() {
@@ -41,13 +31,6 @@ export class SchedulingStep7Component implements OnInit {
   }
 
   goToVisits() {
-    this.scheduleService.registerSchedule(this.response._id, this.dateSend).subscribe(
-      success => this.registerSuccess(success),
-      error => console.error(error)
-    )
-  }
-
-  registerSuccess(success) {
     this.modalService.dismissAll();
     this.router.navigate(['logged/visits'])
   }

@@ -264,8 +264,11 @@ export class PropertyDetailComponent implements OnInit {
 
   }
 
+  typeOfAdSelect: string = 'sale';
+
   changeValueViewSelectSale(valueView) {
     this.valueViewSelectSale = !this.valueViewSelectSale
+    this.typeOfAdSelect = valueView
   }
 
   closeEventHandler() {
@@ -374,7 +377,8 @@ export class PropertyDetailComponent implements OnInit {
 
   scheduling(item) {
     if (localStorage.getItem('user') !== null) {
-      localStorage.setItem('announcementOfScheduling', JSON.stringify(item))
+      localStorage.setItem('announcementOfScheduling', JSON.stringify(item));
+      localStorage.setItem('typeOfAdSelect', this.typeOfAdSelect)
       this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
     } else {
       this.modalService.open(ModalLoginComponent, { centered: true })
