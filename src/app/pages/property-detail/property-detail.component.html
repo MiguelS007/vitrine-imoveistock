@@ -224,9 +224,9 @@
         <div class="col-8 col-body-details-property">
           <!-- FIRST INFO CARD -->
           <div class="w-100 border-radius-10 bg-white">
-            <div class="w-100 content-property-details-icons mt-4 pt-5 px-5">
-              <div *ngIf="response.typeOfAd === 'sale' || valueViewSelectSale" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/TAMANHO-DO-AP-PRETO.svg" alt="">
+            <div class="row mt-4 pt-5 px-5">
+              <div *ngIf="response.typeOfAd === 'sale' || valueViewSelectSale" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/TAMANHO-DO-AP-PRETO.svg" alt="" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p class="mb-0 ml-3">{{response.usefulArea | currency: ' '}}m²</p>
                   <p class="font-size-9 mb-0 ml-3 text-right">{{toNumber(response.saleValue) /
@@ -234,12 +234,12 @@
                     currency: 'R$'}}/m²</p>
                 </div>
               </div>
-              <div *ngIf="response.typeOfAd === 'rent' || !valueViewSelectSale" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/TAMANHO-DO-AP-PRETO.svg" alt="">
+              <div *ngIf="response.typeOfAd === 'rent' || !valueViewSelectSale" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/TAMANHO-DO-AP-PRETO.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3">{{response.usefulArea | currency: ' '}}m²</p>
               </div>
-              <div *ngIf="response.bedrooms > 0" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO QUARTOS.svg" alt="">
+              <div *ngIf="response.bedrooms > 0" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO QUARTOS.svg" alt="" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p *ngIf="response.bedrooms > 1" class="mb-0 ml-3">{{response.bedrooms}} Quartos</p>
                   <p *ngIf="response.bedrooms === 1" class="mb-0 ml-3">{{response.bedrooms}} Quarto</p>
@@ -248,19 +248,19 @@
                   </p>
                 </div>
               </div>
-              <div *ngIf="!response.bedrooms || response.bedrooms === 0" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/CINZA QUARTOS.svg">
+              <div *ngIf="!response.bedrooms || response.bedrooms === 0" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA QUARTOS.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>0 Quartos</del></p>
               </div>
-              <div *ngIf="response.propertyPosition" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO SOL DA MANHA.svg">
+              <div *ngIf="response.propertyPosition" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO SOL DA MANHA.svg" width="25" height="36">
                 <p *ngIf="response.propertyPosition === 'front'" class="mb-0 ml-3">Nascente</p>
                 <p *ngIf="response.propertyPosition === 'funds'" class="mb-0 ml-3">Poente</p>
                 <p *ngIf="response.propertyPosition === 'side'" class="mb-0 ml-3">Lateral</p>
                 <p *ngIf="response.propertyPosition === 'fullfloor'" class="mb-0 ml-3">Nascente / Poente</p>
               </div>
-              <div *ngIf="response.whichFloorOfTheProperty" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO APARTAMENTO.svg" alt="">
+              <div *ngIf="response.whichFloorOfTheProperty" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO APARTAMENTO.svg" alt="" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p class="mb-0 ml-3">Apartamento</p>
                   <p *ngIf="response.whichFloorOfTheProperty === 1" class="mb-0 ml-3 font-size-9 text-right">Abaixo do
@@ -287,8 +287,8 @@
                     andar</p>
                 </div>
               </div>
-              <div *ngIf="response.parkingSpaces" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO GARAGEM.svg">
+              <div *ngIf="response.parkingSpaces" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO GARAGEM.svg" width="36" height="42">
                 <div class="d-flex flex-column">
                   <p *ngIf="response.parkingSpaces > 1" class="mb-0 ml-3">{{response.parkingSpaces}} Vagas</p>
                   <p *ngIf="response.parkingSpaces === 1" class="mb-0 ml-3">{{response.parkingSpaces}} Vaga</p>
@@ -298,21 +298,21 @@
                   <p *ngIf="response.typeOfVacancy === 'rotary'" class="mb-0 ml-3 font-size-9 text-right">Rotativa</p>
                 </div>
               </div>
-              <div *ngIf="!response.parkingSpaces || response.parkingSpaces === 0" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/CINZA GARAGEM.svg">
+              <div *ngIf="!response.parkingSpaces || response.parkingSpaces === 0" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA GARAGEM.svg" width="36" height="42">
                 <p class="mb-0 ml-3 text-muted"><del>0 Vagas</del></p>
               </div>
-              <div *ngIf="response.bathrooms" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO BANHEIROS.svg">
+              <div *ngIf="response.bathrooms" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO BANHEIROS.svg" width="25" height="36">
                 <p *ngIf="response.bathrooms > 1" class="mb-0 ml-3">{{response.bathrooms}} Banheiros</p>
                 <p *ngIf="response.bathrooms === 1" class="mb-0 ml-3">{{response.bathrooms}} Banheiro</p>
               </div>
-              <div *ngIf="!response.bathrooms || response.bathrooms === 0" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/CINZA BANHEIROS.svg">
+              <div *ngIf="!response.bathrooms || response.bathrooms === 0" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA BANHEIROS.svg" width="25" height="36">
                 <p *ngIf="response.bathrooms > 1" class="mb-0 ml-3 text-muted">0 Banheiro</p>
               </div>
-              <div *ngIf="response.conciergeOpeningHours" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO PORTEIRO.svg">
+              <div *ngIf="response.conciergeOpeningHours" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO PORTEIRO.svg" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p class="mb-0 ml-3">Portaria</p>
                   <p *ngIf="response.conciergeOpeningHours === 'allDay'" class="mb-0 ml-3 font-size-9 text-right">24h
@@ -324,34 +324,34 @@
                 </div>
               </div>
               <div *ngIf="!response.conciergeOpeningHours || response.conciergeOpeningHours === 'withoutConcierge'"
-                class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/CINZA PORTEIRO.svg">
+                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA PORTEIRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Portaria</del></p>
               </div>
               <div *ngIf="response.featureConveniences?.elevador || response.featureConveniences?.elevadorDeServico"
-                class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO ELEVADOR.svg" alt="">
+                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO ELEVADOR.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3">Elevador</p>
               </div>
               <div *ngIf="!response.featureConveniences?.elevador || !response.featureConveniences?.elevadorDeServico"
-                class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/CINZA ELEVADOR.svg" alt="">
+                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA ELEVADOR.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Elevador</del></p>
               </div>
               <div *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
-                class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO METRO.svg">
+                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO METRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3">Próximo ao metrô</p>
               </div>
               <div *ngIf="!response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
-                class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/CINZA METRO.svg">
+                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA METRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Próximo ao metrô</del></p>
               </div>
               <div
                 *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral || response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
-                class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO AQUECIMENTO.svg">
+                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO AQUECIMENTO.svg" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p class="mb-0 ml-3">Aquecimento</p>
                   <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral && !response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
@@ -364,19 +364,20 @@
               </div>
               <div
                 *ngIf="!response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral && !response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
-                class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/CINZA AQUECIMENTO.svg" alt="">
+                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA AQUECIMENTO.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Aquecimento</del></p>
               </div>
-              <div *ngIf="response.petsAccepted" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/PRETO PET.svg">
+              <div *ngIf="response.petsAccepted" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO PET.svg" width="25" height="36">
                 <p class="mb-0 ml-3">Aceita Pet</p>
               </div>
-              <div *ngIf="!response.petsAccepted" class="d-flex mt-3 mx-2">
-                <img src="../../../assets/icons-property-details/CINZA PET.svg">
+              <div *ngIf="!response.petsAccepted" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA PET.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Aceita Pet</del></p>
               </div>
             </div>
+
             <div class="w-100 mt-4 px-5 pt-3 pb-4
                     border-bottom-gray">
               <span class="fw-700 font-size-18 line-24
@@ -495,13 +496,65 @@
 
             <div class="w-100 py-4 border-bottom-gray px-5">
               <div class="w-100 d-flex align-items-center justify-content-between">
-                <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Informações Adicionais</p>
+                <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Caracteristicas do imovel</p>
                 <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20"
                   style="cursor: pointer;" class="animate__animated" (click)="openarrow(42)">
                 <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated"
                   width="18" style="cursor: pointer;" (click)="openarrow(42)">
               </div>
               <table *ngIf="arrowinfo" class="w-100 animate__animated pt-4">
+                <tbody>
+                  <tr class="h-51">
+                    <td>
+                      <span class="fw-400
+                                   font-size-16 line-20
+                                   color-black">Face do
+                        imóvel:</span>
+                      <span class="fw-700
+                                   font-size-16 line-20
+                                   color-black">&nbsp;&nbsp;Sul</span>
+                    </td>
+                    <td>
+                      <span class="fw-400
+                                   font-size-16 line-20
+                                   color-black">Item:</span>
+                      <span class="fw-700
+                                   font-size-16 line-20
+                                   color-black">&nbsp;&nbsp;4</span>
+                    </td>
+                  </tr>
+                  <tr class="h-51">
+                    <td>
+                      <span class="fw-400
+                                   font-size-16 line-20
+                                   color-black">Construtora:</span>
+                      <span class="fw-700
+                                   font-size-16 line-20
+                                   color-black">&nbsp;&nbsp;Thá</span>
+                    </td>
+                  </tr>
+                  <!-- <tr class="h-51">
+                    <td>
+                      <span class="fw-400
+                                   font-size-16 line-20
+                                   color-black">Item:</span>
+                      <span class="fw-700
+                                   font-size-16 line-20
+                                   color-black">&nbsp;&nbsp;4</span>
+                    </td>
+                  </tr> -->
+                </tbody>
+              </table>
+            </div>
+            <div class="w-100 py-4 border-bottom-gray px-5">
+              <div class="w-100 d-flex align-items-center justify-content-between">
+                <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Infraestrutura do condomínio</p>
+                <img *ngIf="!arrowinfoCondominio" src="../../../assets/icon/arrow-down-blue.png" width="20"
+                  style="cursor: pointer;" class="animate__animated" (click)="openarrow(16)">
+                <img *ngIf="arrowinfoCondominio" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated"
+                  width="18" style="cursor: pointer;" (click)="openarrow(16)">
+              </div>
+              <table *ngIf="arrowinfoCondominio" class="w-100 animate__animated pt-4">
                 <tbody>
                   <tr class="h-51">
                     <td>

@@ -115,6 +115,7 @@ export class PropertyDetailComponent implements OnInit {
   arrow3 = false;
   arrowinfo = false;
   arrowpff = false;
+  arrowinfoCondominio: boolean = false
 
   cardinfobuy;
   arrayDeDatas: any = [];
@@ -393,6 +394,11 @@ export class PropertyDetailComponent implements OnInit {
       this.arrowinfo = true;
     } else {
       this.arrowinfo = false;
+    }
+    if (value === 16 && this.arrowinfoCondominio === false) {
+      this.arrowinfoCondominio = true;
+    } else {
+      this.arrowinfoCondominio = false;
     }
   }
 
