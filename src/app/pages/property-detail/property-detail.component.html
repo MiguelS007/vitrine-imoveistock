@@ -398,39 +398,52 @@
                 <tbody>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Identificador:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;HZ227</td>
-                  </tr>
-                  <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Ano da contrução</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.yearOfConstruction
-                      || '-'}}</td>
-                  </tr>
-                  <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Tipo do imóvel:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.propertyType ||
-                      '-'}}</td>
-                  </tr>
-                  <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Preço:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.saleValue |
-                      currency: 'R$ ' || '-'}}</td>
-                  </tr>
-                  <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Quartos:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.bedrooms || '-'}}
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;
+                      <span class="text-uppercase">
+                        {{response._id | slice:-5}}
+                      </span>
                     </td>
                   </tr>
                   <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Disponibilidade:</td>
-                    <td *ngIf="response.typeOfAd === 'sale'" class="pl-0 fw-700 font-size-16 line-20 color-black">
-                      &nbsp;&nbsp;Venda</td>
-                    <td *ngIf="response.typeOfAd === 'rent'" class="pl-0 fw-700 font-size-16 line-20 color-black">
-                      &nbsp;&nbsp;Locação</td>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Endereço:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.publicPlaceAddress}}
+                    </td>
                   </tr>
                   <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Valor do Condomínio:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.condominiumValue |
-                      currency: 'R$ ' || '-'}}</td>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Bairro:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.districtAddress}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Cidade:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.cityAddress}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">UF:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.ufAddress}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Area do imóvel:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.usefulArea |
+                      currency: ' '}}m²</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Tipo de uso:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black text-capitalize">&nbsp;&nbsp;{{response.goal
+                      ||
+                      '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Quartos:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.bedrooms || '0'}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Suites:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.suites || '0'}}
+                    </td>
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Banheiros:</td>
@@ -438,14 +451,43 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Metragem:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.usefulArea ||
-                      '-'}}m²</td>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Vagas de garagem:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.parkingSpaces ||
+                      '0'}}</td>
                   </tr>
                   <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Vagas:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.parkingSpaces ||
-                      '-'}}</td>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Ocupação:</td>
+                    <td *ngIf="response.whoLivesInTheProperty === 'vacant'"
+                      class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Está vago</td>
+                    <td *ngIf="response.whoLivesInTheProperty === 'live'"
+                      class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Estou morando</td>
+                    <td *ngIf="response.whoLivesInTheProperty === 'tenant'"
+                      class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Inquilino morando</td>
+                  </tr>
+                  <tr *ngIf="response.typeOfAd === 'rent' || !valueViewSelectSale">
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Aluguel líquido:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.leaseValue
+                      | currency: 'R$'}}</td>
+                  </tr>
+                  <tr *ngIf="response.typeOfAd === 'sale' || valueViewSelectSale">
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Valor para compra:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.saleValue
+                      | currency: 'R$'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Condomínio:</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.condominiumValue |
+                      currency: 'R$ ' || '-'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">IPTU:</td>
+                    <td *ngIf="response.typeOfAd === 'sale' || valueViewSelectSale"
+                      class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.valueOfIptu |
+                      currency: 'R$ '}}</td>
+                    <td *ngIf="response.typeOfAd === 'rent' || !valueViewSelectSale"
+                      class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{toNumber(response.valueOfIptu)
+                      / 12 |
+                      currency: 'R$ '}} <span class="text-muted font-size-12">( mensal )</span></td>
                   </tr>
                 </tbody>
               </table>
