@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ScheduleRegisterResponseDto } from 'src/app/dtos/schedule-register-response.dto';
+import { ActivatedRoute } from '@angular/router';
+import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
+import { ScheduleService } from 'src/app/service/schedule.service';
 
 @Component({
   selector: 'app-register-companion',
@@ -11,10 +13,14 @@ export class RegisterCompanionComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedScheduling: ScheduleRegisterResponseDto;
+  _id: string = '';
+
+  response: AnnouncementVisitGetResponseDto
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private scheduleService: ScheduleService,
+    private route: ActivatedRoute,
   ) {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -24,6 +30,8 @@ export class RegisterCompanionComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.response = this.route.snapshot.data['resolve'];
+    console.log(this.response);
   }
 
 }

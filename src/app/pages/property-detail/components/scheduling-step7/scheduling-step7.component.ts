@@ -21,15 +21,9 @@ export class SchedulingStep7Component implements OnInit {
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private scheduleService: ScheduleService
   ) { }
 
   ngOnInit(): void {
-    let dateSelected = localStorage.getItem('dateScheduling')
-    this.dateSelected = JSON.parse(dateSelected);
-
-    let announcementSelected = localStorage.getItem('announcementOfScheduling');
-    this.response = JSON.parse(announcementSelected);
   }
 
   exit() {

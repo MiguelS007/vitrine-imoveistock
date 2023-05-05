@@ -51,6 +51,11 @@ export class ScheduleService extends BaseService {
         return this.httpClient
             .patch(`${this.url}app/announcement-visit/update-status/${visitId}`, dto, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
-    } 
+    }
+
+    getById(_id: string) {
+        return this.httpClient.get(`${this.url}app/announcement-visit/id/${_id}`, this.anonymousHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
 
 }

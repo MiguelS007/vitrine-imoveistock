@@ -57,6 +57,7 @@ import { SchedulingStep5Component } from './pages/property-detail/components/sch
 import { SchedulingStep6Component } from './pages/property-detail/components/scheduling-step6/scheduling-step6.component';
 import { SchedulingStep7Component } from './pages/property-detail/components/scheduling-step7/scheduling-step7.component';
 import { RegisterCompanionComponent } from './pages/register-companion/register-companion.component';
+import { VisitGetByIdResolve } from './resolvers/visit-getById.resolver';
 
 registerLocaleData(ptBr);
 
@@ -156,6 +157,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     { provide: LOCALE_ID, useValue: 'pt' },
     AnnouncementService,
     CepService,
+    VisitGetByIdResolve
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
