@@ -311,6 +311,71 @@
                 <img src="../../../assets/icons-property-details/CINZA BANHEIROS.svg">
                 <p *ngIf="response.bathrooms > 1" class="mb-0 ml-3 text-muted">0 Banheiro</p>
               </div>
+              <div *ngIf="response.conciergeOpeningHours" class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO PORTEIRO.svg">
+                <div class="d-flex flex-column">
+                  <p class="mb-0 ml-3">Portaria</p>
+                  <p *ngIf="response.conciergeOpeningHours === 'allDay'" class="mb-0 ml-3 font-size-9 text-right">24h
+                  </p>
+                  <p *ngIf="response.conciergeOpeningHours === 'diurnal'" class="mb-0 ml-3 font-size-9 text-right">
+                    Diurna</p>
+                  <p *ngIf="response.conciergeOpeningHours === 'nocturnal'" class="mb-0 ml-3 font-size-9 text-right">
+                    Noturna</p>
+                </div>
+              </div>
+              <div *ngIf="!response.conciergeOpeningHours || response.conciergeOpeningHours === 'withoutConcierge'"
+                class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA PORTEIRO.svg">
+                <p class="mb-0 ml-3 text-muted"><del>Portaria</del></p>
+              </div>
+              <div *ngIf="response.featureConveniences?.elevador || response.featureConveniences?.elevadorDeServico"
+                class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO ELEVADOR.svg" alt="">
+                <p class="mb-0 ml-3">Elevador</p>
+              </div>
+              <div *ngIf="!response.featureConveniences?.elevador || !response.featureConveniences?.elevadorDeServico"
+                class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA ELEVADOR.svg" alt="">
+                <p class="mb-0 ml-3 text-muted"><del>Elevador</del></p>
+              </div>
+              <div *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
+                class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO METRO.svg">
+                <p class="mb-0 ml-3">Próximo ao metrô</p>
+              </div>
+              <div *ngIf="!response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
+                class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA METRO.svg">
+                <p class="mb-0 ml-3 text-muted"><del>Próximo ao metrô</del></p>
+              </div>
+              <div
+                *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral || response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
+                class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO AQUECIMENTO.svg">
+                <div class="d-flex flex-column">
+                  <p class="mb-0 ml-3">Aquecimento</p>
+                  <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral && !response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
+                    class="mb-0 ml-3 font-size-9 text-right">Elétrico</p>
+                  <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar && !response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral"
+                    class="mb-0 ml-3 font-size-9 text-right">Solar</p>
+                  <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar && response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral"
+                    class="mb-0 ml-3 font-size-9 text-right">Elétrico/Solar</p>
+                </div>
+              </div>
+              <div
+                *ngIf="!response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral && !response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
+                class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA AQUECIMENTO.svg" alt="">
+                <p class="mb-0 ml-3 text-muted"><del>Aquecimento</del></p>
+              </div>
+              <div *ngIf="response.petsAccepted" class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/PRETO PET.svg">
+                <p class="mb-0 ml-3">Aceita Pet</p>
+              </div>
+              <div *ngIf="!response.petsAccepted" class="d-flex mt-3 mx-2">
+                <img src="../../../assets/icons-property-details/CINZA PET.svg">
+                <p class="mb-0 ml-3 text-muted"><del>Aceita Pet</del></p>
+              </div>
             </div>
             <div class="w-100 mt-4 px-5 pt-3 pb-4
                     border-bottom-gray">

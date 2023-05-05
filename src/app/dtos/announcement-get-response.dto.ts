@@ -143,6 +143,10 @@ export abstract class AnnouncementGetResponseDto {
     photos?: Photos[];
 
     videos: Videos[];
+
+    conciergeOpeningHours?: string;
+
+    petsAccepted: boolean;
 }
 
 class Videos {
