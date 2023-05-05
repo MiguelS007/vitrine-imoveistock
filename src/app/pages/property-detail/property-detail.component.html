@@ -848,7 +848,7 @@
               </div>
             </div>
           </div>
-          <div class="w-100 border-radius-10 my-4 px-5 pt-4 pb-3  bg-white">
+          <div class="w-100 border-radius-10 my-4 px-5 pt-4 pb-3  bg-white" style="margin-bottom: 100px !important;">
             <div class="w-100 d-flex pb-3 justify-content-between align-items-center">
               <p class="w-100 d-grid pr-1 align-items-center mb-0">
                 <span class="color-black fw-700 font-size-16 line-20">
@@ -972,7 +972,7 @@
                     '-'}}</span>
                 </div>
                 <div class="col-12">
-                  <h6 class="my-4 w-100 bg-graylight" style="height: 1px;"></h6>
+                  <h6 class="my-3 w-100 bg-graylight" style="height: 1px;"></h6>
                 </div>
                 <div class="col-12 d-flex py-4 align-items-center justify-content-between">
                   <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24 color-black">Total de
@@ -995,6 +995,12 @@
               <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
                     fw-700 font-size-18 line-24 mt-3 color-purple
                     w-100" type="button">Fazer Proposta</button>
+              <div *ngIf="response.typeOfAd === 'rent'" class="d-flex flex-column">
+                <hr>
+                <h5 class="fw-700">Avaliação de crédito</h5>
+                <p class="font-size-14 mb-0">Para alugar este imóvel é necessário que sua renda seja 3x maior que o total
+                  mensal.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -1044,9 +1050,9 @@
                     '-'}}</span>
                 </div>
                 <div class="col-12">
-                  <h6 class="my-4 w-100 bg-graylight" style="height: 1px;"></h6>
+                  <h6 class="my-3 w-100 bg-graylight" style="height: 1px;"></h6>
                 </div>
-                <div class="col-12 d-flex py-4 align-items-center justify-content-between">
+                <div class="col-12 d-flex py-3 align-items-center justify-content-between">
                   <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">Total de aluguel
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
@@ -1066,6 +1072,12 @@
               <button (click)="goExpress()" class="bg-white btn border-radius-10 border-purple h-74
                     fw-700 font-size-18 line-24 mt-3 color-purple
                     w-100" type="button">Fazer Proposta</button>
+              <div *ngIf="!valueViewSelectSale" class="d-flex flex-column">
+                <hr>
+                <h5 class="fw-700">Avaliação de crédito</h5>
+                <p class="font-size-14 mb-0">Para alugar este imóvel é necessário que sua renda seja 3x maior que o total
+                  mensal.</p>
+              </div>
             </div>
           </div>
         </div>

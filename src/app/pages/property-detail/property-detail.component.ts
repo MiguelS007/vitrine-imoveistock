@@ -273,7 +273,9 @@ export class PropertyDetailComponent implements OnInit {
       this.images.push(new ImageItem({ src: this.response.photos[i].key, thumb: this.response.photos[i].key }))
     }
 
-    console.log(this.images)
+    if (this.response.typeOfAd === 'rent') {
+      this.valueViewSelectSale = false;
+    }
 
   }
 
