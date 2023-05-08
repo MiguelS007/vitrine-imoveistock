@@ -52,16 +52,18 @@
                                 <i class="bi font-size-20 color-black mr-2 bi-person-vcard"></i>
                                 Leve seu documento de identificação original com foto
                             </p>
-                            <div>
+                            <div *ngIf="response.user_broker != null">
                                 <p class="fw-700 font-size-16 mt-4 line-20 color-black">A visita é acompanhada por esse
                                     corretor:
                                 </p>
                                 <div class="w-100 d-flex">
                                     <i class="bi color-black mr-2 font-size-20 bi-person"></i>
                                     <p class="d-grid">
-                                        <span class="fw-500 font-size-14 line-18 color-black">{{response.user_broker.name}}</span>
+                                        <span class="fw-500 font-size-14 line-18 color-black">{{response?.user_broker?.name}}</span>
                                         <span class="color-muted font-size-12">Corretor</span>
-                                        <span class="fw-400 font-size-14 line-18 color-black">{{response.user_broker.phone}}</span>
+                                        <span class="fw-400 font-size-14 line-18 color-black">
+                                            ({{response?.user_broker?.phone | slice:2:4}}){{response?.user_broker?.phone | slice:4:9}}-{{response?.user_broker?.phone | slice:9:13}}
+                                        </span>
                                     </p>
                                 </div>
                             </div>

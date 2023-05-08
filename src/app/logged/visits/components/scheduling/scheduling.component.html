@@ -82,19 +82,6 @@
                     <i class="bi font-size-20 color-black mr-2 bi-person-vcard"></i>
                     Leve seu documento de identificação original com foto
                 </p>
-                <div>
-                    <p class="fw-700 font-size-16 mt-4 line-20 color-black">A visita é acompanhada por esse
-                        corretor:
-                    </p>
-                    <div class="w-100 d-flex">
-                        <i class="bi color-black mr-2 font-size-20 bi-person"></i>
-                        <p class="d-grid">
-                            <span class="fw-500 font-size-14 line-18 color-black">Jussara Helias</span>
-                            <span class="color-muted font-size-12">Corretor</span>
-                            <span class="fw-400 font-size-14 line-18 color-black">11 9 1234-1234</span>
-                        </p>
-                    </div>
-                </div>
                 <div *ngIf="selectedSchedulingStatus != 'pending'">
                     <p class="fw-700 font-size-16 mt-4 line-20 color-black">A visita é acompanhada por esse corretor:
                     </p>
@@ -115,8 +102,44 @@
                 </div>
 
             </div>
-            <div class="w-100 bg-white mt-4 border-radius-10 h-auto">
-                <h1>TESTE</h1> 
+            <div class="w-100 bg-white mt-4 border-radius-10 p-4 h-auto">
+                <h3 class="fw-700 font-size-16 line-20 color-black">Acompanhantes</h3>
+                <p class="font-size-14 fw-400">Envie o link da indicação, diretamente para o proprietário do imóvel.</p>
+                <div class="border-div-purple mt-3 p-3">
+                    <p class="fw-500 font-size-16">Envie o link da indicação, diretamente para o proprietário do imóvel.</p>
+                    <div *ngFor="let companion of selectedScheduling.companion" class="d-flex">
+                        <i class="bi color-black mr-2 font-size-20 bi-person"></i>
+                        <p class="d-grid">
+                            <span class="fw-500 font-size-14 line-18 color-black">{{companion.name}}</span>
+                            <span class="color-muted font-size-12">{{companion.degreeOfKinship}}</span>
+                            <span class="fw-400 font-size-14 line-18 color-black">
+                                ({{companion.phone | slice:0:2}}){{companion.phone | slice:2:11}}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="border-div-grey p-2">
+                        <span>{{link + selectedScheduling._id}}</span>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-3">
+                            <div class="border-div-purple d-flex align-items-center justify-content-center h-51 mt-1">
+                                <p (click)="sharedIn('whatsapp')" class="mb-0"><img
+                                        src="../../../../../assets/icon/whats-roxo.svg" alt=""></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="border-div-purple d-flex align-items-center justify-content-center h-51 mt-1">
+                                <p (click)="sharedIn('facebook')" class="mb-0"><img
+                                        src="../../../../../assets/icon/facebook-roxo.svg" alt=""></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <button (click)="sharedIn('copy')"
+                                class="btn bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 w-100 h-51 mt-1">Copiar
+                                link</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="w-100 bg-white mt-4 border-radius-10 h-auto">
                 <div class="h-100 product-announcement p-2 mx-3 border-radius-10 bg-white">
@@ -224,7 +247,8 @@
                             <div class="d-flex justify-content-center align-items-center">
                                 <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
                                 <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
-                                                 color-black">{{selectedScheduling.announcement?.suites || 0}} Suítes</p>
+                                                 color-black">{{selectedScheduling.announcement?.suites || 0}} Suítes
+                                </p>
                             </div>
                         </div>
                     </div>

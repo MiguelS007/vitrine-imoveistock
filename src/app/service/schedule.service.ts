@@ -10,6 +10,7 @@ import { ScheduleRegisterResponseDto } from '../dtos/schedule-register-response.
 import { VisitCancelRequestDto } from '../dtos/visit-cancel-request.dto';
 import { VisitRescheduleRegisterDto } from '../dtos/visit-reschedule-request.dto';
 import { BaseService } from './base.service';
+import { AnnouncementVisitGetResponseDto } from '../dtos/announcement-visit-get-response.dto';
 
 @Injectable({
     providedIn: 'root'
@@ -36,7 +37,7 @@ export class ScheduleService extends BaseService {
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
-    getListVisists(): Observable<ScheduleRegisterResponseDto[]> {
+    getListVisists(): Observable<AnnouncementVisitGetResponseDto[]> {
         return this.httpClient
             .get(`${this.url}app/announcement-visit/list`, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));

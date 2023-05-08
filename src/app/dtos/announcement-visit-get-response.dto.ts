@@ -5,7 +5,7 @@ export abstract class AnnouncementVisitGetResponseDto {
     _id:string;
     status:string;
     visitDate: Date;
-    announcement:AnnouncementGetResponseDto;
+    announcement?:AnnouncementGetResponseDto;
     user:UserGetResponseDto;
     visitTypeOfAd?:string;
     user_broker?:UserGetResponseDto;

@@ -49,6 +49,4 @@ export class SchedulingStep6Component implements OnInit {
     this.modalService.open(SchedulingStep7Component, { centered: true, backdrop: 'static', keyboard: false });
     localStorage.removeItem('companionLink');
   }
-
-
 }
