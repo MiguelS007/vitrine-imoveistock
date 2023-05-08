@@ -29,7 +29,7 @@ export class SchedulingStep6Component implements OnInit {
       window.open(`https://api.whatsapp.com/send?text= Gostaria de me acompanhar em uma visita a um imóvel? ${this.link}`)
     }
     if(platform === 'facebook') {
-      window.open(`facebook://send?text=${this.link}`)
+      window.open(`https://www.facebook.com/sharer/sharer.php?Gostaria de me acompanhar em uma visita a um imóvel?${this.link}`)
     }
     if(platform === 'copy') {
       this.copy()

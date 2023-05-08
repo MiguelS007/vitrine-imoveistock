@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { BaseService } from './base.service';
+import { AnnouncementVisitRemoveRequestDto } from '../dtos/announcement-visit-remove-request.dto';
+import { CompanionRegisterRequestDto } from '../dtos/companion-register-request.dto';
 import { ScheduleRegisterRequestDto } from '../dtos/schedule-register-request.dto';
 import { ScheduleRegisterResponseDto } from '../dtos/schedule-register-response.dto';
 import { VisitCancelRequestDto } from '../dtos/visit-cancel-request.dto';
 import { VisitRescheduleRegisterDto } from '../dtos/visit-reschedule-request.dto';
-import { AnnouncementVisitRemoveRequestDto } from '../dtos/announcement-visit-remove-request.dto';
+import { BaseService } from './base.service';
 
 @Injectable({
     providedIn: 'root'
@@ -56,6 +57,12 @@ export class ScheduleService extends BaseService {
     getById(_id: string) {
         return this.httpClient.get(`${this.url}app/announcement-visit/id/${_id}`, this.anonymousHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
+    registerCompanion(dto: CompanionRegisterRequestDto) {
+        return this.httpClient
+        .post(`${this.url}app/announcement-visit/register-companion-visit`, dto, this.anonymousHeader())
+        .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
 }

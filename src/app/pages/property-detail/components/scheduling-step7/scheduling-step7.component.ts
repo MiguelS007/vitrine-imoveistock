@@ -24,6 +24,17 @@ export class SchedulingStep7Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    let dateSelected = localStorage.getItem('dateScheduling')
+    this.dateSelected = JSON.parse(dateSelected);
+
+    let announcementSelected = localStorage.getItem('announcementOfScheduling');
+    this.response = JSON.parse(announcementSelected);
+
+
+    this.dateSend = {
+      visitDate: this.dateSelected,
+      visitTypeOfAd: localStorage.getItem('typeOfAdSelect')
+    }
   }
 
   exit() {
@@ -33,5 +44,7 @@ export class SchedulingStep7Component implements OnInit {
   goToVisits() {
     this.modalService.dismissAll();
     this.router.navigate(['logged/visits'])
+    localStorage.removeItem('dateScheduling');
+    localStorage.removeItem('announcementOfScheduling');
   }
 }
