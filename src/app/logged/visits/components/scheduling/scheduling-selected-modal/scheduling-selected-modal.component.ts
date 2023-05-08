@@ -6,19 +6,19 @@ import { AnnouncementService } from '../../../../../service/announcement.service
 import { EditSchedulingModalComponent } from '../edit-scheduling-modal/edit-scheduling-modal.component';
 import { EditScheduling2ModalComponent } from '../edit-scheduling2-modal/edit-scheduling2-modal.component';
 import { EditScheduling3ModalComponent } from '../edit-scheduling3-modal/edit-scheduling3-modal.component';
+import { ToastrService } from 'ngx-toastr';
+import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
+import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
 
 @Component({
   selector: 'app-scheduling-selected-modal',
   templateUrl: './scheduling-selected-modal.component.html',
-  styleUrls: ['./scheduling-selected-modal.component.scss']
+  styleUrls: ['./scheduling-selected-modal.component.scss'],
+  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class SchedulingSelectedModalComponent implements OnInit {
 
-  selectedScheduling: ScheduleRegisterResponseDto = {
-    _id: '',
-    cancellationReason: '',
-    visitDate: new Date,
-  };
+  selectedScheduling: AnnouncementVisitGetResponseDto;
 
   recentlySeenList: any = [];
 
@@ -26,11 +26,13 @@ export class SchedulingSelectedModalComponent implements OnInit {
 
   confirmcancel = false;
 
+  link = location.origin + '/register-companion/id/';
 
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private announcementService: AnnouncementService
+    private announcementService: AnnouncementService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +70,26 @@ export class SchedulingSelectedModalComponent implements OnInit {
 
     this.router.navigate([`announcement/detail/${value}`]);
 
+  }
+
+  sharedIn(platform) {
+    if(platform === 'whatsapp') {
+      window.open(`https://api.whatsapp.com/send?text= Gostaria de me acompanhar em uma visita a um imóvel? ${this.link + this.selectedScheduling._id}`)
+    }
+    if(platform === 'facebook') {
+      window.open(`https://www.facebook.com/sharer/sharer.php?Gostaria de me acompanhar em uma visita a um imóvel?${this.link + this.selectedScheduling._id}`)
+    }
+    if(platform === 'copy') {
+      this.copy()
+    }
+  }
+
+  copy() {
+    navigator.clipboard.writeText(this.link + this.selectedScheduling._id);
+
+    this.toastrService.success('Sucesso', 'Código copiado!', {
+      progressBar: true,
+    });
   }
 
   likeHeart(value) {

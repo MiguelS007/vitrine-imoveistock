@@ -4,11 +4,13 @@ import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-respon
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { SchedulingStep6Component } from '../scheduling-step6/scheduling-step6.component';
+import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
 
 @Component({
   selector: 'app-scheduling-step5',
   templateUrl: './scheduling-step5.component.html',
-  styleUrls: ['./scheduling-step5.component.scss']
+  styleUrls: ['./scheduling-step5.component.scss'],
+  providers: [Location, { provide: LocationStrategy, useClass: PathLocationStrategy }]
 })
 export class SchedulingStep5Component implements OnInit {
 
@@ -51,9 +53,9 @@ export class SchedulingStep5Component implements OnInit {
   }
 
   registerSuccess(success: any) {
-    console.log(success);
-    localStorage.setItem('companionLink', success.link);
-    
+    localStorage.setItem('companionLink', location.origin + success.link);
+    console.log(location.origin + success.link);
+
     this.modalService.dismissAll()
     this.modalService.open(SchedulingStep6Component, { centered: true, backdrop: 'static', keyboard: false });
   }
