@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
 import { SchedulingStep4Component } from '../scheduling-step4/scheduling-step4.component';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-scheduling-step3',
@@ -21,7 +22,8 @@ export class SchedulingStep3Component implements OnInit {
   constructor(
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private userService: UserService
   ) {
     this.form = this.formBuilder.group({
       ddd: ['', [Validators.required]],
@@ -37,12 +39,19 @@ export class SchedulingStep3Component implements OnInit {
   }
 
   confirm() {
-    if (this.form.value === this.response.user_broker.phone) {
-      this.modalService.dismissAll();
-      this.modalService.open(SchedulingStep4Component, { centered: true, backdrop: 'static', keyboard: false });
-    } else {
-      this.toastrService.error('Corretor não encontrado', '', { progressBar: true })
-    }
+    let phone = '55' + this.form.controls['ddd'].value + this.form.controls['phone'].value
+
+    this.userService.getBrokerByPhone(phone).subscribe({
+      next: data => {
+        console.log(data);
+        this.modalService.dismissAll();
+        this.modalService.open(SchedulingStep4Component, { centered: true, backdrop: 'static', keyboard: false });
+      },
+      error: error => {
+        console.error(error)
+        this.toastrService.error(`${error.error.errors}`, '', { progressBar: true })
+      }
+    })
   }
 
   nextCode(item, value) {

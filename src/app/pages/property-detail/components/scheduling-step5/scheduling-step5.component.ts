@@ -5,6 +5,7 @@ import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-reque
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { SchedulingStep6Component } from '../scheduling-step6/scheduling-step6.component';
 import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
+import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
 
 @Component({
   selector: 'app-scheduling-step5',
@@ -18,9 +19,13 @@ export class SchedulingStep5Component implements OnInit {
 
   response: AnnouncementGetResponseDto;
 
+  selectedScheduling: AnnouncementVisitGetResponseDto;
+
   typeOfAd = localStorage.getItem('typeOfAdSelect');
 
   dateSend: ScheduleRegisterRequestDto;
+
+  urls: any = [];
 
   constructor(
     private modalService: NgbModal,

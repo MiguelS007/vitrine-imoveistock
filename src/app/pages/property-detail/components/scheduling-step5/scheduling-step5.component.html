@@ -7,10 +7,17 @@
         <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
             Revise e confirme o seu agendamento
         </p>
+        <h3 class="fw-600 pb-2 font-size-18 line-32 color-black">Resumo: </h3>
         <div class="w-100">
-            <p class="fw-500 font-size-18 line-24 color-black">Descrição:
-                {{response.description}}
-            </p>
+            <div class="row border border-radius-10 p-3 mb-2">
+                <div class="col-3 p-0">
+                    <img *ngIf="!response.mainPhoto" src="../../../assets/img/ap.png" class="w-100 border-radius-10" />
+                    <img *ngIf="response.mainPhoto" [src]="response.mainPhoto" class="w-100 border-radius-10" />
+                </div>
+                <div class="col-9">
+                    <p class="fw-500 font-size-18 line-24 color-black">{{response.description}}</p>
+                </div>
+            </div>
             <p>
                 <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
                 <span class="fw-400 font-size-16 line-20 color-black">
@@ -55,28 +62,32 @@
             </p>
         </div>
         <div class="row">
-            <div class="col-sm-6 d-flex">
+            <div class="col-sm-6 d-flex mt-1">
+                <!-- <div *ngIf="urls.length === 0" class="border-profile-pic-side">
+                    <p class="d-flex align-items-center justify-content-center mb-0">{{selectedScheduling.user_broker.name[0]}}</p>
+                </div> -->
                 <div class="border-profile-pic-side">
-                    <p class="d-flex align-items-center justify-content-center mb-0">JH</p>
+                    <p class="d-flex align-items-center justify-content-center mb-0">{{selectedScheduling?.user_broker?.photo}}</p>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
-                    <span class="ml-3">Jussara Helias</span>
+                    <span class="ml-3">{{selectedScheduling?.user_broker?.name}}</span>
                 </div>
             </div>
-            <div class="col-sm-6 d-flex">
+            <div class="col-sm-6 d-flex mt-1">
                 <div class="border-profile-pic-side">
                     <p class="d-flex align-items-center justify-content-center mb-0">JV</p>
                 </div>
                 <div class="d-flex flex-column align-items-center justify-content-center">
                     <span>Júlio Vasques</span>
-                    <span class="font-size-12">Corretor imoveistock</span> 
+                    <span class="font-size-12">Corretor imoveistock</span>
                 </div>
             </div>
         </div>
         <div class="w-100 my-4 align-items-center d-flex border border-radius-10 p-3">
             <i class="bi font-size-24 color-black bi-info-circle"></i>
             <p class="fw-400 ml-3 mb-0 font-size-16 line-20 color-black">
-                Ao fazer este agendamento, sua presença é automaticamente confirmada e um dos <b>corretores imoveistock</b> é selecionado para acompanhar a sua visita.
+                Ao fazer este agendamento, sua presença é automaticamente confirmada e um dos <b>corretores
+                    imoveistock</b> é selecionado para acompanhar a sua visita.
             </p>
         </div>
         <div class="d-flex flex-column">
