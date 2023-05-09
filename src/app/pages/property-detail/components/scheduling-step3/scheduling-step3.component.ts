@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AnnouncementGetResponseDto } from '../../../../dtos/announcement-get-response.dto';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
 import { SchedulingStep4Component } from '../scheduling-step4/scheduling-step4.component';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-scheduling-step3',
@@ -14,43 +15,43 @@ export class SchedulingStep3Component implements OnInit {
 
   form: FormGroup
 
-  dateSelected: Date;
-
-  response: AnnouncementGetResponseDto;
+  response: AnnouncementVisitGetResponseDto;
 
   code1;
 
   constructor(
     private modalService: NgbModal,
-    private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService,
+    private userService: UserService
   ) {
     this.form = this.formBuilder.group({
       ddd: ['', [Validators.required]],
-      phone: ['', [Validators.required]]
+      phone: ['', [Validators.required, Validators.minLength(9)]]
     })
-   }
+  }
 
   ngOnInit(): void {
-    let dateSelected = localStorage.getItem('dateScheduling')
-    this.dateSelected = JSON.parse(dateSelected);
-
-    let announcementSelected = localStorage.getItem('announcementOfScheduling');
-    this.response = JSON.parse(announcementSelected);
   }
 
   exit() {
     this.modalService.dismissAll();
   }
 
-  confirm(){
-    this.modalService.dismissAll();
-    this.modalService.open(SchedulingStep4Component, { centered: true, backdrop: 'static', keyboard: false});
-  }
+  confirm() {
+    let phone = '55' + this.form.controls['ddd'].value + this.form.controls['phone'].value
 
-  goToVisits() {
-    this.modalService.dismissAll()
-    this.router.navigate(['logged/visits'])
+    this.userService.getBrokerByPhone(phone).subscribe({
+      next: data => {
+        console.log(data);
+        this.modalService.dismissAll();
+        this.modalService.open(SchedulingStep4Component, { centered: true, backdrop: 'static', keyboard: false });
+      },
+      error: error => {
+        console.error(error)
+        this.toastrService.error(`${error.error.errors}`, '', { progressBar: true })
+      }
+    })
   }
 
   nextCode(item, value) {
