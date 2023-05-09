@@ -29,6 +29,11 @@ export class EditScheduling2ModalComponent implements OnInit {
 
     let announcementSelected = localStorage.getItem('announcementSelected');
     this.response = JSON.parse(announcementSelected);
+
+    this.dateSend = {
+      visitDate: this.dateSelected,
+      visitTypeOfAd: localStorage.getItem('typeOfAdSelect')
+    }
   }
 
   exit() {
