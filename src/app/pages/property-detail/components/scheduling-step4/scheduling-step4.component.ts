@@ -29,7 +29,8 @@ export class SchedulingStep4Component implements OnInit {
   confirm() {
     localStorage.setItem('user-broker', this.user.name)
     this.modalService.dismissAll()
-    this.modalService.open(SchedulingStep5Component, { centered: true, backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(SchedulingStep5Component, { centered: true, backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.user = this.user
   }
 
 }

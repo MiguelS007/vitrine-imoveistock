@@ -62,9 +62,9 @@
       </p>
     </div>
     <div class="row">
-      <div class="col-sm-6 d-flex mt-1">
+      <div *ngIf="user" class="col-sm-6 d-flex mt-1">
         <div class="border-profile-pic-side" *ngIf="urls.length === 0">
-          <span class="fw-700 font-size-48 text-center">{{user?.name[0]}}</span>
+          <span class="fw-600 font-size-20 text-center">{{nameBroker[0]}}</span>
         </div>
         <div *ngFor="let url of urls">
           <img [src]="url" class="border-profile-pic-side">

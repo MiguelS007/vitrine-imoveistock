@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SchedulingStep7Component } from '../scheduling-step7/scheduling-step7.component';
 import { ToastrService } from 'ngx-toastr';
+import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 
 @Component({
   selector: 'app-scheduling-step6',
@@ -9,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./scheduling-step6.component.scss']
 })
 export class SchedulingStep6Component implements OnInit {
+  @Input() user: UserGetResponseDto
 
   link = localStorage.getItem('companionLink');
 
@@ -46,7 +48,8 @@ export class SchedulingStep6Component implements OnInit {
 
   goToStep7() {
     this.modalService.dismissAll()
-    this.modalService.open(SchedulingStep7Component, { centered: true, backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(SchedulingStep7Component, { centered: true, backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.user = this.user
     localStorage.removeItem('companionLink');
   }
 }

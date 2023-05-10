@@ -32,12 +32,12 @@ export class SchedulingStep5Component implements OnInit {
   constructor(
     private modalService: NgbModal,
     private scheduleService: ScheduleService,
-    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    if (this.user?.photo?.location)
+    if (this.user?.photo?.location) {
       this.urls = [this.user.photo.location]
+    }
 
     let dateSelected = localStorage.getItem('dateScheduling')
     this.dateSelected = JSON.parse(dateSelected);
