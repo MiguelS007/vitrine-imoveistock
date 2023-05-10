@@ -1,102 +1,102 @@
 <section class="container-fluid p-4">
-    <div class="d-flex justify-content-end">
-        <img src="../../../../../assets/icon/x.png" alt="" (click)="exit()" style="cursor: pointer;">
-    </div>
+  <div class="d-flex justify-content-end">
+    <img src="../../../../../assets/icon/x.png" alt="" (click)="exit()" style="cursor: pointer;">
+  </div>
 
-    <div class="anima-body">
-        <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
-            Revise e confirme o seu agendamento
-        </p>
-        <h3 class="fw-600 pb-2 font-size-18 line-32 color-black">Resumo: </h3>
-        <div class="w-100">
-            <div class="row border border-radius-10 p-3 mb-2">
-                <div class="col-3 p-0">
-                    <img *ngIf="!response.mainPhoto" src="../../../assets/img/ap.png" class="w-100 border-radius-10" />
-                    <img *ngIf="response.mainPhoto" [src]="response.mainPhoto" class="w-100 border-radius-10" />
-                </div>
-                <div class="col-9">
-                    <p class="fw-500 font-size-18 line-24 color-black">{{response.description}}</p>
-                </div>
-            </div>
-            <p>
-                <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
-                <span class="fw-400 font-size-16 line-20 color-black">
-                    {{response.publicPlaceAddress}}, {{response.districtAddress}},
-                    {{response.cityAddress}} - {{response.ufAddress}}
-                </span>
-            </p>
-            <div class="row block-important px-3  d-flex">
-                <div
-                    class="col pt-2 pb-3 left-important justify-content-left px-0 d-flex align-items-center justify-content-left">
-                    <img src="../../../assets/icon/bed.png" class="pr-2" />
-                    <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                        {{response.bedrooms || '-'}} Quartos
-                    </p>
-                </div>
-                <div
-                    class="col pt-2 pb-3 left-important justify-content-center px-0 d-flex align-items-center justify-content-left">
-                    <img src="../../../assets/icon/car.png" class="pr-2" />
-                    <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                        {{response.parkingSpaces || '0'}} Vagas
-                    </p>
-                </div>
-                <div
-                    class="col pt-2 pb-3 left-important justify-content-end px-0 d-flex align-items-center justify-content-left">
-                    <img src="../../../assets/icon/rule.png" class="pr-2" />
-                    <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                        {{response.usefulArea | currency: ' '}}m²
-                    </p>
-                </div>
-            </div>
-            <p *ngIf="typeOfAd === 'sale'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-                Valor para compra: {{response.saleValue | currency: 'R$'}}
-            </p>
-            <p *ngIf="typeOfAd === 'rent'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-                Valor para alugar: {{response.leaseValue | currency: 'R$'}}
-            </p>
-            <p class="w-100 fw-400 font-size-16  line-20 color-black">
-                <i class="bi font-size-20  mr-2 bi-calendar"></i>
-                {{dateSelected | date: 'EEEE'}}, {{dateSelected | date: 'dd'}} de {{dateSelected |date:
-                'MMMM'}}
-                <span> às {{dateSelected | date: 'HH:mm'}}</span>
-            </p>
+  <div class="anima-body">
+    <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
+      Revise e confirme o seu agendamento
+    </p>
+    <h3 class="fw-600 pb-2 font-size-18 line-32 color-black">Resumo: </h3>
+    <div class="w-100">
+      <div class="row border border-radius-10 p-3 mb-2">
+        <div class="col-3 p-0">
+          <img *ngIf="!response.mainPhoto" src="../../../assets/img/ap.png" class="w-100 border-radius-10" />
+          <img *ngIf="response.mainPhoto" [src]="response.mainPhoto" class="w-100 border-radius-10" />
         </div>
-        <div class="row">
-            <div class="col-sm-6 d-flex mt-1">
-                <!-- <div *ngIf="urls.length === 0" class="border-profile-pic-side">
-                    <p class="d-flex align-items-center justify-content-center mb-0">{{selectedScheduling.user_broker.name[0]}}</p>
-                </div> -->
-                <div class="border-profile-pic-side">
-                    <p class="d-flex align-items-center justify-content-center mb-0">{{selectedScheduling?.user_broker?.photo}}</p>
-                </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <span class="ml-3">{{selectedScheduling?.user_broker?.name}}</span>
-                </div>
-            </div>
-            <div class="col-sm-6 d-flex mt-1">
-                <div class="border-profile-pic-side">
-                    <p class="d-flex align-items-center justify-content-center mb-0">JV</p>
-                </div>
-                <div class="d-flex flex-column align-items-center justify-content-center">
-                    <span>Júlio Vasques</span>
-                    <span class="font-size-12">Corretor imoveistock</span>
-                </div>
-            </div>
+        <div class="col-9">
+          <p class="fw-500 font-size-18 line-24 color-black">{{response.description}}</p>
         </div>
-        <div class="w-100 my-4 align-items-center d-flex border border-radius-10 p-3">
-            <i class="bi font-size-24 color-black bi-info-circle"></i>
-            <p class="fw-400 ml-3 mb-0 font-size-16 line-20 color-black">
-                Ao fazer este agendamento, sua presença é automaticamente confirmada e um dos <b>corretores
-                    imoveistock</b> é selecionado para acompanhar a sua visita.
-            </p>
+      </div>
+      <p>
+        <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
+        <span class="fw-400 font-size-16 line-20 color-black">
+          {{response.publicPlaceAddress}}, {{response.districtAddress}},
+          {{response.cityAddress}} - {{response.ufAddress}}
+        </span>
+      </p>
+      <div class="row block-important px-3  d-flex">
+        <div
+          class="col pt-2 pb-3 left-important justify-content-left px-0 d-flex align-items-center justify-content-left">
+          <img src="../../../assets/icon/bed.png" class="pr-2" />
+          <p class="fw-400 mb-0 font-size-14 line-20 color-black">
+            {{response.bedrooms || '-'}} Quartos
+          </p>
         </div>
-        <div class="d-flex flex-column">
-            <button type="submit" (click)="confirm()"
-                class="btn pb-2 bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100">Confirmar
-                e
-                agendar visita</button>
-            <button type="button" (click)="exit()"
-                class="btn bg-white border-radius-10 border-purple color-purple h-74 fw-700 font-size-18 w-100 mt-3">Cancelar</button>
+        <div
+          class="col pt-2 pb-3 left-important justify-content-center px-0 d-flex align-items-center justify-content-left">
+          <img src="../../../assets/icon/car.png" class="pr-2" />
+          <p class="fw-400 mb-0 font-size-14 line-20 color-black">
+            {{response.parkingSpaces || '0'}} Vagas
+          </p>
         </div>
+        <div
+          class="col pt-2 pb-3 left-important justify-content-end px-0 d-flex align-items-center justify-content-left">
+          <img src="../../../assets/icon/rule.png" class="pr-2" />
+          <p class="fw-400 mb-0 font-size-14 line-20 color-black">
+            {{response.usefulArea | currency: ' '}}m²
+          </p>
+        </div>
+      </div>
+      <p *ngIf="typeOfAd === 'sale'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
+        Valor para compra: {{response.saleValue | currency: 'R$'}}
+      </p>
+      <p *ngIf="typeOfAd === 'rent'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
+        Valor para alugar: {{response.leaseValue | currency: 'R$'}}
+      </p>
+      <p class="w-100 fw-400 font-size-16  line-20 color-black">
+        <i class="bi font-size-20  mr-2 bi-calendar"></i>
+        {{dateSelected | date: 'EEEE'}}, {{dateSelected | date: 'dd'}} de {{dateSelected |date:
+        'MMMM'}}
+        <span> às {{dateSelected | date: 'HH:mm'}}</span>
+      </p>
     </div>
+    <div class="row">
+      <div class="col-sm-6 d-flex mt-1">
+        <div class="border-profile-pic-side" *ngIf="urls.length === 0">
+          <span class="fw-700 font-size-48 text-center">{{user?.name[0]}}</span>
+        </div>
+        <div *ngFor="let url of urls">
+          <img [src]="url" class="border-profile-pic-side">
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <span class="ml-3">{{nameBroker}}</span>
+        </div>
+      </div>
+      <div class="col-sm-6 d-flex mt-1">
+        <div class="border-profile-pic-side">
+          <p class="d-flex align-items-center justify-content-center mb-0">JV</p>
+        </div>
+        <div class="d-flex flex-column align-items-center justify-content-center">
+          <span>Júlio Vasques</span>
+          <span class="font-size-12">Corretor imoveistock</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 my-4 align-items-center d-flex border border-radius-10 p-3">
+      <i class="bi font-size-24 color-black bi-info-circle"></i>
+      <p class="fw-400 ml-3 mb-0 font-size-16 line-20 color-black">
+        Ao fazer este agendamento, sua presença é automaticamente confirmada e um dos <b>corretores
+          imoveistock</b> é selecionado para acompanhar a sua visita.
+      </p>
+    </div>
+    <div class="d-flex flex-column">
+      <button type="submit" (click)="confirm()"
+        class="btn pb-2 bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100">Confirmar
+        e
+        agendar visita</button>
+      <button type="button" (click)="exit()"
+        class="btn bg-white border-radius-10 border-purple color-purple h-74 fw-700 font-size-18 w-100 mt-3">Cancelar</button>
+    </div>
+  </div>
 </section>

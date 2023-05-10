@@ -42,8 +42,23 @@ export class RegisterCompanionComponent implements OnInit {
 
   saveCompanion() {
     const data = Object.assign({}, this.form.value);
-    this.scheduleService.registerCompanion({...data, announcementVisit: this._id}).subscribe(
-      (data) => this.saveCompanionSuccess(data)
+    for (let companion of this.response.companion) {
+      if (companion.phone === this.form.controls['phone'].value) {
+        this.toastrService.error('Acompanhante já adicionado!', '', {
+          progressBar: true,
+          timeOut: 2500
+        })
+        return;
+      }
+    }
+    this.scheduleService.registerCompanion({ ...data, announcementVisit: this._id }).subscribe({
+      next: (data) =>
+        this.saveCompanionSuccess(data),
+      error: error => {
+        console.error(error)
+        this.toastrService.error(`${error.error.errors}`, '', { progressBar: true })
+      }
+    }
     );
   }
 
