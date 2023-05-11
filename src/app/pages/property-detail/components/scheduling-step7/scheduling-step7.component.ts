@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
-import { ScheduleService } from 'src/app/service/schedule.service';
+import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 
 @Component({
   selector: 'app-scheduling-step7',
@@ -11,6 +11,7 @@ import { ScheduleService } from 'src/app/service/schedule.service';
   styleUrls: ['./scheduling-step7.component.scss']
 })
 export class SchedulingStep7Component implements OnInit {
+  @Input() user: UserGetResponseDto
 
   dateSelected: Date;
 
@@ -18,12 +19,20 @@ export class SchedulingStep7Component implements OnInit {
 
   dateSend: ScheduleRegisterRequestDto;
 
+  nameBroker = localStorage.getItem('user-broker');
+
+  urls: string[] = [];
+
   constructor(
     private modalService: NgbModal,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
+    if (this.user?.photo?.location) {
+      this.urls = [this.user.photo.location]
+    }
+
     let dateSelected = localStorage.getItem('dateScheduling')
     this.dateSelected = JSON.parse(dateSelected);
 
@@ -45,6 +54,7 @@ export class SchedulingStep7Component implements OnInit {
     this.modalService.dismissAll();
     this.router.navigate(['logged/visits'])
     localStorage.removeItem('dateScheduling');
+    localStorage.removeItem('user-broker');
     localStorage.removeItem('announcementOfScheduling');
   }
 }

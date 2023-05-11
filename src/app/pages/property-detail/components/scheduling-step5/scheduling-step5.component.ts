@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
+import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { SchedulingStep6Component } from '../scheduling-step6/scheduling-step6.component';
-import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
-import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-scheduling-step5',
@@ -14,25 +15,30 @@ import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit
   providers: [Location, { provide: LocationStrategy, useClass: PathLocationStrategy }]
 })
 export class SchedulingStep5Component implements OnInit {
+  @Input() user: UserGetResponseDto
 
   dateSelected: Date;
 
   response: AnnouncementGetResponseDto;
 
-  selectedScheduling: AnnouncementVisitGetResponseDto;
-
   typeOfAd = localStorage.getItem('typeOfAdSelect');
 
   dateSend: ScheduleRegisterRequestDto;
 
-  urls: any = [];
+  nameBroker = localStorage.getItem('user-broker')
+
+  urls: string[] = [];
 
   constructor(
     private modalService: NgbModal,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
   ) { }
 
   ngOnInit(): void {
+    if (this.user?.photo?.location) {
+      this.urls = [this.user.photo.location]
+    }
+
     let dateSelected = localStorage.getItem('dateScheduling')
     this.dateSelected = JSON.parse(dateSelected);
 
@@ -59,9 +65,9 @@ export class SchedulingStep5Component implements OnInit {
 
   registerSuccess(success: any) {
     localStorage.setItem('companionLink', location.origin + success.link);
-    console.log(location.origin + success.link);
 
     this.modalService.dismissAll()
-    this.modalService.open(SchedulingStep6Component, { centered: true, backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(SchedulingStep6Component, { centered: true, backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.user = this.user
   }
 }

@@ -45,7 +45,8 @@ export class SchedulingStep3Component implements OnInit {
       next: data => {
         console.log(data);
         this.modalService.dismissAll();
-        this.modalService.open(SchedulingStep4Component, { centered: true, backdrop: 'static', keyboard: false });
+        const modalRef = this.modalService.open(SchedulingStep4Component, { centered: true, backdrop: 'static', keyboard: false });
+        modalRef.componentInstance.user = data
       },
       error: error => {
         console.error(error)

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserGetResponseDto } from '../../../../dtos/user-get-response.dtos';
 import { SchedulingStep5Component } from '../scheduling-step5/scheduling-step5.component';
 
 @Component({
@@ -8,10 +9,17 @@ import { SchedulingStep5Component } from '../scheduling-step5/scheduling-step5.c
   styleUrls: ['./scheduling-step4.component.scss']
 })
 export class SchedulingStep4Component implements OnInit {
+  @Input() user: UserGetResponseDto
 
-  constructor(private modalService: NgbModal) { }
+  urls: string[] = [];
+
+  constructor(
+    private modalService: NgbModal,
+  ) { }
 
   ngOnInit(): void {
+    if (this.user?.photo?.location)
+      this.urls = [this.user.photo.location]
   }
 
   exit() {
@@ -19,8 +27,10 @@ export class SchedulingStep4Component implements OnInit {
   }
 
   confirm() {
+    localStorage.setItem('user-broker', this.user.name)
     this.modalService.dismissAll()
-    this.modalService.open(SchedulingStep5Component, { centered: true, backdrop: 'static', keyboard: false});
+    const modalRef = this.modalService.open(SchedulingStep5Component, { centered: true, backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.user = this.user
   }
 
 }

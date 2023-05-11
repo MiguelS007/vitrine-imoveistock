@@ -1,31 +1,45 @@
 <section class="container-fluid p-4">
-    <div class="d-flex justify-content-end">
-        <img src="../../../../../assets/icon/x.png" alt="" (click)="exit()" style="cursor: pointer;">
+  <div class="d-flex justify-content-end">
+    <img src="../../../../../assets/icon/x.png" alt="" (click)="exit()" style="cursor: pointer;">
+  </div>
+
+  <div class="anima-body">
+    <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
+      Você agendou sua visita!
+    </p>
+    <div class="w-100">
+      <p class="w-100 fw-700 font-size-16 line-20 color-black text-capitalize ml-2">
+        <i class="bi font-size-20 mr-2 bi-calendar"></i>
+        {{dateSelected | date: 'EEEE'}}, {{dateSelected | date: 'dd'}} de {{dateSelected |date:
+        'MMMM'}}
+        <span> às {{dateSelected | date: 'HH:mm'}}</span>
+      </p>
+    </div>
+    <div class="row">
+      <div *ngIf="user" class="col-sm-6 d-flex my-1">
+        <div class="border-profile-pic-side" *ngIf="urls.length === 0">
+          <span class="fw-600 font-size-20 text-center">{{nameBroker[0]}}</span>
+        </div>
+        <div *ngFor="let url of urls">
+          <img [src]="url" class="border-profile-pic-side">
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <span class="ml-3">{{nameBroker}}</span>
+        </div>
+      </div>
+      <div class="col-sm-6 d-flex mt-1">
+        <div class="border-profile-pic-side">
+          <p class="d-flex align-items-center justify-content-center mb-0">JV</p>
+        </div>
+        <div class="d-flex flex-column align-items-center justify-content-center">
+          <span>Júlio Vasques</span>
+          <span class="font-size-12">Corretor imoveistock</span>
+        </div>
+      </div>
     </div>
 
-    <div class="anima-body">
-        <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
-            Você agendou sua visita!
-        </p>
-        <div class="w-100">
-            <p class="w-100 fw-700 font-size-16 line-20 color-black text-capitalize ml-2">
-                <i class="bi font-size-20 mr-2 bi-calendar"></i>
-                {{dateSelected | date: 'EEEE'}}, {{dateSelected | date: 'dd'}} de {{dateSelected |date:
-                'MMMM'}}
-                <span> às {{dateSelected | date: 'HH:mm'}}</span>
-            </p>
-        </div>
-        <div class="d-flex my-2">
-            <div class="border-profile-pic-side">
-                <p class="d-flex align-items-center justify-content-center mb-0">JH</p>
-            </div>
-            <div class="d-flex align-items-center justify-content-center">
-                <span class="ml-3">Jussara Helias</span>
-            </div>
-        </div>
-
-        <button type="button" (click)="goToVisits()"
-            class="btn bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100 mt-3">
-            Confirmar</button>
-    </div>
+    <button type="button" (click)="goToVisits()"
+      class="btn bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100 mt-3">
+      Confirmar</button>
+  </div>
 </section>
