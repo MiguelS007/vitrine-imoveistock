@@ -21,7 +21,8 @@ export class SchedulingStep5Component implements OnInit {
 
   response: AnnouncementGetResponseDto;
 
-  typeOfAd = localStorage.getItem('typeOfAdSelect');
+  typeOfAdSelect = localStorage.getItem('typeOfAdSelect');
+  typeOfAd = localStorage.getItem('typeOfAd');
 
   dateSend: ScheduleRegisterRequestDto;
 
@@ -65,6 +66,8 @@ export class SchedulingStep5Component implements OnInit {
 
   registerSuccess(success: any) {
     localStorage.setItem('companionLink', location.origin + success.link);
+    localStorage.removeItem('typeOfAdSelect');
+    localStorage.removeItem('typeOfAd');
 
     this.modalService.dismissAll()
     const modalRef = this.modalService.open(SchedulingStep6Component, { centered: true, backdrop: 'static', keyboard: false });

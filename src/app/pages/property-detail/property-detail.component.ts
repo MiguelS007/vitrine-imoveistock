@@ -377,7 +377,11 @@ export class PropertyDetailComponent implements OnInit {
 
   scheduling(item) {
     localStorage.setItem('announcementOfScheduling', JSON.stringify(item));
-    localStorage.setItem('typeOfAdSelect', this.typeOfAdSelect)
+    if (this.response.typeOfAd === 'both') {
+      localStorage.setItem('typeOfAdSelect', this.typeOfAdSelect)
+    } else {
+      localStorage.setItem('typeOfAd', this.response.typeOfAd)
+    }
     this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
   }
 
