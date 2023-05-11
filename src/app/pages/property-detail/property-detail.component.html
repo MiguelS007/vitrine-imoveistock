@@ -224,8 +224,9 @@
         <div class="col-8 col-body-details-property">
           <!-- FIRST INFO CARD -->
           <div class="w-100 border-radius-10 bg-white">
-            <div class="row mt-4 pt-5 px-5">
-              <div *ngIf="response.typeOfAd === 'sale' || valueViewSelectSale" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+            <div class="row mt-4 pt-5 px-sm-5 px-2">
+              <div *ngIf="response.typeOfAd === 'sale' || valueViewSelectSale"
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/TAMANHO-DO-AP-PRETO.svg" alt="" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p class="mb-0 ml-3">{{response.usefulArea | currency: ' '}}m²</p>
@@ -234,11 +235,12 @@
                     currency: 'R$'}}/m²</p>
                 </div>
               </div>
-              <div *ngIf="response.typeOfAd === 'rent' || !valueViewSelectSale" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="response.typeOfAd === 'rent' || !valueViewSelectSale"
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/TAMANHO-DO-AP-PRETO.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3">{{response.usefulArea | currency: ' '}}m²</p>
               </div>
-              <div *ngIf="response.bedrooms > 0" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="response.bedrooms > 0" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO QUARTOS.svg" alt="" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p *ngIf="response.bedrooms > 1" class="mb-0 ml-3">{{response.bedrooms}} Quartos</p>
@@ -248,18 +250,19 @@
                   </p>
                 </div>
               </div>
-              <div *ngIf="!response.bedrooms || response.bedrooms === 0" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="!response.bedrooms || response.bedrooms === 0"
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA QUARTOS.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>0 Quartos</del></p>
               </div>
-              <div *ngIf="response.propertyPosition" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="response.propertyPosition" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO SOL DA MANHA.svg" width="25" height="36">
                 <p *ngIf="response.propertyPosition === 'front'" class="mb-0 ml-3">Nascente</p>
                 <p *ngIf="response.propertyPosition === 'funds'" class="mb-0 ml-3">Poente</p>
                 <p *ngIf="response.propertyPosition === 'side'" class="mb-0 ml-3">Lateral</p>
                 <p *ngIf="response.propertyPosition === 'fullfloor'" class="mb-0 ml-3">Nascente / Poente</p>
               </div>
-              <div *ngIf="response.whichFloorOfTheProperty" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="response.whichFloorOfTheProperty" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO APARTAMENTO.svg" alt="" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p class="mb-0 ml-3">Apartamento</p>
@@ -287,7 +290,7 @@
                     andar</p>
                 </div>
               </div>
-              <div *ngIf="response.parkingSpaces" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="response.parkingSpaces" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO GARAGEM.svg" width="36" height="42">
                 <div class="d-flex flex-column">
                   <p *ngIf="response.parkingSpaces > 1" class="mb-0 ml-3">{{response.parkingSpaces}} Vagas</p>
@@ -298,20 +301,22 @@
                   <p *ngIf="response.typeOfVacancy === 'rotary'" class="mb-0 ml-3 font-size-9 text-right">Rotativa</p>
                 </div>
               </div>
-              <div *ngIf="!response.parkingSpaces || response.parkingSpaces === 0" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="!response.parkingSpaces || response.parkingSpaces === 0"
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA GARAGEM.svg" width="36" height="42">
                 <p class="mb-0 ml-3 text-muted"><del>0 Vagas</del></p>
               </div>
-              <div *ngIf="response.bathrooms" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="response.bathrooms" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO BANHEIROS.svg" width="25" height="36">
                 <p *ngIf="response.bathrooms > 1" class="mb-0 ml-3">{{response.bathrooms}} Banheiros</p>
                 <p *ngIf="response.bathrooms === 1" class="mb-0 ml-3">{{response.bathrooms}} Banheiro</p>
               </div>
-              <div *ngIf="!response.bathrooms || response.bathrooms === 0" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="!response.bathrooms || response.bathrooms === 0"
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA BANHEIROS.svg" width="25" height="36">
                 <p *ngIf="response.bathrooms > 1" class="mb-0 ml-3 text-muted">0 Banheiro</p>
               </div>
-              <div *ngIf="response.conciergeOpeningHours" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="response.conciergeOpeningHours" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO PORTEIRO.svg" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p class="mb-0 ml-3">Portaria</p>
@@ -324,33 +329,33 @@
                 </div>
               </div>
               <div *ngIf="!response.conciergeOpeningHours || response.conciergeOpeningHours === 'withoutConcierge'"
-                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA PORTEIRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Portaria</del></p>
               </div>
               <div *ngIf="response.featureConveniences?.elevador || response.featureConveniences?.elevadorDeServico"
-                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO ELEVADOR.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3">Elevador</p>
               </div>
               <div *ngIf="!response.featureConveniences?.elevador || !response.featureConveniences?.elevadorDeServico"
-                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA ELEVADOR.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Elevador</del></p>
               </div>
               <div *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
-                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO METRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3">Próximo ao metrô</p>
               </div>
               <div *ngIf="!response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
-                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA METRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Próximo ao metrô</del></p>
               </div>
               <div
                 *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral || response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
-                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO AQUECIMENTO.svg" width="25" height="36">
                 <div class="d-flex flex-column">
                   <p class="mb-0 ml-3">Aquecimento</p>
@@ -364,15 +369,15 @@
               </div>
               <div
                 *ngIf="!response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral && !response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
-                class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA AQUECIMENTO.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Aquecimento</del></p>
               </div>
-              <div *ngIf="response.petsAccepted" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="response.petsAccepted" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO PET.svg" width="25" height="36">
                 <p class="mb-0 ml-3">Aceita Pet</p>
               </div>
-              <div *ngIf="!response.petsAccepted" class="col-lg-3 col-md-4 col-sm-6 d-flex mt-3 mx-2">
+              <div *ngIf="!response.petsAccepted" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA PET.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Aceita Pet</del></p>
               </div>
@@ -1051,7 +1056,8 @@
               <div *ngIf="response.typeOfAd === 'rent'" class="d-flex flex-column">
                 <hr>
                 <h5 class="fw-700">Avaliação de crédito</h5>
-                <p class="font-size-14 mb-0">Para alugar este imóvel é necessário que sua renda seja 3x maior que o total
+                <p class="font-size-14 mb-0">Para alugar este imóvel é necessário que sua renda seja 3x maior que o
+                  total
                   mensal.</p>
               </div>
             </div>
@@ -1128,7 +1134,8 @@
               <div *ngIf="!valueViewSelectSale" class="d-flex flex-column">
                 <hr>
                 <h5 class="fw-700">Avaliação de crédito</h5>
-                <p class="font-size-14 mb-0">Para alugar este imóvel é necessário que sua renda seja 3x maior que o total
+                <p class="font-size-14 mb-0">Para alugar este imóvel é necessário que sua renda seja 3x maior que o
+                  total
                   mensal.</p>
               </div>
             </div>
