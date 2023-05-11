@@ -36,6 +36,8 @@ export class SchedulingStep3Component implements OnInit {
 
   exit() {
     this.modalService.dismissAll();
+    localStorage.removeItem('typeOfAdSelect');
+    localStorage.removeItem('typeOfAd');
   }
 
   confirm() {
