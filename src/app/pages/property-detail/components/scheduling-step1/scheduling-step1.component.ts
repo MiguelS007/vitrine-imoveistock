@@ -82,7 +82,9 @@ export class SchedulingStep1Component implements OnInit {
   }
 
   exit() {
-    this.modalService.dismissAll()
+    this.modalService.dismissAll();
+    localStorage.removeItem('typeOfAdSelect');
+    localStorage.removeItem('typeOfAd');
   }
 
 }
