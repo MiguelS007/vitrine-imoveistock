@@ -65,9 +65,9 @@ export class SchedulingStep5Component implements OnInit {
 
   registerSuccess(success: any) {
     localStorage.setItem('companionLink', location.origin + success.link);
-    console.log(location.origin + success.link);
 
     this.modalService.dismissAll()
-    this.modalService.open(SchedulingStep6Component, { centered: true, backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(SchedulingStep6Component, { centered: true, backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.user = this.user
   }
 }
