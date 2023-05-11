@@ -67,7 +67,14 @@
                 </span>
             </div>
             <div *ngIf="selectedScheduling.status !== 'cancel'" class="w-100 bg-white border-radius-10 p-4 h-auto">
-                <p class="w-100 fw-400 font-size-16 line-20 color-black">
+              <div class="d-flex mb-3">
+                <i class="bi bi-link-45deg"></i>
+                <div class="d-flex flex-column">
+                  <span class="ml-2"><b>Código da visita:</b> {{selectedScheduling?.code || '-'}}</span>
+                  <span class="ml-2 font-size-12 fw-400 color-muted">Informe o código ao corretor durante a visita.</span>
+                </div>
+              </div>
+              <p class="w-100 fw-400 font-size-16 line-20 color-black">
                     <i class="bi font-size-20 mr-2 bi-calendar"></i>{{selectedScheduling?.visitDate | date: 'EEEE'||
                     '-'}}, {{selectedScheduling.visitDate | date: 'dd' }} de {{selectedScheduling.visitDate | date:
                     'LLLL' }} às {{selectedScheduling.visitDate | date: 'HH:mm' || '-'}}
@@ -254,6 +261,9 @@
                     </div>
                 </div>
             </div>
+            <!-- <div class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
+              <h1>teste</h1>
+            </div> -->
             <div *ngIf="selectedScheduling.status !== 'cancel'" class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
                 <p class="fw-700 font-size-18 line-24 color-black">
                     Editar visita

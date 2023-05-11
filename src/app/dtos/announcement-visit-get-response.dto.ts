@@ -12,6 +12,7 @@ export abstract class AnnouncementVisitGetResponseDto {
     userBrokerPartner?:UserGetResponseDto;
     cancellationReason?:string;
     companion?:Companion[];
+    code?: number;
   }
   interface Companion {
     _id:string;
