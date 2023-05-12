@@ -180,7 +180,6 @@ export class ExpressProposalComponent implements OnInit {
 
     if (this.response.typeOfAd === 'both' && localStorage.getItem('bothProposalType') !== null) {
       this.bothSelectType = localStorage.getItem('bothProposalType');
-      console.log('teste show', this.bothSelectType)
     } else if (this.response.typeOfAd === 'both' && localStorage.getItem('bothProposalType') === null) {
       this.bothSelectType = 'sale'
     }
