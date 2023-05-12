@@ -67,7 +67,14 @@
                 </span>
             </div>
             <div *ngIf="selectedScheduling.status !== 'cancel'" class="w-100 bg-white border-radius-10 p-4 h-auto">
-                <p class="w-100 fw-400 font-size-16 line-20 color-black">
+              <div class="d-flex mb-3">
+                <i class="bi bi-link-45deg"></i>
+                <div class="d-flex flex-column">
+                  <span class="ml-2"><b>Código da visita:</b> {{selectedScheduling?.code || '-'}}</span>
+                  <span class="ml-2 font-size-12 fw-400 color-muted">Informe o código ao corretor durante a visita.</span>
+                </div>
+              </div>
+              <p class="w-100 fw-400 font-size-16 line-20 color-black">
                     <i class="bi font-size-20 mr-2 bi-calendar"></i>{{selectedScheduling?.visitDate | date: 'EEEE'||
                     '-'}}, {{selectedScheduling.visitDate | date: 'dd' }} de {{selectedScheduling.visitDate | date:
                     'LLLL' }} às {{selectedScheduling.visitDate | date: 'HH:mm' || '-'}}
@@ -253,6 +260,43 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
+                <form [formGroup]="form">
+                    <h3 class="fw-700 font-size-16 line-20 color-black">Avalie a sua visita</h3>
+                    <p class="font-size-14 fw-400">A sua visita aconteceu?</p>
+                    <div class="w-100 mt-3 d-flex">
+                        <button type="submit" (click)="rateYourVisit('yes')"
+                            class="btn bg-purple text-light border-radius-10 h-74 w-100 mr-1 fw-700 font-size-18 line-24">
+                            Sim
+                        </button>
+                        <button type="submit" (click)="rateYourVisit('no')" type="button"
+                            class="btn bg-white border-purple color-purple ml-1 border-radius-10 h-74 w-100 fw-700 font-size-18 line-24">
+                            Não
+                        </button>
+                    </div>
+                    <div *ngIf="showRateYourVisit" class="mt-3">
+                        <p class="font-size-14 fw-400">Como foi a sua visita?</p>
+                        <div>
+                            <ngb-rating [(rate)]="currentRate" [max]="5" >
+                                <ng-template let-fill="fill" let-index="index">
+                                    <i class="bi-star{{fill === 100 ? '-fill' : ''}}" [class.filled]="fill === 100"></i>
+                                </ng-template>
+                            </ngb-rating>
+                        </div>
+                        <textarea class="fw-400 w-100 my-3 font-size-14 color-black border border-radius-10 px-3 py-3" formControlName="comments" name="" id="" rows="3" placeholder="Conta pra gente como foi"></textarea>
+                        <div class="w-100 mt-3 d-flex">
+                            <button type="submit"
+                                class="btn bg-purple text-light border-radius-10 h-74 w-100 mr-1 fw-700 font-size-18 line-24">
+                                Enviar
+                            </button>
+                            <button type="submit" (click)="rateYourVisit('no')" type="button"
+                                class="btn bg-white border-purple color-purple ml-1 border-radius-10 h-74 w-100 fw-700 font-size-18 line-24">
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div *ngIf="selectedScheduling.status !== 'cancel'" class="w-100 bg-white mt-4 p-4 border-radius-10 h-auto">
                 <p class="fw-700 font-size-18 line-24 color-black">

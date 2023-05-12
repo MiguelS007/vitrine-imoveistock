@@ -27,6 +27,8 @@ export class SchedulingStep2Component implements OnInit {
 
   exit() {
     this.modalService.dismissAll();
+    localStorage.removeItem('typeOfAdSelect');
+    localStorage.removeItem('typeOfAd');
   }
 
 

@@ -1,6 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { ScheduleRegisterResponseDto } from 'src/app/dtos/schedule-register-response.dto';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,10 +7,7 @@ import { SchedulingSelectedModalComponent } from './scheduling-selected-modal/sc
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VisitCancelRequestDto } from 'src/app/dtos/visit-cancel-request.dto';
 import { EditSchedulingModalComponent } from './edit-scheduling-modal/edit-scheduling-modal.component';
-import { EditScheduling2ModalComponent } from './edit-scheduling2-modal/edit-scheduling2-modal.component';
-import { EditScheduling3ModalComponent } from './edit-scheduling3-modal/edit-scheduling3-modal.component';
 import { SchedulingStep1Component } from '../../../../pages/property-detail/components/scheduling-step1/scheduling-step1.component';
-import { ModalLoginComponent } from '../../../../auth/modal-login/modal-login.component';
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
 import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
@@ -49,6 +45,9 @@ export class SchedulingComponent implements OnInit {
 
   link = location.origin + '/register-companion/id/';
 
+  showRateYourVisit: boolean;
+  currentRate = 0;
+
   constructor(
     private scheduleService: ScheduleService,
     private router: Router,
@@ -59,6 +58,7 @@ export class SchedulingComponent implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       cancelvisit: ['', [Validators.required]],
+      comments: ['']
     });
   }
 
@@ -284,9 +284,6 @@ export class SchedulingComponent implements OnInit {
     this.recentlySeenList = list;
 
     this.router.navigate([`announcement/detail/${value}`]);
-
-
-
   }
 
   editScheduling(selectedScheduling) {
@@ -302,6 +299,15 @@ export class SchedulingComponent implements OnInit {
     } else if (selectedScheduling.status === 'cancel') {
       localStorage.setItem('announcementOfScheduling', JSON.stringify(selectedScheduling.announcement))
       this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
+    }
+  }
+
+  rateYourVisit(string) {
+    if(string === 'yes') {
+      this.showRateYourVisit = true
+    } else {
+      this.showRateYourVisit = false
+      this.currentRate = 0
     }
   }
 
