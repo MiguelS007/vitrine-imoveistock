@@ -1199,7 +1199,7 @@
 
           <gallery [items]="images" imageSize="contain" fluid></gallery>
 
-          <button class="btn btn-expand-photo" (click)="openFullScreen()">
+          <button class="btn btn-expand-photo" (click)="openFullScreen()" data-dismiss="modal" aria-label="Close">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -1209,10 +1209,13 @@
         </div>
       </div>
     </div>
-    <ng-image-fullscreen-view [images]="imageSelectedFullScreen" [imageIndex]="currentIndex" [show]="showFlag"
-      (close)="closeEventHandler()">
-    </ng-image-fullscreen-view>
   </div>
+
+
+  <ng-image-fullscreen-view [images]="imageSelectedFullScreen" [imageIndex]="currentIndex" [show]="showFlag"
+    (close)="closeEventHandler()">
+  </ng-image-fullscreen-view>
+
   <!-- Modal PLAY VIDEO -->
   <div class="modal px-0 fade" id="playvideo" tabindex="-1" role="dialog" aria-labelledby="playvideoTitle"
     aria-hidden="true">
