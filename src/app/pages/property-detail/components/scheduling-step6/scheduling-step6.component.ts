@@ -41,7 +41,7 @@ export class SchedulingStep6Component implements OnInit {
   copy() {
     navigator.clipboard.writeText(this.link);
 
-    this.toastrService.success('Sucesso', 'Código para compartilhamento copiado!', {
+    this.toastrService.success('Sucesso', 'Link copiado!', {
       progressBar: true,
     });
   }

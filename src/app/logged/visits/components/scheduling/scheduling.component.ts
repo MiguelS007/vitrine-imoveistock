@@ -104,7 +104,7 @@ export class SchedulingComponent implements OnInit {
   copy() {
     navigator.clipboard.writeText(this.link + this.selectedScheduling._id);
 
-    this.toastrService.success('Sucesso', 'Código copiado!', {
+    this.toastrService.success('Sucesso', 'Link copiado!', {
       progressBar: true,
     });
   }
