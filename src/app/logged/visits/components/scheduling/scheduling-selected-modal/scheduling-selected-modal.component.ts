@@ -9,6 +9,7 @@ import { EditScheduling3ModalComponent } from '../edit-scheduling3-modal/edit-sc
 import { ToastrService } from 'ngx-toastr';
 import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
 import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-scheduling-selected-modal',
@@ -17,6 +18,8 @@ import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit
   providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class SchedulingSelectedModalComponent implements OnInit {
+
+  form: FormGroup
 
   selectedScheduling: AnnouncementVisitGetResponseDto;
 
@@ -28,12 +31,20 @@ export class SchedulingSelectedModalComponent implements OnInit {
 
   link = location.origin + '/register-companion/id/';
 
+  showRateYourVisit: boolean;
+  currentRate = 0;
+
   constructor(
+    private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private router: Router,
     private announcementService: AnnouncementService,
     private toastrService: ToastrService
-  ) { }
+  ) {
+    this.form = this.formBuilder.group({
+      comments: ['']
+    })
+   }
 
   ngOnInit(): void {
     let selectedScheduling = localStorage.getItem('announcementChecked');
@@ -162,6 +173,14 @@ export class SchedulingSelectedModalComponent implements OnInit {
     });
   }
 
+  rateYourVisit(string) {
+    if(string === 'yes') {
+      this.showRateYourVisit = true
+    } else {
+      this.showRateYourVisit = false
+      this.currentRate = 0
+    }
+  }
 
 
 }

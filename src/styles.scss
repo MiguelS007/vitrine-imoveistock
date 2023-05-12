@@ -1251,6 +1251,11 @@ ng-image-fullscreen-view .ng-image-fullscreen-view .lightbox-wrapper .close {
     border-radius: 5px;
 }
 
+//Estrelas na parte de visits, avaliar visita
+.visually-hidden{
+    display: none;
+}
+
 @media (max-width: 1920px) {
     .arrow-box-buy:after {
         left: 35%;
