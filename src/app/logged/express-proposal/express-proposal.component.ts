@@ -179,7 +179,8 @@ export class ExpressProposalComponent implements OnInit {
     }
 
     if (this.response.typeOfAd === 'both' && localStorage.getItem('bothProposalType') !== null) {
-      this.bothSelectType = localStorage.getItem('bothProposalType')
+      this.bothSelectType = localStorage.getItem('bothProposalType');
+      console.log('teste show', this.bothSelectType)
     } else if (this.response.typeOfAd === 'both' && localStorage.getItem('bothProposalType') === null) {
       this.bothSelectType = 'sale'
     }
@@ -338,7 +339,7 @@ export class ExpressProposalComponent implements OnInit {
     let calcRent = this.toNumber(this.response.leaseValue) + this.toNumber(this.response.condominiumValue) + (this.toNumber(this.response.valueOfIptu) / 12)
 
     this.requireRent = calcRent * 4
-    
+
   }
 
   propertyChange(value: string) {
