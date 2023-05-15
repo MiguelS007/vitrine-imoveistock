@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
 import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AnnouncementRatingService } from 'src/app/service/announcement-rating.service';
 
 @Component({
   selector: 'app-scheduling-selected-modal',
@@ -39,10 +40,12 @@ export class SchedulingSelectedModalComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private announcementService: AnnouncementService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private announcementRatingService: AnnouncementRatingService
   ) {
     this.form = this.formBuilder.group({
-      comments: ['']
+      ratingScore: [''],
+      ratingMessage: ['']
     })
    }
 
@@ -180,6 +183,25 @@ export class SchedulingSelectedModalComponent implements OnInit {
       this.showRateYourVisit = false
       this.currentRate = 0
     }
+  }
+
+  submitReview() {
+    let request = {
+      ratingScore: this.form.controls['ratingScore'].value,
+      ratingMessage: this.form.controls['ratingMessage'].value,
+      announcementId: this.selectedScheduling.announcement._id,
+    }
+    
+    this.announcementRatingService.registerAnnouncementRating(request).subscribe({
+      next: (data) =>
+        this.saveReviewSuccess(data),
+    })
+  }
+
+  saveReviewSuccess(data: any) {
+    this.toastrService.success('Sucesso', 'Avaliação enviada!', {
+      progressBar: true,
+    });
   }
 
 
