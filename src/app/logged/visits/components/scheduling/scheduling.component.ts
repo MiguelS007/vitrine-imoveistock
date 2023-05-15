@@ -11,6 +11,7 @@ import { SchedulingStep1Component } from '../../../../pages/property-detail/comp
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
 import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
+import { AnnouncementRatingService } from 'src/app/service/announcement-rating.service';
 
 @Component({
   selector: 'app-scheduling',
@@ -52,13 +53,15 @@ export class SchedulingComponent implements OnInit {
     private scheduleService: ScheduleService,
     private router: Router,
     private announcementService: AnnouncementService,
+    private announcementRatingService: AnnouncementRatingService,
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private toastrService: ToastrService
   ) {
     this.form = this.formBuilder.group({
       cancelvisit: ['', [Validators.required]],
-      comments: ['']
+      ratingScore: [''],
+      ratingMessage: [''],
     });
   }
 
@@ -307,8 +310,25 @@ export class SchedulingComponent implements OnInit {
       this.showRateYourVisit = true
     } else {
       this.showRateYourVisit = false
-      this.currentRate = 0
     }
   }
 
+  submitReview() {
+    let request = {
+      ratingScore: this.form.controls['ratingScore'].value,
+      ratingMessage: this.form.controls['ratingMessage'].value,
+      announcementId: this.selectedScheduling.announcement._id,
+    }
+    
+    this.announcementRatingService.registerAnnouncementRating(request).subscribe({
+      next: (data) =>
+        this.saveReviewSuccess(data),
+    })
+  }
+
+  saveReviewSuccess(data: any) {
+    this.toastrService.success('Sucesso', 'Avaliação enviada!', {
+      progressBar: true,
+    });
+  }
 }
