@@ -18,21 +18,24 @@
     <div class="row">
       <div *ngIf="user" class="col-sm-6 d-flex my-1">
         <div class="border-profile-pic-side" *ngIf="urls.length === 0">
-          <span class="fw-600 font-size-20 text-center">{{nameBroker[0]}}</span>
+          <span class="fw-600 font-size-20 text-center">{{user.name[0]}}</span>
         </div>
         <div *ngFor="let url of urls">
           <img [src]="url" class="border-profile-pic-side">
         </div>
         <div class="d-flex align-items-center justify-content-center">
-          <span class="ml-3">{{nameBroker}}</span>
+          <span class="ml-3">{{user.name}}</span>
         </div>
       </div>
-      <div class="col-sm-6 d-flex mt-1">
-        <div class="border-profile-pic-side">
-          <p class="d-flex align-items-center justify-content-center mb-0">JV</p>
+      <div *ngIf="user_broker" class="col-sm-6 d-flex mt-1">
+        <div class="border-profile-pic-side" *ngIf="!user_broker?.photo?.location">
+          <span class="fw-600 font-size-20 text-center">{{user_broker.name[0]}}</span>
+        </div>
+        <div *ngIf="user_broker?.photo?.location">
+          <img [src]="user_broker?.photo?.location" class="border-profile-pic-side">
         </div>
         <div class="d-flex flex-column align-items-center justify-content-center">
-          <span>Júlio Vasques</span>
+          <span>{{user_broker.name}}</span>
           <span class="font-size-12">Corretor imoveistock</span>
         </div>
       </div>
