@@ -307,8 +307,11 @@ export class PropertyDetailComponent implements OnInit {
     console.log(event)
   }
 
+  typeOfAdSelect: string = 'sale';
+
   changeValueViewSelectSale(valueView) {
     this.valueViewSelectSale = !this.valueViewSelectSale
+    this.typeOfAdSelect = valueView
   }
 
   closeEventHandler() {
@@ -426,12 +429,13 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   scheduling(item) {
-    if (localStorage.getItem('user') !== null) {
-      localStorage.setItem('announcementOfScheduling', JSON.stringify(item))
-      this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
+    localStorage.setItem('announcementOfScheduling', JSON.stringify(item));
+    if (this.response.typeOfAd === 'both') {
+      localStorage.setItem('typeOfAdSelect', this.typeOfAdSelect)
     } else {
-      this.modalService.open(ModalLoginComponent, { centered: true })
+      localStorage.setItem('typeOfAd', this.response.typeOfAd)
     }
+    this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
   }
 
   list() {

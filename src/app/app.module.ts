@@ -53,7 +53,12 @@ import { CepService } from './service/cep.service';
 import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 import { SharedAnnouncementComponent } from './pages/property-detail/components/shared-announcement/shared-announcement.component';
 import { GalleryModule } from 'ng-gallery';
-
+import { SchedulingStep4Component } from './pages/property-detail/components/scheduling-step4/scheduling-step4.component';
+import { SchedulingStep5Component } from './pages/property-detail/components/scheduling-step5/scheduling-step5.component';
+import { SchedulingStep6Component } from './pages/property-detail/components/scheduling-step6/scheduling-step6.component';
+import { SchedulingStep7Component } from './pages/property-detail/components/scheduling-step7/scheduling-step7.component';
+import { RegisterCompanionComponent } from './pages/register-companion/register-companion.component';
+import { VisitGetByIdResolve } from './resolvers/visit-getById.resolver';
 
 registerLocaleData(ptBr);
 
@@ -103,10 +108,15 @@ const cookieConfig: NgcCookieConsentConfig = {
     SchedulingStep1Component,
     SchedulingStep2Component,
     SchedulingStep3Component,
+    SchedulingStep4Component,
+    SchedulingStep5Component,
+    SchedulingStep6Component,
     TermsComponent,
     CookiePolicyComponent,
     TermsSignupComponent,
-    SharedAnnouncementComponent
+    SharedAnnouncementComponent,
+    SchedulingStep7Component,
+    RegisterCompanionComponent
   ],
 
   imports: [
@@ -149,6 +159,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     { provide: LOCALE_ID, useValue: 'pt' },
     AnnouncementService,
     CepService,
+    VisitGetByIdResolve
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
 import { SchedulingStep2Component } from '../scheduling-step2/scheduling-step2.component';
+import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 
 @Component({
   selector: 'app-scheduling-step1',
@@ -59,16 +60,21 @@ export class SchedulingStep1Component implements OnInit {
   }
 
   confirm() {
-    let dateFormat: Date = this.form.controls['day'].value;
-    dateFormat.setHours(parseInt(this.form.controls['time'].value));
-    dateFormat.setMinutes(0);
-    const result = this.isValidDate(dateFormat)
-    if (result === true) {
-      localStorage.setItem('dateScheduling', JSON.stringify(dateFormat));
-      this.modalService.dismissAll()
-      this.modalService.open(SchedulingStep2Component, { centered: true, backdrop: 'static', keyboard: false});
+    if (localStorage.getItem('user') !== null) {
+      let dateFormat: Date = this.form.controls['day'].value;
+      dateFormat.setHours(parseInt(this.form.controls['time'].value));
+      dateFormat.setMinutes(0);
+      const result = this.isValidDate(dateFormat)
+      if (result === true) {
+        localStorage.setItem('dateScheduling', JSON.stringify(dateFormat));
+        this.modalService.dismissAll()
+        this.modalService.open(SchedulingStep2Component, { centered: true, backdrop: 'static', keyboard: false });
+      } else {
+        this.toastrService.error('Selecione uma data valida', '', { progressBar: true })
+      }
     } else {
-      this.toastrService.error('Selecione uma data valida', '', { progressBar: true })
+      this.modalService.dismissAll()
+      this.modalService.open(ModalLoginComponent, { centered: true })
     }
   }
   isValidDate(d) {
@@ -76,7 +82,9 @@ export class SchedulingStep1Component implements OnInit {
   }
 
   exit() {
-    this.modalService.dismissAll()
+    this.modalService.dismissAll();
+    localStorage.removeItem('typeOfAdSelect');
+    localStorage.removeItem('typeOfAd');
   }
 
 }
