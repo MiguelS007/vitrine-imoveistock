@@ -499,7 +499,7 @@
               </table>
             </div>
 
-            <div class="w-100 py-4 border-bottom-gray px-5">
+            <div class="w-100 py-4 border-bottom-gray bg-success px-5">
               <div class="w-100 d-flex align-items-center justify-content-between">
                 <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Caracteristicas do imovel</p>
                 <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20"
@@ -507,51 +507,300 @@
                 <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated"
                   width="18" style="cursor: pointer;" (click)="openarrow(42)">
               </div>
-              <table *ngIf="arrowinfo" class="w-100 animate__animated pt-4">
-                <tbody>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Face do
-                        imóvel:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;Sul</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Item:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;4</span>
-                    </td>
-                  </tr>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Construtora:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;Thá</span>
-                    </td>
-                  </tr>
-                  <!-- <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Item:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;4</span>
-                    </td>
-                  </tr> -->
-                </tbody>
-              </table>
+              <div *ngIf="arrowinfo" class="w-100 animate__animated pt-4">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-12">
+                        <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Imóvel</p>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <p *ngIf="response.featureProperty?.adega === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Adega
+                          </p>
+                          <p *ngIf="response.featureProperty?.areaDeServico === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Área de Serviço
+                          </p>
+                          <p *ngIf="response.featureProperty?.areaVerde === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Area verde
+                          </p>
+                          <p *ngIf="response.featureProperty?.arvoresFrutiferas === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Árvores frutiferas
+                          </p>
+                          <p *ngIf="response.featureProperty?.banheira === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Banheira
+                          </p>
+                          <p *ngIf="response.featureProperty?.bar === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Bar
+                          </p>
+                          <p *ngIf="response.featureProperty?.cachoeira === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Cachoeira
+                          </p>
+                          <p *ngIf="response.featureProperty?.canil === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Canil
+                          </p>
+                          <p *ngIf="response.featureProperty?.casaDeCaseiro === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Casa de caseiro
+                          </p>
+                          <p *ngIf="response.featureProperty?.casaSede === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Casa sede
+                          </p>
+                          <p *ngIf="response.featureProperty?.caseiro === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Caseiro
+                          </p>
+                          <p *ngIf="response.featureProperty?.celeiro === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Celeiro
+                          </p>
+                          <p *ngIf="response.featureProperty?.centralTelefonica === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Central telefônica
+                          </p>
+                          <p *ngIf="response.featureProperty?.cerca === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Cerca
+                          </p>
+                          <p *ngIf="response.featureProperty?.churrasqueiraPrivativa === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Churrasqueira privativa
+                          </p>
+                          <p *ngIf="response.featureProperty?.closet === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Closet
+                          </p>
+                          <p *ngIf="response.featureProperty?.copa === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Copa
+                          </p>
+                          <p *ngIf="response.featureProperty?.cozinhaAmericana === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Cozinha americana
+                          </p>
+                          <p *ngIf="response.featureProperty?.cozinhaGourmet === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Cozinha gourmet
+                          </p>
+                          <p *ngIf="response.featureProperty?.curral === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Curral
+                          </p>
+                          <p *ngIf="response.featureProperty?.deck === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Deck
+                          </p>
+                          <p *ngIf="response.featureProperty?.dependenciaDeEmpregados === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Dependência de empregados
+                          </p>
+                          <p *ngIf="response.featureProperty?.depositoNoSubsolo === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Deposito no subsolo
+                          </p>
+                          <p *ngIf="response.featureProperty?.despensa === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Despensa
+                          </p>
+                          <p *ngIf="response.featureProperty?.edicula === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Edícula
+                          </p>
+                          <p *ngIf="response.featureProperty?.entradaDeServico === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Entrada de servico
+                          </p>
+                          <p *ngIf="response.featureProperty?.entradaLateral === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Entrada lateral
+                          </p>
+                          <p *ngIf="response.featureProperty?.escritorio === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Escritório
+                          </p>
+                          <p *ngIf="response.featureProperty?.frenteParaMar === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Frente para o mar
+                          </p>
+                          <p *ngIf="response.featureProperty?.geminada === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Geminada
+                          </p>
+                          <p *ngIf="response.featureProperty?.horta === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Horta
+                          </p>
+                          <p *ngIf="response.featureProperty?.jardim === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Jardim
+                          </p>
+                          <p *ngIf="response.featureProperty?.lago === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Lago
+                          </p>
+                          <p *ngIf="response.featureProperty?.lareiraPrivativa === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Lareira privativa
+                          </p>
+                          <p *ngIf="response.featureProperty?.mezanino === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Mezanino
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.noPoolDeLocacao === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; No pool de locacao
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.pasto === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Pasto
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.piscinaPrivativa === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Piscina privativa
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.pocoArtesiano === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Poço artesiano
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.pomar === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Pomar
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.rio === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Rio
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.rural === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Rural
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.sacadaComChurrasqueira === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Sacada com churrasqueira
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.sacadaComum === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Sacada comum
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.sacadaFechadaComVidro === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Sacada fechada com vidro
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.sistemaDeAlarme === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Sistema de alarme
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.vestiarioParaDiaristas === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Vestiario para diaristas
+                          </p>
+
+                          <p *ngIf="response.featureProperty?.wcParaEmpregados === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Wc para empregados
+                          </p>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-12">
+                        <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Diferenciais</p>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <p *ngIf="response.featureDifferential?.permiteAdicionar === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Permite adicionar
+                          </p>
+                          <p *ngIf="response.featureDifferential?.acessoriosBanheiros === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Acessorios banheiros
+                          </p>
+                          <p *ngIf="response.featureDifferential?.acusticaLajes === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Laje Acustica
+                          </p>
+                          <p *ngIf="response.featureDifferential?.aguaIndividual === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Água individual
+                          </p>
+                          <p *ngIf="response.featureDifferential?.aquecimentoPiso === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Piso Aquecido
+                          </p>
+                          <p *ngIf="response.featureDifferential?.banheiraHidromassagem === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Banheira hidromassagem
+                          </p>
+                          <p *ngIf="response.featureDifferential?.desembacadorEspelhos === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Desembaçador de espelhos
+                          </p>
+                          <p *ngIf="response.featureDifferential?.esperaSplit === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Espera split
+                          </p>
+                          <p *ngIf="response.featureDifferential?.esquadriasImportadas === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Esquadrias importadas
+                          </p>
+                          <p *ngIf="response.featureDifferential?.portasBlindadas === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Portas blindadas
+                          </p>
+                          <p *ngIf="response.featureDifferential?.exaustorChurras === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Exaustor de churrasqueira
+                          </p>
+                          <p *ngIf="response.featureDifferential?.hidromassagemVertical === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Hidromassagem vertical
+                          </p>
+                          <p *ngIf="response.featureDifferential?.portasLaqueadas === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Portas laqueadas
+                          </p>
+                          <p *ngIf="response.featureDifferential?.preparadoAutomacao === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Preparado automação
+                          </p>
+                          <p *ngIf="response.featureDifferential?.vidrosDuplos === true"
+                            class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                            <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Vidros duplos
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="w-100 py-4 border-bottom-gray px-5">
+            <div class="w-100 py-4 border-bottom-gray bg-danger px-5">
               <div class="w-100 d-flex align-items-center justify-content-between">
                 <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Infraestrutura do condomínio</p>
                 <img *ngIf="!arrowinfoCondominio" src="../../../assets/icon/arrow-down-blue.png" width="20"
@@ -559,49 +808,160 @@
                 <img *ngIf="arrowinfoCondominio" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated"
                   width="18" style="cursor: pointer;" (click)="openarrow(16)">
               </div>
-              <table *ngIf="arrowinfoCondominio" class="w-100 animate__animated pt-4">
-                <tbody>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Face do
-                        imóvel:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;Sul</span>
-                    </td>
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Item:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;4</span>
-                    </td>
-                  </tr>
-                  <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Construtora:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;Thá</span>
-                    </td>
-                  </tr>
-                  <!-- <tr class="h-51">
-                    <td>
-                      <span class="fw-400
-                                   font-size-16 line-20
-                                   color-black">Item:</span>
-                      <span class="fw-700
-                                   font-size-16 line-20
-                                   color-black">&nbsp;&nbsp;4</span>
-                    </td>
-                  </tr> -->
-                </tbody>
-              </table>
+              <div *ngIf="arrowinfoCondominio" class="w-100 animate__animated pt-4">
+                <div *ngIf="response?.characteristicInfrastructureOfTheCondominium" class="row">
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-12">
+                        <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Condominio</p>
+                      </div>
+                      <div class="col-12">
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Aquecedor
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.economizadoresDeAgua === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Economizador de Água
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.reaproveitamentoDeAgua === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Reaproveitador de Água
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Aquecedor solar
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.gasCentral === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Gás Central
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.gerador === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Gerador
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.arCondicionadoCentral === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Ar condicionado
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.porteCochere === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Porte-cochère
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.coletaSeletiva === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Coleta seletiva
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.acessoAsfaltado === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Acesso asfaltado
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Próximo ao metrô
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.acessibilidade === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Acessibilidade
+                        </p>
+                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.automacaoPredial === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Automação Predial
+                        </p>
+                        <p *ngIf="response.featureConveniences?.acessoParaDeficientes === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Acesso para deficientes
+                        </p>
+                        <p *ngIf="response.featureConveniences?.bicicletario === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Bicicletário
+                        </p>
+                        <p *ngIf="response.featureConveniences?.casaDeCaseiro === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Casa de caseiro
+                        </p>
+                        <p *ngIf="response.featureConveniences?.centralDeEntregas === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Central de entregas
+                        </p>
+                        <p *ngIf="response.featureConveniences?.centralDeLimpezaEGovernanca === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Central de limpeza
+                        </p>
+                        <p *ngIf="response.featureConveniences?.elevador === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Elevador
+                        </p>
+                        <p *ngIf="response.featureConveniences?.elevadorDeServico === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Elevador de servico
+                        </p>
+                        <p *ngIf="response.featureConveniences?.heliponto === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Heliponto
+                        </p>
+                        <p *ngIf="response.featureConveniences?.lavanderia === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Lavanderia
+                        </p>
+                        <p *ngIf="response.featureConveniences?.petCare === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Pet center
+                        </p>
+                        <p *ngIf="response.featureConveniences?.vagasDeVisitantes === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Vagas de visitantes
+                        </p>
+                        <p *ngIf="response.featureConveniences?.proximoAoMetro === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Próximo ao metrõ
+                        </p>
+                        <p *ngIf="response.securityFeature?.acessoEletronico === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Acesso eletrônico
+                        </p>
+                        <p *ngIf="response.securityFeature?.camerasDeSeguranca === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Câmeras de segurança
+                        </p>
+                        <p *ngIf="response.securityFeature?.cercaEletrica === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Cerca elétrica
+                        </p>
+                        <p *ngIf="response.securityFeature?.circuitoTvInterno === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Tv a cabo
+                        </p>
+                        <p *ngIf="response.securityFeature?.guaritaBlindada === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Guarita blindada
+                        </p>
+                        <p *ngIf="response.securityFeature?.interfone === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Interfone
+                        </p>
+                        <p *ngIf="response.securityFeature?.portaoEletronico === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Portão eletrônico
+                        </p>
+                        <p *ngIf="response.securityFeature?.portariaNoturna === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Portaria noturna
+                        </p>
+                        <p *ngIf="response.securityFeature?.portaria24h === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Portaria 24h
+                        </p>
+                        <p *ngIf="response.securityFeature?.rondaVigilancia === true"
+                          class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
+                          <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Ronda de vigilância
+                        </p>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <!-- INFO CARDS -->

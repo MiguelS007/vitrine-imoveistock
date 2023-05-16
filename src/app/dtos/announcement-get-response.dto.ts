@@ -136,6 +136,32 @@ export abstract class AnnouncementGetResponseDto {
 
     featureInfantile?: FeatureInfantileModel;
 
+    featureRoof?: FeatureRoofModel;
+
+    featureInfraCom?: FeatureInfraComModel;
+
+    featureFloor?: FeatureFloorModel;
+
+    featureFicaImovel?: FeatureFicaImovelModel;
+
+    featureDifferential?: FeatureDifferentialModel;
+
+    featureSportCom?: FeatureSportComModel;
+
+    featureFicaImovelCom?: FeatureFicaImovelComModel;
+
+    featureRoofCom?: FeatureRoofComModel;
+
+    featureFloorCom?: FeatureFloorComModel;
+
+    featureCharacteristic?: FeatureCharacteristicModel;
+
+    featureSecurityCom?: FeatureSecurityComModel;
+
+    featureConveniencesCom?: FeatureConveniencesComModel;
+
+    featureProperty?: FeaturePropertyModel;
+
     latitude: string;
 
     longitude: string;
@@ -164,6 +190,333 @@ class Photos {
     index: number
     updatedAt
     _id
+}
+
+class FeatureDifferentialModel {
+    permiteAdicionar: boolean;
+    acessoriosBanheiros:boolean;
+    acusticaLajes: boolean;
+    aguaIndividual: boolean;
+    aquecimentoPiso: boolean;
+    banheiraHidromassagem: boolean;
+    desembacadorEspelhos: boolean;
+    esperaSplit: boolean;
+    esquadriasImportadas: boolean;
+    portasBlindadas: boolean;
+    exaustorChurras: boolean;
+    hidromassagemVertical: boolean;
+    portasLaqueadas: boolean;
+    preparadoAutomacao: boolean;
+    vidrosDuplos: boolean;
+}
+
+class FeaturePropertyModel {
+    adega: boolean;
+
+    areaDeServico: boolean;
+
+    banheira: boolean;
+
+    bar: boolean;
+
+    canil: boolean;
+
+    churrasqueiraPrivativa: boolean;
+
+    closet: boolean;
+
+    copa: boolean;
+
+    cozinhaAmericana: boolean;
+
+    cozinhaGourmet: boolean;
+
+    deck: boolean;
+
+    dependenciaDeEmpregados: boolean;
+
+    depositoNoSubsolo: boolean;
+
+    despensa: boolean;
+
+    entradaDeServico: boolean;
+
+    entradaLateral: boolean;
+
+    escritorio: boolean;
+
+    frenteParaMar: boolean;
+
+    geminada: boolean;
+
+    jardim: boolean;
+
+    lareiraPrivativa: boolean;
+
+    mezanino: boolean;
+
+    noPoolDeLocacao: boolean;
+
+    piscinaPrivativa: boolean;
+
+    sacadaComChurrasqueira: boolean;
+
+    sacadaComum: boolean;
+
+    sacadaFechadaComVidro: boolean;
+
+    sistemaDeAlarme: boolean;
+
+    vestiarioParaDiaristas: boolean;
+
+    wcParaEmpregados: boolean;
+
+    caseiro: boolean;
+
+    curral: boolean;
+
+    edicula: boolean;
+
+    horta: boolean;
+
+    lago: boolean;
+
+    cachoeira: boolean;
+
+    casaSede: boolean;
+
+    casaDeCaseiro: boolean;
+
+    celeiro: boolean;
+
+    centralTelefonica: boolean;
+
+    cerca: boolean;
+
+    rural: boolean;
+
+    pasto: boolean;
+
+    pomar: boolean;
+
+    pocoArtesiano: boolean;
+
+    rio: boolean;
+
+    areaVerde: boolean;
+
+    arvoresFrutiferas: boolean;
+}
+
+class FeatureConveniencesComModel {
+    auditorio: boolean;
+
+    cafe: boolean;
+
+    centralEntregas: boolean;
+
+    foyer: boolean;
+
+    recepcao: boolean;
+
+    restaurante: boolean;
+
+    refeitorio: boolean;
+
+    salaReunioes: boolean;
+
+    vagaFixa: boolean;
+
+    vagaRotativa: boolean;
+
+    vagaIdoso: boolean;
+
+    vagaPne: boolean;
+
+    vallet: boolean;
+
+    vestiario: boolean;
+}
+
+class FeatureSecurityComModel {
+    acessoEletronico: boolean;
+
+    camerasDeSegurança: boolean;
+
+    cercaEletrica: boolean;
+
+    circuitoTvInterno: boolean;
+
+    guaritaBlindada: boolean;
+
+    interfone: boolean;
+
+    portaoEletronico: boolean;
+
+    portaria: boolean;
+
+    portaria24h: boolean;
+
+    rondaVigilancia: boolean;
+}
+
+class FeatureCharacteristicModel {
+    carpete: boolean;
+
+    permiteAdicionar: boolean;
+
+    esperaSplit: boolean;
+
+    pisoElevado: boolean;
+}
+
+class FeatureFloorComModel {
+    carpete: boolean;
+
+    ceramica: boolean;
+
+    concreto: boolean;
+
+    contraPiso: boolean;
+
+    granito: boolean;
+
+    laminado: boolean;
+
+    madeira: boolean;
+
+    parquet: boolean;
+
+    porcelanato: boolean;
+}
+
+class FeatureRoofComModel {
+    concreto: boolean;
+
+    gessoRebaixo: boolean;
+
+    madeira: boolean;
+
+    pvc: boolean;
+}
+
+class FeatureFicaImovelComModel {
+    ar: boolean;
+
+    armarioCozinha: boolean;
+
+    armarioQuarto: boolean;
+
+    coifa: boolean;
+
+    cortinas: boolean;
+
+    fogao: boolean;
+
+    freezer: boolean;
+
+    geladeira: boolean;
+
+    luminarias: boolean;
+
+    microondas: boolean;
+
+    persianas: boolean;
+
+    splitSala: boolean;
+}
+
+class FeatureSportComModel {
+    bicicletario: boolean;
+
+    fitness: boolean;
+
+    piscinaCoberta: boolean;
+}
+
+class FeatureFicaImovelModel {
+    ar: boolean;
+
+    armarioCozinha: boolean;
+
+    armarioQuarto: boolean;
+
+    coifa: boolean;
+
+    cortinas: boolean;
+
+    fogao: boolean;
+
+    freezer: boolean;
+
+    geladeira: boolean;
+
+    luminarias: boolean;
+
+    microondas: boolean;
+
+    splitSala: boolean;
+}
+
+class FeatureFloorModel {
+    carpete: boolean;
+
+    ceramica: boolean;
+
+    concreto: boolean;
+
+    contraPiso: boolean;
+
+    granito: boolean;
+
+    laminado: boolean;
+
+    madeira: boolean;
+
+    parquet: boolean;
+
+    porcelanato: boolean;
+}
+
+class FeatureRoofModel {
+    concreto: boolean;
+
+    gessoRebaixo: boolean;
+
+    madeira: boolean;
+
+    pvc: boolean;
+
+}
+
+class FeatureInfraComModel {
+    acessibilidadeCom: boolean;
+
+    acessoAsfaltadoCom: boolean;
+
+    aquecimentoCentralCom: boolean;
+
+    aquecimentoSolarCom: boolean;
+
+    arCondicionadoCentralCom: boolean;
+
+    automacaoPredialCom: boolean;
+
+    coletaSeletivaCom: boolean;
+
+    economizadoresDeAguaCom: boolean;
+
+    gasCentralCom: boolean;
+
+    geradorCom: boolean;
+
+    gestaoDeResiduosCom: boolean;
+
+    porteCochereCom: boolean;
+
+    proximoAoMetroCom: boolean;
+
+    reaproveitamentoDeAguaCom: boolean;
 }
 
 class CharacteristicInfrastructureOfTheCondominiumModel {
@@ -324,6 +677,8 @@ class FeatureInfantileModel {
 
     playground: boolean;
 }
+
+
 
 
 class WhatWasRenovated {

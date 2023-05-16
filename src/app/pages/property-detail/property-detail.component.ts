@@ -278,6 +278,29 @@ export class PropertyDetailComponent implements OnInit {
       this.valueViewSelectSale = false;
     }
 
+    console.log('verificar featureProperty imovel', this.response.featureProperty)
+    console.log('verificar featureDifferential imovel', this.response.featureDifferential)
+    console.log('verificar featureFloor imovel', this.response.featureFloor)
+    console.log('verificar featureFloorCom imovel comercial', this.response.featureFloorCom)
+    console.log('verificar featureRoofCom imovel comercial', this.response.featureRoofCom)
+    console.log('verificar featureRoof imovel', this.response.featureRoof)
+    console.log('verificar featureFicaImovel imovel', this.response.featureFicaImovel)
+    console.log('verificar featureFicaImovelCom imovel comercial', this.response.featureFicaImovelCom)
+
+    console.log('divisao para condominio')
+
+    console.log('verificar caracteristicas', this.response.characteristicInfrastructureOfTheCondominium)
+    console.log('verificar featureSport', this.response.featureSport)
+    console.log('verificar featureSportCom', this.response.featureSportCom)
+    console.log('verificar featureInfantile', this.response.featureInfantile)
+    console.log('verificar featureLeisure', this.response.featureLeisure)
+    console.log('verificar featureConveniences', this.response.featureConveniences)
+    console.log('verificar featureConveniencesCom', this.response.featureConveniencesCom)
+    console.log('verificar securityFeature', this.response.securityFeature)
+    console.log('verificar featureSecurityCom', this.response.featureSecurityCom)
+    console.log('verificar featureInfraCom', this.response.featureInfraCom)
+    console.log('verificar featureCharacteristic', this.response.featureCharacteristic)
+
   }
 
   handleImageChange(event) {
