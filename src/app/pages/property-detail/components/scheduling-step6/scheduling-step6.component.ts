@@ -11,6 +11,7 @@ import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 })
 export class SchedulingStep6Component implements OnInit {
   @Input() user: UserGetResponseDto
+  @Input() user_broker: UserGetResponseDto
 
   link = localStorage.getItem('companionLink');
 
@@ -50,6 +51,7 @@ export class SchedulingStep6Component implements OnInit {
     this.modalService.dismissAll()
     const modalRef = this.modalService.open(SchedulingStep7Component, { centered: true, backdrop: 'static', keyboard: false });
     modalRef.componentInstance.user = this.user
+    modalRef.componentInstance.user_broker = this.user_broker
     localStorage.removeItem('companionLink');
   }
 }

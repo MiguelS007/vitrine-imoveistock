@@ -4,11 +4,15 @@ import { AnnouncementGetResponseDto } from '../../../../dtos/announcement-get-re
 import { ScheduleRegisterRequestDto } from '../../../../dtos/schedule-register-request.dto';
 import { SchedulingStep3Component } from '../scheduling-step3/scheduling-step3.component';
 import { SchedulingStep5Component } from '../scheduling-step5/scheduling-step5.component';
+import { ScheduleService } from 'src/app/service/schedule.service';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-scheduling-step2',
   templateUrl: './scheduling-step2.component.html',
-  styleUrls: ['./scheduling-step2.component.scss']
+  styleUrls: ['./scheduling-step2.component.scss'],
+  providers: [Location, { provide: LocationStrategy, useClass: PathLocationStrategy }]
 })
 export class SchedulingStep2Component implements OnInit {
 
@@ -20,9 +24,22 @@ export class SchedulingStep2Component implements OnInit {
 
   constructor(
     private modalService: NgbModal,
+    private scheduleService: ScheduleService,
+    private ngxSpinnerService: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+    let dateSelected = localStorage.getItem('dateScheduling')
+    this.dateSelected = JSON.parse(dateSelected);
+
+    let announcementSelected = localStorage.getItem('announcementOfScheduling');
+    this.response = JSON.parse(announcementSelected);
+
+
+    this.dateSend = {
+      visitDate: this.dateSelected,
+      visitTypeOfAd: localStorage.getItem('typeOfAdSelect')
+    }
   }
 
   exit() {
@@ -36,9 +53,23 @@ export class SchedulingStep2Component implements OnInit {
     this.modalService.dismissAll();
     this.modalService.open(SchedulingStep3Component, { centered: true, backdrop: 'static', keyboard: false});
   }
-  noHaveBroker(){
+
+  confirmRegister() {
+    this.ngxSpinnerService.show();
+    this.scheduleService.registerSchedule(this.response._id, this.dateSend).subscribe(
+      success => this.registerSuccess(success),
+      error => console.error(error)
+    )
+  }
+
+  registerSuccess(success: any) {
+    this.ngxSpinnerService.hide();
+
+    localStorage.setItem('companionLink', location.origin + success.link);
+
     this.modalService.dismissAll();
-    this.modalService.open(SchedulingStep5Component, { centered: true, backdrop: 'static', keyboard: false});
+    const modalRef = this.modalService.open(SchedulingStep5Component, { centered: true, backdrop: 'static', keyboard: false});
+    modalRef.componentInstance.visit = success.result
   }
 
 }

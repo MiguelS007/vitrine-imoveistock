@@ -12,14 +12,13 @@ import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 })
 export class SchedulingStep7Component implements OnInit {
   @Input() user: UserGetResponseDto
+  @Input() user_broker: UserGetResponseDto
 
   dateSelected: Date;
 
   response: AnnouncementGetResponseDto;
 
   dateSend: ScheduleRegisterRequestDto;
-
-  nameBroker = localStorage.getItem('user-broker');
 
   urls: string[] = [];
 
@@ -35,10 +34,6 @@ export class SchedulingStep7Component implements OnInit {
 
     let dateSelected = localStorage.getItem('dateScheduling')
     this.dateSelected = JSON.parse(dateSelected);
-
-    let announcementSelected = localStorage.getItem('announcementOfScheduling');
-    this.response = JSON.parse(announcementSelected);
-
 
     this.dateSend = {
       visitDate: this.dateSelected,
