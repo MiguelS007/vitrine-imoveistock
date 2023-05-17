@@ -2336,8 +2336,8 @@
                 </vg-controls>
                 <video [vgMedia]="$any(videomedia)" poster="../../../assets/img/preview1.png" #videomedia
                   id="singleVideo" preload="auto">
-                  <source *ngIf="!response.videos" src="../../../assets/vid/test.mp4" type="video/mp4">
-                  <source *ngIf="response.videos" [src]="response?.videos[0]?.key" type="video/mp4">
+                  <source *ngIf="!response.video" src="../../../assets/vid/test.mp4" type="video/mp4">
+                  <source *ngIf="response.video" [src]="response?.video?.key" type="video/mp4">
                   <img src="../../../assets/icon/play.png" />
                 </video>
               </vg-player>

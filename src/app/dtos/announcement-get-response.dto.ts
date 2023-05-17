@@ -168,7 +168,7 @@ export abstract class AnnouncementGetResponseDto {
 
     photos?: Photos[];
 
-    videos: Videos[];
+    video: Videos;
 
     conciergeOpeningHours?: string;
 
