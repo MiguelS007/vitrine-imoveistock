@@ -194,7 +194,7 @@ class Photos {
 
 class FeatureDifferentialModel {
     permiteAdicionar: boolean;
-    acessoriosBanheiros:boolean;
+    acessoriosBanheiros: boolean;
     acusticaLajes: boolean;
     aguaIndividual: boolean;
     aquecimentoPiso: boolean;
@@ -341,7 +341,7 @@ class FeatureConveniencesComModel {
 class FeatureSecurityComModel {
     acessoEletronico: boolean;
 
-    camerasDeSegurança: boolean;
+    camerasDeSeguranca: boolean;
 
     cercaEletrica: boolean;
 
@@ -555,6 +555,8 @@ class FeatureConveniencesModel {
 
     bicicletario: boolean;
 
+    carWash: boolean;
+
     casaDeCaseiro: boolean;
 
     centralDeEntregas: boolean;
@@ -565,15 +567,26 @@ class FeatureConveniencesModel {
 
     elevadorDeServico: boolean;
 
+    entradaCaminhoes: boolean;
+
+    entradaservico: boolean;
+
     heliponto: boolean;
 
     lavanderia: boolean;
 
+    marina: boolean;
+
     petCare: boolean;
+
+    petPlay: boolean;
+
+    proximoAoMetro: boolean;
 
     vagasDeVisitantes: boolean;
 
-    proximoAoMetro: boolean;
+    zelador: boolean;
+
 }
 
 class SecurityFeatureModel {
