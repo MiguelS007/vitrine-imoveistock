@@ -499,7 +499,8 @@
               </table>
             </div>
 
-            <div class="w-100 py-4 border-bottom-gray px-5">
+            <div class="w-100 py-4 border-bottom-gray px-5"
+              *ngIf="showFeatureProperty || showFeatureDifferential || showFeatureFloor || showFeatureFloorCom || showFeatureRoofCom || showFeatureRoof || showFeatureFicaImovel || showFeatureFicaImovelCom">
               <div class="w-100 d-flex align-items-center justify-content-between">
                 <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Caracteristicas do imovel</p>
                 <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20"
@@ -1064,7 +1065,8 @@
                 </div>
               </div>
             </div>
-            <div class="w-100 py-4 border-bottom-gray px-5">
+            <div class="w-100 py-4 border-bottom-gray px-5"
+              *ngIf="showCaracteristicas || showFeatureSport || showFeatureSportCom || showFeatureInfantile || showFeatureLeisure || showFeatureConveniences || showFeatureConveniencesCom || showSecurityFeature || showFeatureSecurityCom || showFeatureInfraCom || showFeatureCharacteristic">
               <div class="w-100 d-flex align-items-center justify-content-between">
                 <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Infraestrutura do condomínio</p>
                 <img *ngIf="!arrowinfoCondominio" src="../../../assets/icon/arrow-down-blue.png" width="20"
