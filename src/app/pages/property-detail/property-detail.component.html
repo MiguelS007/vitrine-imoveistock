@@ -40,6 +40,11 @@
                     <img src="../../../assets/icon/street-view.png" alt="not icon" />
                     <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
                   </button>
+                  <button *ngIf="response?.floorPlan" type="button" data-toggle="modal" data-target="#viewFloorPlan"
+                    class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                    <img src="../../../assets/icon/planta.png" alt="not icon" />
+                    <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Planta do imovel</p>
+                  </button>
                 </div>
               </div>
             </div>
@@ -2380,6 +2385,25 @@
             <p class="fw-500 py-3 w-100 font-size-20 text-center line-26 text-light">Este anúncio ainda não <br />
               possui Visita em 360°</p>
             <img src="../../../assets/img/360video.svg" class="h-fit img-notvideo-360 max-w-1227 w-100" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal floor plant -->
+  <div class="modal px-0 fade" id="viewFloorPlan" tabindex="-1" role="dialog" aria-labelledby="viewFloorPlanTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg-preview modal-dialog-centered h-100" role="document">
+      <div class="modal-content h-100 modal-content-preview">
+        <div class="modal-header d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-close-announcement-detail" data-dismiss="modal" aria-label="Close">
+            <i class="bi font-size-48 text-light bi-x"></i>
+          </button>
+        </div>
+
+        <div class="w-100 d-grid align-items-center justify-content-center h-100">
+          <div class="d-block h-auto align-items-center justify-content-center w-100">
+            <img [src]="response?.floorPlan?.key" class="img-fluid" />
           </div>
         </div>
       </div>
