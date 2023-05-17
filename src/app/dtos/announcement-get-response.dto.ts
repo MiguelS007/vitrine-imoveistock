@@ -170,12 +170,23 @@ export abstract class AnnouncementGetResponseDto {
 
     video: Videos;
 
+    floorPlan: FloorPlan;
+
     conciergeOpeningHours?: string;
 
     petsAccepted: boolean;
 }
 
 class Videos {
+    key: string;
+    main: boolean;
+    notShow: boolean;
+    index: number
+    updatedAt
+    _id
+}
+
+class FloorPlan {
     key: string;
     main: boolean;
     notShow: boolean;
