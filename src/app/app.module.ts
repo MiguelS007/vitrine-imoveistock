@@ -52,6 +52,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CepService } from './service/cep.service';
 import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 import { SharedAnnouncementComponent } from './pages/property-detail/components/shared-announcement/shared-announcement.component';
+import { GalleryModule } from 'ng-gallery';
 import { SchedulingStep4Component } from './pages/property-detail/components/scheduling-step4/scheduling-step4.component';
 import { SchedulingStep5Component } from './pages/property-detail/components/scheduling-step5/scheduling-step5.component';
 import { SchedulingStep6Component } from './pages/property-detail/components/scheduling-step6/scheduling-step6.component';
@@ -145,7 +146,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     AutocompleteLibModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
     NgMultiSelectDropDownModule.forRoot(),
-    NgImageFullscreenViewModule
+    NgImageFullscreenViewModule,
+    GalleryModule
   ],
   providers: [
     {

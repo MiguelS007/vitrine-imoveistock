@@ -213,11 +213,12 @@
             </div>
         </div>
 
-        <div *ngIf="cardinfoone" class="col-12">
+        <div *ngIf="cardinfoone && bothSelectType !== 'sale'" class="col-12">
             <div class="w-100 my-4 p-5 border-radius-10 bg-white">
                 <p class="fw-400 font-size-16 line-20 color-black">
                     Para ser aprovado na avaliação de crédito, você precisa ter bom perfil de crédito, e renda mínima
-                    acima de R$ 9.715. Até 4 pessoas podem compor renda no contrato.
+                    acima de {{requireRent | currency: 'R$'}} Até 4
+                    pessoas podem compor renda no contrato.
                 </p>
                 <!--<a [routerLink]="['/']" class="d-flex fw-400 font-size-16 line-20 ">
                     Saiba mais como ser aprovado na avaliação
@@ -431,20 +432,24 @@
                         <!-- in analisys -->
 
                         <p class="d-flex align-items-center mb-2">
-                            <img src="../../../assets/icon/more.png" (click)="addedItem('open')" />
-                            <span class="fw-400 font-size-16 line-20 color-black" (click)="addedItem('open')">Incluir
+                            <img src="../../../assets/icon/more.png" (click)="addedItem('open')"
+                                class="cursor-pointer" />
+                            <span class="fw-400 cursor-pointer font-size-16 line-20 color-black"
+                                (click)="addedItem('open')">Incluir
                                 algo novo</span>
                         </p>
                         <p class="d-flex align-items-center mb-2">
-                            <img src="../../../assets/icon/tools.png" class="pl-1 pr-2 pb-2"
+                            <img src="../../../assets/icon/tools.png" class="pl-1 pr-2 pb-2 cursor-pointer"
                                 (click)="changeItem('open')" />
-                            <span class="fw-400 font-size-16 line-20 color-black" (click)="changeItem('open')">Fazer
+                            <span class="fw-400 cursor-pointer font-size-16 line-20 color-black"
+                                (click)="changeItem('open')">Fazer
                                 manutenção ou reparo</span>
                         </p>
                         <p class="d-flex align-items-center mb-2">
-                            <img src="../../../assets/icon/list.png" class="pl-1 pr-2 pb-2"
+                            <img src="../../../assets/icon/list.png" class="pl-1 cursor-pointer pr-2 pb-2"
                                 (click)="changeItem('open')" />
-                            <span class="fw-400 font-size-16 line-20 color-black" (click)="changeItem('open')">Modificar
+                            <span class="fw-400 cursor-pointer font-size-16 line-20 color-black"
+                                (click)="changeItem('open')">Modificar
                                 ou substituir algo</span>
                         </p>
                     </div>

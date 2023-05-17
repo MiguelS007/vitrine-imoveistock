@@ -1,4 +1,14 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+  QueryList,
+  Renderer2,
+  Inject,
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,15 +25,19 @@ import { Cep } from '../../dtos/cep';
 import { CepService } from '../../service/cep.service';
 import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
 import { SharedAnnouncementComponent } from './components/shared-announcement/shared-announcement.component';
+import { PageScrollService } from 'ngx-page-scroll-core';
+import { DOCUMENT } from '@angular/common';
+import { Gallery, GalleryItem, ImageItem } from 'ng-gallery';
 
 @Component({
   selector: 'app-property-detail',
   templateUrl: './property-detail.component.html',
-  styleUrls: ['./property-detail.component.scss']
+  styleUrls: ['./property-detail.component.scss'],
 })
 export class PropertyDetailComponent implements OnInit {
-
   @ViewChild('imageEvidence', { static: true }) imageRef!: ElementRef;
+
+  images: GalleryItem[] = [];
 
   infopaymobile = false;
   finalValueSale: number;
@@ -38,6 +52,18 @@ export class PropertyDetailComponent implements OnInit {
   checkScroll() {
     const scrollPosition = window.pageYOffset;
     const widthWindow = window.innerWidth;
+
+    const body = document.body,
+      html = document.documentElement;
+
+    const height = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    );
+
     let interdistance = Math.trunc(scrollPosition);
     if (interdistance > 950) {
       this.infopaymobile = true;
@@ -45,23 +71,19 @@ export class PropertyDetailComponent implements OnInit {
       this.infopaymobile = false;
     }
     // STATIC-INFO-PAY-IN-SCROLL-PAGE
-    const infopaydesk = document.querySelector(
-      '#infopaydesk'
-    ) as HTMLElement;
-    const colinfopay = document.querySelector(
-      '#colinfopay'
-    ) as HTMLElement;
+    const infopaydesk = document.querySelector('#infopaydesk') as HTMLElement;
+    const colinfopay = document.querySelector('#colinfopay') as HTMLElement;
 
 
-    if (interdistance >= 1460) {
+    if (interdistance >= (height - 850)) {
       if (widthWindow <= 1922) {
-        colinfopay.style.alignSelf = 'self-end'
+        colinfopay.style.alignSelf = 'self-end';
         infopaydesk.style.position = 'relative';
         infopaydesk.style.top = '0px';
         infopaydesk.style.maxWidth = '415px';
         infopaydesk.style.zIndex = '20';
       } else {
-        colinfopay.style.alignSelf = 'self-end'
+        colinfopay.style.alignSelf = 'self-end';
         infopaydesk.style.position = 'relative';
         infopaydesk.style.top = '0px';
         infopaydesk.style.maxWidth = '626px';
@@ -83,14 +105,12 @@ export class PropertyDetailComponent implements OnInit {
       } else {
         infopaydesk.style.position = 'relative';
         infopaydesk.style.top = '0px';
-        colinfopay.style.alignSelf = 'auto'
+        colinfopay.style.alignSelf = 'auto';
       }
     }
-
   }
 
   scroller: Subscription;
-
 
   form: FormGroup;
   formproperty: FormGroup;
@@ -108,6 +128,7 @@ export class PropertyDetailComponent implements OnInit {
   arrow3 = false;
   arrowinfo = false;
   arrowpff = false;
+  arrowinfoCondominio: boolean = false;
 
   cardinfobuy;
   arrayDeDatas: any = [];
@@ -132,7 +153,6 @@ export class PropertyDetailComponent implements OnInit {
   tourvirtual = false;
   propertyvideo = true;
 
-
   filterResult: AnnouncementGetResponseDto[] = [];
   listLikes: AnnouncementGetResponseDto[] = [];
   responseAnnouncement: AnnouncementGetResponseDto[] = [];
@@ -154,6 +174,26 @@ export class PropertyDetailComponent implements OnInit {
 
   valueViewSelectSale: boolean = true;
 
+  showFeatureProperty: boolean = false;
+  showFeatureDifferential: boolean = false;
+  showFeatureFloor: boolean = false;
+  showFeatureFloorCom: boolean = false;
+  showFeatureRoofCom: boolean = false;
+  showFeatureRoof: boolean = false;
+  showFeatureFicaImovel: boolean = false;
+  showFeatureFicaImovelCom: boolean = false;
+  showCaracteristicas: boolean = false;
+  showFeatureSport: boolean = false;
+  showFeatureSportCom: boolean = false;
+  showFeatureInfantile: boolean = false;
+  showFeatureLeisure: boolean = false;
+  showFeatureConveniences: boolean = false;
+  showFeatureConveniencesCom: boolean = false;
+  showSecurityFeature: boolean = false;
+  showFeatureSecurityCom: boolean = false;
+  showFeatureInfraCom: boolean = false;
+  showFeatureCharacteristic: boolean = false;
+
   constructor(
     private router: Router,
     private datamokservice: DatamokService,
@@ -162,8 +202,7 @@ export class PropertyDetailComponent implements OnInit {
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
     private modalService: NgbModal,
-    private _cepService: CepService,
-
+    private _cepService: CepService
   ) {
     this.formproperty = this.formBuilder.group({
       searchwords: ['', [Validators.required]],
@@ -178,97 +217,171 @@ export class PropertyDetailComponent implements OnInit {
       typefootagemax: ['', [Validators.required]],
       typefootagemin: ['', [Validators.required]],
     });
-    this.changeSubscription = this.datamokservice.getopModalLogin().subscribe(() => {
-      this.modallogin = false;
-    });
+    this.changeSubscription = this.datamokservice
+      .getopModalLogin()
+      .subscribe(() => {
+        this.modallogin = false;
+      });
   }
 
   ngAfterViewInit(): void {
     for (let i = 1; i < 6; i++) {
       let hoje = new Date();
       hoje.setDate(hoje.getDate() + i);
-      this.arrayDeDatas.push(hoje)
+      this.arrayDeDatas.push(hoje);
     }
     this.list();
 
-
+    window.scrollTo(0, 0);
   }
 
   openImagePreview() {
-    this.indexTeste = 1
-    this.thumbPhotosArrList.map(results => {
-      if (results.nativeElement?.id === this.imageEvidence.key) {
-        results.nativeElement.className = 'active-thumb-photo';
-      } else {
-        results.nativeElement.className = 'disable-thumb-photo ml-2';
-      }
-    });
-    setTimeout(() => {
-      this.swiperRef.swiperRef.on('slideChange', () => {
-        const activeIndex = this.swiperRef.swiperRef.activeIndex;
-        this.imageEvidence = this.response.photos[activeIndex];
-        this.indexTeste = this.imageEvidence.index
-        const activeImage = this.response.photos[activeIndex].key;
-        this.thumbPhotosArrList.map(results => {
-          if (results.nativeElement?.id === this.imageEvidence.key) {
-            results.nativeElement.className = 'active-thumb-photo';
-
-          } else {
-            results.nativeElement.className = 'disable-thumb-photo ml-2';
-          }
-        });
-      });
-    }, 100);
+    // this.indexTeste = 1
+    // this.thumbPhotosArrList.map(results => {
+    //   if (results.nativeElement?.id === this.imageEvidence.key) {
+    //     results.nativeElement.className = 'active-thumb-photo';
+    //   } else {
+    //     results.nativeElement.className = 'disable-thumb-photo ml-2';
+    //   }
+    // });
+    // setTimeout(() => {
+    //   this.swiperRef.swiperRef.on('slideChange', () => {
+    //     const activeIndex = this.swiperRef.swiperRef.activeIndex;
+    //     this.imageEvidence = this.response.photos[activeIndex];
+    //     this.indexTeste = this.imageEvidence.index
+    //     const activeImage = this.response.photos[activeIndex].key;
+    //     this.thumbPhotosArrList.map(results => {
+    //       if (results.nativeElement?.id === this.imageEvidence.key) {
+    //         results.nativeElement.className = 'active-thumb-photo';
+    //       } else {
+    //         results.nativeElement.className = 'disable-thumb-photo ml-2';
+    //       }
+    //     });
+    //   });
+    // }, 100);
   }
 
   ngOnInit(): void {
-
-    this.ngxSpinnerService.show()
-    this.onlyimg = this.datamokservice.onlypreview;
-    this.previewimg = this.datamokservice.imagespreview;
-    this.products = this.datamokservice.resultSearch;
+    this.ngxSpinnerService.show();
 
     this.response = this.route.snapshot.data['resolve'];
-    console.log('response page', this.response);
+
     this.ngxSpinnerService.hide();
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     this.filterResult = JSON.parse(resultadoVerify);
     let valueIptu = parseInt(this.response.valueOfIptu) / 12;
-    this.finalValueSale = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.saleValue);
-    this.finalValueRent = valueIptu + parseInt(this.response.condominiumValue) + parseInt(this.response.leaseValue);
-
+    this.finalValueSale =
+      valueIptu +
+      parseInt(this.response.condominiumValue) +
+      parseInt(this.response.saleValue);
+    this.finalValueRent =
+      valueIptu +
+      parseInt(this.response.condominiumValue) +
+      parseInt(this.response.leaseValue);
 
     if (localStorage.getItem('user') !== null) {
-      this.announcementService.listLikes().subscribe(
-        success => {
-          for (let i = 0; i < success.length; i++) {
-            if (success[i].announcement._id === this.response._id) {
-              Object.assign(this.response, { liked: true });
-            }
-            this.listLikes.push(success[i].announcement)
+      this.announcementService.listLikes().subscribe((success) => {
+        for (let i = 0; i < success.length; i++) {
+          if (success[i].announcement._id === this.response._id) {
+            Object.assign(this.response, { liked: true });
           }
+          this.listLikes.push(success[i].announcement);
         }
-      )
+      });
     }
 
     this._getCompleteAddress();
 
     if (!this.response.photos[0].index) {
       for (let i = 0; i < this.response.photos.length; i++) {
-        Object.assign(this.response.photos[i], { index: i + 1 })
+        Object.assign(this.response.photos[i], { index: i + 1 });
       }
     }
 
-    this.imageEvidence = this.response.photos[0]
+    this.imageEvidence = this.response.photos[0];
 
+    for (let i = 0; i < this.response.photos.length; i++) {
+      this.images.push(
+        new ImageItem({
+          src: this.response.photos[i].key,
+          thumb: this.response.photos[i].key,
+        })
+      );
+    }
+
+    if (this.response.typeOfAd === 'rent') {
+      this.valueViewSelectSale = false;
+    }
+
+    this.showFeatureProperty = Object.values(
+      this.response.featureProperty
+    ).some((value: boolean) => value === true);
+    this.showFeatureDifferential = Object.values(
+      this.response.featureDifferential
+    ).some((value: boolean) => value === true);
+    this.showFeatureFloor = Object.values(this.response.featureFloor).some(
+      (value: boolean) => value === true
+    );
+    this.showFeatureFloorCom = Object.values(
+      this.response.featureFloorCom
+    ).some((value: boolean) => value === true);
+    this.showFeatureRoofCom = Object.values(this.response.featureRoofCom).some(
+      (value: boolean) => value === true
+    );
+    this.showFeatureRoof = Object.values(this.response.featureRoof).some(
+      (value: boolean) => value === true
+    );
+    this.showFeatureFicaImovel = Object.values(
+      this.response.featureFicaImovel
+    ).some((value: boolean) => value === true);
+    this.showFeatureFicaImovelCom = Object.values(
+      this.response.featureFicaImovelCom
+    ).some((value: boolean) => value === true);
+    this.showCaracteristicas = Object.values(
+      this.response.featureCharacteristic
+    ).some((value: boolean) => value === true);
+    this.showFeatureSport = Object.values(this.response.featureSport).some(
+      (value: boolean) => value === true
+    );
+    this.showFeatureSportCom = Object.values(
+      this.response.featureSportCom
+    ).some((value: boolean) => value === true);
+    this.showFeatureInfantile = Object.values(
+      this.response.featureInfantile
+    ).some((value: boolean) => value === true);
+    this.showFeatureLeisure = Object.values(this.response.featureLeisure).some(
+      (value: boolean) => value === true
+    );
+    this.showFeatureConveniences = Object.values(
+      this.response.featureConveniences
+    ).some((value: boolean) => value === true);
+    this.showFeatureConveniencesCom = Object.values(
+      this.response.featureConveniencesCom
+    ).some((value: boolean) => value === true);
+    this.showSecurityFeature = Object.values(
+      this.response.securityFeature
+    ).some((value: boolean) => value === true);
+    this.showFeatureSecurityCom = Object.values(
+      this.response.featureSecurityCom
+    ).some((value: boolean) => value === true);
+    this.showFeatureInfraCom = Object.values(
+      this.response.featureInfraCom
+    ).some((value: boolean) => value === true);
+    this.showFeatureCharacteristic = Object.values(
+      this.response.characteristicInfrastructureOfTheCondominium
+    ).some((value: boolean) => value === true);
+  }
+
+  handleImageChange(event) {
+    console.log(event);
   }
 
   typeOfAdSelect: string = 'sale';
 
   changeValueViewSelectSale(valueView) {
-    this.valueViewSelectSale = !this.valueViewSelectSale
-    this.typeOfAdSelect = valueView
+    this.valueViewSelectSale = !this.valueViewSelectSale;
+    this.typeOfAdSelect = valueView;
   }
 
   closeEventHandler() {
@@ -282,26 +395,29 @@ export class PropertyDetailComponent implements OnInit {
     }
   }
 
+  updateimage(event) {
+    console.log(event);
+  }
+
   openFullScreen() {
-    this.imageSelectedFullScreen = []
-    this.imageSelectedFullScreen.push({ image: this.imageEvidence.key });
-    this.currentIndex = this.imageEvidence.index;
+    this.imageSelectedFullScreen = [];
+    for (let iterator of this.response.photos) {
+      this.imageSelectedFullScreen.push({ image: iterator.key });
+    }
     this.showFlag = true;
   }
 
   public toNumber(paremetro1: string) {
-    return Number(paremetro1)
+    return Number(paremetro1);
   }
-
 
   btninteractionimg(value: string) {
     if (value === 'share') {
-      this.modalService.open(SharedAnnouncementComponent, { centered: true })
+      this.modalService.open(SharedAnnouncementComponent, { centered: true });
     } else if (value === 'print') {
       this.iconprint = !this.iconprint;
     }
   }
-
 
   segmentvideo(value: string) {
     if (value === 'video') {
@@ -320,30 +436,29 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   selectDate(value) {
-    this.dataSelecionada = value
+    this.dataSelecionada = value;
   }
 
   selectTime(value) {
-    this.horasSelecionada = value
+    this.horasSelecionada = value;
   }
   goExpress() {
     if (localStorage.getItem('user') !== null) {
       if (this.response.typeOfAd === 'both') {
         if (this.valueViewSelectSale) {
-          localStorage.setItem('bothProposalType', 'sale')
+          localStorage.setItem('bothProposalType', 'sale');
         } else {
-          localStorage.setItem('bothProposalType', 'rent')
+          localStorage.setItem('bothProposalType', 'rent');
         }
       }
       this.router.navigate([`logged/express/${this.response._id}`]);
     } else {
-      this.modalService.open(ModalLoginComponent, { centered: true })
+      this.modalService.open(ModalLoginComponent, { centered: true });
     }
   }
 
-
-
   hideDetailProperty() {
+    this.checkScroll();
     this.detailprofile = !this.detailprofile;
   }
 
@@ -373,135 +488,142 @@ export class PropertyDetailComponent implements OnInit {
     } else {
       this.arrowinfo = false;
     }
+    if (value === 16 && this.arrowinfoCondominio === false) {
+      this.arrowinfoCondominio = true;
+    } else {
+      this.arrowinfoCondominio = false;
+    }
+    this.checkScroll();
   }
 
   scheduling(item) {
     localStorage.setItem('announcementOfScheduling', JSON.stringify(item));
     if (this.response.typeOfAd === 'both') {
-      localStorage.setItem('typeOfAdSelect', this.typeOfAdSelect)
+      localStorage.setItem('typeOfAdSelect', this.typeOfAdSelect);
     } else {
-      localStorage.setItem('typeOfAd', this.response.typeOfAd)
+      localStorage.setItem('typeOfAd', this.response.typeOfAd);
     }
-    this.modalService.open(SchedulingStep1Component, { centered: true, backdrop: 'static', keyboard: false })
+    this.modalService.open(SchedulingStep1Component, {
+      centered: true,
+      backdrop: 'static',
+      keyboard: false,
+    });
   }
 
   list() {
     this.announcementService.listAnnouncement().subscribe(
-      response => {
-        this.propertyproducts = response
+      (response) => {
+        this.propertyproducts = response;
         this.responseAnnouncement = response;
         for (let i = 0; i < response.length; i++) {
           this.previewImg = this.propertyproducts[i].photos;
         }
 
         if (localStorage.getItem('user') !== null) {
-          this.announcementService.listLikes().subscribe(
-            success => {
-              for (let i = 0; i < success.length; i++) {
-                for (let x = 0; x < this.responseAnnouncement.length; x++) {
-                  if (success[i].announcement._id === this.responseAnnouncement[x]._id) {
-                    Object.assign(this.responseAnnouncement[x], { liked: true });
-                  }
+          this.announcementService.listLikes().subscribe((success) => {
+            for (let i = 0; i < success.length; i++) {
+              for (let x = 0; x < this.responseAnnouncement.length; x++) {
+                if (
+                  success[i].announcement._id ===
+                  this.responseAnnouncement[x]._id
+                ) {
+                  Object.assign(this.responseAnnouncement[x], { liked: true });
                 }
-                this.listLikes.push(success[i].announcement)
               }
+              this.listLikes.push(success[i].announcement);
             }
-          )
+          });
         }
       },
-      error => { console.error(error, 'data not collected') }
+      (error) => {
+        console.error(error, 'data not collected');
+      }
     );
   }
 
   likeHeartMain(value, condition) {
     let request = {
-      announcementId: value
-    }
+      announcementId: value,
+    };
 
     if (localStorage.getItem('user') === null) {
       this.modalService.open(ModalLoginComponent, { centered: true });
-      return
+      return;
     }
     if (this.listLikes.length === 0) {
       this.announcementService.registerLike(request).subscribe(
-        success => {
+        (success) => {
           this.response.liked = true;
-          return
+          return;
         },
-        error => {
-          console.error(error)
+        (error) => {
+          console.error(error);
         }
-      )
+      );
     } else {
       if (condition === true) {
         this.announcementService.registerUnlike(request).subscribe(
-          success => {
+          (success) => {
             this.response.liked = false;
           },
-          error => {
-            console.error(error)
+          (error) => {
+            console.error(error);
           }
-        )
+        );
       } else if (condition === undefined || condition === false) {
         this.announcementService.registerLike(request).subscribe(
-          success => {
+          (success) => {
             this.response.liked = true;
           },
-          error => {
-            console.error(error)
+          (error) => {
+            console.error(error);
           }
-        )
+        );
       }
-
     }
-
   }
 
-
   likeHeart(value) {
-
     let request = {
-      announcementId: value
-    }
-
-
+      announcementId: value,
+    };
 
     if (localStorage.getItem('user') === null) {
       this.modalService.open(ModalLoginComponent, { centered: true });
-      return
+      return;
     }
 
     if (this.listLikes.length === 0) {
       this.announcementService.registerLike(request).subscribe(
-        success => {
-          this.list()
-          return
+        (success) => {
+          this.list();
+          return;
         },
-        error => {
-          console.error(error)
+        (error) => {
+          console.error(error);
         }
-      )
+      );
     }
 
     for (let i = 0; i < this.listLikes.length; i++) {
       if (this.listLikes[i]._id === value) {
         this.announcementService.registerUnlike(request).subscribe(
-          success => {
-            this.list()
-          },
-          error => {
-            console.error(error)
-          }
-        )
-      } else if (this.listLikes[i]._id !== value) {
-        this.announcementService.registerLike(request).subscribe(
-          success => {
+          (success) => {
             this.list();
           },
-          error => {
-            console.error(error)
+          (error) => {
+            console.error(error);
           }
-        )
+        );
+      } else if (this.listLikes[i]._id !== value) {
+        this.announcementService.registerLike(request).subscribe(
+          (success) => {
+            this.list();
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
       }
     }
   }
@@ -513,12 +635,16 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   _getCompleteAddress() {
-
-    if (this.response.numberAddress && this.response.publicPlaceAddress && this.response.districtAddress && this.response.cityAddress && this.response.ufAddress) {
+    if (
+      this.response.numberAddress &&
+      this.response.publicPlaceAddress &&
+      this.response.districtAddress &&
+      this.response.cityAddress &&
+      this.response.ufAddress
+    ) {
       this.completeAddress = `${this.response.numberAddress} ${this.response.publicPlaceAddress}, ${this.response.districtAddress}, ${this.response.cityAddress}, ${this.response.ufAddress}`;
       this._updateMap();
-    }
-    else if (this.response.cepAddress && this.response.numberAddress)
+    } else if (this.response.cepAddress && this.response.numberAddress)
       this._cepService.buscarCep(this.response.cepAddress).then((cep: Cep) => {
         if (cep.logradouro) {
           this.completeAddress = `${this.response.numberAddress} ${cep.logradouro},${cep.bairro},${cep.cidade},${cep.uf}`;
