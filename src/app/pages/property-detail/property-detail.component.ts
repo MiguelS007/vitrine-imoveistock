@@ -314,63 +314,26 @@ export class PropertyDetailComponent implements OnInit {
       this.valueViewSelectSale = false;
     }
 
-    this.showFeatureProperty = Object.values(
-      this.response.featureProperty
-    ).some((value: boolean) => value === true);
-    this.showFeatureDifferential = Object.values(
-      this.response.featureDifferential
-    ).some((value: boolean) => value === true);
-    this.showFeatureFloor = Object.values(this.response.featureFloor).some(
-      (value: boolean) => value === true
-    );
-    this.showFeatureFloorCom = Object.values(
-      this.response.featureFloorCom
-    ).some((value: boolean) => value === true);
-    this.showFeatureRoofCom = Object.values(this.response.featureRoofCom).some(
-      (value: boolean) => value === true
-    );
-    this.showFeatureRoof = Object.values(this.response.featureRoof).some(
-      (value: boolean) => value === true
-    );
-    this.showFeatureFicaImovel = Object.values(
-      this.response.featureFicaImovel
-    ).some((value: boolean) => value === true);
-    this.showFeatureFicaImovelCom = Object.values(
-      this.response.featureFicaImovelCom
-    ).some((value: boolean) => value === true);
-    this.showCaracteristicas = Object.values(
-      this.response.featureCharacteristic
-    ).some((value: boolean) => value === true);
-    this.showFeatureSport = Object.values(this.response.featureSport).some(
-      (value: boolean) => value === true
-    );
-    this.showFeatureSportCom = Object.values(
-      this.response.featureSportCom
-    ).some((value: boolean) => value === true);
-    this.showFeatureInfantile = Object.values(
-      this.response.featureInfantile
-    ).some((value: boolean) => value === true);
-    this.showFeatureLeisure = Object.values(this.response.featureLeisure).some(
-      (value: boolean) => value === true
-    );
-    this.showFeatureConveniences = Object.values(
-      this.response.featureConveniences
-    ).some((value: boolean) => value === true);
-    this.showFeatureConveniencesCom = Object.values(
-      this.response.featureConveniencesCom
-    ).some((value: boolean) => value === true);
-    this.showSecurityFeature = Object.values(
-      this.response.securityFeature
-    ).some((value: boolean) => value === true);
-    this.showFeatureSecurityCom = Object.values(
-      this.response.featureSecurityCom
-    ).some((value: boolean) => value === true);
-    this.showFeatureInfraCom = Object.values(
-      this.response.featureInfraCom
-    ).some((value: boolean) => value === true);
-    this.showFeatureCharacteristic = Object.values(
-      this.response.characteristicInfrastructureOfTheCondominium
-    ).some((value: boolean) => value === true);
+
+    this.showFeatureProperty = this.response.featureProperty ? Object.values(this.response.featureProperty).some((value) => value === true) : false;
+    this.showFeatureDifferential = this.response.featureDifferential ? Object.values(this.response.featureDifferential).some((value) => value === true) : false;
+    this.showFeatureFloor = this.response.featureFloor ? Object.values(this.response.featureFloor).some((value) => value === true) : false;
+    this.showFeatureFloorCom = this.response.featureFloorCom ? Object.values(this.response.featureFloorCom).some((value) => value === true) : false;
+    this.showFeatureRoofCom = this.response.featureRoofCom ? Object.values(this.response.featureRoofCom).some((value) => value === true) : false;
+    this.showFeatureRoof = this.response.featureRoof ? Object.values(this.response.featureRoof).some((value) => value === true) : false;
+    this.showFeatureFicaImovel = this.response.featureFicaImovel ? Object.values(this.response.featureFicaImovel).some((value) => value === true) : false;
+    this.showFeatureFicaImovelCom = this.response.featureFicaImovelCom ? Object.values(this.response.featureFicaImovelCom).some((value) => value === true) : false;
+    this.showCaracteristicas = this.response.featureCharacteristic ? Object.values(this.response.featureCharacteristic).some((value) => value === true) : false;
+    this.showFeatureSport = this.response.featureSport ? Object.values(this.response.featureSport).some((value) => value === true) : false;
+    this.showFeatureSportCom = this.response.featureSportCom ? Object.values(this.response.featureSportCom).some((value) => value === true) : false;
+    this.showFeatureInfantile = this.response.featureInfantile ? Object.values(this.response.featureInfantile).some((value) => value === true) : false;
+    this.showFeatureLeisure = this.response.featureLeisure ? Object.values(this.response.featureLeisure).some((value) => value === true) : false;
+    this.showFeatureConveniences = this.response.featureConveniences ? Object.values(this.response.featureConveniences).some((value) => value === true) : false;
+    this.showFeatureConveniencesCom = this.response.featureConveniencesCom ? Object.values(this.response.featureConveniencesCom).some((value) => value === true) : false;
+    this.showSecurityFeature = this.response.securityFeature ? Object.values(this.response.securityFeature).some((value) => value === true) : false;
+    this.showFeatureSecurityCom = this.response.featureSecurityCom ? Object.values(this.response.featureSecurityCom).some((value) => value === true) : false;
+    this.showFeatureInfraCom = this.response.featureInfraCom ? Object.values(this.response.featureInfraCom).some((value) => value === true) : false;
+    this.showFeatureCharacteristic = this.response.characteristicInfrastructureOfTheCondominium ? Object.values(this.response.characteristicInfrastructureOfTheCondominium).some((value) => value === true) : false;
   }
 
   handleImageChange(event) {
