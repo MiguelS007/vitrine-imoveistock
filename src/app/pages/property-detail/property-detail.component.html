@@ -338,15 +338,24 @@
                 <img src="../../../assets/icons-property-details/CINZA PORTEIRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Portaria</del></p>
               </div>
-              <div *ngIf="response.featureConveniences?.elevador || response.featureConveniences?.elevadorDeServico"
-                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
+              <div *ngIf="response.featureConveniences?.elevador" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO ELEVADOR.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3">Elevador</p>
               </div>
-              <div *ngIf="!response.featureConveniences?.elevador || !response.featureConveniences?.elevadorDeServico"
+              <div *ngIf="response.featureConveniences?.elevadorDeServico"
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
+                <img src="../../../assets/icons-property-details/PRETO ELEVADOR.svg" alt="" width="25" height="36">
+                <p class="mb-0 ml-3">Elevador de serviço</p>
+              </div>
+              <div *ngIf="!response.featureConveniences?.elevador"
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA ELEVADOR.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Elevador</del></p>
+              </div>
+              <div *ngIf="!response.featureConveniences?.elevadorDeServico"
+                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
+                <img src="../../../assets/icons-property-details/CINZA ELEVADOR.svg" alt="" width="25" height="36">
+                <p class="mb-0 ml-3 text-muted"><del>Elevador de serviço</del></p>
               </div>
               <div *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
