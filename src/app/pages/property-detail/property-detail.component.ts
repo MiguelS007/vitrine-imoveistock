@@ -314,6 +314,7 @@ export class PropertyDetailComponent implements OnInit {
       this.valueViewSelectSale = false;
     }
 
+
     this.showFeatureProperty = this.response.featureProperty ? Object.values(this.response.featureProperty).some((value) => value === true) : false;
     this.showFeatureDifferential = this.response.featureDifferential ? Object.values(this.response.featureDifferential).some((value) => value === true) : false;
     this.showFeatureFloor = this.response.featureFloor ? Object.values(this.response.featureFloor).some((value) => value === true) : false;
