@@ -180,15 +180,15 @@
                             <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                 *ngIf="selectedScheduling.announcement?.typeOfAd === 'sale'">
                                 {{selectedScheduling.announcement?.saleValue | currency:
-                                'R$'}}</p>
+                                'R$' :'symbol':'1.0'}}</p>
                             <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                 *ngIf="selectedScheduling.announcement?.typeOfAd === 'both'">
                                 {{selectedScheduling.announcement?.saleValue | currency:
-                                'R$'}}</p>
+                                'R$' :'symbol':'1.0'}}</p>
                             <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                 *ngIf="selectedScheduling.announcement?.typeOfAd === 'rent'">
                                 {{selectedScheduling.announcement?.leaseValue | currency:
-                                'R$'}}
+                                'R$' :'symbol':'1.0'}}
                             </p>
                             <div (click)="likeHeart(selectedScheduling.announcement?._id)"
                                 class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">

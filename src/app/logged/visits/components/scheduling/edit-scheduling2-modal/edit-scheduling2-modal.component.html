@@ -42,15 +42,15 @@
                 </div>
             </div>
             <p *ngIf="response.announcement?.typeOfAd === 'sale'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-                {{response.announcement?.saleValue | currency: 'R$'}}
+                {{response.announcement?.saleValue | currency: 'R$':'symbol':'1.0'}}
             </p>
             <p *ngIf="response.announcement?.typeOfAd === 'rent'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-                {{response.announcement?.leaseValue | currency: 'R$'}}
+                {{response.announcement?.leaseValue | currency: 'R$':'symbol':'1.0'}}
             </p>
             <p *ngIf="response.announcement?.typeOfAd === 'both'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-                Comprar {{response.announcement?.saleValue | currency: 'R$'}}
+                Comprar {{response.announcement?.saleValue | currency: 'R$':'symbol':'1.0'}}
                 <br>
-                Alugar {{response.announcement?.leaseValue | currency: 'R$'}}
+                Alugar {{response.announcement?.leaseValue | currency: 'R$':'symbol':'1.0'}}
             </p>
             <p class="w-100 fw-400 font-size-16  line-20 color-black">
                 <i class="bi font-size-20  mr-2 bi-calendar"></i>

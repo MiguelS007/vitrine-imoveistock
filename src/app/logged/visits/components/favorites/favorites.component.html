@@ -29,11 +29,11 @@
                     </div>
                     <div class="space-value-announcement">
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'sale'">
-                            {{item.saleValue | currency: 'R$'}}</p>
+                            {{item.saleValue | currency: 'R$':'symbol':'1.0'}}</p>
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'both'">
-                            {{item.saleValue | currency: 'R$'}}</p>
+                            {{item.saleValue | currency: 'R$':'symbol':'1.0'}}</p>
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="item.typeOfAd === 'rent'">
-                            {{item.leaseValue | currency: 'R$'}}
+                            {{item.leaseValue | currency: 'R$':'symbol':'1.0'}}
                         </p>
                         <div (click)="likeHeart(item._id)"
                             class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
