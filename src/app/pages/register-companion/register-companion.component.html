@@ -100,15 +100,15 @@
                                     <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                         *ngIf="response.announcement?.typeOfAd === 'sale'">
                                         {{response.announcement?.saleValue | currency:
-                                        'R$'}}</p>
+                                        'R$' :'symbol':'1.0'}}</p>
                                     <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                         *ngIf="response.announcement?.typeOfAd === 'both'">
                                         {{response.announcement?.saleValue | currency:
-                                        'R$'}}</p>
+                                        'R$' :'symbol':'1.0'}}</p>
                                     <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                         *ngIf="response.announcement?.typeOfAd === 'rent'">
                                         {{response.announcement?.leaseValue | currency:
-                                        'R$'}}
+                                        'R$' :'symbol':'1.0'}}
                                     </p>
                                 </div>
                             </div>

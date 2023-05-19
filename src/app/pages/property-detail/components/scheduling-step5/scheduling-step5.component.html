@@ -49,16 +49,16 @@
         </div>
       </div>
       <p *ngIf="typeOfAdSelect === 'sale'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-        Valor para compra: {{visit?.announcement?.saleValue | currency: 'R$'}}
+        Valor para compra: {{visit?.announcement?.saleValue | currency: 'R$' :'symbol':'1.0'}}
       </p>
       <p *ngIf="typeOfAdSelect === 'rent'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-        Valor para alugar: {{visit?.announcement?.leaseValue | currency: 'R$'}}
+        Valor para alugar: {{visit?.announcement?.leaseValue | currency: 'R$' :'symbol':'1.0'}}
       </p>
       <p *ngIf="typeOfAd === 'sale'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-        Valor para compra: {{visit?.announcement?.saleValue | currency: 'R$'}}
+        Valor para compra: {{visit?.announcement?.saleValue | currency: 'R$' :'symbol':'1.0'}}
       </p>
       <p *ngIf="typeOfAd === 'rent'" class="w-100 fw-700 pt-2 pb-4 font-size-22 line-32 color-black">
-        Valor para alugar: {{visit?.announcement?.leaseValue | currency: 'R$'}}
+        Valor para alugar: {{visit?.announcement?.leaseValue | currency: 'R$' :'symbol':'1.0'}}
       </p>
       <p class="w-100 fw-400 font-size-16  line-20 color-black">
         <i class="bi font-size-20  mr-2 bi-calendar"></i>
