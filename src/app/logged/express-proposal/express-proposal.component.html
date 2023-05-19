@@ -139,19 +139,19 @@
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                             *ngIf="response?.typeOfAd === 'sale'">
                             {{response?.saleValue | currency:
-                            'R$'}}</p>
+                            'R$':'symbol':'1.0' }}</p>
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                             *ngIf="response?.typeOfAd === 'rent'">
                             {{response?.leaseValue | currency:
-                            'R$'}}
+                            'R$':'symbol':'1.0'}}
                         </p>
                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                             *ngIf="response?.typeOfAd === 'both'">
                             <span *ngIf="bothSelectType === 'sale'">
-                                {{response?.saleValue | currency: 'R$'}}
+                                {{response?.saleValue | currency: 'R$':'symbol':'1.0'}}
                             </span>
                             <span *ngIf="bothSelectType === 'rent'">
-                                {{response?.leaseValue | currency: 'R$'}}
+                                {{response?.leaseValue | currency: 'R$':'symbol':'1.0'}}
                             </span>
                         </p>
                         <!-- <div (click)="likeHeart(response?._id)"
@@ -213,11 +213,12 @@
             </div>
         </div>
 
-        <div *ngIf="cardinfoone" class="col-12">
+        <div *ngIf="cardinfoone && bothSelectType !== 'sale'" class="col-12">
             <div class="w-100 my-4 p-5 border-radius-10 bg-white">
                 <p class="fw-400 font-size-16 line-20 color-black">
                     Para ser aprovado na avaliação de crédito, você precisa ter bom perfil de crédito, e renda mínima
-                    acima de R$ 9.715. Até 4 pessoas podem compor renda no contrato.
+                    acima de {{requireRent | currency: 'R$':'symbol':'1.0'}} Até 4
+                    pessoas podem compor renda no contrato.
                 </p>
                 <!--<a [routerLink]="['/']" class="d-flex fw-400 font-size-16 line-20 ">
                     Saiba mais como ser aprovado na avaliação
@@ -270,17 +271,17 @@
                     <div class="col-sm-6 mt-3 d-flex justify-content-sm-end">
                         <span *ngIf="response.typeOfAd === 'sale'" class="fw-700 font-size-18
                         line-24 color-black">{{response.saleValue | currency:
-                            'R$'}}</span>
+                            'R$':'symbol':'1.0'}}</span>
                         <span *ngIf="response.typeOfAd === 'rent'" class="fw-700 font-size-18
                             line-24 color-black">{{response.leaseValue | currency:
-                            'R$'}}</span>
+                            'R$':'symbol':'1.0'}}</span>
                         <span *ngIf="response.typeOfAd === 'both'" class="fw-700 font-size-18
                             line-24 color-black">
                             <span *ngIf="bothSelectType === 'rent'">
-                                {{response.leaseValue | currency:'R$'}}
+                                {{response.leaseValue | currency:'R$':'symbol':'1.0'}}
                             </span>
                             <span *ngIf="bothSelectType === 'sale'">
-                                {{response.saleValue | currency:'R$'}}
+                                {{response.saleValue | currency:'R$':'symbol':'1.0'}}
                             </span>
 
                         </span>
@@ -310,13 +311,13 @@
                             *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                             class="fw-700 font-size-18
                                 line-24 color-black">{{response.saleValue | currency:
-                            'R$'}}</span>
+                            'R$':'symbol':'1.0'}}</span>
                         <span
                             *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                             class="fw-700 font-size-18
                                 line-24 color-black">{{toNumber(response.valueOfIptu) / 12 +
                             toNumber(response.leaseValue) + toNumber(response.condominiumValue) |
-                            currency: 'R$'}}</span>
+                            currency: 'R$':'symbol':'1.0-0'}}</span>
                     </div>
                 </div>
                 <p class="d-flex pt-3 mt-2 border-top-gray justify-content-end">
@@ -397,7 +398,7 @@
             </div>
 
             <div
-                *ngIf="proposalResponse?.proposal?.announcement?.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'">
+                *ngIf="response?.typeOfAd === 'rent' || bothSelectType === 'rent'">
                 <div *ngIf="spaceCustomizeProposalChanges" class="w-100 bg-white border-radius-10 p-5">
                     <p class="fw-700 font-size-18 line-18 color-black">Mudanças do imóvel</p>
                     <hr class="bg-whitelight" />
@@ -431,20 +432,24 @@
                         <!-- in analisys -->
 
                         <p class="d-flex align-items-center mb-2">
-                            <img src="../../../assets/icon/more.png" (click)="addedItem('open')" />
-                            <span class="fw-400 font-size-16 line-20 color-black" (click)="addedItem('open')">Incluir
+                            <img src="../../../assets/icon/more.png" (click)="addedItem('open')"
+                                class="cursor-pointer" />
+                            <span class="fw-400 cursor-pointer font-size-16 line-20 color-black"
+                                (click)="addedItem('open')">Incluir
                                 algo novo</span>
                         </p>
                         <p class="d-flex align-items-center mb-2">
-                            <img src="../../../assets/icon/tools.png" class="pl-1 pr-2 pb-2"
+                            <img src="../../../assets/icon/tools.png" class="pl-1 pr-2 pb-2 cursor-pointer"
                                 (click)="changeItem('open')" />
-                            <span class="fw-400 font-size-16 line-20 color-black" (click)="changeItem('open')">Fazer
+                            <span class="fw-400 cursor-pointer font-size-16 line-20 color-black"
+                                (click)="changeItem('open')">Fazer
                                 manutenção ou reparo</span>
                         </p>
                         <p class="d-flex align-items-center mb-2">
-                            <img src="../../../assets/icon/list.png" class="pl-1 pr-2 pb-2"
+                            <img src="../../../assets/icon/list.png" class="pl-1 cursor-pointer pr-2 pb-2"
                                 (click)="changeItem('open')" />
-                            <span class="fw-400 font-size-16 line-20 color-black" (click)="changeItem('open')">Modificar
+                            <span class="fw-400 cursor-pointer font-size-16 line-20 color-black"
+                                (click)="changeItem('open')">Modificar
                                 ou substituir algo</span>
                         </p>
                     </div>
@@ -620,12 +625,12 @@
                                                 *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                                 class="fw-700 font-size-18
                                                         line-24 color-black">{{response.leaseValue | currency:
-                                                'R$'}}</span>
+                                                'R$':'symbol':'1.0'}}</span>
                                             <span
                                                 *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                                 class="fw-700 font-size-18
                                                         line-24 color-black">{{response.saleValue | currency:
-                                                'R$'}}</span>
+                                                'R$':'symbol':'1.0'}}</span>
                                         </td>
                                     </tr>
                                     <tr class="h-40">
@@ -641,7 +646,7 @@
                                                     text-align-right">
                                             <span class="fw-700 font-size-18
                                                         line-24 color-black">{{response.condominiumValue | currency:
-                                                'R$'}}</span>
+                                                'R$':'symbol':'1.0'}}</span>
                                         </td>
                                     </tr>
                                     <tr class="h-40">
@@ -668,12 +673,12 @@
                                                 *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                                 class="fw-700 font-size-18
                                                         line-24 color-black">{{toNumber(response.valueOfIptu) / 12 |
-                                                currency: 'R$'}}</span>
+                                                currency: 'R$':'symbol':'1.0-0'}}</span>
                                             <span
                                                 *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                                 class="fw-700 font-size-18
                                                         line-24 color-black">{{toNumber(response.valueOfIptu) |
-                                                currency: 'R$'}}</span>
+                                                currency: 'R$':'symbol':'1.0'}}</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -700,12 +705,12 @@
                                                     line-24 color-black">{{
                                                 toNumber(response.leaseValue) + toNumber(response.condominiumValue) +
                                                 toNumber(response.valueOfIptu) / 12 |
-                                                currency: 'R$'}}</span>
+                                                currency: 'R$':'symbol':'1.0-0'}}</span>
                                             <span
                                                 *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                                 class="fw-700 font-size-18
                                                     line-24 color-black">{{toNumber(response.saleValue) |
-                                                currency: 'R$'}}</span>
+                                                currency: 'R$':'symbol':'1.0'}}</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -750,12 +755,12 @@
                                             *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                             class="fw-400 font-size-18 line-24 text-light">{{response.leaseValue |
                                             currency:
-                                            'R$'}}</span>
+                                            'R$':'symbol':'1.0'}}</span>
                                         <span
                                             *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                             class="fw-400 font-size-18 line-24 text-light">{{response.saleValue |
                                             currency:
-                                            'R$'}}</span>
+                                            'R$':'symbol':'1.0'}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -775,7 +780,7 @@
                                         <!-- <span *ngIf="response.typeOfAd === 'rent'"
                                             class="fw-400 font-size-18 line-24 text-light">{{response.leaseValue |
                                             currency:
-                                            'R$'}}</span> -->
+                                            'R$':'symbol':'1.0'}}</span> -->
                                         <input
                                             *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                             type="text" formControlName="suggestedRentAmount"
@@ -856,22 +861,22 @@
                                     *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                     class="fw-400 font-size-18 line-24 color-black">{{response.leaseValue |
                                     currency:
-                                    'R$'}}</span>
+                                    'R$':'symbol':'1.0'}}</span>
 
                                 <span
                                     *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                     class="fw-400 font-size-18 line-24 color-black">{{response.saleValue |
                                     currency:
-                                    'R$'}}</span>
+                                    'R$':'symbol':'1.0'}}</span>
 
                                 <!-- <span *ngIf="response.typeOfAd === 'rent'"
                                             class="fw-400 font-size-18 line-24 text-light">{{response.leaseValue |
                                             currency:
-                                            'R$'}}</span>
+                                            'R$':'symbol':'1.0'}}</span>
                                         <span *ngIf="response.typeOfAd === 'sale'"
                                             class="fw-400 font-size-18 line-24 text-light">{{response.saleValue |
                                             currency:
-                                            'R$'}}</span> -->
+                                            'R$':'symbol':'1.0'}}</span> -->
                             </div>
                             <div class="col-12 py-2 d-flex justify-content-between">
                                 <p *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
@@ -890,12 +895,12 @@
                                     *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                     class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) /
                                     12 | currency:
-                                    'R$'}}</span>
+                                    'R$':'symbol':'1.0-0'}}</span>
                                 <span
                                     *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                     class="fw-400 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu) |
                                     currency:
-                                    'R$'}}</span>
+                                    'R$':'symbol':'1.0'}}</span>
                             </div>
                             <div class="col-12 py-2 d-flex justify-content-between">
                                 <p class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
@@ -904,7 +909,7 @@
                                         placement="end" ngbTooltip="Valor total do condomínio" container="body"></i>
                                 </p>
                                 <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue |
-                                    currency: 'R$'}}</span>
+                                    currency: 'R$':'symbol':'1.0'}}</span>
                             </div>
                             <!-- <div class="col-12 py-2 d-flex justify-content-between">
                                 <p class="fw-400 d-flex mb-0 align-items-center font-size-18 line-24 color-black">
@@ -929,11 +934,11 @@
                                         class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.valueOfIptu)
                                         / 12 +
                                         toNumber(response.leaseValue) + toNumber(response.condominiumValue) |
-                                        currency: 'R$'}}</span>
+                                        currency: 'R$':'symbol':'1.0-0'}}</span>
                                     <span
                                         *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                         class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.saleValue) |
-                                        currency: 'R$'}}</span>
+                                        currency: 'R$':'symbol':'1.0'}}</span>
                                 </p>
                                 <span class="fw-400 font-size-18 line-24 color-black">
                                     Comentários sobre essa negociação

@@ -208,16 +208,16 @@
                 <div class="w-100 details-card-swiper d-grid h-50 pt-5
                           align-items-end">
                   <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.leaseValue | currency: 'R$'}}
+                             line-32 text-light">{{item.leaseValue | currency: 'R$':'symbol':'1.0'}}
                     <span class="fw-400 font-size-14 line-20
                                 text-light">/ mês</span>
                   </p>
                   <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$'}}
+                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}
                   </p>
                   <p *ngIf="item.typeOfAd === 'both'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$'}} / {{item.leaseValue | currency:
-                    'R$'}}
+                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                    'R$':'symbol':'1.0'}}
                     <span class="fw-400 font-size-14 line-20
                                          text-light">/ mês</span>
                   </p>
@@ -241,12 +241,12 @@
                 <span class="fw-700 font-size-18 line-24
                           color-black">{{item.description}}</span>
                 <span *ngIf="item.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24
-                          color-black">{{item.saleValue | currency: 'R$'}}</span>
+                          color-black">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}</span>
                 <span *ngIf="item.typeOfAd === 'both'" class="fw-700 font-size-18 line-24
-                          color-black">{{item.saleValue | currency: 'R$'}} / {{item.leaseValue | currency:
-                  'R$'}}</span>
+                          color-black">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                  'R$':'symbol':'1.0'}}</span>
                 <span *ngIf="item.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24
-                          color-black">{{item.leaseValue | currency: 'R$'}}</span>
+                          color-black">{{item.leaseValue | currency: 'R$':'symbol':'1.0'}}</span>
               </p>
               <p class="d-flex h-25 info-property-product mb-0 justify-content-between">
                 <span class="fw-400 font-size-14 line-20
@@ -366,23 +366,23 @@
                 </div>
                 <div class="space-value-announcement">
                   <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mb-0 font-size-22 h-fit line-32
-                                text-light">{{item.saleValue | currency: 'R$'}}</p>
+                                text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}</p>
                   <p *ngIf="item.typeOfAd === 'both'" class="fw-700 mb-0 font-size-22 h-fit line-32
                                 text-light">
                     <span *ngIf="selectTypeAd === 'Comprar'">
-                      {{item.saleValue | currency: 'R$'}}
+                      {{item.saleValue | currency: 'R$':'symbol':'1.0'}}
                     </span>
                     <span *ngIf="selectTypeAd === 'Alugar'">
-                      {{item.leaseValue | currency: 'R$'}}
+                      {{item.leaseValue | currency: 'R$':'symbol':'1.0'}}
                     </span>
 
                     <span *ngIf="selectTypeAd === 'Selecione'">
-                      {{item.saleValue | currency: 'R$'}} / {{item.leaseValue | currency: 'R$'}}
+                      {{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency: 'R$':'symbol':'1.0'}}
                     </span>
 
                   </p>
                   <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mb-0 font-size-22 h-fit line-32
-                                text-light">{{item.leaseValue | currency: 'R$'}}</p>
+                                text-light">{{item.leaseValue | currency: 'R$':'symbol':'1.0'}}</p>
                   <div (click)="likeHeart(item._id, item.liked)" class="h-fit heart-like
                                 bg-transparent-white cursor-pointer border-radius-10
                                 pt-2 pb-1">
@@ -480,16 +480,16 @@
                 <div class="w-100 details-card-swiper d-grid h-50 pt-5
                           align-items-end">
                   <p *ngIf="item.typeOfAd === 'rent'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.leaseValue | currency: 'R$'}}
+                             line-32 text-light">{{item.leaseValue | currency: 'R$':'symbol':'1.0'}}
                     <span class="fw-400 font-size-14 line-20
                                 text-light">/ mês</span>
                   </p>
                   <p *ngIf="item.typeOfAd === 'sale'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$'}}
+                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}
                   </p>
                   <p *ngIf="item.typeOfAd === 'both'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$'}} / {{item.leaseValue | currency:
-                    'R$'}}
+                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                    'R$':'symbol':'1.0'}}
                     <span class="fw-400 font-size-14 line-20
                                          text-light">/ mês</span>
                   </p>
