@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { SearchMapComponent } from './pages/search-map/search-map.component';
 import { AnnouncementGetByIdResolve } from './resolvers/announcement-getById.resolver';
 import { CookiePolicyComponent } from './shared/cookie-policy/cookie-policy.component';
+import { RegisterCompanionComponent } from './pages/register-companion/register-companion.component';
+import { VisitGetByIdResolve } from './resolvers/visit-getById.resolver';
 
 export const routes: Routes = [
 
@@ -37,6 +39,10 @@ export const routes: Routes = [
   {
     path: 'announcement/detail/:_id',
     component: PropertyDetailComponent, resolve: { resolve: AnnouncementGetByIdResolve }
+  },
+  {
+    path: 'register-companion/id/:_id',
+    component: RegisterCompanionComponent, resolve: { resolve: VisitGetByIdResolve }
   },
   {
     path: 'logged',

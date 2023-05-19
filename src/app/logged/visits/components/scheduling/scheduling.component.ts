@@ -1,6 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { ScheduleRegisterResponseDto } from 'src/app/dtos/schedule-register-response.dto';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,21 +7,23 @@ import { SchedulingSelectedModalComponent } from './scheduling-selected-modal/sc
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VisitCancelRequestDto } from 'src/app/dtos/visit-cancel-request.dto';
 import { EditSchedulingModalComponent } from './edit-scheduling-modal/edit-scheduling-modal.component';
-import { EditScheduling2ModalComponent } from './edit-scheduling2-modal/edit-scheduling2-modal.component';
-import { EditScheduling3ModalComponent } from './edit-scheduling3-modal/edit-scheduling3-modal.component';
 import { SchedulingStep1Component } from '../../../../pages/property-detail/components/scheduling-step1/scheduling-step1.component';
-import { ModalLoginComponent } from '../../../../auth/modal-login/modal-login.component';
+import { ToastrService } from 'ngx-toastr';
+import { AnnouncementVisitGetResponseDto } from 'src/app/dtos/announcement-visit-get-response.dto';
+import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
+import { AnnouncementRatingService } from 'src/app/service/announcement-rating.service';
 
 @Component({
   selector: 'app-scheduling',
   templateUrl: './scheduling.component.html',
-  styleUrls: ['./scheduling.component.scss']
+  styleUrls: ['./scheduling.component.scss'],
+  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class SchedulingComponent implements OnInit {
   @ViewChildren('announcements') announcementList: QueryList<any>;
 
   response: any[] = [];
-  responseSchedules: ScheduleRegisterResponseDto[] = [];
+  responseSchedules: AnnouncementVisitGetResponseDto[] = [];
   nameweek: string;
   confirmcancel = false;
   location = false;
@@ -33,30 +34,34 @@ export class SchedulingComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedScheduling: ScheduleRegisterResponseDto;
+  selectedScheduling: AnnouncementVisitGetResponseDto;
 
   recentlySeenList: any = [];
 
   announcementChecked: string;
 
-  itemSelectedForCancel: ScheduleRegisterResponseDto = {
-    _id: '',
-    cancellationReason: '',
-    visitDate: new Date,
-  };
+  itemSelectedForCancel: AnnouncementVisitGetResponseDto;
   situationStatus: any;
   selectedSchedulingStatus: any;
 
+  link = location.origin + '/register-companion/id/';
+
+  showRateYourVisit: boolean;
+  currentRate = 0;
 
   constructor(
     private scheduleService: ScheduleService,
     private router: Router,
     private announcementService: AnnouncementService,
+    private announcementRatingService: AnnouncementRatingService,
     private formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastrService: ToastrService
   ) {
     this.form = this.formBuilder.group({
       cancelvisit: ['', [Validators.required]],
+      ratingScore: [''],
+      ratingMessage: [''],
     });
   }
 
@@ -85,6 +90,26 @@ export class SchedulingComponent implements OnInit {
         console.error(error);
       }
     )
+  }
+
+  sharedIn(platform) {
+    if(platform === 'whatsapp') {
+      window.open(`https://api.whatsapp.com/send?text= Gostaria de me acompanhar em uma visita a um imóvel? ${this.link + this.selectedScheduling._id}`)
+    }
+    if(platform === 'facebook') {
+      window.open(`https://www.facebook.com/sharer/sharer.php?Gostaria de me acompanhar em uma visita a um imóvel?${this.link + this.selectedScheduling._id}`)
+    }
+    if(platform === 'copy') {
+      this.copy()
+    }
+  }
+
+  copy() {
+    navigator.clipboard.writeText(this.link + this.selectedScheduling._id);
+
+    this.toastrService.success('Sucesso', 'Link copiado!', {
+      progressBar: true,
+    });
   }
 
   selecionarVisita(item, status) {
@@ -262,9 +287,6 @@ export class SchedulingComponent implements OnInit {
     this.recentlySeenList = list;
 
     this.router.navigate([`announcement/detail/${value}`]);
-
-
-
   }
 
   editScheduling(selectedScheduling) {
@@ -283,4 +305,30 @@ export class SchedulingComponent implements OnInit {
     }
   }
 
+  rateYourVisit(string) {
+    if(string === 'yes') {
+      this.showRateYourVisit = true
+    } else {
+      this.showRateYourVisit = false
+    }
+  }
+
+  submitReview() {
+    let request = {
+      ratingScore: this.form.controls['ratingScore'].value,
+      ratingMessage: this.form.controls['ratingMessage'].value,
+      announcementId: this.selectedScheduling.announcement._id,
+    }
+    
+    this.announcementRatingService.registerAnnouncementRating(request).subscribe({
+      next: (data) =>
+        this.saveReviewSuccess(data),
+    })
+  }
+
+  saveReviewSuccess(data: any) {
+    this.toastrService.success('Sucesso', 'Avaliação enviada!', {
+      progressBar: true,
+    });
+  }
 }

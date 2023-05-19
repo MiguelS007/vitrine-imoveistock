@@ -2,55 +2,30 @@
     <div class="d-flex justify-content-end">
         <img src="../../../../../assets/icon/x.png" alt="" (click)="exit()" style="cursor: pointer;">
     </div>
-
-    <div class="anima-body">
-        <p class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">
-            Você agendou sua visita!
-        </p>
-        <div class="w-100">
-            <p class="fw-700 font-size-18  line-24 color-black">
-                <i class="bi font-size-18  color-black  bi-clock"></i>
-                Você vai ver quem te acompanhará
-            </p>
-            <p class="fw-400 font-size-18  line-24 color-black">
-                {{dateSelected | date: 'EEEE'}}, pela sua agenda de visitas
-            </p>
-            <a (click)="goToVisits()" class="fw-500 font-size-16 text-primary line-20">Ver agenda de
-                visitas</a>
-            <div class="row px-3 my-3 pt-3 pb-3 d-flex">
-                <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
-                    <img src="../../../assets/icon/bed.png" class="pr-2" />
-                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.bedrooms || '-'}} quartos
-                    </p>
-                </div>
-                <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
-                    <img src="../../../assets/icon/car.png" class="pr-2" />
-                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.parkingSpaces || '-'}} vagas
-                    </p>
-                </div>
-                <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
-                    <img src="../../../assets/icon/rule.png" class="pr-2" />
-                    <p class="fw-400  mb-0  font-size-14  line-20  color-black"> {{response.rooms || '-'}} m2
-                    </p>
-                </div>
-
-            </div>
-            <p class="w-100 fw-400 font-size-16  line-20 color-black">
-                <i class="bi font-size-20  mr-2 bi-calendar"></i>
-                {{dateSelected | date: 'EEEE'}}, {{dateSelected | date: 'dd'}} de {{dateSelected |date:
-                'MMMM'}}
-                <span> às {{dateSelected | date: 'HH:mm'}}</span>
-            </p>
-            <p>
-                <i class="bi font-size-18 color-black mr-1 bi-geo-alt"></i>
-                <span class="fw-400 font-size-16 line-20 color-black">
-                    {{response.publicPlaceAddress}}, {{response.districtAddress}},
-                    {{response.cityAddress}} - {{response.ufAddress}}
-                </span>
-            </p>
-        </div>
-        <button type="button" (click)="goToVisits()"
-            class="btn pb-2 mt-3 border-purple bg-white fw-700 font-size-18 line-24 color-purple border-radius-10  h-74 w-100">Ver
-            visitas</button>
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <img src="../../../../../assets/logo/simbolo-logo-preto.svg" alt="">
+        <h3 class="fw-700 py-3 font-size-24 line-32 color-black w-100 text-center">Aqui você tem o melhor <br>
+            atendimento</h3>
+        <p class="fw-600 font-size-14 text-center">Aqui garantimos que você seja atendido com profissionalismo e
+            qualidade.
+            Digite o celular do seu corretor.</p>
     </div>
+    <form [formGroup]="form">
+        <div class="w-100 d-flex">
+            <input type="tel" maxlength="2" formControlName="ddd" id="ddd" (keyup)="nextCode('ddd', $event)"
+                class="btn w-20 bg-whitelight border-radius-10 border p-3 fw-400 font-size-16 line-20 color-black"
+                placeholder="DDD" />
+            <input type="tel" mask="99999-9999" formControlName="phone" id="tel" (keyup)="nextCode('tel', $event)"
+                class="btn w-100 h-74 bg-whitelight text-left ml-3 border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
+                placeholder="Celular" />
+        </div>
+        <div class="d-flex flex-column">
+            <button [disabled]="this.form.invalid" type="button"
+                class="btn bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100 mt-5"
+                (click)="confirm()">Continuar</button>
+            <button type="button"
+                class="btn bg-white border-radius-10 border-purple color-purple h-74 fw-700 font-size-18 w-100 mt-3"
+                (click)="exit()">Cancelar</button>
+        </div>
+    </form>
 </section>

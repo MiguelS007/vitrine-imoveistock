@@ -48,4 +48,10 @@ export class UserService extends BaseService {
             .get(`${this.url}user-client/authenticated`, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
+
+    getBrokerByPhone(phone: string): Observable<UserGetResponseDto> {
+        return this.httpClient
+            .get(`${this.url}user-client/broker/${phone}`, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
 }

@@ -82,7 +82,7 @@ export class ExpressProposalComponent implements OnInit {
 
   bothSelectType: string;
 
-
+  requireRent: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -179,10 +179,12 @@ export class ExpressProposalComponent implements OnInit {
     }
 
     if (this.response.typeOfAd === 'both' && localStorage.getItem('bothProposalType') !== null) {
-      this.bothSelectType = localStorage.getItem('bothProposalType')
+      this.bothSelectType = localStorage.getItem('bothProposalType');
     } else if (this.response.typeOfAd === 'both' && localStorage.getItem('bothProposalType') === null) {
       this.bothSelectType = 'sale'
     }
+
+    this.calcValue()
 
   }
 
@@ -330,6 +332,13 @@ export class ExpressProposalComponent implements OnInit {
     } else if (value === 'cancelar') {
       this.modalsendproposalexpress = false;
     }
+  }
+
+  calcValue() {
+    let calcRent = this.toNumber(this.response.leaseValue) + this.toNumber(this.response.condominiumValue) + (this.toNumber(this.response.valueOfIptu) / 12)
+
+    this.requireRent = calcRent * 4
+
   }
 
   propertyChange(value: string) {
