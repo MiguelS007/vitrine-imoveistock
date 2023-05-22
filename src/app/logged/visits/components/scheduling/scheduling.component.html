@@ -227,20 +227,28 @@
                                             align-items-center
                                             justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2" />
-                            <p class="fw-400 mb-0
+                            <p *ngIf="selectedScheduling.announcement?.bedrooms > 1" class="fw-400 mb-0
                                                 font-size-14 line-20
                                                 color-black">{{selectedScheduling.announcement?.bedrooms}}
                                 Quartos</p>
+                            <p *ngIf="selectedScheduling.announcement?.bedrooms === 0 || selectedScheduling.announcement?.bedrooms === 1" class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">{{selectedScheduling.announcement?.bedrooms}}
+                                Quarto</p>
                         </div>
                         <div class="col justify-content-left px-0
                                             d-flex
                                             align-items-center
                                             justify-content-left">
                             <img src="../../../assets/icon/car.png" class="pr-2" />
-                            <p class="fw-400 mb-0
+                            <p *ngIf="selectedScheduling.announcement?.parkingSpaces > 1" class="fw-400 mb-0
                                                 font-size-14 line-20
                                                 color-black">{{selectedScheduling.announcement?.parkingSpaces}}
                                 Vagas</p>
+                            <p *ngIf="selectedScheduling.announcement?.parkingSpaces === 0 || selectedScheduling.announcement?.parkingSpaces === 1" class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">{{selectedScheduling.announcement?.parkingSpaces}}
+                                Vaga</p>
                         </div>
                         <div class="col justify-content-left
                                             px-0 d-flex
@@ -257,8 +265,11 @@
                         <div class="col-3">
                             <div class="d-flex justify-content-center align-items-center">
                                 <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
-                                <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
-                                                 color-black">{{selectedScheduling.announcement?.suites || 0}} Suítes
+                                <p *ngIf="selectedScheduling.announcement?.suites > 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                 color-black">{{selectedScheduling.announcement?.suites}} Suítes
+                                </p>
+                                <p *ngIf="selectedScheduling.announcement?.suites === 0 || selectedScheduling.announcement?.suites === 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                 color-black">{{selectedScheduling.announcement?.suites}} Suíte
                                 </p>
                             </div>
                         </div>
