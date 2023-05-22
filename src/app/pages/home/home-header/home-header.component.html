@@ -32,8 +32,9 @@
                                     <div class="col-12 px-0 pb-3">
                                         <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'"
                                             [settings]="dropdownSettings" formControlName="propertyType"
-                                            [data]="dropdownList" [(ngModel)]="selectedItems"
-                                            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                            [data]="dropdownList" [(ngModel)]="selectedItems" (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)" #dropdownRef>
                                         </ng-multiselect-dropdown>
                                     </div>
 

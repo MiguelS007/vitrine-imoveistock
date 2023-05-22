@@ -31,9 +31,10 @@
       <div class="col-4 col-body-products d-none-desk mt-5 pt-5 pl-0">
         <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
 
-          <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
+          <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'" [settings]="dropdownSettings"
             formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
-            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            (onDeSelectAll)="onDeSelectAll($event)" (onSelect)="onItemSelect($event)"
+            (onDeSelect)="onItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" #dropdownRef>
           </ng-multiselect-dropdown>
 
           <div class="dropdown">
@@ -216,7 +217,8 @@
                              line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}
                   </p>
                   <p *ngIf="item.typeOfAd === 'both'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue
+                    | currency:
                     'R$':'symbol':'1.0'}}
                     <span class="fw-400 font-size-14 line-20
                                          text-light">/ mês</span>
@@ -243,7 +245,8 @@
                 <span *ngIf="item.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24
                           color-black">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}</span>
                 <span *ngIf="item.typeOfAd === 'both'" class="fw-700 font-size-18 line-24
-                          color-black">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                          color-black">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue |
+                  currency:
                   'R$':'symbol':'1.0'}}</span>
                 <span *ngIf="item.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24
                           color-black">{{item.leaseValue | currency: 'R$':'symbol':'1.0'}}</span>
@@ -377,7 +380,8 @@
                     </span>
 
                     <span *ngIf="selectTypeAd === 'Selecione'">
-                      {{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency: 'R$':'symbol':'1.0'}}
+                      {{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                      'R$':'symbol':'1.0'}}
                     </span>
 
                   </p>
@@ -488,7 +492,8 @@
                              line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}
                   </p>
                   <p *ngIf="item.typeOfAd === 'both'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue
+                    | currency:
                     'R$':'symbol':'1.0'}}
                     <span class="fw-400 font-size-14 line-20
                                          text-light">/ mês</span>
@@ -512,9 +517,10 @@
     </div>
   </div>
   <form [formGroup]="formModal" class="w-100 d-block-desk border-radius-10 bg-white p-5">
-    <ng-multiselect-dropdown class="customClass" [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
-      formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
-      (onSelectAll)="onSelectAll($event)">
+    <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'" [settings]="dropdownSettings"
+      formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
+      (onDeSelectAll)="onDeSelectAll($event)" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)"
+      (onSelectAll)="onSelectAll($event)" #dropdownRef>
     </ng-multiselect-dropdown>
     <div class="dropdown">
       <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
