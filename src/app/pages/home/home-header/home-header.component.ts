@@ -97,6 +97,7 @@ export class HomeHeaderComponent implements OnInit {
     itemsShowLimit: 3,
     searchPlaceholderText: 'Procurar',
     allowSearchFilter: true,
+    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!'
   };
 
   @ViewChild('dropdownRef') dropdownRef: any;

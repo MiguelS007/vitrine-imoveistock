@@ -140,7 +140,8 @@ export class SearchPageComponent implements OnInit {
     unSelectAllText: 'Desmarcar todos',
     itemsShowLimit: 1,
     searchPlaceholderText: 'Procurar',
-    allowSearchFilter: true
+    allowSearchFilter: true,
+    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!'
   };
 
   constructor(
