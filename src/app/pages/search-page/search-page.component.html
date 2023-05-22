@@ -447,7 +447,9 @@
             <div *ngIf="filterResult.length > 6" class="d-flex flex-fill
                        justify-content-center">
               <pagination-controls (pageChange)="paginationProduct=
-                          $event;">
+                          $event;"
+                          previousLabel="Anterior"
+                          nextLabel="Próximo">
               </pagination-controls>
             </div>
           </div>

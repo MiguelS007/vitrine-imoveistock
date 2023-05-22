@@ -640,7 +640,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   resolveProperty(text:string):string{
-    return propertyTypesConst.find(x => x.value === text).name || text || '-';
+    return propertyTypesConst.find(x => x.value === text)?.name || text || '-';
   }
 
 }
