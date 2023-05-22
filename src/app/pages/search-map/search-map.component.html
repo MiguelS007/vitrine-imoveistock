@@ -148,7 +148,9 @@
                         <div class="col-12 my-5 py-5 justify-content-center">
                             <div *ngIf="selectedAnouncements.length > 2" class="d-flex flex-fill
                                justify-content-center">
-                                <pagination-controls (pageChange)="pagination=$event;">
+                                <pagination-controls (pageChange)="pagination=$event;"
+                                previousLabel="Anterior"
+                                nextLabel="Próximo">
                                 </pagination-controls>
                             </div>
                         </div>
