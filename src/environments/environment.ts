@@ -8,7 +8,7 @@ export const environment = {
   apis: {
     // imoveistock: 'http://ec2-54-158-29-124.compute-1.amazonaws.com:5020/',
     // imoveistock: 'https://marketplace-inkluziva.tgtdigital.io/homolog-imoveistock/',
-    // imoveistock: 'https://imoveistockapi.tgtdigital.io/',
+    // imoveistock: 'https://imoveistock-prod.tgtdigital.io/',
     imoveistock: 'http://localhost:5000/',
   },
   google: {

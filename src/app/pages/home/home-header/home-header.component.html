@@ -32,9 +32,10 @@
                                     <div class="col-12 px-0 pb-3">
                                         <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'"
                                             [settings]="dropdownSettings" formControlName="propertyType"
-                                            [data]="dropdownList" [(ngModel)]="selectedItems" (onDeSelectAll)="onDeSelectAll($event)"
-                                            (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)"
-                                            (onSelectAll)="onSelectAll($event)" #dropdownRef>
+                                            [data]="dropdownList" [(ngModel)]="selectedItems"
+                                            (onDeSelectAll)="onDeSelectAll($event)" (onSelect)="onItemSelect($event)"
+                                            (onDeSelect)="onItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                                            #dropdownRef>
                                         </ng-multiselect-dropdown>
                                     </div>
 
@@ -85,18 +86,20 @@
                                     </div>
                                     <div class="col-12 px-0 mb-3">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-6 pr-0">
                                                 <div *ngIf="!collapsed"
                                                     class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
                                                     <div style="border-right: 0px !important;"
                                                         class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
-                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15"> Valor até
+                                                        <p *ngIf="viewLabelValueMax"
+                                                            class="fw-400 pl-3 mb-0 font-size-14 line-15">
+                                                            Valor até
                                                         </p>
                                                     </div>
                                                     <select formControlName="typePropertyValueSale"
                                                         style="border-left: 0px !important;"
                                                         class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
-                                                        id="state" aria-label="Default select example">
+                                                        id="state" aria-label="Default select example" (change)="removeLabel($event)">
                                                         <option *ngFor="let item of valueUntilSaleArray" [value]="item">
                                                             &nbsp;{{item | currency:'R$':'symbol':'1.0'}}</option>
                                                     </select>
@@ -105,11 +108,13 @@
                                                     class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
                                                     <div style="border-right: 0px !important;"
                                                         class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
-                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15"> Valor até
+                                                        <p *ngIf="viewLabelValueMax"
+                                                            class="fw-400 pl-3 mb-0 font-size-14 line-15">
+                                                            Valor até
                                                         </p>
                                                     </div>
                                                     <select formControlName="typePropertyValueRent"
-                                                        style="border-left: 0px !important;"
+                                                        style="border-left: 0px !important;" (change)="removeLabel($event)"
                                                         class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
                                                         id="state" aria-label="Default select example">
                                                         <option *ngFor="let item of valueUntilRentArray" [value]="item">

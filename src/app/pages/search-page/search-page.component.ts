@@ -100,7 +100,6 @@ export class SearchPageComponent implements OnInit {
 
   @ViewChild('dropdownRef') dropdownRef: any;
 
-
   dropdownList = [
     { item_id: 'apartamento', item_text: 'Apartamento' },
     { item_id: 'casa', item_text: 'Casa' },
@@ -344,6 +343,7 @@ export class SearchPageComponent implements OnInit {
   onItemSelect(item: any) {
     const nativeElement = this.dropdownRef
     if (nativeElement.isDropdownOpen === true) {
+      console.log(nativeElement)
       nativeElement.closeDropdown()
     }
   }
@@ -371,6 +371,28 @@ export class SearchPageComponent implements OnInit {
     }
   }
 
+  onItemSelect2(item: any) {
+    const multiselect = document.getElementById('dropdownRefModal');
+    multiselect.click();
+  }
+
+  onItemDeSelect2(item: any) {
+    if (this.selectedItems.length === 0) {
+      const multiselect = document.getElementById('dropdownRefModal');
+      multiselect.click();
+    }
+  }
+
+  onSelectAll2(items: any) {
+    const multiselect = document.getElementById('dropdownRefModal');
+    multiselect.click();
+  }
+
+  onDeSelectAll2(items) {
+    const multiselect = document.getElementById('dropdownRefModal');
+    multiselect.click();
+  }
+
   selectEvent(item) {
     this.getSelectedCity = item.cidade;
     this.stateSelected = item.estado;
@@ -379,6 +401,7 @@ export class SearchPageComponent implements OnInit {
       typePropertyState: item.estado,
     });
   }
+
   onChangeSearch(search: string) {
   }
 
@@ -639,7 +662,7 @@ export class SearchPageComponent implements OnInit {
     this.router.navigate(['/search-map']);
   }
 
-  resolveProperty(text:string):string{
+  resolveProperty(text: string): string {
     return propertyTypesConst.find(x => x.value === text)?.name || text || '-';
   }
 

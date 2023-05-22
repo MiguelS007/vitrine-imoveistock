@@ -12,16 +12,16 @@
       </p>
 
      <div class="w-100 d-inline-block justify-content-center d-flex">
-       <input type="text" #txt1 class="btn w56h56 bg-whitelight border-radius-10 border p-3 m-1 fw-400 font-size-24 line-20 color-black"  formControlName="code1"
+       <input type="tel" #txt1 class="btn w56h56 bg-whitelight border-radius-10 border p-3 m-1 fw-400 font-size-24 line-20 color-black"  formControlName="code1"
               placeholder="*"  maxlength="1" (keyup)="move($event, '',txt1,txt2)">
 
-       <input type="text" #txt2 class="btn w56h56 bg-whitelight border-radius-10 border p-3 m-1 fw-400 font-size-24 line-20 color-black" formControlName="code2"
+       <input type="tel" #txt2 class="btn w56h56 bg-whitelight border-radius-10 border p-3 m-1 fw-400 font-size-24 line-20 color-black" formControlName="code2"
               (keyup)="move($event, txt1,txt2,txt3)" placeholder="*"   maxlength="1">
 
-       <input type="text" #txt3 class="btn w56h56 bg-whitelight border-radius-10 border p-3 m-1 fw-400 font-size-24 line-20 color-black" formControlName="code3"
+       <input type="tel" #txt3 class="btn w56h56 bg-whitelight border-radius-10 border p-3 m-1 fw-400 font-size-24 line-20 color-black" formControlName="code3"
               (keyup)="move($event, txt2,txt3,txt4)" placeholder="*"  maxlength="1">
 
-       <input type="text" #txt4 class="btn w56h56 bg-whitelight border-radius-10 border p-3 m-1 fw-400 font-size-24 line-20 color-black"  formControlName="code4"
+       <input type="tel" #txt4 class="btn w56h56 bg-whitelight border-radius-10 border p-3 m-1 fw-400 font-size-24 line-20 color-black"  formControlName="code4"
               maxlength="1" placeholder="*"  (keyup)="move($event, txt3,txt4,'')">
      </div>
 
