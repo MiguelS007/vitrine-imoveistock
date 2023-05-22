@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -50,7 +50,7 @@ export class HomeHeaderComponent implements OnInit {
 
   // listAllCity: any = [];
 
-  listEveryCity: { cidade: string; estado: string , render:string}[] = [];
+  listEveryCity: { cidade: string; estado: string, render: string }[] = [];
 
   getSelectedCity: string;
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
@@ -99,6 +99,8 @@ export class HomeHeaderComponent implements OnInit {
     allowSearchFilter: true,
   };
 
+  @ViewChild('dropdownRef') dropdownRef: any;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -141,11 +143,41 @@ export class HomeHeaderComponent implements OnInit {
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
   }
 
-  onItemSelect(item: any) {}
+  onItemSelect(item: any) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
 
-  onSelectAll(items: any) {}
+  onItemDeSelect(item: any) {
+    if (this.selectedItems.length === 0) {
+      const nativeElement = this.dropdownRef
+      if (nativeElement.isDropdownOpen === true) {
+        nativeElement.closeDropdown()
+      }
+    }
+  }
 
-  onChangeSearch(search: string) {}
+  onSelectAll(items: any) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
+
+  onDeSelectAll(items) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
+
+  onDropDownClose(event: any) {
+    console.log('close')
+  }
+
+  onChangeSearch(search: string) { }
 
   selectEvent(item: { cidade: string; estado: string }) {
     this.getSelectedCity = item.cidade;
@@ -218,5 +250,5 @@ export class HomeHeaderComponent implements OnInit {
       this.collapsed = true;
     }
   }
-  
+
 }

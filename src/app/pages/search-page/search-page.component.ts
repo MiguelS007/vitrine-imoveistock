@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
@@ -97,6 +97,9 @@ export class SearchPageComponent implements OnInit {
   listEveryCity: { cidade: string; estado: string, render: string }[] = [];
 
   listOfPrices: any = [];
+
+  @ViewChild('dropdownRef') dropdownRef: any;
+
 
   dropdownList = [
     { item_id: 'apartamento', item_text: 'Apartamento' },
@@ -338,9 +341,35 @@ export class SearchPageComponent implements OnInit {
 
   }
 
-  onItemSelect(item: any) { }
+  onItemSelect(item: any) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
 
-  onSelectAll(items: any) { }
+  onItemDeSelect(item: any) {
+    if (this.selectedItems.length === 0) {
+      const nativeElement = this.dropdownRef
+      if (nativeElement.isDropdownOpen === true) {
+        nativeElement.closeDropdown()
+      }
+    }
+  }
+
+  onSelectAll(items: any) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
+
+  onDeSelectAll(items) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
 
   selectEvent(item) {
     this.getSelectedCity = item.cidade;
