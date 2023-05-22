@@ -101,6 +101,8 @@ export class HomeHeaderComponent implements OnInit {
 
   @ViewChild('dropdownRef') dropdownRef: any;
 
+  viewLabelValueMax: boolean = true;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -141,6 +143,12 @@ export class HomeHeaderComponent implements OnInit {
       }
     }
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
+  }
+
+  
+
+  removeLabel(event) {
+    this.viewLabelValueMax = false;
   }
 
   onItemSelect(item: any) {
@@ -246,8 +254,16 @@ export class HomeHeaderComponent implements OnInit {
     this.typeAd = value;
     if (value === 'sale') {
       this.collapsed = false;
+      this.viewLabelValueMax = true;
+      this.form.patchValue({
+        typePropertyValueSale: ''
+      })
     } else if (value === 'rent') {
       this.collapsed = true;
+      this.viewLabelValueMax = true;
+      this.form.patchValue({
+        typePropertyValueRent: ''
+      })
     }
   }
 
