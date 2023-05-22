@@ -115,7 +115,7 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'loft', item_text: 'Loft' },
     { item_id: 'terreno', item_text: 'Terreno' },
     { item_id: 'comercial', item_text: 'Comercial' },
-    { item_id: 'chacara', item_text: 'Chácara' },
+    { item_id: 'farm', item_text: 'Chácara' },
     { item_id: 'casacomercial', item_text: 'Casa Comercial' },
     { item_id: 'garagem', item_text: 'Garagem' },
     { item_id: 'pontocomercial', item_text: 'Ponto Comercial' },
