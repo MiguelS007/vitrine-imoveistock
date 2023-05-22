@@ -109,7 +109,7 @@ export class ModalSignupComponent implements OnInit {
         },
         error => {
           console.log(error)
-          this.toastrService.error('Erro ao cadastrar', '', { progressBar: true });
+          this.toastrService.error(`${error.error.errors}`, '', { progressBar: true });
         }
       )
     }
