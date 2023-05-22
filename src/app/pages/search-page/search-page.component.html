@@ -416,14 +416,18 @@
                   <div class="col justify-content-left px-0 d-flex
                                 align-items-center justify-content-left">
                     <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
-                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                    <p *ngIf="item.bedrooms > 1" class="fw-400 mb-0 font-size-14 little-text-mobile line-20
                                    color-black">{{item.bedrooms}} Quartos</p>
+                    <p *ngIf="item.bedrooms === 0 || item.bedrooms === 1" class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                   color-black">{{item.bedrooms}} Quarto</p>
                   </div>
                   <div class="col justify-content-center px-0 d-flex
                                 align-items-center justify-content-left">
                     <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
-                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                    <p *ngIf="item.parkingSpaces > 1" class="fw-400 mb-0 font-size-14 little-text-mobile line-20
                                    color-black">{{item.parkingSpaces}} Vagas</p>
+                    <p *ngIf="item.parkingSpaces === 0 || item.parkingSpaces === 1" class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                   color-black">{{item.parkingSpaces}} Vaga</p>
                   </div>
                   <div class="col justify-content-end px-0 d-flex
                                 align-items-center justify-content-left">
@@ -436,8 +440,10 @@
                   <div class="col-4">
                     <div class="d-flex justify-content-center align-items-center">
                       <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
-                      <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
-                                       color-black">{{item.suites || 0}} Suítes</p>
+                      <p *ngIf="item.suites > 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                       color-black">{{item.suites}} Suítes</p>
+                      <p *ngIf="item.suites === 0 || item.suites === 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                       color-black">{{item.suites}} Suíte</p>
                     </div>
                   </div>
                 </div>
