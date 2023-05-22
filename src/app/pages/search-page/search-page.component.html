@@ -31,9 +31,10 @@
       <div class="col-4 col-body-products d-none-desk mt-5 pt-5 pl-0">
         <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
 
-          <ng-multiselect-dropdown [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
+          <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'" [settings]="dropdownSettings"
             formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
-            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            (onDeSelectAll)="onDeSelectAll($event)" (onSelect)="onItemSelect($event)"
+            (onDeSelect)="onItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" #dropdownRef>
           </ng-multiselect-dropdown>
 
           <div class="dropdown">
@@ -172,7 +173,8 @@
                        w-100 h-51" mask="0000" />
           </div>
           <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
-                    line-24 border-radius-10 h-51 w-100" type="submit" [disabled]="form.invalid">
+                    line-24 border-radius-10 h-51 w-100" type="submit"
+            [disabled]="form.invalid && form.controls['typePropertyCity'].value === ''">
             Encontrar
           </button>
         </div>
@@ -216,7 +218,8 @@
                              line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}
                   </p>
                   <p *ngIf="item.typeOfAd === 'both'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue
+                    | currency:
                     'R$':'symbol':'1.0'}}
                     <span class="fw-400 font-size-14 line-20
                                          text-light">/ mês</span>
@@ -243,7 +246,8 @@
                 <span *ngIf="item.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24
                           color-black">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}</span>
                 <span *ngIf="item.typeOfAd === 'both'" class="fw-700 font-size-18 line-24
-                          color-black">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                          color-black">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue |
+                  currency:
                   'R$':'symbol':'1.0'}}</span>
                 <span *ngIf="item.typeOfAd === 'rent'" class="fw-700 font-size-18 line-24
                           color-black">{{item.leaseValue | currency: 'R$':'symbol':'1.0'}}</span>
@@ -377,7 +381,8 @@
                     </span>
 
                     <span *ngIf="selectTypeAd === 'Selecione'">
-                      {{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency: 'R$':'symbol':'1.0'}}
+                      {{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                      'R$':'symbol':'1.0'}}
                     </span>
 
                   </p>
@@ -443,9 +448,7 @@
             <div *ngIf="filterResult.length > 6" class="d-flex flex-fill
                        justify-content-center">
               <pagination-controls (pageChange)="paginationProduct=
-                          $event;"
-                          previousLabel="Anterior"
-                          nextLabel="Próximo">
+                          $event;" previousLabel="Anterior" nextLabel="Próximo">
               </pagination-controls>
             </div>
           </div>
@@ -490,7 +493,8 @@
                              line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}
                   </p>
                   <p *ngIf="item.typeOfAd === 'both'" class="fw-700 mt-5 mb-0 font-size-22 h-fit
-                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue | currency:
+                             line-32 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}} / {{item.leaseValue
+                    | currency:
                     'R$':'symbol':'1.0'}}
                     <span class="fw-400 font-size-14 line-20
                                          text-light">/ mês</span>
@@ -514,9 +518,10 @@
     </div>
   </div>
   <form [formGroup]="formModal" class="w-100 d-block-desk border-radius-10 bg-white p-5">
-    <ng-multiselect-dropdown class="customClass" [placeholder]="'Tipo do imóvel'" [settings]="dropdownSettings"
-      formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
-      (onSelectAll)="onSelectAll($event)">
+    <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'" [settings]="dropdownSettings"
+      formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
+      (onDeSelectAll)="onDeSelectAll2($event)" (onSelect)="onItemSelect2($event)" (onDeSelect)="onItemDeSelect2($event)"
+      (onSelectAll)="onSelectAll2($event)" id="dropdownRefModal" >
     </ng-multiselect-dropdown>
     <div class="dropdown">
       <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
@@ -650,7 +655,7 @@
            w-100 h-51" mask="0000" />
     </div>
     <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
-        line-24 border-radius-10 h-51 w-100" (click)="filtrar()" type="submit">
+        line-24 border-radius-10 h-51 w-100" [disabled]="form.invalid && form.controls['typePropertyCity'].value === ''"  (click)="filtrar()" type="submit">
       Encontrar
     </button>
   </form>

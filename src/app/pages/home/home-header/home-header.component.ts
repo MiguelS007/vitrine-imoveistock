@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -50,7 +50,7 @@ export class HomeHeaderComponent implements OnInit {
 
   // listAllCity: any = [];
 
-  listEveryCity: { cidade: string; estado: string , render:string}[] = [];
+  listEveryCity: { cidade: string; estado: string, render: string }[] = [];
 
   getSelectedCity: string;
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
@@ -70,7 +70,7 @@ export class HomeHeaderComponent implements OnInit {
     { item_id: 'loft', item_text: 'Loft' },
     { item_id: 'terreno', item_text: 'Terreno' },
     { item_id: 'comercial', item_text: 'Comercial' },
-    { item_id: 'chacara', item_text: 'Chácara' },
+    { item_id: 'farm', item_text: 'Chácara' },
     { item_id: 'casacomercial', item_text: 'Casa Comercial' },
     { item_id: 'garagem', item_text: 'Garagem' },
     { item_id: 'pontocomercial', item_text: 'Ponto Comercial' },
@@ -98,6 +98,10 @@ export class HomeHeaderComponent implements OnInit {
     searchPlaceholderText: 'Procurar',
     allowSearchFilter: true,
   };
+
+  @ViewChild('dropdownRef') dropdownRef: any;
+
+  viewLabelValueMax: boolean = true;
 
   constructor(
     private router: Router,
@@ -141,11 +145,47 @@ export class HomeHeaderComponent implements OnInit {
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
   }
 
-  onItemSelect(item: any) {}
+  
 
-  onSelectAll(items: any) {}
+  removeLabel(event) {
+    this.viewLabelValueMax = false;
+  }
 
-  onChangeSearch(search: string) {}
+  onItemSelect(item: any) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
+
+  onItemDeSelect(item: any) {
+    if (this.selectedItems.length === 0) {
+      const nativeElement = this.dropdownRef
+      if (nativeElement.isDropdownOpen === true) {
+        nativeElement.closeDropdown()
+      }
+    }
+  }
+
+  onSelectAll(items: any) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
+
+  onDeSelectAll(items) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
+
+  onDropDownClose(event: any) {
+    console.log('close')
+  }
+
+  onChangeSearch(search: string) { }
 
   selectEvent(item: { cidade: string; estado: string }) {
     this.getSelectedCity = item.cidade;
@@ -214,9 +254,17 @@ export class HomeHeaderComponent implements OnInit {
     this.typeAd = value;
     if (value === 'sale') {
       this.collapsed = false;
+      this.viewLabelValueMax = true;
+      this.form.patchValue({
+        typePropertyValueSale: ''
+      })
     } else if (value === 'rent') {
       this.collapsed = true;
+      this.viewLabelValueMax = true;
+      this.form.patchValue({
+        typePropertyValueRent: ''
+      })
     }
   }
-  
+
 }

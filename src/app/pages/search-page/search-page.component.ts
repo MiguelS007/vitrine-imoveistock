@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
@@ -98,6 +98,8 @@ export class SearchPageComponent implements OnInit {
 
   listOfPrices: any = [];
 
+  @ViewChild('dropdownRef') dropdownRef: any;
+
   dropdownList = [
     { item_id: 'apartamento', item_text: 'Apartamento' },
     { item_id: 'casa', item_text: 'Casa' },
@@ -112,7 +114,7 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'loft', item_text: 'Loft' },
     { item_id: 'terreno', item_text: 'Terreno' },
     { item_id: 'comercial', item_text: 'Comercial' },
-    { item_id: 'chacara', item_text: 'Chácara' },
+    { item_id: 'farm', item_text: 'Chácara' },
     { item_id: 'casacomercial', item_text: 'Casa Comercial' },
     { item_id: 'garagem', item_text: 'Garagem' },
     { item_id: 'pontocomercial', item_text: 'Ponto Comercial' },
@@ -338,9 +340,58 @@ export class SearchPageComponent implements OnInit {
 
   }
 
-  onItemSelect(item: any) { }
+  onItemSelect(item: any) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      console.log(nativeElement)
+      nativeElement.closeDropdown()
+    }
+  }
 
-  onSelectAll(items: any) { }
+  onItemDeSelect(item: any) {
+    if (this.selectedItems.length === 0) {
+      const nativeElement = this.dropdownRef
+      if (nativeElement.isDropdownOpen === true) {
+        nativeElement.closeDropdown()
+      }
+    }
+  }
+
+  onSelectAll(items: any) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
+
+  onDeSelectAll(items) {
+    const nativeElement = this.dropdownRef
+    if (nativeElement.isDropdownOpen === true) {
+      nativeElement.closeDropdown()
+    }
+  }
+
+  onItemSelect2(item: any) {
+    const multiselect = document.getElementById('dropdownRefModal');
+    multiselect.click();
+  }
+
+  onItemDeSelect2(item: any) {
+    if (this.selectedItems.length === 0) {
+      const multiselect = document.getElementById('dropdownRefModal');
+      multiselect.click();
+    }
+  }
+
+  onSelectAll2(items: any) {
+    const multiselect = document.getElementById('dropdownRefModal');
+    multiselect.click();
+  }
+
+  onDeSelectAll2(items) {
+    const multiselect = document.getElementById('dropdownRefModal');
+    multiselect.click();
+  }
 
   selectEvent(item) {
     this.getSelectedCity = item.cidade;
@@ -350,6 +401,7 @@ export class SearchPageComponent implements OnInit {
       typePropertyState: item.estado,
     });
   }
+
   onChangeSearch(search: string) {
   }
 
@@ -610,7 +662,7 @@ export class SearchPageComponent implements OnInit {
     this.router.navigate(['/search-map']);
   }
 
-  resolveProperty(text:string):string{
+  resolveProperty(text: string): string {
     return propertyTypesConst.find(x => x.value === text)?.name || text || '-';
   }
 

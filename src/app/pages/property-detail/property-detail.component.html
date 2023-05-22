@@ -2252,8 +2252,8 @@
     class="schedule-visit d-none bg-white border-top-gray py-3 d-flex-desk justify-content-center cursor-pointer position-fixed z-1000 w-100">
     <div class="w-100 max-w-800 padding-x schedule-visit-modal">
       <div class="w-100">
-        <h3 *ngIf="response.typeOfAd === 'sale'">Venda {{finalValueSale | currency: 'R$':'symbol':'1.0' || '-'}}</h3>
-        <h3 *ngIf="response.typeOfAd === 'both' && valueViewSelectSale">Venda {{finalValueSale | currency: 'R$':'symbol':'1.0' ||
+        <h3 *ngIf="response.typeOfAd === 'sale'">Venda {{response.saleValue | currency: 'R$':'symbol':'1.0' || '-'}}</h3>
+        <h3 *ngIf="response.typeOfAd === 'both' && valueViewSelectSale">Venda {{response.saleValue | currency: 'R$':'symbol':'1.0' ||
           '-'}}</h3>
         <h3 *ngIf="response.typeOfAd === 'both' && !valueViewSelectSale">Total de aluguel {{finalValueRent | currency:
           'R$':'symbol':'1.0' || '-'}}</h3>
