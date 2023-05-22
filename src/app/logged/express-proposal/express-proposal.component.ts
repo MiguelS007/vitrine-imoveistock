@@ -260,6 +260,7 @@ export class ExpressProposalComponent implements OnInit {
       this.modalwarning = true;
 
       this.spaceCustomizeProposal = true;
+      window.scrollTo(0, 1000);
     } else if (value === 'close') {
       this.modalcustomizedproposal = false;
       this.modalsendproposalexpress = false;
