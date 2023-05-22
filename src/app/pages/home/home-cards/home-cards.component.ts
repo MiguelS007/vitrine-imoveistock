@@ -24,7 +24,11 @@ export class HomeCardsComponent implements OnInit {
   }
 
   knowApp() {
-    window.open('https://imoveistock-app-tgt.vercel.app', '_blank')
+    if (localStorage.getItem('user') !== null) {
+      window.open('https://imoveistock-app-tgt.vercel.app', '_blank')
+    } else {
+      window.open('https://indike.imoveistock.com.br/', '_blank')
+    }
   }
 
 }
