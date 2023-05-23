@@ -175,7 +175,6 @@ export class ExpressProposalComponent implements OnInit {
         next: data => {
           this.sendRescheduling = true;
           this.proposalResponse = data;
-          console.log(this.proposalResponse, 'proposal response')
         }
       })
     }
@@ -321,16 +320,21 @@ export class ExpressProposalComponent implements OnInit {
           }
         }
       }
-      console.log(this.request)
-      this.proposalService.register(this.request).subscribe({
-        next: data => {
-          this.toastrService.success('Proposta enviada!', '', { progressBar: true })
-          this.modalsendproposalexpress = false;
-        },
-        error: error => {
-          this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true })
-        }
-      })
+      
+      if (this.proposalResponse?.proposal) {
+        this.sendCounterProposal(this.request)
+      } else {
+        this.sendProposal(this.request)
+      }
+      // this.proposalService.register(this.request).subscribe({
+      //   next: data => {
+      //     this.toastrService.success('Proposta enviada!', '', { progressBar: true })
+      //     this.modalsendproposalexpress = false;
+      //   },
+      //   error: error => {
+      //     this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true })
+      //   }
+      // })
     } else if (value === 'cancelar') {
       this.modalsendproposalexpress = false;
     }
@@ -628,7 +632,7 @@ export class ExpressProposalComponent implements OnInit {
         }
       }
     }
-    // this.router.navigate(['logged/visits']);
+    this.router.navigate(['logged/visits']);
   }
 
 
@@ -657,13 +661,11 @@ export class ExpressProposalComponent implements OnInit {
         localStorage.removeItem('counterProposalInProposal')
       },
       error: error => {
-        // if (error.error.errors[0] === 'there is no proposal denied') {
-        //   this.toastrService.error('Ja existe uma proposta em negociação neste anúncio!', '', { progressBar: true });
-        // } else {
-        //   this.toastrService.error('Erro ao enviar contra proposta!', '', { progressBar: true });
-        // }
-        this.toastrService.error('Erro ao enviar contra proposta!', '', { progressBar: true });
-        console.log(error)
+        if (error.error.errors === 'there is no proposal denied') {
+          this.toastrService.error('Ja existe uma proposta em negociação neste anúncio!', '', { progressBar: true });
+        } else {
+          this.toastrService.error('Erro ao enviar contra proposta!', '', { progressBar: true });
+        }
       }
     })
   }
