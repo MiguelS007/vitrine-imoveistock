@@ -7,6 +7,7 @@ import { SchedulingStep5Component } from '../scheduling-step5/scheduling-step5.c
 import { ScheduleService } from 'src/app/service/schedule.service';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-scheduling-step2',
@@ -25,7 +26,8 @@ export class SchedulingStep2Component implements OnInit {
   constructor(
     private modalService: NgbModal,
     private scheduleService: ScheduleService,
-    private ngxSpinnerService: NgxSpinnerService
+    private ngxSpinnerService: NgxSpinnerService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -49,17 +51,23 @@ export class SchedulingStep2Component implements OnInit {
   }
 
 
-  yesHaveBroker(){
+  yesHaveBroker() {
     this.modalService.dismissAll();
-    this.modalService.open(SchedulingStep3Component, { centered: true, backdrop: 'static', keyboard: false});
+    this.modalService.open(SchedulingStep3Component, { centered: true, backdrop: 'static', keyboard: false });
   }
 
   confirmRegister() {
     this.ngxSpinnerService.show();
     this.scheduleService.registerSchedule(this.response._id, this.dateSend).subscribe(
       success => this.registerSuccess(success),
-      error => console.error(error)
+      error => this.runError(error)
     )
+  }
+
+  runError(error) {
+    this.toastrService.error(`${error.error.errors}`, '', { progressBar: true });
+    this.modalService.dismissAll();
+    this.ngxSpinnerService.hide();
   }
 
   registerSuccess(success: any) {
@@ -68,7 +76,7 @@ export class SchedulingStep2Component implements OnInit {
     localStorage.setItem('companionLink', location.origin + success.link);
 
     this.modalService.dismissAll();
-    const modalRef = this.modalService.open(SchedulingStep5Component, { centered: true, backdrop: 'static', keyboard: false});
+    const modalRef = this.modalService.open(SchedulingStep5Component, { centered: true, backdrop: 'static', keyboard: false });
     modalRef.componentInstance.visit = success.result
   }
 
