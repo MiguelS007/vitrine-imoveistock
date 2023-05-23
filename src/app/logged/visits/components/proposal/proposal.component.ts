@@ -205,15 +205,15 @@ export class ProposalComponent implements OnInit {
   }
 
   selecionarProposta(item) {
-    console.log('proposta', item.type)
     this.proposalsList.map(results => {
       if (results.nativeElement?.id === item._id) {
         results.nativeElement.className = 'scheduling-visit-selected w-100 h-auto bg-white box-shadow border-radius-10 mb-4 p-4';
-        localStorage.setItem('proposalChecked', JSON.stringify(item))
+        
         if (window.screen.width < 992) {
           this.contador++;
           if (this.contador > 1) {
             const modalRef = this.modalService.open(ProposalSelectedModalComponent, { centered: true });
+            modalRef.componentInstance.selectedProposal = item;
             modalRef.result.then(data => {
             }, error => {
               this.listProposal()

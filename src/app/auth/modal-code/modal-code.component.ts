@@ -38,7 +38,7 @@ export class ModalCodeComponent implements OnInit {
   codereceivedEmail: string = '';
   msgkeepcalm = false;
   codereceivedSms = 'Não recebi o código';
-
+  PressBackspace: any
   constructor(
     private router: Router,
     private toastrService: ToastrService,
@@ -187,19 +187,26 @@ export class ModalCodeComponent implements OnInit {
   }
 
   move(e: any, p: any, c: any, n: any) {
-
-
+    /* console.log(this.form.controls[teste].value); */
     var length = c.value.length;
     var maxlength = c.getAttribute('maxlength');
-    if (length == maxlength) {
-      if (n != "") {
-        n.focus();
-      }
+  
+    if (length == maxlength && n != "") {
+      n.focus();
+      return;
     }
-    if (e.key === 'Backspace') {
-      if (p != "") {
-        p.focus();
-      }
+      if (e.key === 'Backspace') {
+      if (c.value === "") {
+        if (p != "") {
+          if (this.PressBackspace) {
+            p.focus();
+            p.value = '';
+          }
+        }
+      } 
+      this.PressBackspace = true;
+    } else {
+      this.PressBackspace = false;
     }
   }
 
