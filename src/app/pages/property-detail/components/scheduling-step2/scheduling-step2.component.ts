@@ -8,6 +8,7 @@ import { ScheduleService } from 'src/app/service/schedule.service';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { SchedulingStep1Component } from '../scheduling-step1/scheduling-step1.component';
 
 @Component({
   selector: 'app-scheduling-step2',
@@ -68,6 +69,9 @@ export class SchedulingStep2Component implements OnInit {
     this.toastrService.error(`${error.error.errors}`, '', { progressBar: true });
     this.modalService.dismissAll();
     this.ngxSpinnerService.hide();
+    if (error.error.errors[0] === 'Horário indisponível!') {
+      this.modalService.open(SchedulingStep1Component);
+    }
   }
 
   registerSuccess(success: any) {
