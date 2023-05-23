@@ -173,7 +173,8 @@
                        w-100 h-51" mask="0000" />
           </div>
           <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
-                    line-24 border-radius-10 h-51 w-100" type="submit" [disabled]="form.invalid">
+                    line-24 border-radius-10 h-51 w-100" type="submit"
+            [disabled]="form.invalid && form.controls['typePropertyCity'].value === ''">
             Encontrar
           </button>
         </div>
@@ -415,14 +416,18 @@
                   <div class="col justify-content-left px-0 d-flex
                                 align-items-center justify-content-left">
                     <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
-                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                    <p *ngIf="item.bedrooms > 1" class="fw-400 mb-0 font-size-14 little-text-mobile line-20
                                    color-black">{{item.bedrooms}} Quartos</p>
+                    <p *ngIf="item.bedrooms === 0 || item.bedrooms === 1" class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                   color-black">{{item.bedrooms}} Quarto</p>
                   </div>
                   <div class="col justify-content-center px-0 d-flex
                                 align-items-center justify-content-left">
                     <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
-                    <p class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                    <p *ngIf="item.parkingSpaces > 1" class="fw-400 mb-0 font-size-14 little-text-mobile line-20
                                    color-black">{{item.parkingSpaces}} Vagas</p>
+                    <p *ngIf="item.parkingSpaces === 0 || item.parkingSpaces === 1" class="fw-400 mb-0 font-size-14 little-text-mobile line-20
+                                   color-black">{{item.parkingSpaces}} Vaga</p>
                   </div>
                   <div class="col justify-content-end px-0 d-flex
                                 align-items-center justify-content-left">
@@ -435,8 +440,10 @@
                   <div class="col-4">
                     <div class="d-flex justify-content-center align-items-center">
                       <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
-                      <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
-                                       color-black">{{item.suites || 0}} Suítes</p>
+                      <p *ngIf="item.suites > 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                       color-black">{{item.suites}} Suítes</p>
+                      <p *ngIf="item.suites === 0 || item.suites === 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                       color-black">{{item.suites}} Suíte</p>
                     </div>
                   </div>
                 </div>
@@ -447,9 +454,7 @@
             <div *ngIf="filterResult.length > 6" class="d-flex flex-fill
                        justify-content-center">
               <pagination-controls (pageChange)="paginationProduct=
-                          $event;"
-                          previousLabel="Anterior"
-                          nextLabel="Próximo">
+                          $event;" previousLabel="Anterior" nextLabel="Próximo">
               </pagination-controls>
             </div>
           </div>
@@ -521,8 +526,8 @@
   <form [formGroup]="formModal" class="w-100 d-block-desk border-radius-10 bg-white p-5">
     <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'" [settings]="dropdownSettings"
       formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
-      (onDeSelectAll)="onDeSelectAll($event)" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)"
-      (onSelectAll)="onSelectAll($event)" #dropdownRef>
+      (onDeSelectAll)="onDeSelectAll2($event)" (onSelect)="onItemSelect2($event)" (onDeSelect)="onItemDeSelect2($event)"
+      (onSelectAll)="onSelectAll2($event)" id="dropdownRefModal" >
     </ng-multiselect-dropdown>
     <div class="dropdown">
       <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
@@ -656,7 +661,7 @@
            w-100 h-51" mask="0000" />
     </div>
     <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
-        line-24 border-radius-10 h-51 w-100" (click)="filtrar()" type="submit">
+        line-24 border-radius-10 h-51 w-100" [disabled]="form.invalid && form.controls['typePropertyCity'].value === ''"  (click)="filtrar()" type="submit">
       Encontrar
     </button>
   </form>

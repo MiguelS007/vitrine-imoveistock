@@ -415,6 +415,7 @@ export class PropertyDetailComponent implements OnInit {
         }
       }
       this.router.navigate([`logged/express/${this.response._id}`]);
+      window.scrollTo(0, 0);
     } else {
       this.modalService.open(ModalLoginComponent, { centered: true });
     }

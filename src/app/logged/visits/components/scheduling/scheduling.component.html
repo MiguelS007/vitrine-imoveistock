@@ -67,14 +67,15 @@
                 </span>
             </div>
             <div *ngIf="selectedScheduling.status !== 'cancel'" class="w-100 bg-white border-radius-10 p-4 h-auto">
-              <div class="d-flex mb-3">
-                <i class="bi bi-link-45deg"></i>
-                <div class="d-flex flex-column">
-                  <span class="ml-2"><b>Código da visita:</b> {{selectedScheduling?.code || '-'}}</span>
-                  <span class="ml-2 font-size-12 fw-400 color-muted">Informe o código ao corretor durante a visita.</span>
+                <div class="d-flex mb-3">
+                    <i class="bi bi-link-45deg"></i>
+                    <div class="d-flex flex-column">
+                        <span class="ml-2"><b>Código da visita:</b> {{selectedScheduling?.code || '-'}}</span>
+                        <span class="ml-2 font-size-12 fw-400 color-muted">Informe o código ao corretor durante a
+                            visita.</span>
+                    </div>
                 </div>
-              </div>
-              <p class="w-100 fw-400 font-size-16 line-20 color-black">
+                <p class="w-100 fw-400 font-size-16 line-20 color-black">
                     <i class="bi font-size-20 mr-2 bi-calendar"></i>{{selectedScheduling?.visitDate | date: 'EEEE'||
                     '-'}}, {{selectedScheduling.visitDate | date: 'dd' }} de {{selectedScheduling.visitDate | date:
                     'LLLL' }} às {{selectedScheduling.visitDate | date: 'HH:mm' || '-'}}
@@ -113,7 +114,8 @@
                 <h3 class="fw-700 font-size-16 line-20 color-black">Acompanhantes</h3>
                 <p class="font-size-14 fw-400">Envie o link da indicação, diretamente para o proprietário do imóvel.</p>
                 <div class="border-div-purple mt-3 p-3">
-                    <p class="fw-500 font-size-16">Envie o link da indicação, diretamente para o proprietário do imóvel.</p>
+                    <p class="fw-500 font-size-16">Envie o link da indicação, diretamente para o proprietário do imóvel.
+                    </p>
                     <div *ngFor="let companion of selectedScheduling.companion" class="d-flex">
                         <i class="bi color-black mr-2 font-size-20 bi-person"></i>
                         <p class="d-grid">
@@ -129,13 +131,15 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-sm-3">
-                            <div class="border-div-purple d-flex align-items-center justify-content-center cursor-pointer h-51 mt-1">
+                            <div
+                                class="border-div-purple d-flex align-items-center justify-content-center cursor-pointer h-51 mt-1">
                                 <p (click)="sharedIn('whatsapp')" class="mb-0"><img
                                         src="../../../../../assets/icon/whats-roxo.svg" alt=""></p>
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <div class="border-div-purple d-flex align-items-center justify-content-center cursor-pointer h-51 mt-1">
+                            <div
+                                class="border-div-purple d-flex align-items-center justify-content-center cursor-pointer h-51 mt-1">
                                 <p (click)="sharedIn('facebook')" class="mb-0"><img
                                         src="../../../../../assets/icon/facebook-roxo.svg" alt=""></p>
                             </div>
@@ -223,20 +227,28 @@
                                             align-items-center
                                             justify-content-left">
                             <img src="../../../assets/icon/bed.png" class="pr-2" />
-                            <p class="fw-400 mb-0
+                            <p *ngIf="selectedScheduling.announcement?.bedrooms > 1" class="fw-400 mb-0
                                                 font-size-14 line-20
                                                 color-black">{{selectedScheduling.announcement?.bedrooms}}
                                 Quartos</p>
+                            <p *ngIf="selectedScheduling.announcement?.bedrooms === 0 || selectedScheduling.announcement?.bedrooms === 1" class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">{{selectedScheduling.announcement?.bedrooms}}
+                                Quarto</p>
                         </div>
                         <div class="col justify-content-left px-0
                                             d-flex
                                             align-items-center
                                             justify-content-left">
                             <img src="../../../assets/icon/car.png" class="pr-2" />
-                            <p class="fw-400 mb-0
+                            <p *ngIf="selectedScheduling.announcement?.parkingSpaces > 1" class="fw-400 mb-0
                                                 font-size-14 line-20
                                                 color-black">{{selectedScheduling.announcement?.parkingSpaces}}
                                 Vagas</p>
+                            <p *ngIf="selectedScheduling.announcement?.parkingSpaces === 0 || selectedScheduling.announcement?.parkingSpaces === 1" class="fw-400 mb-0
+                                                font-size-14 line-20
+                                                color-black">{{selectedScheduling.announcement?.parkingSpaces}}
+                                Vaga</p>
                         </div>
                         <div class="col justify-content-left
                                             px-0 d-flex
@@ -253,8 +265,11 @@
                         <div class="col-3">
                             <div class="d-flex justify-content-center align-items-center">
                                 <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
-                                <p class="fw-400 mb-0 font-size-12 little-text-mobile line-20
-                                                 color-black">{{selectedScheduling.announcement?.suites || 0}} Suítes
+                                <p *ngIf="selectedScheduling.announcement?.suites > 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                 color-black">{{selectedScheduling.announcement?.suites}} Suítes
+                                </p>
+                                <p *ngIf="selectedScheduling.announcement?.suites === 0 || selectedScheduling.announcement?.suites === 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                 color-black">{{selectedScheduling.announcement?.suites}} Suíte
                                 </p>
                             </div>
                         </div>
@@ -284,7 +299,9 @@
                                 </ng-template>
                             </ngb-rating>
                         </div>
-                        <textarea class="fw-400 w-100 my-3 font-size-14 color-black border border-radius-10 px-3 py-3" formControlName="ratingMessage" name="" id="" rows="3" placeholder="Conta pra gente como foi"></textarea>
+                        <textarea class="fw-400 w-100 my-3 font-size-14 color-black border border-radius-10 px-3 py-3"
+                            formControlName="ratingMessage" name="" id="" rows="3"
+                            placeholder="Conta pra gente como foi"></textarea>
                         <div class="w-100 mt-3 d-flex">
                             <button type="submit" (click)="submitReview()"
                                 class="btn bg-purple text-light border-radius-10 h-74 w-100 mr-1 fw-700 font-size-18 line-24">
@@ -379,12 +396,8 @@
                                         w-100">Confirmar
                         </button>
                         <button type="submit" data-dismiss="modal" aria-label="Close"
-                        (click)="editScheduling(selectedScheduling)" [disabled]="form.invalid" class="btn pb-2
-                                        bg-purple fw-700
-                                        font-size-18 line-24
-                                        text-light mt-3
-                                        border-radius-10 h-74
-                                        w-100">Reagendar
+                            (click)="editScheduling(selectedScheduling)" [disabled]="form.invalid"
+                            class="btn pb-2 mt-3 border-purple bg-white fw-700 font-size-18 line-24 color-purple border-radius-10 h-74 w-100">Reagendar
                         </button>
                     </div>
                 </form>
