@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProposalGetResponseDto } from '../../../../../dtos/proposal-get-response.dto';
@@ -12,7 +12,7 @@ import { ProposalCancelModalComponent } from '../proposal-cancel-modal/proposal-
 })
 export class ProposalSelectedModalComponent implements OnInit {
 
-  selectedProposal: ProposalGetResponseDto;
+  @Input() selectedProposal: ProposalGetResponseDto;
   recentlySeenList: any = [];
 
   location = false;
@@ -24,8 +24,6 @@ export class ProposalSelectedModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let selectedProposal = localStorage.getItem('proposalChecked');
-    this.selectedProposal = JSON.parse(selectedProposal)
   }
 
   public toNumber(paremetro1: string) {
@@ -109,6 +107,7 @@ export class ProposalSelectedModalComponent implements OnInit {
   
 
   goExpress(item) {
+    localStorage.setItem('counterProposalInProposal', item._id)
     this.router.navigate([`logged/express/${item.announcement._id}`]);
     this.exit();
   }
