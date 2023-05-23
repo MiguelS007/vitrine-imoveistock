@@ -8,29 +8,32 @@
                         Resultado de busca
                     </span>
                 </p>
-                <p class="fw-700 font-size-24 line-40 color-black">Resultado da sua busca por
+                <p class="fw-700 font-size-24 line-40 color-black teste-desktop">Resultado da sua busca por
                     <span class="font-size-14 row d-flex justify-content-evenly">
-                      <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar</span>
-                      <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar</span>
-                      <span class="result-filter"
-                        *ngFor="let item of filtroResultDisplay.propertyTypeList | slice:0:5; let i = index">
-                        <span *ngIf="i <=3">{{item.item_text}}<b></b></span>
-                        <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay.propertyTypeList.length - 4)}}</span>
-                      </span>
-                      <span class="result-filter" *ngIf="filtroResultDisplay.ufAddress && filtroResultDisplay.cityAddress">
-                        {{filtroResultDisplay.cityAddress+", "+filtroResultDisplay.ufAddress}}</span>
-                      <span class="result-filter" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
-                        Quartos</span>
-                      <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}}</span>
+                        <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar</span>
+                        <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar</span>
+                        <span class="result-filter"
+                            *ngFor="let item of filtroResultDisplay.propertyTypeList | slice:0:5; let i = index">
+                            <span *ngIf="i <=3">{{item.item_text}}<b></b></span>
+                            <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay.propertyTypeList.length -
+                                4)}}</span>
+                        </span>
+                        <span class="result-filter"
+                            *ngIf="filtroResultDisplay.ufAddress && filtroResultDisplay.cityAddress">
+                            {{filtroResultDisplay.cityAddress+", "+filtroResultDisplay.ufAddress}}</span>
+                        <span class="result-filter" *ngIf="filtroResultDisplay.bedrooms">
+                            +{{filtroResultDisplay.bedrooms}}
+                            Quartos</span>
+                        <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}}</span>
                     </span>
-                  </p>
+                </p>
                 <div style="width: 100px;" [routerLink]="['/search']"
                     class="px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex justify-content-center bg-purple align-items-center border-radius-10">
                     <i class="bi bi-list thinks-small text-light pr-2"></i>
                     <span class="fw-700 font-size-12 thinks-small line-24 text-light">Ver&nbsp;Lista</span>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-7 teste-desktop">
                 <div class="col-12 mt-4 d-flex flex-column justify-content-center"
                     *ngIf="selectedAnouncements && selectedAnouncements.length <= 0">
                     <img src="../../../assets/img/not-search-announcement.svg" height="80">
@@ -139,9 +142,9 @@
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <img src="../../../assets/icon/suites.svg" width="18px"
                                                     class="pr-2 mobile-w" />
-                                                    <p *ngIf="item.suites > 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                <p *ngIf="item.suites > 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
                                                         color-black">{{item.suites}} Suítes</p>
-                                                    <p *ngIf="item.suites === 0 || item.suites === 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                                <p *ngIf="item.suites === 0 || item.suites === 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
                                                         color-black">{{item.suites}} Suíte</p>
                                             </div>
                                         </div>
@@ -154,9 +157,8 @@
                         <div class="col-12 my-5 py-5 justify-content-center">
                             <div *ngIf="selectedAnouncements.length > 2" class="d-flex flex-fill
                                justify-content-center">
-                                <pagination-controls (pageChange)="pagination=$event;"
-                                previousLabel="Anterior"
-                                nextLabel="Próximo">
+                                <pagination-controls (pageChange)="pagination=$event;" previousLabel="Anterior"
+                                    nextLabel="Próximo">
                                 </pagination-controls>
                             </div>
                         </div>
@@ -171,20 +173,21 @@
         </div>
     </div>
 </main>
-<section class="container maps">
-    <div class="row mt-5 pt-5">
-        <div class="col-12 mt-5">
-            <button [routerLink]="['/search']" type="button"
-                class="btn w-100 px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex bg-purple align-items-center border-radius-10">
-                <i class="bi bi-list thinks-small text-light pr-2"></i>
-                <span class="fw-700 font-size-12 thinks-small line-24 text-light">Ver&nbsp;Lista</span>
-            </button>
-        </div>
-        <div class="col-12 mt-4">
-            <google-map [center]="center" [zoom]="zoom" [width]="450" [height]="550" [options]="mapOptions"
-                (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map>
-                <br />
-            </google-map>
+<!-- <main class="bg-graylight d-flex justify-content-center position-relative w-100 py-5 px-5p teste-mobile">
+    <div class="padding-x w-100 max-w-1918 mb-5">
+        <div class="row form-search mt-5 h-100 m-0-auto">
+            <div class="col-12 mt-5">
+                <button [routerLink]="['/search']" type="button"
+                    class="btn w-100 px-4 cursor-pointer btn-map-mobile h-51 mt-3 d-flex bg-purple align-items-center border-radius-10">
+                    <i class="bi bi-list thinks-small text-light pr-2"></i>
+                    <span class="fw-700 font-size-12 thinks-small line-24 text-light">Ver&nbsp;Lista</span>
+                </button>
+            </div>
+            <div class="col-lg-5 pt-5">
+                <google-map [center]="center" [zoom]="zoom" [width]="450" [options]="mapOptions"
+                    (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map>
+                </google-map>
+            </div>
         </div>
     </div>
-</section>
+</main> -->
