@@ -653,6 +653,25 @@ export class SearchPageComponent implements OnInit {
     return text.toLocaleLowerCase();
   }
 
+  customFilter(items: { cidade: string; estado: string, render: string }[], query: string): { cidade: string; estado: string, render: string }[] {
+    function removerAcento(text: string): string {
+      text = text.toLowerCase();
+      text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
+      text = text.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
+      text = text.replace(new RegExp('[ÍÌÎ]', 'gi'), 'i');
+      text = text.replace(new RegExp('[ÓÒÔÕ]', 'gi'), 'o');
+      text = text.replace(new RegExp('[ÚÙÛ]', 'gi'), 'u');
+      text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
+      return text.toLocaleLowerCase();
+    }
+    if(query.length < 2) {
+      return[]
+    }
+    return items.filter(a => {
+      return removerAcento(a.render).includes(removerAcento(query))
+    })
+  }
+
   sortPriceList(value: string) {
     this.listOfPrices = this.filterResult;
     if (value === 'minor>major') this.listOfPrices.sort((a, b) => a.saleValue < b.saleValue ? -1 : 0);
