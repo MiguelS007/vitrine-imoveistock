@@ -661,7 +661,7 @@ export class ExpressProposalComponent implements OnInit {
         localStorage.removeItem('counterProposalInProposal')
       },
       error: error => {
-        if (error.error.errors === 'there is no proposal denied') {
+        if (error?.error?.errors === 'there is no proposal denied') {
           this.toastrService.error('Ja existe uma proposta em negociação neste anúncio!', '', { progressBar: true });
         } else {
           this.toastrService.error('Erro ao enviar contra proposta!', '', { progressBar: true });
