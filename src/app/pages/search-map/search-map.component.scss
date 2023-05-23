@@ -1,19 +1,37 @@
 .card-product-map {
-    width: 47% !important;
-    margin-left: 0 !important;
+  width: 47% !important;
+  margin-left: 0 !important;
 }
 
 
-@media only screen and (max-width: 998px) {
-   .hide{
-    display: none ;
-   
-   }
+// @media only screen and (max-width: 998px) {
+//    .hide{
+//     display: none ;
+
+//    }
+//   }
+
+//   @media only screen and (min-width: 998px) {
+//     .maps{
+//      display: none ;
+
+//     }
+//    }
+
+.teste-mobile {
+  display: none !important;
+}
+
+.teste-desktop {
+  display: block !important;
+}
+
+@media (max-width: 998px) {
+  .teste-mobile {
+    display: block !important;
   }
 
-  @media only screen and (min-width: 998px) {
-    .maps{
-     display: none ;
-    
-    }
-   }
+  .teste-desktop {
+    display: none !important;
+  }
+}
