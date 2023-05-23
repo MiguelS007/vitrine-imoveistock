@@ -19,18 +19,36 @@ export class FooterComponent implements OnInit {
 
   ) { }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
   }
 
   openTermsModal(value: string){
     this.userService.termsOrPolitic = value;
     this.modalService.open(TermsComponent,{size:"lg"})
   }
-  
+
   handlerLoggedLinks(url: string): string {
     if (url === '/auth/login')
       return 'footer-log';
     return 'footer-';
   }
 
+  goToFacebook() {
+    window.open('https://www.facebook.com/imoveistock', '_blank')
+  }
+  goToInstagram() {
+    window.open('https://www.instagram.com/imoveistock/', '_blank')
+  }
+  goToLinkedin() {
+    window.open('https://www.linkedin.com/company/imoveistock/', '_blank')
+  }
+  goToYoutube() {
+    window.open('https://www.youtube.com/@imoveistock5198', '_blank')
+  }
+  goToWhatsAppWeb() {
+    window.open('https://web.whatsapp.com/send?phone=+551140037764', '_blank')
+  }
+  goToWhatsAppMobile() {
+    window.open('https://api.whatsapp.com/send?phone=551140037764', '_blank')
+  }
 }
