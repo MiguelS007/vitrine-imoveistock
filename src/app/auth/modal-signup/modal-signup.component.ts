@@ -36,7 +36,7 @@ export class ModalSignupComponent implements OnInit {
       name: ['', [Validators.required]],
       cpf: ['', [Validators.required]],
       termsAndPolicy: [false, [Validators.requiredTrue]],
-      addressZipCode: ['', [Validators.required]]
+      addressZipCode: ['', [Validators.required, Validators.minLength(8)]]
     })
   }
 
