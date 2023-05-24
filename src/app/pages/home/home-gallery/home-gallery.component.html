@@ -15,7 +15,7 @@
                 [slidesPerView]="1" [pagination]="{ clickable: true }" [scrollbar]="true">
                 <ng-template class="w-100" swiperSlide>
                     <div class="row col-md-5 px-0 m-0-auto max-w-1918">
-                        <div class="col-4 mt-3 col-gallery">
+                        <div class="col-4 mt-3 col-gallery" (click)='searchByDistrict("Jardim Botânico")'>
                             <div class="bg-city-01 h-500 align-items-end d-flex w-100 border-radius-10">
                                 <p class="d-grid w-100 h-fit text-center">
                                     <span class="fw-700 font-size-18 line-24 text-light">Jardim Botânico</span>
@@ -23,7 +23,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-8 mt-3 col-gallery">
+                        <div class="col-8 mt-3 col-gallery" (click)='searchByDistrict("Centro")'>
                             <div class="bg-city-02 h-500 align-items-end d-flex w-100 border-radius-10">
                                 <p class="d-grid w-100 h-fit text-center">
                                     <span class="fw-700 font-size-18 line-24 text-light">Centro</span>
@@ -31,7 +31,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-8 col-gallery mt-3">
+                        <div class="col-8 col-gallery mt-3" (click)='searchByDistrict("Champagnat")' >
                             <div class="bg-city-03 h-500 align-items-end d-flex w-100 border-radius-10">
                                 <p class="d-grid w-100 h-fit text-center">
                                     <span class="fw-700 font-size-18 line-24 text-light">Champagnat</span>
@@ -39,7 +39,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-4 col-gallery mt-3">
+                        <div class="col-4 col-gallery mt-3" (click)='searchByDistrict("Ecoville")'>
                             <div class="bg-city-04 h-500 align-items-end d-flex w-100 border-radius-10">
                                 <p class="d-grid w-100 h-fit text-center">
                                     <span class="fw-700 font-size-18 line-24 text-light">Ecoville</span>
@@ -51,7 +51,7 @@
                 </ng-template>
                 <ng-template class="w-100" swiperSlide>
                     <div class="row col-md-5 px-0 m-0-auto max-w-1918">
-                        <div class="col-4 mt-3 col-gallery">
+                        <div class="col-4 mt-3 col-gallery" (click)='searchByDistrict("Cabral")'>
                             <div class="bg-city-05 h-500 align-items-end d-flex w-100 border-radius-10">
                                 <p class="d-grid w-100 h-fit text-center">
                                     <span class="fw-700 font-size-18 line-24 text-light">Cabral</span>
@@ -59,7 +59,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-8 mt-3 col-gallery">
+                        <div class="col-8 mt-3 col-gallery" (click)='searchByDistrict("Centro Cívico")'>
                             <div class="bg-city-06 h-500 align-items-end d-flex w-100 border-radius-10">
                                 <p class="d-grid w-100 h-fit text-center">
                                     <span class="fw-700 font-size-18 line-24 text-light">Centro Cívico</span>
@@ -67,7 +67,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-8 col-gallery mt-3">
+                        <div class="col-8 col-gallery mt-3" (click)='searchByDistrict("Água Verde")'>
                             <div class="bg-city-07 h-500 align-items-end d-flex w-100 border-radius-10">
                                 <p class="d-grid w-100 h-fit text-center">
                                     <span class="fw-700 font-size-18 line-24 text-light">Água Verde</span>
@@ -75,7 +75,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-4 col-gallery mt-3">
+                        <div class="col-4 col-gallery mt-3" (click)='searchByDistrict("Santa Felicidade")'>
                             <div class="bg-city-08 h-500 align-items-end d-flex w-100 border-radius-10">
                                 <p class="d-grid w-100 h-fit text-center">
                                     <span class="fw-700 font-size-18 line-24 text-light">Santa Felicidade</span>

@@ -113,6 +113,12 @@ export class AnnouncementService extends BaseService {
             .get(`${this.url}/list-filter?${queryParams}`, this.anonymousHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
+
+    listByDistrict(district:string):Observable<AnnouncementGetResponseDto[]>{
+        return this.httpClient
+            .get(`${this.url}/list-by-district?district=${district}`, this.anonymousHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
     
 
 }

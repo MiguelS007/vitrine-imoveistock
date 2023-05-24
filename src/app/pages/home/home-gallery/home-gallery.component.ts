@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AnnouncementService} from '../../../service/announcement.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-gallery',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeGalleryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private announcementService:AnnouncementService,private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  searchByDistrict(district: string){
+    this.announcementService.listByDistrict(district).subscribe({
+      next: (data) => {
+        localStorage.setItem('resultSearch', JSON.stringify(data));
+        this.router.navigate(['/search']);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 
 }
