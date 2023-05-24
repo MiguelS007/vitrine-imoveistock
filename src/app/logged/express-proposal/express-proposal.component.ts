@@ -173,6 +173,7 @@ export class ExpressProposalComponent implements OnInit {
     if (localStorage.getItem('counterProposalInProposal') !== null) {
       this.proposalService.getById(localStorage.getItem('counterProposalInProposal')).subscribe({
         next: data => {
+          this.sendRescheduling = true;
           this.proposalResponse = data;
         }
       })
@@ -260,6 +261,7 @@ export class ExpressProposalComponent implements OnInit {
       this.modalwarning = true;
 
       this.spaceCustomizeProposal = true;
+      window.scrollTo(0, 1000);
     } else if (value === 'close') {
       this.modalcustomizedproposal = false;
       this.modalsendproposalexpress = false;
@@ -319,16 +321,21 @@ export class ExpressProposalComponent implements OnInit {
           }
         }
       }
-      console.log(this.request)
-      this.proposalService.register(this.request).subscribe({
-        next: data => {
-          this.toastrService.success('Proposta enviada!', '', { progressBar: true })
-          this.modalsendproposalexpress = false;
-        },
-        error: error => {
-          this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true })
-        }
-      })
+      
+      if (this.proposalResponse?.proposal) {
+        this.sendCounterProposal(this.request)
+      } else {
+        this.sendProposal(this.request)
+      }
+      // this.proposalService.register(this.request).subscribe({
+      //   next: data => {
+      //     this.toastrService.success('Proposta enviada!', '', { progressBar: true })
+      //     this.modalsendproposalexpress = false;
+      //   },
+      //   error: error => {
+      //     this.toastrService.error('Erro ao enviar proposta!', '', { progressBar: true })
+      //   }
+      // })
     } else if (value === 'cancelar') {
       this.modalsendproposalexpress = false;
     }
@@ -576,7 +583,7 @@ export class ExpressProposalComponent implements OnInit {
       }
 
 
-      if (this.proposalResponse.counterProposal) {
+      if (this.proposalResponse?.proposal) {
         this.sendCounterProposal(this.request)
       } else {
         this.sendProposal(this.request)
@@ -618,9 +625,8 @@ export class ExpressProposalComponent implements OnInit {
           comment: this.formCustomizeProposal.controls['comment'].value,
           announcementId: this.response._id
         }
-        console.log('teste', this.proposalResponse)
 
-        if (this.proposalResponse) {
+        if (this.proposalResponse.proposal) {
           this.sendCounterProposal(this.request)
         } else {
           this.sendProposal(this.request)
@@ -632,6 +638,8 @@ export class ExpressProposalComponent implements OnInit {
 
 
   sendProposal(request) {
+    console.log('request sendProposal', request);
+    
     this.proposalService.register(request).subscribe({
       next: data => {
         this.toastrService.success('Proposta enviada!', '', { progressBar: true });
@@ -644,20 +652,21 @@ export class ExpressProposalComponent implements OnInit {
   }
 
   sendCounterProposal(request) {
-    Object.assign(this.request, { parentProposalId: this.proposalResponse.counterProposal._id })
+    console.log('request sendCounterProposal', request);
+      
+    Object.assign(this.request, { parentProposalId: this.proposalResponse?.counterProposal?._id  || this.proposalResponse?.proposal?._id })
     this.proposalService.counterProposal(this.request).subscribe({
       next: data => {
         this.toastrService.success('Contra proposta enviada!', '', { progressBar: true });
         this.ngOnInit();
-        localStorage.removeItem('counter-proposal')
+        localStorage.removeItem('counterProposalInProposal')
       },
       error: error => {
-        if (error.error.errors[0] === 'there is no proposal denied') {
+        if (error?.error?.errors === 'there is no proposal denied') {
           this.toastrService.error('Ja existe uma proposta em negociação neste anúncio!', '', { progressBar: true });
         } else {
           this.toastrService.error('Erro ao enviar contra proposta!', '', { progressBar: true });
         }
-        console.log(error)
       }
     })
   }

@@ -275,10 +275,15 @@ export class PropertyDetailComponent implements OnInit {
       valueIptu +
       parseInt(this.response.condominiumValue) +
       parseInt(this.response.saleValue);
-    this.finalValueRent =
-      valueIptu +
-      parseInt(this.response.condominiumValue) +
-      parseInt(this.response.leaseValue);
+    this.finalValueRent = parseInt(this.response.leaseValue);
+
+    if (valueIptu) {
+      this.finalValueRent +=valueIptu;
+    }
+
+    if (this.response.condominiumValue) {
+      this.finalValueRent += parseInt(this.response.condominiumValue);
+    }
 
     if (localStorage.getItem('user') !== null) {
       this.announcementService.listLikes().subscribe((success) => {
@@ -415,6 +420,7 @@ export class PropertyDetailComponent implements OnInit {
         }
       }
       this.router.navigate([`logged/express/${this.response._id}`]);
+      window.scrollTo(0, 0);
     } else {
       this.modalService.open(ModalLoginComponent, { centered: true });
     }
