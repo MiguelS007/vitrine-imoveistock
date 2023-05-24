@@ -242,7 +242,7 @@
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/TAMANHO-DO-AP-PRETO.svg" alt="" width="25" height="36">
                 <div class="d-flex flex-column">
-                  <p class="mb-0 ml-3">{{response.usefulArea | currency: ' '}}m²</p>
+                  <p class="mb-0 ml-3">{{response.usefulArea | currency: ' ':'symbol':'1.0'}}m²</p>
                   <p class="font-size-9 mb-0 ml-3 text-right">{{toNumber(response.saleValue) /
                     toNumber(response.usefulArea) |
                     currency: 'R$':'symbol':'1.0'}}/m²</p>
@@ -251,7 +251,7 @@
               <div *ngIf="response.typeOfAd === 'rent' || !valueViewSelectSale"
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/TAMANHO-DO-AP-PRETO.svg" alt="" width="25" height="36">
-                <p class="mb-0 ml-3">{{response.usefulArea | currency: ' '}}m²</p>
+                <p class="mb-0 ml-3">{{response.usefulArea | currency: ' ':'symbol':'1.0'}}m²</p>
               </div>
               <div *ngIf="response.bedrooms > 0" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO QUARTOS.svg" alt="" width="25" height="36">
@@ -456,7 +456,7 @@
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Area do imóvel:</td>
                     <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.usefulArea |
-                      currency: ' '}}m²</td>
+                      currency: ' ':'symbol':'1.0'}}m²</td>
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Tipo de uso:</td>
