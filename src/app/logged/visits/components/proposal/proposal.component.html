@@ -19,7 +19,7 @@
                             <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
                                 Banheiros:&nbsp;{{item.announcement?.bathrooms || '-'}}</h2>
                             <h2 class="fw-400 d-inline-block font-size-14 m-1 line-19 color-black">
-                                Metragem:&nbsp;{{item.announcement?.usefulArea | currency: ' ' || '-'}}m²</h2>
+                                Metragem:&nbsp;{{item.announcement?.usefulArea | currency: ' ':'symbol':'1.0' || '-'}}m²</h2>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                     <div class="col justify-content-left px-0 d-flex align-items-center justify-content-left">
                         <img src="../../../assets/icon/rule.png" class="pr-2" />
                         <p class="fw-400 mb-0 font-size-14 line-20 color-black">
-                            {{selectedProposal?.proposal?.announcement?.usefulArea |currency: ' '}} m2</p>
+                            {{selectedProposal?.proposal?.announcement?.usefulArea |currency: ' ':'symbol':'1.0'}} m2</p>
                     </div>
                 </div>
                 <div class="row">
