@@ -1,0 +1,17 @@
+@media(max-width: 1023px) {
+  #responsive-link-web {
+    display: none !important;
+  }
+  #responsive-link-mobile {
+    display: block !important;
+  }
+}
+
+@media(min-width: 1024px) {
+  #responsive-link-web {
+    display: block !important;
+  }
+  #responsive-link-mobile {
+    display: none !important;
+  }
+}

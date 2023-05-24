@@ -16,7 +16,7 @@
             <input type="tel" mask="(00) 00000-0000" formControlName="phone"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="Celular"/>
-            <input type="addressZipCode" mask="00000-000" formControlName="addressZipCode"
+            <input type="tel" mask="00000-000" formControlName="addressZipCode"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="CEP"/>
             <input type="tel" mask="000.000.000-00" formControlName="cpf"
@@ -35,10 +35,10 @@
                 e ciente da
                 <a (click)="openTermsModal('politica')" class="fw-700 font-size-14 line-18 text-primary">Política de
                     Privacidade</a> da
-                Imoveistock
+                imoveistock
             </label>
         </div>
-        <button type="sumbit" (click)="confirm()" [disabled]="this.form.controls['termsAndPolicy'].value !== true "
+        <button type="sumbit" (click)="confirm()" [disabled]="form.controls['termsAndPolicy'].value !== true || form.invalid"
             class="btn pb-2 mt-3 bg-purple fw-700  font-size-18 line-24 text-light border-radius-10 h-74 w-100">Continuar
         </button>
     </div>

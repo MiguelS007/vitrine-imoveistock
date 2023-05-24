@@ -49,6 +49,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./logged/logged.module')
         .then(m => m.LoggedModule)
+  },
+  {
+    path: '**',
+    pathMatch:'full',
+    redirectTo: ''
   }
 ]
 @NgModule({
