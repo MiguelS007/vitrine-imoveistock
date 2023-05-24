@@ -97,11 +97,17 @@ export class HomeHeaderComponent implements OnInit {
     itemsShowLimit: 3,
     searchPlaceholderText: 'Procurar',
     allowSearchFilter: true,
+    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!'
   };
 
   @ViewChild('dropdownRef') dropdownRef: any;
 
   viewLabelValueMax: boolean = true;
+
+  labelValueSale: any = 'Valor até';
+  labelValueRent: any = 'Valor até';
+
+  labelValueBadroom: any = 'Quartos';
 
   constructor(
     private router: Router,
@@ -145,10 +151,18 @@ export class HomeHeaderComponent implements OnInit {
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
   }
 
-  
+
 
   removeLabel(event) {
     this.viewLabelValueMax = false;
+  }
+
+  selectValueSale(item) {
+    this.labelValueSale = item
+  }
+
+  selectValueRent(item) {
+    this.labelValueRent = item
   }
 
   onItemSelect(item: any) {
@@ -181,8 +195,8 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
 
-  onDropDownClose(event: any) {
-    console.log('close')
+  selectValueBadroom(item) {
+    this.labelValueBadroom = item
   }
 
   onChangeSearch(search: string) { }
@@ -196,6 +210,27 @@ export class HomeHeaderComponent implements OnInit {
     });
   }
 
+  customFilter(items: { cidade: string; estado: string, render: string }[], query: string): { cidade: string; estado: string, render: string }[] {
+    function removerAcento(text: string): string {
+      text = text.toLowerCase();
+      text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
+      text = text.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
+      text = text.replace(new RegExp('[ÍÌÎ]', 'gi'), 'i');
+      text = text.replace(new RegExp('[ÓÒÔÕ]', 'gi'), 'o');
+      text = text.replace(new RegExp('[ÚÙÛ]', 'gi'), 'u');
+      text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
+      return text.toLocaleLowerCase();
+    }
+    if(query.length < 2) {
+      return[]
+    }
+    return items.filter(a => {
+      return removerAcento(a.render).includes(removerAcento(query))
+    })
+  }
+
+
+
   confirm() {
     if (this.stateSelected === 'Primeiro escolha um estado')
       this.form.controls['typePropertyState'].setValue('');
@@ -205,18 +240,35 @@ export class HomeHeaderComponent implements OnInit {
       state: this.form.controls['typePropertyState'].value,
       city: this.getSelectedCity,
       allResidential: this.typepropertyfull,
-      untilValueSale: this.form.controls['typePropertyValueSale'].value,
-      untilValueRent: this.form.controls['typePropertyValueRent'].value,
+      untilValueSale: !isNaN(this.labelValueSale) ? Number(this.labelValueSale) : (typeof this.labelValueSale === 'string' ? 0 : this.labelValueSale),
+      untilValueRent: !isNaN(this.labelValueRent) ? Number(this.labelValueRent) : (typeof this.labelValueRent === 'string' ? 0 : this.labelValueRent),
       goal: this.goal, //residencial , comercial
       // residencial
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
-      badRoomsQnt: this.form.controls['typePropertyBadrooms'].value,
+      badRoomsQnt: !isNaN(this.labelValueBadroom) ? Number(this.labelValueBadroom) : (typeof this.labelValueBadroom === 'string' ? 0 : this.labelValueBadroom),
     };
 
     let city = this.getSelectedCity !== undefined ? this.getSelectedCity : '';
 
-    let initialValue: number =
-      filter.untilValueSale !== undefined ? filter.untilValueSale : 0;
+    let initialValue: number;
+
+    if (filter.typeAd === 'sale') {
+      initialValue = filter.untilValueSale;
+    } else if (filter.typeAd === 'rent') {
+      initialValue = filter.untilValueRent;
+    } else {
+      initialValue = 0;
+    }
+
+    let finalValue: number;
+
+    if (filter.typeAd === 'sale') {
+      finalValue = filter.untilValueSale;
+    } else if (filter.typeAd === 'rent') {
+      finalValue = filter.untilValueRent;
+    } else {
+      finalValue = 0;
+    }
 
     let propertyTypeList = this.form.controls['propertyType'].value?.map(
       (item: any) => item.item_id
@@ -228,12 +280,9 @@ export class HomeHeaderComponent implements OnInit {
       cityAddress: city,
       ufAddress: filter.state,
       initialValue: initialValue,
-      finalValue: filter.untilValueSale,
+      finalValue: finalValue,
       bedrooms: filter.badRoomsQnt,
     };
-
-    console.log(requestList, 'request');
-
 
     this.announcementService.listFilter(requestList).subscribe({
       next: (data) => {
@@ -245,7 +294,7 @@ export class HomeHeaderComponent implements OnInit {
         this.router.navigate(['/search']);
       },
       error: (error) => {
-        console.log(error);
+        console.error(error);
       },
     });
   }
@@ -255,15 +304,11 @@ export class HomeHeaderComponent implements OnInit {
     if (value === 'sale') {
       this.collapsed = false;
       this.viewLabelValueMax = true;
-      this.form.patchValue({
-        typePropertyValueSale: ''
-      })
+      this.labelValueRent = 'Valor até'
     } else if (value === 'rent') {
       this.collapsed = true;
       this.viewLabelValueMax = true;
-      this.form.patchValue({
-        typePropertyValueRent: ''
-      })
+      this.labelValueSale = 'Valor até'
     }
   }
 

@@ -29,7 +29,7 @@ export class ProposalService extends BaseService {
 
     counterProposal(dto: ProposalRequestDto): Observable<any> {
         return this.httpClient
-            .patch(`${this.url}/counter-proposal`, dto, this.authorizedHeader())
+            .post(`${this.url}/counter-proposal`, dto, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 

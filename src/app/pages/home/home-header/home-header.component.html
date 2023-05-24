@@ -72,7 +72,8 @@
                                         <ng-autocomplete [data]="listEveryCity" [isLoading]="listEveryCity.length == 0"
                                             [searchKeyword]="'render'" placeholder="Escolha uma cidade"
                                             [minQueryLength]="2" (selected)='selectEvent($event)'
-                                            [itemTemplate]="itemcityTemplate" [notFoundTemplate]="notFoundTemplate">
+                                            [itemTemplate]="itemcityTemplate" [notFoundTemplate]="notFoundTemplate"
+                                            [customFilter]="customFilter">
                                         </ng-autocomplete>
 
                                         <ng-template #itemcityTemplate let-item>
@@ -87,7 +88,7 @@
                                     <div class="col-12 px-0 mb-3">
                                         <div class="row">
                                             <div class="col-6 pr-0">
-                                                <div *ngIf="!collapsed"
+                                                <!-- <div *ngIf="!collapsed"
                                                     class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
                                                     <div style="border-right: 0px !important;"
                                                         class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
@@ -96,6 +97,7 @@
                                                             Valor até
                                                         </p>
                                                     </div>
+
                                                     <select formControlName="typePropertyValueSale"
                                                         style="border-left: 0px !important;"
                                                         class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
@@ -120,10 +122,54 @@
                                                         <option *ngFor="let item of valueUntilRentArray" [value]="item">
                                                             &nbsp;{{item | currency:'R$':'symbol':'1.0'}}</option>
                                                     </select>
+                                                </div> -->
+                                                <div *ngIf="typeAd === 'sale'" class="dropdown">
+                                                    <button
+                                                        class="btn w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic d-flex justify-content-between align-items-center"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <p *ngIf="labelValueSale !== 'Valor até'" class="mb-0">
+                                                            {{labelValueSale |
+                                                            currency:'R$':'symbol':'1.0'}}</p>
+                                                        <p *ngIf="labelValueSale === 'Valor até'" class="mb-0">Valor até
+                                                        </p>
+                                                        <i class="bi bi-caret-down-fill icon-standard-custom"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu mt-2 w-100"
+                                                        style="max-height: 200px; overflow-y: auto;"
+                                                        aria-labelledby="dropdownMenuButton">
+                                                        <div *ngFor="let item of valueUntilSaleArray">
+                                                            <a class="dropdown-item"
+                                                                (click)="selectValueSale(item)">&nbsp;{{item |
+                                                                currency:'R$':'symbol':'1.0'}}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="typeAd === 'rent'" class="dropdown">
+                                                    <button
+                                                        class="btn w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic d-flex justify-content-between align-items-center"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <p *ngIf="labelValueRent !== 'Valor até'" class="mb-0">
+                                                            {{labelValueRent |
+                                                            currency:'R$':'symbol':'1.0'}}</p>
+                                                        <p *ngIf="labelValueRent === 'Valor até'" class="mb-0">Valor até
+                                                        </p>
+                                                        <i class="bi bi-caret-down-fill icon-standard-custom"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu mt-2 w-100"
+                                                        style="max-height: 200px; overflow-y: auto;"
+                                                        aria-labelledby="dropdownMenuButton">
+                                                        <div *ngFor="let item of valueUntilRentArray">
+                                                            <a class="dropdown-item"
+                                                                (click)="selectValueRent(item)">&nbsp;{{item |
+                                                                currency:'R$':'symbol':'1.0'}}</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <div
+                                                <!-- <div
                                                     class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
                                                     <div style="border-right: 0px !important;"
                                                         class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
@@ -136,6 +182,26 @@
                                                         <option *ngFor="let item of badroomsArray" [value]="item">&nbsp;
                                                             {{item}} +</option>
                                                     </select>
+                                                </div> -->
+                                                <div class="dropdown">
+                                                    <button
+                                                        class="btn w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic d-flex justify-content-between align-items-center"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <p *ngIf="labelValueBadroom !== 'Quartos'" class="mb-0">
+                                                            {{labelValueBadroom}} +</p>
+                                                        <p *ngIf="labelValueBadroom === 'Quartos'" class="mb-0">Quartos
+                                                        </p>
+                                                        <i class="bi bi-caret-down-fill icon-standard-custom"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu mt-2 w-100"
+                                                        style="max-height: 100px; overflow-y: auto;"
+                                                        aria-labelledby="dropdownMenuButton">
+                                                        <div *ngFor="let item of badroomsArray">
+                                                            <a class="dropdown-item"
+                                                                (click)="selectValueBadroom(item)">&nbsp;{{item}}+</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

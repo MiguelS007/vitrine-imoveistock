@@ -79,7 +79,7 @@
             <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listEveryCity"
               [isLoading]="listEveryCity.length == 0" [searchKeyword]="'render'" placeholder="Escolha uma cidade"
               [minQueryLength]="2" (selected)='selectEvent($event)' [itemTemplate]="itemcityTemplate"
-              [notFoundTemplate]="notFoundTemplate">
+              [notFoundTemplate]="notFoundTemplate" [customFilter]="customFilter">
             </ng-autocomplete>
 
             <ng-template #itemcityTemplate let-item>
@@ -544,7 +544,7 @@
       <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listEveryCity"
         [isLoading]="listEveryCity.length == 0" [searchKeyword]="'render'" placeholder="Escolha uma cidade"
         [minQueryLength]="2" (selected)='selectEvent($event)' [itemTemplate]="itemModalTemplate"
-        [notFoundTemplate]="notFoundTemplate">
+        [notFoundTemplate]="notFoundTemplate" [customFilter]="customFilter">
       </ng-autocomplete>
 
       <ng-template #itemModalTemplate let-item>
