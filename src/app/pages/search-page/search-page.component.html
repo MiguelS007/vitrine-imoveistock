@@ -30,7 +30,7 @@
             <span *ngIf="filtroResultDisplay?.goal"> {{filtroResultDisplay.goal}}</span>
           </span>
         </p>
-        
+
         <button class="bg-purple btn text-light fw-500 font-size-18
         line-19 border-radius-10" (click)="clearAndSearch()">Limpar filtros</button>
       </div>
@@ -71,15 +71,17 @@
           </div>
 
           <div class="dropdown px-0 my-4">
-            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyDistrict" [data]="listDistricts" [disabled]="listDistricts.length == 0" [searchKeyword]="'district'" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
+            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyDistrict"
+            [data]="listDistricts" [isLoading]="listEveryCity.length == 0" [disabled]="listDistricts.length == 0" [searchKeyword]="'district'"
+             placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
               [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
               [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
-      
+
             <ng-template #itemDistrictsTemplate let-item>
               <a [innerHTML]="item.district"></a>
             </ng-template>
-      
+
             <ng-template #notFoundTemplate let-notFound>
               <div>Não encontrado</div>
             </ng-template>
@@ -549,9 +551,10 @@
         <div>Não encontrado</div>
       </ng-template>
     </div>
-    
+
     <div class="dropdown px-0 my-4">
-      <ng-autocomplete id="search-cityes-test" [data]="listDistricts" [disabled]="listDistricts.length == 0" [searchKeyword]="'district'" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
+      <ng-autocomplete id="search-cityes-test" [data]="listDistricts" [disabled]="listDistricts.length == 0"
+      [searchKeyword]="'district'" formControlName="typePropertyDistrict" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
         [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
         [notFoundTemplate]="notFoundTemplate">
       </ng-autocomplete>
