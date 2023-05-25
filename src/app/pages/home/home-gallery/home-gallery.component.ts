@@ -19,6 +19,7 @@ export class HomeGalleryComponent implements OnInit {
       next: (data) => {
         localStorage.setItem('resultSearch', JSON.stringify(data));
         this.router.navigate(['/search']);
+        window.scrollTo(0, 0);
       },
       error: (err) => {
         console.log(err);
