@@ -96,6 +96,7 @@ export class SearchPageComponent implements OnInit {
 
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
   listEveryCity: { cidade: string; estado: string; render: string }[] = [];
+  listDistricts: { district: string }[] = [];
 
   listOfPrices: any = [];
 
@@ -159,6 +160,7 @@ export class SearchPageComponent implements OnInit {
       propertyType: [''],
       typePropertyState: ['', [Validators.required]],
       typePropertyCity: ['', [Validators.required]],
+      typePropertyDistrict: '',
       typeMaxPrice: [''],
       typeMinPrice: [''],
       typeBathRoom: [''],
@@ -211,6 +213,7 @@ export class SearchPageComponent implements OnInit {
 
     if (filtro !== null) {
       filtro = JSON.parse(filtro);
+      this.listDistrictByCity(filtro.cityAddress);
 
       this.searchByTypeAd(filtro.typeOfAdd);
 
@@ -223,6 +226,7 @@ export class SearchPageComponent implements OnInit {
         typeStatus: filtro.typeOfAdd,
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
+        typePropertyDistrict: filtro?.district || '',
         typeMaxPrice: filtro.finalValue,
       });
 
@@ -240,6 +244,7 @@ export class SearchPageComponent implements OnInit {
       this.filtroResultDisplay = {
         ufAddress: filtro?.ufAddress,
         cityAddress: filtro?.cityAddress,
+        districtAddress: filtro?.districtAddress,
         initialValue: filtro?.initialValue,
         finalValue: filtro?.finalValue,
         bedrooms: filtro?.bedrooms,
@@ -330,6 +335,7 @@ export class SearchPageComponent implements OnInit {
         this.propertyproducts = data;
       },
     });
+    if (filtro?.cityAddress) this.selectEvent2(filtro?.cityAddress);
   }
 
   onItemSelect(item: any) {
@@ -392,6 +398,12 @@ export class SearchPageComponent implements OnInit {
       typePropertyCity: item.render,
       typePropertyState: item.estado,
     });
+
+    this.listDistrictByCity(item.cidade);
+  }
+
+  selectEvent2(item) {
+    this.form.controls['typePropertyDistrict'].setValue(item.district);
   }
 
   onChangeSearch(search: string) {}
@@ -557,6 +569,15 @@ export class SearchPageComponent implements OnInit {
     this.filtrar();
   }
 
+  listDistrictByCity(value) {
+    console.log(value);
+
+    this.announcementService.listDistrictsByCity(value).subscribe({
+      next: (response) => (this.listDistricts = response),
+      error: (error) => console.log(error),
+    });
+  }
+
   clearAndSearch() {
     this.filtroResultDisplay.propertyTypeList = [];
     this.selectedItems = [];
@@ -610,6 +631,10 @@ export class SearchPageComponent implements OnInit {
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
       cityAddress: city,
+      districtAddress:
+        this.form.controls['typePropertyDistrict'].value?.district ||
+        this.form.controls['typePropertyDistrict'].value ||
+        '',
       ufAddress:
         this.form.controls['typePropertyState'].value ||
         this.formModal.controls['typePropertyState'].value,
@@ -658,7 +683,7 @@ export class SearchPageComponent implements OnInit {
         this.messageNotSearch = false;
         localStorage.setItem('resultSearch', JSON.stringify(data));
         localStorage.setItem('filtro', JSON.stringify(request));
-
+        this.listDistrictByCity(this.getSelectedCity);
         if (this.filterResult.length === 0) {
           this.messageNotSearch = true;
           this.announcementService.listAnnouncement().subscribe(
