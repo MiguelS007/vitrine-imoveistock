@@ -119,6 +119,10 @@ export class AnnouncementService extends BaseService {
             .get(`${this.url}/list-by-district?district=${district}`, this.anonymousHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
-    
 
+    countDistrict():Observable<{district:string, count:number}[]>{
+        return this.httpClient
+        .get(`${this.url}/district-count`, this.anonymousHeader())
+        .pipe(map(this.extractData), catchError(this.serviceError));
+    }
 }

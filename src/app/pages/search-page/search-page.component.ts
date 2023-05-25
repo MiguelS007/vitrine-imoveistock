@@ -225,7 +225,7 @@ export class SearchPageComponent implements OnInit {
         typeMaxPrice: filtro.finalValue,
       });
 
-      if (filtro.propertyTypeList.length > 0)
+      if (filtro.propertyTypeList?.length > 0)
         this.selectedItems = [...filtro.propertyTypeList]
 
       this.formModal.patchValue({
