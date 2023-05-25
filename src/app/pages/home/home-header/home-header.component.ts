@@ -247,6 +247,7 @@ export class HomeHeaderComponent implements OnInit {
   confirm() {
     if (this.stateSelected === 'Primeiro escolha um estado')
       this.form.controls['typePropertyState'].setValue('');
+    console.log(this.form.value);
 
     let filter = {
       typeAd: this.typeAd,
