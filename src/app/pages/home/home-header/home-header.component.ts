@@ -118,6 +118,7 @@ export class HomeHeaderComponent implements OnInit {
     this.form = this.formBuilder.group({
       search: [''],
       propertyType: [''],
+      chooseCity: [''],
       typeStatus: ['sale', [Validators.required]],
       typeProperty: [''],
       typePropertyCity: ['', [Validators.required]],
