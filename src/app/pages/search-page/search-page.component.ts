@@ -560,16 +560,25 @@ export class SearchPageComponent implements OnInit {
   clearAndSearch() {
     this.filtroResultDisplay.propertyTypeList = [];
     this.selectedItems = [];
+
+    let city = this.getSelectedCity;
     let ufAddress =
       this.form.controls['typePropertyState'].value ||
       this.formModal.controls['typePropertyState'].value;
+
     this.form.reset();
     this.formModal.reset();
+
     this.form.controls['typePropertyState'].setValue(ufAddress);
+    this.form.controls['typePropertyCity'].setValue(
+      this.listEveryCity.find((x) => x.cidade === city)?.render || city
+    );
+
     this.searchByBadRoom('');
     this.searchBySuites('');
     this.searchByBathRoom('');
     this.searchByVacancies('');
+
     this.filtrar();
   }
 
