@@ -54,6 +54,7 @@ export class HomeHeaderComponent implements OnInit {
 
   getSelectedCity: string;
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
+  listDistricts: { district: string }[] = [];
   extensiveState: any;
 
   dropdownList = [
@@ -121,6 +122,7 @@ export class HomeHeaderComponent implements OnInit {
       chooseCity: [''],
       typeStatus: ['sale', [Validators.required]],
       typeProperty: [''],
+      typePropertyDistrict: [''],
       typePropertyCity: ['', [Validators.required]],
       typePropertyState: ['', [Validators.required]],
       typePropertyValueRent: [''],
@@ -209,6 +211,14 @@ export class HomeHeaderComponent implements OnInit {
       typePropertyCity: item.cidade,
       typePropertyState: item.estado,
     });
+    this.listDistrictByCity(item.cidade);
+  }
+
+  listDistrictByCity(value:string) {
+    this.announcementService.listDistrictsByCity(value).subscribe({
+      next: (response) => this.listDistricts = response,
+      error: (error) => console.log(error),
+    })
   }
 
   customFilter(items: { cidade: string; estado: string, render: string }[], query: string): { cidade: string; estado: string, render: string }[] {
@@ -230,7 +240,9 @@ export class HomeHeaderComponent implements OnInit {
     })
   }
 
-
+  selectEvent2(item) {
+    this.form.controls['typePropertyDistrict'].setValue(item.district);
+  }
 
   confirm() {
     if (this.stateSelected === 'Primeiro escolha um estado')
@@ -240,6 +252,7 @@ export class HomeHeaderComponent implements OnInit {
       typeAd: this.typeAd,
       state: this.form.controls['typePropertyState'].value,
       city: this.getSelectedCity,
+      district: this.form.controls['typePropertyDistrict'].value?.district || this.form.controls['typePropertyDistrict'].value || '',
       allResidential: this.typepropertyfull,
       untilValueSale: !isNaN(this.labelValueSale) ? Number(this.labelValueSale) : (typeof this.labelValueSale === 'string' ? 0 : this.labelValueSale),
       untilValueRent: !isNaN(this.labelValueRent) ? Number(this.labelValueRent) : (typeof this.labelValueRent === 'string' ? 0 : this.labelValueRent),
@@ -280,6 +293,7 @@ export class HomeHeaderComponent implements OnInit {
       propertyType: !!propertyTypeList ? propertyTypeList : [],
       cityAddress: city,
       ufAddress: filter.state,
+      districtAddress: filter?.district || '',
       initialValue: initialValue,
       finalValue: finalValue,
       bedrooms: filter.badRoomsQnt,

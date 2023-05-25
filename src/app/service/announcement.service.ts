@@ -73,6 +73,10 @@ export class AnnouncementService extends BaseService {
             queryParams += `&cityAddress=${dto.cityAddress}`
         }
 
+        if(dto.districtAddress) {
+            queryParams += `&districtAddress=${dto.districtAddress}`
+        }
+
         if(dto.initialValue && dto.initialValue > 1) {
             queryParams += `&initialValue=${dto.initialValue}`
         }
@@ -123,6 +127,12 @@ export class AnnouncementService extends BaseService {
     countDistrict():Observable<{district:string, count:number}[]>{
         return this.httpClient
         .get(`${this.url}/district-count`, this.anonymousHeader())
+        .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
+    listDistrictsByCity(city:string):Observable<{district: string}[]>{
+        return this.httpClient
+        .get(`${this.url}/list-districts-city/${city}`, this.anonymousHeader())
         .pipe(map(this.extractData), catchError(this.serviceError));
     }
 }
