@@ -393,7 +393,17 @@
                 <p class="mb-0 ml-3 text-muted"><del>Aceita Pet</del></p>
               </div>
             </div>
-
+            
+                        <div class="w-100 mt-4 px-5 pt-3 pb-4
+                    border-bottom-gray">
+              <span class="fw-700 font-size-18 line-24
+                       color-black">Título do anúncio</span>
+              <br />
+              <p class="fw-400 font-size-18 line-24 py-3
+                       color-black" style="white-space:pre-line">
+                {{response.title || '-'}}
+              </p>
+            </div>
             <div class="w-100 mt-4 px-5 pt-3 pb-4
                     border-bottom-gray">
               <span class="fw-700 font-size-18 line-24
@@ -403,6 +413,7 @@
               <p class="fw-400 font-size-18 line-24 py-3
                        color-black" style="white-space:pre-line">
                 {{response.description || '-'}}
+                {{response.title || '-'}}
               </p>
             </div>
 
