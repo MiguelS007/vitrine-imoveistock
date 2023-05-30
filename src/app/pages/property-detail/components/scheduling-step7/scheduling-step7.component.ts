@@ -47,6 +47,7 @@ export class SchedulingStep7Component implements OnInit {
 
   goToVisits() {
     this.modalService.dismissAll();
+    localStorage.setItem('goToVisits', 'true')
     this.router.navigate(['logged/visits'])
     localStorage.removeItem('dateScheduling');
     localStorage.removeItem('user-broker');
