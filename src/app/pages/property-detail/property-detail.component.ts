@@ -65,7 +65,7 @@ export class PropertyDetailComponent implements OnInit {
     );
 
     let interdistance = Math.trunc(scrollPosition);
-    if (interdistance > 950) {
+    if (interdistance > 680) {
       this.infopaymobile = true;
     } else {
       this.infopaymobile = false;
