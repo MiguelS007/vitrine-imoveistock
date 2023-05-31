@@ -28,6 +28,8 @@ export abstract class AnnouncementGetResponseDto {
 
     title: string;
 
+    code: number;
+
     numberAddress: string;
 
     complementAddress: string;
