@@ -118,11 +118,23 @@ export class AnnouncementService extends BaseService {
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
-    listByDistrict(district:string):Observable<AnnouncementGetResponseDto[]>{
+    listByDistrict(district: string): Observable<AnnouncementGetResponseDto[]> {
+        console.log('LISTANDOOOS')
         return this.httpClient
-            .get(`${this.url}/list-by-district?district=${district}`, this.anonymousHeader())
-            .pipe(map(this.extractData), catchError(this.serviceError));
-    }
+          .get<any>(`${this.url}/list-by-district?district=${district}`, this.anonymousHeader())
+          .pipe(
+            map(response => {
+              if (response && response.success && response.data && response.data.announcements) {
+                console.log('aqui monke', response)
+                return response.data.announcements as AnnouncementGetResponseDto[];
+              } else {
+                throw new Error('Falha ao obter os anúncios por distrito.');
+              }
+            }),
+            catchError(this.serviceError)
+          );
+      }
+      
 
     countDistrict():Observable<{district:string, count:number}[]>{
         return this.httpClient

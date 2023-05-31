@@ -195,20 +195,21 @@ export class SearchPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('SHOOOW SHOWWW DE BOLA')
     this.ngxSpinnerService.show();
 
-    for (let i = 0; i < this.estados.estados.length; i++) {
-      for (let j = 0; j < this.estados.estados[i].cidades.length; j++) {
+    this.estados.estados.forEach((estado) => {
+      estado.cidades.forEach((cidade) => {
         this.listEveryCity.push({
-          cidade: this.estados.estados[i].cidades[j],
-          estado: this.estados.estados[i].sigla,
-          render:
-            this.estados.estados[i].cidades[j] +
-            ' , ' +
-            this.estados.estados[i].sigla,
+          cidade,
+          estado: estado.sigla,
+          render: `${cidade}, ${estado.sigla}`,
         });
-      }
-    }
+      });
+    });
+
+
+
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
 
     let filtro: any = localStorage.getItem('filtro');
@@ -228,7 +229,7 @@ export class SearchPageComponent implements OnInit {
         typeStatus: filtro.typeOfAdd,
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
-        typePropertyDistrict: {district: filtro?.districtAddress || ''} ,
+        typePropertyDistrict: { district: filtro?.districtAddress || '' },
         typeMaxPrice: filtro.finalValue,
       });
 
@@ -238,7 +239,7 @@ export class SearchPageComponent implements OnInit {
       this.formModal.patchValue({
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
-        typePropertyDistrict: {district: filtro?.districtAddress || ''} ,
+        typePropertyDistrict: { district: filtro?.districtAddress || '' },
         typeMaxPrice: filtro.finalValue,
       });
 
@@ -268,6 +269,7 @@ export class SearchPageComponent implements OnInit {
       };
     }
 
+    console.log('AQUI 2')
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
 
@@ -290,6 +292,7 @@ export class SearchPageComponent implements OnInit {
 
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
+      console.log('EOQQ?', this.filterResult)
       this.announcementService.listAnnouncement().subscribe((success) => {
         this.filterResult = success;
         if (localStorage.getItem('user') !== null) {
@@ -322,6 +325,7 @@ export class SearchPageComponent implements OnInit {
     let teste: any = [];
     this.announcementService.listAnnouncement().subscribe({
       next: (data) => {
+        console.log('>>>A>>A>A', data)
         this.listAllCity = [];
         let removeRepets: any = [];
         for (let i = 0; i < data.length; i++) {
@@ -409,11 +413,11 @@ export class SearchPageComponent implements OnInit {
     // this.form.controls['typePropertyDistrict'].setValue(item.district);
     this.getSelectedDistrict = item.district;
     this.form.patchValue({
-      typePropertyDistrict:{district: item?.district || ''}
+      typePropertyDistrict: { district: item?.district || '' }
     });
   }
 
-  onChangeSearch(search: string) {}
+  onChangeSearch(search: string) { }
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -479,15 +483,15 @@ export class SearchPageComponent implements OnInit {
     const recentlySeen = JSON.parse(localStorage.getItem('recentlySeen')) || [];
     const verify = { _id: value };
     const exists = recentlySeen.some(item => item._id === value);
-  
+
     if (!exists) {
       recentlySeen.push(verify);
     }
-  
+
     localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
     window.open(`announcement/detail/${value}`, '_blank');
   }
-  
+
 
   searchByTypeAd(item) {
     if (item === 'sale') {
@@ -710,7 +714,7 @@ export class SearchPageComponent implements OnInit {
     this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(
-      (data) => {},
+      (data) => { },
       (error) => {
         this.modalFilterOpen = false;
       }

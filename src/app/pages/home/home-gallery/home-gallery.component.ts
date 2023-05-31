@@ -30,6 +30,7 @@ export class HomeGalleryComponent implements OnInit {
 
     this.announcementService.listByDistrict(district).subscribe({
       next: (data) => {
+        console.log('DATA API', data)
         localStorage.setItem('resultSearch', JSON.stringify(data));
         localStorage.setItem('filtro', JSON.stringify(requestList));
         this.router.navigate(['/search']);
