@@ -476,24 +476,18 @@ export class SearchPageComponent implements OnInit {
   }
 
   announcementSelected(value) {
-    let teste: any = localStorage.getItem('recentlySeen');
-    this.recentlySeenList = JSON.parse(teste);
-    let verify = { _id: value };
-    let list: any = this.recentlySeenList;
-    if (list === null) {
-      list = [];
+    const recentlySeen = JSON.parse(localStorage.getItem('recentlySeen')) || [];
+    const verify = { _id: value };
+    const exists = recentlySeen.some(item => item._id === value);
+  
+    if (!exists) {
+      recentlySeen.push(verify);
     }
-    if (this.recentlySeenList !== null) {
-      for (let i = 0; i < list.length; i++) {
-        if (list[i]._id !== value) {
-          list.push(verify);
-        }
-      }
-    }
-    this.recentlySeenList = list;
-    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList));
-    this.router.navigate([`announcement/detail/${value}`]);
+  
+    localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
+    window.open(`announcement/detail/${value}`, '_blank');
   }
+  
 
   searchByTypeAd(item) {
     if (item === 'sale') {
