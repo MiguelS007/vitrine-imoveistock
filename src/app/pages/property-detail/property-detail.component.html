@@ -2225,7 +2225,7 @@
                     | currency: 'R$ ':'symbol':'1.0' ||
                     '-'}}</span>
                   <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">{{finalValueRent |
-                    currency: 'R$ ':'symbol':'1.0' || '-'}}</span>
+                    currency: 'R$ ':'symbol':'1.0-0' || '-'}}</span>
                 </div>
               </div>
               <button (click)="scheduling(response)" class="bg-purple btn border-radius-10 h-74
@@ -2262,7 +2262,7 @@
           'R$':'symbol':'1.0' ||
           '-'}}</h3>
         <h3 *ngIf="response.typeOfAd === 'both' && !valueViewSelectSale">Total de aluguel {{finalValueRent | currency:
-          'R$':'symbol':'1.0' || '-'}}</h3>
+          'R$':'symbol':'1.0-0' || '-'}}</h3>
         <h3 *ngIf="response.typeOfAd === 'rent'">Total de aluguel {{finalValueRent | currency: 'R$':'symbol':'1.0-0' ||
           '-'}}</h3>
       </div>
