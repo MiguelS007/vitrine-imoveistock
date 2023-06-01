@@ -49,10 +49,12 @@ export class SearchPageComponent implements OnInit {
   urlsimg: any = [];
 
   filterResult: AnnouncementGetResponseDto[] = [];
+  totalResults: number = 0;
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
 
   orderBy: string = 'Selecione';
+  lastPaginationPage: number;
 
   recentlySeenIdsList: any = [];
 
@@ -197,18 +199,18 @@ export class SearchPageComponent implements OnInit {
   ngOnInit(): void {
     this.ngxSpinnerService.show();
 
-    for (let i = 0; i < this.estados.estados.length; i++) {
-      for (let j = 0; j < this.estados.estados[i].cidades.length; j++) {
+    this.estados.estados.forEach((estado) => {
+      estado.cidades.forEach((cidade) => {
         this.listEveryCity.push({
-          cidade: this.estados.estados[i].cidades[j],
-          estado: this.estados.estados[i].sigla,
-          render:
-            this.estados.estados[i].cidades[j] +
-            ' , ' +
-            this.estados.estados[i].sigla,
+          cidade,
+          estado: estado.sigla,
+          render: `${cidade}, ${estado.sigla}`,
         });
-      }
-    }
+      });
+    });
+
+
+
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
 
     let filtro: any = localStorage.getItem('filtro');
@@ -228,7 +230,7 @@ export class SearchPageComponent implements OnInit {
         typeStatus: filtro.typeOfAdd,
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
-        typePropertyDistrict: {district: filtro?.districtAddress || ''} ,
+        typePropertyDistrict: { district: filtro?.districtAddress || '' },
         typeMaxPrice: filtro.finalValue,
       });
 
@@ -238,7 +240,7 @@ export class SearchPageComponent implements OnInit {
       this.formModal.patchValue({
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
-        typePropertyDistrict: {district: filtro?.districtAddress || ''} ,
+        typePropertyDistrict: { district: filtro?.districtAddress || '' },
         typeMaxPrice: filtro.finalValue,
       });
 
@@ -270,6 +272,7 @@ export class SearchPageComponent implements OnInit {
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
+    this.totalResults = Number(localStorage.getItem('totalSearch'));
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
@@ -405,15 +408,50 @@ export class SearchPageComponent implements OnInit {
     this.listDistrictByCity(item.cidade);
   }
 
+  onPageChange(pageNumber) {
+    const filter = JSON.parse(localStorage.getItem('filtro'));
+  
+    if (pageNumber <= 3) {
+      this.lastPaginationPage = null;
+      this.paginationProduct = pageNumber;
+      return;
+    }
+  
+    if (pageNumber < this.lastPaginationPage) {
+      const diff = this.lastPaginationPage - pageNumber;
+      const totalToRemove = diff * 6;
+  
+      this.filterResult.splice(-totalToRemove);
+      this.paginationProduct = pageNumber;
+      return;
+    }
+  
+    if (pageNumber >= 4) {
+      this.lastPaginationPage = pageNumber;
+      filter.page = Number(pageNumber) + 1;
+  
+      this.announcementService.listFilter(filter).subscribe((response) => {
+        const announcements = response?.data;
+  
+        if (announcements.length) {
+          this.filterResult.push(...announcements);
+        }
+      });
+  
+      this.paginationProduct = pageNumber;
+    }
+  }
+  
+
   selectEvent2(item) {
     // this.form.controls['typePropertyDistrict'].setValue(item.district);
     this.getSelectedDistrict = item.district;
     this.form.patchValue({
-      typePropertyDistrict:{district: item?.district || ''}
+      typePropertyDistrict: { district: item?.district || '' }
     });
   }
 
-  onChangeSearch(search: string) {}
+  onChangeSearch(search: string) { }
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -479,15 +517,15 @@ export class SearchPageComponent implements OnInit {
     const recentlySeen = JSON.parse(localStorage.getItem('recentlySeen')) || [];
     const verify = { _id: value };
     const exists = recentlySeen.some(item => item._id === value);
-  
+
     if (!exists) {
       recentlySeen.push(verify);
     }
-  
+
     localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
     window.open(`announcement/detail/${value}`, '_blank');
   }
-  
+
 
   searchByTypeAd(item) {
     if (item === 'sale') {
@@ -677,7 +715,7 @@ export class SearchPageComponent implements OnInit {
     this.announcementService.listFilter(request).subscribe({
       next: (data) => {
         this.ngxSpinnerService.hide();
-        this.filterResult = data;
+        this.filterResult = data.data;
         this.filtroResultDisplay = request;
 
         this.messageNotSearch = false;
@@ -710,7 +748,7 @@ export class SearchPageComponent implements OnInit {
     this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(
-      (data) => {},
+      (data) => { },
       (error) => {
         this.modalFilterOpen = false;
       }

@@ -56,7 +56,7 @@ export class AnnouncementService extends BaseService {
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
-    listFilter(dto: AnnouncementFilterListResponseDto): Observable<AnnouncementGetResponseDto[]> {
+    listFilter(dto: AnnouncementFilterListResponseDto): Observable<{data:AnnouncementGetResponseDto[], total: number}> {
         let queryParams = `typeOfAdd=${dto.typeOfAdd}`;
         
         if(dto.propertyType && dto.propertyType.length > 0) {
@@ -113,16 +113,34 @@ export class AnnouncementService extends BaseService {
             queryParams += `&finalUsefulArea=${dto.finalUsefulArea}`
         }
 
+        if(dto.page) {
+            queryParams += `&page=${dto.page}`
+        }
+
         return this.httpClient
             .get(`${this.url}/list-filter?${queryParams}`, this.anonymousHeader())
-            .pipe(map(this.extractData), catchError(this.serviceError));
+            .pipe(map((d: any) => {
+                return { data: d.data as AnnouncementGetResponseDto[], total: d.total }
+            }), catchError(this.serviceError));
     }
 
-    listByDistrict(district:string):Observable<AnnouncementGetResponseDto[]>{
+    listByDistrict(district: string): Observable<AnnouncementGetResponseDto[]> {
+        console.log('LISTANDOOOS')
         return this.httpClient
-            .get(`${this.url}/list-by-district?district=${district}`, this.anonymousHeader())
-            .pipe(map(this.extractData), catchError(this.serviceError));
-    }
+          .get<any>(`${this.url}/list-by-district?district=${district}`, this.anonymousHeader())
+          .pipe(
+            map(response => {
+              if (response && response.success && response.data && response.data.announcements) {
+                console.log('aqui monke', response)
+                return response.data.announcements as AnnouncementGetResponseDto[];
+              } else {
+                throw new Error('Falha ao obter os anúncios por distrito.');
+              }
+            }),
+            catchError(this.serviceError)
+          );
+      }
+      
 
     countDistrict():Observable<{district:string, count:number}[]>{
         return this.httpClient

@@ -30,6 +30,9 @@ export abstract class AnnouncementFilterListResponseDto {
     finalUsefulArea?: number;
 
     propertyTypeList?: ListDisplay[];
+
+    page?: number;
+
 }
 
 class ListDisplay {
