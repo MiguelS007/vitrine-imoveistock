@@ -305,8 +305,9 @@ export class HomeHeaderComponent implements OnInit {
         Object.assign(requestList, {
           propertyTypeList: this.form.controls['propertyType'].value,
         });
+        localStorage.setItem('totalSearch', JSON.stringify(data.total))
         localStorage.setItem('filtro', JSON.stringify(requestList));
-        localStorage.setItem('resultSearch', JSON.stringify(data));
+        localStorage.setItem('resultSearch', JSON.stringify(data.data));
         this.router.navigate(['/search']);
       },
       error: (error) => {

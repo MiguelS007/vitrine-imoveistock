@@ -56,7 +56,7 @@ export class AnnouncementService extends BaseService {
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
-    listFilter(dto: AnnouncementFilterListResponseDto): Observable<AnnouncementGetResponseDto[]> {
+    listFilter(dto: AnnouncementFilterListResponseDto): Observable<{data:AnnouncementGetResponseDto[], total: number}> {
         let queryParams = `typeOfAdd=${dto.typeOfAdd}`;
         
         if(dto.propertyType && dto.propertyType.length > 0) {
@@ -113,9 +113,15 @@ export class AnnouncementService extends BaseService {
             queryParams += `&finalUsefulArea=${dto.finalUsefulArea}`
         }
 
+        if(dto.page) {
+            queryParams += `&page=${dto.page}`
+        }
+
         return this.httpClient
             .get(`${this.url}/list-filter?${queryParams}`, this.anonymousHeader())
-            .pipe(map(this.extractData), catchError(this.serviceError));
+            .pipe(map((d: any) => {
+                return { data: d.data as AnnouncementGetResponseDto[], total: d.total }
+            }), catchError(this.serviceError));
     }
 
     listByDistrict(district: string): Observable<AnnouncementGetResponseDto[]> {

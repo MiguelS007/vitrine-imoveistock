@@ -49,10 +49,12 @@ export class SearchPageComponent implements OnInit {
   urlsimg: any = [];
 
   filterResult: AnnouncementGetResponseDto[] = [];
+  totalResults: number = 0;
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
 
   orderBy: string = 'Selecione';
+  lastPaginationPage: number;
 
   recentlySeenIdsList: any = [];
 
@@ -195,7 +197,6 @@ export class SearchPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('SHOOOW SHOWWW DE BOLA')
     this.ngxSpinnerService.show();
 
     this.estados.estados.forEach((estado) => {
@@ -269,9 +270,9 @@ export class SearchPageComponent implements OnInit {
       };
     }
 
-    console.log('AQUI 2')
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
+    this.totalResults = Number(localStorage.getItem('totalSearch'));
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
@@ -292,7 +293,6 @@ export class SearchPageComponent implements OnInit {
 
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
-      console.log('EOQQ?', this.filterResult)
       this.announcementService.listAnnouncement().subscribe((success) => {
         this.filterResult = success;
         if (localStorage.getItem('user') !== null) {
@@ -325,7 +325,6 @@ export class SearchPageComponent implements OnInit {
     let teste: any = [];
     this.announcementService.listAnnouncement().subscribe({
       next: (data) => {
-        console.log('>>>A>>A>A', data)
         this.listAllCity = [];
         let removeRepets: any = [];
         for (let i = 0; i < data.length; i++) {
@@ -408,6 +407,41 @@ export class SearchPageComponent implements OnInit {
 
     this.listDistrictByCity(item.cidade);
   }
+
+  onPageChange(pageNumber) {
+    const filter = JSON.parse(localStorage.getItem('filtro'));
+  
+    if (pageNumber <= 3) {
+      this.lastPaginationPage = null;
+      this.paginationProduct = pageNumber;
+      return;
+    }
+  
+    if (pageNumber < this.lastPaginationPage) {
+      const diff = this.lastPaginationPage - pageNumber;
+      const totalToRemove = diff * 6;
+  
+      this.filterResult.splice(-totalToRemove);
+      this.paginationProduct = pageNumber;
+      return;
+    }
+  
+    if (pageNumber >= 4) {
+      this.lastPaginationPage = pageNumber;
+      filter.page = Number(pageNumber) + 1;
+  
+      this.announcementService.listFilter(filter).subscribe((response) => {
+        const announcements = response?.data;
+  
+        if (announcements.length) {
+          this.filterResult.push(...announcements);
+        }
+      });
+  
+      this.paginationProduct = pageNumber;
+    }
+  }
+  
 
   selectEvent2(item) {
     // this.form.controls['typePropertyDistrict'].setValue(item.district);
@@ -681,7 +715,7 @@ export class SearchPageComponent implements OnInit {
     this.announcementService.listFilter(request).subscribe({
       next: (data) => {
         this.ngxSpinnerService.hide();
-        this.filterResult = data;
+        this.filterResult = data.data;
         this.filtroResultDisplay = request;
 
         this.messageNotSearch = false;

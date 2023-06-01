@@ -304,8 +304,7 @@
           <div
             class="w-100 d-flex d-none-desk align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
             <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
-              <span *ngIf="!messageNotSearch">{{filterResult?.length}}</span>
-              <span *ngIf="messageNotSearch">0</span>
+              <span *ngIf="!messageNotSearch">{{totalResults}}</span>
               <span class="px-1">Resultados</span>
             </p>
             <div class="d-flex align-items-center">
@@ -452,8 +451,7 @@
           <div class="col-12 my-5 py-5 justify-content-center "   *ngIf="!messageNotSearch">
             <div *ngIf="filterResult.length > 6" class="d-flex flex-fill
                        justify-content-center">
-              <pagination-controls (pageChange)="paginationProduct=
-                          $event;" previousLabel="Anterior" nextLabel="Próximo">
+              <pagination-controls (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Próximo">
               </pagination-controls>
             </div>
           </div> 
