@@ -8,7 +8,7 @@ export const environment = {
   apis: {
 
 
-  imoveistock: 'imoveistock-prod.tgtdigital.io/',
+  imoveistock: 'http://imoveistock-prod.tgtdigital.io/',
     //  imoveistock: 'http://localhost:5000/',
 
   },
