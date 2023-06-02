@@ -26,6 +26,7 @@ export class HomeGalleryComponent implements OnInit {
     let requestList = {
       cityAddress: 'Curitiba',
       ufAddress: 'PR',
+      districtAddress: district,
     };
 
     this.announcementService.listByDistrict(district).subscribe({
