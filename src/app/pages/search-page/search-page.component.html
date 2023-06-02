@@ -224,7 +224,7 @@
                                          text-light">/ mês</span>
                   </p>
                   <span class="fw-700 font-size-14 line-20
-                             text-light">{{item.description | slice: 0:28 }}</span>
+                             text-light">{{item.title | slice: 0:28 }}</span>
                 </div>
               </div>
             </ng-template>
@@ -241,7 +241,7 @@
             <div class="col-9 col-img-types-property">
               <p class="d-grid title-property-product mb-0 h-75">
                 <span class="fw-700 font-size-18 line-24
-                          color-black">{{item.description}}</span>
+                          color-black">{{item.title}}</span>
                 <span *ngIf="item.typeOfAd === 'sale'" class="fw-700 font-size-18 line-24
                           color-black">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}</span>
                 <span *ngIf="item.typeOfAd === 'both'" class="fw-700 font-size-18 line-24
@@ -503,7 +503,7 @@
                                          text-light">/ mês</span>
                   </p>
                   <span class="fw-700 font-size-14 line-20
-                             text-light">{{item.description | slice: 0:28 }}</span>
+                             text-light">{{item.title | slice: 0:28 }}</span>
                 </div>
               </div>
             </ng-template>
