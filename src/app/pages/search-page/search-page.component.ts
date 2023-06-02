@@ -209,8 +209,6 @@ export class SearchPageComponent implements OnInit {
       });
     });
 
-
-
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
 
     let filtro: any = localStorage.getItem('filtro');
@@ -225,6 +223,8 @@ export class SearchPageComponent implements OnInit {
       this.getSelectedCity = filtro.cityAddress;
 
       if (!!filtro.ufAddress) this.stateSelected = filtro.ufAddress;
+
+      if (this.citySelected) this.listDistrictByCity(this.citySelected);
 
       this.form.patchValue({
         typeStatus: filtro.typeOfAdd,
@@ -410,48 +410,47 @@ export class SearchPageComponent implements OnInit {
 
   onPageChange(pageNumber) {
     const filter = JSON.parse(localStorage.getItem('filtro'));
-  
+
     if (pageNumber <= 3) {
       this.lastPaginationPage = null;
       this.paginationProduct = pageNumber;
       return;
     }
-  
+
     if (pageNumber < this.lastPaginationPage) {
       const diff = this.lastPaginationPage - pageNumber;
       const totalToRemove = diff * 6;
-  
+
       this.filterResult.splice(-totalToRemove);
       this.paginationProduct = pageNumber;
       return;
     }
-  
+
     if (pageNumber >= 4) {
       this.lastPaginationPage = pageNumber;
       filter.page = Number(pageNumber) + 1;
-  
+
       this.announcementService.listFilter(filter).subscribe((response) => {
         const announcements = response?.data;
-  
+
         if (announcements.length) {
           this.filterResult.push(...announcements);
         }
       });
-  
+
       this.paginationProduct = pageNumber;
     }
   }
-  
 
   selectEvent2(item) {
     // this.form.controls['typePropertyDistrict'].setValue(item.district);
     this.getSelectedDistrict = item.district;
     this.form.patchValue({
-      typePropertyDistrict: { district: item?.district || '' }
+      typePropertyDistrict: { district: item?.district || '' },
     });
   }
 
-  onChangeSearch(search: string) { }
+  onChangeSearch(search: string) {}
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -516,7 +515,7 @@ export class SearchPageComponent implements OnInit {
   announcementSelected(value) {
     const recentlySeen = JSON.parse(localStorage.getItem('recentlySeen')) || [];
     const verify = { _id: value };
-    const exists = recentlySeen.some(item => item._id === value);
+    const exists = recentlySeen.some((item) => item._id === value);
 
     if (!exists) {
       recentlySeen.push(verify);
@@ -525,7 +524,6 @@ export class SearchPageComponent implements OnInit {
     localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
     window.open(`announcement/detail/${value}`, '_blank');
   }
-
 
   searchByTypeAd(item) {
     if (item === 'sale') {
@@ -609,7 +607,6 @@ export class SearchPageComponent implements OnInit {
   }
 
   listDistrictByCity(value) {
-
     this.announcementService.listDistrictsByCity(value).subscribe({
       next: (response) => (this.listDistricts = response),
       error: (error) => console.log(error),
@@ -748,7 +745,7 @@ export class SearchPageComponent implements OnInit {
     this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(
-      (data) => { },
+      (data) => {},
       (error) => {
         this.modalFilterOpen = false;
       }
