@@ -125,20 +125,9 @@ export class AnnouncementService extends BaseService {
     }
 
     listByDistrict(district: string): Observable<AnnouncementGetResponseDto[]> {
-        console.log('LISTANDOOOS')
         return this.httpClient
-          .get<any>(`${this.url}/list-by-district?district=${district}`, this.anonymousHeader())
-          .pipe(
-            map(response => {
-              if (response && response.success && response.data && response.data.announcements) {
-                console.log('aqui monke', response)
-                return response.data.announcements as AnnouncementGetResponseDto[];
-              } else {
-                throw new Error('Falha ao obter os anúncios por distrito.');
-              }
-            }),
-            catchError(this.serviceError)
-          );
+          .get(`${this.url}/list-by-district?district=${district}`, this.anonymousHeader())
+          .pipe(map(this.extractData), catchError(this.serviceError));
       }
       
 
