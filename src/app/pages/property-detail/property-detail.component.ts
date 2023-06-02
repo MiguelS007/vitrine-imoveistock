@@ -3,17 +3,16 @@ import {
   ElementRef,
   HostListener,
   OnInit,
-  ViewChild,
-  ViewChildren,
   QueryList,
-  Renderer2,
-  Inject,
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GalleryItem, ImageItem } from 'ng-gallery';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { debounceTime, fromEvent, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
@@ -25,9 +24,6 @@ import { Cep } from '../../dtos/cep';
 import { CepService } from '../../service/cep.service';
 import { SchedulingStep1Component } from './components/scheduling-step1/scheduling-step1.component';
 import { SharedAnnouncementComponent } from './components/shared-announcement/shared-announcement.component';
-import { PageScrollService } from 'ngx-page-scroll-core';
-import { DOCUMENT } from '@angular/common';
-import { Gallery, GalleryItem, ImageItem } from 'ng-gallery';
 
 @Component({
   selector: 'app-property-detail',
@@ -65,7 +61,7 @@ export class PropertyDetailComponent implements OnInit {
     );
 
     let interdistance = Math.trunc(scrollPosition);
-    if (interdistance > 950) {
+    if (interdistance > 680) {
       this.infopaymobile = true;
     } else {
       this.infopaymobile = false;
@@ -298,7 +294,7 @@ export class PropertyDetailComponent implements OnInit {
 
     this._getCompleteAddress();
 
-    if (!this.response.photos[0].index) {
+    if (!this.response.photos[0]?.index) {
       for (let i = 0; i < this.response.photos.length; i++) {
         Object.assign(this.response.photos[i], { index: i + 1 });
       }

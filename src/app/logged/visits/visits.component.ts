@@ -14,7 +14,11 @@ export class VisitsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.changePage('favorites')
+    if(localStorage.getItem('goToVisits')){
+      localStorage.removeItem('goToVisits')
+      this.changePage('scheduling')
+    }else
+      this.changePage('favorites')
    }
 
   changePage(value: string) {

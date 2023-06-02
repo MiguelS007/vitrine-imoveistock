@@ -7,6 +7,8 @@ export abstract class AnnouncementFilterListResponseDto {
 
     cityAddress?: string;
 
+    districtAddress?:string;
+
     goal?: string;
 
     initialValue?: number;
@@ -28,6 +30,9 @@ export abstract class AnnouncementFilterListResponseDto {
     finalUsefulArea?: number;
 
     propertyTypeList?: ListDisplay[];
+
+    page?: number;
+
 }
 
 class ListDisplay {

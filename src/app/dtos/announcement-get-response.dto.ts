@@ -26,6 +26,10 @@ export abstract class AnnouncementGetResponseDto {
 
     cepAddress: string;
 
+    title: string;
+
+    code: number;
+
     numberAddress: string;
 
     complementAddress: string;

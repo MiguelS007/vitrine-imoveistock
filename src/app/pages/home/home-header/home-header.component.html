@@ -38,39 +38,9 @@
                                             #dropdownRef>
                                         </ng-multiselect-dropdown>
                                     </div>
-
-                                    <!-- <div class="col-12 px-0 mb-3 ">
-                                        <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
-                                            <select formControlName="typePropertyState" (change)="getEstados($event)"
-                                                class="w-100 px-3 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
-                                                [(ngModel)]="stateSelected" id="state"
-                                                aria-label="Default select example">
-                                                <option [value]="stateSelected" disabled selected value>
-                                                    {{stateSelected}}</option>
-                                                <option *ngFor="let item of estados.estados" [value]="item.nome">
-                                                    {{item.nome}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 px-0 mb-4 ">
-                                        <ng-autocomplete [data]="listAllCity" [searchKeyword]="keyword"
-                                            placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
-                                            (inputChanged)='onChangeSearch($event)' [itemTemplate]="itemTemplate"
-                                            [notFoundTemplate]="notFoundTemplate">
-                                        </ng-autocomplete>
-
-                                        <ng-template #itemTemplate let-item>
-                                            <a [innerHTML]="item.name"></a>
-                                        </ng-template>
-
-                                        <ng-template #notFoundTemplate let-notFound>
-                                            <div [innerHTML]="notFound"></div>
-                                        </ng-template>
-
-                                    </div> -->
                                     <div class="col-12 px-0 mb-4 ">
                                         <ng-autocomplete [data]="listEveryCity" [isLoading]="listEveryCity.length == 0"
-                                            [searchKeyword]="'render'" placeholder="Escolha uma cidade"
+                                            [searchKeyword]="'render'" formControlName="chooseCity" placeholder="Escolha uma cidade"
                                             [minQueryLength]="2" (selected)='selectEvent($event)'
                                             [itemTemplate]="itemcityTemplate" [notFoundTemplate]="notFoundTemplate"
                                             [customFilter]="customFilter">
@@ -85,6 +55,20 @@
                                         </ng-template>
 
                                     </div>
+                                    <div class="col-12 px-0 mb-4">
+                                        <ng-autocomplete formControlName="typePropertyDistrict" [data]="listDistricts" [disabled]="listDistricts.length == 0" [searchKeyword]="'district'" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
+                                          [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
+                                          [notFoundTemplate]="notFoundTemplate">
+                                        </ng-autocomplete>
+                                  
+                                        <ng-template #itemDistrictsTemplate let-item>
+                                          <a [innerHTML]="item.district"></a>
+                                        </ng-template>
+                                  
+                                        <ng-template #notFoundTemplate let-notFound>
+                                          <div>Não encontrado</div>
+                                        </ng-template>
+                                      </div>
                                     <div class="col-12 px-0 mb-3">
                                         <div class="row">
                                             <div class="col-6 pr-0">
@@ -210,7 +194,7 @@
                                     <div class="d-flex col-12 px-0 justify-content-end">
                                         <button
                                             class="btn w-100 btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5"
-                                            type="submit" [disabled]="form.invalid">
+                                            type="submit" [disabled]="this.form.controls['chooseCity'].value == ''">
                                             Procurar imóveis
 
                                         </button>

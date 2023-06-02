@@ -6,6 +6,7 @@ import { ScheduleService } from 'src/app/service/schedule.service';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { ScheduleRegisterRequestDto } from 'src/app/dtos/schedule-register-request.dto';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-scheduling-step4',
@@ -26,7 +27,8 @@ export class SchedulingStep4Component implements OnInit {
   constructor(
     private modalService: NgbModal,
     private scheduleService: ScheduleService,
-    private ngxSpinnerService: NgxSpinnerService
+    private ngxSpinnerService: NgxSpinnerService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -58,7 +60,7 @@ export class SchedulingStep4Component implements OnInit {
     this.ngxSpinnerService.show();
     this.scheduleService.registerSchedule(this.response._id, this.dateSend).subscribe(
       success => this.registerSuccess(success),
-      error => console.error(error)
+      error => this.registerFailed(error)
     )
   }
 
@@ -69,6 +71,13 @@ export class SchedulingStep4Component implements OnInit {
     this.modalService.dismissAll();
     const modalRef = this.modalService.open(SchedulingStep5Component, { centered: true, backdrop: 'static', keyboard: false });
     modalRef.componentInstance.visit = success.result
+  }
+
+  registerFailed(error: any) {
+    this.ngxSpinnerService.hide();
+
+    this.toastrService.error('Você já possui uma visita para este imóvel agendada!', '', { progressBar: true })
+    console.error(error)
   }
 
 }
