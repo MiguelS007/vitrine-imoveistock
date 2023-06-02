@@ -96,10 +96,10 @@
                     <div class="w-100 d-flex">
                         <i class="bi color-black mr-2 font-size-20 bi-person"></i>
                         <p class="d-grid">
-                            <span class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.user?.name ||
+                            <span class="fw-500 font-size-14 line-18 color-black">{{selectedScheduling.user_broker?.name ||
                                 '-'}}</span>
                             <span class="fw-400 font-size-14 line-18 color-black">Corretor</span>
-                            <span class="fw-400 font-size-14 line-18 color-black">{{selectedScheduling.user?.phone ||
+                            <span class="fw-400 font-size-14 line-18 color-black">{{selectedScheduling.user_broker?.phone ||
                                 '-'}}</span>
                         </p>
                         <span *ngIf="selectedScheduling.status === 'cancel'"
