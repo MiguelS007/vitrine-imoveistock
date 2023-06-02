@@ -1,11 +1,17 @@
-import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  QueryList,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
 import { DatamokService } from 'src/app/service/datamok.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
@@ -18,11 +24,9 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.scss']
+  styleUrls: ['./search-page.component.scss'],
 })
-
 export class SearchPageComponent implements OnInit {
-
   form: FormGroup;
   formfilter: FormGroup;
   iconlikeheart = false;
@@ -37,21 +41,22 @@ export class SearchPageComponent implements OnInit {
   countLoft: number;
   countKitnet: number;
 
-  stateSelected = 'Escolha o Estado'
-  citySelected = 'Selecione uma ciadade'
+  stateSelected = 'Escolha o Estado';
+  citySelected = 'Selecione uma ciadade';
 
   response: AnnouncementGetResponseDto[] = [];
   user: UserGetResponseDto;
   urlsimg: any = [];
 
   filterResult: AnnouncementGetResponseDto[] = [];
+  totalResults: number = 0;
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
 
   orderBy: string = 'Selecione';
+  lastPaginationPage: number;
 
   recentlySeenIdsList: any = [];
-
 
   recentlySeenList: AnnouncementGetResponseDto[] = [];
 
@@ -71,16 +76,14 @@ export class SearchPageComponent implements OnInit {
   stylePropertyTitle: string = 'O que está buscando?';
   TypeProperty = 'Tipo de Imóvel';
 
-
   listAllForFilter: AnnouncementGetResponseDto[] = [];
   listLikesForFilter: AnnouncementGetResponseDto[] = [];
 
   listAllCity: any = [
     {
-      cidade: ''
-    }
+      cidade: '',
+    },
   ];
-
 
   modalFilter: boolean = false;
 
@@ -90,11 +93,13 @@ export class SearchPageComponent implements OnInit {
   states: string[];
   cities: string[];
 
-  keyword = 'name'
+  keyword = 'name';
   getSelectedCity: string;
+  getSelectedDistrict: string;
 
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
-  listEveryCity: { cidade: string; estado: string, render: string }[] = [];
+  listEveryCity: { cidade: string; estado: string; render: string }[] = [];
+  listDistricts: { district: string }[] = [];
 
   listOfPrices: any = [];
 
@@ -141,7 +146,7 @@ export class SearchPageComponent implements OnInit {
     itemsShowLimit: 1,
     searchPlaceholderText: 'Procurar',
     allowSearchFilter: true,
-    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!'
+    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
   };
 
   constructor(
@@ -151,15 +156,14 @@ export class SearchPageComponent implements OnInit {
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
     private modalService: NgbModal
-
   ) {
-
     this.form = this.formBuilder.group({
       typeStatus: ['', [Validators.required]],
       searchwords: [''],
       propertyType: [''],
       typePropertyState: ['', [Validators.required]],
       typePropertyCity: ['', [Validators.required]],
+      typePropertyDistrict: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
       typeBathRoom: [''],
@@ -177,6 +181,7 @@ export class SearchPageComponent implements OnInit {
       propertyType: [''],
       typePropertyState: [''],
       typePropertyCity: [''],
+      typePropertyDistrict: [''],
       typeMaxPrice: [''],
       typeMinPrice: [''],
       typeBathRoom: [''],
@@ -194,22 +199,25 @@ export class SearchPageComponent implements OnInit {
   ngOnInit(): void {
     this.ngxSpinnerService.show();
 
-    for (let i = 0; i < this.estados.estados.length; i++) {
-      for (let j = 0; j < this.estados.estados[i].cidades.length; j++) {
+    this.estados.estados.forEach((estado) => {
+      estado.cidades.forEach((cidade) => {
         this.listEveryCity.push({
-          cidade: this.estados.estados[i].cidades[j],
-          estado: this.estados.estados[i].sigla,
-          render: this.estados.estados[i].cidades[j] + ' , ' + this.estados.estados[i].sigla
+          cidade,
+          estado: estado.sigla,
+          render: `${cidade}, ${estado.sigla}`,
         });
-      }
-    }
+      });
+    });
+
+
+
     this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
 
     let filtro: any = localStorage.getItem('filtro');
 
     if (filtro !== null) {
-
       filtro = JSON.parse(filtro);
+      // this.listDistrictByCity(filtro.cityAddress);
 
       this.searchByTypeAd(filtro.typeOfAdd);
 
@@ -222,23 +230,26 @@ export class SearchPageComponent implements OnInit {
         typeStatus: filtro.typeOfAdd,
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
+        typePropertyDistrict: { district: filtro?.districtAddress || '' },
         typeMaxPrice: filtro.finalValue,
       });
 
-      if (filtro.propertyTypeList.length > 0)
-        this.selectedItems = [...filtro.propertyTypeList]
+      if (filtro.propertyTypeList?.length > 0)
+        this.selectedItems = [...filtro.propertyTypeList];
 
       this.formModal.patchValue({
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
+        typePropertyDistrict: { district: filtro?.districtAddress || '' },
         typeMaxPrice: filtro.finalValue,
       });
 
-      this.searchByBadRoom(filtro.bedrooms)
+      this.searchByBadRoom(filtro.bedrooms);
 
       this.filtroResultDisplay = {
         ufAddress: filtro?.ufAddress,
         cityAddress: filtro?.cityAddress,
+        districtAddress: filtro?.districtAddress,
         initialValue: filtro?.initialValue,
         finalValue: filtro?.finalValue,
         bedrooms: filtro?.bedrooms,
@@ -251,18 +262,17 @@ export class SearchPageComponent implements OnInit {
         initialUsefulArea: filtro?.initialUsefulArea,
         parkingSpaces: filtro?.parkingSpaces,
         yearOfConstruction: filtro?.yearOfConstruction,
-        propertyTypeList: filtro?.propertyTypeList
-      }
-
-
+        propertyTypeList: filtro?.propertyTypeList,
+      };
     } else {
       this.filtroResultDisplay = {
         typeOfAdd: null,
-      }
+      };
     }
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
+    this.totalResults = Number(localStorage.getItem('totalSearch'));
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
@@ -281,94 +291,87 @@ export class SearchPageComponent implements OnInit {
       this.filterResult = [];
     }
 
-
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
-      this.announcementService.listAnnouncement().subscribe(
-        success => {
-          this.filterResult = success;
-          if (localStorage.getItem('user') !== null) {
-            this.announcementService.listLikes().subscribe(
-              success => {
-                for (let i = 0; i < success.length; i++) {
-                  for (let x = 0; x < this.filterResult.length; x++) {
-                    if (success[i].announcement._id === this.filterResult[x]._id) {
-                      Object.assign(this.filterResult[x], { liked: true });
-                    }
-                  }
-                  this.listLikes.push(success[i].announcement)
+      this.announcementService.listAnnouncement().subscribe((success) => {
+        this.filterResult = success;
+        if (localStorage.getItem('user') !== null) {
+          this.announcementService.listLikes().subscribe((success) => {
+            for (let i = 0; i < success.length; i++) {
+              for (let x = 0; x < this.filterResult.length; x++) {
+                if (success[i].announcement._id === this.filterResult[x]._id) {
+                  Object.assign(this.filterResult[x], { liked: true });
                 }
               }
-            )
-          }
-          this.ngxSpinnerService.hide();
-        },
-      )
-    } else if (localStorage.getItem('user') !== null) {
-      this.announcementService.listLikes().subscribe(
-        success => {
-          for (let i = 0; i < success.length; i++) {
-            for (let x = 0; x < this.filterResult.length; x++) {
-              if (success[i].announcement._id === this.filterResult[x]._id) {
-                Object.assign(this.filterResult[x], { liked: true });
-              }
+              this.listLikes.push(success[i].announcement);
             }
-            this.listLikes.push(success[i].announcement)
-          }
+          });
         }
-      )
+        this.ngxSpinnerService.hide();
+      });
+    } else if (localStorage.getItem('user') !== null) {
+      this.announcementService.listLikes().subscribe((success) => {
+        for (let i = 0; i < success.length; i++) {
+          for (let x = 0; x < this.filterResult.length; x++) {
+            if (success[i].announcement._id === this.filterResult[x]._id) {
+              Object.assign(this.filterResult[x], { liked: true });
+            }
+          }
+          this.listLikes.push(success[i].announcement);
+        }
+      });
     }
     // GET-CITIES
     let teste: any = [];
     this.announcementService.listAnnouncement().subscribe({
-      next: data => {
+      next: (data) => {
         this.listAllCity = [];
         let removeRepets: any = [];
         for (let i = 0; i < data.length; i++) {
-          removeRepets.push(data[i].cityAddress)
+          removeRepets.push(data[i].cityAddress);
         }
-        teste = new Set(removeRepets)
+        teste = new Set(removeRepets);
         this.response = data;
         this.ngxSpinnerService.hide();
-      }
-    })
+      },
+    });
 
     this.announcementService.listExclusive().subscribe({
-      next: data => {
+      next: (data) => {
         this.propertyproducts = data;
-      }
-    })
-
+      },
+    });
+    // if (filtro?.cityAddress) this.selectEvent2(filtro?.cityAddress);
   }
 
   onItemSelect(item: any) {
-    const nativeElement = this.dropdownRef
+    const nativeElement = this.dropdownRef;
     if (nativeElement.isDropdownOpen === true) {
-      console.log(nativeElement)
-      nativeElement.closeDropdown()
+      console.log(nativeElement);
+      nativeElement.closeDropdown();
     }
   }
 
   onItemDeSelect(item: any) {
     if (this.selectedItems.length === 0) {
-      const nativeElement = this.dropdownRef
+      const nativeElement = this.dropdownRef;
       if (nativeElement.isDropdownOpen === true) {
-        nativeElement.closeDropdown()
+        nativeElement.closeDropdown();
       }
     }
   }
 
   onSelectAll(items: any) {
-    const nativeElement = this.dropdownRef
+    const nativeElement = this.dropdownRef;
     if (nativeElement.isDropdownOpen === true) {
-      nativeElement.closeDropdown()
+      nativeElement.closeDropdown();
     }
   }
 
   onDeSelectAll(items) {
-    const nativeElement = this.dropdownRef
+    const nativeElement = this.dropdownRef;
     if (nativeElement.isDropdownOpen === true) {
-      nativeElement.closeDropdown()
+      nativeElement.closeDropdown();
     }
   }
 
@@ -401,138 +404,186 @@ export class SearchPageComponent implements OnInit {
       typePropertyCity: item.render,
       typePropertyState: item.estado,
     });
+
+    this.listDistrictByCity(item.cidade);
   }
 
-  onChangeSearch(search: string) {
+  onPageChange(pageNumber) {
+    const filter = JSON.parse(localStorage.getItem('filtro'));
+  
+    if (pageNumber <= 3) {
+      this.lastPaginationPage = null;
+      this.paginationProduct = pageNumber;
+      return;
+    }
+  
+    if (pageNumber < this.lastPaginationPage) {
+      const diff = this.lastPaginationPage - pageNumber;
+      const totalToRemove = diff * 6;
+  
+      this.filterResult.splice(-totalToRemove);
+      this.paginationProduct = pageNumber;
+      return;
+    }
+  
+    if (pageNumber >= 4) {
+      this.lastPaginationPage = pageNumber;
+      filter.page = Number(pageNumber) + 1;
+  
+      this.announcementService.listFilter(filter).subscribe((response) => {
+        const announcements = response?.data;
+  
+        if (announcements.length) {
+          this.filterResult.push(...announcements);
+        }
+      });
+  
+      this.paginationProduct = pageNumber;
+    }
   }
+  
+
+  selectEvent2(item) {
+    // this.form.controls['typePropertyDistrict'].setValue(item.district);
+    this.getSelectedDistrict = item.district;
+    this.form.patchValue({
+      typePropertyDistrict: { district: item?.district || '' }
+    });
+  }
+
+  onChangeSearch(search: string) { }
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
-      let valorComparado = array[i]
-      let cont = 0         //contador de incidencia de repeticao, seu valor deve ser 1
+      let valorComparado = array[i];
+      let cont = 0; //contador de incidencia de repeticao, seu valor deve ser 1
       for (let i in array) {
         if (valorComparado === array[i]) {
-          cont += 1
+          cont += 1;
           if (cont > 1) {
-            cont--
-            delete array[i]
+            cont--;
+            delete array[i];
           }
         }
       }
     }
-    return array
+    return array;
   }
 
   likeHeart(value, condition) {
-
     let request = {
-      announcementId: value
-    }
+      announcementId: value,
+    };
 
     if (localStorage.getItem('user') === null) {
       this.modalService.open(ModalLoginComponent, { centered: true });
-      return
+      return;
     }
 
     if (this.listLikes.length === 0) {
       this.announcementService.registerLike(request).subscribe(
-        success => {
-          this.ngOnInit()
-          return
+        (success) => {
+          this.ngOnInit();
+          return;
         },
-        error => {
-          console.log(error)
+        (error) => {
+          console.log(error);
         }
-      )
+      );
     } else {
       if (condition === true) {
         this.announcementService.registerUnlike(request).subscribe(
-          success => {
-            this.ngOnInit()
+          (success) => {
+            this.ngOnInit();
           },
-          error => {
-            console.log(error)
+          (error) => {
+            console.log(error);
           }
-        )
+        );
       } else if (condition === undefined) {
         this.announcementService.registerLike(request).subscribe(
-          success => {
-            this.ngOnInit()
+          (success) => {
+            this.ngOnInit();
           },
-          error => {
-            console.log(error)
+          (error) => {
+            console.log(error);
           }
-        )
+        );
       }
-
     }
   }
 
   announcementSelected(value) {
-    let teste: any = localStorage.getItem('recentlySeen');
-    this.recentlySeenList = JSON.parse(teste);
-    let verify = { _id: value };
-    let list: any = this.recentlySeenList;
-    if (list === null) {
-      list = [];
+    const recentlySeen = JSON.parse(localStorage.getItem('recentlySeen')) || [];
+    const verify = { _id: value };
+    const exists = recentlySeen.some(item => item._id === value);
+
+    if (!exists) {
+      recentlySeen.push(verify);
     }
-    if (this.recentlySeenList !== null) {
-      for (let i = 0; i < list.length; i++) {
-        if (list[i]._id !== value) {
-          list.push(verify);
-        }
-      }
-    }
-    this.recentlySeenList = list;
-    localStorage.setItem('recentlySeen', JSON.stringify(this.recentlySeenList))
-    this.router.navigate([`announcement/detail/${value}`])
+
+    localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
+    window.open(`announcement/detail/${value}`, '_blank');
   }
+
 
   searchByTypeAd(item) {
     if (item === 'sale') {
-      this.selectTypeAd = 'Comprar'
+      this.selectTypeAd = 'Comprar';
     } else if (item === 'rent') {
-      this.selectTypeAd = 'Alugar'
+      this.selectTypeAd = 'Alugar';
     }
     this.selectFilterOfAd = item;
-
-    this.form.patchValue({
-      typeStatus: item,
-    });
+    this.form.controls['typeStatus'].setValue(item);
+    // this.form.patchValue({
+    //   typeStatus: item,
+    // });
   }
 
   searchByBadRoom(item) {
     // SELECT BADROOMS
     if (item === '1') {
-      this.selectBadRooms = '+1 Quarto'
+      this.selectBadRooms = '+1 Quarto';
     } else if (!!item) {
-      this.selectBadRooms = `+${item} Quartos`
+      this.selectBadRooms = `+${item} Quartos`;
+    } else {
+      this.selectBadRooms = 'Quartos';
     }
+    this.form.controls['typeBadrooms'].setValue(item);
   }
 
   searchBySuites(item) {
     // SELECT SUITES
     if (item === '1') {
-      this.selectSuites = '+1 Suíte'
+      this.selectSuites = '+1 Suíte';
     } else if (!!item) {
-      this.selectSuites = `+${item} Suítes`
+      this.selectSuites = `+${item} Suítes`;
+    } else {
+      this.selectSuites = 'Suítes';
     }
+    this.form.controls['typeSuites'].setValue(item);
   }
   searchByBathRoom(item) {
     // SELECT BATHROOMS
     if (item === '1') {
-      this.selectBathrooms = '+1 Banheiro'
+      this.selectBathrooms = '+1 Banheiro';
     } else if (!!item) {
-      this.selectBathrooms = `+${item} Banheiros`
+      this.selectBathrooms = `+${item} Banheiros`;
+    } else {
+      this.selectBathrooms = 'Banheiros';
     }
+    this.form.controls['typeBathRoom'].setValue(item);
   }
   searchByVacancies(item) {
     // SELECT VACANCES
     if (item === '1') {
-      this.selectVacancies = '+1 Vaga'
+      this.selectVacancies = '+1 Vaga';
     } else if (!!item) {
-      this.selectVacancies = `+${item} Vagas`
+      this.selectVacancies = `+${item} Vagas`;
+    } else {
+      this.selectVacancies = 'Vagas';
     }
+    this.form.controls['typevacancies'].setValue(item);
   }
 
   searchByStyleProperty(value) {
@@ -540,27 +591,62 @@ export class SearchPageComponent implements OnInit {
   }
 
   filterTypeProperty(value) {
-    this.TypeProperty = value
+    this.TypeProperty = value;
   }
 
   removeTag(index: any) {
-    let filterDisplay = this.filtroResultDisplay.propertyTypeList.indexOf(index);
+    let filterDisplay =
+      this.filtroResultDisplay.propertyTypeList.indexOf(index);
     this.filtroResultDisplay.propertyTypeList.splice(filterDisplay, 1);
 
     this.selectedItems = [];
 
     setTimeout(() => {
-      this.selectedItems = this.filtroResultDisplay.propertyTypeList
+      this.selectedItems = this.filtroResultDisplay.propertyTypeList;
     }, 100);
 
     this.filtrar();
   }
 
+  listDistrictByCity(value) {
+
+    this.announcementService.listDistrictsByCity(value).subscribe({
+      next: (response) => (this.listDistricts = response),
+      error: (error) => console.log(error),
+    });
+  }
+
+  clearAndSearch() {
+    this.filtroResultDisplay.propertyTypeList = [];
+    this.selectedItems = [];
+
+    let city = this.getSelectedCity;
+    let ufAddress =
+      this.form.controls['typePropertyState'].value ||
+      this.formModal.controls['typePropertyState'].value;
+
+    this.form.reset();
+    this.formModal.reset();
+
+    this.form.controls['typePropertyState'].setValue(ufAddress);
+    this.form.controls['typePropertyCity'].setValue(
+      this.listEveryCity.find((x) => x.cidade === city)?.render || city
+    );
+
+    this.searchByBadRoom('');
+    this.searchBySuites('');
+    this.searchByBathRoom('');
+    this.searchByVacancies('');
+
+    this.filtrar();
+  }
 
   filtrar() {
-    this.form.controls['typePropertyState'].setValue(this.stateSelected)
+    this.ngxSpinnerService.show();
+    this.form.controls['typePropertyState'].setValue(this.stateSelected);
 
-    if (this.stateSelected === 'Escolha o Estado') this.form.controls['typePropertyState'].setValue('')
+    if (this.stateSelected === 'Escolha o Estado')
+      this.form.controls['typePropertyState'].setValue('');
 
     let filter: any = {
       state: this.form.controls['typePropertyState'].value,
@@ -576,71 +662,102 @@ export class SearchPageComponent implements OnInit {
       (item: any) => item.item_id
     );
 
-    if (this.selectTypeAd === 'Selecione') {
-      this.selectFilterOfAd = 'sale'
+    if (this.selectTypeAd === 'Selecione' || this.selectTypeAd === undefined) {
+      this.selectFilterOfAd = 'sale';
     }
 
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
       cityAddress: city,
-      ufAddress: this.form.controls['typePropertyState'].value || this.formModal.controls['typePropertyState'].value,
-      bedrooms: this.form.controls['typeBadrooms'].value || this.formModal.controls['typeBadrooms'].value,
-      suites: this.form.controls['typeSuites'].value || this.formModal.controls['typeSuites'].value,
-      bathrooms: this.form.controls['typeBathRoom'].value || this.formModal.controls['typeBathRoom'].value,
-      initialValue: this.form.controls['typeMaxPrice'].value || this.formModal.controls['typeMaxPrice'].value,
-      finalValue: this.form.controls['typeMinPrice'].value || this.formModal.controls['typeMinPrice'].value,
-      finalUsefulArea: this.form.controls['typefootagemax'].value || this.formModal.controls['typefootagemax'].value,
-      initialUsefulArea: this.form.controls['typefootagemin'].value || this.formModal.controls['typefootagemin'].value,
-      parkingSpaces: this.form.controls['typevacancies'].value || this.formModal.controls['typevacancies'].value,
-      yearOfConstruction: this.form.controls['typeconstruction'].value || this.formModal.controls['typeconstruction'].value,
+      districtAddress:
+        this.form.controls['typePropertyDistrict'].value?.district ||
+        this.form.controls['typePropertyDistrict'].value ||
+        '',
+      ufAddress:
+        this.form.controls['typePropertyState'].value ||
+        this.formModal.controls['typePropertyState'].value,
+      bedrooms:
+        this.form.controls['typeBadrooms'].value ||
+        this.formModal.controls['typeBadrooms'].value,
+      suites:
+        this.form.controls['typeSuites'].value ||
+        this.formModal.controls['typeSuites'].value,
+      bathrooms:
+        this.form.controls['typeBathRoom'].value ||
+        this.formModal.controls['typeBathRoom'].value,
+      initialValue:
+        this.form.controls['typeMaxPrice'].value ||
+        this.formModal.controls['typeMaxPrice'].value,
+      finalValue:
+        this.form.controls['typeMinPrice'].value ||
+        this.formModal.controls['typeMinPrice'].value,
+      finalUsefulArea:
+        this.form.controls['typefootagemax'].value ||
+        this.formModal.controls['typefootagemax'].value,
+      initialUsefulArea:
+        this.form.controls['typefootagemin'].value ||
+        this.formModal.controls['typefootagemin'].value,
+      parkingSpaces:
+        this.form.controls['typevacancies'].value ||
+        this.formModal.controls['typevacancies'].value,
+      yearOfConstruction:
+        this.form.controls['typeconstruction'].value ||
+        this.formModal.controls['typeconstruction'].value,
       propertyType: !!propertyTypeList ? propertyTypeList : [],
-      propertyTypeList: this.form.controls['propertyType'].value || this.formModal.controls['propertyType'].value,
-      goal: ''
-    }
+      propertyTypeList:
+        this.form.controls['propertyType'].value ||
+        this.formModal.controls['propertyType'].value,
+      goal: '',
+    };
+
+    console.log(request);
 
     this.announcementService.listFilter(request).subscribe({
-      next: data => {
-        this.filterResult = data;
+      next: (data) => {
+        this.ngxSpinnerService.hide();
+        this.filterResult = data.data;
         this.filtroResultDisplay = request;
 
         this.messageNotSearch = false;
         localStorage.setItem('resultSearch', JSON.stringify(data));
         localStorage.setItem('filtro', JSON.stringify(request));
-
+        this.listDistrictByCity(this.getSelectedCity);
         if (this.filterResult.length === 0) {
           this.messageNotSearch = true;
           this.announcementService.listAnnouncement().subscribe(
-            success => {
+            (success) => {
               this.filterResult = success;
             },
-            error => {
-              console.error(error)
+            (error) => {
+              console.error(error);
             }
           );
         }
         if (this.modalFilterOpen === true) {
-          this.exit()
+          this.exit();
         }
       },
-      error: error => {
-        console.log(error)
-      }
-    })
+      error: (error) => {
+        this.ngxSpinnerService.hide();
+        console.log(error);
+      },
+    });
   }
 
   openFilter(content) {
     this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
-    modalRef.result.then(data => {
-    }, error => {
-      this.modalFilterOpen = false;
-    });
+    modalRef.result.then(
+      (data) => { },
+      (error) => {
+        this.modalFilterOpen = false;
+      }
+    );
   }
 
   exit() {
-    this.modalService.dismissAll()
+    this.modalService.dismissAll();
   }
-
 
   public removerAcento(text) {
     text = text.toLowerCase();
@@ -653,7 +770,10 @@ export class SearchPageComponent implements OnInit {
     return text.toLocaleLowerCase();
   }
 
-  customFilter(items: { cidade: string; estado: string, render: string }[], query: string): { cidade: string; estado: string, render: string }[] {
+  customFilter(
+    items: { cidade: string; estado: string; render: string }[],
+    query: string
+  ): { cidade: string; estado: string; render: string }[] {
     function removerAcento(text: string): string {
       text = text.toLowerCase();
       text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
@@ -664,18 +784,20 @@ export class SearchPageComponent implements OnInit {
       text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
       return text.toLocaleLowerCase();
     }
-    if(query.length < 2) {
-      return[]
+    if (query.length < 2) {
+      return [];
     }
-    return items.filter(a => {
-      return removerAcento(a.render).includes(removerAcento(query))
-    })
+    return items.filter((a) => {
+      return removerAcento(a.render).includes(removerAcento(query));
+    });
   }
 
   sortPriceList(value: string) {
     this.listOfPrices = this.filterResult;
-    if (value === 'minor>major') this.listOfPrices.sort((a, b) => a.saleValue < b.saleValue ? -1 : 0);
-    else if (value === 'major>minor') this.listOfPrices.sort((a, b) => a.saleValue > b.saleValue ? -1 : 0);
+    if (value === 'minor>major')
+      this.listOfPrices.sort((a, b) => (a.saleValue < b.saleValue ? -1 : 0));
+    else if (value === 'major>minor')
+      this.listOfPrices.sort((a, b) => (a.saleValue > b.saleValue ? -1 : 0));
   }
 
   redirectToMap() {
@@ -683,10 +805,8 @@ export class SearchPageComponent implements OnInit {
   }
 
   resolveProperty(text: string): string {
-    return propertyTypesConst.find(x => x.value === text)?.name || text || '-';
+    return (
+      propertyTypesConst.find((x) => x.value === text)?.name || text || '-'
+    );
   }
-
 }
-
-
-

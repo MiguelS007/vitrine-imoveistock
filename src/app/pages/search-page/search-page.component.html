@@ -1,7 +1,7 @@
 <main class="bg-graylight d-flex justify-content-center position-relative w-100 py-5 px-5p">
   <div class="padding-x w-100 max-w-1918 mb-5">
     <form [formGroup]="form" class="row form-search mt-5 h-100 m-0-auto" (ngSubmit)="filtrar()">
-      <div class="col-12 d-none-desk mt-5 pt-5" *ngIf="filtroResultDisplay.typeOfAdd">
+      <div class="col-12 d-none-desk mt-5 pt-5" *ngIf="filtroResultDisplay">
         <p class="d-flex fw-700 font-size-16 line-19 color-black align-items-center">
           <span [routerLink]="['/']" id="clicavel" class="fw-700 font-size-16 line-19 color-black">Página
             Inicial /</span>
@@ -10,27 +10,36 @@
         </p>
         <p class="fw-700 font-size-24 line-40 color-black">Resultado da sua busca por
           <span class="font-size-14 row d-flex justify-content-evenly">
-            <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'sale'">Comprar</span>
-            <span class="result-filter" *ngIf="filtroResultDisplay.typeOfAdd === 'rent'">Alugar</span>
+            <span class="result-filter" *ngIf="filtroResultDisplay?.typeOfAdd === 'sale'">Comprar</span>
+            <span class="result-filter" *ngIf="filtroResultDisplay?.typeOfAdd === 'rent'">Alugar</span>
             <span class="result-filter"
-              *ngFor="let item of filtroResultDisplay.propertyTypeList | slice:0:5; let i = index">
+              *ngFor="let item of filtroResultDisplay?.propertyTypeList | slice:0:5; let i = index">
               <span *ngIf="i <=3">{{item.item_text}} <b><a class="cursor-pointer"
                     (click)="removeTag(item)">X</a></b></span>
               <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay.propertyTypeList.length - 4)}}</span>
             </span>
-            <span class="result-filter" *ngIf="filtroResultDisplay.ufAddress && filtroResultDisplay.cityAddress">
+            <span class="result-filter" *ngIf="filtroResultDisplay?.ufAddress && filtroResultDisplay?.cityAddress">
               {{filtroResultDisplay.cityAddress+", "+filtroResultDisplay.ufAddress}}</span>
+            <span class="result-filter" *ngIf="filtroResultDisplay?.districtAddress">
+              {{filtroResultDisplay.districtAddress}}
+            </span>
             <!-- <span class="result-filter" *ngIf="filtroResultDisplay.cityAddress">
               {{filtroResultDisplay.cityAddress}}</span> -->
-            <span class="result-filter" *ngIf="filtroResultDisplay.bedrooms"> +{{filtroResultDisplay.bedrooms}}
+            <span class="result-filter" *ngIf="filtroResultDisplay?.bedrooms"> +{{filtroResultDisplay?.bedrooms}}
               Quartos<b><a class="cursor-pointer" (click)="filtroResultDisplay.bedrooms = 0">X</a></b></span>
-            <span *ngIf="filtroResultDisplay.goal"> {{filtroResultDisplay.goal}}</span>
+            <span *ngIf="filtroResultDisplay?.goal"> {{filtroResultDisplay.goal}}</span>
           </span>
         </p>
+        
+        <!-- <button class="bg-purple btn text-light fw-500 font-size-18
+        line-19 border-radius-10" (click)="clearAndSearch()">Limpar filtros</button> -->
+
       </div>
       <div class="col-4 col-body-products d-none-desk mt-5 pt-5 pl-0">
         <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
-
+          <div class="d-flex justify-content-end">
+            <a style="color:#542fdf; text-decoration: underline !important;cursor: pointer;" class="mb-4 mx-1 fw-500 font-size-18 line-19" (click)="clearAndSearch()">Limpar filtros</a>
+          </div>
           <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'" [settings]="dropdownSettings"
             formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
             (onDeSelectAll)="onDeSelectAll($event)" (onSelect)="onItemSelect($event)"
@@ -47,33 +56,6 @@
               <a class="dropdown-item" (click)="searchByTypeAd('rent')">Alugar</a>
             </div>
           </div>
-          <!-- <div class="dropdown px-0 mb-3 ">
-                        <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
-                            <select formControlName="typePropertyState" (change)="getEstados($event)"
-                                class="w-100 border text-left select-property border-radius-10 mt-3  h-51 bg-light fw-400 font-size-14 line-20 color-black"
-                                [(ngModel)]="stateSelected" id="state" aria-label="Default select example">
-                                <option [value]="stateSelected" disabled selected value>
-                                    {{stateSelected || 'Escolha o Estado'}}</option>
-                                <option *ngFor="let item of estados.estados" [value]="item.nome">{{item.nome}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="dropdown px-0 mb-4 ">
-                        <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity"
-                            [searchKeyword]="keyword" (inputChanged)='onChangeSearch($event)'
-                            placeholder="Escolha uma cidade" (selected)='selectEvent($event)'
-                            [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
-                        </ng-autocomplete>
-
-                        <ng-template #itemTemplate let-item>
-                            <a [innerHTML]="item.name"></a>
-                        </ng-template>
-
-                        <ng-template #notFoundTemplate let-notFound>
-                            <div [innerHTML]="notFound"></div>
-                        </ng-template>
-
-                    </div> -->
 
           <div class="dropdown px-0 my-4 ">
             <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listEveryCity"
@@ -84,6 +66,23 @@
 
             <ng-template #itemcityTemplate let-item>
               <a [innerHTML]="item.cidade+' , '+item.estado"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div>Não encontrado</div>
+            </ng-template>
+          </div>
+
+          <div class="dropdown px-0 my-4">
+            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyDistrict"
+            [data]="listDistricts" [isLoading]="listEveryCity.length == 0" [disabled]="listDistricts.length == 0" [searchKeyword]="'district'"
+             placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
+              [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
+              [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+
+            <ng-template #itemDistrictsTemplate let-item>
+              <a [innerHTML]="item.district"></a>
             </ng-template>
 
             <ng-template #notFoundTemplate let-notFound>
@@ -279,7 +278,7 @@
               <span class="result-filter"
                 *ngFor="let item of filtroResultDisplay.propertyTypeList | slice:0:5; let i = index">
                 <span *ngIf="i <=3">{{item.item_text}} <b><a class="cursor-pointer"
-                      (click)="removeTag(i)">X</a></b></span>
+                      (click)="removeTag(item)">X</a></b></span>
                 <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay.propertyTypeList.length - 4)}}</span>
               </span>
               <span class="result-filter" *ngIf="filtroResultDisplay.ufAddress && filtroResultDisplay.cityAddress">
@@ -305,8 +304,7 @@
           <div
             class="w-100 d-flex d-none-desk align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
             <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
-              <span *ngIf="!messageNotSearch">{{filterResult?.length}}</span>
-              <span *ngIf="messageNotSearch">0</span>
+              <span *ngIf="!messageNotSearch">{{totalResults}}</span>
               <span class="px-1">Resultados</span>
             </p>
             <div class="d-flex align-items-center">
@@ -333,10 +331,10 @@
               atender no momento</p>
             <span class="text-center">{{':('}}</span>
           </div>
-          <div class="col-lg-6 px-3 col-cards-products" *ngFor="let item of filterResult | paginate: {
+          <div class="col-lg-6 px-3 col-cards-products"  *ngFor="let item of filterResult | paginate: {
                     itemsPerPage: 6, currentPage: paginationProduct }; let
                     i= index">
-            <div
+            <div *ngIf="!messageNotSearch"
               class="w-100 cursor-pointer card-product-result-search d-inline-block mt-5 p-3 border-radius-10 bg-white">
               <div class="border-radius-10 position-relative">
                 <img *ngIf="!item.mainPhoto" (click)="announcementSelected(item._id)"
@@ -402,7 +400,7 @@
                   <span class="fw-400 font-size-14 line-20
                                 color-black text-capitalize">{{resolveProperty(item.propertyType)}}</span>
                   <p class="fw-700 my-2 font-size-16 line-20 mb-0
-                                color-black text-truncate" style="max-width: 90%;">{{item.description}}</p>
+                                color-black text-truncate" style="max-width: 90%;">{{item.title}}</p>
                   <p class="d-flex align-items-center text-left" style="height: 40px;">
                     <i class="bi font-size-20 mr-2 color-black
                                    bi-geo-alt"></i>
@@ -450,14 +448,13 @@
               </div>
             </div>
           </div>
-          <div class="col-12 my-5 py-5 justify-content-center">
+          <div class="col-12 my-5 py-5 justify-content-center "   *ngIf="!messageNotSearch">
             <div *ngIf="filterResult.length > 6" class="d-flex flex-fill
                        justify-content-center">
-              <pagination-controls (pageChange)="paginationProduct=
-                          $event;" previousLabel="Anterior" nextLabel="Próximo">
+              <pagination-controls (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Próximo">
               </pagination-controls>
             </div>
-          </div>
+          </div> 
         </div>
         <div class="w-100 mt-4 border-radius-10 bg-white p-4 space-exclusivos-mobile-search-page">
           <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
@@ -549,6 +546,22 @@
 
       <ng-template #itemModalTemplate let-item>
         <a [innerHTML]="item.cidade+' , '+item.estado"></a>
+      </ng-template>
+
+      <ng-template #notFoundTemplate let-notFound>
+        <div>Não encontrado</div>
+      </ng-template>
+    </div>
+
+    <div class="dropdown px-0 my-4">
+      <ng-autocomplete id="search-cityes-test" [data]="listDistricts" [disabled]="listDistricts.length == 0"
+      [searchKeyword]="'district'" formControlName="typePropertyDistrict" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
+        [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
+        [notFoundTemplate]="notFoundTemplate">
+      </ng-autocomplete>
+
+      <ng-template #itemDistrictsTemplate let-item>
+        <a [innerHTML]="item.district"></a>
       </ng-template>
 
       <ng-template #notFoundTemplate let-notFound>
