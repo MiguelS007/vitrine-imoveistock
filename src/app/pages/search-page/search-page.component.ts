@@ -230,11 +230,13 @@ export class SearchPageComponent implements OnInit {
 
       if (this.citySelected) this.listDistrictByCity(this.citySelected);
 
+      console.log(filtro?.districtAddress)
+
       this.form.patchValue({
         typeStatus: filtro.typeOfAdd,
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
-        typePropertyDistrict: { district: filtro?.districtAddress?.district || '' },
+        typePropertyDistrict: { district: filtro?.districtAddress || '' },
         typeMaxPrice: filtro.finalValue,
       });
 
@@ -244,7 +246,7 @@ export class SearchPageComponent implements OnInit {
       this.formModal.patchValue({
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
-        typePropertyDistrict: { district: filtro?.districtAddress?.district || '' },
+        typePropertyDistrict: { district: filtro?.districtAddress || '' },
         typeMaxPrice: filtro.finalValue,
       });
 
@@ -654,13 +656,12 @@ export class SearchPageComponent implements OnInit {
       this.selectFilterOfAd = 'sale';
     }
 
+    const district = this.form.controls['typePropertyDistrict'].value?.district || '';
+
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
       cityAddress: city,
-      districtAddress:
-        this.form.controls['typePropertyDistrict'].value?.district ||
-        this.form.controls['typePropertyDistrict'].value ||
-        '',
+      districtAddress: district,
       ufAddress:
         this.form.controls['typePropertyState'].value ||
         this.formModal.controls['typePropertyState'].value,
@@ -697,6 +698,8 @@ export class SearchPageComponent implements OnInit {
         this.formModal.controls['propertyType'].value,
       goal: '',
     };
+
+    console.log(request);
 
 
     this.announcementService.listFilter(request).subscribe({
