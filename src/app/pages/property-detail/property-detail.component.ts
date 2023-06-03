@@ -232,29 +232,6 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   openImagePreview() {
-    // this.indexTeste = 1
-    // this.thumbPhotosArrList.map(results => {
-    //   if (results.nativeElement?.id === this.imageEvidence.key) {
-    //     results.nativeElement.className = 'active-thumb-photo';
-    //   } else {
-    //     results.nativeElement.className = 'disable-thumb-photo ml-2';
-    //   }
-    // });
-    // setTimeout(() => {
-    //   this.swiperRef.swiperRef.on('slideChange', () => {
-    //     const activeIndex = this.swiperRef.swiperRef.activeIndex;
-    //     this.imageEvidence = this.response.photos[activeIndex];
-    //     this.indexTeste = this.imageEvidence.index
-    //     const activeImage = this.response.photos[activeIndex].key;
-    //     this.thumbPhotosArrList.map(results => {
-    //       if (results.nativeElement?.id === this.imageEvidence.key) {
-    //         results.nativeElement.className = 'active-thumb-photo';
-    //       } else {
-    //         results.nativeElement.className = 'disable-thumb-photo ml-2';
-    //       }
-    //     });
-    //   });
-    // }, 100);
   }
 
   ngOnInit(): void {
