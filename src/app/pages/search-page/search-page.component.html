@@ -569,32 +569,6 @@
       </ng-template>
     </div>
 
-    <!-- <div class="dropdown px-0 mb-3 ">
-            <div class="w-100 z-10 max-h-400 overflow-x-scroll border-radius-0">
-                <select formControlName="typePropertyState" (change)="getEstados($event)"
-                    class="w-100 px-3 border text-left select-property border-radius-10 mt-3  h-51 bg-light fw-400 font-size-14 line-20 color-black"
-                    [(ngModel)]="stateSelected" id="state" aria-label="Default select example">
-                    <option [value]="stateSelected" disabled selected value>
-                        {{stateSelected}}</option>
-                    <option *ngFor="let item of estados.estados" [value]="item.nome">{{item.nome}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="dropdown px-0 mb-4 ">
-            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyCity" [data]="listAllCity"
-                [searchKeyword]="keyword" (inputChanged)='onChangeSearch($event)' placeholder="Escolha uma cidade"
-                (selected)='selectEvent($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
-            </ng-autocomplete>
-
-            <ng-template #itemTemplate let-item>
-                <a [innerHTML]="item.name"></a>
-            </ng-template>
-
-            <ng-template #notFoundTemplate let-notFound>
-                <div [innerHTML]="notFound"></div>
-            </ng-template>
-
-        </div> -->
     <div class="row mt-4 px-0">
       <div class="col-12">
         <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor</p>
