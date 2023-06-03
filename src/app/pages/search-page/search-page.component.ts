@@ -699,9 +699,6 @@ export class SearchPageComponent implements OnInit {
       goal: '',
     };
 
-    console.log(request);
-
-
     this.announcementService.listFilter(request).subscribe({
       next: (data) => {
         this.ngxSpinnerService.hide();
