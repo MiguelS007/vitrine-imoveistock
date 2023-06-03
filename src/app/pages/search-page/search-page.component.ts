@@ -704,8 +704,6 @@ export class SearchPageComponent implements OnInit {
         this.ngxSpinnerService.hide();
         this.filterResult = data.data;
         this.filtroResultDisplay = request;
-
-        console.log(this.filterResult);
         
 
         this.messageNotSearch = false;
