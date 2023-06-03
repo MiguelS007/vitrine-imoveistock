@@ -135,7 +135,7 @@ export class HomeHeaderComponent implements OnInit {
     localStorage.removeItem('resultSearch');
     localStorage.removeItem('filtro');
 
-    this.announcementService.listAnnouncement().subscribe({
+    this.announcementService.listAnnouncement(10).subscribe({
       next: (success) => {
         this.response = success;
       },

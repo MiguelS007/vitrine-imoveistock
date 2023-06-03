@@ -39,8 +39,13 @@ export class AnnouncementService extends BaseService {
     }
 
     listAnnouncement(limit?:number): Observable<AnnouncementGetResponseDto[]> {
+        if(limit){
+            return this.httpClient
+            .get(`${this.url}/list-exclusive-showcase?limit=${limit}`, this.anonymousHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+        }
         return this.httpClient
-            .get(`${this.url}/list-all-showcase/${limit || ''}`, this.anonymousHeader())
+            .get(`${this.url}/list-all-showcase`, this.anonymousHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
@@ -51,8 +56,14 @@ export class AnnouncementService extends BaseService {
     }
 
     listExclusive(limit?:number): Observable<AnnouncementGetResponseDto[]> {
+        if(limit){
+            return this.httpClient
+            .get(`${this.url}/list-exclusive-showcase?limit=${limit}`, this.anonymousHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+        }
+
         return this.httpClient
-            .get(`${this.url}/list-exclusive-showcase/${limit || ''}`, this.anonymousHeader())
+            .get(`${this.url}/list-exclusive-showcase`, this.anonymousHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
 
