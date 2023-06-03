@@ -289,6 +289,9 @@ export class HomeHeaderComponent implements OnInit {
       (item: any) => item.item_id
     );
 
+    console.log(propertyTypeList,'propertyTypeList');
+    
+
     let requestList: AnnouncementFilterListResponseDto = {
       typeOfAdd: filter.typeAd,
       propertyType: !!propertyTypeList ? propertyTypeList : [],
