@@ -45,7 +45,7 @@ export class SchedulingStep4Component implements OnInit {
 
     this.dateSend = {
       visitDate: this.dateSelected,
-      visitTypeOfAd: localStorage.getItem('typeOfAdSelect'),
+      visitTypeOfAd: localStorage.getItem('typeOfAdSelect') || localStorage.getItem('typeOfAd'),
       userBrokerPartnerId: this.user._id
     }
   }

@@ -44,7 +44,6 @@ export class SearchPageComponent implements OnInit {
   stateSelected = 'Escolha o Estado';
   citySelected = 'Selecione uma ciadade';
 
-  response: AnnouncementGetResponseDto[] = [];
   user: UserGetResponseDto;
   urlsimg: any = [];
 
@@ -199,6 +198,12 @@ export class SearchPageComponent implements OnInit {
   ngOnInit(): void {
     this.ngxSpinnerService.show();
 
+    this.announcementService.listExclusive(10).subscribe({
+      next: (data) => {
+        this.propertyproducts = data;  
+      },
+    });
+
     this.estados.estados.forEach((estado) => {
       estado.cidades.forEach((cidade) => {
         this.listEveryCity.push({
@@ -215,7 +220,6 @@ export class SearchPageComponent implements OnInit {
 
     if (filtro !== null) {
       filtro = JSON.parse(filtro);
-      // this.listDistrictByCity(filtro.cityAddress);
 
       this.searchByTypeAd(filtro.typeOfAdd);
 
@@ -225,6 +229,8 @@ export class SearchPageComponent implements OnInit {
       if (!!filtro.ufAddress) this.stateSelected = filtro.ufAddress;
 
       if (this.citySelected) this.listDistrictByCity(this.citySelected);
+
+      console.log(filtro?.districtAddress)
 
       this.form.patchValue({
         typeStatus: filtro.typeOfAdd,
@@ -281,35 +287,39 @@ export class SearchPageComponent implements OnInit {
       for (let i = 0; i < this.filterResult.length; i++) {
         this.listOfPrices.push(this.filterResult[i].saleValue);
       }
-
-      if (this.filterResult.length === 0) {
-        this.messageNotSearch = true;
-      } else {
-        this.messageNotSearch = false;
-      }
     } else {
       this.filterResult = [];
     }
 
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
-      this.announcementService.listAnnouncement().subscribe((success) => {
-        this.filterResult = success;
-        if (localStorage.getItem('user') !== null) {
-          this.announcementService.listLikes().subscribe((success) => {
-            for (let i = 0; i < success.length; i++) {
-              for (let x = 0; x < this.filterResult.length; x++) {
-                if (success[i].announcement._id === this.filterResult[x]._id) {
-                  Object.assign(this.filterResult[x], { liked: true });
+      this.messageNotSearch = true;
+      this.announcementService.listAnnouncement(5).subscribe({
+        next: (success) => {
+          this.filterResult = success;
+          if (localStorage.getItem('user') !== null) {
+            this.announcementService.listLikes().subscribe((success) => {
+              for (let i = 0; i < success.length; i++) {
+                for (let x = 0; x < this.filterResult.length; x++) {
+                  if (
+                    success[i].announcement._id === this.filterResult[x]._id
+                  ) {
+                    Object.assign(this.filterResult[x], { liked: true });
+                  }
                 }
+                this.listLikes.push(success[i].announcement);
               }
-              this.listLikes.push(success[i].announcement);
-            }
-          });
-        }
-        this.ngxSpinnerService.hide();
+            });
+          }
+          this.ngxSpinnerService.hide();
+        },
+        error: (error) => {
+          this.ngxSpinnerService.hide();
+          this.messageNotSearch = true;
+        },
       });
     } else if (localStorage.getItem('user') !== null) {
+      this.messageNotSearch = false;
       this.announcementService.listLikes().subscribe((success) => {
         for (let i = 0; i < success.length; i++) {
           for (let x = 0; x < this.filterResult.length; x++) {
@@ -318,30 +328,13 @@ export class SearchPageComponent implements OnInit {
             }
           }
           this.listLikes.push(success[i].announcement);
+          this.ngxSpinnerService.hide();
         }
       });
+    } else {
+      this.messageNotSearch = false;
+      this.ngxSpinnerService.hide();
     }
-    // GET-CITIES
-    let teste: any = [];
-    this.announcementService.listAnnouncement().subscribe({
-      next: (data) => {
-        this.listAllCity = [];
-        let removeRepets: any = [];
-        for (let i = 0; i < data.length; i++) {
-          removeRepets.push(data[i].cityAddress);
-        }
-        teste = new Set(removeRepets);
-        this.response = data;
-        this.ngxSpinnerService.hide();
-      },
-    });
-
-    this.announcementService.listExclusive().subscribe({
-      next: (data) => {
-        this.propertyproducts = data;
-      },
-    });
-    // if (filtro?.cityAddress) this.selectEvent2(filtro?.cityAddress);
   }
 
   onItemSelect(item: any) {
@@ -663,13 +656,12 @@ export class SearchPageComponent implements OnInit {
       this.selectFilterOfAd = 'sale';
     }
 
+    const district = this.form.controls['typePropertyDistrict'].value?.district || '';
+
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
       cityAddress: city,
-      districtAddress:
-        this.form.controls['typePropertyDistrict'].value?.district ||
-        this.form.controls['typePropertyDistrict'].value ||
-        '',
+      districtAddress: district,
       ufAddress:
         this.form.controls['typePropertyState'].value ||
         this.formModal.controls['typePropertyState'].value,
@@ -707,13 +699,12 @@ export class SearchPageComponent implements OnInit {
       goal: '',
     };
 
-    console.log(request);
-
     this.announcementService.listFilter(request).subscribe({
       next: (data) => {
         this.ngxSpinnerService.hide();
         this.filterResult = data.data;
         this.filtroResultDisplay = request;
+        
 
         this.messageNotSearch = false;
         localStorage.setItem('resultSearch', JSON.stringify(data));
@@ -721,7 +712,7 @@ export class SearchPageComponent implements OnInit {
         this.listDistrictByCity(this.getSelectedCity);
         if (this.filterResult.length === 0) {
           this.messageNotSearch = true;
-          this.announcementService.listAnnouncement().subscribe(
+          this.announcementService.listAnnouncement(10).subscribe(
             (success) => {
               this.filterResult = success;
             },

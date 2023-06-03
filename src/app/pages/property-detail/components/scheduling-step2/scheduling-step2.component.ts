@@ -41,7 +41,7 @@ export class SchedulingStep2Component implements OnInit {
 
     this.dateSend = {
       visitDate: this.dateSelected,
-      visitTypeOfAd: localStorage.getItem('typeOfAdSelect')
+      visitTypeOfAd: localStorage.getItem('typeOfAdSelect') || localStorage.getItem('typeOfAd'),
     }
   }
 
