@@ -70,7 +70,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
         if (value === true) {
           setTimeout(() => {
             this.user = JSON.parse(localStorage.getItem('userDto'));
-            this.userName = this.user.name.split(' ')[0];
+            this.userName = this.user?.name?.split(' ')[0] || '';
             this.loggedname = true;
             this.loggedopt = true;
             this.loginopt = false;

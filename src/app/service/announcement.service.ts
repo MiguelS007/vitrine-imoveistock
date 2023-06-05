@@ -153,4 +153,10 @@ export class AnnouncementService extends BaseService {
         .get(`${this.url}/list-districts-city/${city}`, this.anonymousHeader())
         .pipe(map(this.extractData), catchError(this.serviceError));
     }
+
+    listCitys():Observable<{city: string, uf:string}[]>{
+        return this.httpClient
+        .get(`${this.url}/list-cites`, this.anonymousHeader())
+        .pipe(map(this.extractData), catchError(this.serviceError));
+    }
 }

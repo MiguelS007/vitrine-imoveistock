@@ -50,7 +50,7 @@ export class HomeHeaderComponent implements OnInit {
 
   // listAllCity: any = [];
 
-  listEveryCity: { cidade: string; estado: string, render: string }[] = [];
+  listEveryCity: { cidade: string; estado: string; render: string }[] = [];
 
   getSelectedCity: string;
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
@@ -98,7 +98,7 @@ export class HomeHeaderComponent implements OnInit {
     itemsShowLimit: 3,
     searchPlaceholderText: 'Procurar',
     allowSearchFilter: true,
-    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!'
+    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
   };
 
   @ViewChild('dropdownRef') dropdownRef: any;
@@ -136,73 +136,86 @@ export class HomeHeaderComponent implements OnInit {
     localStorage.removeItem('filtro');
 
     this.announcementService.listAnnouncement().subscribe({
-      next: (success) => {
-        this.response = success;
-      },
+      next: (success) => (this.response = success),
       error: (error) => console.error(error, 'data not collected'),
     });
 
-    for (let i = 0; i < this.estados.estados.length; i++) {
-      for (let j = 0; j < this.estados.estados[i].cidades.length; j++) {
-        this.listEveryCity.push({
-          cidade: this.estados.estados[i].cidades[j],
-          estado: this.estados.estados[i].sigla,
-          render: this.estados.estados[i].cidades[j] + ' , ' + this.estados.estados[i].sigla
+    this.announcementService.listCitys().subscribe({
+      next: (data) => {
+        data.forEach((item) => {
+          if (item.city !== 'string' && item.uf.length === 2) {
+            const city =
+              item.city.charAt(0).toUpperCase() +
+              item.city.slice(1).toLowerCase();
+            this.listEveryCity.push({
+              cidade: city,
+              estado: item.uf.toUpperCase(),
+              render: `${city}, ${item.uf.toUpperCase()}`,
+            });
+          }
         });
-      }
-    }
-    this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
+        this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
+      },
+    });
+
+    // for (let i = 0; i < this.estados.estados.length; i++) {
+    //   for (let j = 0; j < this.estados.estados[i].cidades.length; j++) {
+    //     this.listEveryCity.push({
+    //       cidade: this.estados.estados[i].cidades[j],
+    //       estado: this.estados.estados[i].sigla,
+    //       render: this.estados.estados[i].cidades[j] + ' , ' + this.estados.estados[i].sigla
+    //     });
+    //   }
+    // }
   }
-
-
 
   removeLabel(event) {
     this.viewLabelValueMax = false;
   }
 
   selectValueSale(item) {
-    this.labelValueSale = item
+    this.labelValueSale = item;
   }
 
   selectValueRent(item) {
-    this.labelValueRent = item
+    this.labelValueRent = item;
   }
 
   onItemSelect(item: any) {
-    const nativeElement = this.dropdownRef
+    const nativeElement = this.dropdownRef;
     if (nativeElement.isDropdownOpen === true) {
-      nativeElement.closeDropdown()
+      nativeElement.closeDropdown();
     }
   }
 
   onItemDeSelect(item: any) {
     if (this.selectedItems.length === 0) {
-      const nativeElement = this.dropdownRef
+      const nativeElement = this.dropdownRef;
       if (nativeElement.isDropdownOpen === true) {
-        nativeElement.closeDropdown()
+        nativeElement.closeDropdown();
       }
     }
   }
 
   onSelectAll(items: any) {
-    const nativeElement = this.dropdownRef
+    const nativeElement = this.dropdownRef;
     if (nativeElement.isDropdownOpen === true) {
-      nativeElement.closeDropdown()
+      nativeElement.closeDropdown();
     }
   }
 
   onDeSelectAll(items) {
-    const nativeElement = this.dropdownRef
+    const nativeElement = this.dropdownRef;
     if (nativeElement.isDropdownOpen === true) {
-      nativeElement.closeDropdown()
+      nativeElement.closeDropdown();
     }
   }
 
   selectValueBadroom(item) {
-    this.labelValueBadroom = item
+    this.labelValueBadroom = item;
   }
 
-  onChangeSearch(search: string) { }
+  onChangeSearch(search: string) {}
 
   selectEvent(item: { cidade: string; estado: string }) {
     this.getSelectedCity = item.cidade;
@@ -214,14 +227,17 @@ export class HomeHeaderComponent implements OnInit {
     this.listDistrictByCity(item.cidade);
   }
 
-  listDistrictByCity(value:string) {
+  listDistrictByCity(value: string) {
     this.announcementService.listDistrictsByCity(value).subscribe({
-      next: (response) => this.listDistricts = response,
+      next: (response) => (this.listDistricts = response),
       error: (error) => console.log(error),
-    })
+    });
   }
 
-  customFilter(items: { cidade: string; estado: string, render: string }[], query: string): { cidade: string; estado: string, render: string }[] {
+  customFilter(
+    items: { cidade: string; estado: string; render: string }[],
+    query: string
+  ): { cidade: string; estado: string; render: string }[] {
     function removerAcento(text: string): string {
       text = text.toLowerCase();
       text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
@@ -232,12 +248,12 @@ export class HomeHeaderComponent implements OnInit {
       text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
       return text.toLocaleLowerCase();
     }
-    if(query.length < 2) {
-      return[]
+    if (query.length < 2) {
+      return [];
     }
-    return items.filter(a => {
-      return removerAcento(a.render).includes(removerAcento(query))
-    })
+    return items.filter((a) => {
+      return removerAcento(a.render).includes(removerAcento(query));
+    });
   }
 
   selectEvent2(item) {
@@ -253,14 +269,29 @@ export class HomeHeaderComponent implements OnInit {
       typeAd: this.typeAd,
       state: this.form.controls['typePropertyState'].value,
       city: this.getSelectedCity,
-      district: this.form.controls['typePropertyDistrict'].value?.district || this.form.controls['typePropertyDistrict'].value || '',
+      district:
+        this.form.controls['typePropertyDistrict'].value?.district ||
+        this.form.controls['typePropertyDistrict'].value ||
+        '',
       allResidential: this.typepropertyfull,
-      untilValueSale: !isNaN(this.labelValueSale) ? Number(this.labelValueSale) : (typeof this.labelValueSale === 'string' ? 0 : this.labelValueSale),
-      untilValueRent: !isNaN(this.labelValueRent) ? Number(this.labelValueRent) : (typeof this.labelValueRent === 'string' ? 0 : this.labelValueRent),
+      untilValueSale: !isNaN(this.labelValueSale)
+        ? Number(this.labelValueSale)
+        : typeof this.labelValueSale === 'string'
+        ? 0
+        : this.labelValueSale,
+      untilValueRent: !isNaN(this.labelValueRent)
+        ? Number(this.labelValueRent)
+        : typeof this.labelValueRent === 'string'
+        ? 0
+        : this.labelValueRent,
       goal: this.goal, //residencial , comercial
       // residencial
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
-      badRoomsQnt: !isNaN(this.labelValueBadroom) ? Number(this.labelValueBadroom) : (typeof this.labelValueBadroom === 'string' ? 0 : this.labelValueBadroom),
+      badRoomsQnt: !isNaN(this.labelValueBadroom)
+        ? Number(this.labelValueBadroom)
+        : typeof this.labelValueBadroom === 'string'
+        ? 0
+        : this.labelValueBadroom,
     };
 
     let city = this.getSelectedCity !== undefined ? this.getSelectedCity : '';
@@ -305,7 +336,7 @@ export class HomeHeaderComponent implements OnInit {
         Object.assign(requestList, {
           propertyTypeList: this.form.controls['propertyType'].value,
         });
-        localStorage.setItem('totalSearch', JSON.stringify(data.total))
+        localStorage.setItem('totalSearch', JSON.stringify(data.total));
         localStorage.setItem('filtro', JSON.stringify(requestList));
         localStorage.setItem('resultSearch', JSON.stringify(data.data));
         this.router.navigate(['/search']);
@@ -321,12 +352,11 @@ export class HomeHeaderComponent implements OnInit {
     if (value === 'sale') {
       this.collapsed = false;
       this.viewLabelValueMax = true;
-      this.labelValueRent = 'Valor até'
+      this.labelValueRent = 'Valor até';
     } else if (value === 'rent') {
       this.collapsed = true;
       this.viewLabelValueMax = true;
-      this.labelValueSale = 'Valor até'
+      this.labelValueSale = 'Valor até';
     }
   }
-
 }
