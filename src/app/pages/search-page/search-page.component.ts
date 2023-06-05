@@ -48,7 +48,6 @@ export class SearchPageComponent implements OnInit {
   urlsimg: any = [];
 
   filterResult: AnnouncementGetResponseDto[] = [];
-  totalResults: number = 0;
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
 
@@ -100,7 +99,7 @@ export class SearchPageComponent implements OnInit {
   listEveryCity: { cidade: string; estado: string; render: string }[] = [];
   listDistricts: { district: string }[] = [];
 
-  listOfPrices: any = [];
+  // listOfPrices: any = [];
 
   @ViewChild('dropdownRef') dropdownRef: any;
 
@@ -200,21 +199,37 @@ export class SearchPageComponent implements OnInit {
 
     this.announcementService.listExclusive(10).subscribe({
       next: (data) => {
-        this.propertyproducts = data;  
+        this.propertyproducts = data;
       },
     });
 
-    this.estados.estados.forEach((estado) => {
-      estado.cidades.forEach((cidade) => {
-        this.listEveryCity.push({
-          cidade,
-          estado: estado.sigla,
-          render: `${cidade}, ${estado.sigla}`,
+    this.announcementService.listCitys().subscribe({
+      next: (data) => {
+        data.forEach((item) => {
+          if (item.city !== 'string' && item.uf.length === 2) {
+            const city =
+              item.city.charAt(0).toUpperCase() +
+              item.city.slice(1).toLowerCase();
+            this.listEveryCity.push({
+              cidade: city,
+              estado: item.uf.toUpperCase(),
+              render: `${city}, ${item.uf.toUpperCase()}`,
+            });
+          }
         });
-      });
+        this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
+      },
     });
 
-    this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
+    // this.estados.estados.forEach((estado) => {
+    //   estado.cidades.forEach((cidade) => {
+    //     this.listEveryCity.push({
+    //       cidade,
+    //       estado: estado.sigla,
+    //       render: `${cidade}, ${estado.sigla}`,
+    //     });
+    //   });
+    // });
 
     let filtro: any = localStorage.getItem('filtro');
 
@@ -229,8 +244,6 @@ export class SearchPageComponent implements OnInit {
       if (!!filtro.ufAddress) this.stateSelected = filtro.ufAddress;
 
       if (this.citySelected) this.listDistrictByCity(this.citySelected);
-
-      console.log(filtro?.districtAddress)
 
       this.form.patchValue({
         typeStatus: filtro.typeOfAdd,
@@ -278,19 +291,14 @@ export class SearchPageComponent implements OnInit {
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
-    this.totalResults = Number(localStorage.getItem('totalSearch'));
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
       this.filterResult = JSON.parse(resultadoVerify);
-      // list-price-orderBy
-      for (let i = 0; i < this.filterResult.length; i++) {
-        this.listOfPrices.push(this.filterResult[i].saleValue);
-      }
     } else {
       this.filterResult = [];
     }
-
+    
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.messageNotSearch = true;
@@ -307,11 +315,13 @@ export class SearchPageComponent implements OnInit {
                     Object.assign(this.filterResult[x], { liked: true });
                   }
                 }
-                this.listLikes.push(success[i].announcement);
               }
+              this.listLikes = success.map((item) => item.announcement);
+              this.ngxSpinnerService.hide();
             });
+          }else{
+            this.ngxSpinnerService.hide();
           }
-          this.ngxSpinnerService.hide();
         },
         error: (error) => {
           this.ngxSpinnerService.hide();
@@ -320,16 +330,23 @@ export class SearchPageComponent implements OnInit {
       });
     } else if (localStorage.getItem('user') !== null) {
       this.messageNotSearch = false;
-      this.announcementService.listLikes().subscribe((success) => {
-        for (let i = 0; i < success.length; i++) {
-          for (let x = 0; x < this.filterResult.length; x++) {
-            if (success[i].announcement._id === this.filterResult[x]._id) {
-              Object.assign(this.filterResult[x], { liked: true });
+      this.announcementService.listLikes().subscribe({
+        next: (success) => {
+          for (let i = 0; i < success.length; i++) {
+            for (let x = 0; x < this.filterResult.length; x++) {
+              if (success[i].announcement._id === this.filterResult[x]._id) {
+                Object.assign(this.filterResult[x], { liked: true });
+              }
             }
           }
-          this.listLikes.push(success[i].announcement);
+          this.listLikes = success.map((item) => item.announcement);
           this.ngxSpinnerService.hide();
-        }
+        },
+        error: (error) => {
+          this.ngxSpinnerService.hide();
+          console.log(error);
+          
+        },
       });
     } else {
       this.messageNotSearch = false;
@@ -656,7 +673,8 @@ export class SearchPageComponent implements OnInit {
       this.selectFilterOfAd = 'sale';
     }
 
-    const district = this.form.controls['typePropertyDistrict'].value?.district || '';
+    const district =
+      this.form.controls['typePropertyDistrict'].value?.district || '';
 
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
@@ -704,7 +722,6 @@ export class SearchPageComponent implements OnInit {
         this.ngxSpinnerService.hide();
         this.filterResult = data.data;
         this.filtroResultDisplay = request;
-        
 
         this.messageNotSearch = false;
         localStorage.setItem('resultSearch', JSON.stringify(data));
@@ -781,11 +798,14 @@ export class SearchPageComponent implements OnInit {
   }
 
   sortPriceList(value: string) {
-    this.listOfPrices = this.filterResult;
-    if (value === 'minor>major')
-      this.listOfPrices.sort((a, b) => (a.saleValue < b.saleValue ? -1 : 0));
-    else if (value === 'major>minor')
-      this.listOfPrices.sort((a, b) => (a.saleValue > b.saleValue ? -1 : 0));
+    const listOfPrices = this.filterResult;
+    if (value === 'minor>major') {
+      listOfPrices.sort((a, b) => (a.saleValue < b.saleValue ? -1 : 0));
+      this.orderBy = 'Menor preço';
+    } else if (value === 'major>minor') {
+      listOfPrices.sort((a, b) => (a.saleValue > b.saleValue ? -1 : 0));
+      this.orderBy = 'Maior preço';
+    }
   }
 
   redirectToMap() {

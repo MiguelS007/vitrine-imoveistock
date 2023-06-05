@@ -304,7 +304,7 @@
           <div
             class="w-100 d-flex d-none-desk align-items-center results-bar justify-content-between py-4 px-5 border-radius-10 bg-white">
             <p class="d-flex mb-0 fw-400 font-size-14 line-20 color-black">
-              <span *ngIf="!messageNotSearch">{{totalResults}}</span>
+              <span *ngIf="!messageNotSearch">{{filterResult?.length || 0}}</span>
               <span class="px-1">Resultados</span>
             </p>
             <div class="d-flex align-items-center">
@@ -315,7 +315,6 @@
                   {{orderBy}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" (click)="sortPriceList('Relevante')">Relevante</a>
                   <a class="dropdown-item" (click)="sortPriceList('major>minor')">Maior preço</a>
                   <a class="dropdown-item" (click)="sortPriceList('minor>major')">Menor preço</a>
                 </div>
@@ -324,7 +323,7 @@
           </div>
         </div>
         <div class="row pr-0">
-          <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch">
+          <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch || !filterResult?.length">
             <img src="../../../assets/img/not-search-announcement.svg" height="80">
             <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
             <p class="text-center mb-0">explore outros filtros e confira os imoveis abaixo que podem te

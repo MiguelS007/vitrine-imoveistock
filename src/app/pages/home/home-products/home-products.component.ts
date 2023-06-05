@@ -9,6 +9,7 @@ import { UserService } from 'src/app/service/user.service';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { AuthenticationService } from '../../../service/authentication.service';
 import { propertyTypesConst } from 'src/app/utils/propertyTypes';
+import { catchError, forkJoin, of } from 'rxjs';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -52,34 +53,38 @@ export class HomeProductsComponent implements OnInit {
       },
     });
   }
+
   list() {
-    this.announcementService.listExclusive().subscribe({
-      next: (response) => {
-        this.response = response;
-        if (localStorage.getItem('user') !== null) {
-          this.announcementService.listLikes().subscribe({
-            next: (success) => {
-              for (let i = 0; i < success.length; i++) {
-                for (let x = 0; x < this.response.length; x++) {
-                  if (success[i].announcement._id === this.response[x]._id) {
-                    Object.assign(this.response[x], { liked: true });
-                  }
-                }
-                this.listLikes.push(success[i].announcement);
-              }
-            },
-            error: (error) => {
-              if (error.error.message === 'Unauthorized') {
-                localStorage.removeItem('userDto');
-                localStorage.removeItem('user');
-              }
-            },
-          });
+    const fork = forkJoin({
+      likes:
+        localStorage.getItem('user') !== null
+          ? this.announcementService.listLikes().pipe(
+              catchError((err) => {
+                console.log(err, 'error in list likes');
+                return of(undefined);
+              })
+            )
+          : of(undefined),
+      exclusive: this.announcementService.listExclusive().pipe(
+        catchError((err) => {
+          console.log(err, 'error in list exclusive');
+          return of(undefined);
+        })
+      ),
+    });
+
+    fork.subscribe((data) => {
+      this.response = data.exclusive;
+      if (data.likes) {
+        this.listLikes = data.likes.map((x) => x.announcement);
+        for (let i = 0; i < this.listLikes.length; i++) {
+          for (let x = 0; x < this.response.length; x++) {
+            if (this.listLikes[i]._id === this.response[x]._id) {
+              Object.assign(this.response[x], { liked: true });
+            }
+          }
         }
-      },
-      error: (error) => {
-        console.log(error, 'data not collected');
-      },
+      }
     });
   }
 
@@ -92,34 +97,36 @@ export class HomeProductsComponent implements OnInit {
       return;
     }
     if (this.listLikes.length === 0) {
-      this.announcementService.registerLike(request).subscribe(
-        (success) => {
+      this.announcementService.registerLike(request).subscribe({
+        next: (success) => {
           this.list();
           return;
         },
-        (error) => {
+        error: (error) => {
           console.log(error);
-        }
-      );
+        },
+      });
     } else {
       if (condition === true) {
-        this.announcementService.registerUnlike(request).subscribe(
-          (success) => {
+        this.announcementService.registerUnlike(request).subscribe({
+          next: (success) => {
             this.list();
+            return;
           },
-          (error) => {
+          error: (error) => {
             console.log(error);
-          }
-        );
+          },
+        });
       } else if (condition === undefined) {
-        this.announcementService.registerLike(request).subscribe(
-          (success) => {
+        this.announcementService.registerLike(request).subscribe({
+          next: (success) => {
             this.list();
+            return;
           },
-          (error) => {
+          error: (error) => {
             console.log(error);
-          }
-        );
+          },
+        });
       }
     }
   }
@@ -153,6 +160,8 @@ export class HomeProductsComponent implements OnInit {
   }
 
   resolveProperty(text: string): string {
-    return propertyTypesConst.find((x) => x.value === text)?.name || text || '-';
+    return (
+      propertyTypesConst.find((x) => x.value === text)?.name || text || '-'
+    );
   }
 }
