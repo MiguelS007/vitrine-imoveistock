@@ -48,7 +48,6 @@ export class SearchPageComponent implements OnInit {
   urlsimg: any = [];
 
   filterResult: AnnouncementGetResponseDto[] = [];
-  totalResults: number = 0;
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
 
@@ -278,7 +277,6 @@ export class SearchPageComponent implements OnInit {
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
-    this.totalResults = Number(localStorage.getItem('totalSearch'));
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
