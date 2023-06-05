@@ -639,6 +639,9 @@ export class ExpressProposalComponent implements OnInit {
 
   sendProposal(request) {
     console.log('request sendProposal', request);
+
+    this.modalsendproposalexpress = false;
+    this.modalcustomizedproposal = false;
     
     this.proposalService.register(request).subscribe({
       next: data => {
@@ -653,7 +656,10 @@ export class ExpressProposalComponent implements OnInit {
 
   sendCounterProposal(request) {
     console.log('request sendCounterProposal', request);
-      
+
+    this.modalsendproposalexpress = false;
+    this.modalcustomizedproposal = false;
+
     Object.assign(this.request, { parentProposalId: this.proposalResponse?.counterProposal?._id  || this.proposalResponse?.proposal?._id })
     this.proposalService.counterProposal(this.request).subscribe({
       next: data => {

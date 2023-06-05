@@ -245,8 +245,6 @@ export class SearchPageComponent implements OnInit {
 
       if (this.citySelected) this.listDistrictByCity(this.citySelected);
 
-      console.log(filtro?.districtAddress);
-
       this.form.patchValue({
         typeStatus: filtro.typeOfAdd,
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
@@ -300,7 +298,7 @@ export class SearchPageComponent implements OnInit {
     } else {
       this.filterResult = [];
     }
-
+    
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.messageNotSearch = true;
@@ -317,11 +315,13 @@ export class SearchPageComponent implements OnInit {
                     Object.assign(this.filterResult[x], { liked: true });
                   }
                 }
-                this.listLikes.push(success[i].announcement);
               }
+              this.listLikes = success.map((item) => item.announcement);
+              this.ngxSpinnerService.hide();
             });
+          }else{
+            this.ngxSpinnerService.hide();
           }
-          this.ngxSpinnerService.hide();
         },
         error: (error) => {
           this.ngxSpinnerService.hide();
@@ -330,16 +330,23 @@ export class SearchPageComponent implements OnInit {
       });
     } else if (localStorage.getItem('user') !== null) {
       this.messageNotSearch = false;
-      this.announcementService.listLikes().subscribe((success) => {
-        for (let i = 0; i < success.length; i++) {
-          for (let x = 0; x < this.filterResult.length; x++) {
-            if (success[i].announcement._id === this.filterResult[x]._id) {
-              Object.assign(this.filterResult[x], { liked: true });
+      this.announcementService.listLikes().subscribe({
+        next: (success) => {
+          for (let i = 0; i < success.length; i++) {
+            for (let x = 0; x < this.filterResult.length; x++) {
+              if (success[i].announcement._id === this.filterResult[x]._id) {
+                Object.assign(this.filterResult[x], { liked: true });
+              }
             }
           }
-          this.listLikes.push(success[i].announcement);
+          this.listLikes = success.map((item) => item.announcement);
           this.ngxSpinnerService.hide();
-        }
+        },
+        error: (error) => {
+          this.ngxSpinnerService.hide();
+          console.log(error);
+          
+        },
       });
     } else {
       this.messageNotSearch = false;
