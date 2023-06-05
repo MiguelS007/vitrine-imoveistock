@@ -48,7 +48,6 @@ export class SearchPageComponent implements OnInit {
   urlsimg: any = [];
 
   filterResult: AnnouncementGetResponseDto[] = [];
-  totalResults: number = 0;
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
 
@@ -100,7 +99,7 @@ export class SearchPageComponent implements OnInit {
   listEveryCity: { cidade: string; estado: string; render: string }[] = [];
   listDistricts: { district: string }[] = [];
 
-  listOfPrices: any = [];
+  // listOfPrices: any = [];
 
   @ViewChild('dropdownRef') dropdownRef: any;
 
@@ -200,7 +199,7 @@ export class SearchPageComponent implements OnInit {
 
     this.announcementService.listExclusive(10).subscribe({
       next: (data) => {
-        this.propertyproducts = data;  
+        this.propertyproducts = data;
       },
     });
 
@@ -230,7 +229,7 @@ export class SearchPageComponent implements OnInit {
 
       if (this.citySelected) this.listDistrictByCity(this.citySelected);
 
-      console.log(filtro?.districtAddress)
+      console.log(filtro?.districtAddress);
 
       this.form.patchValue({
         typeStatus: filtro.typeOfAdd,
@@ -278,15 +277,10 @@ export class SearchPageComponent implements OnInit {
 
     let recentlySeenList = localStorage.getItem('recentlySeen');
     this.recentlySeenIdsList = JSON.parse(recentlySeenList);
-    this.totalResults = Number(localStorage.getItem('totalSearch'));
 
     let resultadoVerify = localStorage.getItem('resultSearch');
     if (resultadoVerify !== null) {
       this.filterResult = JSON.parse(resultadoVerify);
-      // list-price-orderBy
-      for (let i = 0; i < this.filterResult.length; i++) {
-        this.listOfPrices.push(this.filterResult[i].saleValue);
-      }
     } else {
       this.filterResult = [];
     }
@@ -656,7 +650,8 @@ export class SearchPageComponent implements OnInit {
       this.selectFilterOfAd = 'sale';
     }
 
-    const district = this.form.controls['typePropertyDistrict'].value?.district || '';
+    const district =
+      this.form.controls['typePropertyDistrict'].value?.district || '';
 
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
@@ -704,7 +699,6 @@ export class SearchPageComponent implements OnInit {
         this.ngxSpinnerService.hide();
         this.filterResult = data.data;
         this.filtroResultDisplay = request;
-        
 
         this.messageNotSearch = false;
         localStorage.setItem('resultSearch', JSON.stringify(data));
@@ -781,11 +775,14 @@ export class SearchPageComponent implements OnInit {
   }
 
   sortPriceList(value: string) {
-    this.listOfPrices = this.filterResult;
-    if (value === 'minor>major')
-      this.listOfPrices.sort((a, b) => (a.saleValue < b.saleValue ? -1 : 0));
-    else if (value === 'major>minor')
-      this.listOfPrices.sort((a, b) => (a.saleValue > b.saleValue ? -1 : 0));
+    const listOfPrices = this.filterResult;
+    if (value === 'minor>major') {
+      listOfPrices.sort((a, b) => (a.saleValue < b.saleValue ? -1 : 0));
+      this.orderBy = 'Menor preço';
+    } else if (value === 'major>minor') {
+      listOfPrices.sort((a, b) => (a.saleValue > b.saleValue ? -1 : 0));
+      this.orderBy = 'Maior preço';
+    }
   }
 
   redirectToMap() {
