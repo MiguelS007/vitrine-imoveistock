@@ -142,7 +142,7 @@ export class NavBarComponent implements OnInit, AfterViewInit {
   }
 
   openBrokers() {
-    window.open('https://imobiliarias.imoveistock.com.br/', '_blank')
+    window.open('https://corretores.imoveistock.com.br/', '_blank')
   }
 
   changePage(value) {
