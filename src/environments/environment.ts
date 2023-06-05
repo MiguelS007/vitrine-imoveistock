@@ -11,6 +11,7 @@ export const environment = {
   // imoveistock: 'http://localhost:5000/',
 
 
+
   },
   google: {
     apiKey: 'AIzaSyBzwijvQ13DZALYBwC-uKdWWELaf0r9Xzs',
