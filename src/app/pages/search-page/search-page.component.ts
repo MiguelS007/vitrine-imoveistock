@@ -724,7 +724,7 @@ export class SearchPageComponent implements OnInit {
         this.filtroResultDisplay = request;
 
         this.messageNotSearch = false;
-        localStorage.setItem('resultSearch', JSON.stringify(data));
+        localStorage.setItem('resultSearch', JSON.stringify(data.data));
         localStorage.setItem('filtro', JSON.stringify(request));
         this.listDistrictByCity(this.getSelectedCity);
         if (this.filterResult.length === 0) {
