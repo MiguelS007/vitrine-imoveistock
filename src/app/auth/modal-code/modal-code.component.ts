@@ -139,9 +139,9 @@ export class ModalCodeComponent implements OnInit {
         this.authenticationService.setAuthenticatedUser(
           new AuthetincatedUserDto(success.userId, success.phone, success.token, success.profileId, success.apiFunctionsId),
         );
-        this.authenticationService.logged.next(true)
         this.userService.getUser().subscribe(
           success => {
+            this.authenticationService.logged.next(true)
             let user = JSON.stringify(success);
             localStorage.setItem('userDto', user);
             this.modalService.dismissAll()

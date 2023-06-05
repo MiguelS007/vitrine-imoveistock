@@ -203,17 +203,33 @@ export class SearchPageComponent implements OnInit {
       },
     });
 
-    this.estados.estados.forEach((estado) => {
-      estado.cidades.forEach((cidade) => {
-        this.listEveryCity.push({
-          cidade,
-          estado: estado.sigla,
-          render: `${cidade}, ${estado.sigla}`,
+    this.announcementService.listCitys().subscribe({
+      next: (data) => {
+        data.forEach((item) => {
+          if (item.city !== 'string' && item.uf.length === 2) {
+            const city =
+              item.city.charAt(0).toUpperCase() +
+              item.city.slice(1).toLowerCase();
+            this.listEveryCity.push({
+              cidade: city,
+              estado: item.uf.toUpperCase(),
+              render: `${city}, ${item.uf.toUpperCase()}`,
+            });
+          }
         });
-      });
+        this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
+      },
     });
 
-    this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
+    // this.estados.estados.forEach((estado) => {
+    //   estado.cidades.forEach((cidade) => {
+    //     this.listEveryCity.push({
+    //       cidade,
+    //       estado: estado.sigla,
+    //       render: `${cidade}, ${estado.sigla}`,
+    //     });
+    //   });
+    // });
 
     let filtro: any = localStorage.getItem('filtro');
 
