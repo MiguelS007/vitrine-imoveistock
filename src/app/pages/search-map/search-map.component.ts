@@ -1,21 +1,33 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { environment } from '../../../environments/environment';
 import { GoogleMap } from '@angular/google-maps';
-import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markerclusterer';
+import {
+  MarkerClusterer,
+  SuperClusterAlgorithm,
+} from '@googlemaps/markerclusterer';
 import { GeocodeService } from '../../service/geocode.service';
 import { AnnouncementFilterListResponseDto } from '../../dtos/announcement-filter-list-response.dto';
 import { propertyTypesConst } from 'src/app/utils/propertyTypes';
+import { AnnouncementService } from 'src/app/service/announcement.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
+import { catchError, forkJoin, of } from 'rxjs';
 
 @Component({
   selector: 'app-search-map',
   templateUrl: './search-map.component.html',
-  styleUrls: ['./search-map.component.scss']
+  styleUrls: ['./search-map.component.scss'],
 })
 export class SearchMapComponent implements OnInit, AfterViewInit {
-
   @ViewChild(GoogleMap) public map: GoogleMap | undefined;
 
   geolib: any;
@@ -37,12 +49,13 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
   cluster: MarkerClusterer;
 
-  response: AnnouncementGetResponseDto[] = [];
+  response: AnnouncementGetResponseDto[] =
+    JSON.parse(localStorage.getItem('resultSearch')) || [];
   selectedAnouncements: AnnouncementGetResponseDto[] = [];
 
   pagination: number = 1;
 
-  orderBy: string = 'Selecione'
+  orderBy: string = 'Selecione';
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
 
@@ -50,9 +63,10 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     private ngxSpinnerService: NgxSpinnerService,
     private router: Router,
     private _geocodeService: GeocodeService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private announcementService: AnnouncementService,
+    private modalService: NgbModal
   ) {
-
     this.geolib = require('geolib');
   }
 
@@ -61,7 +75,6 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
     this.ngxSpinnerService.show();
 
     this.response = JSON.parse(localStorage.getItem('resultSearch'));
@@ -69,23 +82,27 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
     this.filtroResultDisplay = JSON.parse(localStorage.getItem('filtro'));
 
-    this.geocoder.geocode({ address: `${this.filtroResultDisplay.cityAddress}, ${this.filtroResultDisplay.ufAddress}` }, (results, status) => {
+    this.geocoder.geocode(
+      {
+        address: `${this.filtroResultDisplay.cityAddress}, ${this.filtroResultDisplay.ufAddress}`,
+      },
+      (results, status) => {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var lat = results[0].geometry.location.lat();
+          var lng = results[0].geometry.location.lng();
 
-      if (status == google.maps.GeocoderStatus.OK) {
-        var lat = results[0].geometry.location.lat();
-        var lng = results[0].geometry.location.lng();
-
-        this.center = {
-          lat,
-          lng,
-        };
-      } else {
-        this.center = {
-          lat: environment.google.map.center.lat,
-          lng: environment.google.map.center.lng,
-        };
+          this.center = {
+            lat,
+            lng,
+          };
+        } else {
+          this.center = {
+            lat: environment.google.map.center.lat,
+            lng: environment.google.map.center.lng,
+          };
+        }
       }
-    });
+    );
 
     this.mapOptions.center = this.center;
 
@@ -94,20 +111,45 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     this.ngxSpinnerService.hide();
   }
 
-  onChangeSearch(search: string) {
-  }
-
+  onChangeSearch(search: string) {}
 
   selectAnnouncement(_id: string) {
-
     this.router.navigate([`announcement/detail`, _id]);
   }
 
   likeHeart(value, condition) {
+    let request = {
+      announcementId: value,
+    };
+
+    if (localStorage.getItem('user') === null) {
+      this.modalService.open(ModalLoginComponent, { centered: true });
+      return;
+    }
+
+    if (condition === true) {
+      this.announcementService.registerUnlike(request).subscribe({
+        next: (success) => {
+          this.listLikes();
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    } else if (condition === undefined) {
+      this.announcementService.registerLike(request).subscribe({
+        next: (success) => {
+          this.listLikes();
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    }
   }
 
   changeOderBy(value) {
-    this.orderBy = value
+    this.orderBy = value;
   }
 
   public removerAcento(text) {
@@ -123,24 +165,24 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
   sortPriceList(value: string) {
     if (value === 'minor>major')
-      this.response.sort((a, b) => a.saleValue < b.saleValue ? -1 : 0);
+      this.response.sort((a, b) => (a.saleValue < b.saleValue ? -1 : 0));
     else if (value === 'major>minor')
-      this.response.sort((a, b) => a.saleValue > b.saleValue ? -1 : 0);
+      this.response.sort((a, b) => (a.saleValue > b.saleValue ? -1 : 0));
   }
 
   private _updateMarkers() {
-
     this.markers = [];
 
-    this.response.map((anouncement) => {
+    if (!this.response || !this.response.length) return;
 
+    this.response.map((anouncement) => {
       const marker = new google.maps.Marker({
         draggable: false,
         position: {
-          lat: +(anouncement.latitude),
-          lng: +(anouncement.longitude),
+          lat: +anouncement.latitude,
+          lng: +anouncement.longitude,
         },
-        icon: '../../../assets/icon/custom-marker.svg'
+        icon: '../../../assets/icon/custom-marker.svg',
       });
 
       marker.set('_id', anouncement._id);
@@ -165,7 +207,6 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   _clickCluster(cluster: any) {
-
     const mapZoom = this.map.getZoom();
 
     const clusterLat: number = cluster.latLng.lat();
@@ -174,7 +215,6 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     const idList: string[] = [];
 
     this.markers.map((marker) => {
-
       const _id = marker.get('_id');
       const markerLat = marker.getPosition().lat();
       const markerLng = marker.getPosition().lng();
@@ -184,8 +224,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         { lat: markerLat, lng: markerLng }
       );
 
-      if (distance <= 100)
-        idList.push(_id);
+      if (distance <= 100) idList.push(_id);
 
       this.center = {
         lat: clusterLat,
@@ -195,8 +234,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
       if (mapZoom <= 12) {
         this.zoom = mapZoom + 3;
         this.map.googleMap.setZoom(mapZoom + 3);
-      }
-      else if (mapZoom < 16) {
+      } else if (mapZoom < 16) {
         this.zoom = mapZoom + 1;
         this.map.googleMap.setZoom(mapZoom + 1);
       }
@@ -206,32 +244,40 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   _filterAnnouncementLst(_ids?: string[]) {
-
-    if (!_ids)
-      this.selectedAnouncements = this.response;
+    if (!_ids) this.selectedAnouncements = this.response;
     else {
-
       this.selectedAnouncements = [];
 
       this.response.map((an) => {
-        if (_ids.includes(an._id))
-          this.selectedAnouncements.push(an);
+        if (_ids.includes(an._id)) this.selectedAnouncements.push(an);
       });
 
       this.changeDetectorRef.detectChanges();
     }
   }
 
-  moveMap() {
-
-
-  }
+  moveMap() {}
 
   changeZoom() {
     console.log(this.map.getZoom());
   }
 
-  resolveProperty(text:string):string{
-    return propertyTypesConst.find(x => x.value === text).name || text || '-';
+  resolveProperty(text: string): string {
+    return propertyTypesConst.find((x) => x.value === text).name || text || '-';
+  }
+
+  listLikes() {
+    if (localStorage.getItem('user') !== null) {
+      this.announcementService.listLikes().subscribe({
+        next: (data) => {
+          data.forEach((element) => {
+            for (let x = 0; x < this.response.length; x++)
+              if (this.response[x]._id === element.announcement._id) {
+                Object.assign(this.response[x], { liked: true });
+              }
+          });
+        },
+      });
+    }
   }
 }
