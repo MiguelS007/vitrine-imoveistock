@@ -235,10 +235,10 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   customFilter(
-    items: { cidade: string; estado: string; render: string }[],
+    items: { cidade: string; estado: string; render?: string; district?: string }[],
     query: string
-  ): { cidade: string; estado: string; render: string }[] {
-    function removerAcento(text: string): string {
+  ): { cidade: string; estado: string; render?: string; district?: string }[] {
+    function removeAccents(text: string): string {
       text = text.toLowerCase();
       text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
       text = text.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
@@ -248,11 +248,25 @@ export class HomeHeaderComponent implements OnInit {
       text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
       return text.toLocaleLowerCase();
     }
+  
     if (query.length < 2) {
       return [];
     }
-    return items.filter((a) => {
-      return removerAcento(a.render).includes(removerAcento(query));
+  
+    return items.filter((item) => {
+      const normalizedQuery = removeAccents(query.toLowerCase());
+  
+      if (item.render) {
+        const normalizedRender = removeAccents(item.render.toLowerCase());
+        return normalizedRender.includes(normalizedQuery);
+      }
+  
+      if (item.district) {
+        const normalizedDistrict = removeAccents(item.district.toLowerCase());
+        return normalizedDistrict.includes(normalizedQuery);
+      }
+  
+      return false;
     });
   }
 
@@ -277,21 +291,21 @@ export class HomeHeaderComponent implements OnInit {
       untilValueSale: !isNaN(this.labelValueSale)
         ? Number(this.labelValueSale)
         : typeof this.labelValueSale === 'string'
-        ? 0
-        : this.labelValueSale,
+          ? 0
+          : this.labelValueSale,
       untilValueRent: !isNaN(this.labelValueRent)
         ? Number(this.labelValueRent)
         : typeof this.labelValueRent === 'string'
-        ? 0
-        : this.labelValueRent,
+          ? 0
+          : this.labelValueRent,
       goal: this.goal, //residencial , comercial
       // residencial
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: !isNaN(this.labelValueBadroom)
         ? Number(this.labelValueBadroom)
         : typeof this.labelValueBadroom === 'string'
-        ? 0
-        : this.labelValueBadroom,
+          ? 0
+          : this.labelValueBadroom,
     };
 
     let city = this.getSelectedCity !== undefined ? this.getSelectedCity : '';
