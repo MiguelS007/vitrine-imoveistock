@@ -420,37 +420,74 @@ export class SearchPageComponent implements OnInit {
 
   onPageChange(pageNumber) {
     const filter = JSON.parse(localStorage.getItem('filtro'));
-
-    if (pageNumber <= 3) {
-      this.lastPaginationPage = null;
+    this.paginationProduct = pageNumber;
+  
+    if (
+      this.filterResult.length === 24 &&
+      this.lastPaginationPage === 3 &&
+      pageNumber === 2
+    ) {
       this.paginationProduct = pageNumber;
+      this.lastPaginationPage = pageNumber;
       return;
     }
-
+  
+    if (
+      this.filterResult.length === 24 &&
+      this.lastPaginationPage === 2 &&
+      pageNumber === 1
+    ) {
+      this.paginationProduct = pageNumber;
+      this.lastPaginationPage = pageNumber;
+      return;
+    }
+  
+    if (
+      this.filterResult.length === 30 &&
+      this.lastPaginationPage === 4 &&
+      pageNumber === 1
+    ) {
+      const totalToRemove = 6;
+  
+      this.filterResult.splice(-totalToRemove);
+      this.paginationProduct = pageNumber;
+      this.lastPaginationPage = pageNumber;
+      return;
+    }
+  
+    if (this.filterResult.length > 30 && pageNumber === 1) {
+      this.paginationProduct = pageNumber;
+      this.lastPaginationPage = pageNumber;
+      this.filterResult = this.filterResult.slice(0, 24);
+      return;
+    }
+  
     if (pageNumber < this.lastPaginationPage) {
       const diff = this.lastPaginationPage - pageNumber;
       const totalToRemove = diff * 6;
-
+  
       this.filterResult.splice(-totalToRemove);
       this.paginationProduct = pageNumber;
+      this.lastPaginationPage = pageNumber;
       return;
     }
-
+  
     if (pageNumber >= 4) {
       this.lastPaginationPage = pageNumber;
-      filter.page = Number(pageNumber) + 1;
-
+      filter.page = pageNumber + 1;
+  
       this.announcementService.listFilter(filter).subscribe((response) => {
         const announcements = response?.data;
-
+  
         if (announcements.length) {
           this.filterResult.push(...announcements);
         }
       });
-
+  
       this.paginationProduct = pageNumber;
     }
   }
+  
 
   selectEvent2(item) {
     // this.form.controls['typePropertyDistrict'].setValue(item.district);
