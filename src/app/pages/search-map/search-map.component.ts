@@ -11,6 +11,7 @@ import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-respon
 import { environment } from '../../../environments/environment';
 import { GoogleMap } from '@angular/google-maps';
 import {
+  Cluster,
   MarkerClusterer,
   SuperClusterAlgorithm,
 } from '@googlemaps/markerclusterer';
@@ -21,6 +22,7 @@ import { AnnouncementService } from 'src/app/service/announcement.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { catchError, forkJoin, of } from 'rxjs';
+import { ViewAnnouncementModalComponent } from './view-announcement-modal/view-announcement-modal.component';
 
 @Component({
   selector: 'app-search-map',
@@ -58,6 +60,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   orderBy: string = 'Selecione';
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
+
+  mapCustom: google.maps.Map; // referência para o objeto Map
+  markerCustom: google.maps.Marker; // referência para o objeto Marker
 
   constructor(
     private ngxSpinnerService: NgxSpinnerService,
@@ -111,7 +116,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     this.ngxSpinnerService.hide();
   }
 
-  onChangeSearch(search: string) {}
+  onChangeSearch(search: string) { }
 
   selectAnnouncement(_id: string) {
     this.router.navigate([`announcement/detail`, _id]);
@@ -133,7 +138,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
           this.listLikes();
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         },
       });
     } else if (condition === undefined) {
@@ -142,7 +147,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
           this.listLikes();
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         },
       });
     }
@@ -204,7 +209,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         },
       });
     }
+
   }
+
 
   _clickCluster(cluster: any) {
     const mapZoom = this.map.getZoom();
@@ -244,6 +251,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   _filterAnnouncementLst(_ids?: string[]) {
+
     if (!_ids) this.selectedAnouncements = this.response;
     else {
       this.selectedAnouncements = [];
@@ -254,16 +262,24 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
       this.changeDetectorRef.detectChanges();
     }
+
+    if (window.screen.width <= 998) {
+      let responseView: any = [];
+      this.response.map((an) => {
+        if (_ids.includes(an._id)) responseView.push(an);
+      });
+      this.openAnnouncement(responseView);
+    }
   }
 
-  moveMap() {}
+  moveMap() { }
 
   changeZoom() {
     console.log(this.map.getZoom());
   }
 
   resolveProperty(text: string): string {
-    return propertyTypesConst.find((x) => x.value === text).name || text || '-';
+    return propertyTypesConst.find((x) => x.value === text)?.name || text || '-';
   }
 
   listLikes() {
@@ -279,5 +295,10 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         },
       });
     }
+  }
+
+  openAnnouncement(content) {
+    localStorage.setItem('announcementView', JSON.stringify(content))
+    this.modalService.open(ViewAnnouncementModalComponent, { centered: true })
   }
 }
