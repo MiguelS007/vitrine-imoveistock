@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 
@@ -63,24 +64,29 @@ export class ViewAnnouncementModalComponent implements OnInit {
       announcementId: value
     }
 
-    if (this.response.liked === true) {
-      this.announcementService.registerUnlike(request).subscribe(
-        success => {
-          this.response.liked = false;
-        },
-        error => {
-          console.error(error)
-        }
-      )
+    if(localStorage.getItem('user') !== null) {
+      if (this.response.liked === true) {
+        this.announcementService.registerUnlike(request).subscribe(
+          success => {
+            this.response.liked = false;
+          },
+          error => {
+            console.error(error)
+          }
+        )
+      } else {
+        this.announcementService.registerLike(request).subscribe({
+          next: (success) => {
+            this.response.liked = true;
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      }
     } else {
-      this.announcementService.registerLike(request).subscribe({
-        next: (success) => {
-          this.response.liked = true;
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
+      this.modalService.open(ModalLoginComponent, { centered: true });
+      return;
     }
 
   }
