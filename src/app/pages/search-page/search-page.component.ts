@@ -115,7 +115,7 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'cobertura', item_text: 'Cobertura' },
     { item_id: 'flat', item_text: 'Flat' },
     { item_id: 'loft', item_text: 'Loft' },
-    { item_id: 'terreno', item_text: 'Terreno' },
+    { item_id: 'ground', item_text: 'Terreno' },
     { item_id: 'comercial', item_text: 'Comercial' },
     { item_id: 'farm', item_text: 'Chácara' },
     { item_id: 'casacomercial', item_text: 'Casa Comercial' },
@@ -298,7 +298,7 @@ export class SearchPageComponent implements OnInit {
     } else {
       this.filterResult = [];
     }
-    
+
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.messageNotSearch = true;
@@ -319,7 +319,7 @@ export class SearchPageComponent implements OnInit {
               this.listLikes = success.map((item) => item.announcement);
               this.ngxSpinnerService.hide();
             });
-          }else{
+          } else {
             this.ngxSpinnerService.hide();
           }
         },
@@ -345,7 +345,7 @@ export class SearchPageComponent implements OnInit {
         error: (error) => {
           this.ngxSpinnerService.hide();
           console.log(error);
-          
+
         },
       });
     } else {
@@ -460,7 +460,7 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
-  onChangeSearch(search: string) {}
+  onChangeSearch(search: string) { }
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -753,7 +753,7 @@ export class SearchPageComponent implements OnInit {
     this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(
-      (data) => {},
+      (data) => { },
       (error) => {
         this.modalFilterOpen = false;
       }
