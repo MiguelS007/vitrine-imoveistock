@@ -9,24 +9,24 @@
         <div class="w-100">
             <input type="text" formControlName="name"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
-                placeholder="Nome Completo"/>
-            <input type="email" formControlName="email"
+                placeholder="Nome Completo" [ngClass]="{ 'is-invalid': form.controls['name'].invalid && form.controls['name'].dirty, 'is-valid': form.controls['name'].valid }"/>
+            <input type="email" formControlName="email" [ngClass]="{ 'is-invalid': form.controls['email'].invalid && form.controls['email'].dirty, 'is-valid': form.controls['email'].valid }"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="Email"/>
-            <input type="tel" mask="(00) 00000-0000" formControlName="phone"
+            <input type="tel" mask="(00) 00000-0000" formControlName="phone" [ngClass]="{ 'is-invalid': form.controls['phone'].invalid && form.controls['phone'].dirty, 'is-valid': form.controls['phone'].valid }"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="Celular"/>
-            <input type="tel" mask="00000-000" formControlName="addressZipCode"
+            <input type="tel" mask="00000-000" formControlName="addressZipCode" [ngClass]="{ 'is-invalid': form.controls['addressZipCode'].invalid && form.controls['addressZipCode'].dirty, 'is-valid': form.controls['addressZipCode'].valid }"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="CEP"/>
-            <input type="tel" mask="000.000.000-00" formControlName="cpf"
+            <input type="tel" mask="000.000.000-00" formControlName="cpf" [ngClass]="{ 'is-invalid': form.controls['cpf'].invalid && form.controls['cpf'].dirty, 'is-valid': form.controls['cpf'].valid }"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="CPF"/>
         </div>
         <p class="fw-400 pt-3 pb-2 font-size-14 line-18 color-black w-100 text-left">
             Para visitar imóveis, você precisa apresentar um documento original com foto.
         </p>
-        <div class="form-check d-flex align-items-center pb-2">
+        <div class="form-check d-flex align-items-center pb-2 ml-2">
             <input class="form-check-input w18h18" type="checkbox" formControlName="termsAndPolicy" value=""
                 id="checksignup">
             <label class="form-check-label ml-2 fw-400 font-size-14 line-18 color-black" for="checksignup">
