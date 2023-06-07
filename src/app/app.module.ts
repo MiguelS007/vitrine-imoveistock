@@ -59,6 +59,7 @@ import { SchedulingStep6Component } from './pages/property-detail/components/sch
 import { SchedulingStep7Component } from './pages/property-detail/components/scheduling-step7/scheduling-step7.component';
 import { RegisterCompanionComponent } from './pages/register-companion/register-companion.component';
 import { VisitGetByIdResolve } from './resolvers/visit-getById.resolver';
+import { ViewAnnouncementModalComponent } from './pages/search-map/view-announcement-modal/view-announcement-modal.component';
 
 registerLocaleData(ptBr);
 
@@ -116,7 +117,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     TermsSignupComponent,
     SharedAnnouncementComponent,
     SchedulingStep7Component,
-    RegisterCompanionComponent
+    RegisterCompanionComponent,
+    ViewAnnouncementModalComponent
   ],
 
   imports: [
