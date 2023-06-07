@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        <div *ngIf="cardinfoone && bothSelectType !== 'sale'" class="col-12">
+        <div *ngIf="bothSelectType !== 'sale' && response.typeOfAd === 'rent'" class="col-12">
             <div class="w-100 my-4 p-5 border-radius-10 bg-white">
                 <p class="fw-400 font-size-16 line-20 color-black">
                     Para ser aprovado na avaliação de crédito, você precisa ter bom perfil de crédito, e renda mínima
