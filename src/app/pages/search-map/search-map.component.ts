@@ -264,14 +264,11 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     }
 
     if (window.screen.width <= 998) {
-      if (this.zoom === 16) {
-        let responseView: any = [];
-        this.response.map((an) => {
-          if (_ids.includes(an._id)) responseView.push(an);
-        });
-        this.openAnnouncement(responseView);
-      } else if (this.zoom === 16) {
-      }
+      let responseView: any = [];
+      this.response.map((an) => {
+        if (_ids.includes(an._id)) responseView.push(an);
+      });
+      this.openAnnouncement(responseView);
     }
   }
 
