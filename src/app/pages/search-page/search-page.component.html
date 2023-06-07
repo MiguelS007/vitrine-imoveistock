@@ -78,7 +78,7 @@
             [data]="listDistricts" [isLoading]="listEveryCity.length == 0" [disabled]="listDistricts.length == 0" [searchKeyword]="'district'"
              placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
               [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
-              [notFoundTemplate]="notFoundTemplate">
+              [notFoundTemplate]="notFoundTemplate" [customFilter]="customDistrictFilter">
             </ng-autocomplete>
 
             <ng-template #itemDistrictsTemplate let-item>
@@ -556,7 +556,7 @@
       <ng-autocomplete id="search-cityes-test" [data]="listDistricts" [disabled]="listDistricts.length == 0"
       [searchKeyword]="'district'" formControlName="typePropertyDistrict" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
         [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
-        [notFoundTemplate]="notFoundTemplate">
+        [notFoundTemplate]="notFoundTemplate" [customFilter]="customDistrictFilter">
       </ng-autocomplete>
 
       <ng-template #itemDistrictsTemplate let-item>
