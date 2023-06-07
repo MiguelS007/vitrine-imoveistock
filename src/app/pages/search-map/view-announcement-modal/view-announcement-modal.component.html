@@ -1,0 +1,105 @@
+<section class="container-fluid p-4">
+    <div class="d-flex justify-content-end">
+        <img src="../../../../assets/icon/x.png" alt="" (click)="exit()">
+    </div>
+    <div class="h-100 product-announcement cursor-pointer p-2 border-radius-10 bg-white">
+        <div class="py-2 px-3 product-announcement-card position-relative">
+            <img *ngIf="!response.mainPhoto" src="../../../../assets/img/ap.png" class="photo-announcement-card"
+                (click)="announcementSelected(response._id)">
+            <img *ngIf="response.mainPhoto" [src]="response.mainPhoto" class="photo-announcement-card"
+                (click)="announcementSelected(response._id)">
+            <div class="space-sale-exclusive">
+                <h4 *ngIf="response.typeOfAd === 'sale'"
+                    class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                    Venda</h4>
+                <h4 *ngIf="response.typeOfAd === 'rent'"
+                    class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                    Locação</h4>
+                <div class="d-flex" *ngIf="response.typeOfAd === 'both'">
+                    <h4
+                        class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light mr-2">
+                        Venda</h4>
+                    <h4 class="bg-purple h-fit px-4 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 text-light">
+                        Locação</h4>
+                </div>
+                <h4 *ngIf="response.exclusivity"
+                    class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
+                    Exclusivo</h4>
+            </div>
+            <div class="space-value-announcement">
+                <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="response.typeOfAd === 'sale'">
+                    {{response.saleValue | currency: 'R$':'symbol':'1.0'}}</p>
+                <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="response.typeOfAd === 'both'">
+                    {{response.saleValue | currency: 'R$':'symbol':'1.0'}}</p>
+                <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light" *ngIf="response.typeOfAd === 'rent'">
+                    {{response.leaseValue | currency: 'R$':'symbol':'1.0'}}
+                </p>
+                <div (click)="likeHeart(response._id)"
+                    class="h-fit bg-transparent-white border-radius-10 pt-2 pb-1 px-3">
+                    <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' "
+                        class="bi bi-heart-fill font-size-16 text-light"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 px-0" (click)="announcementSelected(response._id)">
+            <div class="w-100 mx-1 pt-3">
+                <span
+                    class="fw-400 font-size-14 line-20 color-black text-capitalize">{{response.propertyCharacteristics}}</span>
+                <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate" style="max-width: 90%;">
+                    {{response.description}}</p>
+                <p class="d-flex align-items-center">
+                    <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
+                    <span class="fw-400 font-size-14 line-20 color-black">{{response.publicPlaceAddress}},
+                        {{response.cityAddress}} - {{response.ufAddress}}</span>
+                </p>
+            </div>
+            <div class="row mx-1 d-flex">
+                <div
+                    class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
+                    <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
+                    <p *ngIf="response.bedrooms > 1"
+                        class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
+                        {{response.bedrooms}}
+                        Quartos
+                    </p>
+                    <p *ngIf="response.bedrooms === 1 || response.bedrooms === 0"
+                        class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
+                        {{response.bedrooms}}
+                        Quarto
+                    </p>
+                </div>
+                <div
+                    class="col mt-2 justify-content-center left-important  px-0 d-flex align-items-center justify-content-left">
+                    <img src="../../../assets/icon/car.png" class="pr-2 mobile-w" />
+                    <p *ngIf="response.parkingSpaces > 1"
+                        class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                        {{response.parkingSpaces}} Vagas
+                    </p>
+                    <p *ngIf="response.parkingSpaces === 1 || response.parkingSpaces === 0"
+                        class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black">
+                        {{response.parkingSpaces}} Vaga
+                    </p>
+                </div>
+                <div
+                    class="col mt-2 justify-content-end left-important  px-0 d-flex align-items-center justify-content-left">
+                    <img src="../../../assets/icon/rule.png" class="pr-2 mobile-w" />
+                    <p
+                        class="fw-400 mb-0 font-size-14 little-text-mobile line-20 color-black d-inline-block text-nowrap">
+                        {{response.usefulArea |
+                        currency: ' ':'symbol':'1.0'}} m2</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
+                        <p *ngIf="response.suites > 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                        color-black">{{response.suites}} Suítes</p>
+                        <p *ngIf="response.suites === 1 || response.suites === 0" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                        color-black">{{response.suites}} Suíte</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

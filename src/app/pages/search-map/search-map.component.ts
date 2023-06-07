@@ -21,6 +21,7 @@ import { AnnouncementService } from 'src/app/service/announcement.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { catchError, forkJoin, of } from 'rxjs';
+import { ViewAnnouncementModalComponent } from './view-announcement-modal/view-announcement-modal.component';
 
 @Component({
   selector: 'app-search-map',
@@ -111,7 +112,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     this.ngxSpinnerService.hide();
   }
 
-  onChangeSearch(search: string) {}
+  onChangeSearch(search: string) { }
 
   selectAnnouncement(_id: string) {
     this.router.navigate([`announcement/detail`, _id]);
@@ -244,26 +245,37 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   _filterAnnouncementLst(_ids?: string[]) {
+    
     if (!_ids) this.selectedAnouncements = this.response;
     else {
       this.selectedAnouncements = [];
-
+      
       this.response.map((an) => {
         if (_ids.includes(an._id)) this.selectedAnouncements.push(an);
       });
-
+      
       this.changeDetectorRef.detectChanges();
+    }
+
+    if (window.screen.width <= 998) {
+      if (_ids.length === 1) {
+        let responseView
+        this.response.map((an) => {
+          if (_ids.includes(an._id)) responseView = an;
+        });
+        this.openAnnouncement(responseView);
+      }
     }
   }
 
-  moveMap() {}
+  moveMap() { }
 
   changeZoom() {
     console.log(this.map.getZoom());
   }
 
   resolveProperty(text: string): string {
-    return propertyTypesConst.find((x) => x.value === text).name || text || '-';
+    return propertyTypesConst.find((x) => x.value === text)?.name || text || '-';
   }
 
   listLikes() {
@@ -279,5 +291,10 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         },
       });
     }
+  }
+
+  openAnnouncement(content) {
+    localStorage.setItem('announcementView', JSON.stringify(content))
+    this.modalService.open(ViewAnnouncementModalComponent, { centered: true })
   }
 }
