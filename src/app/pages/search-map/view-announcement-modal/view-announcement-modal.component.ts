@@ -12,7 +12,7 @@ import { AnnouncementService } from 'src/app/service/announcement.service';
 })
 export class ViewAnnouncementModalComponent implements OnInit {
 
-  response: AnnouncementGetResponseDto;
+  response: AnnouncementGetResponseDto[] = [];
 
   listLikes: any = []
 
@@ -23,24 +23,24 @@ export class ViewAnnouncementModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let response = localStorage.getItem('announcementView');
+    let response: any = localStorage.getItem('announcementView');
     this.response = JSON.parse(response);
 
     if (localStorage.getItem('user') !== null) {
       this.announcementService.listLikes().subscribe(
         success => {
-          console.log('sucesso', success)
           for (let i = 0; i < success.length; i++) {
             this.listLikes.push(success[i].announcement);
+            for (let iterator of this.response) {
+              if (success[i].announcement._id === iterator._id) {
+                iterator.liked = true;
+              } else {
+                iterator.liked = false;
+              }
+            }
+
           }
 
-          for (let iterator of this.listLikes) {
-            if (iterator._id === this.response._id) {
-              this.response.liked = true;
-            } else {
-              this.response.liked = false;
-            }
-          }
         },
         error => {
           console.error(error);
@@ -61,14 +61,18 @@ export class ViewAnnouncementModalComponent implements OnInit {
   likeHeart(value) {
 
     let request = {
-      announcementId: value
+      announcementId: value._id
     }
 
-    if(localStorage.getItem('user') !== null) {
-      if (this.response.liked === true) {
+    if (localStorage.getItem('user') !== null) {
+      if (value.liked === true) {
         this.announcementService.registerUnlike(request).subscribe(
           success => {
-            this.response.liked = false;
+            for (let iterator of this.response) {
+              if (iterator._id === value._id) {
+                iterator.liked = false
+              }
+            }
           },
           error => {
             console.error(error)
@@ -77,10 +81,14 @@ export class ViewAnnouncementModalComponent implements OnInit {
       } else {
         this.announcementService.registerLike(request).subscribe({
           next: (success) => {
-            this.response.liked = true;
+            for (let iterator of this.response) {
+              if (iterator._id === value._id) {
+                iterator.liked = true
+              }
+            }
           },
           error: (error) => {
-            console.log(error);
+            console.error(error);
           },
         });
       }
