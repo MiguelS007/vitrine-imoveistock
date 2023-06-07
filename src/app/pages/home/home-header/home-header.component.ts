@@ -69,7 +69,7 @@ export class HomeHeaderComponent implements OnInit {
     { item_id: 'cobertura', item_text: 'Cobertura' },
     { item_id: 'flat', item_text: 'Flat' },
     { item_id: 'loft', item_text: 'Loft' },
-    { item_id: 'terreno', item_text: 'Terreno' },
+    { item_id: 'ground', item_text: 'Terreno' },
     { item_id: 'comercial', item_text: 'Comercial' },
     { item_id: 'farm', item_text: 'Chácara' },
     { item_id: 'casacomercial', item_text: 'Casa Comercial' },
@@ -215,7 +215,7 @@ export class HomeHeaderComponent implements OnInit {
     this.labelValueBadroom = item;
   }
 
-  onChangeSearch(search: string) {}
+  onChangeSearch(search: string) { }
 
   selectEvent(item: { cidade: string; estado: string }) {
     this.getSelectedCity = item.cidade;
@@ -277,21 +277,21 @@ export class HomeHeaderComponent implements OnInit {
       untilValueSale: !isNaN(this.labelValueSale)
         ? Number(this.labelValueSale)
         : typeof this.labelValueSale === 'string'
-        ? 0
-        : this.labelValueSale,
+          ? 0
+          : this.labelValueSale,
       untilValueRent: !isNaN(this.labelValueRent)
         ? Number(this.labelValueRent)
         : typeof this.labelValueRent === 'string'
-        ? 0
-        : this.labelValueRent,
+          ? 0
+          : this.labelValueRent,
       goal: this.goal, //residencial , comercial
       // residencial
       styleProperty: this.stylePropertys, // EDIFICIL, TERRENO
       badRoomsQnt: !isNaN(this.labelValueBadroom)
         ? Number(this.labelValueBadroom)
         : typeof this.labelValueBadroom === 'string'
-        ? 0
-        : this.labelValueBadroom,
+          ? 0
+          : this.labelValueBadroom,
     };
 
     let city = this.getSelectedCity !== undefined ? this.getSelectedCity : '';
