@@ -11,6 +11,7 @@ import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-respon
 import { environment } from '../../../environments/environment';
 import { GoogleMap } from '@angular/google-maps';
 import {
+  Cluster,
   MarkerClusterer,
   SuperClusterAlgorithm,
 } from '@googlemaps/markerclusterer';
@@ -59,6 +60,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   orderBy: string = 'Selecione';
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
+
+  mapCustom: google.maps.Map; // referência para o objeto Map
+  markerCustom: google.maps.Marker; // referência para o objeto Marker
 
   constructor(
     private ngxSpinnerService: NgxSpinnerService,
@@ -134,7 +138,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
           this.listLikes();
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         },
       });
     } else if (condition === undefined) {
@@ -143,7 +147,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
           this.listLikes();
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         },
       });
     }
@@ -205,7 +209,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         },
       });
     }
+
   }
+
 
   _clickCluster(cluster: any) {
     const mapZoom = this.map.getZoom();
@@ -245,25 +251,26 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   _filterAnnouncementLst(_ids?: string[]) {
-    
+
     if (!_ids) this.selectedAnouncements = this.response;
     else {
       this.selectedAnouncements = [];
-      
+
       this.response.map((an) => {
         if (_ids.includes(an._id)) this.selectedAnouncements.push(an);
       });
-      
+
       this.changeDetectorRef.detectChanges();
     }
 
     if (window.screen.width <= 998) {
-      if (_ids.length === 1) {
-        let responseView
+      if (this.zoom === 16) {
+        let responseView: any = [];
         this.response.map((an) => {
-          if (_ids.includes(an._id)) responseView = an;
+          if (_ids.includes(an._id)) responseView.push(an);
         });
         this.openAnnouncement(responseView);
+      } else if (this.zoom === 16) {
       }
     }
   }
