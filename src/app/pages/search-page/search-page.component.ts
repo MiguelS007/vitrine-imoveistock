@@ -58,6 +58,8 @@ export class SearchPageComponent implements OnInit {
 
   recentlySeenList: AnnouncementGetResponseDto[] = [];
 
+  lastPage: number;
+
   listLikes: AnnouncementGetResponseDto[] = [];
 
   messageNotSearch = false;
@@ -421,36 +423,23 @@ export class SearchPageComponent implements OnInit {
   onPageChange(pageNumber) {
     const filter = JSON.parse(localStorage.getItem('filtro'));
 
-    if (pageNumber <= 3) {
-      this.lastPaginationPage = null;
-      this.paginationProduct = pageNumber;
-      return;
-    }
-
-    if (pageNumber < this.lastPaginationPage) {
-      const diff = this.lastPaginationPage - pageNumber;
-      const totalToRemove = diff * 6;
-
-      this.filterResult.splice(-totalToRemove);
-      this.paginationProduct = pageNumber;
-      return;
-    }
-
+    const prevPage = this.paginationProduct;
+    this.paginationProduct = pageNumber;
     if (pageNumber >= 4) {
-      this.lastPaginationPage = pageNumber;
-      filter.page = Number(pageNumber) + 1;
-
-      this.announcementService.listFilter(filter).subscribe((response) => {
-        const announcements = response?.data;
-
-        if (announcements.length) {
-          this.filterResult.push(...announcements);
-        }
-      });
-
+      filter.page = pageNumber + 1;
+      if(prevPage < pageNumber){
+        this.announcementService.listFilter(filter).subscribe((response) => {
+          const announcements = response?.data;
+    
+          if (announcements.length) {
+            this.filterResult.push(...announcements);
+          }
+        });
+      }
       this.paginationProduct = pageNumber;
     }
   }
+  
 
   selectEvent2(item) {
     // this.form.controls['typePropertyDistrict'].setValue(item.district);
