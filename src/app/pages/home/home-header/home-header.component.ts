@@ -299,7 +299,8 @@ export class HomeHeaderComponent implements OnInit {
     let initialValue: number;
 
     if (filter.typeAd === 'sale') {
-      initialValue = filter.untilValueSale;
+      // Neste componente não pode considerar valor inicial, apenas no search-component
+      initialValue = 2;
     } else if (filter.typeAd === 'rent') {
       initialValue = filter.untilValueRent;
     } else {
