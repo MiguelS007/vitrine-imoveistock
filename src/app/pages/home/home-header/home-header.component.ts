@@ -230,7 +230,7 @@ export class HomeHeaderComponent implements OnInit {
   listDistrictByCity(value: string) {
     this.announcementService.listDistrictsByCity(value).subscribe({
       next: (response) => {
-        response.unshift({ district: 'Todos os bairros' });
+        response.unshift({ district: 'Todos' });
         this.listDistricts = response;
       },
       error: (error) => console.log(error),
