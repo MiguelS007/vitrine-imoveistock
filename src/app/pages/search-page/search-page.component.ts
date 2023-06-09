@@ -58,6 +58,8 @@ export class SearchPageComponent implements OnInit {
 
   recentlySeenList: AnnouncementGetResponseDto[] = [];
 
+  lastPage: number;
+
   listLikes: AnnouncementGetResponseDto[] = [];
 
   messageNotSearch = false;
@@ -115,7 +117,7 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'cobertura', item_text: 'Cobertura' },
     { item_id: 'flat', item_text: 'Flat' },
     { item_id: 'loft', item_text: 'Loft' },
-    { item_id: 'terreno', item_text: 'Terreno' },
+    { item_id: 'ground', item_text: 'Terreno' },
     { item_id: 'comercial', item_text: 'Comercial' },
     { item_id: 'farm', item_text: 'Chácara' },
     { item_id: 'casacomercial', item_text: 'Casa Comercial' },
@@ -298,7 +300,7 @@ export class SearchPageComponent implements OnInit {
     } else {
       this.filterResult = [];
     }
-    
+
     // CHECK-LIKES
     if (this.filterResult === null || this.filterResult.length === 0) {
       this.messageNotSearch = true;
@@ -319,7 +321,7 @@ export class SearchPageComponent implements OnInit {
               this.listLikes = success.map((item) => item.announcement);
               this.ngxSpinnerService.hide();
             });
-          }else{
+          } else {
             this.ngxSpinnerService.hide();
           }
         },
@@ -345,7 +347,7 @@ export class SearchPageComponent implements OnInit {
         error: (error) => {
           this.ngxSpinnerService.hide();
           console.log(error);
-          
+
         },
       });
     } else {
@@ -421,36 +423,23 @@ export class SearchPageComponent implements OnInit {
   onPageChange(pageNumber) {
     const filter = JSON.parse(localStorage.getItem('filtro'));
 
-    if (pageNumber <= 3) {
-      this.lastPaginationPage = null;
-      this.paginationProduct = pageNumber;
-      return;
-    }
-
-    if (pageNumber < this.lastPaginationPage) {
-      const diff = this.lastPaginationPage - pageNumber;
-      const totalToRemove = diff * 6;
-
-      this.filterResult.splice(-totalToRemove);
-      this.paginationProduct = pageNumber;
-      return;
-    }
-
+    const prevPage = this.paginationProduct;
+    this.paginationProduct = pageNumber;
     if (pageNumber >= 4) {
-      this.lastPaginationPage = pageNumber;
-      filter.page = Number(pageNumber) + 1;
-
-      this.announcementService.listFilter(filter).subscribe((response) => {
-        const announcements = response?.data;
-
-        if (announcements.length) {
-          this.filterResult.push(...announcements);
-        }
-      });
-
+      filter.page = pageNumber + 1;
+      if(prevPage < pageNumber){
+        this.announcementService.listFilter(filter).subscribe((response) => {
+          const announcements = response?.data;
+    
+          if (announcements.length) {
+            this.filterResult.push(...announcements);
+          }
+        });
+      }
       this.paginationProduct = pageNumber;
     }
   }
+  
 
   selectEvent2(item) {
     // this.form.controls['typePropertyDistrict'].setValue(item.district);
@@ -460,7 +449,7 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
-  onChangeSearch(search: string) {}
+  onChangeSearch(search: string) { }
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -753,7 +742,7 @@ export class SearchPageComponent implements OnInit {
     this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(
-      (data) => {},
+      (data) => { },
       (error) => {
         this.modalFilterOpen = false;
       }

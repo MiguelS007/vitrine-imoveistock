@@ -69,7 +69,7 @@ export class HomeHeaderComponent implements OnInit {
     { item_id: 'cobertura', item_text: 'Cobertura' },
     { item_id: 'flat', item_text: 'Flat' },
     { item_id: 'loft', item_text: 'Loft' },
-    { item_id: 'terreno', item_text: 'Terreno' },
+    { item_id: 'ground', item_text: 'Terreno' },
     { item_id: 'comercial', item_text: 'Comercial' },
     { item_id: 'farm', item_text: 'Chácara' },
     { item_id: 'casacomercial', item_text: 'Casa Comercial' },
@@ -215,7 +215,7 @@ export class HomeHeaderComponent implements OnInit {
     this.labelValueBadroom = item;
   }
 
-  onChangeSearch(search: string) {}
+  onChangeSearch(search: string) { }
 
   selectEvent(item: { cidade: string; estado: string }) {
     this.getSelectedCity = item.cidade;
