@@ -10,8 +10,6 @@ export const environment = {
   imoveistock: 'https://imoveistock-prod.tgtdigital.io/',
   // imoveistock: 'http://localhost:5000/',
 
-
-
   },
   google: {
     apiKey: 'AIzaSyBzwijvQ13DZALYBwC-uKdWWELaf0r9Xzs',

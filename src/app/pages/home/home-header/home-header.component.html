@@ -56,7 +56,11 @@
 
                                     </div>
                                     <div class="col-12 px-0 mb-4">
-                                        <ng-autocomplete formControlName="typePropertyDistrict" [data]="listDistricts" [disabled]="listDistricts.length == 0" [searchKeyword]="'district'" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
+                                        <ng-autocomplete formControlName="typePropertyDistrict" 
+                                          [data]="listDistricts" [disabled]="listDistricts.length == 0" 
+                                          [searchKeyword]="'district'" placeholder="Escolha um bairro" 
+                                          (selected)='selectEvent2($event)'
+                                          [customFilter]="customFilter"
                                           [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
                                           [notFoundTemplate]="notFoundTemplate">
                                         </ng-autocomplete>
