@@ -607,7 +607,10 @@ export class SearchPageComponent implements OnInit {
 
   listDistrictByCity(value) {
     this.announcementService.listDistrictsByCity(value).subscribe({
-      next: (response) => (this.listDistricts = response),
+      next: (response) => {
+        response.unshift({ district: 'Todos os bairros' });
+        this.listDistricts = response;
+      },
       error: (error) => console.log(error),
     });
   }
