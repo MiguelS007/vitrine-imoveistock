@@ -13,7 +13,7 @@
                 placeholder="Nome Completo" [ngClass]="{ 'is-invalid': form.controls['name'].invalid && form.controls['name'].dirty, 'is-valid': form.controls['name'].valid }"/>
 
                 <div *ngIf="form.controls['name'].invalid && form.controls['name'].dirty" class="mt-3 mensagem-error">
-                    <h6 class="color-black ml-3"> Nome e obrigatório </h6>
+                    <h6 class="color-black ml-3"> Nome é obrigatório </h6>
                 </div>
 
                 <input type="email" formControlName="email" [ngClass]="{ 'is-invalid': form.controls['email'].invalid && form.controls['email'].dirty, 'is-valid': form.controls['email'].valid }"
