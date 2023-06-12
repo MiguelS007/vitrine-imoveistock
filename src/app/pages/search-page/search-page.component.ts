@@ -766,12 +766,11 @@ export class SearchPageComponent implements OnInit {
     text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
     return text.toLocaleLowerCase();
   }
-
   customFilter(
-    items: { cidade: string; estado: string; render: string }[],
+    items: { cidade: string; estado: string; render?: string; district?: string }[],
     query: string
-  ): { cidade: string; estado: string; render: string }[] {
-    function removerAcento(text: string): string {
+  ): { cidade: string; estado: string; render?: string; district?: string }[] {
+    function removeAccents(text: string): string {
       text = text.toLowerCase();
       text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
       text = text.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
@@ -781,14 +780,51 @@ export class SearchPageComponent implements OnInit {
       text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
       return text.toLocaleLowerCase();
     }
+  
     if (query.length < 2) {
       return [];
     }
-    return items.filter((a) => {
-      return removerAcento(a.render).includes(removerAcento(query));
+  
+    return items.filter((item) => {
+      const normalizedQuery = removeAccents(query.toLowerCase());
+      console.log('ÇÇAÇAÇAÇ', items, query)
+      if (item.render) {
+        const normalizedRender = removeAccents(item.render.toLowerCase());
+        return normalizedRender.includes(normalizedQuery);
+      }
+  
+      if (item.district) {
+        const normalizedDistrict = removeAccents(item.district.toLowerCase());
+        return normalizedDistrict.includes(normalizedQuery);
+      }
+  
+      return false;
     });
   }
-
+  customDistrictFilter(items: any[], query: string): any[] {
+    if (!query || query.length < 2) {
+      // Retorna todos os itens quando a consulta é vazia ou possui menos de 2 caracteres
+      return items;
+    }
+  
+    // Remove acentos e caracteres especiais da consulta
+    const normalizedQuery = query
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  
+    // Filtra os itens com base no nome do bairro, removendo acentos e caracteres especiais
+    const filteredItems = items.filter(item => {
+      const normalizedDistrict = item.district
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+      return normalizedDistrict.includes(normalizedQuery);
+    });
+    return filteredItems;
+  }
+  
+  
   sortPriceList(value: string) {
     const listOfPrices = this.filterResult;
     if (value === 'minor>major') {
