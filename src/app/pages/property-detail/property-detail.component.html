@@ -95,16 +95,19 @@
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'"
-                    class="fw-700 font-size-18 line-24 color-black">{{(response.saleValue | currency: 'R$':'symbol':'1.0' )|| '-'}}</span>
+                    class="fw-700 font-size-18 line-24 color-black">{{(response.saleValue | currency:
+                    'R$':'symbol':'1.0' )|| '-'}}</span>
                   <span *ngIf="response.typeOfAd === 'rent'"
-                    class="fw-700 font-size-18 line-24 color-black">{{(response.leaseValue | currency: 'R$':'symbol':'1.0-0' )||'-'}}</span>
+                    class="fw-700 font-size-18 line-24 color-black">{{(response.leaseValue | currency:
+                    'R$':'symbol':'1.0-0' )||'-'}}</span>
                 </div>
-                <div *ngIf="response.condominiumValue"
+                <div *ngIf="response.condominiumValue && response.condominiumValue !== '0'"
                   class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">Condomínio
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-400 font-size-18 line-24 color-black">{{(response.condominiumValue | currency: 'R$':'symbol':'1.0') ||'-'}}</span>
+                  <span class="fw-400 font-size-18 line-24 color-black">{{(response.condominiumValue | currency:
+                    'R$':'symbol':'1.0') ||'-'}}</span>
                 </div>
                 <div *ngIf="response.valueOfIptu !== '0'"
                   class="col-12 d-flex py-2 align-items-center justify-content-between">
@@ -179,19 +182,21 @@
                     class="fw-700 font-size-18 line-24 color-black">{{response.leaseValue |
                     currency: 'R$ ':'symbol':'1.0' || '-'}}</span>
                 </div>
-                <div *ngIf="response.condominiumValue"
+                <div *ngIf="response.condominiumValue && response.condominiumValue !== '0'"
                   class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">Condomínio
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
-                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency: 'R$':'symbol':'1.0' ||'-'}}</span>
+                  <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency:
+                    'R$':'symbol':'1.0' ||'-'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.valueOfIptu !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="valueViewSelectSale"
-                    class="fw-400 font-size-18 line-24 color-black">{{(response.valueOfIptu | currency: 'R$':'symbol':'1.0' )||'-'}}</span>
+                    class="fw-400 font-size-18 line-24 color-black">{{(response.valueOfIptu | currency:
+                    'R$':'symbol':'1.0' )||'-'}}</span>
                   <span *ngIf="!valueViewSelectSale"
                     class="fw-400 font-size-18 line-24 color-black">{{(toNumber(response.valueOfIptu) / 12 | currency:
                     'R$ ':'symbol':'1.0-0' )||
@@ -208,7 +213,8 @@
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="valueViewSelectSale"
-                    class="fw-700 font-size-18 line-24 color-black">{{(response.saleValue | currency: 'R$':'symbol':'1.0' )||
+                    class="fw-700 font-size-18 line-24 color-black">{{(response.saleValue | currency:
+                    'R$':'symbol':'1.0' )||
                     '-'}}</span>
                   <span *ngIf="!valueViewSelectSale" class="fw-700 font-size-18 line-24 color-black">{{(finalValueRent |
                     currency: 'R$ ':'symbol':'1.0' )|| '-'}}</span>
@@ -467,25 +473,39 @@
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Quartos:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.bedrooms || '0'}}
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.bedrooms !== 0">
+                      &nbsp;&nbsp;{{response.bedrooms || '-'}}
+                    </td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.bedrooms === 0">
+                      &nbsp;&nbsp;-
                     </td>
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Suites:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.suites || '0'}}
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.suites !== 0">
+                      &nbsp;&nbsp;{{response.suites || '-'}}
+                    </td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.suites === 0">&nbsp;&nbsp;-
                     </td>
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Banheiros:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.bathrooms || '-'}}
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.bathrooms !== 0">
+                      &nbsp;&nbsp;{{response.bathrooms || '-'}}
+                    </td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.bathrooms === 0">
+                      &nbsp;&nbsp;-
                     </td>
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Vagas de garagem:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.parkingSpaces ||
-                      '0'}}</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.parkingSpaces !== 0">&nbsp;&nbsp;{{response.parkingSpaces ||
+                      '-'}}</td>
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.parkingSpaces === 0">
+                      &nbsp;&nbsp;-
+                    </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="response.whoLivesInTheProperty">
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Ocupação:</td>
                     <td *ngIf="response.whoLivesInTheProperty === 'vacant'"
                       class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;Está vago</td>
@@ -504,7 +524,7 @@
                     <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.saleValue
                       | currency: 'R$':'symbol':'1.0'}}</td>
                   </tr>
-                  <tr *ngIf="response.condominiumValue">
+                  <tr *ngIf="response.condominiumValue && response.condominiumValue !== '0'">
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Condomínio:</td>
                     <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.condominiumValue |
                       currency: 'R$ ':'symbol':'1.0' || '-'}}</td>
@@ -1750,12 +1770,13 @@
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'"
-                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$':'symbol':'1.0' || '-'}}</span>
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$':'symbol':'1.0'
+                    || '-'}}</span>
                   <span *ngIf="response.typeOfAd === 'rent'"
                     class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.leaseValue) |
                     currency: 'R$':'symbol':'1.0-0'}}</span>
                 </div>
-                <div *ngIf="response.condominiumValue"
+                <div *ngIf="response.condominiumValue && response.condominiumValue !== '0'"
                   class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">Condomínio
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
@@ -1763,7 +1784,7 @@
                   <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency:
                     'R$':'symbol':'1.0' || '-'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.valueOfIptu !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
@@ -1788,7 +1809,8 @@
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
                   <span *ngIf="response.typeOfAd === 'sale'"
-                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$':'symbol':'1.0' ||'-'}}</span>
+                    class="fw-700 font-size-18 line-24 color-black">{{response.saleValue | currency: 'R$':'symbol':'1.0'
+                    ||'-'}}</span>
                   <span *ngIf="response.typeOfAd === 'rent'"
                     class="fw-700 font-size-18 line-24 color-black">{{finalValueRent | currency: 'R$ ':'symbol':'1.0-0'
                     || '-'}}</span>
@@ -1834,7 +1856,7 @@
                     class="fw-700 font-size-18 line-24 color-black">{{toNumber(response.leaseValue) | currency:
                     'R$':'symbol':'1.0'}}</span>
                 </div>
-                <div *ngIf="response.condominiumValue"
+                <div *ngIf="response.condominiumValue && response.condominiumValue !== '0'"
                   class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">Condomínio
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
@@ -1843,7 +1865,7 @@
                     :'symbol':'1.0' ||
                     '-'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.valueOfIptu !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
