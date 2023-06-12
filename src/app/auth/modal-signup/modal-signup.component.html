@@ -7,21 +7,46 @@
             Para continuar, precisamos de alguns dados seus
         </p>
         <div class="w-100">
-            <input type="text" formControlName="name"
+           
+                <input type="text" formControlName="name"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="Nome Completo" [ngClass]="{ 'is-invalid': form.controls['name'].invalid && form.controls['name'].dirty, 'is-valid': form.controls['name'].valid }"/>
-            <input type="email" formControlName="email" [ngClass]="{ 'is-invalid': form.controls['email'].invalid && form.controls['email'].dirty, 'is-valid': form.controls['email'].valid }"
+
+                <div *ngIf="form.controls['name'].invalid && form.controls['name'].dirty" class="mt-3 mensagem-error">
+                    <h6 class="color-black ml-3"> Nome e obrigatório </h6>
+                </div>
+
+                <input type="email" formControlName="email" [ngClass]="{ 'is-invalid': form.controls['email'].invalid && form.controls['email'].dirty, 'is-valid': form.controls['email'].valid }"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="Email"/>
-            <input type="tel" mask="(00) 00000-0000" formControlName="phone" [ngClass]="{ 'is-invalid': form.controls['phone'].invalid && form.controls['phone'].dirty, 'is-valid': form.controls['phone'].valid }"
+
+                <div *ngIf="form.controls['email'].invalid && form.controls['email'].dirty" class="mt-3 mensagem-error">
+                    <h6 class="color-black ml-3"> Email incorreto (nome@exemplo.com)</h6>
+                </div>
+           
+                <input type="tel" mask="(00) 00000-0000" formControlName="phone" [ngClass]="{ 'is-invalid': form.controls['phone'].invalid && form.controls['phone'].dirty, 'is-valid': form.controls['phone'].valid }"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="Celular"/>
-            <input type="tel" mask="00000-000" formControlName="addressZipCode" [ngClass]="{ 'is-invalid': form.controls['addressZipCode'].invalid && form.controls['addressZipCode'].dirty, 'is-valid': form.controls['addressZipCode'].valid }"
+
+                <div *ngIf="form.controls['phone'].invalid && form.controls['phone'].dirty" class="mt-3 mensagem-error">
+                    <h6 class="color-black ml-3"> Celular incorreto (00 00000-0000)</h6>
+                </div>
+           
+                <input type="tel" mask="00000-000" formControlName="addressZipCode" [ngClass]="{ 'is-invalid': form.controls['addressZipCode'].invalid && form.controls['addressZipCode'].dirty, 'is-valid': form.controls['addressZipCode'].valid }"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="CEP"/>
-            <input type="tel" mask="000.000.000-00" formControlName="cpf" [ngClass]="{ 'is-invalid': form.controls['cpf'].invalid && form.controls['cpf'].dirty, 'is-valid': form.controls['cpf'].valid }"
+
+                <div *ngIf="form.controls['addressZipCode'].invalid && form.controls['addressZipCode'].dirty" class="mt-3 mensagem-error">
+                    <h6 class="color-black ml-3"> CEP incorreto (00000-000)</h6>
+                </div>
+           
+                <input type="tel" mask="000.000.000-00" formControlName="cpf" [ngClass]="{ 'is-invalid': form.controls['cpf'].invalid && form.controls['cpf'].dirty, 'is-valid': form.controls['cpf'].valid }"
                 class="btn w-100 h-74 bg-whitelight mt-3 text-left border-radius-10 border p-4 fw-400 font-size-16 line-20 color-black"
                 placeholder="CPF"/>
+
+                <div *ngIf="form.controls['cpf'].invalid && form.controls['cpf'].dirty" class="mt-3 mensagem-error">
+                    <h6 class="color-black ml-3"> CPF incorreto (000.000.000-00)</h6>
+                </div>
         </div>
         <p class="fw-400 pt-3 pb-2 font-size-14 line-18 color-black w-100 text-left">
             Para visitar imóveis, você precisa apresentar um documento original com foto.

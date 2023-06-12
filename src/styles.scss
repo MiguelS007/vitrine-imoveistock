@@ -1948,6 +1948,13 @@ vg-overlay-play .vg-overlay-play {
     outline: none !important;
 }
 
+.mensagem-error {
+    background-color: #EE7D52FF;
+    opacity: 0.6;
+    border-radius: 3px;
+    color: white;
+}
+
 // Resultado do filtro
 .result-filter {
     width: fit-content;
