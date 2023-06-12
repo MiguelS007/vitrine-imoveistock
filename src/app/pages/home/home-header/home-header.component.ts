@@ -229,16 +229,19 @@ export class HomeHeaderComponent implements OnInit {
 
   listDistrictByCity(value: string) {
     this.announcementService.listDistrictsByCity(value).subscribe({
-      next: (response) => (this.listDistricts = response),
+      next: (response) => {
+        response.unshift({ district: 'Todos' });
+        this.listDistricts = response;
+      },
       error: (error) => console.log(error),
     });
   }
 
   customFilter(
-    items: { cidade: string; estado: string; render: string }[],
+    items: { cidade: string; estado: string; render?: string; district?: string }[],
     query: string
-  ): { cidade: string; estado: string; render: string }[] {
-    function removerAcento(text: string): string {
+  ): { cidade: string; estado: string; render?: string; district?: string }[] {
+    function removeAccents(text: string): string {
       text = text.toLowerCase();
       text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
       text = text.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
@@ -248,11 +251,25 @@ export class HomeHeaderComponent implements OnInit {
       text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
       return text.toLocaleLowerCase();
     }
+  
     if (query.length < 2) {
       return [];
     }
-    return items.filter((a) => {
-      return removerAcento(a.render).includes(removerAcento(query));
+  
+    return items.filter((item) => {
+      const normalizedQuery = removeAccents(query.toLowerCase());
+  
+      if (item.render) {
+        const normalizedRender = removeAccents(item.render.toLowerCase());
+        return normalizedRender.includes(normalizedQuery);
+      }
+  
+      if (item.district) {
+        const normalizedDistrict = removeAccents(item.district.toLowerCase());
+        return normalizedDistrict.includes(normalizedQuery);
+      }
+  
+      return false;
     });
   }
 
@@ -299,7 +316,8 @@ export class HomeHeaderComponent implements OnInit {
     let initialValue: number;
 
     if (filter.typeAd === 'sale') {
-      initialValue = filter.untilValueSale;
+      // Neste componente não pode considerar valor inicial, apenas no search-component
+      initialValue = 2;
     } else if (filter.typeAd === 'rent') {
       initialValue = filter.untilValueRent;
     } else {
