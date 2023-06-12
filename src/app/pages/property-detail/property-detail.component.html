@@ -190,7 +190,7 @@
                   <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency:
                     'R$':'symbol':'1.0' ||'-'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.valueOfIptu !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
@@ -1784,7 +1784,7 @@
                   <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency:
                     'R$':'symbol':'1.0' || '-'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.valueOfIptu !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
@@ -1865,7 +1865,7 @@
                     :'symbol':'1.0' ||
                     '-'}}</span>
                 </div>
-                <div class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.valueOfIptu !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
