@@ -79,7 +79,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   scrollUp() {
-    window.scrollTo({behavior:'smooth', top:0});
+    window.scrollTo({behavior:'smooth', top:150});
   }
 
   ngOnInit(): void {
