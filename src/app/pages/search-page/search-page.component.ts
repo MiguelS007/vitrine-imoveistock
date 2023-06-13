@@ -438,6 +438,8 @@ export class SearchPageComponent implements OnInit {
       }
       this.paginationProduct = pageNumber;
     }
+
+    this.scrollUp()
   }
   
 
@@ -845,4 +847,9 @@ export class SearchPageComponent implements OnInit {
       propertyTypesConst.find((x) => x.value === text)?.name || text || '-'
     );
   }
+
+  scrollUp() {
+    window.scrollTo({behavior:'smooth', top:150});
+  }
+
 }

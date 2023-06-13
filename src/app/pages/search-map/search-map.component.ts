@@ -21,7 +21,6 @@ import { propertyTypesConst } from 'src/app/utils/propertyTypes';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
-import { catchError, forkJoin, of } from 'rxjs';
 import { ViewAnnouncementModalComponent } from './view-announcement-modal/view-announcement-modal.component';
 
 @Component({
@@ -33,7 +32,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleMap) public map: GoogleMap | undefined;
 
   geolib: any;
-  geocoder: google.maps.Geocoder = new google.maps.Geocoder();
+  geocoder: google.maps.Geocoder;
+
+  apiLoaded: boolean = localStorage.getItem('googleMapsLoaded') == 'true';
 
   center: google.maps.LatLngLiteral | undefined;
   zoom: number = 12;
@@ -43,7 +44,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     fullscreenControl: false,
     keyboardShortcuts: false,
     streetViewControl: false,
-    maxZoom: 16,
+    maxZoom: 18,
     minZoom: 5,
   };
 
@@ -76,17 +77,34 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this._updateMarkers();
+    this.apiLoaded = localStorage.getItem('googleMapsLoaded') == 'true';
+    if (this.apiLoaded && this.geocoder === undefined) {
+      this.initMap();
+      this._updateMarkers();
+    } else if (this.apiLoaded && this.geocoder !== undefined) {
+      this._updateMarkers();
+    }
+
+    if (!this.apiLoaded) {
+      const time = setTimeout(() => {
+        this.apiLoaded = localStorage.getItem('googleMapsLoaded') == 'true';
+        if (this.apiLoaded) {
+          this.initMap();
+          setTimeout(() => {
+            this._updateMarkers();
+          },500);
+          clearTimeout(time);
+        }
+      }, 1000);
+    }
   }
 
-  ngOnInit(): void {
-    this.ngxSpinnerService.show();
+  scrollUp() {
+    window.scrollTo({ behavior: 'smooth', top: 150 });
+  }
 
-    this.response = JSON.parse(localStorage.getItem('resultSearch'));
-    this.selectedAnouncements = this.response;
-
-    this.filtroResultDisplay = JSON.parse(localStorage.getItem('filtro'));
-
+  initMap() {
+    this.geocoder = new google.maps.Geocoder();
     this.geocoder.geocode(
       {
         address: `${this.filtroResultDisplay.cityAddress}, ${this.filtroResultDisplay.ufAddress}`,
@@ -108,6 +126,18 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         }
       }
     );
+  }
+
+  ngOnInit(): void {
+    this.ngxSpinnerService.show();
+    this.apiLoaded = localStorage.getItem('googleMapsLoaded') == 'true';
+
+    this.response = JSON.parse(localStorage.getItem('resultSearch'));
+    this.selectedAnouncements = this.response;
+
+    this.filtroResultDisplay = JSON.parse(localStorage.getItem('filtro'));
+
+    if (this.apiLoaded) this.initMap();
 
     this.mapOptions.center = this.center;
 
@@ -116,7 +146,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     this.ngxSpinnerService.hide();
   }
 
-  onChangeSearch(search: string) { }
+  onChangeSearch(search: string) {}
 
   selectAnnouncement(_id: string) {
     this.router.navigate([`announcement/detail`, _id]);
@@ -175,7 +205,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
       this.response.sort((a, b) => (a.saleValue > b.saleValue ? -1 : 0));
   }
 
-  private _updateMarkers() {
+  private  _updateMarkers() {
+    console.log('update markers');
+
     this.markers = [];
 
     if (!this.response || !this.response.length) return;
@@ -209,9 +241,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         },
       });
     }
-
   }
-
 
   _clickCluster(cluster: any) {
     const mapZoom = this.map.getZoom();
@@ -231,27 +261,27 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         { lat: markerLat, lng: markerLng }
       );
 
-      if (distance <= 100) idList.push(_id);
+      if (distance <= 2) idList.push(_id);
 
       this.center = {
         lat: clusterLat,
         lng: clusterLng,
       };
 
-      if (mapZoom <= 12) {
+      if (mapZoom <= 13) {
         this.zoom = mapZoom + 3;
         this.map.googleMap.setZoom(mapZoom + 3);
-      } else if (mapZoom < 16) {
+      } else if (mapZoom < 18) {
         this.zoom = mapZoom + 1;
         this.map.googleMap.setZoom(mapZoom + 1);
       }
     });
 
-    this._filterAnnouncementLst(idList);
+    if (this.map.googleMap.getZoom() === 18)
+      this._filterAnnouncementLst(idList);
   }
 
   _filterAnnouncementLst(_ids?: string[]) {
-
     if (!_ids) this.selectedAnouncements = this.response;
     else {
       this.selectedAnouncements = [];
@@ -271,21 +301,20 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
       if (responseView.length === 1) {
         this.openAnnouncement(responseView);
-      } else if (this.map.getZoom() === 16) {
+      } else if (this.map.getZoom() >= 17) {
         this.openAnnouncement(responseView);
       }
-
     }
   }
 
-  moveMap() { }
+  moveMap() {}
 
-  changeZoom() {
-    console.log(this.map.getZoom());
-  }
+  changeZoom() {}
 
   resolveProperty(text: string): string {
-    return propertyTypesConst.find((x) => x.value === text)?.name || text || '-';
+    return (
+      propertyTypesConst.find((x) => x.value === text)?.name || text || '-'
+    );
   }
 
   listLikes() {
@@ -304,7 +333,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   openAnnouncement(content) {
-    localStorage.setItem('announcementView', JSON.stringify(content))
-    this.modalService.open(ViewAnnouncementModalComponent, { centered: true })
+    localStorage.setItem('announcementView', JSON.stringify(content));
+    this.modalService.open(ViewAnnouncementModalComponent, { centered: true });
   }
 }
