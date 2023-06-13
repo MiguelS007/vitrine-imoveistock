@@ -849,7 +849,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   scrollUp() {
-    window.scrollTo({behavior:'smooth', top:0});
+    window.scrollTo({behavior:'smooth', top:150});
   }
 
 }
