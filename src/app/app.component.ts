@@ -16,6 +16,7 @@ export class AppComponent {
 
   title = 'imoveistock Indicação';
   
+  
   private popupOpenSubscription!: Subscription;
   private popupCloseSubscription!: Subscription;
   private initializingSubscription!: Subscription;
@@ -31,11 +32,13 @@ export class AppComponent {
   
   constructor(private ngCookieService: NgcCookieConsentService,
   ) {
-
+    localStorage.setItem('googleMapsLoaded', 'false');
     this.loaderApi.load().then((google) => {
+      localStorage.setItem('googleMapsLoaded', 'true');
       console.log('google maps loaded!');
     });
   }
+
 
   ngOnInit(){
     // subscribe to cookieconsent observables to react to main events
@@ -81,6 +84,7 @@ export class AppComponent {
       });
   }
   ngOnDestroy() {
+    localStorage.removeItem('googleMapsLoaded')
     this.popupOpenSubscription.unsubscribe();
     this.popupCloseSubscription.unsubscribe();
     this.initializingSubscription.unsubscribe();
