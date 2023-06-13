@@ -92,7 +92,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
           this.initMap();
           setTimeout(() => {
             this._updateMarkers();
-          },500);
+          }, 500);
           clearTimeout(time);
         }
       }, 1000);
@@ -205,9 +205,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
       this.response.sort((a, b) => (a.saleValue > b.saleValue ? -1 : 0));
   }
 
-  private  _updateMarkers() {
-    console.log('update markers');
-
+  private _updateMarkers() {
     this.markers = [];
 
     if (!this.response || !this.response.length) return;
@@ -235,7 +233,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
       this.cluster = new MarkerClusterer({
         map: this.map?.googleMap,
         markers: this.markers,
-        algorithm: new SuperClusterAlgorithm({ radius: 100 }),
+        algorithm: new SuperClusterAlgorithm({ radius: 50 }),
         onClusterClick: (cluster) => {
           this._clickCluster(cluster);
         },
@@ -249,6 +247,8 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     const clusterLat: number = cluster.latLng.lat();
     const clusterLng: number = cluster.latLng.lng();
 
+    console.log(clusterLat, clusterLng);
+
     const idList: string[] = [];
 
     this.markers.map((marker) => {
@@ -261,8 +261,8 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         { lat: markerLat, lng: markerLng }
       );
 
-      if (distance <= 2) idList.push(_id);
-
+      if (distance <= 0.5) idList.push(_id);
+      
       this.center = {
         lat: clusterLat,
         lng: clusterLng,
@@ -277,8 +277,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
       }
     });
 
-    if (this.map.googleMap.getZoom() === 18)
-      this._filterAnnouncementLst(idList);
+    if (this.map.getZoom() >= 17) this._filterAnnouncementLst(idList);
   }
 
   _filterAnnouncementLst(_ids?: string[]) {

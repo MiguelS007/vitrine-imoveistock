@@ -22,34 +22,32 @@
           class="col-12 px-5p col-btns-preview-img  position-absolute justify-content-center d-flex align-items-center">
           <!-- OPTIONS HEADER BTNS -->
           <div class="w-100 max-w-1918 p-y-0 py-5 d-flex justify-content-between">
-            <div class="row mx-0">
-              <div class="col-12 px-0 col-btns-announcements">
-                <div class="d-flex overflow-y-scroll w-auto spc-btns-property align-items-center">
-                  <button type="button" data-toggle="modal" data-target="#previewimage" (click)="openImagePreview()"
-                    class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-                    <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
-                    <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
-                  </button>
-                  <button type="button" data-toggle="modal" data-target="#playvideo"
-                    class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-                    <img src="../../../assets/icon/play-circle.png" alt="not icon" />
-                    <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
-                  </button>
-                  <!-- <button type="button" data-toggle="modal" data-target="#view360video"
+            <div class="col px-0 col-btns-announcements">
+              <div class="d-flex overflow-y-scroll w-auto spc-btns-property align-items-center">
+                <button type="button" data-toggle="modal" data-target="#previewimage" (click)="openImagePreview()"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
+                  <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
+                </button>
+                <button type="button" data-toggle="modal" data-target="#playvideo"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <img src="../../../assets/icon/play-circle.png" alt="not icon" />
+                  <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
+                </button>
+                <!-- <button type="button" data-toggle="modal" data-target="#view360video"
                     class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
                     <img src="../../../assets/icon/street-view.png" alt="not icon" />
                     <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Visita 360°</p>
                   </button> -->
-                  <button *ngIf="response?.floorPlan" type="button" data-toggle="modal" data-target="#viewFloorPlan"
-                    class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
-                    <img src="../../../assets/icon/planta.png" alt="not icon" />
-                    <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Planta do imóvel</p>
-                  </button>
-                </div>
+                <button *ngIf="response?.floorPlan" type="button" data-toggle="modal" data-target="#viewFloorPlan"
+                  class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
+                  <img src="../../../assets/icon/planta.png" alt="not icon" />
+                  <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Planta do imóvel</p>
+                </button>
               </div>
             </div>
             <!-- HEART, SHARE ETC...BTNS -->
-            <div class="options-img d-flex align-items-center">
+            <div class="col d-flex align-items-center justify-content-end">
               <div (click)="likeHeartMain(response._id, response.liked)"
                 class="button-property-detail-shared mx-1 mt-2 heart-like bg-transparent-white cursor-pointer border-radius-10">
                 <i [class]="response.liked ? 'bi-heart-fill':'bi-heart' "
@@ -190,7 +188,8 @@
                   <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency:
                     'R$':'symbol':'1.0' ||'-'}}</span>
                 </div>
-                <div *ngIf="response.valueOfIptu !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.valueOfIptu !== '0'"
+                  class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
@@ -504,7 +503,8 @@
                   </tr>
                   <tr>
                     <td class="pl-0 fw-400 font-size-16 line-20 color-black">Vagas de garagem:</td>
-                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.parkingSpaces !== 0">&nbsp;&nbsp;{{response.parkingSpaces ||
+                    <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.parkingSpaces !== 0">
+                      &nbsp;&nbsp;{{response.parkingSpaces ||
                       '-'}}</td>
                     <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.parkingSpaces === 0">
                       &nbsp;&nbsp;-
@@ -1789,7 +1789,8 @@
                   <span class="fw-400 font-size-18 line-24 color-black">{{response.condominiumValue | currency:
                     'R$':'symbol':'1.0' || '-'}}</span>
                 </div>
-                <div *ngIf="response.valueOfIptu !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.valueOfIptu !== '0'"
+                  class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>
@@ -1870,7 +1871,8 @@
                     :'symbol':'1.0' ||
                     '-'}}</span>
                 </div>
-                <div *ngIf="response.valueOfIptu !== '0'" class="col-12 d-flex py-2 align-items-center justify-content-between">
+                <div *ngIf="response.valueOfIptu !== '0'"
+                  class="col-12 d-flex py-2 align-items-center justify-content-between">
                   <span class="fw-400 font-size-18 line-24 color-black">IPTU
                     <i class="bi font-size-14 color-muted bi-info-circle"></i>
                   </span>

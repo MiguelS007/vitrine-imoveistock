@@ -338,8 +338,7 @@
               <div class="border-radius-10 position-relative">
                 <img *ngIf="!item.mainPhoto" (click)="announcementSelected(item._id)"
                   src="../../../assets/img/img-announcement-default.jpg" class="img-search-announcement-main">
-                <img *ngIf="item.mainPhoto" (click)="announcementSelected(item._id)" [src]="item.mainPhoto"
-                  class="img-search-announcement-main">
+                <img *ngIf="item.mainPhoto" (click)="announcementSelected(item._id)" [src]="item.mainPhoto" loading="lazy" class="img-search-announcement-main">
                 <div class="space-sale-or-rent-search-announcement">
                   <h4 *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
                                 border-radius-5 fw-400 font-size-14 line-15
@@ -450,7 +449,7 @@
           <div class="col-12 my-5 py-5 justify-content-center "   *ngIf="!messageNotSearch">
             <div *ngIf="filterResult.length > 6" class="d-flex flex-fill
                        justify-content-center">
-              <pagination-controls [maxSize]="5" [autoHide]="true" (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Próximo">
+              <pagination-controls [maxSize]="maxItensPagination" [autoHide]="true" (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Próximo">
               </pagination-controls>
             </div>
           </div> 

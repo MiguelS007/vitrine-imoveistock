@@ -1,13 +1,13 @@
 $spinner: blue;
 $background: #e9ebf6;
 $size: 30px;
-
+@use "sass:math";
 html { background-color: $background; }
 
 .spinner {
   position: absolute;
-  top: calc(50% - #{$size / 2});
-  left: calc(50% - #{$size / 2});
+  top: calc(50% - math.div($size, 2));
+  left: calc(50% - math.div($size, 2));
   width: $size;
   height: $size;
   animation: spinner 0.75s linear infinite;
