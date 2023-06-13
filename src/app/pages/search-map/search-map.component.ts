@@ -21,7 +21,6 @@ import { propertyTypesConst } from 'src/app/utils/propertyTypes';
 import { AnnouncementService } from 'src/app/service/announcement.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
-import { catchError, forkJoin, of } from 'rxjs';
 import { ViewAnnouncementModalComponent } from './view-announcement-modal/view-announcement-modal.component';
 
 @Component({
@@ -33,7 +32,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleMap) public map: GoogleMap | undefined;
 
   geolib: any;
-  geocoder: google.maps.Geocoder = new google.maps.Geocoder();
+  geocoder: google.maps.Geocoder;
 
   center: google.maps.LatLngLiteral | undefined;
   zoom: number = 12;
@@ -43,7 +42,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     fullscreenControl: false,
     keyboardShortcuts: false,
     streetViewControl: false,
-    maxZoom: 16,
+    maxZoom: 18,
     minZoom: 5,
   };
 
@@ -79,8 +78,14 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     this._updateMarkers();
   }
 
+  scrollUp() {
+    window.scrollTo({behavior:'smooth', top:0});
+  }
+
   ngOnInit(): void {
     this.ngxSpinnerService.show();
+
+    this.geocoder = new google.maps.Geocoder();
 
     this.response = JSON.parse(localStorage.getItem('resultSearch'));
     this.selectedAnouncements = this.response;
@@ -116,7 +121,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     this.ngxSpinnerService.hide();
   }
 
-  onChangeSearch(search: string) { }
+  onChangeSearch(search: string) {}
 
   selectAnnouncement(_id: string) {
     this.router.navigate([`announcement/detail`, _id]);
@@ -209,9 +214,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         },
       });
     }
-
   }
-
 
   _clickCluster(cluster: any) {
     const mapZoom = this.map.getZoom();
@@ -231,27 +234,27 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         { lat: markerLat, lng: markerLng }
       );
 
-      if (distance <= 100) idList.push(_id);
+      if (distance <= 2) idList.push(_id);
 
       this.center = {
         lat: clusterLat,
         lng: clusterLng,
       };
 
-      if (mapZoom <= 12) {
+      if (mapZoom <= 13) {
         this.zoom = mapZoom + 3;
         this.map.googleMap.setZoom(mapZoom + 3);
-      } else if (mapZoom < 16) {
+      } else if (mapZoom < 18) {
         this.zoom = mapZoom + 1;
         this.map.googleMap.setZoom(mapZoom + 1);
       }
     });
 
-    this._filterAnnouncementLst(idList);
+    if (this.map.googleMap.getZoom() === 18)
+      this._filterAnnouncementLst(idList);
   }
 
   _filterAnnouncementLst(_ids?: string[]) {
-
     if (!_ids) this.selectedAnouncements = this.response;
     else {
       this.selectedAnouncements = [];
@@ -271,21 +274,20 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
       if (responseView.length === 1) {
         this.openAnnouncement(responseView);
-      } else if (this.map.getZoom() === 16) {
+      } else if (this.map.getZoom() >= 17) {
         this.openAnnouncement(responseView);
       }
-
     }
   }
 
-  moveMap() { }
+  moveMap() {}
 
-  changeZoom() {
-    console.log(this.map.getZoom());
-  }
+  changeZoom() {}
 
   resolveProperty(text: string): string {
-    return propertyTypesConst.find((x) => x.value === text)?.name || text || '-';
+    return (
+      propertyTypesConst.find((x) => x.value === text)?.name || text || '-'
+    );
   }
 
   listLikes() {
@@ -304,7 +306,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   openAnnouncement(content) {
-    localStorage.setItem('announcementView', JSON.stringify(content))
-    this.modalService.open(ViewAnnouncementModalComponent, { centered: true })
+    localStorage.setItem('announcementView', JSON.stringify(content));
+    this.modalService.open(ViewAnnouncementModalComponent, { centered: true });
   }
 }
