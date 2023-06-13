@@ -4,6 +4,7 @@ import {
   ViewChildren,
   QueryList,
   ViewChild,
+  HostListener,
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -27,6 +28,10 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   styleUrls: ['./search-page.component.scss'],
 })
 export class SearchPageComponent implements OnInit {
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.handlerMaxItens();
+  }
   form: FormGroup;
   formfilter: FormGroup;
   iconlikeheart = false;
@@ -100,6 +105,7 @@ export class SearchPageComponent implements OnInit {
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
   listEveryCity: { cidade: string; estado: string; render: string }[] = [];
   listDistricts: { district: string }[] = [];
+  maxItensPagination: number = 5;
 
   // listOfPrices: any = [];
 
@@ -198,6 +204,8 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.ngxSpinnerService.show();
+
+    this.handlerMaxItens();
 
     this.announcementService.listExclusive(10).subscribe({
       next: (data) => {
@@ -347,12 +355,22 @@ export class SearchPageComponent implements OnInit {
         error: (error) => {
           this.ngxSpinnerService.hide();
           console.log(error);
-
         },
       });
     } else {
       this.messageNotSearch = false;
       this.ngxSpinnerService.hide();
+    }
+  }
+
+  handlerMaxItens() {
+    const width = screen.width;
+    if (width <= 768) {
+      this.maxItensPagination = 3;
+    } else if (width <= 520) {
+      this.maxItensPagination = 2;
+    } else {
+      this.maxItensPagination = 5;
     }
   }
 
@@ -427,10 +445,10 @@ export class SearchPageComponent implements OnInit {
     this.paginationProduct = pageNumber;
     if (pageNumber >= 4) {
       filter.page = pageNumber + 1;
-      if(prevPage < pageNumber){
+      if (prevPage < pageNumber) {
         this.announcementService.listFilter(filter).subscribe((response) => {
           const announcements = response?.data;
-    
+
           if (announcements.length) {
             this.filterResult.push(...announcements);
           }
@@ -439,9 +457,8 @@ export class SearchPageComponent implements OnInit {
       this.paginationProduct = pageNumber;
     }
 
-    this.scrollUp()
+    this.scrollUp();
   }
-  
 
   selectEvent2(item) {
     // this.form.controls['typePropertyDistrict'].setValue(item.district);
@@ -451,7 +468,7 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
-  onChangeSearch(search: string) { }
+  onChangeSearch(search: string) {}
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -747,7 +764,7 @@ export class SearchPageComponent implements OnInit {
     this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(
-      (data) => { },
+      (data) => {},
       (error) => {
         this.modalFilterOpen = false;
       }
@@ -769,7 +786,12 @@ export class SearchPageComponent implements OnInit {
     return text.toLocaleLowerCase();
   }
   customFilter(
-    items: { cidade: string; estado: string; render?: string; district?: string }[],
+    items: {
+      cidade: string;
+      estado: string;
+      render?: string;
+      district?: string;
+    }[],
     query: string
   ): { cidade: string; estado: string; render?: string; district?: string }[] {
     function removeAccents(text: string): string {
@@ -782,24 +804,23 @@ export class SearchPageComponent implements OnInit {
       text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
       return text.toLocaleLowerCase();
     }
-  
+
     if (query.length < 2) {
       return [];
     }
-  
+
     return items.filter((item) => {
       const normalizedQuery = removeAccents(query.toLowerCase());
-      console.log('ÇÇAÇAÇAÇ', items, query)
       if (item.render) {
         const normalizedRender = removeAccents(item.render.toLowerCase());
         return normalizedRender.includes(normalizedQuery);
       }
-  
+
       if (item.district) {
         const normalizedDistrict = removeAccents(item.district.toLowerCase());
         return normalizedDistrict.includes(normalizedQuery);
       }
-  
+
       return false;
     });
   }
@@ -808,25 +829,24 @@ export class SearchPageComponent implements OnInit {
       // Retorna todos os itens quando a consulta é vazia ou possui menos de 2 caracteres
       return items;
     }
-  
+
     // Remove acentos e caracteres especiais da consulta
     const normalizedQuery = query
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase();
-  
+
     // Filtra os itens com base no nome do bairro, removendo acentos e caracteres especiais
-    const filteredItems = items.filter(item => {
+    const filteredItems = items.filter((item) => {
       const normalizedDistrict = item.district
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase();
       return normalizedDistrict.includes(normalizedQuery);
     });
     return filteredItems;
   }
-  
-  
+
   sortPriceList(value: string) {
     const listOfPrices = this.filterResult;
     if (value === 'minor>major') {
@@ -849,7 +869,6 @@ export class SearchPageComponent implements OnInit {
   }
 
   scrollUp() {
-    window.scrollTo({behavior:'smooth', top:150});
+    window.scrollTo({ behavior: 'smooth', top: 150 });
   }
-
 }
