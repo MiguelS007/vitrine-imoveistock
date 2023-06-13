@@ -466,7 +466,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Area do imóvel:</td>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Área do imóvel:</td>
                     <td class="pl-0 fw-700 font-size-16 line-20 color-black">&nbsp;&nbsp;{{response.usefulArea |
                       currency: ' ':'symbol':'1.0'}}m²</td>
                   </tr>
@@ -486,7 +486,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Suites:</td>
+                    <td class="pl-0 fw-400 font-size-16 line-20 color-black">Suítes:</td>
                     <td class="pl-0 fw-700 font-size-16 line-20 color-black" *ngIf="response.suites !== 0">
                       &nbsp;&nbsp;{{response.suites || '-'}}
                     </td>
@@ -552,7 +552,7 @@
             <div class="w-100 py-4 border-bottom-gray px-5"
               *ngIf="showFeatureProperty || showFeatureDifferential || showFeatureFloor || showFeatureFloorCom || showFeatureRoofCom || showFeatureRoof || showFeatureFicaImovel || showFeatureFicaImovelCom">
               <div class="w-100 d-flex align-items-center justify-content-between">
-                <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Caracteristicas do imovel</p>
+                <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Características do imóvel</p>
                 <img *ngIf="!arrowinfo" src="../../../assets/icon/arrow-down-blue.png" width="20"
                   style="cursor: pointer;" class="animate__animated" (click)="openarrow(42)">
                 <img *ngIf="arrowinfo" src="../../../assets/icon/arrow-top-blue.png" class="animate__animated"
@@ -1280,7 +1280,7 @@
                   <div *ngIf="showFeatureInfantile" class="col-sm-6">
                     <div class="row">
                       <div class="col-12">
-                        <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Área infaltil</p>
+                        <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Área infantil</p>
                       </div>
                       <div class="col-12">
                         <p *ngIf="response.featureInfantile?.brinquedoteca === true"
@@ -1713,7 +1713,7 @@
                   <div *ngIf="showCaracteristicas" class="col-sm-6">
                     <div class="row">
                       <div class="col-12">
-                        <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Caracteristicas</p>
+                        <p class="w-100 color-black fw-700 font-size-18 line-24 mb-0">Características</p>
                       </div>
                       <div class="col-12">
                         <p *ngIf="response.featureCharacteristic?.carpete === true"
