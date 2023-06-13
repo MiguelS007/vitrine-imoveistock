@@ -34,6 +34,8 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   geolib: any;
   geocoder: google.maps.Geocoder;
 
+  apiLoaded: boolean = localStorage.getItem('googleMapsLoaded') == 'true';
+
   center: google.maps.LatLngLiteral | undefined;
   zoom: number = 12;
 
@@ -75,23 +77,34 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this._updateMarkers();
+    this.apiLoaded = localStorage.getItem('googleMapsLoaded') == 'true';
+    if (this.apiLoaded && this.geocoder === undefined) {
+      this.initMap();
+      this._updateMarkers();
+    } else if (this.apiLoaded && this.geocoder !== undefined) {
+      this._updateMarkers();
+    }
+
+    if (!this.apiLoaded) {
+      const time = setTimeout(() => {
+        this.apiLoaded = localStorage.getItem('googleMapsLoaded') == 'true';
+        if (this.apiLoaded) {
+          this.initMap();
+          setTimeout(() => {
+            this._updateMarkers();
+          },500);
+          clearTimeout(time);
+        }
+      }, 1000);
+    }
   }
 
   scrollUp() {
-    window.scrollTo({behavior:'smooth', top:150});
+    window.scrollTo({ behavior: 'smooth', top: 150 });
   }
 
-  ngOnInit(): void {
-    this.ngxSpinnerService.show();
-
+  initMap() {
     this.geocoder = new google.maps.Geocoder();
-
-    this.response = JSON.parse(localStorage.getItem('resultSearch'));
-    this.selectedAnouncements = this.response;
-
-    this.filtroResultDisplay = JSON.parse(localStorage.getItem('filtro'));
-
     this.geocoder.geocode(
       {
         address: `${this.filtroResultDisplay.cityAddress}, ${this.filtroResultDisplay.ufAddress}`,
@@ -113,6 +126,18 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
         }
       }
     );
+  }
+
+  ngOnInit(): void {
+    this.ngxSpinnerService.show();
+    this.apiLoaded = localStorage.getItem('googleMapsLoaded') == 'true';
+
+    this.response = JSON.parse(localStorage.getItem('resultSearch'));
+    this.selectedAnouncements = this.response;
+
+    this.filtroResultDisplay = JSON.parse(localStorage.getItem('filtro'));
+
+    if (this.apiLoaded) this.initMap();
 
     this.mapOptions.center = this.center;
 
@@ -180,7 +205,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
       this.response.sort((a, b) => (a.saleValue > b.saleValue ? -1 : 0));
   }
 
-  private _updateMarkers() {
+  private  _updateMarkers() {
+    console.log('update markers');
+
     this.markers = [];
 
     if (!this.response || !this.response.length) return;
