@@ -85,8 +85,14 @@ export class AnnouncementService extends BaseService {
         }
 
         if(dto.districtAddress) {
-            queryParams += `&districtAddress=${dto.districtAddress}`
+            dto.districtAddress.forEach(element => {
+                queryParams += `&districtAddress=${element}`;       
+            });
         }
+
+        // if(dto.districtAddress) {
+        //     queryParams += `&districtAddress=${dto.districtAddress}`
+        // }
 
         if(dto.initialValue && dto.initialValue > 1) {
             queryParams += `&initialValue=${dto.initialValue}`

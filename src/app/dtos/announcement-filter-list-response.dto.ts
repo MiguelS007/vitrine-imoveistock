@@ -7,7 +7,7 @@ export abstract class AnnouncementFilterListResponseDto {
 
     cityAddress?: string;
 
-    districtAddress?:string;
+    districtAddress?:string[];
 
     goal?: string;
 
