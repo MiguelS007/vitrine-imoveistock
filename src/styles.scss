@@ -1921,7 +1921,7 @@ vg-overlay-play .vg-overlay-play {
 }
 
 .btn-type-of-ad-select {
-    background-color: white !important;
+    background-color: #F0F0F0 !important;
     border: none !important;
     border-radius: 0px !important;
     border-bottom: 2px solid #542FDF !important;
@@ -1931,6 +1931,7 @@ vg-overlay-play .vg-overlay-play {
 }
 
 .btn-type-of-ad-disabled {
+    background-color: white !important;
     border: none !important;
     box-shadow: none !important;
     outline: none !important;
