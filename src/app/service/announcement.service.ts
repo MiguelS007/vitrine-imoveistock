@@ -84,15 +84,15 @@ export class AnnouncementService extends BaseService {
             queryParams += `&cityAddress=${dto.cityAddress}`
         }
 
-        if(dto.districtAddress) {
-            dto.districtAddress.forEach(element => {
-                queryParams += `&districtAddress=${element}`;       
-            });
-        }
-
         // if(dto.districtAddress) {
-        //     queryParams += `&districtAddress=${dto.districtAddress}`
+        //     dto.districtAddress.forEach(element => {
+        //         queryParams += `&districtAddress=${element}`;       
+        //     });
         // }
+
+        if(dto.districtAddress) {
+            queryParams += `&districtAddress=${dto.districtAddress}`
+        }
 
         if(dto.initialValue && dto.initialValue > 1) {
             queryParams += `&initialValue=${dto.initialValue}`

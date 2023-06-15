@@ -543,13 +543,19 @@ export class SearchPageComponent implements OnInit {
     const recentlySeen = JSON.parse(localStorage.getItem('recentlySeen')) || [];
     const verify = { _id: value };
     const exists = recentlySeen.some((item) => item._id === value);
+    const width = screen.width;
 
     if (!exists) {
       recentlySeen.push(verify);
     }
 
     localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
-    window.open(`announcement/detail/${value}`, '_blank');
+    
+    if (width >= 1241) {
+      window.open(`announcement/detail/${value}`, '_blank');
+    } else {
+      this.router.navigate([`announcement/detail/${value}`]);
+    }
   }
 
   searchByTypeAd(item) {
@@ -636,7 +642,7 @@ export class SearchPageComponent implements OnInit {
         // response.unshift({ district: 'Todos os bairros' });
         this.listDistricts = response;
         this.dropdownListDistrict = response.map((item, index) => {
-          return { item_text: item.district, item_id: index}
+          return { item_text: item.district, item_id: index }
         }
         )
       },
