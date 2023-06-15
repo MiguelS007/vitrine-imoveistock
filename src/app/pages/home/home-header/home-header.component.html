@@ -55,23 +55,16 @@
                                         </ng-template>
 
                                     </div>
-                                    <div class="col-12 px-0 mb-4">
-                                        <ng-autocomplete formControlName="typePropertyDistrict" [data]="listDistricts"
-                                            [disabled]="listDistricts.length == 0" [searchKeyword]="'district'"
-                                            placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
-                                            [customFilter]="customFilter" [minQueryLength]="2"
-                                            [itemTemplate]="itemDistrictsTemplate"
-                                            [notFoundTemplate]="notFoundTemplate">
-                                        </ng-autocomplete>
 
-                                        <ng-template #itemDistrictsTemplate let-item>
-                                            <a [innerHTML]="item.district"></a>
-                                        </ng-template>
-
-                                        <ng-template #notFoundTemplate let-notFound>
-                                            <div>Não encontrado</div>
-                                        </ng-template>
+                                    <div class="col-12 px-0 pb-3">
+                                        <ng-multiselect-dropdown [placeholder]="'Escolha um bairro'"
+                                            formControlName="typePropertyDistrict" [settings]="dropdownSettingsDistrict"
+                                            [data]="dropdownListDistrict" [(ngModel)]="selectedItemsDistricts"
+                                            (onSelect)="onItemSelectDistrict($event)"
+                                            (onSelectAll)="onSelectAllDistrict($event)">
+                                        </ng-multiselect-dropdown>
                                     </div>
+
                                     <div class="col-12 px-0 mb-3">
                                         <div class="row">
                                             <div class="col-6 pr-0">

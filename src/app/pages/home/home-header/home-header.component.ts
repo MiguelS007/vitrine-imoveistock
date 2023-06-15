@@ -88,7 +88,12 @@ export class HomeHeaderComponent implements OnInit {
     { item_id: 'prediointeiro', item_text: 'Prédio Inteiro' },
   ];
 
+  dropdownListDistrict = [
+    { item_id: 1, item_text: '' }
+  ];
+
   selectedItems: any = [];
+  selectedItemsDistricts: any[] = [];
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: 'item_id',
@@ -96,6 +101,18 @@ export class HomeHeaderComponent implements OnInit {
     selectAllText: 'Selecionar todos',
     unSelectAllText: 'Desmarcar todos',
     itemsShowLimit: 3,
+    searchPlaceholderText: 'Procurar',
+    allowSearchFilter: true,
+    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
+  };
+
+  dropdownSettingsDistrict: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Selecionar todos',
+    unSelectAllText: 'Desmarcar todos',
+    itemsShowLimit: 2,
     searchPlaceholderText: 'Procurar',
     allowSearchFilter: true,
     noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
@@ -181,6 +198,12 @@ export class HomeHeaderComponent implements OnInit {
     this.labelValueRent = item;
   }
 
+  onItemSelectDistrict(item: any) {
+  }
+
+  onSelectAllDistrict(items: any) {
+  }
+
   onItemSelect(item: any) {
     const nativeElement = this.dropdownRef;
     if (nativeElement.isDropdownOpen === true) {
@@ -227,14 +250,19 @@ export class HomeHeaderComponent implements OnInit {
     this.listDistrictByCity(item.cidade);
   }
 
-  listDistrictByCity(value: string) {
+  listDistrictByCity(value) {
     this.announcementService.listDistrictsByCity(value).subscribe({
       next: (response) => {
-        response.unshift({ district: 'Todos' });
+        // response.unshift({ district: 'Todos os bairros' });
         this.listDistricts = response;
+        this.dropdownListDistrict = response.map((item, index) => {
+          return { item_text: item.district, item_id: index }
+        }
+        )
       },
       error: (error) => console.log(error),
     });
+
   }
 
   customFilter(
@@ -287,9 +315,7 @@ export class HomeHeaderComponent implements OnInit {
       state: this.form.controls['typePropertyState'].value,
       city: this.getSelectedCity,
       district:
-        this.form.controls['typePropertyDistrict'].value?.district ||
-        this.form.controls['typePropertyDistrict'].value ||
-        '',
+        this.form.controls['typePropertyDistrict'].value?.map(item => item.item_text) ||'',
       allResidential: this.typepropertyfull,
       untilValueSale: !isNaN(this.labelValueSale)
         ? Number(this.labelValueSale)

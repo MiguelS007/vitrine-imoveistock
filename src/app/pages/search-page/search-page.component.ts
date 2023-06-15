@@ -268,6 +268,10 @@ export class SearchPageComponent implements OnInit {
       if (filtro.propertyTypeList?.length > 0)
         this.selectedItems = [...filtro.propertyTypeList];
 
+      if (filtro.districtAddress?.length > 0) {
+        this.selectedItemsDistricts = [...filtro.districtAddress];
+      }
+
       this.formModal.patchValue({
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
         typePropertyState: filtro.ufAddress,
@@ -385,11 +389,9 @@ export class SearchPageComponent implements OnInit {
   }
 
   onItemSelectDistrict(item: any) {
-    console.log(item);
   }
 
   onSelectAllDistrict(items: any) {
-    console.log(items);
   }
 
   onItemDeSelect(item: any) {
@@ -550,7 +552,7 @@ export class SearchPageComponent implements OnInit {
     }
 
     localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
-    
+
     if (width >= 1241) {
       window.open(`announcement/detail/${value}`, '_blank');
     } else {
@@ -627,10 +629,18 @@ export class SearchPageComponent implements OnInit {
       this.filtroResultDisplay.propertyTypeList.indexOf(index);
     this.filtroResultDisplay.propertyTypeList.splice(filterDisplay, 1);
 
+    let filterDisplayDistrict =
+      this.filtroResultDisplay.districtAddress.indexOf(index);
+    this.filtroResultDisplay.districtAddress.splice(filterDisplayDistrict, 1);
+
     this.selectedItems = [];
+    this.selectedItemsDistricts = []
 
     setTimeout(() => {
       this.selectedItems = this.filtroResultDisplay.propertyTypeList;
+    }, 100);
+    setTimeout(() => {
+      this.selectedItemsDistricts = this.filtroResultDisplay.districtAddress;
     }, 100);
 
     this.filtrar();
@@ -701,7 +711,7 @@ export class SearchPageComponent implements OnInit {
       this.selectFilterOfAd = 'sale';
     }
 
-    const district = this.form.controls['typePropertyDistrict'].value?.district || '';
+    const district = this.form.controls['typePropertyDistrict'].value?.map(item => item.item_text) || '';
 
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
@@ -743,8 +753,6 @@ export class SearchPageComponent implements OnInit {
         this.formModal.controls['propertyType'].value,
       goal: '',
     };
-
-    console.log(this.form.controls['typePropertyDistrict'].value?.district);
 
     this.announcementService.listFilter(request).subscribe({
       next: (data) => {
