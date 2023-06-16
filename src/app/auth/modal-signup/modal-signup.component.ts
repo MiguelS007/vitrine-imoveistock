@@ -28,8 +28,6 @@ export class ModalSignupComponent implements OnInit {
     private userService: UserService,
     private toastrService: ToastrService,
     private modalService: NgbModal,
-    private elementRef: ElementRef,
-    private renderer: Renderer2
 
   ) {
     this.form = this.formBuilder.group({
@@ -55,33 +53,7 @@ export class ModalSignupComponent implements OnInit {
 
   }
 
-  ngAfterViewInit(){
-    const scrollFixElements = this.elementRef.nativeElement.querySelectorAll('.scrollFix');
 
-    scrollFixElements.forEach((element: HTMLElement) => {
-      this.renderer.setStyle(element, 'pointer-events', 'none');
-    });
-
-    this.renderer.listen(this.elementRef.nativeElement, 'touchstart', (event) => {
-      scrollFixElements.forEach((element: HTMLElement) => {
-        this.renderer.setStyle(element, 'pointer-events', 'auto');
-      });
-    });
-
-    this.renderer.listen(this.elementRef.nativeElement, 'touchmove', (event) => {
-      scrollFixElements.forEach((element: HTMLElement) => {
-        this.renderer.setStyle(element, 'pointer-events', 'none');
-      });
-    });
-
-    this.renderer.listen(this.elementRef.nativeElement, 'touchend', (event) => {
-      setTimeout(() => {
-        scrollFixElements.forEach((element: HTMLElement) => {
-          this.renderer.setStyle(element, 'pointer-events', 'none');
-        });
-      }, 0);
-    }); 
-  }
   
 
   exit() {
