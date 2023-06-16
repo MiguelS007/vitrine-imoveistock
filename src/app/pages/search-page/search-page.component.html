@@ -114,14 +114,14 @@
             <div class="col-6">
               <label for="typeMinPrice">De</label>
               <input formControlName="typeMinPrice" type="text" currencyMask
-                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
+                [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="De"
                 class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
                 maxlength="15" />
             </div>
             <div class="col-6">
               <label for="typeMaxPrice">Até</label>
               <input formControlName="typeMaxPrice" type="text" currencyMask
-                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
+                [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="Até"
                 class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
                 maxlength="20" />
             </div>
@@ -585,14 +585,14 @@
       <div class="col-6">
         <label for="typeMinPrice">De</label>
         <input formControlName="typeMinPrice" type="text" currencyMask
-          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
+          [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="De"
           class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
           maxlength="15" />
       </div>
       <div class="col-6">
         <label for="typeMaxPrice">Até</label>
         <input formControlName="typeMaxPrice" type="text" currencyMask
-          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
+          [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="Até"
           class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
           maxlength="20" />
       </div>
