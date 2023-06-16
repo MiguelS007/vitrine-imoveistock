@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserRegisterRequestDto } from 'src/app/dtos/user-register-request.dto';
@@ -27,7 +27,9 @@ export class ModalSignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private toastrService: ToastrService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private elementRef: ElementRef,
+    private renderer: Renderer2
 
   ) {
     this.form = this.formBuilder.group({
@@ -52,6 +54,35 @@ export class ModalSignupComponent implements OnInit {
     }
 
   }
+
+  ngAfterViewInit(){
+    const scrollFixElements = this.elementRef.nativeElement.querySelectorAll('.scrollFix');
+
+    scrollFixElements.forEach((element: HTMLElement) => {
+      this.renderer.setStyle(element, 'pointer-events', 'none');
+    });
+
+    this.renderer.listen(this.elementRef.nativeElement, 'touchstart', (event) => {
+      scrollFixElements.forEach((element: HTMLElement) => {
+        this.renderer.setStyle(element, 'pointer-events', 'auto');
+      });
+    });
+
+    this.renderer.listen(this.elementRef.nativeElement, 'touchmove', (event) => {
+      scrollFixElements.forEach((element: HTMLElement) => {
+        this.renderer.setStyle(element, 'pointer-events', 'none');
+      });
+    });
+
+    this.renderer.listen(this.elementRef.nativeElement, 'touchend', (event) => {
+      setTimeout(() => {
+        scrollFixElements.forEach((element: HTMLElement) => {
+          this.renderer.setStyle(element, 'pointer-events', 'none');
+        });
+      }, 0);
+    }); 
+  }
+  
 
   exit() {
     this.modalService.dismissAll()
