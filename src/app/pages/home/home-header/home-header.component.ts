@@ -174,16 +174,6 @@ export class HomeHeaderComponent implements OnInit {
         this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
       },
     });
-
-    // for (let i = 0; i < this.estados.estados.length; i++) {
-    //   for (let j = 0; j < this.estados.estados[i].cidades.length; j++) {
-    //     this.listEveryCity.push({
-    //       cidade: this.estados.estados[i].cidades[j],
-    //       estado: this.estados.estados[i].sigla,
-    //       render: this.estados.estados[i].cidades[j] + ' , ' + this.estados.estados[i].sigla
-    //     });
-    //   }
-    // }
   }
 
   removeLabel(event) {
