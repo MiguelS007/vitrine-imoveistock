@@ -20,17 +20,26 @@
             </span>
             <span class="result-filter" *ngIf="filtroResultDisplay?.ufAddress && filtroResultDisplay?.cityAddress">
               {{filtroResultDisplay.cityAddress+", "+filtroResultDisplay.ufAddress}}</span>
-            <span class="result-filter" *ngIf="filtroResultDisplay?.districtAddress">
-              {{filtroResultDisplay.districtAddress}}
-            </span>
-            <!-- <span class="result-filter" *ngIf="filtroResultDisplay.cityAddress">
-              {{filtroResultDisplay.cityAddress}}</span> -->
+
+            <!-- <span class="result-filter">
+              <span *ngIf="filtroResultDisplay?.districtAddress">
+                {{filtroResultDisplay.districtAddress}}
+              </span>
+            </span> -->
+
+            <!-- <span class="result-filter"
+              *ngFor="let item of filtroResultDisplay?.districtAddress | slice:0:5; let i = index">
+              <span *ngIf="i <=3">{{item.item_text}}<b><a class="cursor-pointer"
+                    (click)="removeTag(item)">X</a></b></span>
+              <span *ngIf="i > 3">{{'Bairros+'+(filtroResultDisplay.districtAddress.length - 4)}}</span>
+            </span> -->
+
             <span class="result-filter" *ngIf="filtroResultDisplay?.bedrooms"> +{{filtroResultDisplay?.bedrooms}}
               Quartos<b><a class="cursor-pointer" (click)="filtroResultDisplay.bedrooms = 0">X</a></b></span>
             <span *ngIf="filtroResultDisplay?.goal"> {{filtroResultDisplay.goal}}</span>
           </span>
         </p>
-        
+
         <!-- <button class="bg-purple btn text-light fw-500 font-size-18
         line-19 border-radius-10" (click)="clearAndSearch()">Limpar filtros</button> -->
 
@@ -38,7 +47,8 @@
       <div class="col-4 col-body-products d-none-desk mt-5 pt-5 pl-0">
         <div class="w-100 d-none-desk border-radius-10 bg-white p-5">
           <div class="d-flex justify-content-end">
-            <a style="color:#542fdf; text-decoration: underline !important;cursor: pointer;" class="mb-4 mx-1 fw-500 font-size-18 line-19" (click)="clearAndSearch()">Limpar filtros</a>
+            <a style="color:#542fdf; text-decoration: underline !important;cursor: pointer;"
+              class="mb-4 mx-1 fw-500 font-size-18 line-19" (click)="clearAndSearch()">Limpar filtros</a>
           </div>
           <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'" [settings]="dropdownSettings"
             formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
@@ -73,12 +83,12 @@
             </ng-template>
           </div>
 
-          <div class="dropdown px-0 my-4">
-            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyDistrict"
-            [data]="listDistricts" [isLoading]="listEveryCity.length == 0" [disabled]="listDistricts.length == 0" [searchKeyword]="'district'"
-             placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
-              [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
-              [notFoundTemplate]="notFoundTemplate" [customFilter]="customDistrictFilter">
+          <!-- <div class="dropdown px-0 my-4">
+            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyDistrict" [data]="listDistricts"
+              [isLoading]="listEveryCity.length == 0" [disabled]="listDistricts.length == 0"
+              [searchKeyword]="'district'" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
+              [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate" [notFoundTemplate]="notFoundTemplate"
+              [customFilter]="customDistrictFilter">
             </ng-autocomplete>
 
             <ng-template #itemDistrictsTemplate let-item>
@@ -88,6 +98,13 @@
             <ng-template #notFoundTemplate let-notFound>
               <div>Não encontrado</div>
             </ng-template>
+          </div> -->
+
+          <div>
+            <ng-multiselect-dropdown [placeholder]="'Escolha um bairro'" formControlName="typePropertyDistrict"
+              [settings]="dropdownSettingsDistrict" [data]="dropdownListDistrict" [(ngModel)]="selectedItemsDistricts"
+              (onSelect)="onItemSelectDistrict($event)" (onSelectAll)="onSelectAllDistrict($event)">
+            </ng-multiselect-dropdown>
           </div>
 
           <div class="row mt-4 px-0">
@@ -97,14 +114,14 @@
             <div class="col-6">
               <label for="typeMinPrice">De</label>
               <input formControlName="typeMinPrice" type="text" currencyMask
-                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
+                [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="De"
                 class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
                 maxlength="15" />
             </div>
             <div class="col-6">
               <label for="typeMaxPrice">Até</label>
               <input formControlName="typeMaxPrice" type="text" currencyMask
-                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
+                [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="Até"
                 class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
                 maxlength="20" />
             </div>
@@ -323,14 +340,15 @@
           </div>
         </div>
         <div class="row pr-0">
-          <div class="col-12 mt-4 d-flex flex-column justify-content-center" *ngIf="messageNotSearch || !filterResult?.length">
+          <div class="col-12 mt-4 d-flex flex-column justify-content-center"
+            *ngIf="messageNotSearch || !filterResult?.length">
             <img src="../../../assets/img/not-search-announcement.svg" height="80">
             <h4 class="text-center mt-3">Não encontramos imóveis com as suas preferências</h4>
             <p class="text-center mb-0">explore outros filtros e confira os imoveis abaixo que podem te
               atender no momento</p>
             <span class="text-center">{{':('}}</span>
           </div>
-          <div class="col-lg-6 px-3 col-cards-products"  *ngFor="let item of filterResult | paginate: {
+          <div class="col-lg-6 px-3 col-cards-products" *ngFor="let item of filterResult | paginate: {
                     itemsPerPage: 6, currentPage: paginationProduct }; let
                     i= index">
             <div *ngIf="!messageNotSearch"
@@ -338,7 +356,8 @@
               <div class="border-radius-10 position-relative">
                 <img *ngIf="!item.mainPhoto" (click)="announcementSelected(item._id)"
                   src="../../../assets/img/img-announcement-default.jpg" class="img-search-announcement-main">
-                <img *ngIf="item.mainPhoto" (click)="announcementSelected(item._id)" [src]="item.mainPhoto" loading="lazy" class="img-search-announcement-main">
+                <img *ngIf="item.mainPhoto" (click)="announcementSelected(item._id)" [src]="item.mainPhoto"
+                  loading="lazy" class="img-search-announcement-main">
                 <div class="space-sale-or-rent-search-announcement">
                   <h4 *ngIf="item.typeOfAd === 'sale'" class="bg-purple h-fit px-4 py-2 mb-0
                                 border-radius-5 fw-400 font-size-14 line-15
@@ -365,7 +384,7 @@
                                 line-15 color-black">Exclusivo</h4>
                 </div>
                 <div class="space-value-announcement">
-                  <p *ngIf="item.typeOfAd === 'sale'"  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="fw-700 mb-0 font-size-22 h-fit line-32
+                  <p *ngIf="item.typeOfAd === 'sale'" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="fw-700 mb-0 font-size-22 h-fit line-32
                                 text-light">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}</p>
                   <p *ngIf="item.typeOfAd === 'both'" class="fw-700 mb-0 font-size-22 h-fit line-32
                                 text-light">
@@ -446,13 +465,14 @@
               </div>
             </div>
           </div>
-          <div class="col-12 my-5 py-5 justify-content-center "   *ngIf="!messageNotSearch">
+          <div class="col-12 my-5 py-5 justify-content-center " *ngIf="!messageNotSearch">
             <div *ngIf="filterResult.length > 6" class="d-flex flex-fill
                        justify-content-center">
-              <pagination-controls [maxSize]="maxItensPagination" [autoHide]="true" (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Próximo">
+              <pagination-controls [maxSize]="maxItensPagination" [autoHide]="true" (pageChange)="onPageChange($event)"
+                previousLabel="Anterior" nextLabel="Próximo">
               </pagination-controls>
             </div>
-          </div> 
+          </div>
         </div>
         <div class="w-100 mt-4 border-radius-10 bg-white p-4 space-exclusivos-mobile-search-page">
           <p class="fw-700 font-size-18 line-24 color-blue">Imóveis
@@ -522,7 +542,7 @@
     <ng-multiselect-dropdown [placeholder]="'Tipo de imóvel'" [settings]="dropdownSettings"
       formControlName="propertyType" [data]="dropdownList" [(ngModel)]="selectedItems"
       (onDeSelectAll)="onDeSelectAll2($event)" (onSelect)="onItemSelect2($event)" (onDeSelect)="onItemDeSelect2($event)"
-      (onSelectAll)="onSelectAll2($event)" id="dropdownRefModal" >
+      (onSelectAll)="onSelectAll2($event)" id="dropdownRefModal">
     </ng-multiselect-dropdown>
     <div class="dropdown">
       <a class="btn pl-3 border mt-4 border-radius-10 bg-light text-dark w-100 h-51 d-flex justify-content-between align-items-center dropdown-toggle"
@@ -551,20 +571,11 @@
       </ng-template>
     </div>
 
-    <div class="dropdown px-0 my-4">
-      <ng-autocomplete id="search-cityes-test" [data]="listDistricts" [disabled]="listDistricts.length == 0"
-      [searchKeyword]="'district'" formControlName="typePropertyDistrict" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
-        [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
-        [notFoundTemplate]="notFoundTemplate" [customFilter]="customDistrictFilter">
-      </ng-autocomplete>
-
-      <ng-template #itemDistrictsTemplate let-item>
-        <a [innerHTML]="item.district"></a>
-      </ng-template>
-
-      <ng-template #notFoundTemplate let-notFound>
-        <div>Não encontrado</div>
-      </ng-template>
+    <div>
+      <ng-multiselect-dropdown [placeholder]="'Escolha um bairro'" formControlName="typePropertyDistrict"
+        [settings]="dropdownSettingsDistrict" [data]="dropdownListDistrict" [(ngModel)]="selectedItemsDistricts"
+        (onSelect)="onItemSelectDistrict($event)" (onSelectAll)="onSelectAllDistrict($event)">
+      </ng-multiselect-dropdown>
     </div>
 
     <div class="row mt-4 px-0">
@@ -574,14 +585,14 @@
       <div class="col-6">
         <label for="typeMinPrice">De</label>
         <input formControlName="typeMinPrice" type="text" currencyMask
-          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="De"
+          [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="De"
           class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
           maxlength="15" />
       </div>
       <div class="col-6">
         <label for="typeMaxPrice">Até</label>
         <input formControlName="typeMaxPrice" type="text" currencyMask
-          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Até"
+          [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="Até"
           class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
           maxlength="20" />
       </div>
@@ -646,7 +657,8 @@
            w-100 h-51" mask="0000" />
     </div>
     <button class="bg-purple btn mt-4 text-light fw-700 font-size-18
-        line-24 border-radius-10 h-51 w-100" [disabled]="form.invalid && form.controls['typePropertyCity'].value === ''"  (click)="filtrar()" type="submit">
+        line-24 border-radius-10 h-51 w-100"
+      [disabled]="form.invalid && form.controls['typePropertyCity'].value === ''" (click)="filtrar()" type="submit">
       Encontrar
     </button>
   </form>

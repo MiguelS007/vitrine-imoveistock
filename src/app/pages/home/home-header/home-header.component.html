@@ -1,8 +1,8 @@
-<main class="bg-home-header px-5p  d-flex justify-content-center position-relative w-100">
+<main class="bg-home-header px-5p d-flex justify-content-center position-relative w-100" style="height: 690px;">
     <div class="w-100  max-w-1918 d-flex flex-column justify-content-end h-100">
         <div class="px-0 w-100 mb-5">
-            <div class="row row-of-home mx-0">
-                <div class="col-5 col-12-mobile">
+            <div class="row row-of-home mx-0 mt-5">
+                <div class="col-5 col-12-mobile break-card-home">
                     <form [formGroup]="form" (ngSubmit)="confirm()"
                         class="row mx-0 w3-white p-4 border-radius-10 justify-content-center form-header">
                         <div class="col-12">
@@ -40,10 +40,10 @@
                                     </div>
                                     <div class="col-12 px-0 mb-4 ">
                                         <ng-autocomplete [data]="listEveryCity" [isLoading]="listEveryCity.length == 0"
-                                            [searchKeyword]="'render'" formControlName="chooseCity" placeholder="Escolha uma cidade"
-                                            [minQueryLength]="2" (selected)='selectEvent($event)'
-                                            [itemTemplate]="itemcityTemplate" [notFoundTemplate]="notFoundTemplate"
-                                            [customFilter]="customFilter">
+                                            [searchKeyword]="'render'" formControlName="chooseCity"
+                                            placeholder="Escolha uma cidade" [minQueryLength]="2"
+                                            (selected)='selectEvent($event)' [itemTemplate]="itemcityTemplate"
+                                            [notFoundTemplate]="notFoundTemplate" [customFilter]="customFilter">
                                         </ng-autocomplete>
 
                                         <ng-template #itemcityTemplate let-item>
@@ -52,65 +52,22 @@
 
                                         <ng-template #notFoundTemplate let-notFound>
                                             <div>Não encontrado</div>
-                                        </ng-template> 
+                                        </ng-template>
 
                                     </div>
-                                    <div class="col-12 px-0 mb-4">
-                                        <ng-autocomplete formControlName="typePropertyDistrict" 
-                                          [data]="listDistricts" [disabled]="listDistricts.length == 0" 
-                                          [searchKeyword]="'district'" placeholder="Escolha um bairro" 
-                                          (selected)='selectEvent2($event)'
-                                          [customFilter]="customFilter"
-                                          [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate"
-                                          [notFoundTemplate]="notFoundTemplate">
-                                        </ng-autocomplete>
-                                  
-                                        <ng-template #itemDistrictsTemplate let-item>
-                                          <a [innerHTML]="item.district"></a>
-                                        </ng-template>
-                                  
-                                        <ng-template #notFoundTemplate let-notFound>
-                                          <div>Não encontrado</div>
-                                        </ng-template>
-                                      </div>
+
+                                    <div *ngIf="this.form.controls['chooseCity'].value !== ''" class="col-12 px-0 pb-3">
+                                        <ng-multiselect-dropdown [placeholder]="'Escolha um bairro'"
+                                            formControlName="typePropertyDistrict" [settings]="dropdownSettingsDistrict"
+                                            [data]="dropdownListDistrict" [(ngModel)]="selectedItemsDistricts"
+                                            (onSelect)="onItemSelectDistrict($event)"
+                                            (onSelectAll)="onSelectAllDistrict($event)">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+
                                     <div class="col-12 px-0 mb-3">
                                         <div class="row">
                                             <div class="col-6 pr-0">
-                                                <!-- <div *ngIf="!collapsed"
-                                                    class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
-                                                    <div style="border-right: 0px !important;"
-                                                        class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
-                                                        <p *ngIf="viewLabelValueMax"
-                                                            class="fw-400 pl-3 mb-0 font-size-14 line-15">
-                                                            Valor até
-                                                        </p>
-                                                    </div>
-
-                                                    <select formControlName="typePropertyValueSale"
-                                                        style="border-left: 0px !important;"
-                                                        class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
-                                                        id="state" aria-label="Default select example" (change)="removeLabel($event)">
-                                                        <option *ngFor="let item of valueUntilSaleArray" [value]="item">
-                                                            &nbsp;{{item | currency:'R$':'symbol':'1.0'}}</option>
-                                                    </select>
-                                                </div>
-                                                <div *ngIf="collapsed"
-                                                    class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
-                                                    <div style="border-right: 0px !important;"
-                                                        class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
-                                                        <p *ngIf="viewLabelValueMax"
-                                                            class="fw-400 pl-3 mb-0 font-size-14 line-15">
-                                                            Valor até
-                                                        </p>
-                                                    </div>
-                                                    <select formControlName="typePropertyValueRent"
-                                                        style="border-left: 0px !important;" (change)="removeLabel($event)"
-                                                        class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
-                                                        id="state" aria-label="Default select example">
-                                                        <option *ngFor="let item of valueUntilRentArray" [value]="item">
-                                                            &nbsp;{{item | currency:'R$':'symbol':'1.0'}}</option>
-                                                    </select>
-                                                </div> -->
                                                 <div *ngIf="typeAd === 'sale'" class="dropdown">
                                                     <button
                                                         class="btn w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic d-flex justify-content-between align-items-center"
@@ -157,20 +114,6 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <!-- <div
-                                                    class="w-100 d-flex align-items-center max-h-400 overflow-x-scroll border-radius-0">
-                                                    <div style="border-right: 0px !important;"
-                                                        class="border h-51 mb-0 align-items-center d-flex line-20 flex-none color-black">
-                                                        <p class="fw-400 pl-3 mb-0 font-size-14 line-15">Quartos </p>
-                                                    </div>
-                                                    <select formControlName="typePropertyBadrooms"
-                                                        style="border-left: 0px !important;"
-                                                        class="w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic"
-                                                        id="state" aria-label="Default select example">
-                                                        <option *ngFor="let item of badroomsArray" [value]="item">&nbsp;
-                                                            {{item}} +</option>
-                                                    </select>
-                                                </div> -->
                                                 <div class="dropdown">
                                                     <button
                                                         class="btn w-100 border text-left select-property border-radius-0 h-51 bg-white fw-400 font-size-14 line-20 color-black classic d-flex justify-content-between align-items-center"
@@ -195,6 +138,10 @@
                                         </div>
                                     </div>
 
+                                    <div class="d-flex justify-content-end w-100">
+                                        <a style="color:#542fdf; text-decoration: underline !important;cursor: pointer;"
+                                          class="mb-4 mx-1 fw-500 font-size-18 line-19" (click)="form.reset()">Limpar filtros</a>
+                                    </div>
                                     <div class="d-flex col-12 px-0 justify-content-end">
                                         <button
                                             class="btn w-100 btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5"
