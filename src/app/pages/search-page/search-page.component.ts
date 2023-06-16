@@ -1,25 +1,22 @@
 import {
   Component,
-  OnInit,
-  ViewChildren,
-  QueryList,
-  ViewChild,
   HostListener,
+  OnInit,
+  ViewChild
 } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
-import { DatamokService } from 'src/app/service/datamok.service';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { AnnouncementService } from 'src/app/service/announcement.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
+import { propertyTypesConst } from 'src/app/utils/propertyTypes';
+import SwiperCore, { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 import estados from '../../../assets/json/estados-cidades.json';
 import { AnnouncementFilterListResponseDto } from '../../dtos/announcement-filter-list-response.dto';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { propertyTypesConst } from 'src/app/utils/propertyTypes';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
@@ -107,8 +104,6 @@ export class SearchPageComponent implements OnInit {
   listDistricts: { district: string }[] = [];
   maxItensPagination: number = 5;
 
-  // listOfPrices: any = [];
-
   @ViewChild('dropdownRef') dropdownRef: any;
 
   dropdownList = [
@@ -142,7 +137,13 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'prediointeiro', item_text: 'Prédio Inteiro' },
   ];
 
+  dropdownListDistrict = [
+    { item_id: 1, item_text: '' }
+  ];
+
   selectedItems: any[] = [];
+  selectedItemsDistricts: any[] = [];
+
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: 'item_id',
@@ -155,9 +156,20 @@ export class SearchPageComponent implements OnInit {
     noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
   };
 
+  dropdownSettingsDistrict: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Selecionar todos',
+    unSelectAllText: 'Desmarcar todos',
+    itemsShowLimit: 2,
+    searchPlaceholderText: 'Procurar',
+    allowSearchFilter: true,
+    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
+  };
+
   constructor(
     private router: Router,
-    private datamokservice: DatamokService,
     private formBuilder: FormBuilder,
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
@@ -231,16 +243,6 @@ export class SearchPageComponent implements OnInit {
       },
     });
 
-    // this.estados.estados.forEach((estado) => {
-    //   estado.cidades.forEach((cidade) => {
-    //     this.listEveryCity.push({
-    //       cidade,
-    //       estado: estado.sigla,
-    //       render: `${cidade}, ${estado.sigla}`,
-    //     });
-    //   });
-    // });
-
     let filtro: any = localStorage.getItem('filtro');
 
     if (filtro !== null) {
@@ -265,6 +267,10 @@ export class SearchPageComponent implements OnInit {
 
       if (filtro.propertyTypeList?.length > 0)
         this.selectedItems = [...filtro.propertyTypeList];
+
+      if (filtro.districtAddress?.length > 0) {
+        this.selectedItemsDistricts = [...filtro.districtAddress];
+      }
 
       this.formModal.patchValue({
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
@@ -382,6 +388,12 @@ export class SearchPageComponent implements OnInit {
     }
   }
 
+  onItemSelectDistrict(item: any) {
+  }
+
+  onSelectAllDistrict(items: any) {
+  }
+
   onItemDeSelect(item: any) {
     if (this.selectedItems.length === 0) {
       const nativeElement = this.dropdownRef;
@@ -461,14 +473,13 @@ export class SearchPageComponent implements OnInit {
   }
 
   selectEvent2(item) {
-    // this.form.controls['typePropertyDistrict'].setValue(item.district);
     this.getSelectedDistrict = item.district;
     this.form.patchValue({
       typePropertyDistrict: { district: item?.district || '' },
     });
   }
 
-  onChangeSearch(search: string) {}
+  onChangeSearch(search: string) { }
 
   limpaValoresRepetidos(array) {
     for (let i in array) {
@@ -534,13 +545,19 @@ export class SearchPageComponent implements OnInit {
     const recentlySeen = JSON.parse(localStorage.getItem('recentlySeen')) || [];
     const verify = { _id: value };
     const exists = recentlySeen.some((item) => item._id === value);
+    const width = screen.width;
 
     if (!exists) {
       recentlySeen.push(verify);
     }
 
     localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
-    window.open(`announcement/detail/${value}`, '_blank');
+
+    if (width >= 1241) {
+      window.open(`announcement/detail/${value}`, '_blank');
+    } else {
+      this.router.navigate([`announcement/detail/${value}`]);
+    }
   }
 
   searchByTypeAd(item) {
@@ -551,9 +568,6 @@ export class SearchPageComponent implements OnInit {
     }
     this.selectFilterOfAd = item;
     this.form.controls['typeStatus'].setValue(item);
-    // this.form.patchValue({
-    //   typeStatus: item,
-    // });
   }
 
   searchByBadRoom(item) {
@@ -615,10 +629,18 @@ export class SearchPageComponent implements OnInit {
       this.filtroResultDisplay.propertyTypeList.indexOf(index);
     this.filtroResultDisplay.propertyTypeList.splice(filterDisplay, 1);
 
+    let filterDisplayDistrict =
+      this.filtroResultDisplay.districtAddress.indexOf(index);
+    this.filtroResultDisplay.districtAddress.splice(filterDisplayDistrict, 1);
+
     this.selectedItems = [];
+    this.selectedItemsDistricts = []
 
     setTimeout(() => {
       this.selectedItems = this.filtroResultDisplay.propertyTypeList;
+    }, 100);
+    setTimeout(() => {
+      this.selectedItemsDistricts = this.filtroResultDisplay.districtAddress;
     }, 100);
 
     this.filtrar();
@@ -627,11 +649,16 @@ export class SearchPageComponent implements OnInit {
   listDistrictByCity(value) {
     this.announcementService.listDistrictsByCity(value).subscribe({
       next: (response) => {
-        response.unshift({ district: 'Todos os bairros' });
+        // response.unshift({ district: 'Todos os bairros' });
         this.listDistricts = response;
+        this.dropdownListDistrict = response.map((item, index) => {
+          return { item_text: item.district, item_id: index }
+        }
+        )
       },
       error: (error) => console.log(error),
     });
+
   }
 
   clearAndSearch() {
@@ -684,8 +711,7 @@ export class SearchPageComponent implements OnInit {
       this.selectFilterOfAd = 'sale';
     }
 
-    const district =
-      this.form.controls['typePropertyDistrict'].value?.district || '';
+    const district = this.form.controls['typePropertyDistrict'].value?.map(item => item.item_text) || '';
 
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
@@ -764,7 +790,7 @@ export class SearchPageComponent implements OnInit {
     this.modalFilterOpen = true;
     const modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then(
-      (data) => {},
+      (data) => { },
       (error) => {
         this.modalFilterOpen = false;
       }

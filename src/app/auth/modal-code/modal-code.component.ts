@@ -187,7 +187,6 @@ export class ModalCodeComponent implements OnInit {
   }
 
   move(e: any, p: any, c: any, n: any) {
-    /* console.log(this.form.controls[teste].value); */
     var length = c.value.length;
     var maxlength = c.getAttribute('maxlength');
   

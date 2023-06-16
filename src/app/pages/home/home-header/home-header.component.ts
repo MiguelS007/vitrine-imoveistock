@@ -88,7 +88,12 @@ export class HomeHeaderComponent implements OnInit {
     { item_id: 'prediointeiro', item_text: 'Prédio Inteiro' },
   ];
 
+  dropdownListDistrict = [
+    { item_id: 1, item_text: '' }
+  ];
+
   selectedItems: any = [];
+  selectedItemsDistricts: any[] = [];
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: 'item_id',
@@ -96,6 +101,18 @@ export class HomeHeaderComponent implements OnInit {
     selectAllText: 'Selecionar todos',
     unSelectAllText: 'Desmarcar todos',
     itemsShowLimit: 3,
+    searchPlaceholderText: 'Procurar',
+    allowSearchFilter: true,
+    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
+  };
+
+  dropdownSettingsDistrict: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Selecionar todos',
+    unSelectAllText: 'Desmarcar todos',
+    itemsShowLimit: 2,
     searchPlaceholderText: 'Procurar',
     allowSearchFilter: true,
     noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
@@ -157,16 +174,6 @@ export class HomeHeaderComponent implements OnInit {
         this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
       },
     });
-
-    // for (let i = 0; i < this.estados.estados.length; i++) {
-    //   for (let j = 0; j < this.estados.estados[i].cidades.length; j++) {
-    //     this.listEveryCity.push({
-    //       cidade: this.estados.estados[i].cidades[j],
-    //       estado: this.estados.estados[i].sigla,
-    //       render: this.estados.estados[i].cidades[j] + ' , ' + this.estados.estados[i].sigla
-    //     });
-    //   }
-    // }
   }
 
   removeLabel(event) {
@@ -179,6 +186,12 @@ export class HomeHeaderComponent implements OnInit {
 
   selectValueRent(item) {
     this.labelValueRent = item;
+  }
+
+  onItemSelectDistrict(item: any) {
+  }
+
+  onSelectAllDistrict(items: any) {
   }
 
   onItemSelect(item: any) {
@@ -227,14 +240,19 @@ export class HomeHeaderComponent implements OnInit {
     this.listDistrictByCity(item.cidade);
   }
 
-  listDistrictByCity(value: string) {
+  listDistrictByCity(value) {
     this.announcementService.listDistrictsByCity(value).subscribe({
       next: (response) => {
-        response.unshift({ district: 'Todos' });
+        // response.unshift({ district: 'Todos os bairros' });
         this.listDistricts = response;
+        this.dropdownListDistrict = response.map((item, index) => {
+          return { item_text: item.district, item_id: index }
+        }
+        )
       },
       error: (error) => console.log(error),
     });
+
   }
 
   customFilter(
@@ -287,9 +305,7 @@ export class HomeHeaderComponent implements OnInit {
       state: this.form.controls['typePropertyState'].value,
       city: this.getSelectedCity,
       district:
-        this.form.controls['typePropertyDistrict'].value?.district ||
-        this.form.controls['typePropertyDistrict'].value ||
-        '',
+        this.form.controls['typePropertyDistrict'].value?.map(item => item.item_text) ||'',
       allResidential: this.typepropertyfull,
       untilValueSale: !isNaN(this.labelValueSale)
         ? Number(this.labelValueSale)
