@@ -88,7 +88,7 @@ export class HomeHeaderComponent implements OnInit {
   ];
 
   dropdownListDistrict = [
-    { item_id: 1, item_text: '' }
+   
   ];
 
   selectedItems: any = [];
@@ -392,4 +392,10 @@ export class HomeHeaderComponent implements OnInit {
       this.labelValueSale = 'Valor até';
     }
   }
+  resetForm(){
+    this.form.reset();
+    this.dropdownListDistrict =[]
+    
+  }
+ 
 }
