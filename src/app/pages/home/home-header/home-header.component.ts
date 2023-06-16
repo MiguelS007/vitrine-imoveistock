@@ -1,17 +1,16 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
-  FormGroup,
   FormBuilder,
-  Validators,
-  FormControl,
+  FormGroup,
+  Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
-import { AnnouncementService } from '../../../service/announcement.service';
 import estados from '../../../../assets/json/estados-cidades.json';
 import { AnnouncementFilterListResponseDto } from '../../../dtos/announcement-filter-list-response.dto';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { AnnouncementService } from '../../../service/announcement.service';
 @Component({
   selector: 'app-home-header',
   templateUrl: './home-header.component.html',
@@ -325,7 +324,7 @@ export class HomeHeaderComponent implements OnInit {
         : typeof this.labelValueBadroom === 'string'
           ? 0
           : this.labelValueBadroom,
-    };
+    };    
 
     let city = this.getSelectedCity !== undefined ? this.getSelectedCity : '';
 
