@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserRegisterRequestDto } from 'src/app/dtos/user-register-request.dto';
@@ -14,7 +14,8 @@ import { TermsSignupComponent } from 'src/app/shared/terms-signup/terms-signup.c
   templateUrl: './modal-signup.component.html',
   styleUrls: ['./modal-signup.component.scss']
 })
-export class ModalSignupComponent implements OnInit {
+
+export class ModalSignupComponent implements OnInit  {
 
   form: FormGroup;
 
@@ -22,6 +23,7 @@ export class ModalSignupComponent implements OnInit {
 
   response: string[];
   isSubmitted: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,7 +55,16 @@ export class ModalSignupComponent implements OnInit {
 
   }
 
+  @ViewChild('inputElement') inputElement: any;
 
+  ngAfterViewInit() {
+    this.inputElement.ionBlur.subscribe(() => {
+      setTimeout(() => {
+        this.inputElement.setFocus();
+      }, 0);
+    });
+  }
+  
   
 
   exit() {
