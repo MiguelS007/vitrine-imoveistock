@@ -322,7 +322,7 @@
                 <img src="../../../assets/icons-property-details/CINZA BANHEIROS.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>0 Banheiro</del></p>
               </div>
-              <div *ngIf="response.conciergeOpeningHours && response.conciergeOpeningHours !== 'withoutConcierge'"
+              <div *ngIf="response.securityFeature?.portaria24h && response.conciergeOpeningHours !== 'withoutConcierge'"
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO PORTEIRO.svg" width="25" height="36">
                 <div class="d-flex flex-column">
@@ -335,7 +335,7 @@
                     Noturna</p>
                 </div>
               </div>
-              <div *ngIf="!response.conciergeOpeningHours || response.conciergeOpeningHours === 'withoutConcierge'"
+              <div *ngIf="!response.securityFeature?.portaria24h || response.conciergeOpeningHours === 'withoutConcierge'"
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA PORTEIRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Portaria</del></p>
