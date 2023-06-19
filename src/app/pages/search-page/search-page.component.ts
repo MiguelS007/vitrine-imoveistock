@@ -586,7 +586,9 @@ export class SearchPageComponent implements OnInit {
     } else {
       this.selectBadRooms = 'Quartos';
     }
-    this.form.controls['typeBadrooms'].setValue(item);
+    if(item !== 0){
+      this.form.controls['typeBadrooms'].setValue(item);
+    }
   }
 
   searchBySuites(item) {
@@ -694,6 +696,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   filtrar() {
+    this.paginationProduct = 0;
     this.ngxSpinnerService.show();
     this.form.controls['typePropertyState'].setValue(this.stateSelected);
 
