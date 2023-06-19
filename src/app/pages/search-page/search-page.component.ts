@@ -689,6 +689,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   filtrar() {
+    this.paginationProduct = 0;
     this.ngxSpinnerService.show();
     this.form.controls['typePropertyState'].setValue(this.stateSelected);
 
