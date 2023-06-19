@@ -367,6 +367,11 @@ export class SearchPageComponent implements OnInit {
       this.messageNotSearch = false;
       this.ngxSpinnerService.hide();
     }
+
+    //Pegar página atual do paginator
+    this.paginationProduct = Number(localStorage.getItem('currentyPage')) || 1;
+    localStorage.removeItem('currentyPage');
+
   }
 
   handlerMaxItens() {
@@ -552,6 +557,8 @@ export class SearchPageComponent implements OnInit {
     }
 
     localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
+
+    localStorage.setItem('currentyPage', this.paginationProduct.toString());
 
     if (width >= 1241) {
       window.open(`announcement/detail/${value}`, '_blank');
