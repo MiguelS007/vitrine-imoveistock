@@ -1,22 +1,24 @@
 import {
   Component,
-  HostListener,
   OnInit,
-  ViewChild
+  ViewChildren,
+  QueryList,
+  ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-response.dto';
 import { UserGetResponseDto } from 'src/app/dtos/user-get-response.dtos';
+import { DatamokService } from 'src/app/service/datamok.service';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AnnouncementService } from 'src/app/service/announcement.service';
-import { propertyTypesConst } from 'src/app/utils/propertyTypes';
-import SwiperCore, { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalLoginComponent } from 'src/app/auth/modal-login/modal-login.component';
 import estados from '../../../assets/json/estados-cidades.json';
 import { AnnouncementFilterListResponseDto } from '../../dtos/announcement-filter-list-response.dto';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { propertyTypesConst } from 'src/app/utils/propertyTypes';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
@@ -25,10 +27,6 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   styleUrls: ['./search-page.component.scss'],
 })
 export class SearchPageComponent implements OnInit {
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.handlerMaxItens();
-  }
   form: FormGroup;
   formfilter: FormGroup;
   iconlikeheart = false;
@@ -102,7 +100,8 @@ export class SearchPageComponent implements OnInit {
   estados: { estados: { sigla: string; nome: string; cidades: string[] }[] };
   listEveryCity: { cidade: string; estado: string; render: string }[] = [];
   listDistricts: { district: string }[] = [];
-  maxItensPagination: number = 5;
+
+  // listOfPrices: any = [];
 
   @ViewChild('dropdownRef') dropdownRef: any;
 
@@ -137,13 +136,7 @@ export class SearchPageComponent implements OnInit {
     { item_id: 'prediointeiro', item_text: 'Prédio Inteiro' },
   ];
 
-  dropdownListDistrict = [
-    { item_id: 1, item_text: '' }
-  ];
-
   selectedItems: any[] = [];
-  selectedItemsDistricts: any[] = [];
-
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: 'item_id',
@@ -156,20 +149,9 @@ export class SearchPageComponent implements OnInit {
     noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
   };
 
-  dropdownSettingsDistrict: IDropdownSettings = {
-    singleSelection: false,
-    idField: 'item_id',
-    textField: 'item_text',
-    selectAllText: 'Selecionar todos',
-    unSelectAllText: 'Desmarcar todos',
-    itemsShowLimit: 2,
-    searchPlaceholderText: 'Procurar',
-    allowSearchFilter: true,
-    noFilteredDataAvailablePlaceholderText: 'Tipo de imóvel não encontrado!',
-  };
-
   constructor(
     private router: Router,
+    private datamokservice: DatamokService,
     private formBuilder: FormBuilder,
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
@@ -217,8 +199,6 @@ export class SearchPageComponent implements OnInit {
   ngOnInit(): void {
     this.ngxSpinnerService.show();
 
-    this.handlerMaxItens();
-
     this.announcementService.listExclusive(10).subscribe({
       next: (data) => {
         this.propertyproducts = data;
@@ -242,6 +222,16 @@ export class SearchPageComponent implements OnInit {
         this.listEveryCity.sort((a, b) => (a.cidade > b.cidade ? 1 : -1));
       },
     });
+
+    // this.estados.estados.forEach((estado) => {
+    //   estado.cidades.forEach((cidade) => {
+    //     this.listEveryCity.push({
+    //       cidade,
+    //       estado: estado.sigla,
+    //       render: `${cidade}, ${estado.sigla}`,
+    //     });
+    //   });
+    // });
 
     let filtro: any = localStorage.getItem('filtro');
 
@@ -267,10 +257,6 @@ export class SearchPageComponent implements OnInit {
 
       if (filtro.propertyTypeList?.length > 0)
         this.selectedItems = [...filtro.propertyTypeList];
-
-      if (filtro.districtAddress?.length > 0) {
-        this.selectedItemsDistricts = [...filtro.districtAddress];
-      }
 
       this.formModal.patchValue({
         typePropertyCity: filtro.cityAddress + ' , ' + this.stateSelected,
@@ -361,22 +347,12 @@ export class SearchPageComponent implements OnInit {
         error: (error) => {
           this.ngxSpinnerService.hide();
           console.log(error);
+
         },
       });
     } else {
       this.messageNotSearch = false;
       this.ngxSpinnerService.hide();
-    }
-  }
-
-  handlerMaxItens() {
-    const width = screen.width;
-    if (width <= 768) {
-      this.maxItensPagination = 3;
-    } else if (width <= 520) {
-      this.maxItensPagination = 2;
-    } else {
-      this.maxItensPagination = 5;
     }
   }
 
@@ -386,12 +362,6 @@ export class SearchPageComponent implements OnInit {
       console.log(nativeElement);
       nativeElement.closeDropdown();
     }
-  }
-
-  onItemSelectDistrict(item: any) {
-  }
-
-  onSelectAllDistrict(items: any) {
   }
 
   onItemDeSelect(item: any) {
@@ -457,7 +427,7 @@ export class SearchPageComponent implements OnInit {
     this.paginationProduct = pageNumber;
     if (pageNumber >= 4) {
       filter.page = pageNumber + 1;
-      if (prevPage < pageNumber) {
+      if(prevPage < pageNumber){
         this.announcementService.listFilter(filter).subscribe((response) => {
           const announcements = response?.data;
 
@@ -468,11 +438,11 @@ export class SearchPageComponent implements OnInit {
       }
       this.paginationProduct = pageNumber;
     }
-
-    this.scrollUp();
   }
 
+
   selectEvent2(item) {
+    // this.form.controls['typePropertyDistrict'].setValue(item.district);
     this.getSelectedDistrict = item.district;
     this.form.patchValue({
       typePropertyDistrict: { district: item?.district || '' },
@@ -545,19 +515,13 @@ export class SearchPageComponent implements OnInit {
     const recentlySeen = JSON.parse(localStorage.getItem('recentlySeen')) || [];
     const verify = { _id: value };
     const exists = recentlySeen.some((item) => item._id === value);
-    const width = screen.width;
 
     if (!exists) {
       recentlySeen.push(verify);
     }
 
     localStorage.setItem('recentlySeen', JSON.stringify(recentlySeen));
-
-    if (width >= 1241) {
-      window.open(`announcement/detail/${value}`, '_blank');
-    } else {
-      this.router.navigate([`announcement/detail/${value}`]);
-    }
+    window.open(`announcement/detail/${value}`, '_blank');
   }
 
   searchByTypeAd(item) {
@@ -568,6 +532,9 @@ export class SearchPageComponent implements OnInit {
     }
     this.selectFilterOfAd = item;
     this.form.controls['typeStatus'].setValue(item);
+    // this.form.patchValue({
+    //   typeStatus: item,
+    // });
   }
 
   searchByBadRoom(item) {
@@ -629,18 +596,10 @@ export class SearchPageComponent implements OnInit {
       this.filtroResultDisplay.propertyTypeList.indexOf(index);
     this.filtroResultDisplay.propertyTypeList.splice(filterDisplay, 1);
 
-    let filterDisplayDistrict =
-      this.filtroResultDisplay.districtAddress.indexOf(index);
-    this.filtroResultDisplay.districtAddress.splice(filterDisplayDistrict, 1);
-
     this.selectedItems = [];
-    this.selectedItemsDistricts = []
 
     setTimeout(() => {
       this.selectedItems = this.filtroResultDisplay.propertyTypeList;
-    }, 100);
-    setTimeout(() => {
-      this.selectedItemsDistricts = this.filtroResultDisplay.districtAddress;
     }, 100);
 
     this.filtrar();
@@ -648,17 +607,9 @@ export class SearchPageComponent implements OnInit {
 
   listDistrictByCity(value) {
     this.announcementService.listDistrictsByCity(value).subscribe({
-      next: (response) => {
-        // response.unshift({ district: 'Todos os bairros' });
-        this.listDistricts = response;
-        this.dropdownListDistrict = response.map((item, index) => {
-          return { item_text: item.district, item_id: index }
-        }
-        )
-      },
+      next: (response) => (this.listDistricts = response),
       error: (error) => console.log(error),
     });
-
   }
 
   clearAndSearch() {
@@ -687,6 +638,8 @@ export class SearchPageComponent implements OnInit {
   }
 
   filtrar() {
+    this.paginationProduct = 0;
+
     this.ngxSpinnerService.show();
     this.form.controls['typePropertyState'].setValue(this.stateSelected);
 
@@ -694,7 +647,7 @@ export class SearchPageComponent implements OnInit {
       this.form.controls['typePropertyState'].setValue('');
 
     let filter: any = {
-      state: this.form.controls['typePropertyState'].value,
+      state: this.form.controls['typePropfertyState'].value,
       stateModal: this.formModal.controls['typePropertyState'].value,
       city: this.getSelectedCity,
       goal: this.TypeProperty, //residencial , comercial
@@ -711,7 +664,8 @@ export class SearchPageComponent implements OnInit {
       this.selectFilterOfAd = 'sale';
     }
 
-    const district = this.form.controls['typePropertyDistrict'].value?.map(item => item.item_text) || '';
+    const district =
+      this.form.controls['typePropertyDistrict'].value?.district || '';
 
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
@@ -811,16 +765,12 @@ export class SearchPageComponent implements OnInit {
     text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
     return text.toLocaleLowerCase();
   }
+
   customFilter(
-    items: {
-      cidade: string;
-      estado: string;
-      render?: string;
-      district?: string;
-    }[],
+    items: { cidade: string; estado: string; render: string }[],
     query: string
-  ): { cidade: string; estado: string; render?: string; district?: string }[] {
-    function removeAccents(text: string): string {
+  ): { cidade: string; estado: string; render: string }[] {
+    function removerAcento(text: string): string {
       text = text.toLowerCase();
       text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
       text = text.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
@@ -830,47 +780,12 @@ export class SearchPageComponent implements OnInit {
       text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
       return text.toLocaleLowerCase();
     }
-
     if (query.length < 2) {
       return [];
     }
-
-    return items.filter((item) => {
-      const normalizedQuery = removeAccents(query.toLowerCase());
-      if (item.render) {
-        const normalizedRender = removeAccents(item.render.toLowerCase());
-        return normalizedRender.includes(normalizedQuery);
-      }
-
-      if (item.district) {
-        const normalizedDistrict = removeAccents(item.district.toLowerCase());
-        return normalizedDistrict.includes(normalizedQuery);
-      }
-
-      return false;
+    return items.filter((a) => {
+      return removerAcento(a.render).includes(removerAcento(query));
     });
-  }
-  customDistrictFilter(items: any[], query: string): any[] {
-    if (!query || query.length < 2) {
-      // Retorna todos os itens quando a consulta é vazia ou possui menos de 2 caracteres
-      return items;
-    }
-
-    // Remove acentos e caracteres especiais da consulta
-    const normalizedQuery = query
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase();
-
-    // Filtra os itens com base no nome do bairro, removendo acentos e caracteres especiais
-    const filteredItems = items.filter((item) => {
-      const normalizedDistrict = item.district
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase();
-      return normalizedDistrict.includes(normalizedQuery);
-    });
-    return filteredItems;
   }
 
   sortPriceList(value: string) {
@@ -892,9 +807,5 @@ export class SearchPageComponent implements OnInit {
     return (
       propertyTypesConst.find((x) => x.value === text)?.name || text || '-'
     );
-  }
-
-  scrollUp() {
-    window.scrollTo({ behavior: 'smooth', top: 150 });
   }
 }
