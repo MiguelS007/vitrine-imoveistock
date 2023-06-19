@@ -579,7 +579,9 @@ export class SearchPageComponent implements OnInit {
     } else {
       this.selectBadRooms = 'Quartos';
     }
-    this.form.controls['typeBadrooms'].setValue(item);
+    if(item !== 0){
+      this.form.controls['typeBadrooms'].setValue(item);
+    }
   }
 
   searchBySuites(item) {
