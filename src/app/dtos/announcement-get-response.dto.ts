@@ -529,7 +529,7 @@ class FeatureInfraComModel {
 
     porteCochereCom: boolean;
 
-    proximoAoMetroCom: boolean;
+    // proximoAoMetroCom: boolean;
 
     reaproveitamentoDeAguaCom: boolean;
 }
@@ -540,7 +540,7 @@ class CharacteristicInfrastructureOfTheCondominiumModel {
 
     automacaoPredial: boolean;
 
-    proximoAoMetro: boolean;
+    // proximoAoMetro: boolean;
 
     acessoAsfaltado: boolean;
 
@@ -596,7 +596,7 @@ class FeatureConveniencesModel {
 
     petPlay: boolean;
 
-    proximoAoMetro: boolean;
+    // proximoAoMetro: boolean;
 
     vagasDeVisitantes: boolean;
 

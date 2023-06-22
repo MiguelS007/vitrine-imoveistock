@@ -359,16 +359,16 @@
                 <img src="../../../assets/icons-property-details/CINZA ELEVADOR.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Elevador de serviço</del></p>
               </div>
-              <div *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
+              <!-- <div *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO METRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3">Próximo ao metrô</p>
-              </div>
-              <div *ngIf="!response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
+              </div> -->
+              <!-- <div *ngIf="!response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA METRO.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Próximo ao metrô</del></p>
-              </div>
+              </div> -->
               <div
                 *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral || response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
@@ -1180,10 +1180,10 @@
                           class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
                           <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Porte cochere
                         </p>
-                        <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro === true"
+                        <!-- <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro === true"
                           class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
                           <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Próximo ao metro
-                        </p>
+                        </p> -->
                         <p *ngIf="response.characteristicInfrastructureOfTheCondominium?.reaproveitamentoDeAgua === true"
                           class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
                           <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Reaproveitamento de água
@@ -1454,10 +1454,10 @@
                           class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
                           <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Pet Play
                         </p>
-                        <p *ngIf="response.featureConveniences?.proximoAoMetro === true"
+                        <!-- <p *ngIf="response.featureConveniences?.proximoAoMetro === true"
                           class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
                           <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Próximo ao Metrô
-                        </p>
+                        </p> -->
                         <p *ngIf="response.featureConveniences?.vagasDeVisitantes === true"
                           class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
                           <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Vagas de Visitantes
@@ -1698,10 +1698,10 @@
                           <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Porte Cochère
                         </p>
 
-                        <p *ngIf="response.featureInfraCom?.proximoAoMetroCom === true"
+                        <!-- <p *ngIf="response.featureInfraCom?.proximoAoMetroCom === true"
                           class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
                           <i class="bi color-pink font-size-20 bi-check2"></i>&nbsp;&nbsp; Próximo ao Metrô
-                        </p>
+                        </p> -->
 
                         <p *ngIf="response.featureInfraCom?.reaproveitamentoDeAguaCom === true"
                           class="align-items-center fw-400 mb-0 py-2 font-size-16 line-20 color-black">
