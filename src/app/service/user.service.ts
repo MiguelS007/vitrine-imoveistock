@@ -8,6 +8,8 @@ import { UserRegisterResponseDto } from '../dtos/user-register-response.dto';
 import { UserGetResponseDto } from '../dtos/user-get-response.dtos';
 import { BaseService } from './base.service';
 import { UserSendMessageRequestDto } from '../dtos/user-send-message-request.dto';
+import { UserUpdateDto } from '../dtos/user-update.dto';
+import { UserEditPhotoRequestDto } from '../dtos/user-edit-photo-request.dto';
 
 @Injectable({
     providedIn: 'root'
@@ -54,4 +56,16 @@ export class UserService extends BaseService {
             .get(`${this.url}user-client/broker/${phone}`, this.authorizedHeader())
             .pipe(map(this.extractData), catchError(this.serviceError));
     }
+
+    userUpdate(dto: UserUpdateDto): Observable<UserUpdateDto> {
+        return this.httpClient
+            .patch(`${this.url}user-client/update-user-info`, dto, this.authorizedHeader())
+            .pipe(map(this.extractData), catchError(this.serviceError));
+    }
+
+    editPhoto(dto: UserEditPhotoRequestDto): Observable<UserGetResponseDto> {
+        return this.httpClient
+          .patch(`${this.url}user-client/photo`, dto, this.authorizedHeader())
+          .pipe(map(this.extractData), catchError(this.serviceError));
+      }
 }

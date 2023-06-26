@@ -212,6 +212,11 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     this.home = false;
     this.about = false;
   }
+
+  goMyAccount() {
+    this.router.navigate(['logged/my-account']);
+  }
+
   sideBtn() {
     this.collapsed = !this.collapsed;
     this.loggedname = false;
