@@ -7,11 +7,11 @@
 
         <div class="card-header-profile d-flex justify-content-center align-items-center">
             <div class="border-profile-picture">
-                <div class="img-fake-profile">
+                <div *ngIf="urls.length === 0" class="img-fake-profile">
                     <span class="text-center text-capitalize">{{user?.name}}</span>
                 </div>
-                <div>
-                    <img class="photo-profile-custom">
+                <div *ngFor="let url of urls">
+                    <img [src]="urls" class="photo-profile-custom">
                 </div>
                 <label class="cam-change-picture-circle" for="pictureProfile">
                     <img src="../../../assets/icon/icon-camera.svg" width="16">
