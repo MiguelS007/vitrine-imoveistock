@@ -67,6 +67,7 @@ export class MyAccountComponent implements OnInit {
   }
 
   confirm() {
+    this.ngxSpinnerService.show();
     let request = {
       name: this.form.controls['name'].value,
       email: this.form.controls['email'].value,
@@ -78,9 +79,11 @@ export class MyAccountComponent implements OnInit {
         this.toastrService.success('Dados atualizados com sucesso', '', { progressBar: true });
         this.editInfos = true
         window.location.reload()
+        this.ngxSpinnerService.hide();
       },
       error: error => {
         this.toastrService.error('Erro ao atualizar os dados!', '', { progressBar: true });
+        this.ngxSpinnerService.hide();
         console.error(error)
       }
     })
