@@ -40,10 +40,9 @@ export class MyAccountComponent implements OnInit {
     this.userService.getUser().subscribe(
       success => {
         this.user = success;
-        if(this.user?.photo?.location) {
+        if (this.user?.photo?.location) {
           this.urls.push(this.user.photo.location)
-        }
-        console.log(success);
+        };
         this.form.patchValue({
           name: success.name,
           email: success.email,
@@ -59,7 +58,12 @@ export class MyAccountComponent implements OnInit {
   }
 
   cancel() {
-    this.editInfos = true
+    this.editInfos = true;
+    this.form.patchValue({
+      name: this.user.name,
+      email: this.user.email,
+      phone: this.user.phone,
+    })
   }
 
   confirm() {
