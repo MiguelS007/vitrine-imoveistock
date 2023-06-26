@@ -15,10 +15,12 @@ import { LocationStrategy, PathLocationStrategy, Location } from '@angular/commo
 export class RegisterCompanionComponent implements OnInit {
 
   form: FormGroup;
+  formCode:FormGroup;
 
   response: AnnouncementVisitGetResponseDto;
 
   _id: string = '';
+  insertCode: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,6 +32,12 @@ export class RegisterCompanionComponent implements OnInit {
       name: ['', [Validators.required]],
       degreeOfKinship: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.minLength(11)]],
+      cpf:['', [Validators.required]],
+      terms: [false, [Validators.requiredTrue]]
+    })
+
+    this.formCode = this.formBuilder.group({
+      code: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
     })
   }
 
@@ -42,16 +50,22 @@ export class RegisterCompanionComponent implements OnInit {
 
   saveCompanion() {
     const data = Object.assign({}, this.form.value);
-    for (let companion of this.response.companion) {
-      if (companion.phone === this.form.controls['phone'].value) {
-        this.toastrService.error('Acompanhante já adicionado!', '', {
-          progressBar: true,
-          timeOut: 2500
-        })
-        return;
-      }
+    if(this.form.invalid || this.formCode.invalid) {
+      this.toastrService.error('Preencha todos os campos corretamente!', '', {
+        progressBar: true,
+        timeOut: 2500
+      })
+      return;
     }
-    this.scheduleService.registerCompanion({ ...data, announcementVisit: this._id }).subscribe({
+    if(this.response.companion.some(x => x.phone === this.form.controls['phone'].value)) {
+      this.toastrService.error('Acompanhante já adicionado!', '', {
+        progressBar: true,
+        timeOut: 2500
+      })
+      return;
+    }
+    
+    this.scheduleService.registerCompanion({ ...data, announcementVisit: this._id }, this.formCode.value.code).subscribe({
       next: (data) =>
         this.saveCompanionSuccess(data),
       error: error => {
@@ -60,6 +74,36 @@ export class RegisterCompanionComponent implements OnInit {
       }
     }
     );
+  }
+
+  sendCode(){
+    if(this.form.invalid) {
+      this.toastrService.error('Preencha todos os campos corretamente!', '', {
+        progressBar: true,
+        timeOut: 2500
+      })
+      return;
+    }
+    if(this.response.companion.some(x => x.phone === this.form.controls['phone'].value)) {
+      this.toastrService.error('Acompanhante já adicionado!', '', {
+        progressBar: true,
+        timeOut: 2500
+      })
+      return;
+    }
+    this.scheduleService.sendCode({phone: this.form.controls['phone'].value}).subscribe({
+      next: (data) =>{
+        this.toastrService.success('Código enviado com sucesso!', '', {
+          progressBar: true,
+          timeOut: 2500
+        })
+        this.insertCode = true;
+      },
+      error: error => {
+        console.error(error)
+        this.toastrService.error(`${error.error.errors}`, '', { progressBar: true })
+      }
+    });
   }
 
   saveCompanionSuccess(data: any): void {
