@@ -40,7 +40,7 @@ export class MyAccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUser().subscribe(
-      success => {
+      (success) => {
         this.user = success;
         if (this.user?.photo?.location) {
           this.urls.push(this.user.photo.location)
@@ -65,7 +65,7 @@ export class MyAccountComponent implements OnInit {
     this.form.patchValue({
       name: this.user.name,
       email: this.user.email,
-      phone: this.user.phone.slice(2),
+      phone: this.user.phone,
       cpf: this.user.cpf,
     })
   }
@@ -75,7 +75,7 @@ export class MyAccountComponent implements OnInit {
     let request = {
       name: this.form.controls['name'].value,
       email: this.form.controls['email'].value,
-      phone: this.form.controls['phone'].value,
+      phone: '55'+this.form.controls['phone'].value,
       cpf: this.form.controls['cpf'].value,
     }
 
