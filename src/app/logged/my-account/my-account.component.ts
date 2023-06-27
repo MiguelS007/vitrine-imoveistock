@@ -22,6 +22,7 @@ export class MyAccountComponent implements OnInit {
   urls: any = [];
 
   requestPhoto: UserEditPhotoRequestDto;
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,7 +33,8 @@ export class MyAccountComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: [''],
       email: [''],
-      phone: ['']
+      phone: [''],
+      cpf: ['']
     })
   }
 
@@ -46,7 +48,8 @@ export class MyAccountComponent implements OnInit {
         this.form.patchValue({
           name: success.name,
           email: success.email,
-          phone: success.phone,
+          phone: success.phone.slice(2),
+          cpf: success.cpf,
         })
       }
     )
@@ -62,7 +65,8 @@ export class MyAccountComponent implements OnInit {
     this.form.patchValue({
       name: this.user.name,
       email: this.user.email,
-      phone: this.user.phone,
+      phone: this.user.phone.slice(2),
+      cpf: this.user.cpf,
     })
   }
 
@@ -72,6 +76,7 @@ export class MyAccountComponent implements OnInit {
       name: this.form.controls['name'].value,
       email: this.form.controls['email'].value,
       phone: this.form.controls['phone'].value,
+      cpf: this.form.controls['cpf'].value,
     }
 
     this.userService.userUpdate(request).subscribe({
