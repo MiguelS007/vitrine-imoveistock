@@ -261,12 +261,11 @@
                 <img src="../../../assets/icons-property-details/CINZA QUARTOS.svg" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>0 Quartos</del></p>
               </div>
-              <div *ngIf="response.propertyPosition" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
+              <div *ngIf="response.propertyPosition ==='allDay' || response.propertyPosition ==='morning' || response.propertyPosition ==='afternoon'" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO SOL DA MANHA.svg" width="25" height="36">
-                <p *ngIf="response.propertyPosition === 'front'" class="mb-0 ml-3">Nascente</p>
-                <p *ngIf="response.propertyPosition === 'funds'" class="mb-0 ml-3">Poente</p>
-                <p *ngIf="response.propertyPosition === 'side'" class="mb-0 ml-3">Lateral</p>
-                <p *ngIf="response.propertyPosition === 'fullfloor'" class="mb-0 ml-3">Nascente / Poente</p>
+                <p *ngIf="response.propertyPosition === 'allDay'" class="mb-0 ml-3">Sol o dia todo</p>
+                <p *ngIf="response.propertyPosition === 'morning'" class="mb-0 ml-3">Sol na manhã</p>
+                <p *ngIf="response.propertyPosition === 'afternoon'" class="mb-0 ml-3">Sol à tarde</p>
               </div>
               <div *ngIf="response.whichFloorOfTheProperty" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO APARTAMENTO.svg" alt="" width="25" height="36">
