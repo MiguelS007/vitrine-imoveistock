@@ -668,12 +668,12 @@
                                             *ngIf="response.typeOfAd === 'rent' || response.typeOfAd === 'both' && bothSelectType === 'rent'"
                                             type="text" formControlName="suggestedRentAmount"
                                             class="form-control input-custom-proposal" currencyMask
-                                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                                            [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }">
                                         <input
                                             *ngIf="response.typeOfAd === 'sale' || response.typeOfAd === 'both' && bothSelectType === 'sale'"
                                             type="text" formControlName="suggestedSaleAmount"
                                             class="form-control input-custom-proposal" currencyMask
-                                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                                            [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }">
                                     </div>
                                 </div>
                             </div>
@@ -686,7 +686,7 @@
                                     <div class="col-sm-6 d-flex justify-content-sm-end">
                                         <input type="text" formControlName="salePropertyAsPaymentAmount"
                                             class="form-control input-custom-proposal" currencyMask
-                                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                                            [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }">
                                     </div>
                                 </div>
                             </div>
@@ -699,7 +699,7 @@
                                     <div class="col-sm-6 d-flex justify-content-sm-end">
                                         <input type="text" formControlName="saleCarAsPaymentAmount"
                                             class="form-control input-custom-proposal" currencyMask
-                                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                                            [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }">
                                     </div>
                                 </div>
                             </div>
@@ -713,7 +713,7 @@
                                     <div class="col-sm-6 d-flex justify-content-sm-end">
                                         <input type="text" formControlName="saleFinancingAsPaymentAmount"
                                             class="form-control input-custom-proposal" currencyMask
-                                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                                            [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }">
                                     </div>
                                 </div>
                             </div>
@@ -727,7 +727,7 @@
                                     <div class="col-sm-6 d-flex justify-content-sm-end">
                                         <input type="text" formControlName="saleDirectInstallmentAsPaymentAmount"
                                             class="form-control input-custom-proposal" currencyMask
-                                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                                            [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }">
                                     </div>
                                 </div>
                             </div>
