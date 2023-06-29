@@ -626,7 +626,7 @@ export class ExpressProposalComponent implements OnInit {
           announcementId: this.response._id
         }
 
-        if (this.proposalResponse.proposal) {
+        if (this.proposalResponse?.proposal) {
           this.sendCounterProposal(this.request)
         } else {
           this.sendProposal(this.request)
