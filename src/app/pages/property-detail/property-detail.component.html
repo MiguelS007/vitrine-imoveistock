@@ -29,7 +29,7 @@
                   <i class="bi font-size-18 text-light small-text bi-camera-fill"></i>
                   <p class="px-2 font-size-18 small-text line-19 text-light mb-0">Ver fotos</p>
                 </button>
-                <button type="button" data-toggle="modal" data-target="#playvideo"
+                <button type="button" data-toggle="modal" data-target="#playvideo" *ngIf="response.video !== null"
                   class="fw-700 btn-view-img h-51 w-fit px-5 btn align-items-center d-flex mr-2 mt-2 border-radius-10 bg-purple">
                   <img src="../../../assets/icon/play-circle.png" alt="not icon" />
                   <p class="px-2 font-size-18 line-19 small-text text-light mb-0">Ver vídeo</p>
