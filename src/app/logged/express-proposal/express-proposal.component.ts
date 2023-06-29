@@ -643,7 +643,6 @@ export class ExpressProposalComponent implements OnInit {
 
 
   sendProposal(request) {
-    console.log('request sendProposal', request);
 
     this.modalsendproposalexpress = false;
     this.modalcustomizedproposal = false;
