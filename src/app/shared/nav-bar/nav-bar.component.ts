@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { filter, Subscription } from 'rxjs';
@@ -212,6 +212,11 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     this.home = false;
     this.about = false;
   }
+
+  goMyAccount() {
+    this.router.navigate(['logged/my-account']);
+  }
+
   sideBtn() {
     this.collapsed = !this.collapsed;
     this.loggedname = false;
@@ -219,6 +224,17 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     this.loginopt = true;
 
   }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const menu = document.getElementById('navbarSupportedContentVisits');
+    const targetElement = event.target as HTMLElement;
+    // Verifica se o clique ocorreu fora do menu
+    if (!menu.contains(targetElement)) {
+      // Fecha a navegação
+      menu.classList.remove('show');
+    }
+}
 
   openLogin() {
     this.modalService.open(ModalLoginComponent, { centered: true })

@@ -59,24 +59,42 @@ export class SchedulingStep1Component implements OnInit {
     this.dataSelecionada = value
   }
 
-  confirm() {
-    if (localStorage.getItem('user') !== null) {
-      let dateFormat: Date = this.form.controls['day'].value;
-      dateFormat.setHours(parseInt(this.form.controls['time'].value));
-      dateFormat.setMinutes(0);
-      const result = this.isValidDate(dateFormat)
-      if (result === true) {
-        localStorage.setItem('dateScheduling', JSON.stringify(dateFormat));
-        this.modalService.dismissAll()
-        this.modalService.open(SchedulingStep2Component, { centered: true, backdrop: 'static', keyboard: false });
-      } else {
-        this.toastrService.error('Selecione uma data valida', '', { progressBar: true })
-      }
-    } else {
-      this.modalService.dismissAll()
-      this.modalService.open(ModalLoginComponent, { centered: true })
-    }
+  confirmDisabled: boolean = true; // Variável para controlar o estado do botão confirmar
+
+confirm() {
+  const selectedDay = this.form.controls['day'].value;
+  const selectedTime = this.form.controls['time'].value;
+
+  if (!selectedDay || !selectedTime) {
+    this.toastrService.error('Selecione o dia e a hora antes de confirmar.', '', { progressBar: true });
+    return;
   }
+
+  if (localStorage.getItem('user') !== null) {
+    let dateFormat: Date = selectedDay;
+    dateFormat.setHours(parseInt(selectedTime));
+    dateFormat.setMinutes(0);
+    const result = this.isValidDate(dateFormat);
+    if (result === true) {
+      localStorage.setItem('dateScheduling', JSON.stringify(dateFormat));
+      this.modalService.dismissAll();
+      this.modalService.open(SchedulingStep2Component, { centered: true, backdrop: 'static', keyboard: false });
+    } else {
+      this.toastrService.error('Selecione uma data válida.', '', { progressBar: true });
+    }
+  } else {
+    this.modalService.dismissAll();
+    this.modalService.open(ModalLoginComponent, { centered: true });
+  }
+}
+
+checkFieldsValidity() {
+  const selectedDay = this.form.controls['day'].value;
+  const selectedTime = this.form.controls['time'].value;
+
+  this.confirmDisabled = !(selectedDay && selectedTime);
+}
+
   isValidDate(d) {
     return d instanceof Date && !isNaN(d.getTime());
   }
