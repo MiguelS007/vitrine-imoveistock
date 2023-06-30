@@ -415,6 +415,7 @@ export class ExpressProposalComponent implements OnInit {
       this.spaceCustomizeProposalChangesOptions = false
       this.spaceCustomizeProposalChanges = false
       this.spaceRemoveitem = true;
+      this.form.reset();
       setTimeout(() => {
         this.inputRemove.nativeElement.focus()
       }, 100);
@@ -422,6 +423,7 @@ export class ExpressProposalComponent implements OnInit {
       this.spaceCustomizeProposalChangesOptions = true
       this.spaceCustomizeProposalChanges = false
       this.spaceRemoveitem = false;
+      this.form.reset();
     } else if (value === 'submit') {
 
       let requestRemove = {
@@ -449,6 +451,7 @@ export class ExpressProposalComponent implements OnInit {
     if (value === 'open') {
       this.spaceCustomizeProposalChangesOptions = false
       this.spaceCustomizeProposalChanges = false;
+      this.form.reset();
       setTimeout(() => {
         this.inputAdd.nativeElement.focus()
       }, 100);
@@ -457,6 +460,7 @@ export class ExpressProposalComponent implements OnInit {
       this.spaceCustomizeProposalChangesOptions = true
       this.spaceCustomizeProposalChanges = false
       this.spaceAddedItem = false;
+      this.form.reset();
     } else if (value === 'submit') {
 
       let requestAdded = {
@@ -484,7 +488,7 @@ export class ExpressProposalComponent implements OnInit {
     if (value === 'open') {
       this.spaceCustomizeProposalChangesOptions = false
       this.spaceCustomizeProposalChanges = false;
-
+      this.form.reset();
       setTimeout(() => {
         this.inputChange.nativeElement.focus()
       }, 100);
@@ -493,6 +497,7 @@ export class ExpressProposalComponent implements OnInit {
       this.spaceCustomizeProposalChangesOptions = true
       this.spaceCustomizeProposalChanges = false
       this.spaceChangeItem = false;
+      this.form.reset();
     } else if (value === 'submit') {
 
       let requestChange = {
@@ -626,7 +631,7 @@ export class ExpressProposalComponent implements OnInit {
           announcementId: this.response._id
         }
 
-        if (this.proposalResponse.proposal) {
+        if (this.proposalResponse?.proposal) {
           this.sendCounterProposal(this.request)
         } else {
           this.sendProposal(this.request)
@@ -638,7 +643,6 @@ export class ExpressProposalComponent implements OnInit {
 
 
   sendProposal(request) {
-    console.log('request sendProposal', request);
 
     this.modalsendproposalexpress = false;
     this.modalcustomizedproposal = false;

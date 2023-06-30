@@ -35,7 +35,7 @@ export class AppComponent {
     localStorage.setItem('googleMapsLoaded', 'false');
     this.loaderApi.load().then((google) => {
       localStorage.setItem('googleMapsLoaded', 'true');
-      console.log('google maps loaded!');
+     /*  console.log('google maps loaded!'); */
     });
   }
 

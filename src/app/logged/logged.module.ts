@@ -24,6 +24,7 @@ import { EditSchedulingModalComponent } from './visits/components/scheduling/edi
 import { EditScheduling2ModalComponent } from './visits/components/scheduling/edit-scheduling2-modal/edit-scheduling2-modal.component';
 import { EditScheduling3ModalComponent } from './visits/components/scheduling/edit-scheduling3-modal/edit-scheduling3-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EditSchedulingModalComponent,
     EditScheduling2ModalComponent,
     EditScheduling3ModalComponent,
+    MyAccountComponent,
   ],
   imports: [
     CommonModule,

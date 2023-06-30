@@ -1,4 +1,4 @@
-<section style="margin-top: 100px;" class="bg-clear">
+<section class="bg-clear mt-100">
     <div class="container">
         <form [formGroup]="form">
             <div class="row justify-content-center">
@@ -16,6 +16,11 @@
                         <div class="input-group mb-3">
                             <input type="text"
                                 class="form-control bg-whitelight border-radius-10 border p-2 color-black h-51"
+                                mask="000.000.000-00" formControlName="cpf" placeholder="CPF">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text"
+                                class="form-control bg-whitelight border-radius-10 border p-2 color-black h-51"
                                 formControlName="degreeOfKinship" placeholder="Grau de parentesco">
                         </div>
                         <div class="input-group mb-3">
@@ -23,11 +28,17 @@
                                 class="form-control bg-whitelight border-radius-10 border p-2 color-black h-51"
                                 mask="(00)00000-0000" formControlName="phone" placeholder="Telefone">
                         </div>
-                        <button
-                            [disabled]="this.form.invalid"
-                            type="button"
+
+                        <div class="form-check mb-3 mx-2">
+                            <input type="checkbox" class="form-check-input" id="terms" formControlName="terms">
+                            <label class="form-check-label" for="terms">
+                                Aceito com termos de uso e política de privacidade.
+                            </label>
+                        </div>
+
+                        <button [disabled]="this.form.invalid" type="button"
                             class="btn bg-purple fw-700 font-size-18 line-24 text-light border-radius-10 h-74 w-100 mt-2"
-                             (click)="saveCompanion()" >Salvar</button>
+                            (click)="saveCompanion()">Salvar</button>
                     </div>
                     <div class="bg-white border-radius-10 p-3 mb-3">
                         <!-- <div class="d-flex">
@@ -59,10 +70,12 @@
                                 <div class="w-100 d-flex">
                                     <i class="bi color-black mr-2 font-size-20 bi-person"></i>
                                     <p class="d-grid">
-                                        <span class="fw-500 font-size-14 line-18 color-black">{{response?.user_broker?.name}}</span>
+                                        <span
+                                            class="fw-500 font-size-14 line-18 color-black">{{response?.user_broker?.name}}</span>
                                         <span class="color-muted font-size-12">Corretor</span>
                                         <span class="fw-400 font-size-14 line-18 color-black">
-                                            ({{response?.user_broker?.phone | slice:2:4}}){{response?.user_broker?.phone | slice:4:9}}-{{response?.user_broker?.phone | slice:9:13}}
+                                            ({{response?.user_broker?.phone | slice:2:4}}){{response?.user_broker?.phone
+                                            | slice:4:9}}-{{response?.user_broker?.phone | slice:9:13}}
                                         </span>
                                     </p>
                                 </div>
@@ -139,7 +152,8 @@
                                                 font-size-14 line-20
                                                 color-black">{{response.announcement.bedrooms}}
                                         Quartos</p>
-                                    <p *ngIf="response.announcement.bedrooms === 0 || response.announcement.bedrooms === 1" class="fw-400 mb-0
+                                    <p *ngIf="response.announcement.bedrooms === 0 || response.announcement.bedrooms === 1"
+                                        class="fw-400 mb-0
                                                 font-size-14 line-20
                                                 color-black">{{response.announcement.bedrooms}}
                                         Quarto</p>
@@ -153,7 +167,8 @@
                                                 font-size-14 line-20
                                                 color-black">{{response.announcement.parkingSpaces}}
                                         Vagas</p>
-                                    <p *ngIf="response.announcement.parkingSpaces === 0 || response.announcement.parkingSpaces === 1" class="fw-400 mb-0
+                                    <p *ngIf="response.announcement.parkingSpaces === 0 || response.announcement.parkingSpaces === 1"
+                                        class="fw-400 mb-0
                                                 font-size-14 line-20
                                                 color-black">{{response.announcement.parkingSpaces}}
                                         Vaga</p>
@@ -175,7 +190,8 @@
                                         <img src="../../../assets/icon/suites.svg" width="18px" class="pr-2 mobile-w" />
                                         <p *ngIf="response.announcement?.suites > 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
                                                  color-black">{{response.announcement?.suites}} Suítes</p>
-                                        <p *ngIf="response.announcement?.suites === 0 || response.announcement?.suites === 1" class="fw-400 mb-0 font-size-12 little-text-mobile line-20
+                                        <p *ngIf="response.announcement?.suites === 0 || response.announcement?.suites === 1"
+                                            class="fw-400 mb-0 font-size-12 little-text-mobile line-20
                                                  color-black">{{response.announcement?.suites}} Suíte</p>
                                     </div>
                                 </div>

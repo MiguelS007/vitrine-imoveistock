@@ -1,0 +1,63 @@
+.card-profile {
+    border: 1px solid #B0B1B4;
+    border-radius: 10px;
+}
+
+.color-text-blue {
+    color: #878DBA;
+}
+
+.card-header-profile {
+    background-color: #f8f8fd !important;
+    border-radius: 10px !important;
+    height: 130px !important;
+    width: 100% !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-top: 51px !important;
+    flex-direction: column !important;
+}
+
+.border-profile-picture {
+    height: 80px !important;
+    width: 80px !important;
+    border-radius: 50% !important;
+    border: 3px solid #01ff5f !important;
+    position: absolute !important;
+    top: -40px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.img-fake-profile {
+    height: 68px !important;
+    width: 68px !important;
+    border-radius: 50% !important;
+    background-color: #542fdf !important;
+    color: white !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.photo-profile-custom {
+    height: 70px !important;
+    width: 70px !important;
+    border-radius: 50% !important;
+}
+
+.cam-change-picture-circle {
+    position: absolute !important;
+    bottom: 0px !important;
+    right: 0px !important;
+    background-color: white !important;
+    height: 28px !important;
+    width: 28px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}

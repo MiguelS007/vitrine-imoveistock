@@ -167,8 +167,12 @@
                                 </div>
                                 <div class="col-12 px-0" (click)="announcementSelected(item._id)">
                                     <div class="w-100 mx-1 pt-3">
-                                        <span
-                                            class="fw-400 font-size-14 line-20 color-black text-capitalize">{{resolveProperty(item.propertyType)}}</span>
+                                        <div class="d-flex align-items-center justify-content-between font-size-14
+                                        color-black text-capitalize fw-400">
+                                          <span>{{item.districtAddress}}</span>
+                                          <span class="mr-3">{{resolveProperty(item.propertyType)}}</span>
+                                        </div>
+                      
                                         <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
                                             style="max-width: 90%;">{{item.title}}</p>
                                         <p class="d-flex align-items-center">

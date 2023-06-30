@@ -6,6 +6,7 @@ import { ExpressProposalComponent } from './express-proposal/express-proposal.co
 import { LoggedComponent } from './logged.component';
 import { VisitsComponent } from './visits/visits.component';
 import { RegisterCompanionComponent } from '../pages/register-companion/register-companion.component';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'express/:_id',
         component: ExpressProposalComponent, resolve: { resolve: AnnouncementGetByIdResolve }
+      },
+      {
+        path: 'my-account',
+        component: MyAccountComponent
       },
     ],
   },
