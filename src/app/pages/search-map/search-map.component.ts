@@ -65,6 +65,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   mapCustom: google.maps.Map; // referência para o objeto Map
   markerCustom: google.maps.Marker; // referência para o objeto Marker
 
+  selectedItems: any[] = [];
+  selectedItemsDistricts: any[] = [];
+
   constructor(
     private ngxSpinnerService: NgxSpinnerService,
     private router: Router,
@@ -145,8 +148,6 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
     this.ngxSpinnerService.hide();
   }
-
-  onChangeSearch(search: string) {}
 
   selectAnnouncement(_id: string) {
     this.router.navigate([`announcement/detail`, _id]);
@@ -262,7 +263,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
       );
 
       if (distance <= 0.5) idList.push(_id);
-      
+
       this.center = {
         lat: clusterLat,
         lng: clusterLng,
@@ -306,9 +307,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     }
   }
 
-  moveMap() {}
+  moveMap() { }
 
-  changeZoom() {}
+  changeZoom() { }
 
   resolveProperty(text: string): string {
     return (
@@ -334,5 +335,25 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   openAnnouncement(content) {
     localStorage.setItem('announcementView', JSON.stringify(content));
     this.modalService.open(ViewAnnouncementModalComponent, { centered: true });
+  }
+
+  removeTag(index: any) {
+    let filterDisplay =
+      this.filtroResultDisplay.propertyTypeList.indexOf(index);
+    this.filtroResultDisplay.propertyTypeList.splice(filterDisplay, 1);
+
+    let filterDisplayDistrict =
+      this.filtroResultDisplay.districtAddress.indexOf(index);
+    this.filtroResultDisplay.districtAddress.splice(filterDisplayDistrict, 1);
+
+    this.selectedItems = [];
+    this.selectedItemsDistricts = []
+
+    setTimeout(() => {
+      this.selectedItems = this.filtroResultDisplay.propertyTypeList;
+    }, 100);
+    setTimeout(() => {
+      this.selectedItemsDistricts = this.filtroResultDisplay.districtAddress;
+    }, 100);
   }
 }
