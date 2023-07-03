@@ -394,11 +394,13 @@
               </div>
               <div *ngIf="response.petsAccepted" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO PET.svg" width="25" height="36">
-                <p class="mb-0 ml-3">Aceita Pet</p>
+                <p class="mb-0 ms-3 " *ngIf="response.petsAccepted === 'accepted'">Aceita Pet</p>
+                <p class="mb-0 ms-3 " *ngIf="response.petsAccepted === 'uninformed'">Não informado</p>
+                <p class="mb-0 ms-3 " *ngIf="response.petsAccepted === 'rejected'">Não</p>
               </div>
               <div *ngIf="!response.petsAccepted" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/CINZA PET.svg" width="25" height="36">
-                <p class="mb-0 ml-3 text-muted"><del>Aceita Pet</del></p>
+                <p class="mb-0 ml-3 text-muted"><del></del></p>
               </div>
             </div>
 
