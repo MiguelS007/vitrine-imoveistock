@@ -418,10 +418,10 @@
                        color-black">Descrição do Imóvel</span>
               <br />
               <br />
-              <p class="fw-400 font-size-18 line-24 py-3
+              <div [innerHTML]="response.description" class="fw-400 font-size-18 line-24 py-3
                        color-black" style="white-space:pre-line">
-                {{response.description || '-'}}
-              </p>
+               
+              </div>
             </div>
 
             <div class="w-100 mt-4 px-5 pt-3 pb-4
