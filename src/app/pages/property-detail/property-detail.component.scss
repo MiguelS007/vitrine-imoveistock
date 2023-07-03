@@ -1,3 +1,25 @@
+.tooltip-container {
+    position: relative;
+        &
+  :hover::after {
+    content: attr(data-title); /* Modifiquei para attr(data-title) */
+    position: absolute;
+    padding: 20px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: .5s;
+    min-width: 200px;
+    background-color: #7b68ee;
+    color:  white;
+    border-radius: 5px;
+    z-index: 1;
+  }
+
+}
+
+
+
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
