@@ -178,7 +178,7 @@ export abstract class AnnouncementGetResponseDto {
 
     conciergeOpeningHours?: string;
 
-    petsAccepted: boolean;
+    petsAccepted: string;
 }
 
 class Videos {
