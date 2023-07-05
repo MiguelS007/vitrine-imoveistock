@@ -14,7 +14,7 @@ export const propertyTypesConst = [
     { value: 'casacomercial', name: 'Casa comercial' },
     { value: 'garagem', name: 'Garagem' },
     { value: 'pontocomercial', name: 'Ponto comercial' },
-    { value: 'conjuntocomercial', name: 'Conjunto comercial' },
+    { value: 'conjuntocomercial', name: 'Conjunto / Sala comercial' },
     { value: 'loja', name: 'Loja' },
     { value: 'salao', name: 'Salão' },
     { value: 'galpao', name: 'Galpão' },
@@ -27,5 +27,7 @@ export const propertyTypesConst = [
     { value: 'prediointeiro', name: 'Prédio inteiro' },
     { value: 'casa', name: 'Casa' },
     { value: 'sobrado', name: 'Sobrado' },
-    { value: 'sobradoEmCondominio', name: 'Sobrado em condomínio' },
+    { value: 'sobradoemcondominio', name: 'Sobrado em condomínio' },
+    { value: 'barracao', name: 'Barracão' },
+    { value: 'terrenoemcondominio', name: 'Terreno em Condomínio' },
   ];

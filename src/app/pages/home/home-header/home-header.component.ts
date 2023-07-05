@@ -74,7 +74,7 @@ export class HomeHeaderComponent implements OnInit {
     { item_id: 'casacomercial', item_text: 'Casa Comercial' },
     { item_id: 'garagem', item_text: 'Garagem' },
     { item_id: 'pontocomercial', item_text: 'Ponto Comercial' },
-    { item_id: 'conjuntocomercial', item_text: 'Conjunto Comercial' },
+    { item_id: 'conjuntocomercial', item_text: 'Conjunto / Sala Comercial' },
     { item_id: 'loja', item_text: 'Loja' },
     { item_id: 'salao', item_text: 'Salão' },
     { item_id: 'galpao', item_text: 'Galpão' },
@@ -85,6 +85,8 @@ export class HomeHeaderComponent implements OnInit {
     { item_id: 'pousada', item_text: 'Pousada' },
     { item_id: 'lajecorporativa', item_text: 'Laje Corporativa' },
     { item_id: 'prediointeiro', item_text: 'Prédio Inteiro' },
+    { item_id: 'barracao', item_text: 'Barracão' },
+    { item_id: 'terrenoemcondominio', item_text: 'Terreno em Condomínio' },
   ];
 
   dropdownListDistrict = [
