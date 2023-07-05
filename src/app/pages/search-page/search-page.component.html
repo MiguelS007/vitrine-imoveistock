@@ -21,19 +21,6 @@
             <span class="result-filter" *ngIf="filtroResultDisplay?.ufAddress && filtroResultDisplay?.cityAddress">
               {{filtroResultDisplay.cityAddress+", "+filtroResultDisplay.ufAddress}}</span>
 
-            <!-- <span class="result-filter">
-              <span *ngIf="filtroResultDisplay?.districtAddress">
-                {{filtroResultDisplay.districtAddress}}
-              </span>
-            </span> -->
-
-            <!-- <span class="result-filter"
-              *ngFor="let item of filtroResultDisplay?.districtAddress | slice:0:5; let i = index">
-              <span *ngIf="i <=3">{{item.item_text}}<b><a class="cursor-pointer"
-                    (click)="removeTag(item)">X</a></b></span>
-              <span *ngIf="i > 3">{{'Bairros+'+(filtroResultDisplay.districtAddress.length - 4)}}</span>
-            </span> -->
-
             <span class="result-filter" *ngIf="filtroResultDisplay?.bedrooms"> +{{filtroResultDisplay?.bedrooms}}
               Quartos<b><a class="cursor-pointer" (click)="filtroResultDisplay.bedrooms = 0">X</a></b></span>
             <span *ngIf="filtroResultDisplay?.goal"> {{filtroResultDisplay.goal}}</span>

@@ -14,7 +14,8 @@
                         <span class="result-filter" *ngIf="filtroResultDisplay?.typeOfAdd === 'rent'">Alugar</span>
                         <span class="result-filter"
                             *ngFor="let item of filtroResultDisplay?.propertyTypeList | slice:0:5; let i = index">
-                            <span *ngIf="i <=3">{{item.item_text}}<b></b></span>
+                            <span *ngIf="i <=3">{{item.item_text}} <b><a class="cursor-pointer"
+                                        (click)="removeTag(item)">X</a></b></span>
                             <span *ngIf="i > 3">{{'Tipos de imóveis+'+(filtroResultDisplay?.propertyTypeList.length -
                                 4)}}</span>
                         </span>
@@ -151,7 +152,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -159,8 +160,8 @@
                         <div class="col-12 my-5 py-5 justify-content-center">
                             <div *ngIf="selectedAnouncements?.length >= 3" class="d-flex flex-fill
                                justify-content-center">
-                                <pagination-controls (pageChange)="pagination=$event; scrollUp()" previousLabel="Anterior"
-                                    nextLabel="Próximo">
+                                <pagination-controls (pageChange)="pagination=$event; scrollUp()"
+                                    previousLabel="Anterior" nextLabel="Próximo">
                                 </pagination-controls>
                             </div>
                         </div>
@@ -169,7 +170,7 @@
             </div>
             <div class="col-lg-5 pt-5" *ngIf="apiLoaded">
                 <google-map [center]="center" [zoom]="zoom" [width]="450" [options]="mapOptions"
-                    (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map >
+                    (mapDragend)="moveMap()" (zoomChanged)="changeZoom()" #map>
                 </google-map>
             </div>
             <div class="col-lg-5 pt-5" *ngIf="!apiLoaded">
@@ -178,7 +179,7 @@
                         <span class="spinner-inner-1"></span>
                         <span class="spinner-inner-2"></span>
                         <span class="spinner-inner-3"></span>
-                      </div>                    
+                    </div>
                 </div>
             </div>
         </div>
