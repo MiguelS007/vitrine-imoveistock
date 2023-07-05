@@ -1112,6 +1112,10 @@ ng-image-fullscreen-view .ng-image-fullscreen-view .lightbox-wrapper .close {
     height: 219px;
 }
 
+.product-announcement {
+    height: 465px;
+}
+
 .heart-like {
     padding: 0.8rem 1.1rem;
 }
@@ -1210,6 +1214,18 @@ ng-image-fullscreen-view .ng-image-fullscreen-view .lightbox-wrapper .close {
     z-index: 99 !important;
 }
 
+.space-value-announcement-home {
+    position: absolute !important;
+    bottom: -55px !important;
+    left: 0px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    align-items: center !important;
+    padding: 0px 16px 8px 16px !important;
+    z-index: 99 !important;
+}
+
 //HEADER-CARDS
 .icon-cards {
     padding: 20% 0;
@@ -1233,6 +1249,16 @@ ng-image-fullscreen-view .ng-image-fullscreen-view .lightbox-wrapper .close {
 }
 
 .photo-announcement-card {
+    position: absolute;
+    height: 273px !important;
+    width: 100% !important;
+    top: 0px !important;
+    left: 0px !important;
+    z-index: 1;
+    border-radius: 10px !important;
+}
+
+.photo-announcement-card-mobile {
     position: absolute;
     height: 219px !important;
     width: 100% !important;
