@@ -125,7 +125,7 @@
                     [slidesPerView]="3" [pagination]="{ clickable: true }" [scrollbar]="true">
                     <ng-template class="max-w-1477" *ngFor="let item of response | slice: 0:15" swiperSlide>
                         <div class="col-md-12 px-0 mt-mobile cursor-pointer">
-                            <div class="h-100 product-announcement p-2 mx-3 border-radius-10 bg-white">
+                            <div class="product-announcement p-2 mx-3 border-radius-10 bg-white">
                                 <div class="py-2 px-3 position-relative" style="height: 219px;">
                                     <img *ngIf="!item.mainPhoto" src="../../../../assets/img/ap.png"
                                         class="photo-announcement-card" (click)="announcementSelected(item._id)">
@@ -150,7 +150,7 @@
                                             class="bg-greenlight h-fit ml-2 px-3 py-2 mb-0 border-radius-5 fw-400 font-size-14 line-15 color-black">
                                             Exclusivo</h4>
                                     </div>
-                                    <div class="space-value-announcement">
+                                    <div class="space-value-announcement-home">
                                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
                                             *ngIf="item.typeOfAd === 'sale'">{{item.saleValue | currency: 'R$':'symbol':'1.0'}}</p>
                                         <p class="fw-700 mb-0 font-size-22 h-fit line-32 text-light"
@@ -165,7 +165,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 px-0" (click)="announcementSelected(item._id)">
+                                <div class="col-12 px-0" (click)="announcementSelected(item._id)" style="margin-top: 50px;">
                                     <div class="w-100 mx-1 pt-3">
                                         <div class="d-flex align-items-center justify-content-between font-size-14
                                         color-black text-capitalize fw-400">
@@ -173,8 +173,8 @@
                                           <span class="mr-3">{{resolveProperty(item.propertyType)}}</span>
                                         </div>
                       
-                                        <p class="fw-700 font-size-16 line-20 mb-0 color-black  text-truncate"
-                                            style="max-width: 90%;">{{item.title}}</p>
+                                        <p class="fw-700 font-size-16 line-20 mb-0 color-black"
+                                            style="max-width: 95%;">{{item.title}}</p>
                                         <p class="d-flex align-items-center">
                                             <i class="bi font-size-20 mr-2 color-black bi-geo-alt"></i>
                                             <span
@@ -182,7 +182,7 @@
                                                 {{item.cityAddress}} - {{item.ufAddress}}</span>
                                         </p>
                                     </div>
-                                    <div class="row mx-1 d-flex">
+                                    <div class="row mx-1 d-flex mt-4">
                                         <div
                                             class="col mt-2 justify-content-left left-important px-0 d-flex align-items-center justify-content-left">
                                             <img src="../../../assets/icon/bed.png" class="pr-2 mobile-w" />
@@ -242,8 +242,8 @@
                             <div class="h-100 w-100 product-announcement p-2 border-radius-10 bg-white">
                                 <div class="py-2 px-3 position-relative" style="height: 219px;">
                                     <img *ngIf="!item.mainPhoto" src="../../../../assets/img/ap.png"
-                                        class="photo-announcement-card" (click)="announcementSelected(item._id)">
-                                    <img *ngIf="item.mainPhoto" [src]="item.mainPhoto" class="photo-announcement-card"
+                                        class="photo-announcement-card-mobile" (click)="announcementSelected(item._id)">
+                                    <img *ngIf="item.mainPhoto" [src]="item.mainPhoto" class="photo-announcement-card-mobile"
                                         (click)="announcementSelected(item._id)">
                                     <div class="space-sale-exclusive">
                                         <h4 *ngIf="item.typeOfAd === 'sale'"
