@@ -52,6 +52,8 @@ export abstract class AnnouncementGetResponseDto {
 
     propertyPosition?: string;
 
+    sunnyUnit?: string;
+
     yearOfConstruction?: string;
 
     appearanceOfTheProperty?: string;
