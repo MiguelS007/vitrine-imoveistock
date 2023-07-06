@@ -263,9 +263,14 @@
               </div>
               <div *ngIf="response.propertyPosition ==='allDay' || response.propertyPosition ==='morning' || response.propertyPosition ==='afternoon'" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO SOL DA MANHA.svg" width="25" height="36">
-                <p *ngIf="response.propertyPosition === 'allDay'" class="mb-0 ml-3">Sol o dia todo</p>
-                <p *ngIf="response.propertyPosition === 'morning'" class="mb-0 ml-3">Sol na manhã</p>
-                <p *ngIf="response.propertyPosition === 'afternoon'" class="mb-0 ml-3">Sol à tarde</p>
+                <div class="d-flex flex-column">
+                  <p *ngIf="response.propertyPosition === 'allDay'" class="mb-0 ml-3">Sol o dia todo</p>
+                  <p *ngIf="response.propertyPosition === 'morning'" class="mb-0 ml-3">Sol na manhã</p>
+                  <p *ngIf="response.propertyPosition === 'afternoon'" class="mb-0 ml-3">Sol à tarde</p>
+                  <p *ngIf="response.sunnyUnit === 'kitchen'" class="font-size-9 mb-0 ml-3 text-right">Cozinha</p>
+                  <p *ngIf="response.sunnyUnit === 'bedroom'" class="font-size-9 mb-0 ml-3 text-right">Quarto</p>
+                  <p *ngIf="response.sunnyUnit === 'livingRoom'" class="font-size-9 mb-0 ml-3 text-right">Sala</p>
+                </div>
               </div>
               <div *ngIf="response.whichFloorOfTheProperty" class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
                 <img src="../../../assets/icons-property-details/PRETO APARTAMENTO.svg" alt="" width="25" height="36">
@@ -362,16 +367,6 @@
                 <img src="../../../assets/icons-property-details/CINZA ELEVADOR.svg" alt="" width="25" height="36">
                 <p class="mb-0 ml-3 text-muted"><del>Elevador de serviço</del></p>
               </div>
-              <!-- <div *ngIf="response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
-                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
-                <img src="../../../assets/icons-property-details/PRETO METRO.svg" width="25" height="36">
-                <p class="mb-0 ml-3">Próximo ao metrô</p>
-              </div> -->
-              <!-- <div *ngIf="!response.characteristicInfrastructureOfTheCondominium?.proximoAoMetro"
-                class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
-                <img src="../../../assets/icons-property-details/CINZA METRO.svg" width="25" height="36">
-                <p class="mb-0 ml-3 text-muted"><del>Próximo ao metrô</del></p>
-              </div> -->
               <div
                 *ngIf="response.characteristicInfrastructureOfTheCondominium?.aquecimentoCentral || response.characteristicInfrastructureOfTheCondominium?.aquecimentoSolar"
                 class="col-6 col-lg-3 col-md-4 col-sm-6 d-flex mt-3 ">
