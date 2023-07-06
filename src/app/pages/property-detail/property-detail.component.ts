@@ -238,7 +238,6 @@ export class PropertyDetailComponent implements OnInit {
     this.ngxSpinnerService.show();
 
     this.response = this.route.snapshot.data['resolve'];
-    console.log(this.response);
     
     this.ngxSpinnerService.hide();
 
