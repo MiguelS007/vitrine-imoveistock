@@ -90,7 +90,7 @@ export class HomeHeaderComponent implements OnInit {
   ];
 
   dropdownListDistrict = [
-   
+
   ];
 
   selectedItems: any = [];
@@ -177,6 +177,13 @@ export class HomeHeaderComponent implements OnInit {
     });
   }
 
+  existCity: boolean = false;
+
+  clearFormCity() {
+    this.existCity = false
+    this.dropdownListDistrict = []
+  }
+
   removeLabel(event) {
     this.viewLabelValueMax = false;
   }
@@ -239,12 +246,12 @@ export class HomeHeaderComponent implements OnInit {
       typePropertyState: item.estado,
     });
     this.listDistrictByCity(item.cidade);
+    this.existCity = true;
   }
 
   listDistrictByCity(value) {
     this.announcementService.listDistrictsByCity(value).subscribe({
       next: (response) => {
-        // response.unshift({ district: 'Todos os bairros' });
         this.listDistricts = response;
         this.dropdownListDistrict = response.map((item, index) => {
           return { item_text: item.district, item_id: index }
@@ -270,24 +277,24 @@ export class HomeHeaderComponent implements OnInit {
       text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
       return text.toLocaleLowerCase();
     }
-  
+
     if (query.length < 2) {
       return [];
     }
-  
+
     return items.filter((item) => {
       const normalizedQuery = removeAccents(query.toLowerCase());
-  
+
       if (item.render) {
         const normalizedRender = removeAccents(item.render.toLowerCase());
         return normalizedRender.includes(normalizedQuery);
       }
-  
+
       if (item.district) {
         const normalizedDistrict = removeAccents(item.district.toLowerCase());
         return normalizedDistrict.includes(normalizedQuery);
       }
-  
+
       return false;
     });
   }
@@ -299,14 +306,12 @@ export class HomeHeaderComponent implements OnInit {
   confirm() {
     if (this.stateSelected === 'Primeiro escolha um estado')
       this.form.controls['typePropertyState'].setValue('');
-    console.log(this.form.value);
-
     let filter = {
       typeAd: this.typeAd,
       state: this.form.controls['typePropertyState'].value,
       city: this.getSelectedCity,
       district:
-        this.form.controls['typePropertyDistrict'].value?.map(item => item.item_text) ||'',
+        this.form.controls['typePropertyDistrict'].value?.map(item => item.item_text) || '',
       allResidential: this.typepropertyfull,
       untilValueSale: !isNaN(this.labelValueSale)
         ? Number(this.labelValueSale)
@@ -326,7 +331,7 @@ export class HomeHeaderComponent implements OnInit {
         : typeof this.labelValueBadroom === 'string'
           ? 0
           : this.labelValueBadroom,
-    };    
+    };
 
     let city = this.getSelectedCity !== undefined ? this.getSelectedCity : '';
 
@@ -394,10 +399,9 @@ export class HomeHeaderComponent implements OnInit {
       this.labelValueSale = 'Valor até';
     }
   }
-  resetForm(){
+  resetForm() {
     this.form.reset();
-    this.dropdownListDistrict =[]
-    
+    this.dropdownListDistrict = []
   }
- 
+
 }

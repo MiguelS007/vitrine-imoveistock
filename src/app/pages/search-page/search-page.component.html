@@ -70,23 +70,6 @@
             </ng-template>
           </div>
 
-          <!-- <div class="dropdown px-0 my-4">
-            <ng-autocomplete id="search-cityes-test" formControlName="typePropertyDistrict" [data]="listDistricts"
-              [isLoading]="listEveryCity.length == 0" [disabled]="listDistricts.length == 0"
-              [searchKeyword]="'district'" placeholder="Escolha um bairro" (selected)='selectEvent2($event)'
-              [minQueryLength]="2" [itemTemplate]="itemDistrictsTemplate" [notFoundTemplate]="notFoundTemplate"
-              [customFilter]="customDistrictFilter">
-            </ng-autocomplete>
-
-            <ng-template #itemDistrictsTemplate let-item>
-              <a [innerHTML]="item.district"></a>
-            </ng-template>
-
-            <ng-template #notFoundTemplate let-notFound>
-              <div>Não encontrado</div>
-            </ng-template>
-          </div> -->
-
           <div>
             <ng-multiselect-dropdown [placeholder]="'Escolha um bairro'" formControlName="typePropertyDistrict"
               [settings]="dropdownSettingsDistrict" [data]="dropdownListDistrict" [(ngModel)]="selectedItemsDistricts"
@@ -114,13 +97,13 @@
             </div>
           </div>
 
-          <div class="row mt-4 px-0">
+          <div *ngIf="filtroResultDisplay?.typeOfAdd === 'rent'" class="row mt-4 px-0">
             <div class="col-12">
               <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor do condomínio</p>
             </div>
             <div class="col-12">
-              <label for="typeMaxPriceCondominium">Até</label>
-              <input formControlName="typeMaxPriceCondominium" type="text" currencyMask
+              <label for="finalValueCondominium">Até</label>
+              <input formControlName="finalValueCondominium" type="text" currencyMask
                 [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="Até"
                 class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
                 maxlength="20" />
@@ -603,13 +586,13 @@
       </div>
     </div>
 
-    <div class="row mt-4 px-0">
+    <div *ngIf="filtroResultDisplay?.typeOfAdd === 'rent'" class="row mt-4 px-0">
       <div class="col-12">
         <p class="fw-400 pb-0 color-black text-left font-size-16 line-20 ">Valor do condomínio</p>
       </div>
       <div class="col-12">
-        <label for="typeMaxPriceCondominium">Até</label>
-        <input formControlName="typeMaxPriceCondominium" type="text" currencyMask
+        <label for="finalValueCondominium">Até</label>
+        <input formControlName="finalValueCondominium" type="text" currencyMask
           [options]="{ prefix: 'R$ ', thousands: '.', precision: '0' }" placeholder="Até"
           class="border border-radius-10 bg-light fw-400 text-left font-size-16 line-20 px-3 color-black w-100 h-51"
           maxlength="20" />

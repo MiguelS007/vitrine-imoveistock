@@ -39,7 +39,7 @@
                                         </ng-multiselect-dropdown>
                                     </div>
                                     <div class="col-12 px-0 mb-4 ">
-                                        <ng-autocomplete [data]="listEveryCity" [isLoading]="listEveryCity.length == 0"
+                                        <ng-autocomplete (keyup)="clearFormCity()" [data]="listEveryCity" [isLoading]="listEveryCity.length == 0"
                                             [searchKeyword]="'render'" formControlName="chooseCity"
                                             placeholder="Escolha uma cidade" [minQueryLength]="2"
                                             (selected)='selectEvent($event)' [itemTemplate]="itemcityTemplate"
@@ -148,7 +148,7 @@
                                         <button
                                             class="btn w-100 btn-browser fw-700 font-size-16 line-20 text-light border-radius-10 bg-purple h-51 px-5"
                                             type="submit"
-                                            [disabled]="this.form.controls['chooseCity'].value == '' || dropdownListDistrict.length == 0">
+                                            [disabled]="!this.existCity || dropdownListDistrict.length == 0">
                                             Procurar imóveis
                                         </button>
                                     </div>

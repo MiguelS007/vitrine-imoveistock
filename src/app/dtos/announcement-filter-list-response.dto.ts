@@ -15,6 +15,8 @@ export abstract class AnnouncementFilterListResponseDto {
 
     finalValue?: number;
 
+    finalValueCondominium?: number;
+
     bedrooms?: number;
 
     suites?: number;

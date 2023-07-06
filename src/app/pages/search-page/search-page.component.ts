@@ -185,7 +185,7 @@ export class SearchPageComponent implements OnInit {
       typePropertyCity: ['', [Validators.required]],
       typePropertyDistrict: [''],
       typeMaxPrice: [''],
-      typeMaxPriceCondominium: [''],
+      finalValueCondominium: [''],
       typeMinPrice: [''],
       typeBathRoom: [''],
       typeBadrooms: [''],
@@ -204,7 +204,7 @@ export class SearchPageComponent implements OnInit {
       typePropertyCity: [''],
       typePropertyDistrict: [''],
       typeMaxPrice: [''],
-      typeMaxPriceCondominium: [''],
+      finalValueCondominium: [''],
       typeMinPrice: [''],
       typeBathRoom: [''],
       typeBadrooms: [''],
@@ -291,6 +291,7 @@ export class SearchPageComponent implements OnInit {
         districtAddress: filtro?.districtAddress,
         initialValue: filtro?.initialValue,
         finalValue: filtro?.finalValue,
+        finalValueCondominium: filtro?.finalValueCondominium,
         bedrooms: filtro?.bedrooms,
         suites: filtro?.suites,
         propertyType: filtro?.propertyType,
@@ -746,6 +747,9 @@ export class SearchPageComponent implements OnInit {
       initialValue:
         this.form.controls['typeMaxPrice'].value ||
         this.formModal.controls['typeMaxPrice'].value,
+      finalValueCondominium:
+        this.form.controls['finalValueCondominium'].value ||
+        this.formModal.controls['finalValueCondominium'].value,
       finalValue:
         this.form.controls['typeMinPrice'].value ||
         this.formModal.controls['typeMinPrice'].value,
@@ -767,7 +771,8 @@ export class SearchPageComponent implements OnInit {
         this.formModal.controls['propertyType'].value,
       goal: '',
     };
-
+    console.log(request);
+    
     this.announcementService.listFilter(request).subscribe({
       next: (data) => {
         this.ngxSpinnerService.hide();
