@@ -90,16 +90,16 @@ export class AnnouncementService extends BaseService {
             });
         }
 
-        // if(dto.districtAddress) {
-        //     queryParams += `&districtAddress=${dto.districtAddress}`
-        // }
-
         if(dto.initialValue && dto.initialValue > 1) {
             queryParams += `&initialValue=${dto.initialValue}`
         }
 
         if(dto.finalValue && dto.finalValue > 0 ) {
             queryParams += `&finalValue=${dto.finalValue}`
+        }
+
+        if(dto.finalValueCondominium && dto.finalValueCondominium > 0) {
+            queryParams += `&finalValueCondominium=${dto.finalValueCondominium}`
         }
 
         if(dto.bedrooms) {
