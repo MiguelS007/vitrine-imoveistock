@@ -78,9 +78,10 @@ export class MyAccountComponent implements OnInit {
       phone: '55'+this.form.controls['phone'].value,
       cpf: this.form.controls['cpf'].value,
     }
-
     this.userService.userUpdate(request).subscribe({
       next: data => {
+        localStorage.setItem('nome', request.name);
+
         this.toastrService.success('Dados atualizados com sucesso', '', { progressBar: true });
         this.editInfos = true
         window.location.reload()

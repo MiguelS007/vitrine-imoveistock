@@ -13,7 +13,7 @@
                 <div *ngFor="let url of urls">
                     <img [src]="urls" class="photo-profile-custom">
                 </div>
-                <label class="cam-change-picture-circle" for="pictureProfile">
+                <label class="cam-change-picture-circle cursor-pointer" for="pictureProfile">
                     <img src="../../../assets/icon/icon-camera.svg" width="16">
                     <input type="file" class="d-none" id="pictureProfile" (change)="onSelectFile($event)">
                 </label>
