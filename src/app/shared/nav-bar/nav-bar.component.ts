@@ -65,12 +65,13 @@ export class NavBarComponent implements OnInit, AfterViewInit {
       this.verificationLogged(true)
     }
 
+    this.userName = localStorage.getItem('nome').split(' ')[0] || '';
     this.authenticationService.logged.subscribe({
       next: value => {
         if (value === true) {
           setTimeout(() => {
             this.user = JSON.parse(localStorage.getItem('userDto'));
-            this.userName = this.user?.name?.split(' ')[0] || '';
+            // this.userName = this.user?.name?.split(' ')[0] || '';
             this.loggedname = true;
             this.loggedopt = true;
             this.loginopt = false;
