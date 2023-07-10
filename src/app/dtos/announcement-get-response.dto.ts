@@ -20,6 +20,8 @@ export abstract class AnnouncementGetResponseDto {
 
     publicPlaceAddress: string;
 
+    furnishedApartment: string;
+
     districtAddress: string;
 
     propertyCharacteristics: string;
