@@ -721,7 +721,7 @@ export class SearchPageComponent implements OnInit {
       this.selectFilterOfAd = 'sale';
     }
 
-    const district = this.form.controls['typePropertyDistrict'].value?.map(item => item.item_text) || '';
+    const district = this.form.controls['typePropertyDistrict'].value?.map(item => item?.item_text || item) || '';
 
     let request: AnnouncementFilterListResponseDto = {
       typeOfAdd: this.selectFilterOfAd,
