@@ -11,6 +11,7 @@ import { AnnouncementGetResponseDto } from 'src/app/dtos/announcement-get-respon
 import estados from '../../../../assets/json/estados-cidades.json';
 import { AnnouncementFilterListResponseDto } from '../../../dtos/announcement-filter-list-response.dto';
 import { AnnouncementService } from '../../../service/announcement.service';
+import { ParamsFilterDTO } from '../../../dtos/announcement-query-filter.dto';
 @Component({
   selector: 'app-home-header',
   templateUrl: './home-header.component.html',
@@ -371,15 +372,27 @@ export class HomeHeaderComponent implements OnInit {
       bedrooms: filter.badRoomsQnt,
     };
 
+    let paramsFilter: ParamsFilterDTO = {}
+
     this.announcementService.listFilter(requestList).subscribe({
       next: (data) => {
         Object.assign(requestList, {
           propertyTypeList: this.form.controls['propertyType'].value,
         });
+        paramsFilter.bairros = requestList.districtAddress.length > 1 ? 'varios' : requestList.districtAddress[0];
+        paramsFilter.valor_ate = requestList.finalValue
+        paramsFilter.quartos = requestList.bedrooms
+        paramsFilter.tipo_imovel = requestList.propertyType.length > 1 ? 'varios' : requestList.propertyType[0];
         localStorage.setItem('totalSearch', JSON.stringify(data.total));
         localStorage.setItem('filtro', JSON.stringify(requestList));
         localStorage.setItem('resultSearch', JSON.stringify(data.data));
-        this.router.navigate(['/search']);
+        const tipo = requestList.typeOfAdd == 'sale' ? 'venda' : 'aluguel';
+        for (const key in paramsFilter) {
+          if (paramsFilter.hasOwnProperty(key) && paramsFilter[key] === 0) {
+            delete paramsFilter[key];
+          }
+        }
+        this.router.navigate(['/buscar', tipo, `${requestList.cityAddress}-${requestList.ufAddress}`], { queryParams: paramsFilter });
       },
       error: (error) => {
         console.error(error);

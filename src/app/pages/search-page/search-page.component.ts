@@ -5,6 +5,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -52,6 +53,7 @@ export class SearchPageComponent implements OnInit {
   filterResult: AnnouncementGetResponseDto[] = [];
 
   filtroResultDisplay: AnnouncementFilterListResponseDto;
+  filterUrlParams: AnnouncementFilterListResponseDto;
 
   orderBy: string = 'Selecione';
   lastPaginationPage: number;
@@ -175,7 +177,8 @@ export class SearchPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ngxSpinnerService: NgxSpinnerService,
     private announcementService: AnnouncementService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private route: ActivatedRoute
   ) {
     this.form = this.formBuilder.group({
       typeStatus: ['', [Validators.required]],
@@ -248,10 +251,10 @@ export class SearchPageComponent implements OnInit {
     });
 
     let filtro: any = localStorage.getItem('filtro');
+    filtro = this.loadParamsFromUrll(filtro);
+    localStorage.setItem('filtro', JSON.stringify(filtro));
 
     if (filtro !== null) {
-      filtro = JSON.parse(filtro);
-
       this.searchByTypeAd(filtro.typeOfAdd);
 
       this.citySelected = filtro.cityAddress;
@@ -379,6 +382,44 @@ export class SearchPageComponent implements OnInit {
 
   }
 
+  loadParamsFromUrll(filtroJson){
+    let filter = filtroJson == null? {} : JSON.parse(filtroJson)
+    this.route.paramMap.subscribe(params => {
+      if(params){
+        const city = params.get('cidade').split("-")[0];
+        const uf = params.get('cidade').split("-")[1]
+        const type = params.get('type') == 'venda' ? 'sale' : 'rent';
+        // filter.typeAdd = type;
+        filter.cityAddress = city;
+        filter.ufAddress = uf;
+
+      }
+    });
+    return filter
+  }
+  generateEmptyFilter(){
+    const empFilter: AnnouncementFilterListResponseDto = {
+      typeOfAdd: '',
+      propertyType: [],
+      ufAddress: '',
+      cityAddress: '',
+      districtAddress: [],
+      goal: '',
+      initialValue: 0,
+      finalValue: 0,
+      finalValueCondominium: 0,
+      bedrooms: 0,
+      suites: 0,
+      bathrooms: 0,
+      parkingSpaces: 0,
+      yearOfConstruction: '',
+      initialUsefulArea: 0,
+      finalUsefulArea: 0,
+      propertyTypeList: [],
+      page: 0,
+    };
+  return empFilter;
+  }
   handlerMaxItens() {
     const width = screen.width;
     if (width <= 768) {

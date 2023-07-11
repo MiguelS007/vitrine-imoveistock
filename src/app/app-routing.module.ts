@@ -33,6 +33,11 @@ export const routes: Routes = [
     component: SearchPageComponent,
   },
   {
+    path: 'buscar/:type/:cidade',
+    component: SearchPageComponent,
+    pathMatch: 'full',
+  },
+  {
     path: 'search-map',
     component: SearchMapComponent,
   },
